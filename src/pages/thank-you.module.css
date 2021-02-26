@@ -1,0 +1,6 @@
+@media (min-width: 764px) {
+    .SideBySide {
+        display: flex;
+        justify-content: space-between;
+    }
+}

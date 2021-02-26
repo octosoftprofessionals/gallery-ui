@@ -1,0 +1,23 @@
+.FooterSocialIcons {
+    display: flex;
+    justify-content: center;
+}
+
+.FooterCopyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FooterCopyright>* {
+    margin: 2px;
+}
+
+.JoinMemberLink {
+    text-align: center;
+}
+
+.JoinMemberLink a:link,
+.JoinMemberLink a:visited {
+    color: white;
+}
