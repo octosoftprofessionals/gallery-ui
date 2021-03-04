@@ -17,6 +17,7 @@ const Home = () => {
     <Layout>
       <Sectional style={{backgroundColor: 'beige', color: 'black'}}>
         <h1>Welcome to art!</h1>
+        <iframe src='https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/33271220540992826225097820539128178648770545811899996650803447161650161909761?embed=true' width='100%' height='100%' frameborder='0' allowfullscreen></iframe>
         <div className={classes.ProductAndForm}>
           <div className={classes.ProductContainer}>
             <ProductCard
