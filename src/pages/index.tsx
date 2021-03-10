@@ -43,13 +43,13 @@ const Home = () => {
     <Layout>
   
       
-      <Sectional style={{ backgroundColor: "white", color: "black" }}>
-        <div className={classes.TopSection}>
-          <h2>MY ART GALLERY</h2>
-          <p>Find my awesome art pieces here!</p>
-        </div>
-      </Sectional>
-      <iframe src='https://opensea.io/collection/hashmasks?embed=true'
+     {/* <Sectional style={{ backgroundColor: "white", color: "black" }}>
+       <div className={classes.TopSection}>
+        <h2>MY ART GALLERY</h2>
+        <p>Find my awesome art pieces here!</p>
+      </div>
+       </Sectional> */}
+      <iframe src='https://opensea.io/collection/superchief-gallery?embed=true'
         width='100%'
         height='100%'
         frameBorder='0'
