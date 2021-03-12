@@ -19,7 +19,7 @@ const SocialIcons: React.FC = () => {
   return (
     <div className={classes.SocialIcons}>
      
-      />
+    
       <IconLink
         icon={FaTwitter}
         to="https://twitter.com/SUPERCHIEFTV"
