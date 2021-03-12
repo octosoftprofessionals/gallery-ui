@@ -16,7 +16,7 @@ const FooterSectional = () => {
         <SocialIcons />
       </div>
       <div className={classes.FooterCopyright}>
-        <div>&#169; 2021 Bit Goddesses. All Rights Reserved.</div>
+        <div>&#169; 2021 Superchief Gallery NFT. All Rights Reserved.</div>
 
       </div>
     </Sectional>

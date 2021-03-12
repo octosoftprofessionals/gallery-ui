@@ -16,7 +16,7 @@ const Home = () => {
         <p>Find my awesome art pieces here!</p>
       </div>
        </Sectional> */}
-      <iframe src='https://opensea.io/collection/superchief-gallary-nft?embed=true'
+      <iframe src='https://opensea.io/collection/superchief-gallery?embed=true'
         width='100%'
         height='100%'
         frameBorder='0'
