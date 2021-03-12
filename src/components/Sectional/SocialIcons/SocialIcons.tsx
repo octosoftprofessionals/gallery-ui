@@ -18,51 +18,29 @@ import classes from "./SocialIcons.module.css"
 const SocialIcons: React.FC = () => {
   return (
     <div className={classes.SocialIcons}>
-      <IconLink
-        icon={FaTelegram}
-        to="http://t.me/X"
-        externalLink={true}
+     
       />
       <IconLink
         icon={FaTwitter}
-        to="https://twitter.com/X"
+        to="https://twitter.com/SUPERCHIEFTV"
         externalLink={true}
       />
       <IconLink
         icon={FaYoutube}
-        to="https://www.youtube.com/channel/X?sub_confirmation=1"
+        to="https://www.youtube.com/channel/UCNZ91jvRGk58hJGLTvABPAw"
         externalLink={true}
       />
       <IconLink
         icon={FaFacebook}
-        to="https://www.facebook.com/X"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaMedium}
-        to="https://medium.com/@X"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaDiscord}
-        to="https://discord.com/channels/X"
+        to="https://www.facebook.com/SuperchiefGalleryLA/"
         externalLink={true}
       />
       <IconLink
         icon={FaInstagram}
-        to="https://www.instagram.com/X"
+        to="https://www.instagram.com/superchiefgallery/"
         externalLink={true}
       />
-      <IconLink
-        icon={FaLinkedin}
-        to="https://www.linkedin.com/groups/X"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaPodcast}
-        to="https://X"
-        externalLink={true}
-      />
+
     </div>
   )
 }
