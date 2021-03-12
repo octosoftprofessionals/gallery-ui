@@ -1,5 +1,5 @@
 import React from "react"
-import FooterSectional from "../components/FooterSecitonal/FooterSectional"
+import FooterSectional from "../components/FooterSectional/FooterSectional"
 import Layout from "../components/layout"
 import BottomFiller from "../components/Sectional/BottomFiller/BottomFiller"
 import Sectional from "../components/Sectional/Sectional"
