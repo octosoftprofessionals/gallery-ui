@@ -14,9 +14,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^1.12.1",
     "gatsby": "^2.32.3",
-    "gatsby-source-stripe": "^3.2.1",
     "mongodb": "^3.6.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
