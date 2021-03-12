@@ -19,10 +19,9 @@ const SocialIcons: React.FC = () => {
   return (
     <div className={classes.SocialIcons}>
      
-    
       <IconLink
         icon={FaTwitter}
-        to="https://twitter.com/SUPERCHIEFTV"
+        to="https://twitter.com/bitgoddesses"
         externalLink={true}
       />
       <IconLink
@@ -37,7 +36,7 @@ const SocialIcons: React.FC = () => {
       />
       <IconLink
         icon={FaInstagram}
-        to="https://www.instagram.com/superchiefgallery/"
+        to="https://www.instagram.com/bitgoddessess/"
         externalLink={true}
       />
 
