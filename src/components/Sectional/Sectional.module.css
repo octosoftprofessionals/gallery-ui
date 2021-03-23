@@ -1,0 +1,11 @@
+.container {
+  padding: 16px 16px 11px;
+  border-bottom: solid 1px #baffee;
+  color: black;
+  display: flex;
+  margin: auto;
+}
+.container a {
+  text-decoration: none;
+  color: black;
+}
