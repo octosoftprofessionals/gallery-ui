@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import styles from './Sectional.module.css';
 
 const Sectional: React.FC<{
   className?: string
@@ -7,28 +8,10 @@ const Sectional: React.FC<{
 }> = ({ children, className = "", style, innerStyle = {}, ...props }) => {
   return (
     <div
-      className={className}
+      className={[className, styles.container].join(' ')}
       {...props}
-      style={{
-        ...style,
-        display: "flex",
-        flexShrink: 0,
-        justifyContent: "center",
-      }}
     >
-      <div
-        style={{
-          ...{
-            maxWidth: "1180px",
-            width: "100%",
-            padding: "16px",
-            boxSizing: "border-box",
-          },
-          ...innerStyle,
-        }}
-      >
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

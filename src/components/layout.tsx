@@ -1,4 +1,6 @@
 import React from "react"
+import { Link, Img } from "gatsby"
+import logoSrc from './logo.png'
 import "./style.css"
 
 import { FaHome, FaTshirt } from "react-icons/fa"
@@ -14,18 +16,20 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div className={classes.Root}>
       <Sectional
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, #191C25 0%, #292C25 65%, #191C25 100%)",
-        }}
+        className={classes.navbar}
         innerStyle={{ padding: 0 }}
       >
-        <nav className={classes.NavBar}>
-          <div className={classes.PrimaryIcons}>
-            <IconLink to="/" icon={FaHome} text="HOME" />
-          </div>
-          <SocialIcons />
-        </nav>
+        <div className={classes.navbarContent}>
+          <Link className={classes.logo} to="/">
+            <img src={logoSrc} style={{height: 30}} />
+          </Link>
+          <span className={classes.socialLinks}>
+            <Link className={classes.submitLink} to="/submit-work">Submit Art</Link>
+            <span className={classes.socialIcons}>
+              <SocialIcons />
+            </span>
+          </span>
+        </div>
       </Sectional>
       <main className={classes.Main}>{children}</main>
     </div>

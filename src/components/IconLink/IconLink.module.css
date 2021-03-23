@@ -1,16 +1,18 @@
 .IconLink {
-    color: white;
-    font-size: 16px;
-    padding: 2px;
+  font-size: 16px;
+  padding: 0 10px;
+  display: inline-block;
 }
 
+.IconLink,
 .IconLink a:link,
 .IconLink a:visited {
-    color: white;
+  color: #1bd3a5;
 }
 
-.IconLink a:hover {
-    background-color: #ee8e7073;
+.IconLink a:hover,
+.IconLink a:focus {
+  color: #18a07e;
 }
 
 .IconLink span {

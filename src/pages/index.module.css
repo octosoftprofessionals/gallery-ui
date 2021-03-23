@@ -1,3 +1,19 @@
+.banner {
+    min-height: 300px;
+    height: 80vh;
+    background: #00ffc0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+}
+.banner img {
+    max-width: 1000px;
+    min-width: 300px;
+    width: 100%;
+}
 .ProductContainer {
     display: flex;
     justify-content: center;

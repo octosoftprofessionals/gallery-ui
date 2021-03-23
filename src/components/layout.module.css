@@ -1,9 +1,3 @@
-.Root {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .NavBar {
     padding: 4px 16px;
     max-width: 1180px;
@@ -32,18 +26,59 @@
 .PrimaryIcons a:hover {
     background-color: #ee8e7073;
 }
-
 .Main {
-    width: 100%;
-    overflow-y: auto;
-    padding: 1px;
-    margin: 0;
-    color: white;
-    /* background-color: #002891; */
-    background-color: #2a2a72;
-    background-image: linear-gradient( 315deg, #2a2a72 0%, #04D9D9 65%, #3a3a72 100%);
+    min-height: 100vh;
+    height: 100%;
+}
+.Main > iframe {
+    min-height: 100vh;
+}
+
+.logo {
+    font-family: Helvetica, Helvetica Neue, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #1bd3a5;
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 4px;
+}
+
+.socialLinks {
+    text-align: right;
     flex: 1;
-    box-sizing: border-box;
+    margin-top: 5px;
+}
+@media (max-width: 630px) {
+    .socialLinks .socialIcons {
+        display: none;
+    }
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    z-index: 99;
+    background: white;
+}
+.navbarContent {
+    max-width: 1160px;
+    margin: auto;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+}
+.submitLink {
+    vertical-align: top;
+    padding-right: 20px;
+    text-transform: uppercase;
+    font-family: Helvetica Neue, Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    color: #1bd3a5 !important;
+}
+
+:global(a) {
+    color: #1fbe96;
 }

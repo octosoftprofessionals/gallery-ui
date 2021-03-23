@@ -17,8 +17,7 @@ import classes from "./SocialIcons.module.css"
 
 const SocialIcons: React.FC = () => {
   return (
-    <div className={classes.SocialIcons}>
-     
+    <>
       <IconLink
         icon={FaTwitter}
         to="https://twitter.com/superchieftv"
@@ -39,8 +38,7 @@ const SocialIcons: React.FC = () => {
         to="https://https://www.instagram.com/superchiefgallery/"
         externalLink={true}
       />
-
-    </div>
+    </>
   )
 }
 
