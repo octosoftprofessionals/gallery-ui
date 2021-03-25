@@ -20,11 +20,10 @@ class Home extends React.Component {
         {/* <div className={classes.banner}>
           <Hero />
         </div> */}
+        <div className={classes.loading}>
+          <h4>Loading...</h4>
+        </div>
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <div className={classes.loading}>
-            <h4>Loading...</h4>
-            {/* <img className={classes.loadingGif} src="https://metxr-assets.metxr.org/files/224fbf04-bf20-4270-8a6f-176e41d3ae99.gif" /> */}
-          </div>
           <iframe src={config.MARKETPLACE_IFRAME_EMBED_LINK}
             width='100%'
             height='1600px'
