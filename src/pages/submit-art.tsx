@@ -25,7 +25,7 @@ const SubmitWorkPage = () => {
         </p>
         <p>
           Please wait while the form loads below.<br/>
-          Questions or comments? Email us at <a href="mailto: metxr@protonmail.com">metxr@protonmail.com</a>.
+          Questions or comments? Email us at <a href={`mailto: ${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>.
         </p>
         <div className={classes.form}>
           <iframe
