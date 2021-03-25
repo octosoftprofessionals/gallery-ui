@@ -22,7 +22,7 @@ class Home extends React.Component {
           <Hero />
         </div> */}
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <iframe src='https://opensea.io/collection/superchief-gallery?embed=true'
+          <iframe src='https://opensea.io/collection/superchief-gallery-nft?embed=true'
             width='100%'
             height='1600px'
             frameBorder='0'
