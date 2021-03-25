@@ -7,7 +7,7 @@ import classes from "./submit-art.module.css"
 import config from '../config';
 
 const SubmitWorkPage = () => {
-  console.log('env', config.AIRTABLE_EMBED_SRC);
+  console.log('env', config, config.AIRTABLE_EMBED_SRC);
   return (
     <Layout>
       <div className={classes.container}>
