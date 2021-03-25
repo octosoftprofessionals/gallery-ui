@@ -1,17 +1,16 @@
 import React from "react"
 import FooterSectional from "../components/FooterSectional/FooterSectional"
 import Layout from "../components/layout"
-import BottomFiller from "../components/Sectional/BottomFiller/BottomFiller"
-import Sectional from "../components/Sectional/Sectional"
 import classes from "./submit-art.module.css"
 import config from '../config';
 
 const SubmitWorkPage = () => {
-  console.log('env', config, process.env, config.AIRTABLE_EMBED_SRC);
   return (
     <Layout>
       <div className={classes.container}>
-        <h2>SUBMIT YOUR WORK AS AN NFT FOR THE SUPERCHIEF GALLERY</h2>
+        <h2>
+          Submit your work as an NFT for the {config.GALLERY_NAME}
+        </h2>
         <p>
           We are open to submissions!
         </p>

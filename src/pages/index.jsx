@@ -2,10 +2,9 @@ import React from "react"
 import FooterSectional from "../components/FooterSectional/FooterSectional"
 import Layout from "../components/layout"
 import BottomFiller from "../components/Sectional/BottomFiller/BottomFiller"
-import Sectional from "../components/Sectional/Sectional"
 import classes from "./index.module.css"
 import "./index.css"
-import Hero from "../components/Hero/Hero"
+import config from "../config"
 
 class Home extends React.Component {
   render() {
@@ -22,7 +21,7 @@ class Home extends React.Component {
           <Hero />
         </div> */}
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <iframe src='https://opensea.io/collection/superchief-gallery-nft?embed=true'
+          <iframe src={config.MARKETPLACE_IFRAME_EMBED_LINK}
             width='100%'
             height='1600px'
             frameBorder='0'
