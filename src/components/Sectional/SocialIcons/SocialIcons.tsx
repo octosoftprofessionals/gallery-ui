@@ -35,7 +35,7 @@ const SocialIcons: React.FC = () => {
       />
       <IconLink
         icon={FaInstagram}
-        to="https://https://www.instagram.com/superchiefgallery/"
+        to="https://www.instagram.com/superchiefgallery/"
         externalLink={true}
       />
     </>
