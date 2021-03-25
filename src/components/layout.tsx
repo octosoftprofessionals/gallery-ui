@@ -24,7 +24,7 @@ const Layout: React.FC = ({ children }) => {
             <img src={logoSrc} style={{height: 30}} />
           </Link>
           <span className={classes.socialLinks}>
-            <Link className={classes.submitLink} to="/submit-work">Submit Art</Link>
+            <Link className={classes.submitLink} to="/submit-art">Submit Art</Link>
             <span className={classes.socialIcons}>
               <SocialIcons />
             </span>
