@@ -39,7 +39,7 @@
     font-family: Helvetica, Helvetica Neue, sans-serif;
     font-weight: bold;
     letter-spacing: 0.5px;
-    color: #1bd3a5;
+    color: #00c9c9;
     font-size: 22px;
     line-height: 30px;
     margin-top: 4px;
@@ -77,9 +77,9 @@
     font-family: Helvetica Neue, Helvetica, sans-serif;
     font-weight: bold;
     letter-spacing: -0.5px;
-    color: #1bd3a5 !important;
+    color: #00c9c9 !important;
 }
 
 :global(a) {
-    color: #1fbe96;
+    color: #00c9c9;
 }
