@@ -4,8 +4,10 @@ import Layout from "../components/layout"
 import BottomFiller from "../components/Sectional/BottomFiller/BottomFiller"
 import Sectional from "../components/Sectional/Sectional"
 import classes from "./submit-work.module.css"
+import config from '../config';
 
 const SubmitWorkPage = () => {
+  console.log('env', config.AIRTABLE_EMBED_SRC);
   return (
     <Layout>
       <div className={classes.container}>
@@ -28,7 +30,7 @@ const SubmitWorkPage = () => {
         <div className={classes.form}>
           <iframe
             className="airtable-embed"
-            src="https://airtable.com/embed/shr8HBrZjylr7c5cp?backgroundColor=purple"
+            src={config.AIRTABLE_EMBED_SRC}
             frameborder="0" onmousewheel="" width="100%" height="1250px"
             style={{
               background: 'transparent',
