@@ -18,6 +18,10 @@ const FooterSectional: React.FC<{
         <span className={classes.FooterCopyright}>
           <div>&#169; 2021 Superchief Gallery NFT. All Rights Reserved.</div>
         </span>
+        <a className={classes.buyEth}
+        href="https://go.coinmama.com/visit/?bta=65123&nci=5364" Target="_Top">
+            Buy Ethereum with Credit Card on Coinmama.com
+          </a>
       </div>
     </Sectional>
   )
