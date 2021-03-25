@@ -5,6 +5,9 @@
   padding: 0 16px;
   margin: 200px auto;
 }
+.container > * {
+  padding-right: 16px;
+}
 .container h2 {
   text-transform: uppercase;
 }
