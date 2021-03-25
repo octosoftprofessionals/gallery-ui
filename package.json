@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "gatsby": "^2.32.3",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
