@@ -383,7 +383,7 @@ or provision.
 `
 
 const Terms = () => (
-  <div style={{maxWidth: 900, margin: '50px auto'}}>
+  <div style={{maxWidth: 900, margin: '10px auto', padding: 20}}>
     <ReactMarkdown children={markdown} />
   </div>
 )
