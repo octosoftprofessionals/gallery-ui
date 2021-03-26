@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import styles from './Countdown.module.css';
 
-const UTC_TIMESTAMP = '2021-03-29T00:30:00Z';
+const UTC_TIMESTAMP = '2021-03-29T01:00:00Z';
 
 class Countdown extends React.Component {
   state = {
