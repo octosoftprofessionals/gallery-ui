@@ -3,6 +3,8 @@ import { useCookie } from "../../hooks/use-cookie"
 import Sectional from "../Sectional/Sectional"
 import SocialIcons from "../Sectional/SocialIcons/SocialIcons"
 import classes from "./FooterSection.module.css"
+import Countdown from "../Countdown/Countdown"
+import { Link } from "gatsby"
 
 const FooterSectional: React.FC<{
   className?: string
@@ -11,17 +13,23 @@ const FooterSectional: React.FC<{
     <Sectional
       className={[classes.footer, className].join(' ')}
     >
+      <div className={classes.content}>
+      <div className={classes.countdown}>
+        <Countdown />
+      </div>
       <div className={classes.center}>
         <span className={classes.FooterSocialIcons}>
           <SocialIcons />
         </span>
-        <span className={classes.FooterCopyright}>
-          <div>&#169; 2021 Superchief Gallery NFT. All Rights Reserved.</div>
-        </span>
         <a className={classes.buyEth}
-        href="https://go.coinmama.com/visit/?bta=65123&nci=5364" Target="_Top">
-            Buy Ethereum with Credit Card on Coinmama.com
+        target="_blank"
+        href="https://go.coinmama.com/visit/?bta=65123&nci=5364">
+            Buy ETH with Credit Card
           </a>
+        <span className={classes.FooterCopyright}>
+          &#169; 2021. By using this site, you agree to the <Link to="/terms">Terms of Service</Link>.
+        </span>
+      </div>
       </div>
     </Sectional>
   )

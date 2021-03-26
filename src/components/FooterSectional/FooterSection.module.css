@@ -6,9 +6,20 @@
     padding: 22px 16px;
     background: #fbfbfb;
 }
-.footer > .center {
-    max-width: 1160px;
+
+.content {
+    display: flex;
+    max-width: 900px;
     margin: auto;
+}
+
+@media (max-width: 640px) {
+    .footer .content {
+        display: block !important;
+    }
+}
+
+.footer > .center {
 }
 .center > span {
     display: inline-block;
@@ -17,17 +28,24 @@
 .FooterSocialIcons {
     display: flex;
     justify-content: center;
+    margin-top: 6px;
 }
 
 .FooterCopyright {
     font-size: 14px;
     color: #c0c1c3;
+    margin: 0 8px;
 }
 a.buyEth {
     font-size: 14px;
     color: #00c9c9;
     text-decoration: underline;
     white-space: nowrap;
+}
+
+.center a {
+    color: #00c9c9;
+    text-decoration: underline;
 }
 
 .FooterCopyright>* {
@@ -41,4 +59,9 @@ a.buyEth {
 .JoinMemberLink a:link,
 .JoinMemberLink a:visited {
     color: white;
+}
+
+.countdown {
+    max-width: 1160px;
+    margin: auto;
 }
