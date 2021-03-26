@@ -30,6 +30,7 @@
     min-height: 100vh;
     height: 100%;
     margin-top: 78px;
+    margin-bottom: 22px;
 }
 .Main > iframe {
     min-height: 100vh;
