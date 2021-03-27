@@ -27,6 +27,7 @@ class Countdown extends React.Component {
     const seconds = deadlineM.diff(nowM, 'seconds') % 60;
     if (days <= 0 && hours <= 0 && mins <= 0 && seconds <= 1) return null;
     const { long, onNavbar } = this.props;
+    return null;
     return (
       <span className={[
         styles.container,

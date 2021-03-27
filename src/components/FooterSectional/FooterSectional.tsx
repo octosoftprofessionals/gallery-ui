@@ -14,9 +14,6 @@ const FooterSectional: React.FC<{
       className={[classes.footer, className].join(' ')}
     >
       <div className={classes.content}>
-      <div className={classes.countdown}>
-        <Countdown />
-      </div>
       <div className={classes.center}>
         <span className={classes.FooterSocialIcons}>
           <SocialIcons />

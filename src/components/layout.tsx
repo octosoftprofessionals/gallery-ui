@@ -12,6 +12,7 @@ import classes from "./layout.module.css"
 import SocialIcons from "./Sectional/SocialIcons/SocialIcons"
 import IconLink from "./IconLink/IconLink"
 import Countdown from "./Countdown/Countdown"
+import config from "../config"
 
 const Layout: React.FC = ({ children }) => {
   return (
@@ -21,10 +22,9 @@ const Layout: React.FC = ({ children }) => {
         innerStyle={{ padding: 0 }}
       >
         <div className={classes.navbarContent}>
-          <Link className={classes.logo} to="/">
+          <Link className={classes.logo} to={config.LOGO_LINK}>
             <img src={logoSrc} style={{height: 30}} />
           </Link>
-          <Countdown long={true} onNavbar={true} />          
           <span className={classes.socialLinks}>
             <Link className={classes.submitLink} to="/submit-art">Submit Art</Link>
             <span className={classes.socialIcons}>
