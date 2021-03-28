@@ -26,7 +26,7 @@ const Layout: React.FC = ({ children }) => {
             <img src={logoSrc} style={{height: 26}} />
           </Link>
           <span className={classes.socialLinks}>
-            <Link className={classes.submitLink} to="/collectibles">BUY TIMED COLLECTIBLES</Link>
+            <Link className={classes.submitLink} to="/timed-collectibles">BUY TIMED COLLECTIBLES</Link>
             <span className={classes.socialIcons}>
               <SocialIcons />
             </span>
