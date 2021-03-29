@@ -24,7 +24,7 @@ class Home extends React.Component {
           <h4>Loading...</h4>
         </div>
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <iframe src={`https://opensea.io/assets/superchief-gallery-nifty?search%5BresultModel%5D=ASSETS&search%5BsortAscending%5D=false&search%5Btoggles%5D%5B0%5D=BUY_NOW`}
+          <iframe src={`https://opensea.io/assets/superchief-gallery-nifty?search[sortAscending]=false&search[toggles][0]=BUY_NOW&search[resultModel]=ASSETS&embed=true`}
             width='100%'
             height='1600px'
             frameBorder='0'
