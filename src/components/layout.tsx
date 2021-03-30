@@ -14,7 +14,11 @@ import IconLink from "./IconLink/IconLink"
 import Countdown from "./Countdown/Countdown"
 import config from "../config"
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC = ({
+  children,
+  showEditionsLink,
+  showAuctionsLink,
+}) => {
   return (
     <div className={classes.Root}>
       <Sectional
@@ -26,7 +30,14 @@ const Layout: React.FC = ({ children }) => {
             <img src={logoSrc} style={{height: 26}} />
           </Link>
           <span className={classes.socialLinks}>
-            <Link className={classes.submitLink} to="/timed-collectibles">BUY TIMED COLLECTIBLES</Link>
+            {
+              showEditionsLink &&
+              <Link className={classes.submitLink} to="/timed-collectibles">EDITIONS</Link>
+            }
+            {
+              showAuctionsLink &&
+              <Link className={classes.submitLink} to="/">AUCTIONS</Link>
+            }
             <span className={classes.socialIcons}>
               <SocialIcons />
             </span>

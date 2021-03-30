@@ -10,7 +10,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className={classes.container}>
-      <Layout>
+      <Layout showEditionsLink={true}>
       {/* <Sectional style={{ backgroundColor: "white", color: "black" }}>
         <div className={classes.TopSection}>
           <h2>MY ART GALLERY</h2>
