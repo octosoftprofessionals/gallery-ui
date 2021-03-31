@@ -13,11 +13,6 @@
   color: #e0bd70;
 }
 
-.IconLink a:hover,
-.IconLink a:focus {
-  color: #18a07e;
-}
-
 .IconLink span {
   display: none;
   font-size: 20px;
