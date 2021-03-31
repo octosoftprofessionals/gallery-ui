@@ -36,7 +36,8 @@
     color: #c0c1c3;
     margin: 0 8px;
 }
-.buyEth {
+a.buyEth {
+    color: #bd9f5d;
     font-size: 14px;
     text-decoration: underline;
     white-space: nowrap;
