@@ -5,6 +5,7 @@ import SocialIcons from "../Sectional/SocialIcons/SocialIcons"
 import classes from "./FooterSection.module.css"
 import Countdown from "../Countdown/Countdown"
 import { Link } from "gatsby"
+import config from "../../config"
 
 const FooterSectional: React.FC<{
   className?: string
@@ -24,7 +25,7 @@ const FooterSectional: React.FC<{
             Buy ETH with Credit Card
           </a>
         <span className={classes.FooterCopyright}>
-          &#169; 2021. By using this site, you agree to the <Link to="/terms">Terms of Service</Link>.
+          &#169; 2021 {config.GALLERY_NAME}
         </span>
       </div>
       </div>

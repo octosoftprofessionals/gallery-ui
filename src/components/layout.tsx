@@ -1,18 +1,11 @@
 import React from "react"
-import { Link, Img } from "gatsby"
+import { Link } from "gatsby"
 import logoSrc from './logo.png'
 import "./style.css"
-
-import { FaHome, FaTshirt } from "react-icons/fa"
-
-import { GiRobotGrab } from "react-icons/gi"
 import Sectional from "./Sectional/Sectional"
 
 import classes from "./layout.module.css"
 import SocialIcons from "./Sectional/SocialIcons/SocialIcons"
-import IconLink from "./IconLink/IconLink"
-import Countdown from "./Countdown/Countdown"
-import config from "../config"
 
 const Layout: React.FC = ({
   children,
@@ -27,7 +20,7 @@ const Layout: React.FC = ({
       >
         <div className={classes.navbarContent}>
           <Link className={classes.logo} to="/">
-            <img src={logoSrc} style={{height: 26}} />
+            <img src={logoSrc} style={{height: 50}} />
           </Link>
           <span className={classes.socialLinks}>
             {

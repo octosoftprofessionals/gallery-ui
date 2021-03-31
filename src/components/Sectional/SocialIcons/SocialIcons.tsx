@@ -14,30 +14,43 @@ import {
 import IconLink from "../../IconLink/IconLink"
 
 import classes from "./SocialIcons.module.css"
+import config from "../../../config"
 
 const SocialIcons: React.FC = () => {
   return (
     <>
-      <IconLink
-        icon={FaTwitter}
-        to="https://twitter.com/superchieftv"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaYoutube}
-        to="https://www.youtube.com/channel/UCNZ91jvRGk58hJGLTvABPAw"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaFacebook}
-        to="https://www.facebook.com/SuperchiefGalleryLA/"
-        externalLink={true}
-      />
-      <IconLink
-        icon={FaInstagram}
-        to="https://www.instagram.com/superchiefgallery/"
-        externalLink={true}
-      />
+      {
+        config.TWITTER_LINK &&
+        <IconLink
+          icon={FaTwitter}
+          to={config.TWITTER_LINK}
+          externalLink={true}
+        />
+      }
+      {
+        config.YOUTUBE_LINK &&
+        <IconLink
+          icon={FaYoutube}
+          to={config.YOUTUBE_LINK}
+          externalLink={true}
+        />
+      }
+      {
+        config.FACEBOOK_LINK &&
+        <IconLink
+          icon={FaFacebook}
+          to={config.FACEBOOK_LINK}
+          externalLink={true}
+        />
+      }
+      {
+        config.INSTAGRAM_LINK &&
+        <IconLink
+          icon={FaInstagram}
+          to="https://www.instagram.com/superchiefgallery/"
+          externalLink={true}
+        />
+      }
     </>
   )
 }

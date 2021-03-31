@@ -40,10 +40,10 @@
     font-family: Helvetica, Helvetica Neue, sans-serif;
     font-weight: bold;
     letter-spacing: 0.5px;
-    color: #00c9c9;
+    color: #e0bd70;
     font-size: 22px;
     line-height: 30px;
-    margin-top: 4px;
+    margin-top: -1px;
 }
 
 .socialLinks {
@@ -79,9 +79,9 @@
     font-family: Helvetica Neue, Helvetica, sans-serif;
     font-weight: bold;
     letter-spacing: -0.5px;
-    color: #00c9c9 !important;
+    color: #e0bd70 !important;
 }
 
 :global(a) {
-    color: #00c9c9;
+    color: #e0bd70;
 }

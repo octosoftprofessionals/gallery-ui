@@ -10,7 +10,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className={classes.container}>
-      <Layout showEditionsLink={true}>
+      <Layout>
       {/* <Sectional style={{ backgroundColor: "white", color: "black" }}>
         <div className={classes.TopSection}>
           <h2>MY ART GALLERY</h2>
@@ -24,11 +24,13 @@ class Home extends React.Component {
           <h4>Loading...</h4>
         </div>
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <iframe src={config.MARKETPLACE_IFRAME_EMBED_LINK}
-            width='100%'
-            height='1600px'
-            frameBorder='0'
-            allowFullScreen></iframe>
+          <div>
+            <iframe id="iframe" src={config.MARKETPLACE_IFRAME_EMBED_LINK}
+              width='100%'
+              height='1600px'
+              frameBorder='0'
+              allowFullScreen></iframe>
+          </div>
         </table>
         <FooterSectional />
         <BottomFiller />
