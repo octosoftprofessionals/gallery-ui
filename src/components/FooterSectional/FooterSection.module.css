@@ -36,15 +36,13 @@
     color: #c0c1c3;
     margin: 0 8px;
 }
-a.buyEth {
+.buyEth {
     font-size: 14px;
-    color: #e0bd70;
     text-decoration: underline;
     white-space: nowrap;
 }
 
 .center a {
-    color: #e0bd70;
     text-decoration: underline;
 }
 

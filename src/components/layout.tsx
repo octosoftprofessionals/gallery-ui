@@ -23,14 +23,7 @@ const Layout: React.FC = ({
             <img src={logoSrc} style={{height: 50}} />
           </Link>
           <span className={classes.socialLinks}>
-            {
-              showEditionsLink &&
-              <Link className={classes.submitLink} to="/timed-collectibles">EDITIONS</Link>
-            }
-            {
-              showAuctionsLink &&
-              <Link className={classes.submitLink} to="/">AUCTIONS</Link>
-            }
+            <Link className={classes.submitLink} to="/submit-art">Submit Art</Link>
             <span className={classes.socialIcons}>
               <SocialIcons />
             </span>

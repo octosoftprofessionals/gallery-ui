@@ -6,6 +6,8 @@ const config = {
   LOGO_LINK: process.env.GATSBY_LOGO_LINK || 'https://opensea.io/assets/metxr',
   TWITTER_LINK: process.env.GATSBY_TWITTER_LINK || 'https://twitter.com/METXROfficial',
   INSTAGRAM_LINK: process.env.GATSBY_INSTAGRAM_LINK || 'https://www.instagram.com/metxr.nft/',
+  THEME_COLOR: '#e0bd70',
+  TEXT_LINK_COLOR: '#bd9f5d',
 }
 
 export default config;
