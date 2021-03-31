@@ -22,7 +22,7 @@ const FooterSectional: React.FC<{
         <a className={classes.buyEth}
         target="_blank"
         href="https://metxr.org">
-            Visit the MetXR museum
+            Visit the MetXR 3D Museum
           </a>
         <span className={classes.FooterCopyright}>
           &#169; 2021 {config.GALLERY_NAME}
