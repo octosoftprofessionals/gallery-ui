@@ -21,8 +21,8 @@ const FooterSectional: React.FC<{
         </span>
         <a className={classes.buyEth}
         target="_blank"
-        href="https://go.coinmama.com/visit/?bta=65123&nci=5364">
-            Buy ETH with Credit Card
+        href="https://metxr.org">
+            Visit the MetXR museum
           </a>
         <span className={classes.FooterCopyright}>
           &#169; 2021 {config.GALLERY_NAME}
