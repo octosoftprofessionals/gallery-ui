@@ -1,8 +1,12 @@
+.Root {
+    padding: 0 24px;
+}
+
 a {
     color: #bd9f5d;
 }
 .NavBar {
-    padding: 4px 16px;
+    padding: 4px 24px;
     max-width: 1180px;
     width: 100%;
     display: flex;

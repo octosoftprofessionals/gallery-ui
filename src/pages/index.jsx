@@ -7,6 +7,7 @@ import "./index.css"
 import config from "../config"
 
 class Home extends React.Component {
+
   render() {
     return (
       <div className={classes.container}>
@@ -20,16 +21,19 @@ class Home extends React.Component {
         {/* <div className={classes.banner}>
           <Hero />
         </div> */}
-        <div className={classes.loading}>
+        <div id="loading" className={classes.loading}>
           <h4>Loading...</h4>
         </div>
         <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
           <div>
-            <iframe id="iframe" src={config.MARKETPLACE_IFRAME_EMBED_LINK}
+            <iframe
+              id="iframe" src={config.MARKETPLACE_IFRAME_EMBED_LINK}
               width='100%'
               height='1600px'
               frameBorder='0'
-              allowFullScreen></iframe>
+              allowFullScreen
+              onLoad={() => document.querySelector('#loading')?.remove()}
+            />
           </div>
         </table>
         <FooterSectional />
