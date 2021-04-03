@@ -1,20 +1,3 @@
-#hold-iframe {
-  padding: 0px;
-  margin:0 auto;
-  width:100%;
-  height:100%;
-  min-height: 1600px;
-  overflow:hidden;
-}
-#hold-iframe > div {
-  margin: auto;
-  overflow:hidden;
-}
-
-iframe, iframe body {
-  overflow:hidden;
-}
-
-a {
+/* a {
   color: #bd9f5d;
-}
+} */

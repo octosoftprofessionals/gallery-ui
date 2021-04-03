@@ -1,3 +1,10 @@
+
+.featuredArtwork {
+    padding-bottom: 78px;
+}
+
+/* OLD */
+
 .banner {
     min-height: 300px;
     height: 80vh;

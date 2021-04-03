@@ -1,47 +1,43 @@
-import React from "react"
-import FooterSectional from "../components/FooterSectional/FooterSectional"
-import Layout from "../components/layout"
-import BottomFiller from "../components/Sectional/BottomFiller/BottomFiller"
-import classes from "./index.module.css"
-import "./index.css"
-import config from "../config"
+import React from 'react'
 
-class Home extends React.Component {
+import BottomFiller from '../components/Sectional/BottomFiller/BottomFiller'
+import FooterSectional from '../components/FooterSectional/FooterSectional'
+import Gallery from '../components/Gallery/Gallery'
+import HeroAuction from '../components/HeroAuction'
+import Layout from '../components/layout'
 
-  render() {
-    return (
-      <div className={classes.container}>
-      <Layout>
-      {/* <Sectional style={{ backgroundColor: "white", color: "black" }}>
-        <div className={classes.TopSection}>
-          <h2>MY ART GALLERY</h2>
-          <p>Find my awesome art pieces here!</p>
-        </div>
-        </Sectional> */}
-        {/* <div className={classes.banner}>
-          <Hero />
-        </div> */}
-        <div id="loading" className={classes.loading}>
-          <h4>Loading...</h4>
-        </div>
-        <table border="0" cellspacing="0" cellpadding="0" id="hold-iframe">
-          <div>
-            <iframe
-              id="iframe" src={config.MARKETPLACE_IFRAME_EMBED_LINK}
-              width='100%'
-              height='1600px'
-              frameBorder='0'
-              allowFullScreen
-              onLoad={() => document.querySelector('#loading')?.remove()}
-            />
-          </div>
-        </table>
-        <FooterSectional />
-        <BottomFiller />
-      </Layout>
-      </div>
-    );
-  }
+import classes from './index.module.css'
+import './index.css'
+
+const items = [...new Array(20)].map(() => ({}))
+
+const FeaturedArtworkSection = () => (
+  <div className={classes.featuredArtwork}>
+    <h2 style={{
+      verticalAlign: 'top',
+      height: '21px',
+      lineHeight: '25px',
+      fontSize: '1.5em',
+      marginBottom: 0,
+    }}>
+      Featured Artwork
+    </h2>
+    <div className='divider' style={{ borderBottom: '2px solid #333', marginTop: '1.25em', marginBottom: '1.5em' }}></div>
+    <Gallery items={items} />
+  </div>
+)
+
+const Home = () => {
+  return (
+    <div className={classes.container}>
+    <Layout>
+      <HeroAuction />
+      <FeaturedArtworkSection />
+      <FooterSectional />
+      <BottomFiller />
+    </Layout>
+    </div>
+  )
 }
 
 export default Home
