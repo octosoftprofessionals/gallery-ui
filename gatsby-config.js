@@ -10,5 +10,8 @@ require("dotenv").config({
 
 module.exports = {
     /* Your site config here */
-    plugins: [`gatsby-plugin-styled-components`],
+    plugins: [
+        'gatsby-plugin-styled-components',
+        'gatsby-plugin-typescript',
+    ],
 }
