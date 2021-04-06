@@ -1,8 +1,0 @@
-.gallery {
-  display: flex;
-  flex-direction: row;
-  flex-basis: 3;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}

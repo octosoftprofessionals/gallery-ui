@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
+
+import Countdown from './Countdown';
 
 const HeroAuction = () => (
-  <div className="hero-auction" style={{ width: '100%', height: '30vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+  <Root>
     <p> Hero Placeholder </p>
-  </div>
-)
+    <Countdown />
+  </Root>
+);
 
-export default HeroAuction
+export default HeroAuction;
+
+const Root = styled.div`
+  width: 100%;
+  height: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -11,10 +11,9 @@ import {
   FaLinkedin,
   FaPodcast,
 } from "react-icons/fa"
-import IconLink from "../../IconLink/IconLink"
+import IconLink from "../IconLink"
 
-import classes from "./SocialIcons.module.css"
-import config from "../../../config"
+import config from "../../config"
 
 const SocialIcons: React.FC = () => {
   return (
