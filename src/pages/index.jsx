@@ -1,43 +1,51 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import BottomFiller from '../components/Sectional/BottomFiller/BottomFiller'
-import FooterSectional from '../components/FooterSectional/FooterSectional'
-import Gallery from '../components/Gallery/Gallery'
+import BottomFiller from '../components/Sectional/BottomFiller'
+import FooterSectional from '../components/FooterSectional'
+import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
-import Layout from '../components/layout'
-
-import classes from './index.module.css'
-import './index.css'
+import Layout from '../components/Layout'
 
 const items = [...new Array(20)].map(() => ({}))
 
 const FeaturedArtworkSection = () => (
-  <div className={classes.featuredArtwork}>
-    <h2 style={{
-      verticalAlign: 'top',
-      height: '21px',
-      lineHeight: '25px',
-      fontSize: '1.5em',
-      marginBottom: 0,
-    }}>
+  <FeaturedArtwork>
+    <FeaturedArtworkTitle>
       Featured Artwork
-    </h2>
-    <div className='divider' style={{ borderBottom: '2px solid #333', marginTop: '1.25em', marginBottom: '1.5em' }}></div>
+    </FeaturedArtworkTitle>
+    <Divider />
     <Gallery items={items} />
-  </div>
+  </FeaturedArtwork>
 )
 
 const Home = () => {
   return (
-    <div className={classes.container}>
     <Layout>
       <HeroAuction />
       <FeaturedArtworkSection />
       <FooterSectional />
       <BottomFiller />
     </Layout>
-    </div>
   )
 }
 
 export default Home
+
+const FeaturedArtwork = styled.div`
+  padding-bottom: 78px;
+`;
+
+const FeaturedArtworkTitle = styled.h2`
+  vertical-align: top;
+  height: 21px;
+  line-height: 25px;
+  font-size: 1.5em;
+  margin-bottom: 0;
+`;
+
+const Divider = styled.div`
+  border-bottom: 2px solid #333;
+  margin-top: 1.25em;
+  margin-bottom: 1.5em;
+`;

@@ -1,0 +1,8 @@
+@import "../css/typography.css";
+
+body {
+  font-family: Avenir, Avenir Next, Helvetica Neue, 'Bai Jamjuree Regular';
+  margin: 0;
+  font-size: 18px;
+  height: 100vh;
+}

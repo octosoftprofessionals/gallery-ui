@@ -1,0 +1,85 @@
+/* font face Bai Jamjuree */
+
+@font-face {
+  font-family: 'Bai Jamjuree Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Regular'), url('/assets/baijamjuree/BaiJamjuree-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Italic'), url('/assets/baijamjuree/BaiJamjuree-Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Bold'), url('/assets/baijamjuree/BaiJamjuree-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Bold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Bold Italic'), url('/assets/baijamjuree/BaiJamjuree-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree ExtraLight Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree ExtraLight Regular'), url('/assets/baijamjuree/BaiJamjuree-ExtraLight.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Light Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Light Regular'), url('/assets/baijamjuree/BaiJamjuree-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Medium Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Medium Regular'), url('/assets/baijamjuree/BaiJamjuree-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree SemiBold Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree SemiBold Regular'), url('/assets/baijamjuree/BaiJamjuree-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree ExtraLight Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree ExtraLight Italic'), url('/assets/baijamjuree/BaiJamjuree-ExtraLightItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Light Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Light Italic'), url('/assets/baijamjuree/BaiJamjuree-LightItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree Medium Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree Medium Italic'), url('/assets/baijamjuree/BaiJamjuree-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Bai Jamjuree SemiBold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bai Jamjuree SemiBold Italic'), url('/assets/baijamjuree/BaiJamjuree-SemiBoldItalic.woff') format('woff');
+}
