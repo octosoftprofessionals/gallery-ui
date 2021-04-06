@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import Sectional from './Sectional/Sectional'
-import SocialIcons from './Sectional/SocialIcons'
+import Sectional from '../Sectional/Sectional'
+import SocialIcons from '../Sectional/SocialIcons'
 
-import logoSrc from './logo.png'
+import logoSrc from '../assets/logo.png'
 
 import './layout.css'
 

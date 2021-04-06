@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import ArtworkDisplay from '../../components/ArtworkDisplay'
 import Carousel from '../../components/Carousel'
-import Layout from '../../components/Layout'
+import Layout from '../../components/Layout/Layout'
 
 const imgUrl = 'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
 const videoUrl = 'http://localhost:8000/float.mp4'

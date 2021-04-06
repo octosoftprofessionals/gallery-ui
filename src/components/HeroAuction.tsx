@@ -12,10 +12,4 @@ const HeroAuction = () => (
 
 export default HeroAuction;
 
-const Root = styled.div`
-  width: 100%;
-  height: 30vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const Root = styled.div``;
