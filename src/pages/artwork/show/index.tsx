@@ -69,7 +69,7 @@ const ContentContainer = styled.div`
   margin-bottom: 64px;
 
   > * + * {
-    margin: 24px;
+    margin: 24px 0;
   }
 `
 
