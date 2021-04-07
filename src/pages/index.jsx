@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
 import FooterSectional from '../components/FooterSectional'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
-import HeroBanner from '../components/HeroBanner'
 import Layout from '../components/Layout/Layout'
-import BannerImg from '../components/HeroBanner'
 
 const items = [...new Array(20)].map(() => ({}))
 
