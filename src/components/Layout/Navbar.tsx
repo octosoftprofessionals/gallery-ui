@@ -40,6 +40,8 @@ const NavbarContent = styled.div`
   margin: auto;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const LogoLink = styled(Link)`
@@ -56,15 +58,16 @@ const LogoLinkImg = styled.img`
   height: 50px;
 `
 
-const SocialLinks = styled.span`
+const SocialLinks = styled.div`
+  display: flex;
+  flex-direction: row;
   text-align: right;
-  flex: 1;
   margin-top: 5px;
   white-space: nowrap;
 `
 
 const SubmitLink = styled(Link)`
-  vertical-align: top;
+  vertical-align: middle;
   margin-right: 15px;
   text-transform: uppercase;
   font-family: Helvetica Neue, Helvetica, sans-serif;
@@ -73,7 +76,7 @@ const SubmitLink = styled(Link)`
   color: #e0bd70 !important;
 `
 
-const SocialIconList = styled.span`
+const SocialIconList = styled.div`
   @media (max-width: 630px) {
     display: none;
   }
