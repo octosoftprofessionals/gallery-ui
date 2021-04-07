@@ -6,13 +6,22 @@ A whitelabel for NFT art galleries
 
 This project uses:
 
-- Gatsby.js
-- React
-- Material UI
-- React Hooks & Context
-- OpenSea API
+- [Gatsby.js](https://www.gatsbyjs.com)
+- [React](https://reactjs.org)
+- [Material UI](https://material-ui.com)
+- React [Hooks](https://reactjs.org/docs/hooks-reference.html) & [Context](https://reactjs.org/docs/context.html) for state management
+- [OpenSea API](https://docs.opensea.io)
 
-Setup Steps
+### Details
+
+Gatsby has multiple plugins for our specific project:
+- [gatsby-plugin-material-ui](https://www.gatsbyjs.com/plugins/gatsby-plugin-material-ui)
+- [gatsby-plugin-styled-components](https://www.gatsbyjs.com/plugins/gatsby-plugin-styled-components)
+- [gatsby-plugin-typescript](https://www.gatsbyjs.com/plugins/gatsby-plugin-typescript)
+
+Make sure to check out their documentation if necessary.
+
+### Setup Steps
 
 ```bash
 # Install global CLIs
