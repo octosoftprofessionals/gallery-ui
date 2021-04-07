@@ -3,9 +3,7 @@ import styled from 'styled-components'
 
 const Hero = ({ children }) => (
   <HeroRoot>
-    <HeroAssetContainer>
-      {children}
-    </HeroAssetContainer>
+    <HeroAssetContainer>{children}</HeroAssetContainer>
   </HeroRoot>
 )
 

@@ -7,7 +7,8 @@ import Hero from './Hero'
 import MoreItems from './MoreItems'
 import SmartDescription from './SmartDescription'
 
-const imgUrl = 'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
+const imgUrl =
+  'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
 const videoUrl = 'http://localhost:8000/float.mp4'
 const title = 'unnamed'
 const artist = '@jandali'
@@ -35,9 +36,7 @@ const ShowArtwork = () => {
                 <ArtistText>{artist}</ArtistText>
               </div>
               <ValueTextContainer>
-                <ValueText>
-                  {value}
-                </ValueText>
+                <ValueText>{value}</ValueText>
               </ValueTextContainer>
             </Header>
 

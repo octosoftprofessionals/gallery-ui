@@ -3,19 +3,24 @@ import styled from 'styled-components'
 
 const SmartParagraph = ({ text }) => (
   <p>
-    {text.split('\n').map((line, index, ary) => (
-      index === ary.length - 1 ?
-        line :
+    {text.split('\n').map((line, index, ary) =>
+      index === ary.length - 1 ? (
+        line
+      ) : (
         <>
-          {line}<br />
+          {line}
+          <br />
         </>
-    ))}
+      )
+    )}
   </p>
 )
 
 const SmartDescription = ({ paragraphs = [] }) => (
   <Root>
-    {paragraphs.map(paragraphText => <SmartParagraph text={paragraphText} />)}
+    {paragraphs.map(paragraphText => (
+      <SmartParagraph text={paragraphText} />
+    ))}
   </Root>
 )
 

@@ -14,9 +14,7 @@ const Navbar = () => (
         <LogoLinkImg src={logoSrc} />
       </LogoLink>
       <SocialLinks>
-        <SubmitLink to="/submit-art">
-          Submit Art
-        </SubmitLink>
+        <SubmitLink to="/submit-art">Submit Art</SubmitLink>
         <SocialIconList>
           <SocialIcons />
         </SocialIconList>

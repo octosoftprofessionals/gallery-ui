@@ -5,7 +5,7 @@ import { FaTwitter } from 'react-icons/fa'
 
 const SITE_URL = 'https://XXXXX'
 const TwitterShareButton = () => {
-  const searchParams = new URLSearchParams();
+  const searchParams = new URLSearchParams()
   searchParams.set('url', SITE_URL)
   searchParams.set('text', 'Art is lit! Check this out!')
 
@@ -19,7 +19,9 @@ const TwitterShareButton = () => {
 export default TwitterShareButton
 
 const Root = styled.a`
-  &:root, &:link, &:visited {
+  &:root,
+  &:link,
+  &:visited {
     background-color: #53a7e6;
     color: white;
     padding: 4px 6px;
