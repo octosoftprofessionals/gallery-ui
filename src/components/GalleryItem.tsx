@@ -3,9 +3,7 @@ import styled from 'styled-components'
 
 import ArtworkDisplay from './ArtworkDisplay'
 
-const videoUrls = [
-  'http://localhost:8000/float.mp4',
-]
+const videoUrls = ['http://localhost:8000/float.mp4']
 
 const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
@@ -78,8 +76,7 @@ const CardLink = styled.a`
     transition: all 400ms;
   }
 
-  &:hover ${ArtworkDisplayContainer},
-  &:hover ${ArtworkDisplayContainer} img {
+  &:hover ${ArtworkDisplayContainer}, &:hover ${ArtworkDisplayContainer} img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     transition: all 400ms;

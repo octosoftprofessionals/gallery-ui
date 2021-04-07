@@ -4,29 +4,34 @@ import styled from 'styled-components'
 import FooterSectional from '../components/FooterSectional'
 import Layout from '../components/Layout/Layout'
 
-import config from '../config';
+import config from '../config'
 
 const SubmitWorkPage = () => {
   return (
     <Layout>
       <Container>
-        <h2>
-          Submit your work as an NFT for the {config.GALLERY_NAME}
-        </h2>
+        <h2>Submit your work as an NFT for the {config.GALLERY_NAME}</h2>
+        <p>We are open to submissions!</p>
         <p>
-          We are open to submissions!
-        </p>
-        <p>
-          Fill out this form to have your work reviewed for addition to our NFT gallery. After review, we will mint an NFT for your artwork and update you when the auction is announced.
+          Fill out this form to have your work reviewed for addition to our NFT
+          gallery. After review, we will mint an NFT for your artwork and update
+          you when the auction is announced.
         </p>
         <p>
           To learn more about NFTs,
-          <a href="https://opensea.io/blog/guides/non-fungible-tokens/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://opensea.io/blog/guides/non-fungible-tokens/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             click here
-          </a>.
+          </a>
+          .
         </p>
         <p>
-          Questions or comments? Email us at <a href={`mailto: ${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>.
+          Questions or comments? Email us at{' '}
+          <a href={`mailto: ${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>
+          .
         </p>
         <p>
           <em>Please wait while the form loads below.</em>
@@ -50,7 +55,7 @@ const SubmitWorkPage = () => {
   )
 }
 
-export default SubmitWorkPage;
+export default SubmitWorkPage
 
 const Container = styled.div`
   color: black;
@@ -84,7 +89,7 @@ const Container = styled.div`
     padding-top: 0.25em;
     padding-bottom: 0.75em;
   }
-`;
+`
 
 const FormContainer = styled.div`
   > iframe {
@@ -99,8 +104,8 @@ const FormContainer = styled.div`
   :global(.formDesignerView .form .formHeader, .sharedForm .formHeader) {
     display: none !important;
   }
-`;
+`
 
 const Footer = styled(FooterSectional)`
   background: white;
-`;
+`

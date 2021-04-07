@@ -18,38 +18,34 @@ import config from '../../config'
 const SocialIcons: React.FC = () => {
   return (
     <>
-      {
-        config.TWITTER_LINK &&
+      {config.TWITTER_LINK && (
         <IconLink
           icon={FaTwitter}
           to={config.TWITTER_LINK}
           externalLink={true}
         />
-      }
-      {
-        config.YOUTUBE_LINK &&
+      )}
+      {config.YOUTUBE_LINK && (
         <IconLink
           icon={FaYoutube}
           to={config.YOUTUBE_LINK}
           externalLink={true}
         />
-      }
-      {
-        config.FACEBOOK_LINK &&
+      )}
+      {config.FACEBOOK_LINK && (
         <IconLink
           icon={FaFacebook}
           to={config.FACEBOOK_LINK}
           externalLink={true}
         />
-      }
-      {
-        config.INSTAGRAM_LINK &&
+      )}
+      {config.INSTAGRAM_LINK && (
         <IconLink
           icon={FaInstagram}
           to={config.INSTAGRAM_LINK}
           externalLink={true}
         />
-      }
+      )}
     </>
   )
 }

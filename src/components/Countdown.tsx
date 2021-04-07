@@ -9,7 +9,7 @@ class Countdown extends React.Component {
     nowM: moment(),
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
         nowM: moment(),
@@ -17,11 +17,11 @@ class Countdown extends React.Component {
     }, 1000)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.timer)
   }
 
-  render () {
+  render() {
     const deadlineM = moment.utc(UTC_TIMESTAMP)
     const nowM = moment()
     const days = deadlineM.diff(nowM, 'days')
@@ -37,31 +37,31 @@ class Countdown extends React.Component {
 
     return (
       <Root isLong={isLong}>
-        <PromptText>Ends in</PromptText>{' '}
-
-        <Digit>{days}</Digit>
-        <Label>{ isLong ? 'days' : ':'}</Label>
-
-        <Digit>{
-          String(hours).length == 1 ? '0' + hours : hours
-        }</Digit>
-        <Label>{ isLong ? 'hr' : ':'}</Label>
-
-        <Digit>{
-          String(mins).length === 1 ? '0' + mins : mins
-        }</Digit>
-        <Label>{ isLong ? 'min' : ':'}</Label>
-
-        <Digit>{
-          String(seconds).length === 1 ? '0' + seconds : seconds
-        }</Digit>
-        <Label>{ isLong ? 'sec' : ''}</Label>
+        <PromptText>Ends in</PromptText>
+        <span>
+          <Digit>{days}</Digit>
+          <Label>{isLong ? 'days' : ':'}</Label>
+        </span>
+        <span>
+          <Digit>{String(hours).length == 1 ? '0' + hours : hours}</Digit>
+          <Label>{isLong ? 'hr' : ':'}</Label>
+        </span>
+        <span>
+          <Digit>{String(mins).length === 1 ? '0' + mins : mins}</Digit>
+          <Label>{isLong ? 'min' : ':'}</Label>
+        </span>
+        <span>
+          <Digit>
+            {String(seconds).length === 1 ? '0' + seconds : seconds}
+          </Digit>
+          <Label>{isLong ? 'sec' : ''}</Label>
+        </span>
       </Root>
     )
   }
 }
 
-export default Countdown;
+export default Countdown
 
 const Root = styled.span`
   display: inline-block;
@@ -69,20 +69,17 @@ const Root = styled.span`
   line-height: 40px;
   margin-left: 5px;
 
-  ${props => props.isLong ? `
-    .label {
-      margin: 0 5px;
-      font-size: 0.66em;
-      color: #a2a2a2;
-    }
-  ` : ''}
-`;
+  ${props =>
+    props.isLong
+      ? '.label { margin: 0 5px; font-size: 0.66em; color: #a2a2a2; }'
+      : ''}
+`
 
 const PromptText = styled.span`
   opacity: 0.7;
   font-size: 0.95em;
   color: #e0bd70;
-`;
+`
 
 const Label = styled.span`
   text-transform: uppercase;
@@ -91,8 +88,8 @@ const Label = styled.span`
   color: black;
   font-weight: bold;
   margin: 0 2px;
-`;
+`
 
 const Digit = styled.span`
   font-weight: bold;
-`;
+`

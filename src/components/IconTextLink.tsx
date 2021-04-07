@@ -20,7 +20,7 @@ const IconTextLink: React.FC<{
   icon: React.FC
   title: string
   internal?: boolean
-}> = ({ children, icon: Icon, title, href = "", internal = false }) => {
+}> = ({ children, icon: Icon, title, href = '', internal = false }) => {
   return (
     <Root>
       <IconLinkItem>
@@ -34,9 +34,7 @@ const IconTextLink: React.FC<{
             {title}
           </FlexLink>
         </Title>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </InfoContainer>
     </Root>
   )
