@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 import {
   FaFacebook,
@@ -10,10 +10,10 @@ import {
   FaMedium,
   FaLinkedin,
   FaPodcast,
-} from "react-icons/fa"
-import IconLink from "../IconLink"
+} from 'react-icons/fa'
+import IconLink from '../IconLink'
 
-import config from "../../config"
+import config from '../../config'
 
 const SocialIcons: React.FC = () => {
   return (

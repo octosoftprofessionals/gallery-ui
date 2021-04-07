@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
 
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
 const IconLink: React.FC<{
   icon: React.FC
@@ -34,7 +34,7 @@ const IconLink: React.FC<{
   )
 }
 
-export default IconLink;
+export default IconLink
 
 const Root = styled.div`
   font-size: 16px;
@@ -69,4 +69,4 @@ const Root = styled.div`
       display: inline;
     }
   }
-`;
+`

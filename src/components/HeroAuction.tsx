@@ -1,21 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
 
-import Countdown from './Countdown';
+import Countdown from './Countdown'
 
 const HeroAuction = () => (
-  <Root>
+  <div>
     <p> Hero Placeholder </p>
-    <Countdown />
-  </Root>
-);
+    <Countdown isLong={false} />
+  </div>
+)
 
-export default HeroAuction;
-
-const Root = styled.div`
-  width: 100%;
-  height: 30vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+export default HeroAuction

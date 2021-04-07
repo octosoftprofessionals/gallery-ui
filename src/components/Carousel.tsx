@@ -4,11 +4,9 @@ import styled from 'styled-components'
 import GalleryItem from './GalleryItem'
 
 const Carousel = ({ items }) => (
-  <div>
-    <ItemList>
-      {items.map((item, index) => <GalleryItem key={index} {...item} />)}
-    </ItemList>
-  </div>
+  <ItemList>
+    {items.map((item, index) => <GalleryItem key={index} {...item} />)}
+  </ItemList>
 )
 
 export default Carousel
@@ -21,4 +19,4 @@ const ItemList = styled.div`
   align-items: center;
   overflow-x: scroll;
   overflow-y: hidden;
-`;
+`

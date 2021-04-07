@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
 import FooterSectional from '../components/FooterSectional'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
-import Layout from '../components/Layout'
+import Layout from '../components/Layout/Layout'
 
 const items = [...new Array(20)].map(() => ({}))
 
@@ -22,7 +23,9 @@ const FeaturedArtworkSection = () => (
 const Home = () => {
   return (
     <Layout>
-      <HeroAuction />
+      <HeroSection>
+        <HeroAuction />
+      </HeroSection>
       <FeaturedArtworkSection />
       <FooterSectional />
       <BottomFiller />
@@ -31,6 +34,14 @@ const Home = () => {
 }
 
 export default Home
+
+const HeroSection = styled.div`
+  width: 100%;
+  height: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const FeaturedArtwork = styled.div`
   padding-bottom: 78px;

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import FooterSectional from '../components/FooterSectional'
-import Layout from '../components/Layout'
+import Layout from '../components/Layout/Layout'
 
 import config from '../config';
 

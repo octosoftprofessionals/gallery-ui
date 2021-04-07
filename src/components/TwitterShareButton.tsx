@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 import { FaTwitter } from 'react-icons/fa'
 
-const SITE_URL = 'https://XXXXX';
+const SITE_URL = 'https://XXXXX'
 const TwitterShareButton = () => {
   const searchParams = new URLSearchParams();
   searchParams.set('url', SITE_URL)
@@ -14,7 +14,7 @@ const TwitterShareButton = () => {
       <FaTwitter /> Share
     </Root>
   )
-};
+}
 
 export default TwitterShareButton
 
@@ -34,4 +34,4 @@ const Root = styled.a`
   &:hover {
     opacity: 0.8;
   }
-`;
+`
