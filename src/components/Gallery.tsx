@@ -5,7 +5,9 @@ import GalleryItem from './GalleryItem'
 
 const Gallery = ({ items }) => (
   <Root>
-    {items.map((item, index) => <GalleryItem key={index} {...item} />)}
+    {items.map((item, index) => (
+      <GalleryItem key={index} {...item} />
+    ))}
   </Root>
 )
 

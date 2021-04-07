@@ -16,9 +16,7 @@ const FooterSectional = () => (
         <ActionLink href="https://metxr.org" target="_blank">
           Visit the MetXR 3D Museum
         </ActionLink>
-        <Copyright>
-          &#169; 2021 {config.GALLERY_NAME}
-        </Copyright>
+        <Copyright>&#169; 2021 {config.GALLERY_NAME}</Copyright>
       </CenterContainer>
     </ContentContainer>
   </Root>
@@ -82,4 +80,3 @@ const Copyright = styled.div`
     margin: 2px;
   }
 `
-

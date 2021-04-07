@@ -27,11 +27,7 @@ const IconLink: React.FC<{
     }
   }
 
-  return (
-    <Root>
-      {linkBody}
-    </Root>
-  )
+  return <Root>{linkBody}</Root>
 }
 
 export default IconLink

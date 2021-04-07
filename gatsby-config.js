@@ -4,14 +4,22 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
 })
 
 module.exports = {
-    /* Your site config here */
-    plugins: [
-        'gatsby-plugin-styled-components',
-        'gatsby-plugin-typescript',
-    ],
+  /* Your site config here */
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-typescript',
+  ],
 }
