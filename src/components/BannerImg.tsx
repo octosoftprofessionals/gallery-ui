@@ -1,11 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import bannerSrc from '../assets/banner.png';
+import bannerSrc from '../assets/banner.png'
 
-const BannerImg = () => {
-  return (
-    <img src={bannerSrc} />
-  );
-};
+const BannerImg = () => <img src={bannerSrc} />
 
-export default BannerImg;
+export default BannerImg

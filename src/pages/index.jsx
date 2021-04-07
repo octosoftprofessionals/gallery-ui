@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <Layout>
       <HeroSection>
-        <BannerImg />
+        <HeroAuction />
       </HeroSection>
       <FeaturedArtworkSection />
       <FooterSectional />

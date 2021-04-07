@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import ArtworkDisplay from '../../../components/ArtworkDisplay'
 import Layout from '../../../components/Layout/Layout'
-
 import Hero from './Hero'
 import MoreItems from './MoreItems'
 import SmartDescription from './SmartDescription'
@@ -23,7 +22,9 @@ const value = '50.00 ETH'
 const ShowArtwork = () => {
   return (
     <div>
-      <Hero centerpiece={<ArtworkDisplay imgUrl={imgUrl} videoUrl={videoUrl} />} />
+      <Hero>
+        <ArtworkDisplay imgUrl={imgUrl} videoUrl={videoUrl} />
+      </Hero>
       {/* TODO: flip navbar style */}
       <Layout>
         <Main>
@@ -61,7 +62,7 @@ const Main = styled.div`
   align-items: center;
   margin-top: -38px;
   padding-bottom: 64px;
-`;
+`
 
 const ContentContainer = styled.div`
   width: 50%;
@@ -71,7 +72,7 @@ const ContentContainer = styled.div`
   > * + * {
     margin: 24px;
   }
-`;
+`
 
 const Header = styled.div`
   display: flex;
@@ -82,30 +83,30 @@ const Header = styled.div`
   > * {
     width: 50%;
   }
-`;
+`
 
 const TitleText = styled.h1`
   margin-bottom: 0;
-`;
+`
 
 const ArtistText = styled.p`
   margin-top: 0;
   margin-bottom: 0;
-`;
+`
 
 const ValueTextContainer = styled.div`
   text-align: right;
   flex-direction: column;
   justify-content: flex-end;
-`;
+`
 
 const ValueText = styled.p`
   margin-top: 20px;
   font-weight: bold;
   margin-bottom: 0;
-`;
+`
 
 const Divider = styled.div`
   border-bottom: 2px solid #333;
   margin: 24px 0;
-`;
+`

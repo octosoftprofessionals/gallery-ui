@@ -23,4 +23,4 @@ export default SmartDescription
 
 const Root = styled.div`
   margin-top: 32px;
-`;
+`

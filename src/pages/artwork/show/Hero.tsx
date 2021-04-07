@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Hero = ({ centerpiece }) => (
+const Hero = ({ children }) => (
   <HeroRoot>
     <HeroAssetContainer>
-      {centerpiece}
+      {children}
     </HeroAssetContainer>
   </HeroRoot>
 )
@@ -18,9 +18,9 @@ const HeroRoot = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const HeroAssetContainer = styled.div`
   width: 50%;
   max-width: 520px;
-`;
+`

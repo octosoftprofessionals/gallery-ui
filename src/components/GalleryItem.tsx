@@ -59,7 +59,7 @@ const ArtworkDisplayContainer = styled.div`
     z-index: 1;
     transition: all 400ms;
   }
-`;
+`
 
 const CardLink = styled.a`
   display: block;
@@ -84,17 +84,17 @@ const CardLink = styled.a`
     border-top-right-radius: 10px;
     transition: all 400ms;
   }
-`;
+`
 
 const InfoContainer = styled.div`
   padding: 0 24px 24px;
-`;
+`
 
 const Divider = styled.div`
   border-bottom: 1px solid #ccc;
   margin: 24px 0;
-`;
+`
 
 const AmountText = styled.p`
   margin: 0;
-`;
+`

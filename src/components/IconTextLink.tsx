@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
 
 import { Link } from 'gatsby'
@@ -50,23 +50,23 @@ const Root = styled.div`
   padding: 8px;
   margin: 8px;
   box-sizing: border-box;
-`;
+`
 
 const IconLinkItem = styled.div`
   font-size: 40px;
   padding: 8px;
-`;
+`
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 8px;
-`;
+`
 
 const Title = styled.div`
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 8px;
-`;
+`
 
 const StyledFlexLink = styled.div`
   color: #bbb;
@@ -75,4 +75,4 @@ const StyledFlexLink = styled.div`
   :hover {
     color: white;
   }
-`;
+`

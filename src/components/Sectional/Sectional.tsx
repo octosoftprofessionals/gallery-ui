@@ -1,20 +1,17 @@
-import React, { CSSProperties } from "react"
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-const Sectional: React.FC<{
-  className?: string
-  style?: CSSProperties
-  innerStyle?: CSSProperties
-}> = ({ children, className = "", style, innerStyle = {}, ...props }) => {
-  return (
-    <Container
-      className={className}
-      {...props}
-    >
-      {children}
-    </Container>
-  )
-}
+const Sectional= ({
+  children,
+  className = '',
+  style,
+  innerStyle = {},
+  ...props
+}) => (
+  <Container className={className} {...props}>
+    {children}
+  </Container>
+)
 
 export default Sectional
 
@@ -29,4 +26,4 @@ const Container = styled.div`
     text-decoration: none;
     color: black;
   }
-`;
+`
