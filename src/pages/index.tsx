@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
-import FooterSectional from '../components/FooterSectional'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
@@ -25,7 +24,6 @@ const Home = () => {
         <HeroAuction />
       </HeroSection>
       <FeaturedArtworkSection />
-      <FooterSectional />
       <BottomFiller />
     </Layout>
   )

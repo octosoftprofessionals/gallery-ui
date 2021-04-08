@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeProvider, styled } from '@material-ui/core/styles'
 
 import Navbar from './Navbar'
+import Footer from './Footer'
 
 import { Theme } from '../Styles'
 import './Layout.css'
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
         <Navbar />
         <StyledMain>{children}</StyledMain>
       </LayoutContainer>
+      <Footer />
     </ThemeProvider>
   )
 }
