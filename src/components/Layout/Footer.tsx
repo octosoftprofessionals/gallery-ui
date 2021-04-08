@@ -17,14 +17,16 @@ const useStyles = makeStyles({
     color: '#b3b3b3',
     '&:hover': { color: '#666666' },
   },
-  containerSocialMedia: {},
   link: { textDecoration: 'none', cursor: 'pointer' },
   img: {
     background: `url(${logoSrc})`,
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundPosition: 'inerit',
     backgroundSize: 'contain',
     paddingBottom: '2em',
+  },
+  containerText: {
+    '@media (max-width: 576px)': { flexDirection: 'column', marginTop: 20 },
   },
 })
 
@@ -37,50 +39,68 @@ const Footer = () => {
         container
         justify="space-between"
         alignItems="center"
+        direction="row"
         className={classes.root}
       >
-        <Grid item xs={4} container justify="space-around">
-          <Grid item xs={2}>
+        <Grid item xs={6} sm={5} container direction="row">
+          <Grid item xs={12} sm={2}>
             <div className={classes.img} />
           </Grid>
-          <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Instagram
-            </Typography>
-          </Link>
-          <Link to={twitter} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Twitter
-            </Typography>
-          </Link>
-          <Link to={discord} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Discord
-            </Typography>
-          </Link>
-          <Link to={blog} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Blog
-            </Typography>
-          </Link>
+
+          <Grid
+            item
+            sm={6}
+            container
+            justify="space-around"
+            className={classes.containerText}
+          >
+            <Link to={instagram} className={classes.link}>
+              <Typography
+                variant="overline"
+                color="initial"
+                className={classes.text}
+              >
+                Instagram
+              </Typography>
+            </Link>
+            <Link to={twitter} className={classes.link}>
+              <Typography
+                variant="overline"
+                color="initial"
+                className={classes.text}
+              >
+                Twitter
+              </Typography>
+            </Link>
+            <Link to={discord} className={classes.link}>
+              <Typography
+                variant="overline"
+                color="initial"
+                className={classes.text}
+              >
+                Discord
+              </Typography>
+            </Link>
+            <Link to={blog} className={classes.link}>
+              <Typography
+                variant="overline"
+                color="initial"
+                className={classes.text}
+              >
+                Blog
+              </Typography>
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item xs={5} container justify="space-around">
+
+        <Grid
+          item
+          xs={6}
+          sm={5}
+          container
+          justify="space-around"
+          className={classes.containerText}
+        >
           <Link to={instagram} className={classes.link}>
             <Typography
               variant="overline"
