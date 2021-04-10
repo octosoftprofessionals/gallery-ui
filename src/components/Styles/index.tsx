@@ -1,19 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import { colors } from './Colors'
+
+const { AshGray, Black, GrayLite, Platinum, White } = colors
 
 export const Theme = createMuiTheme({
   palette: {
     action: {
-      hover: '#666666',
+      hover: AshGray,
     },
     primary: {
-      main: '#000',
-      contrastText: '#ffffff',
+      main: Black,
+      contrastText: White,
     },
     secondary: {
-      main: '#ffffff',
-      light: '#f2f2f2',
-      dark: '#e6e6e6',
-      contrastText: '#000',
+      main: White,
+      light: GrayLite,
+      dark: Platinum,
+      contrastText: Black,
     },
   },
   shadows: {
