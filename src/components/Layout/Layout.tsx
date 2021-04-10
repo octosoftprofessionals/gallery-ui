@@ -8,7 +8,7 @@ import './Layout.css'
 
 const LayoutContainer = styled('div')({ padding: Theme.spacing(0, 4) })
 
-const MyMain = styled('main')({
+const StyledMain = styled('main')({
   minHeight: '100vh',
   height: '100%',
   marginTop: 78,
@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={Theme}>
       <LayoutContainer>
         <Navbar />
-        <MyMain>{children}</MyMain>
+        <StyledMain>{children}</StyledMain>
       </LayoutContainer>
     </ThemeProvider>
   )
