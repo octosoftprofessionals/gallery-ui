@@ -6,13 +6,13 @@ import Navbar from './Navbar'
 import { Theme } from '../Styles'
 import './Layout.css'
 
-const LayoutContainer = styled('div')({ padding: Theme.spacing(0, 4) })
+const LayoutContainer = styled('div')({ padding: Theme.spacing(0, 8) })
 
 const StyledMain = styled('main')({
-  minHeight: '100vh',
-  height: '100%',
-  marginTop: 78,
-  marginBottom: Theme.spacing(4) - 2,
+  minHeight: `${Theme.spacing(16)}vh`,
+  height: `${Theme.spacing(16)}%`,
+  marginTop: Theme.spacing(15),
+  marginBottom: Theme.spacing(7),
 })
 
 const Layout = ({ children }) => {
