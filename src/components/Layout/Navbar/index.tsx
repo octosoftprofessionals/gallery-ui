@@ -21,42 +21,45 @@ import {
 
 const { boxShadow1 } = boxShadow
 
-const useStyles = makeStyles(theme => ({
-  root: { padding: theme.spacing(11, 0, 0) },
+const useStyles = makeStyles(Theme => ({
+  root: { padding: Theme.spacing(11, 0, 0) },
   img: {
     background: `url(${logoSrc})`,
-    paddingBottom: theme.spacing(14),
+    paddingBottom: Theme.spacing(14),
     backgroundPosition: 'left',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
   },
   container: {
     boxShadow: boxShadow1,
-    padding: theme.spacing(2),
-    borderRadius: theme.spacing(2) + 2,
+    padding: Theme.spacing(2),
+    borderRadius: Theme.shape.borderRadius[1],
   },
   selected: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    '&:hover': { backgroundColor: theme.palette.primary.main },
+    backgroundColor: Theme.palette.primary.main,
+    color: Theme.palette.primary.contrastText,
+    '&:hover': { backgroundColor: Theme.palette.primary.main },
   },
-  buttonMenu: { boxShadow: boxShadow1 },
+  buttonMenu: {
+    boxShadow: boxShadow1,
+    fontSize: `${Theme.typography.fontSize[0]}rem`,
+  },
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
   },
-  drawer: { width: `${theme.spacing(17)}vw`, padding: theme.spacing(0, 7) },
-  offIcon: { fontSize: '3em' },
-  containerImg: { marginBottom: theme.spacing(7) },
+  drawer: { width: `${Theme.spacing(17)}vw`, padding: Theme.spacing(0, 7) },
+  offIcon: { fontSize: `${Theme.typography.fontSize[2]}em` },
+  containerImg: { marginBottom: Theme.spacing(7) },
   imgMenu: {
-    marginLeft: theme.spacing(3),
-    marginTop: theme.spacing(7),
+    marginLeft: Theme.spacing(3),
+    marginTop: Theme.spacing(7),
     background: `url(${logoSrc})`,
-    paddingBottom: theme.spacing(14),
+    paddingBottom: Theme.spacing(14),
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
   },
-  drawerFooter: { marginTop: `${theme.spacing(3)}vh` },
+  drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
 }))
 
 const index = () => {
@@ -73,7 +76,7 @@ const index = () => {
               </Link>
             </Grid>
 
-            <div className={classes.container}>
+            <Grid item className={classes.container}>
               <Hidden mdDown>
                 <Link to="/" className={classes.link}>
                   <Button variant="text" color="primary">
@@ -95,10 +98,10 @@ const index = () => {
                   </Button>
                 </Link>
               </Hidden>
-            </div>
+            </Grid>
 
             <Hidden smDown>
-              <Grid item>
+              <Grid item xs={4} container justify="flex-end">
                 <Button variant="contained" color="primary">
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>

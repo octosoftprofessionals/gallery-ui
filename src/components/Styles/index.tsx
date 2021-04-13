@@ -64,6 +64,7 @@ export const Theme = createMuiTheme({
       },
     },
   },
+  shape: { borderRadius: [0, 10] },
   palette: {
     action: {
       hover: GrayLite,
@@ -101,6 +102,7 @@ export const Theme = createMuiTheme({
     100,
   ],
   typography: {
+    fontSize: [2, 4, 6, 18, 20, 66],
     fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
       ','
     ),
