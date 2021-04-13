@@ -5,17 +5,10 @@ import { Typography, Grid } from '@material-ui/core'
 
 import logoSrc from '../../assets/logo.png'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(Theme => ({
   root: {
-    backgroundColor: '#F2F2F2',
-    padding: '48px 24px',
-  },
-  text: {
-    textTransform: 'capitalize',
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#b3b3b3',
-    '&:hover': { color: '#666666' },
+    backgroundColor: Theme.palette.secondary.light,
+    padding: Theme.spacing(13, 9),
   },
   link: { textDecoration: 'none', cursor: 'pointer' },
   img: {
@@ -23,12 +16,12 @@ const useStyles = makeStyles({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'inerit',
     backgroundSize: 'contain',
-    paddingBottom: '2em',
+    paddingBottom: `${Theme.spacing(1)}em`,
   },
   containerText: {
-    '@media (max-width: 576px)': { flexDirection: 'column', marginTop: 20 },
+    '@media (max-width: 576px)': { flexDirection: 'column' },
   },
-})
+}))
 
 const Footer = () => {
   const classes = useStyles()
@@ -42,53 +35,28 @@ const Footer = () => {
         direction="row"
         className={classes.root}
       >
+        <Grid item xs={12} sm={2}>
+          <div className={classes.img} />
+        </Grid>
         <Grid item xs={6} sm={5} container direction="row">
-          <Grid item xs={12} sm={2}>
-            <div className={classes.img} />
-          </Grid>
-
           <Grid
             item
             sm={6}
             container
-            justify="space-around"
+            justify="space-evenly"
             className={classes.containerText}
           >
             <Link to={instagram} className={classes.link}>
-              <Typography
-                variant="overline"
-                color="initial"
-                className={classes.text}
-              >
-                Instagram
-              </Typography>
+              <Typography variant="overline">Instagram</Typography>
             </Link>
             <Link to={twitter} className={classes.link}>
-              <Typography
-                variant="overline"
-                color="initial"
-                className={classes.text}
-              >
-                Twitter
-              </Typography>
+              <Typography variant="overline">Twitter</Typography>
             </Link>
             <Link to={discord} className={classes.link}>
-              <Typography
-                variant="overline"
-                color="initial"
-                className={classes.text}
-              >
-                Discord
-              </Typography>
+              <Typography variant="overline">Discord</Typography>
             </Link>
             <Link to={blog} className={classes.link}>
-              <Typography
-                variant="overline"
-                color="initial"
-                className={classes.text}
-              >
-                Blog
-              </Typography>
+              <Typography variant="overline">Blog</Typography>
             </Link>
           </Grid>
         </Grid>
@@ -98,53 +66,23 @@ const Footer = () => {
           xs={6}
           sm={5}
           container
-          justify="space-around"
+          justify="space-evenly"
           className={classes.containerText}
         >
           <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Community Guidelines
-            </Typography>
+            <Typography variant="overline">Community Guidelines</Typography>
           </Link>
           <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Terms of Service
-            </Typography>
+            <Typography variant="overline">Terms of Service</Typography>
           </Link>
           <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Privacy
-            </Typography>
+            <Typography variant="overline">Privacy</Typography>
           </Link>
           <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Careers
-            </Typography>
+            <Typography variant="overline">Careers</Typography>
           </Link>
           <Link to={instagram} className={classes.link}>
-            <Typography
-              variant="overline"
-              color="initial"
-              className={classes.text}
-            >
-              Help
-            </Typography>
+            <Typography variant="overline">Help</Typography>
           </Link>
         </Grid>
       </Grid>
