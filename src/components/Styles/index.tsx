@@ -2,14 +2,14 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { colors } from './Colors'
 
 const {
-  AshGray,
-  GrayStrong,
+  DimGray,
+  Gray,
   Black,
-  GrayLite,
-  Platinum,
+  WhiteSmoke,
+  Gainsboro,
   White,
-  GrayText,
-  GrayCard,
+  DarkGray,
+  VeryLightGrey,
 } = colors
 
 export const Theme = createMuiTheme({
@@ -34,11 +34,11 @@ export const Theme = createMuiTheme({
     },
     MuiTypography: {
       overline: {
-        color: GrayText,
+        color: DarkGray,
         textTransform: 'capitalize',
         fontSize: 14,
         fontWeight: 600,
-        '&:hover': { color: AshGray },
+        '&:hover': { color: DimGray },
       },
       button: {
         margin: 0,
@@ -66,7 +66,7 @@ export const Theme = createMuiTheme({
         fontSize: 18,
         fontWeight: 600,
         textTransform: 'none',
-        color: GrayStrong,
+        color: Gray,
       },
     },
     MuiDrawer: {
@@ -89,20 +89,20 @@ export const Theme = createMuiTheme({
   shape: { borderRadius: [0, 10, 16] },
   palette: {
     action: {
-      hover: GrayLite,
+      hover: WhiteSmoke,
     },
     primary: {
       main: Black,
-      light: AshGray,
+      light: DimGray,
       contrastText: White,
     },
     secondary: {
       main: White,
-      light: GrayLite,
-      dark: Platinum,
+      light: WhiteSmoke,
+      dark: Gainsboro,
       contrastText: Black,
     },
-    text: { secondary: GrayCard },
+    text: { secondary: VeryLightGrey },
   },
   spacing: [
     0,
