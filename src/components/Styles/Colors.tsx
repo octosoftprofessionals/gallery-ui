@@ -6,6 +6,7 @@ export const colors = {
   GrayText: '#b3b3b3',
   Platinum: '#e6e6e6',
   GrayStrong: '#7f7f7f',
+  GrayCard: '#cccccc',
 }
 
 export const boxShadow = { boxShadow1: '0px 10px 20px rgb(0 0 0 / 5%)' }

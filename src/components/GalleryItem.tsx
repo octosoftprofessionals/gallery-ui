@@ -1,7 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles'
+import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import ArtworkDisplay from './ArtworkDisplay'
+import { title } from 'node:process'
 
 const videoUrls = ['http://localhost:8000/float.mp4']
 
@@ -23,75 +25,91 @@ const randImg = () => {
   return imgUrls[Math.floor(Math.random() * imgUrls.length)]
 }
 
-const GalleryItem = () => (
-  <CardLink href={`/artwork/show`}>
-    <ArtworkDisplayContainer>
-      <ArtworkDisplay imgUrl={randImg()} videoUrl={randAsset()} />
-    </ArtworkDisplayContainer>
-    <InfoContainer>
-      <div>
-        <h1>unnamed</h1>
-        <p>@jandali</p>
-      </div>
-      <Divider />
-      <div>
-        <AmountText>50.00 ETH</AmountText>
-      </div>
-    </InfoContainer>
-  </CardLink>
-)
+const useStyle = makeStyles(Theme => ({
+  root: {},
+  img: {
+    backgroundImage: props => `url(${props.imgUrls})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    paddingBottom: '100%',
+    borderRadius: Theme.spacing(4, 4, 0, 0),
+  },
+  footerCard: {
+    padding: Theme.spacing(9),
+    backgroundColor: Theme.palette.primary.main,
+    borderRadius: Theme.spacing(0, 0, 4, 4),
+  },
+  titels: { color: Theme.palette.text.secondary },
+  infoCard: { margin: Theme.spacing(9) },
+  containerAvatar: { marginTop: Theme.spacing(9) },
+}))
+
+const GalleryItem = ({}) => {
+  const classes = useStyle({ imgUrls: randImg() })
+  const price = '5.00'
+  const hour = 12
+  const min = 21
+  const sec = 45
+  const artis = '@ArtisName'
+  const title = 'Unname'
+  return (
+    <>
+      <Paper variant="elevation" elevation={1} className={classes.root}>
+        <div className={classes.img} />
+        <Grid
+          item
+          container
+          direction="column"
+          alignItems="center"
+          justify="space-around"
+        >
+          <Grid
+            item
+            xs={10}
+            container
+            justify="flex-start"
+            className={classes.infoCard}
+          >
+            <Typography variant="h5" color="initial">
+              {title}
+            </Typography>
+            <Grid
+              item
+              xs={12}
+              container
+              direction="row"
+              alignItems="center"
+              className={classes.containerAvatar}
+            >
+              <Avatar alt="avat" src={`${randImg()}`} />
+              <Typography variant="subtitle1" color="initial">
+                {artis}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid item container className={classes.footerCard}>
+            <Grid item xs={6} container>
+              <Typography variant="caption" className={classes.titels}>
+                Current bid
+              </Typography>
+              <Typography variant="caption" color="secondary">
+                {`${price} ETH`}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} container alignItems="flex-start">
+              <Typography variant="caption" className={classes.titels}>
+                Ending in
+              </Typography>
+              <Typography variant="caption" color="secondary">
+                {`${hour}h ${min}m ${sec}s`}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+    </>
+  )
+}
 
 export default GalleryItem
-
-const ArtworkDisplayContainer = styled.div`
-  width: 280px;
-  height: 240px;
-  overflow: hidden;
-  transition: all 400ms;
-
-  img {
-    width: 280px;
-    height: 240px;
-    object-fit: cover;
-    overflow: hidden;
-    z-index: 1;
-    transition: all 400ms;
-  }
-`
-
-const CardLink = styled.a`
-  display: block;
-  text-decoration: none;
-  color: black;
-  box-shadow: 0px 0px 5px 0px #ccc;
-  margin-right: 1em;
-  margin-bottom: 1.5em;
-  transition: all 400ms;
-
-  &:hover {
-    border-radius: 12px;
-    box-shadow: 0px 0px 12px 0px #999;
-    position: relative;
-    transform: translateY(-3px);
-    transition: all 400ms;
-  }
-
-  &:hover ${ArtworkDisplayContainer}, &:hover ${ArtworkDisplayContainer} img {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    transition: all 400ms;
-  }
-`
-
-const InfoContainer = styled.div`
-  padding: 0 24px 24px;
-`
-
-const Divider = styled.div`
-  border-bottom: 1px solid #ccc;
-  margin: 24px 0;
-`
-
-const AmountText = styled.p`
-  margin: 0;
-`

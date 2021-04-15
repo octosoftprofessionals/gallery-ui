@@ -9,6 +9,7 @@ const {
   Platinum,
   White,
   GrayText,
+  GrayCard,
 } = colors
 
 export const Theme = createMuiTheme({
@@ -50,6 +51,17 @@ export const Theme = createMuiTheme({
         fontSize: 46,
         fontWeight: 600,
       },
+      h5: {
+        fontSize: 24,
+        fontWeight: 600,
+      },
+      subtitle1: {
+        fontSize: 16,
+        fontWeight: 600,
+        marginLeft: 8,
+        fontFamily:
+          '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
+      },
       caption: {
         fontSize: 18,
         fontWeight: 600,
@@ -63,8 +75,18 @@ export const Theme = createMuiTheme({
         color: White,
       },
     },
+    MuiPaper: {
+      elevation1: {
+        borderRadius: 16,
+        maxWidth: 301,
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
+        },
+      },
+    },
   },
-  shape: { borderRadius: [0, 10] },
+  shape: { borderRadius: [0, 10, 16] },
   palette: {
     action: {
       hover: GrayLite,
@@ -80,6 +102,7 @@ export const Theme = createMuiTheme({
       dark: Platinum,
       contrastText: Black,
     },
+    text: { secondary: GrayCard },
   },
   spacing: [
     0,
