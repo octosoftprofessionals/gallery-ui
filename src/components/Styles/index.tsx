@@ -2,13 +2,14 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { colors } from './Colors'
 
 const {
-  AshGray,
-  GrayStrong,
+  DimGray,
+  Gray,
   Black,
-  GrayLite,
-  Platinum,
+  WhiteSmoke,
+  Gainsboro,
   White,
-  GrayText,
+  DarkGray,
+  VeryLightGrey,
 } = colors
 
 export const Theme = createMuiTheme({
@@ -33,11 +34,11 @@ export const Theme = createMuiTheme({
     },
     MuiTypography: {
       overline: {
-        color: GrayText,
+        color: DarkGray,
         textTransform: 'capitalize',
         fontSize: 14,
         fontWeight: 600,
-        '&:hover': { color: AshGray },
+        '&:hover': { color: DimGray },
       },
       button: {
         margin: 0,
@@ -50,11 +51,22 @@ export const Theme = createMuiTheme({
         fontSize: 46,
         fontWeight: 600,
       },
+      h5: {
+        fontSize: 24,
+        fontWeight: 600,
+      },
+      subtitle1: {
+        fontSize: 16,
+        fontWeight: 600,
+        marginLeft: 8,
+        fontFamily:
+          '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
+      },
       caption: {
         fontSize: 18,
         fontWeight: 600,
         textTransform: 'none',
-        color: GrayStrong,
+        color: Gray,
       },
     },
     MuiDrawer: {
@@ -63,23 +75,34 @@ export const Theme = createMuiTheme({
         color: White,
       },
     },
+    MuiPaper: {
+      elevation1: {
+        borderRadius: 16,
+        maxWidth: 301,
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
+        },
+      },
+    },
   },
-  shape: { borderRadius: [0, 10] },
+  shape: { borderRadius: [0, 10, 16] },
   palette: {
     action: {
-      hover: GrayLite,
+      hover: WhiteSmoke,
     },
     primary: {
       main: Black,
-      light: AshGray,
+      light: DimGray,
       contrastText: White,
     },
     secondary: {
       main: White,
-      light: GrayLite,
-      dark: Platinum,
+      light: WhiteSmoke,
+      dark: Gainsboro,
       contrastText: Black,
     },
+    text: { secondary: VeryLightGrey },
   },
   spacing: [
     0,
