@@ -5,7 +5,7 @@ import InAuctions from './InAuctions'
 import Reserve from './Reserve'
 import Sold from './Sold'
 
-const index = ({ price, timer, statesArt }) => {
+const FooterCardItem = ({ price, timer, statesArt }) => {
   return (
     <Grid item>
       {statesArt === 'auction' ? (
@@ -19,4 +19,4 @@ const index = ({ price, timer, statesArt }) => {
   )
 }
 
-export default index
+export default FooterCardItem
