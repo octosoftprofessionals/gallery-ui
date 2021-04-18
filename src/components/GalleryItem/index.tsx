@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import ArtworkDisplay from './ArtworkDisplay'
-import { deltaTime, timeFormat } from '../Utils'
+import { deltaTime, timeFormat } from '../../Utils'
+import FooterCardItem from './FooterCardItem'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -15,24 +16,25 @@ const useStyle = makeStyles(Theme => ({
     paddingBottom: '100%',
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
-  footerCard: {
-    padding: Theme.spacing(9),
-    backgroundColor: Theme.palette.primary.main,
-    borderRadius: Theme.spacing(0, 0, 4, 4),
-  },
-  titels: { color: Theme.palette.text.secondary },
   infoCard: { margin: Theme.spacing(9) },
   containerAvatar: { marginTop: Theme.spacing(9) },
 }))
 
-const GalleryItem = ({ imgUrl, price, artis, titleArt, start }) => {
+const GalleryItem = ({
+  imgUrl,
+  price,
+  artis,
+  titleArt,
+  endingIn,
+  statesArt,
+}) => {
   const [timer, setTimer] = useState('')
 
   const classes = useStyle({ imgUrl: imgUrl })
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      const delta = deltaTime(start)
+      const delta = deltaTime(endingIn)
       if (delta >= 0) {
         setTimer(timeFormat(delta))
       } else {
@@ -45,16 +47,10 @@ const GalleryItem = ({ imgUrl, price, artis, titleArt, start }) => {
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <div className={classes.img} />
-      <Grid
-        item
-        container
-        direction="column"
-        alignItems="center"
-        justify="space-around"
-      >
+      <Grid item container direction="column" justify="space-around">
         <Grid
           item
-          xs={10}
+          xs={12}
           container
           justify="flex-start"
           className={classes.infoCard}
@@ -76,25 +72,8 @@ const GalleryItem = ({ imgUrl, price, artis, titleArt, start }) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item container className={classes.footerCard}>
-          <Grid item xs={6} container>
-            <Typography variant="caption" className={classes.titels}>
-              Current bid
-            </Typography>
-            <Typography variant="caption" color="secondary">
-              {`${price} ETH`}
-            </Typography>
-          </Grid>
-          <Grid item xs={6} container alignItems="flex-start">
-            <Grid item xs={12}>
-              <Typography variant="caption" className={classes.titels}>
-                Ending in
-              </Typography>
-            </Grid>
-            <Typography variant="caption" color="secondary">
-              {timer}
-            </Typography>
-          </Grid>
+        <Grid item xs={12}>
+          <FooterCardItem price={price} timer={timer} statesArt={statesArt} />
         </Grid>
       </Grid>
     </Paper>

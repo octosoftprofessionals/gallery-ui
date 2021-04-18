@@ -3,6 +3,25 @@ import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const videoUrls = ['http://localhost:8000/float.mp4']
+const stateArt = ['auction', 'reserve', 'sold']
+const endingInArt = [
+  '2021/06/19 11:43:00 AM',
+  '2021/04/17 11:43:00 PM',
+  '2021/04/18 01:13:30 PM',
+  '2021/04/26 11:39:50 AM',
+]
+const priceArt = [
+  '5.567',
+  '15.234',
+  '0.11',
+  '0.521',
+  '0.1520',
+  '2.1020',
+  '1.670',
+  '4.240',
+  '0.001',
+  '',
+]
 
 const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
@@ -12,8 +31,10 @@ const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
   // 'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
 ]
-
-const start = new Date('2021/04/16 11:43:00 PM')
+const randEndingInArt = () => {
+  const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
+  return new Date(endingIn)
+}
 
 const randAsset = () => {
   const assetUrls = imgUrls.concat(videoUrls)
@@ -22,6 +43,14 @@ const randAsset = () => {
 
 const randImg = () => {
   return imgUrls[Math.floor(Math.random() * imgUrls.length)]
+}
+
+const randStateArt = () => {
+  return stateArt[Math.floor(Math.random() * stateArt.length)]
+}
+
+const randPriceArt = () => {
+  return priceArt[Math.floor(Math.random() * priceArt.length)]
 }
 
 import GalleryItem from './GalleryItem'
@@ -48,10 +77,11 @@ const Gallery = ({ items }) => {
             key={index}
             {...item}
             imgUrl={randImg()}
-            price={'5.00'}
+            price={randPriceArt()}
             artis={'@ArtisName'}
             titleArt={'Unname'}
-            start={start}
+            endingIn={randEndingInArt()}
+            statesArt={randStateArt()}
           />
         </Grid>
       ))}

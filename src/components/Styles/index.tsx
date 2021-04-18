@@ -77,6 +77,7 @@ export const Theme = createMuiTheme({
     },
     MuiPaper: {
       elevation1: {
+        boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
         borderRadius: 16,
         maxWidth: 301,
         '&:hover': {
@@ -102,7 +103,7 @@ export const Theme = createMuiTheme({
       dark: Gainsboro,
       contrastText: Black,
     },
-    text: { secondary: VeryLightGrey },
+    text: { primary: Gray, secondary: VeryLightGrey },
   },
   spacing: [
     0,
