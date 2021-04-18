@@ -15,9 +15,22 @@ const Home = () => {
       <HeroSection>
         <HeroAuction />
       </HeroSection>
-      <ArtworkGrid title="Live auctions" items={items} icon />
-      <ArtworkGrid title="Featured artworks" items={items} />
-      <ArtworkGrid title="Featured creators" items={items} />
+      <ArtworkGrid
+        title="Live auctions"
+        titleButtom="live auctions"
+        items={items}
+        icon
+      />
+      <ArtworkGrid
+        title="Featured artworks"
+        titleButtom="artworks"
+        items={items}
+      />
+      <ArtworkGrid
+        title="Featured creators"
+        titleButtom="creators"
+        items={items}
+      />
       <BottomFiller />
     </Layout>
   )

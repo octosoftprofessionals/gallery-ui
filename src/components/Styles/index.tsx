@@ -134,14 +134,13 @@ export const Theme = createMuiTheme({
     32,
     36,
     48,
-    64,
     66,
     78,
-    100,
     96,
+    100,
   ],
   typography: {
-    fontSize: [2, 4, 6, 18, 20, 66],
+    fontSize: [2, 4, 6, 18, 20, 66, '.85em', '1em'],
     fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
       ','
     ),

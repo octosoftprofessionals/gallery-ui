@@ -8,7 +8,9 @@ import Gallery from '../Gallery'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
-  head: { padding: Theme.spacing(16, 0, 9) },
+  head: {
+    padding: Theme.spacing(16, 0, 9),
+  },
   '@keyframes fillepa': {
     '0%': { opacity: 1 },
     '100%': { opacity: 0 },
@@ -18,9 +20,15 @@ const useStyle = makeStyles(Theme => ({
     animation: '$fillepa 1.5s ease infinite ',
     display: ({ icon }) => (!icon ? 'none' : 'block'),
   },
+  text: {
+    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[7] },
+  },
+  textButton: {
+    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[6] },
+  },
 }))
 
-const ArtworkGrid = ({ title, items, icon, link }) => {
+const ArtworkGrid = ({ title, titleButtom, items, icon, link }) => {
   const classes = useStyle({ icon })
 
   return (
@@ -34,18 +42,24 @@ const ArtworkGrid = ({ title, items, icon, link }) => {
         alignItems="center"
         className={classes.head}
       >
-        <Grid item xs={5} container alignItems="center">
+        <Grid item xs={6} container alignItems="center">
           <FiberManualRecordIcon className={classes.iconDot} />
-          <Typography variant="h5" color="primary">
+          <Typography variant="h5" color="primary" className={classes.text}>
             {title}
           </Typography>
         </Grid>
 
-        <Link to={link}>
-          <Typography variant="body1" color="initial">
-            {`View all ${title.toLowerCase()}`}
-          </Typography>
-        </Link>
+        <Grid item>
+          <Link to={link}>
+            <Typography
+              variant="body1"
+              color="initial"
+              className={classes.textButton}
+            >
+              {`View all ${titleButtom}`}
+            </Typography>
+          </Link>
+        </Grid>
       </Grid>
       <Divider />
       <Gallery items={items} />
