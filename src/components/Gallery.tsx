@@ -76,6 +76,7 @@ const Gallery = ({ items }) => {
           <GalleryItem
             key={index}
             {...item}
+            artwork
             imgUrl={randImg()}
             price={randPriceArt()}
             artis={'@ArtisName'}
