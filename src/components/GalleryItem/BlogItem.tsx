@@ -16,7 +16,7 @@ const useStyle = makeStyles(Theme => ({
   containerAvatar: { marginTop: Theme.spacing(9) },
 }))
 
-const CreatorsItem = ({ name, artis, imgUrl, avatarUrl, bio }) => {
+const BlogItem = ({ name, artis, imgUrl, avatarUrl, bio }) => {
   const classes = useStyle({ imgUrl: imgUrl })
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
@@ -55,4 +55,4 @@ const CreatorsItem = ({ name, artis, imgUrl, avatarUrl, bio }) => {
   )
 }
 
-export default CreatorsItem
+export default BlogItem

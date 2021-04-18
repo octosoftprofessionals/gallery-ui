@@ -22,13 +22,20 @@ const GalleryItem = ({
   statesArt,
   link,
   creatorsItem,
+  bio,
 }) => {
   const classes = useStyle()
 
   return (
     <>
       {!!creatorsItem ? (
-        <CreatorsItem name={name} imgUrl={imgUrl} avatarUrl={avatarUrl} />
+        <CreatorsItem
+          name={name}
+          imgUrl={imgUrl}
+          avatarUrl={avatarUrl}
+          artis={artis}
+          bio={bio}
+        />
       ) : !!artwork ? (
         <ArtworkItem
           imgUrl={imgUrl}
