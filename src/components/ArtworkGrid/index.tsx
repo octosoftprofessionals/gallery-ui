@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider } from '@material-ui/core'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
@@ -7,7 +8,7 @@ import Gallery from '../Gallery'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
-  head: { padding: Theme.spacing(18, 0, 9) },
+  head: { padding: Theme.spacing(16, 0, 9) },
   '@keyframes fillepa': {
     '0%': { opacity: 1 },
     '100%': { opacity: 0 },
@@ -19,7 +20,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const Featured = ({ title, items, icon }) => {
+const ArtworkGrid = ({ title, items, icon, link }) => {
   const classes = useStyle({ icon })
 
   return (
@@ -33,16 +34,18 @@ const Featured = ({ title, items, icon }) => {
         alignItems="center"
         className={classes.head}
       >
-        <Grid item xs={9} container alignItems="center">
+        <Grid item xs={5} container alignItems="center">
           <FiberManualRecordIcon className={classes.iconDot} />
           <Typography variant="h5" color="primary">
             {title}
           </Typography>
         </Grid>
 
-        <Typography variant="body1" color="initial">
-          {`View all ${title.toLowerCase()}`}
-        </Typography>
+        <Link to={link}>
+          <Typography variant="body1" color="initial">
+            {`View all ${title.toLowerCase()}`}
+          </Typography>
+        </Link>
       </Grid>
       <Divider />
       <Gallery items={items} />
@@ -50,4 +53,4 @@ const Featured = ({ title, items, icon }) => {
   )
 }
 
-export default Featured
+export default ArtworkGrid

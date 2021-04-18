@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
-import Featured from '../components/Featured'
+import ArtworkGrid from '../components/ArtworkGrid'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
@@ -15,9 +15,9 @@ const Home = () => {
       <HeroSection>
         <HeroAuction />
       </HeroSection>
-      <Featured title="Live auctions" items={items} icon />
-      <Featured title="Featured artworks" items={items} />
-      <Featured title="Featured creators" items={items} />
+      <ArtworkGrid title="Live auctions" items={items} icon />
+      <ArtworkGrid title="Featured artworks" items={items} />
+      <ArtworkGrid title="Featured creators" items={items} />
       <BottomFiller />
     </Layout>
   )
