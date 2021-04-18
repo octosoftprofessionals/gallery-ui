@@ -23,6 +23,14 @@ const priceArt = [
   '',
 ]
 
+const bioArt = [
+  'Eiusmod veniam Lorem anim aliquip reprehenderit proident mollit adipisicing aute labore et. Lorem dolor elit enim culpa anim. Fugiat pariatur proident occaecat dolor enim aute duis. Pariatur dolore nostrud cillum ullamco. Et incididunt veniam qui excepteur irure dolore quis do. Do Lorem amet deserunt do exercitation cillum eu. Sit cillum nostrud qui pariatur aliqua.',
+
+  'Cillum sunt anim ut irure fugiat irure occaecat sint anim ullamco est elit minim commodo. Ullamco ea duis labore culpa sint culpa reprehenderit dolor irure ea aute ex reprehenderit. Officia ex ex occaecat adipisicing ullamco fugiat sit fugiat ex consectetur voluptate aliquip. Aute irure veniam non ipsum esse ullamco dolore duis in eu consequat culpa deserunt cupidatat. Dolore cupidatat dolore tempor excepteur ea. Esse nisi officia ullamco velit labore consequat. Dolore labore reprehenderit aute qui enim voluptate irure anim consectetur ea et elit nostrud exercitation.',
+
+  'Eiusmod aliquip labore sint ex magna incididunt labore. Ipsum tempor culpa nisi qui consectetur labore irure aute dolor veniam nisi cillum fugiat voluptate. Aliquip ut dolor do magna dolor voluptate reprehenderit ea magna excepteur in.',
+]
+
 const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
   'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
@@ -53,6 +61,10 @@ const randPriceArt = () => {
   return priceArt[Math.floor(Math.random() * priceArt.length)]
 }
 
+const randBioArt = () => {
+  return bioArt[Math.floor(Math.random() * bioArt.length)]
+}
+
 import GalleryItem from './GalleryItem'
 
 const useStyle = makeStyles(Theme => ({
@@ -76,13 +88,14 @@ const Gallery = ({ items }) => {
           <GalleryItem
             key={index}
             {...item}
-            artwork
+            creatorsItem
             imgUrl={randImg()}
             price={randPriceArt()}
             artis={'@ArtisName'}
             titleArt={'Unname'}
             endingIn={randEndingInArt()}
             statesArt={randStateArt()}
+            bio={randBioArt()}
           />
         </Grid>
       ))}
