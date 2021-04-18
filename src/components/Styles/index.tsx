@@ -68,6 +68,14 @@ export const Theme = createMuiTheme({
         textTransform: 'none',
         color: Gray,
       },
+      body1: {
+        fontSize: 18,
+        fontWeight: 600,
+        textTransform: 'none',
+        cursor: 'pointer',
+        color: DimGray,
+        '&:hover': { color: Black },
+      },
     },
     MuiDrawer: {
       paperAnchorRight: {
@@ -84,6 +92,12 @@ export const Theme = createMuiTheme({
           transform: 'translateY(-2px)',
           boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
         },
+      },
+    },
+    MuiDivider: {
+      root: {
+        backgroundColor: Black,
+        marginBottom: 8,
       },
     },
   },
@@ -120,13 +134,13 @@ export const Theme = createMuiTheme({
     32,
     36,
     48,
-    64,
     66,
     78,
+    96,
     100,
   ],
   typography: {
-    fontSize: [2, 4, 6, 18, 20, 66],
+    fontSize: [2, 4, 6, 18, 20, 66, '.85em', '1em'],
     fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
       ','
     ),

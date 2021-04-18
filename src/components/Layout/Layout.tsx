@@ -10,9 +10,9 @@ import './Layout.css'
 const LayoutContainer = styled('div')({ padding: Theme.spacing(0, 8) })
 
 const StyledMain = styled('main')({
-  minHeight: `${Theme.spacing(16)}vh`,
-  height: `${Theme.spacing(16)}%`,
-  marginTop: Theme.spacing(15),
+  minHeight: `${Theme.spacing(15)}vh`,
+  height: `${Theme.spacing(15)}%`,
+  marginTop: Theme.spacing(14),
   marginBottom: Theme.spacing(7),
 })
 

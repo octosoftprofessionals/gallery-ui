@@ -3,19 +3,11 @@ import styled from 'styled-components'
 
 import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
-import Gallery from '../components/Gallery'
+import ArtworkGrid from '../components/ArtworkGrid'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
 const items = [...new Array(20)].map(() => ({}))
-
-const FeaturedArtworkSection = () => (
-  <FeaturedArtwork>
-    <FeaturedArtworkTitle>Featured Artwork</FeaturedArtworkTitle>
-    <Divider />
-    <Gallery items={items} />
-  </FeaturedArtwork>
-)
 
 const Home = () => {
   return (
@@ -23,7 +15,22 @@ const Home = () => {
       <HeroSection>
         <HeroAuction />
       </HeroSection>
-      <FeaturedArtworkSection />
+      <ArtworkGrid
+        title="Live auctions"
+        titleButtom="live auctions"
+        items={items}
+        icon
+      />
+      <ArtworkGrid
+        title="Featured artworks"
+        titleButtom="artworks"
+        items={items}
+      />
+      <ArtworkGrid
+        title="Featured creators"
+        titleButtom="creators"
+        items={items}
+      />
       <BottomFiller />
     </Layout>
   )
@@ -37,22 +44,4 @@ const HeroSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
-
-const FeaturedArtwork = styled.div`
-  padding-bottom: 78px;
-`
-
-const FeaturedArtworkTitle = styled.h2`
-  vertical-align: top;
-  height: 21px;
-  line-height: 25px;
-  font-size: 1.5em;
-  margin-bottom: 0;
-`
-
-const Divider = styled.div`
-  border-bottom: 2px solid #333;
-  margin-top: 1.25em;
-  margin-bottom: 1.5em;
 `
