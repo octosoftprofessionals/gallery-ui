@@ -5,6 +5,10 @@ import { Grid, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   footerCard: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position: 'absolute',
     padding: Theme.spacing(9),
     backgroundColor: Theme.palette.primary.main,
     borderRadius: Theme.spacing(0, 0, 4, 4),
@@ -19,9 +23,11 @@ const InAuctions = ({ price, timer }) => {
         <Typography variant="caption" color="textSecondary">
           Current bid
         </Typography>
-        <Typography variant="caption" color="secondary">
-          {`${price} ETH`}
-        </Typography>
+        <Grid item xs={12}>
+          <Typography variant="caption" color="secondary">
+            {`${price} ETH`}
+          </Typography>
+        </Grid>
       </Grid>
       <Grid item xs={6} container alignItems="flex-start">
         <Typography variant="caption" color="textSecondary">

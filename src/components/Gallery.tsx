@@ -72,7 +72,7 @@ const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
 }))
 
-const Gallery = ({ items }) => {
+const Gallery = ({ items, typeItem }) => {
   const classes = useStyle()
   return (
     <Grid container direction="row" justify="space-around" wrap="wrap">
@@ -88,14 +88,16 @@ const Gallery = ({ items }) => {
           <GalleryItem
             key={index}
             {...item}
-            creatorsItem
+            typeItem={typeItem}
             imgUrl={randImg()}
+            avatarUrl={randImg()}
             price={randPriceArt()}
             artis={'@ArtisName'}
             titleArt={'Unname'}
             endingIn={randEndingInArt()}
             statesArt={randStateArt()}
             bio={randBioArt()}
+            link={randImg()}
           />
         </Grid>
       ))}

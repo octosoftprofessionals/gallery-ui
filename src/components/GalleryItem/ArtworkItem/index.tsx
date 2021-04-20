@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'gatsby'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
@@ -8,7 +8,7 @@ import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from './FooterCardItem'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
+  root: { position: 'relative' },
   img: {
     backgroundImage: props => `url(${props.imgUrl})`,
     backgroundPosition: 'center',
@@ -17,8 +17,13 @@ const useStyle = makeStyles(Theme => ({
     paddingBottom: '100%',
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
-  infoCard: { margin: Theme.spacing(9) },
-  containerAvatar: { marginTop: Theme.spacing(9) },
+  infoCard: {
+    padding: Theme.spacing(9),
+    paddingBottom: '25vh',
+    display: 'grid',
+    gridGap: Theme.spacing(9),
+  },
+  containerAvatar: { marginBottom: Theme.spacing(9) },
   link: { textDecoration: 'none' },
 }))
 
@@ -38,7 +43,6 @@ const ArtworkItem = ({
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const delta = deltaTime(endingIn)
-      console.log('de :>> ', delta)
       if (delta >= 0) {
         setTimer(timeFormat(delta))
       } else {
@@ -49,40 +53,24 @@ const ArtworkItem = ({
   }, [])
 
   return (
-    <Link to={link} className={classes.link}>
+    <a href={link} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
         <div className={classes.img} />
-        <Grid item container direction="column" justify="space-around">
-          <Grid
-            item
-            xs={12}
-            container
-            justify="flex-start"
-            className={classes.infoCard}
-          >
-            <Typography variant="h5" color="initial">
-              {titleArt}
+        <div className={classes.infoCard}>
+          <Typography variant="h5" color="initial">
+            {titleArt}
+          </Typography>
+          <div className={classes.containerAvatar}>
+            <Avatar alt="avat" src={`${avatarUrl}`} />
+            <Typography variant="subtitle1" color="initial">
+              {artis}
             </Typography>
-            <Grid
-              item
-              xs={12}
-              container
-              direction="row"
-              alignItems="center"
-              className={classes.containerAvatar}
-            >
-              <Avatar alt="avat" src={`${avatarUrl}`} />
-              <Typography variant="subtitle1" color="initial">
-                {artis}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <FooterCardItem price={price} timer={timer} statesArt={statesArt} />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
+
+        <FooterCardItem price={price} timer={timer} statesArt={statesArt} />
       </Paper>
-    </Link>
+    </a>
   )
 }
 

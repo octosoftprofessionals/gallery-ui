@@ -87,7 +87,6 @@ export const Theme = createMuiTheme({
       elevation1: {
         boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
         borderRadius: 16,
-        maxWidth: 301,
         '&:hover': {
           transform: 'translateY(-2px)',
           boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
