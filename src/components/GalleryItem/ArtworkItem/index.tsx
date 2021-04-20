@@ -19,7 +19,7 @@ const useStyle = makeStyles(Theme => ({
   },
   infoCard: {
     padding: Theme.spacing(9),
-    paddingBottom: '25vh',
+    paddingBottom: `${Theme.spacing(6)}vh`,
     display: 'grid',
     gridGap: Theme.spacing(9),
   },
@@ -61,13 +61,14 @@ const ArtworkItem = ({
             {titleArt}
           </Typography>
           <div className={classes.containerAvatar}>
-            <Avatar alt="avat" src={`${avatarUrl}`} />
-            <Typography variant="subtitle1" color="initial">
-              {artis}
-            </Typography>
+            <Grid container direction="row" alignItems="center">
+              <Avatar alt="avat" src={`${avatarUrl}`} />
+              <Typography variant="subtitle1" color="initial">
+                {artis}
+              </Typography>
+            </Grid>
           </div>
         </div>
-
         <FooterCardItem price={price} timer={timer} statesArt={statesArt} />
       </Paper>
     </a>

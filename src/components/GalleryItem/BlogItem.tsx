@@ -1,6 +1,7 @@
 import React from 'react'
+
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -14,44 +15,47 @@ const useStyle = makeStyles(Theme => ({
   },
   infoCard: { margin: Theme.spacing(9) },
   containerAvatar: { marginTop: Theme.spacing(9) },
+  link: { textDecoration: 'none' },
 }))
 
-const BlogItem = ({ name, artis, imgUrl, avatarUrl, bio }) => {
+const BlogItem = ({ title, desciptio, imgUrl, link, publishDate }) => {
   const classes = useStyle({ imgUrl: imgUrl })
   return (
-    <Paper variant="elevation" elevation={1} className={classes.root}>
-      <div className={classes.img} />
-      <Avatar alt="avat" src={`${avatarUrl}`} />
-      <Grid item container direction="column" justify="space-around">
-        <Grid
-          item
-          xs={12}
-          container
-          justify="flex-start"
-          className={classes.infoCard}
-        >
-          <Typography variant="h5" color="initial">
-            {name}
-          </Typography>
+    <a href={link} className={classes.link}>
+      <Paper variant="elevation" elevation={1} className={classes.root}>
+        <div className={classes.img} />
+
+        <Grid item container direction="column" justify="space-around">
           <Grid
             item
             xs={12}
             container
-            direction="row"
-            alignItems="center"
-            className={classes.containerAvatar}
+            justify="flex-start"
+            className={classes.infoCard}
           >
-            <Typography variant="subtitle1" color="initial">
-              {artis}
+            <Typography variant="h5" color="initial">
+              {title}
             </Typography>
-            <Typography variant="caption" color="initial">
-              {bio}
-            </Typography>
+            <Grid
+              item
+              xs={12}
+              container
+              direction="row"
+              alignItems="center"
+              className={classes.containerAvatar}
+            >
+              <Typography variant="subtitle1" color="initial">
+                {desciptio}
+              </Typography>
+              <Typography variant="caption" color="initial">
+                {`PUBLISHED ${publishDate}`}
+              </Typography>
+            </Grid>
           </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
-        <Grid item xs={12}></Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+    </a>
   )
 }
 

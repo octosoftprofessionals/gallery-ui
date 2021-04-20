@@ -11,7 +11,7 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const GalleryItem = ({
-  artwork,
+  typeItem,
   name,
   imgUrl,
   avatarUrl,
@@ -21,22 +21,13 @@ const GalleryItem = ({
   endingIn,
   statesArt,
   link,
-  creatorsItem,
   bio,
 }) => {
   const classes = useStyle()
 
   return (
     <>
-      {!!creatorsItem ? (
-        <CreatorsItem
-          name={name}
-          imgUrl={imgUrl}
-          avatarUrl={avatarUrl}
-          artis={artis}
-          bio={bio}
-        />
-      ) : !!artwork ? (
+      {typeItem === 'artworks' ? (
         <ArtworkItem
           imgUrl={imgUrl}
           price={price}
@@ -47,8 +38,17 @@ const GalleryItem = ({
           link={link}
           avatarUrl={avatarUrl}
         />
+      ) : typeItem === 'creator' ? (
+        <CreatorsItem
+          name={name}
+          imgUrl={imgUrl}
+          avatarUrl={avatarUrl}
+          artis={artis}
+          bio={bio}
+          link={link}
+        />
       ) : (
-        <BlogItem />
+        <BlogItem link={link} imgUrl={imgUrl} />
       )}
     </>
   )
