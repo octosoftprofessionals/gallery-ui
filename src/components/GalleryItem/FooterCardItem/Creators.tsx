@@ -26,8 +26,13 @@ const useStyle = makeStyles(Theme => ({
 const Creators = ({ followers, link }) => {
   const classes = useStyle()
   return (
-    <Grid container alignItems="center" className={classes.footerCard}>
-      <Grid item xs={6} container direction="column">
+    <Grid
+      container
+      alignItems="center"
+      justify="space-around"
+      className={classes.footerCard}
+    >
+      <Grid item xs={3} md={4} container direction="column">
         <Typography variant="h6" color="primary">
           {followers}
         </Typography>
@@ -35,7 +40,7 @@ const Creators = ({ followers, link }) => {
           Followers
         </Typography>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={3} md={4}>
         <Link to={link} className={classes.link}>
           <Button variant="outlined">
             <Typography variant="button">Follow</Typography>

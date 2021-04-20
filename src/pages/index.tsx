@@ -16,21 +16,21 @@ const Home = () => {
       <HeroSection>
         <HeroAuction />
       </HeroSection>
-      <ArtworkGrid
+      {/* <ArtworkGrid
         title="Live auctions"
         titleButtom="live auctions"
         link="/auctions"
         icon
       >
         <Gallery items={items} typeItem="artworks" />
-      </ArtworkGrid>
+      </ArtworkGrid> */}
       {/* <ArtworkGrid
         title="Featured artworks"
         titleButtom="artworks"
         link="/artworks"
       >
         <Gallery items={items} typeItem="artworks" />
-      </ArtworkGrid>
+      </ArtworkGrid> */}
       <ArtworkGrid
         title="Featured creators"
         titleButtom="creators"
@@ -38,7 +38,7 @@ const Home = () => {
       >
         <Gallery items={items} typeItem="creator" />
       </ArtworkGrid>
-      <ArtworkGrid title="Blog" titleButtom="articles" link="/articles">
+      {/* <ArtworkGrid title="Blog" titleButtom="articles" link="/articles">
         <Gallery items={items} typeItem="blog" />
       </ArtworkGrid> */}
       <BottomFiller />

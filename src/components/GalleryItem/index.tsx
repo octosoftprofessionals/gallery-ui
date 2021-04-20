@@ -21,6 +21,7 @@ const GalleryItem = ({
   endingIn,
   statesArt,
   link,
+  followers,
   bio,
 }) => {
   const classes = useStyle()
@@ -45,6 +46,7 @@ const GalleryItem = ({
           avatarUrl={avatarUrl}
           artis={artis}
           bio={bio}
+          followers={followers}
           link={link}
         />
       ) : (

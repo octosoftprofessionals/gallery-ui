@@ -10,6 +10,7 @@ const endingInArt = [
   '2021/04/18 01:13:30 PM',
   '2021/04/26 11:39:50 AM',
 ]
+const followersArt = ['13', '45', '123', '509582']
 const priceArt = [
   '5.567',
   '15.234',
@@ -65,6 +66,10 @@ const randBioArt = () => {
   return bioArt[Math.floor(Math.random() * bioArt.length)]
 }
 
+const randFollowersArt = () => {
+  return followersArt[Math.floor(Math.random() * followersArt.length)]
+}
+
 import GalleryItem from './GalleryItem'
 
 const useStyle = makeStyles(Theme => ({
@@ -94,9 +99,11 @@ const Gallery = ({ items, typeItem }) => {
             price={randPriceArt()}
             artis={'@ArtisName'}
             titleArt={'Unname'}
+            name={'Loreme lorem'}
             endingIn={randEndingInArt()}
             statesArt={randStateArt()}
             bio={randBioArt()}
+            followers={randFollowersArt()}
             link={randImg()}
           />
         </Grid>
