@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 
-import logoSrc from '../../../assets/logo.png'
+import logoSrc from '../../../assets/logoNew.png'
 import { boxShadow } from '../../Styles/Colors'
 
 import {

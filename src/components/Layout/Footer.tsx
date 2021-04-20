@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, Grid } from '@material-ui/core'
 
-import logoSrc from '../../assets/logo.png'
+import logoSrc from '../../assets/logoNew2.png'
 
 const useStyles = makeStyles(Theme => ({
   root: {
