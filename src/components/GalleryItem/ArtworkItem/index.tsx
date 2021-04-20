@@ -5,7 +5,7 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import ArtworkDisplay from './ArtworkDisplay'
 import { deltaTime, timeFormat } from '../../../Utils'
-import FooterCardItem from './FooterCardItem'
+import FooterCardItem from '../FooterCardItem'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
