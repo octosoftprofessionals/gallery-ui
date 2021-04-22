@@ -19,28 +19,20 @@ const Home = () => {
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"
-        link="/auctions"
+        link="/"
         icon
       >
         <Gallery items={items} itemType="artworks" />
-      </ArtworkGrid> */}
-      {/* <ArtworkGrid
-        title="Featured artworks"
-        titleButton="artworks"
-        link="/artworks"
-      >
+      </ArtworkGrid>
+      <ArtworkGrid title="Featured artworks" titleButton="artworks" link="/">
         <Gallery items={items} itemType="artworks" />
-      </ArtworkGrid> */}
-      {/* <ArtworkGrid
-        title="Featured creators"
-        titleButton="creators"
-        link="/creators"
-      >
+      </ArtworkGrid>
+      <ArtworkGrid title="Featured creators" titleButton="creators" link="/">
         <Gallery items={items} itemType="creator" />
       </ArtworkGrid>
-      {/* <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
+      <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
         <Gallery items={items} itemType="blog" />
-      </ArtworkGrid> */}
+      </ArtworkGrid>
       <BottomFiller />
     </Layout>
   )

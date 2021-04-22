@@ -75,12 +75,3 @@ const ArtworkDisplay = ({ imgUrl, videoUrl }) => {
 }
 
 export default ArtworkDisplay
-
-//   max-width: 100%;
-//   object-fit: contain;
-// `
-
-// const AssetImg = styled.img`
-//   max-width: 100%;
-//   object-fit: contain;
-// `
