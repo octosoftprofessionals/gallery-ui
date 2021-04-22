@@ -144,6 +144,7 @@ export const Theme = createMuiTheme({
     primary: {
       main: Black,
       light: DimGray,
+      dark: Gray,
       contrastText: White,
     },
     secondary: {

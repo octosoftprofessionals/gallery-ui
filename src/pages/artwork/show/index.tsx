@@ -1,11 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
+import { Grid } from '@material-ui/core'
 
 import ArtworkDisplay from '../../../components/ArtworkDisplay'
 import Layout from '../../../components/Layout/Layout'
-import Hero from './Hero'
-import MoreItems from './MoreItems'
-import SmartDescription from './SmartDescription'
+import MoreItems from '../../../components/MoreItems'
+import SmartDescription from '../../../components/SmartDescription'
 
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
@@ -22,90 +21,10 @@ const value = '50.00 ETH'
 // params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
 const ShowArtwork = () => {
   return (
-    <div>
-      <Hero>
-        <ArtworkDisplay imgUrl={imgUrl} videoUrl={videoUrl} />
-      </Hero>
-      {/* TODO: flip navbar style */}
-      <Layout>
-        <Main>
-          <ContentContainer>
-            <Header>
-              <div>
-                <TitleText>{title}</TitleText>
-                <ArtistText>{artist}</ArtistText>
-              </div>
-              <ValueTextContainer>
-                <ValueText>{value}</ValueText>
-              </ValueTextContainer>
-            </Header>
-
-            <Divider />
-
-            <SmartDescription paragraphs={descriptionParagraphs} />
-          </ContentContainer>
-
-          <MoreItems />
-        </Main>
-      </Layout>
-    </div>
+    <Layout>
+      <ArtworkDisplay imgUrl={imgUrl} videoUrl={videoUrl} />
+    </Layout>
   )
 }
 
 export default ShowArtwork
-
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: -38px;
-  padding-bottom: 64px;
-`
-
-const ContentContainer = styled.div`
-  width: 50%;
-  min-height: 480px;
-  margin-bottom: 64px;
-
-  > * + * {
-    margin: 24px 0;
-  }
-`
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  > * {
-    width: 50%;
-  }
-`
-
-const TitleText = styled.h1`
-  margin-bottom: 0;
-`
-
-const ArtistText = styled.p`
-  margin-top: 0;
-  margin-bottom: 0;
-`
-
-const ValueTextContainer = styled.div`
-  text-align: right;
-  flex-direction: column;
-  justify-content: flex-end;
-`
-
-const ValueText = styled.p`
-  margin-top: 20px;
-  font-weight: bold;
-  margin-bottom: 0;
-`
-
-const Divider = styled.div`
-  border-bottom: 2px solid #333;
-  margin: 24px 0;
-`
