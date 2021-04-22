@@ -1,10 +1,9 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
 
-import ArtworkDisplay from '../../../components/ArtworkDisplay'
+import ArtworkShow from '../../../components/ArtworkShow'
 import Layout from '../../../components/Layout/Layout'
-import MoreItems from '../../../components/MoreItems'
-import SmartDescription from '../../../components/SmartDescription'
+
+import { colors } from '../../../components/Styles/Colors'
 
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
@@ -21,8 +20,19 @@ const value = '50.00 ETH'
 // params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
 const ShowArtwork = () => {
   return (
-    <Layout>
-      <ArtworkDisplay imgUrl={imgUrl} videoUrl={videoUrl} />
+    <Layout
+      backgroundColor={colors.WhiteSmoke}
+      padding="0"
+      marginBottom="0"
+      marginTop="0"
+    >
+      <ArtworkShow
+        imgUrl={imgUrl}
+        videoUrl={videoUrl}
+        titleArt={title}
+        description={descriptionParagraphs}
+        namber={'1'}
+      />
     </Layout>
   )
 }

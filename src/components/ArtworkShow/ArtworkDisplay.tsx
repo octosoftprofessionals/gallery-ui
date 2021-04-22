@@ -9,9 +9,13 @@ import {
   FullscreenExit,
 } from '@material-ui/icons'
 
-import { boxShadow } from '../components/Styles/Colors'
+import { boxShadow } from '../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
+  root: {
+    backgroundColor: Theme.palette.secondary.light,
+    padding: Theme.spacing(9),
+  },
   video: { maxWidth: '45vh', filter: boxShadow.boxShadow2, cursor: 'zoom-in' },
   icon: { fontSize: Theme.spacing(8) },
   iconButtom: {
@@ -26,7 +30,12 @@ const ArtworkDisplay = ({ imgUrl, videoUrl }) => {
   const [fullscreen, setFullscreen] = useState(false)
   const classes = useStyle()
   return (
-    <Grid item container justify="center" direction="column">
+    <Grid
+      container
+      justify="center"
+      direction="column"
+      className={classes.root}
+    >
       <Grid item container justify="center">
         <video
           poster={imgUrl}
