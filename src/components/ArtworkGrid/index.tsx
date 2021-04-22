@@ -29,7 +29,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkGrid = ({ children, title, titleButtom, icon, link }) => {
+const ArtworkGrid = ({ children, title, titleButton, icon, link }) => {
   const classes = useStyle({ icon })
 
   return (
@@ -57,7 +57,7 @@ const ArtworkGrid = ({ children, title, titleButtom, icon, link }) => {
               color="initial"
               className={classes.textButton}
             >
-              {`View all ${titleButtom}`}
+              {`View all ${titleButton}`}
             </Typography>
           </Link>
         </Grid>

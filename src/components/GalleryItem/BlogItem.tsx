@@ -18,7 +18,7 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
 }))
 
-const BlogItem = ({ title, desciptio, imgUrl, link, publishDate }) => {
+const BlogItem = ({ title, description, imgUrl, link, publishDate }) => {
   const classes = useStyle({ imgUrl: imgUrl })
   return (
     <a href={link} className={classes.link}>
@@ -45,7 +45,7 @@ const BlogItem = ({ title, desciptio, imgUrl, link, publishDate }) => {
               className={classes.containerAvatar}
             >
               <Typography variant="subtitle1" color="initial">
-                {desciptio}
+                {description}
               </Typography>
               <Typography variant="caption" color="initial">
                 {`PUBLISHED ${publishDate}`}
