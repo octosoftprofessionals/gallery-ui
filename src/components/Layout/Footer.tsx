@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, Grid } from '@material-ui/core'
 
-import logoSrc from '../../assets/logo.png'
+import logoSrc from '../../assets/logoNew.png'
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -12,11 +12,13 @@ const useStyles = makeStyles(Theme => ({
   },
   link: { textDecoration: 'none', cursor: 'pointer' },
   img: {
+    flex: 1,
+    width: Theme.spacing(13),
+    height: Theme.spacing(13),
     background: `url(${logoSrc})`,
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'inerit',
+    backgroundPosition: 'right',
     backgroundSize: 'contain',
-    paddingBottom: `${Theme.spacing(1)}em`,
   },
   containerText: {
     '@media (max-width: 576px)': { flexDirection: 'column' },
@@ -27,44 +29,44 @@ const Footer = () => {
   const classes = useStyles()
   const { instagram, twitter, discord, blog } = 'http://localhost:8000/'
   return (
-    <>
+    <Grid container className={classes.root}>
+      <Grid item xs={1} container justify="center">
+        <div className={classes.img} />
+      </Grid>
       <Grid
+        item
+        xs={12}
+        md={11}
         container
         justify="space-between"
         alignItems="center"
-        direction="row"
-        className={classes.root}
       >
-        <Grid item xs={12} sm={2}>
-          <div className={classes.img} />
-        </Grid>
-        <Grid item xs={6} sm={5} container direction="row">
-          <Grid
-            item
-            sm={6}
-            container
-            justify="space-evenly"
-            className={classes.containerText}
-          >
-            <Link to={instagram} className={classes.link}>
-              <Typography variant="overline">Instagram</Typography>
-            </Link>
-            <Link to={twitter} className={classes.link}>
-              <Typography variant="overline">Twitter</Typography>
-            </Link>
-            <Link to={discord} className={classes.link}>
-              <Typography variant="overline">Discord</Typography>
-            </Link>
-            <Link to={blog} className={classes.link}>
-              <Typography variant="overline">Blog</Typography>
-            </Link>
-          </Grid>
+        <Grid
+          item
+          xs={6}
+          md={3}
+          container
+          justify="space-evenly"
+          className={classes.containerText}
+        >
+          <Link to={instagram} className={classes.link}>
+            <Typography variant="overline">Instagram</Typography>
+          </Link>
+          <Link to={twitter} className={classes.link}>
+            <Typography variant="overline">Twitter</Typography>
+          </Link>
+          <Link to={discord} className={classes.link}>
+            <Typography variant="overline">Discord</Typography>
+          </Link>
+          <Link to={blog} className={classes.link}>
+            <Typography variant="overline">Blog</Typography>
+          </Link>
         </Grid>
 
         <Grid
           item
           xs={6}
-          sm={5}
+          md={5}
           container
           justify="space-evenly"
           className={classes.containerText}
@@ -86,7 +88,7 @@ const Footer = () => {
           </Link>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   )
 }
 
