@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
-import ArtworkDisplay from './ArtworkDisplay'
 import ArtworkItem from './ArtworkItem'
 import BlogItem from './BlogItem'
 import CreatorsItem from './CreatorsItem'

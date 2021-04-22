@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import { ArrowDownward } from '@material-ui/icons'
 import Creator from '../ArtworkGrid'
+import CardAuction from './CardAuction'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -71,18 +72,7 @@ const ArworkDetail = ({ titleArt, description, namber }) => {
         alignItems="stretch"
         direction="column"
       >
-        <Grid item xs={4}>
-          <Paper>
-            <Grid container direction="row">
-              <Grid item xs={6}>
-                sold
-              </Grid>
-              <Grid item xs={6}>
-                Other
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
+        <CardAuction auctionState={true} />
         <Typography variant="h6" color="primary">
           History
         </Typography>

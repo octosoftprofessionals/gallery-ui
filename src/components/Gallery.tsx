@@ -104,7 +104,7 @@ const Gallery = ({ items, itemType }) => {
             statesArt={randStateArt()}
             bio={randBioArt()}
             followers={randFollowersArt()}
-            link={randImg()}
+            link={'/artwork/show'}
             description={randBioArt()}
           />
         </Grid>
