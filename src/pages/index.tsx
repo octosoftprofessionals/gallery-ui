@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import BannerImg from '../components/BannerImg'
 import BottomFiller from '../components/Sectional/BottomFiller'
 import ArtworkGrid from '../components/ArtworkGrid'
+import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
@@ -15,22 +16,31 @@ const Home = () => {
       <HeroSection>
         <HeroAuction />
       </HeroSection>
-      <ArtworkGrid
+      {/* <ArtworkGrid
         title="Live auctions"
-        titleButtom="live auctions"
-        items={items}
+        titleButton="live auctions"
+        link="/auctions"
         icon
-      />
-      <ArtworkGrid
+      >
+        <Gallery items={items} itemType="artworks" />
+      </ArtworkGrid> */}
+      {/* <ArtworkGrid
         title="Featured artworks"
-        titleButtom="artworks"
-        items={items}
-      />
+        titleButton="artworks"
+        link="/artworks"
+      >
+        <Gallery items={items} itemType="artworks" />
+      </ArtworkGrid> */}
       <ArtworkGrid
         title="Featured creators"
-        titleButtom="creators"
-        items={items}
-      />
+        titleButton="creators"
+        link="/creators"
+      >
+        <Gallery items={items} itemType="creator" />
+      </ArtworkGrid>
+      {/* <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
+        <Gallery items={items} itemType="blog" />
+      </ArtworkGrid> */}
       <BottomFiller />
     </Layout>
   )

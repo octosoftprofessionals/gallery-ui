@@ -5,6 +5,10 @@ import { Grid, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   footerCard: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position: 'absolute',
     padding: Theme.spacing(9),
     backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(0, 0, 4, 4),
@@ -14,7 +18,7 @@ const useStyle = makeStyles(Theme => ({
 const Sold = ({ price }) => {
   const classes = useStyle()
   return (
-    <Grid item xs={12} container className={classes.footerCard}>
+    <Grid container className={classes.footerCard}>
       <Typography variant="caption" color="textPrimary">
         Sold for
       </Typography>

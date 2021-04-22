@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import { colors } from './Colors'
+import { colors, backgroundGradient } from './Colors'
 
 const {
   DimGray,
@@ -15,6 +15,19 @@ const {
 export const Theme = createMuiTheme({
   overrides: {
     MuiButton: {
+      outlined: {
+        borderRadius: 50,
+        boxShadow: 'none',
+        color: Black,
+        backgroundColor: White,
+        '&:hover': {
+          color: White,
+          backgroundColor: Black,
+          transform: 'translateY(-2px)',
+          boxShadow: 'rgb(0 0 0 / 25%) 0px 8px 15px',
+        },
+        padding: '16px 24px',
+      },
       contained: {
         borderRadius: 50,
         margin: '0 2px',
@@ -52,6 +65,11 @@ export const Theme = createMuiTheme({
         fontWeight: 600,
       },
       h5: {
+        fontSize: 32,
+        fontWeight: 600,
+      },
+      h6: {
+        textTransform: 'capitalize',
         fontSize: 24,
         fontWeight: 600,
       },
@@ -59,6 +77,17 @@ export const Theme = createMuiTheme({
         fontSize: 16,
         fontWeight: 600,
         marginLeft: 8,
+        fontFamily:
+          '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
+      },
+      subtitle2: {
+        boxSizing: 'border-box',
+        WebkitTextFillColor: 'transparent',
+        background: backgroundGradient,
+        WebkitBackgroundClip: 'text',
+        margin: 0,
+        fontSize: 16,
+        fontWeight: 600,
         fontFamily:
           '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
       },
@@ -76,6 +105,13 @@ export const Theme = createMuiTheme({
         color: DimGray,
         '&:hover': { color: Black },
       },
+      body2: {
+        fontSize: 15,
+        fontFamily:
+          'Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+        fontWeight: 400,
+        lineHeight: 1.7,
+      },
     },
     MuiDrawer: {
       paperAnchorRight: {
@@ -87,7 +123,6 @@ export const Theme = createMuiTheme({
       elevation1: {
         boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
         borderRadius: 16,
-        maxWidth: 301,
         '&:hover': {
           transform: 'translateY(-2px)',
           boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
@@ -101,7 +136,7 @@ export const Theme = createMuiTheme({
       },
     },
   },
-  shape: { borderRadius: [0, 10, 16] },
+  shape: { borderRadius: [0, 10, 16, 50] },
   palette: {
     action: {
       hover: WhiteSmoke,
@@ -130,7 +165,7 @@ export const Theme = createMuiTheme({
     20,
     22,
     24,
-    26,
+    30,
     32,
     36,
     48,

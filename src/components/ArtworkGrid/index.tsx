@@ -20,6 +20,7 @@ const useStyle = makeStyles(Theme => ({
     animation: '$fillepa 1.5s ease infinite ',
     display: ({ icon }) => (!icon ? 'none' : 'block'),
   },
+  link: { textDecoration: 'none' },
   text: {
     '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[7] },
   },
@@ -28,7 +29,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkGrid = ({ title, titleButtom, items, icon, link }) => {
+const ArtworkGrid = ({ children, title, titleButton, icon, link }) => {
   const classes = useStyle({ icon })
 
   return (
@@ -50,19 +51,19 @@ const ArtworkGrid = ({ title, titleButtom, items, icon, link }) => {
         </Grid>
 
         <Grid item>
-          <Link to={link}>
+          <Link to={link} className={classes.link}>
             <Typography
               variant="body1"
               color="initial"
               className={classes.textButton}
             >
-              {`View all ${titleButtom}`}
+              {`View all ${titleButton}`}
             </Typography>
           </Link>
         </Grid>
       </Grid>
       <Divider />
-      <Gallery items={items} />
+      {children}
     </Grid>
   )
 }
