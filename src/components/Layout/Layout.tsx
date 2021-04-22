@@ -7,7 +7,11 @@ import Footer from './Footer'
 import { Theme } from '../Styles'
 import './Layout.css'
 
-const LayoutContainer = styled('div')({ padding: Theme.spacing(0, 8) })
+const LayoutContainer = styled('div')({
+  padding: ({ padding }) => (padding ? padding : Theme.spacing(0, 8)),
+  backgroundColor: ({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : Theme.palette.secondary.main,
+})
 
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
@@ -16,10 +20,10 @@ const StyledMain = styled('main')({
   marginBottom: Theme.spacing(7),
 })
 
-const Layout = ({ children }) => {
+const Layout = ({ children, padding, backgroundColor }) => {
   return (
     <ThemeProvider theme={Theme}>
-      <LayoutContainer>
+      <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
         <Navbar />
         <StyledMain>{children}</StyledMain>
       </LayoutContainer>

@@ -69,7 +69,7 @@ const index = () => {
     <>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar className={classes.root}>
-          <Grid container justify="space-between" alignItems="center">
+          <Grid container justify="space-around" alignItems="center">
             <Grid item xs={4}>
               <Link to="/" className={classes.link}>
                 <div className={classes.img} />
