@@ -32,7 +32,10 @@ export const Theme = createMuiTheme({
         borderRadius: 50,
         margin: '0 2px',
         boxShadow: 'none',
+        color: White,
+        backgroundColor: Black,
         '&:hover': {
+          backgroundColor: Black,
           transform: 'translateY(-2px)',
           boxShadow: 'rgb(0 0 0 / 25%) 0px 8px 15px',
         },
@@ -128,6 +131,10 @@ export const Theme = createMuiTheme({
           boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
         },
       },
+      elevation2: {
+        boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
+        borderRadius: 16,
+      },
     },
     MuiDivider: {
       root: {
@@ -136,10 +143,11 @@ export const Theme = createMuiTheme({
       },
     },
   },
+
   shape: { borderRadius: [0, 10, 16, 50] },
   palette: {
     action: {
-      hover: WhiteSmoke,
+      disabledOpacity: [0, 0.2, 0.38],
     },
     primary: {
       main: Black,
@@ -176,7 +184,7 @@ export const Theme = createMuiTheme({
     100,
   ],
   typography: {
-    fontSize: [2, 4, 6, 18, 20, 66, '.85em', '1em'],
+    fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em'],
     fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
       ','
     ),

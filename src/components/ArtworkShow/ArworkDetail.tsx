@@ -21,14 +21,21 @@ const useStyle = makeStyles(Theme => ({
   desciptionText: { margin: Theme.spacing(0, 0, 5) },
   name: { margin: Theme.spacing(0, 0, 5) },
   title: { margin: 0 },
-  creator: { fontSize: Theme.typography.fontSize[6] },
+  creator: { fontSize: Theme.typography.fontSize[8] },
 }))
 
-const ArworkDetail = ({ titleArt, description, namber }) => {
+const ArworkDetail = ({
+  titleArt,
+  description,
+  namber,
+  price,
+  money,
+  endingIn,
+}) => {
   const classes = useStyle()
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12} sm={6} container direction="column">
+    <Grid container justify="space-between" className={classes.root}>
+      <Grid item xs={12} sm={5} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
           <ArrowDownward className={classes.icon} /> Artwork information
@@ -63,21 +70,18 @@ const ArworkDetail = ({ titleArt, description, namber }) => {
           {namber}
         </Typography>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        container
-        justify="center"
-        alignItems="stretch"
-        direction="column"
-      >
-        <CardAuction auctionState={true} />
+      <Grid item xs={12} sm={6} container direction="column">
+        <CardAuction
+          auctionState={true}
+          price={price}
+          money={money}
+          endingIn={endingIn}
+        />
         <Typography variant="h6" color="primary">
           History
         </Typography>
       </Grid>
-      <Creator display="none" title="Creator" fontSize="24px" />
+      <Creator displayTextButton="none" title="Creator" fontSize="24px" />
     </Grid>
   )
 }

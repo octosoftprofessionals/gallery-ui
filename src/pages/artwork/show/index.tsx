@@ -16,6 +16,19 @@ const descriptionParagraphs = [
   'The night is come, but not too soon;\nAnd sinking silently,\nAll silently, the little moon\nDrops down behind the sky.\nThere is no light in earth or heaven\nBut the cold light of stars;\nAnd the first watch of night is given\nTo the red planet Mars.',
 ]
 const value = '50.00 ETH'
+const valueMoney = '$5,345.585'
+
+const endingInArt = [
+  '2021/06/19 11:43:00 AM',
+  '2021/04/17 11:43:00 PM',
+  '2021/08/18 01:13:30 PM',
+  '2021/07/26 11:39:50 AM',
+]
+
+const randEndingInArt = () => {
+  const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
+  return new Date(endingIn)
+}
 
 // params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
 const ShowArtwork = () => {
@@ -32,6 +45,9 @@ const ShowArtwork = () => {
         titleArt={title}
         description={descriptionParagraphs}
         namber={'1'}
+        price={value}
+        money={valueMoney}
+        endingIn={randEndingInArt()}
       />
     </Layout>
   )

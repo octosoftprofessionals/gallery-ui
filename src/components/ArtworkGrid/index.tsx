@@ -22,15 +22,25 @@ const useStyle = makeStyles(Theme => ({
   },
   link: { textDecoration: 'none' },
   text: {
-    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[7] },
+    fontSize: ({ fontSize }) => fontSize,
+    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[9] },
   },
   textButton: {
-    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[6] },
+    display: ({ displayTextButton }) => displayTextButton,
+    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[8] },
   },
 }))
 
-const ArtworkGrid = ({ children, title, titleButton, icon, link }) => {
-  const classes = useStyle({ icon })
+const ArtworkGrid = ({
+  children,
+  title,
+  titleButton,
+  icon,
+  link,
+  displayTextButton,
+  fontSize,
+}) => {
+  const classes = useStyle({ icon, displayTextButton, fontSize })
 
   return (
     <Grid item container direction="column">
