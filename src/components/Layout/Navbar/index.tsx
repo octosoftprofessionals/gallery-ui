@@ -102,7 +102,7 @@ const index = () => {
 
             <Hidden smDown>
               <Grid item xs={4} container justify="flex-end">
-                <Button variant="contained" color="primary">
+                <Button variant="contained">
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>
               </Grid>
