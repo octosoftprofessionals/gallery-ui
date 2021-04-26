@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import { Button, Grid, Divider, Paper, Typography } from '@material-ui/core'
+import {
+  Button,
+  Divider,
+  Grid,
+  Hidden,
+  Paper,
+  Typography,
+  withWidth,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { deltaTime, timerArray } from '../../../Utils'
@@ -12,7 +20,9 @@ const useStyle = makeStyles(Theme => ({
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
   },
-  infoAution: { display: ({ disabeInfo }) => (disabeInfo ? 'blok' : 'none') },
+  infoAution: {
+    display: ({ disableInfo }) => (disableInfo ? 'block' : 'none'),
+  },
   texTimer: {
     fontSize: Theme.typography.fontSize[3],
     marginTop: Theme.spacing(2),
@@ -23,11 +33,15 @@ const useStyle = makeStyles(Theme => ({
 
 const AuctionItem = ({ price, money, endingIn, link }) => {
   const [timer, setTimer] = useState(0)
-  const [changeTitle, setChangeTitle] = useState('Current Bid')
+  const [changeTitle, setChangeTitle] = useState('Auction ending in')
+  const [variantButton, setVariantButton] = useState('contained')
+  const [textButton, setTextButton] = useState('Place a bid')
   const [infoAution, setInfoAution] = useState(
     'Any bids placed in the last 15 minutes will extend the auction for another 15 minutes.'
   )
-  const [disabeInfo, setDisabeInfo] = useState(false)
+  const [disableInfo, setDisableInfo] = useState(false)
+  const [disableHours, setDisableHours] = useState(true)
+  const [disableTime, setDisableTime] = useState(true)
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const delta = deltaTime(endingIn)
@@ -35,22 +49,28 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
         setTimer(timerArray(delta))
       } else {
         clearInterval(timeInterval)
+        setDisableTime(false)
+        setVariantButton('outlined')
+        setTextButton('I understand, let me bid anyway')
         setInfoAution(
           'If you were to place a bid at this time there is a high chance that it would result in an error.'
         )
         setTimer(0)
       }
+
+      let { Hours, Minutes } = timerArray(delta)
+      if (Hours <= 0) {
+        setDisableHours(false)
+      }
+      if (Hours <= 0 && Minutes <= 15) {
+        setDisableInfo(true)
+        setChangeTitle('This auction is ending soon!')
+      }
     }, 1000)
   }, [])
   let { Hours, Minutes, Seconds } = timer
-  if (Hours <= 0 && Minutes < 15) {
-    setDisabeInfo(true)
-    setChangeTitle('This auction is ending soon!')
-    setInfoAution(
-      'Any bids placed in the last 15 minutes will extend the auction for another 15 minutes.'
-    )
-  }
-  const classes = useStyle({ disabeInfo })
+
+  const classes = useStyle({ disableInfo })
   return (
     <Grid item>
       <Paper elevation={2}>
@@ -62,7 +82,7 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
             justify="space-around"
             className={classes.root}
           >
-            <Grid item xs={4} container direction="column">
+            <Grid item xs={12} sm={4} container direction="column">
               <Typography
                 variant="button"
                 color="primary"
@@ -81,12 +101,14 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
                 {money}
               </Typography>
             </Grid>
-            <Divider
-              orientation="vertical"
-              flexItem
-              className={classes.divider}
-            />
-            <Grid item xs={5} container direction="column">
+            <Hidden mdDown>
+              <Divider
+                orientation="vertical"
+                flexItem
+                className={classes.divider}
+              />
+            </Hidden>
+            <Grid item xs={12} sm={6} container direction="column">
               <Typography
                 variant="button"
                 color="primary"
@@ -94,8 +116,17 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
               >
                 {changeTitle}
               </Typography>
-              <Grid container direction="row" justify="space-between">
-                <Grid item xs={4}>
+              <Grid
+                container
+                direction="row"
+                justify={disableHours ? 'space-between' : 'flex-start'}
+                style={{ display: disableTime ? 'block' : 'none' }}
+              >
+                <Grid
+                  item
+                  xs={4}
+                  style={{ display: disableHours ? 'block' : 'none' }}
+                >
                   <Grid container direction="column" alignItems="flex-start">
                     <Typography variant="h5" color="primary">
                       {Hours}
@@ -154,12 +185,12 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
             <Grid item xs={12}>
               <Link to={link}>
                 <Button
-                  variant="contained"
+                  variant={variantButton}
                   fullWidth
                   className={classes.button}
                 >
                   <Typography variant="button" className={classes.textButton}>
-                    Place a bid
+                    {textButton}
                   </Typography>
                 </Button>
               </Link>
@@ -171,4 +202,4 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
   )
 }
 
-export default AuctionItem
+export default withWidth()(AuctionItem)

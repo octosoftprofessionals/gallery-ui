@@ -31,23 +31,26 @@ const ArworkDetail = ({
   price,
   money,
   endingIn,
+  link,
 }) => {
   const classes = useStyle()
   return (
     <Grid container justify="space-between" className={classes.root}>
-      <Grid item xs={12} sm={5} container direction="column">
+      <Grid item xs={12} sm={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
           <ArrowDownward className={classes.icon} /> Artwork information
         </Typography>
-        <Grid item xs={4} container>
-          <Typography
-            variant="subtitle1"
-            color="initial"
-            className={classes.title}
-          >
-            Description
-          </Typography>
+        <Grid item xs={12} sm={6} container>
+          <Grid item xs={12}>
+            <Typography
+              variant="subtitle1"
+              color="initial"
+              className={classes.title}
+            >
+              Description
+            </Typography>
+          </Grid>
           {description.map((paragraph, index) => (
             <Typography
               variant="body2"
@@ -76,6 +79,7 @@ const ArworkDetail = ({
           price={price}
           money={money}
           endingIn={endingIn}
+          link={link}
         />
         <Typography variant="h6" color="primary">
           History
