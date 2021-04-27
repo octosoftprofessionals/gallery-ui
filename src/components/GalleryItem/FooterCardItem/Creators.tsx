@@ -16,7 +16,7 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
   text: {
-    fontSize: Theme.typography.fontSize[3],
+    fontSize: Theme.typography.fontSize[4],
     lineHeight: 1,
     '&:hover': { color: Theme.palette.primary.main },
   },

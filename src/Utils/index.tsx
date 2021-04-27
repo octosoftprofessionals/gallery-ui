@@ -25,3 +25,16 @@ export const timeFormat = (delta: number) => {
 
   return timeString
 }
+
+export const timerArray = (delta: number) => {
+  let _second = 1000
+  let _minute = _second * 60
+  let _hour = _minute * 60
+  let _day = _hour * 24
+
+  let Hours = Math.floor((delta % _day) / _hour)
+  let Minutes = Math.floor((delta % _hour) / _minute)
+  let Seconds = Math.floor((delta % _minute) / _second)
+
+  return { Hours, Minutes, Seconds }
+}

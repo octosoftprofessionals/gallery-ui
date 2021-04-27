@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
@@ -53,25 +54,31 @@ const ArtworkItem = ({
   }, [])
 
   return (
-    <a href={link} className={classes.link}>
+    <Link to={link} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
         <div className={classes.img} />
         <div className={classes.infoCard}>
-          <Typography variant="h5" color="initial">
+          <Typography variant="h5" color="primary">
             {titleArt}
           </Typography>
           <div className={classes.containerAvatar}>
             <Grid container direction="row" alignItems="center">
               <Avatar alt="avat" src={`${avatarUrl}`} />
-              <Typography variant="subtitle1" color="initial">
+              <Typography variant="subtitle1" color="primary">
                 {artis}
               </Typography>
             </Grid>
           </div>
         </div>
-        <FooterCardItem price={price} timer={timer} statesArt={statesArt} />
+        <FooterCardItem
+          price={price}
+          timer={timer}
+          statesArt={statesArt}
+          link
+          followers
+        />
       </Paper>
-    </a>
+    </Link>
   )
 }
 

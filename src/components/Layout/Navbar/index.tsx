@@ -69,7 +69,7 @@ const index = () => {
     <>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar className={classes.root}>
-          <Grid container justify="space-between" alignItems="center">
+          <Grid container justify="space-around" alignItems="center">
             <Grid item xs={4}>
               <Link to="/" className={classes.link}>
                 <div className={classes.img} />
@@ -102,7 +102,7 @@ const index = () => {
 
             <Hidden smDown>
               <Grid item xs={4} container justify="flex-end">
-                <Button variant="contained" color="primary">
+                <Button variant="contained">
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>
               </Grid>
