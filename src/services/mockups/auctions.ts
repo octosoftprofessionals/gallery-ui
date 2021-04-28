@@ -10,9 +10,9 @@ const createdInArt = [
 
 const endingInArt = [
   '2021/06/19 11:43:00 AM',
-  '2021/04/17 11:43:00 PM',
-  '2021/04/18 01:13:30 PM',
-  '2021/04/26 11:39:50 AM',
+  '2021/05/17 11:43:00 PM',
+  '2021/06/18 01:13:30 PM',
+  '2021/07/26 11:39:50 AM',
 ]
 const followersArt = [13, 45, 123, 509582]
 const priceArt = [
@@ -42,7 +42,7 @@ const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
   'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
-  // 'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
+  'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
 ]
 
 const authorsNames = [
@@ -63,6 +63,26 @@ const artworkTitles = [
   'DaVinci',
 ]
 
+const randPublicKey = () => {
+  return 'XxdXXXXXXXXXX4XXXyXXXXXXXXXXXXXXX'.replace(/[Xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'X' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}
+
+const randIDs = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}
+
+const randUserIndex = index => {
+  return followersArt[Math.floor(Math.random() * index * followersArt.length)]
+}
+
 const randCreatedDate = () => {
   const createdIn =
     createdInArt[Math.floor(Math.random() * createdInArt.length)]
@@ -79,7 +99,7 @@ const randAsset = () => {
   return assetUrls[Math.floor(Math.random() * assetUrls.length)]
 }
 
-const randImg = () => {
+const randImgUrl = () => {
   return imgUrls[Math.floor(Math.random() * imgUrls.length)]
 }
 
@@ -106,26 +126,129 @@ const randBioArt = () => {
 const randFollowersArt = () => {
   return followersArt[Math.floor(Math.random() * followersArt.length)]
 }
+
+type ArtworksProps = {
+  id: String
+  name: String
+  description: String
+  assetIPFSPath: String
+  metadataIPFSPath: String
+  width: Number
+  height: Number
+  duration: Number
+  mimeType: String
+  mintTxHash: String
+  muxStatus: String
+  muxMaxResolution: String
+  muxPlaybackId: String
+  assetId: String
+  assetProcessor: String
+  assetStatus: String
+  muxId: String
+  tokenId: Number
+  status: String
+  hiddenAt: String
+  deletedAt: String
+  moderationStatus: String
+}
+
+type CreatorProps = {
+  userIndex: Number
+  publicKey: String
+  username: String
+  profileImageUrl: String
+  coverImageUrl: String
+  name: String
+  bio: String
+  isApprovedCreator: boolean
+  moderationStatus: String
+  joinedWaitlistAt: String
+  createdAt: Date
+  firstName: String
+  lastName: String
+  isAdmin: boolean
+  followers: Number
+  links: LinksProps
+}
+
+type LinksProps = {
+  tiktok: {
+    handle: String
+    platform: String
+  }
+  twitch: {
+    handle: String
+    platform: String
+  }
+  discord: {
+    handle: String
+    platform: String
+  }
+  twitter: {
+    handle: String
+    platform: String
+  }
+  website: {
+    handle: String
+    platform: String
+  }
+  youtube: {
+    handle: String
+    platform: String
+  }
+  facebook: {
+    handle: String
+    platform: String
+  }
+  snapchat: {
+    handle: String
+    platform: String
+  }
+  instagram: {
+    handle: String
+    platform: String
+  }
+}
+
 type AuctionProps = {
   auction_id: String
-  type: 'LIVE' | 'FEATURED'
+  type: String
   created_date: Date
-  artwork: {
-    id: String
-    title: String
-    thumb_url: String
-    author: {
-      id: String
-      handle: String
-      name: String
-      bio: String
-      followers: Number
-      avatar_url: String
-    }
-    state: String
-  }
+  state: String
   current_bid: String
   ends_at: Date
+  creator: CreatorProps
+  artworks: ArtworksProps[]
+}
+
+function fillArtworks(size): ArtworksProps[] {
+  const artworks: ArtworksProps[] = []
+  artworks.push({
+    id: randIDs(),
+    assetIPFSPath: randAsset(),
+    assetId: randPublicKey(),
+    assetProcessor: 'COCONUT',
+    assetStatus: 'SUCCESS',
+    deletedAt: 'null',
+    description: randBioArt(),
+    duration: 16.458332,
+    height: 1920,
+    width: 1280,
+    hiddenAt: 'null',
+    metadataIPFSPath:
+      'QmYnFsNTQ3v9wSnEHPmP1uPQfB6zEDvxzYTV6831zdCYMD/metadata.json',
+    mimeType: 'video/mp4',
+    mintTxHash: `${randPublicKey()}mP1uPQfB6zEsNTQ3v9`,
+    moderationStatus: 'ACTIVE',
+    muxId: randIDs(),
+    muxMaxResolution: 'high',
+    muxPlaybackId: randIDs(),
+    muxStatus: 'SUCCESS',
+    name: randArtworkTitle(),
+    status: randStateArt(),
+    tokenId: randFollowersArt(),
+  })
+  return artworks
 }
 
 function fillAuctions(size): AuctionProps[] {
@@ -135,22 +258,38 @@ function fillAuctions(size): AuctionProps[] {
       auction_id: `auction_id_${i}`,
       type: 'LIVE',
       created_date: randCreatedDate(),
-      artwork: {
-        id: `artwork_id_${i}`,
-        title: randArtworkTitle(),
-        thumb_url: randImg(),
-        author: {
-          id: `author_id_${i}`,
-          handle: randAuthorName(),
-          name: randAuthorName(),
-          bio: randBioArt(),
-          followers: randFollowersArt(),
-          avatar_url: randImg(),
-        },
-        state: randStateArt(),
-      },
       current_bid: randPriceArt(),
       ends_at: randEndingInArt(),
+      creator: {
+        bio: randBioArt(),
+        coverImageUrl: randImgUrl(),
+        createdAt: randCreatedDate(),
+        firstName: randAuthorName(),
+        isAdmin: false,
+        isApprovedCreator: true,
+        joinedWaitlistAt: null,
+        lastName: randAuthorName(),
+        name: randAuthorName(),
+        publicKey: randPublicKey(),
+        moderationStatus: 'ACTIVE',
+        username: randAuthorName(),
+        profileImageUrl: randImgUrl(),
+        userIndex: randUserIndex(i),
+        followers: randFollowersArt(),
+        links: {
+          discord: { handle: `${randArtworkTitle()}`, platform: 'discord' },
+          facebook: { handle: `${randArtworkTitle()}`, platform: 'facebook' },
+          instagram: { handle: `${randArtworkTitle()}`, platform: 'instagram' },
+          snapchat: { handle: `${randArtworkTitle()}`, platform: 'snapchat' },
+          tiktok: { handle: `${randArtworkTitle()}`, platform: 'tiktok' },
+          twitch: { handle: `${randArtworkTitle()}`, platform: 'twitch' },
+          twitter: { handle: `${randArtworkTitle()}`, platform: 'twitter' },
+          website: { handle: `${randArtworkTitle()}`, platform: 'website' },
+          youtube: { handle: `${randArtworkTitle()}`, platform: 'youtube' },
+        },
+      },
+      artworks: fillArtworks(6),
+      state: randStateArt(),
     })
   }
   return auctions
