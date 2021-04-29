@@ -25,7 +25,6 @@ const priceArt = [
   '1.670',
   '4.240',
   '0.001',
-  '',
 ]
 
 const bioArt = [
@@ -108,7 +107,7 @@ const randAuthorName = () => {
 }
 
 const randArtworkTitle = () => {
-  return stateArt[Math.floor(Math.random() * artworkTitles.length)]
+  return artworkTitles[Math.floor(Math.random() * artworkTitles.length)]
 }
 
 const randStateArt = () => {
@@ -150,6 +149,7 @@ type ArtworksProps = {
   hiddenAt: String
   deletedAt: String
   moderationStatus: String
+  price: String
 }
 
 type CreatorProps = {
@@ -247,6 +247,7 @@ function fillArtworks(size): ArtworksProps[] {
     name: randArtworkTitle(),
     status: randStateArt(),
     tokenId: randFollowersArt(),
+    price: '$23,450.00',
   })
   return artworks
 }
