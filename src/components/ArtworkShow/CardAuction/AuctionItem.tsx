@@ -120,7 +120,7 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
                 container
                 direction="row"
                 justify={disableHours ? 'space-between' : 'flex-start'}
-                style={{ display: disableTime ? 'block' : 'none' }}
+                style={{ display: disableTime ? 'flex' : 'none' }}
               >
                 <Grid
                   item
