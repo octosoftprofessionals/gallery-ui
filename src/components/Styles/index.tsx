@@ -63,6 +63,7 @@ export const Theme = createMuiTheme({
         fontWeight: 600,
         textTransform: 'none',
       },
+      h3: { fontSize: 66, fontWeight: 600 },
       h4: {
         fontSize: 46,
         fontWeight: 600,
@@ -182,6 +183,8 @@ export const Theme = createMuiTheme({
     78,
     96,
     100,
+    312,
+    500,
   ],
   typography: {
     fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em'],
