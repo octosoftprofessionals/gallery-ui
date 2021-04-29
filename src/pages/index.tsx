@@ -17,9 +17,7 @@ const items = [...new Array(20)].map(() => ({}))
 const Home = () => {
   return (
     <Layout>
-      <Grid container justify="center">
-        <HeroAuction auction={randOneAuction()} />
-      </Grid>
+      <HeroAuction auction={randOneAuction()} />
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"

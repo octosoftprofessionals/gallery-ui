@@ -6,8 +6,10 @@ import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionIt
 import { boxShadow } from '../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
-  root: { height: `${Theme.spacing(10)}vw`, marginBottom: Theme.spacing(16) },
-  container: { height: Theme.spacing(18) },
+  root: {
+    flex: 1,
+    margin: Theme.spacing(11, 0),
+  },
   img: {
     backgroundImage: ({ imgUrl }) => `url(${imgUrl})`,
     backgroundPosition: 'center',
@@ -20,44 +22,37 @@ const useStyle = makeStyles(Theme => ({
 
 const HeroAuction = ({ auction }) => {
   const { artworks, ends_at, current_bid } = auction
-  console.log('auction :>> ', auction)
-  console.log('object :>> ', artworks.values().next().value)
   const { assetIPFSPath, name, price } = artworks.values().next().value
-  console.log('current_bid :>> ', current_bid)
 
   const classes = useStyle({ imgUrl: assetIPFSPath })
   return (
-    <Grid container justify="center" className={classes.root}>
-      <Grid
-        item
-        xs={11}
-        container
-        justify="space-around"
-        className={classes.container}
-      >
-        <Grid item xs={12} sm={4}>
-          <div className={classes.img} />
-        </Grid>
+    <div className={classes.root}>
+      <Grid container justify="center">
+        <Grid item xs={12} md={11} container justify="space-around">
+          <Grid item xs={12} sm={5} md={4}>
+            <div className={classes.img} />
+          </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          container
-          direction="column"
-          justify="space-around"
-        >
-          <Grid item>CreatorButton</Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            container
+            direction="column"
+            justify="space-around"
+          >
+            <Grid item>CreatorButton</Grid>
 
-          <HeroAuctionItem
-            endingIn={ends_at}
-            money={price}
-            price={current_bid}
-            title={name}
-          />
+            <HeroAuctionItem
+              endingIn={ends_at}
+              money={price}
+              price={current_bid}
+              title={name}
+            />
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   )
 }
 

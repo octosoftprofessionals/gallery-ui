@@ -28,7 +28,7 @@ const useStyle = makeStyles(Theme => ({
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
 }))
 
-const AuctionItem = ({
+const HeroAuctionItem = ({
   price,
   money,
   endingIn,
@@ -80,7 +80,7 @@ const AuctionItem = ({
         justify="space-between"
         className={classes.root}
       >
-        <Grid item xs={12} sm={4} container direction="column">
+        <Grid item xs={12} lg={4} container direction="column">
           <Typography
             variant="button"
             color="primary"
@@ -104,7 +104,7 @@ const AuctionItem = ({
             className={classes.divider}
           />
         </Hidden>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} lg={7}>
           <Grid item xs={12}>
             <Typography
               variant="button"
@@ -114,8 +114,12 @@ const AuctionItem = ({
               Auction ending in
             </Typography>
           </Grid>
-          <Grid item xs={11} container direction="row" justify="flex-start">
-            <Grid sm={3} style={{ display: disableHours ? 'block' : 'none' }}>
+          <Grid item xs={12} container direction="row" justify="flex-start">
+            <Grid
+              xs={4}
+              sm={3}
+              style={{ display: disableHours ? 'block' : 'none' }}
+            >
               <Grid container direction="column" alignItems="flex-start">
                 <Typography
                   variant="h5"
@@ -129,10 +133,9 @@ const AuctionItem = ({
                 </Typography>
               </Grid>
             </Grid>
-
             <Grid
               item
-              xs={12}
+              xs={4}
               sm={3}
               container
               direction="column"
@@ -149,10 +152,9 @@ const AuctionItem = ({
                 Minutes
               </Typography>
             </Grid>
-
             <Grid
               item
-              xs={12}
+              xs={4}
               sm={3}
               container
               direction="column"
@@ -172,8 +174,15 @@ const AuctionItem = ({
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={11} container direction="row" justify="space-between">
-        <Grid item xs={12} sm={6}>
+      <Grid
+        item
+        sm={11}
+        container
+        direction="row"
+        justify="flex-start"
+        spacing={4}
+      >
+        <Grid item xs={12} md={6}>
           <Link to={linkButtonBid}>
             <Button variant="contained" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
@@ -182,7 +191,7 @@ const AuctionItem = ({
             </Button>
           </Link>
         </Grid>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} md={5}>
           <Link to={linkButtonArtWork}>
             <Button variant="outlined" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
@@ -196,4 +205,4 @@ const AuctionItem = ({
   )
 }
 
-export default withWidth()(AuctionItem)
+export default withWidth()(HeroAuctionItem)
