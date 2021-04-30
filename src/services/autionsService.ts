@@ -72,3 +72,14 @@ export async function getArtworkAuctions() {
     }, 250)
   })
 }
+
+export async function getArtwork(id: String) {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        artwork:
+          auctionsMockup[Math.floor(Math.random() * auctionsMockup.length)],
+      })
+    }, 250)
+  })
+}
