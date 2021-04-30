@@ -2,6 +2,7 @@ import React from 'react'
 
 import ArtworkShow from '../../../components/ArtworkShow'
 import Layout from '../../../components/Layout/Layout'
+import CreatorButton from '../../../components/CreatorButton'
 
 import { colors } from '../../../components/Styles/Colors'
 
@@ -30,6 +31,8 @@ const randEndingInArt = () => {
   return new Date(endingIn)
 }
 
+const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
+
 // params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
 const ShowArtwork = () => {
   return (
@@ -39,6 +42,7 @@ const ShowArtwork = () => {
       marginBottom="0"
       marginTop="0"
     >
+      <CreatorButton imgUrl={imgUrl} user={artist} link={linkProfile} />
       <ArtworkShow
         imgUrl={imgUrl}
         videoUrl={videoUrl}
@@ -49,7 +53,9 @@ const ShowArtwork = () => {
         money={valueMoney}
         endingIn={randEndingInArt()}
       />
+      
     </Layout>
+    
   )
 }
 
