@@ -1,23 +1,23 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
-
+import { useQuery } from 'react-query'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
-import fillAuctions from '../services/mockups/auctions'
-
-const randOneAuction = () => {
-  return fillAuctions[Math.floor(Math.random() * fillAuctions.length)]
-}
+import { getArtworkAuctions } from '../services/autionsService'
 
 const items = [...new Array(20)].map(() => ({}))
 
 const Home = () => {
+  const liveAuctionsQuery = useQuery('liveAuctions', getArtworkAuctions)
+  // const featuredAuctionsQuery = useQuery('featuredAuctions', getArtworkAuctions)
+  console.log('liveAuctionsQuery::', liveAuctionsQuery)
+
   return (
     <Layout>
-      <HeroAuction auction={randOneAuction()} />
+      {/* <HeroAuction auction={} /> */}
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"

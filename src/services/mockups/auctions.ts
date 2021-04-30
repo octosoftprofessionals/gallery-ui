@@ -1,4 +1,6 @@
-const videoUrls = ['http://localhost:8000/float.mp4']
+const videoUrls = [
+  'https://fnd.fleek.co/fnd-prod/QmWLWhYZyjTe13BF22SpSo6RdnAoA2LsPuBgzFbdmuSvcg/nft.mp4',
+]
 const stateArt = ['auction', 'reserve', 'sold']
 
 const createdInArt = [
@@ -150,6 +152,7 @@ type ArtworksProps = {
   deletedAt: String
   moderationStatus: String
   price: String
+  creator: CreatorProps
 }
 
 type CreatorProps = {
@@ -210,57 +213,33 @@ type LinksProps = {
   }
 }
 
-type AuctionProps = {
-  auction_id: String
-  type: String
-  created_date: Date
-  state: String
-  current_bid: String
-  ends_at: Date
-  creator: CreatorProps
-  artworks: ArtworksProps[]
-}
-
-function fillArtworks(size): ArtworksProps[] {
-  const artworks: ArtworksProps[] = []
-  artworks.push({
-    id: randIDs(),
-    assetIPFSPath: randAsset(),
-    assetId: randPublicKey(),
-    assetProcessor: 'COCONUT',
-    assetStatus: 'SUCCESS',
-    deletedAt: 'null',
-    description: randBioArt(),
-    duration: 16.458332,
-    height: 1920,
-    width: 1280,
-    hiddenAt: 'null',
-    metadataIPFSPath:
-      'QmYnFsNTQ3v9wSnEHPmP1uPQfB6zEDvxzYTV6831zdCYMD/metadata.json',
-    mimeType: 'video/mp4',
-    mintTxHash: `${randPublicKey()}mP1uPQfB6zEsNTQ3v9`,
-    moderationStatus: 'ACTIVE',
-    muxId: randIDs(),
-    muxMaxResolution: 'high',
-    muxPlaybackId: randIDs(),
-    muxStatus: 'SUCCESS',
-    name: randArtworkTitle(),
-    status: randStateArt(),
-    tokenId: randFollowersArt(),
-    price: '$23,450.00',
-  })
-  return artworks
-}
-
-function fillAuctions(size): AuctionProps[] {
-  const auctions: AuctionProps[] = []
+function fillAuctions(size): ArtworksProps[] {
+  const auctions: ArtworksProps[] = []
   for (let i = 0; i < size; i++) {
     auctions.push({
-      auction_id: `auction_id_${i}`,
-      type: 'LIVE',
-      created_date: randCreatedDate(),
-      current_bid: randPriceArt(),
-      ends_at: randEndingInArt(),
+      id: randIDs(),
+      name: randArtworkTitle(),
+      description: randBioArt(),
+      assetIPFSPath: randAsset(),
+      metadataIPFSPath:
+        'QmYnFsNTQ3v9wSnEHPmP1uPQfB6zEDvxzYTV6831zdCYMD/metadata.json',
+      width: 1280,
+      height: 1920,
+      duration: 16.458332,
+      mimeType: 'video/mp4',
+      mintTxHash: `${randPublicKey()}mP1uPQfB6zEsNTQ3v9`,
+      muxStatus: 'SUCCESS',
+      muxMaxResolution: 'high',
+      muxPlaybackId: randIDs(),
+      assetId: randPublicKey(),
+      assetProcessor: 'COCONUT',
+      assetStatus: 'SUCCESS',
+      muxId: randIDs(),
+      tokenId: randFollowersArt(),
+      status: randStateArt(),
+      deletedAt: 'null',
+      moderationStatus: 'ACTIVE',
+      hiddenAt: 'null',
       creator: {
         bio: randBioArt(),
         coverImageUrl: randImgUrl(),
@@ -289,8 +268,7 @@ function fillAuctions(size): AuctionProps[] {
           youtube: { handle: `${randArtworkTitle()}`, platform: 'youtube' },
         },
       },
-      artworks: fillArtworks(6),
-      state: randStateArt(),
+      price: '$23,450.00',
     })
   }
   return auctions
