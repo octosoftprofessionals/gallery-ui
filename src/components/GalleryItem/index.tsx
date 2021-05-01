@@ -9,48 +9,39 @@ const useStyle = makeStyles(Theme => ({
   root: {},
 }))
 
-const GalleryItem = ({
-  itemType,
-  name,
-  imgUrl,
-  avatarUrl,
-  price,
-  artis,
-  titleArt,
-  endingIn,
-  statesArt,
-  link,
-  followers,
-  bio,
-  description,
-}) => {
+const GalleryItem = ({ itemType, artwork, link }) => {
   const classes = useStyle()
 
   return (
     <>
       {itemType === 'artworks' ? (
         <ArtworkItem
-          imgUrl={imgUrl}
-          price={price}
-          artis={artis}
-          titleArt={titleArt}
-          endingIn={endingIn}
-          statesArt={statesArt}
+          key={artwork.assetId}
+          imgUrl={artwork.assetIPFSPath}
+          price={artwork.price}
+          artis={artwork.creator.username}
+          titleArt={artwork.name}
+          endingIn={artwork.duration}
+          statesArt={artwork.assetStatus}
           link={link}
-          avatarUrl={avatarUrl}
+          avatarUrl={artwork.creator.coverImageUrl}
         />
       ) : itemType === 'creator' ? (
         <CreatorsItem
-          name={name}
-          imgUrl={imgUrl}
-          avatarUrl={avatarUrl}
-          artis={artis}
-          bio={bio}
-          followers={followers}
+          name={artwork.creator.username}
+          imgUrl={artwork.creator.coverImageUrl}
+          avatarUrl={artwork.creator.profileImageUrl}
+          artis={artwork.creator.name}
+          bio={artwork.creator.bio}
+          followers={artwork.creator.followers}
           link={link}
         />
       ) : (
-        <BlogItem link={link} imgUrl={imgUrl} description={description} />
+        <BlogItem
+          link={link}
+          imgUrl={artwork.creator.profileImageUrl}
+          description={artwork.description}
+        />
       )}
     </>
   )

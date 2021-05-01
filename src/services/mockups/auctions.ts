@@ -105,7 +105,7 @@ const randImgUrl = () => {
 }
 
 const randAuthorName = () => {
-  return stateArt[Math.floor(Math.random() * authorsNames.length)]
+  return authorsNames[Math.floor(Math.random() * authorsNames.length)]
 }
 
 const randArtworkTitle = () => {
@@ -233,7 +233,7 @@ function fillAuctions(size): ArtworksProps[] {
       muxPlaybackId: randIDs(),
       assetId: randPublicKey(),
       assetProcessor: 'COCONUT',
-      assetStatus: 'SUCCESS',
+      assetStatus: randStateArt(),
       muxId: randIDs(),
       tokenId: randFollowersArt(),
       status: randStateArt(),
@@ -254,7 +254,7 @@ function fillAuctions(size): ArtworksProps[] {
         moderationStatus: 'ACTIVE',
         username: randAuthorName(),
         profileImageUrl: randImgUrl(),
-        userIndex: randUserIndex(i),
+        userIndex: i,
         followers: randFollowersArt(),
         links: {
           discord: { handle: `${randArtworkTitle()}`, platform: 'discord' },
@@ -268,7 +268,7 @@ function fillAuctions(size): ArtworksProps[] {
           youtube: { handle: `${randArtworkTitle()}`, platform: 'youtube' },
         },
       },
-      price: '$23,450.00',
+      price: randPriceArt(),
     })
   }
   return auctions

@@ -64,8 +64,8 @@ const ArtworkItem = ({
           <div className={classes.containerAvatar}>
             <Grid container direction="row" alignItems="center">
               <Avatar alt="avat" src={`${avatarUrl}`} />
-              <Typography variant="subtitle1" color="primary">
-                {artis}
+              <Typography variant="subtitle1" color="initial">
+                {`@${artis}`}
               </Typography>
             </Grid>
           </div>
