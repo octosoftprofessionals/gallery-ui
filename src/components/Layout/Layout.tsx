@@ -16,16 +16,16 @@ const LayoutContainer = styled('div')({
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
   height: `${Theme.spacing(15)}%`,
-  marginTop: Theme.spacing(14),
+  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(14)),
   marginBottom: Theme.spacing(7),
 })
 
-const Layout = ({ children, padding, backgroundColor }) => {
+const Layout = ({ children, padding, backgroundColor, marginTop }) => {
   return (
     <ThemeProvider theme={Theme}>
       <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
         <Navbar />
-        <StyledMain>{children}</StyledMain>
+        <StyledMain marginTop={marginTop}>{children}</StyledMain>
       </LayoutContainer>
       <Footer />
     </ThemeProvider>

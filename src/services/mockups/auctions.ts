@@ -1,4 +1,6 @@
-const videoUrls = ['http://localhost:8000/float.mp4']
+const videoUrls = [
+  'https://fnd.fleek.co/fnd-prod/QmWLWhYZyjTe13BF22SpSo6RdnAoA2LsPuBgzFbdmuSvcg/nft.mp4',
+]
 const stateArt = ['auction', 'reserve', 'sold']
 
 const createdInArt = [
@@ -225,7 +227,8 @@ function fillArtworks(size): ArtworksProps[] {
   const artworks: ArtworksProps[] = []
   artworks.push({
     id: randIDs(),
-    assetIPFSPath: randAsset(),
+    assetIPFSPath:
+      'https://fnd.fleek.co/fnd-prod/QmWLWhYZyjTe13BF22SpSo6RdnAoA2LsPuBgzFbdmuSvcg/nft.mp4',
     assetId: randPublicKey(),
     assetProcessor: 'COCONUT',
     assetStatus: 'SUCCESS',
