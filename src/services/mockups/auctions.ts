@@ -1,13 +1,15 @@
 const videoUrls = [
   'https://fnd.fleek.co/fnd-prod/QmWLWhYZyjTe13BF22SpSo6RdnAoA2LsPuBgzFbdmuSvcg/nft.mp4',
+  'https://fnd.fleek.co/fnd-prod/QmWgrXjKUXs8Eo5ceFar4EqsVn9G88y7BXte6iMRRYjNrH/nft.mp4',
+  'https://fnd.fleek.co/fnd-prod/QmbFEbfMmaofj6X4vkjTWALGcXzoptVxb3gCFjXd3G4phe/nft.mp4',
 ]
 const stateArt = ['auction', 'reserve', 'sold']
 
 const createdInArt = [
   '2020/06/19 11:43:00 AM',
-  '2020/04/17 11:43:00 PM',
-  '2020/04/18 01:13:30 PM',
-  '2020/04/26 11:39:50 AM',
+  '2020/07/17 11:43:00 PM',
+  '2020/09/18 01:13:30 PM',
+  '2020/08/26 11:39:50 AM',
 ]
 
 const endingInArt = [
@@ -136,7 +138,7 @@ type ArtworksProps = {
   metadataIPFSPath: String
   width: Number
   height: Number
-  duration: Number
+  duration: Date
   mimeType: String
   mintTxHash: String
   muxStatus: String
@@ -225,7 +227,7 @@ function fillAuctions(size): ArtworksProps[] {
         'QmYnFsNTQ3v9wSnEHPmP1uPQfB6zEDvxzYTV6831zdCYMD/metadata.json',
       width: 1280,
       height: 1920,
-      duration: 16.458332,
+      duration: randEndingInArt(),
       mimeType: 'video/mp4',
       mintTxHash: `${randPublicKey()}mP1uPQfB6zEsNTQ3v9`,
       muxStatus: 'SUCCESS',
