@@ -40,6 +40,7 @@ const HeroAuctionItem = ({
   const [disableInfo, setDisableInfo] = useState(false)
   const [disableHours, setDisableHours] = useState(true)
   const [disableTime, setDisableTime] = useState(true)
+  const [changeTitle, setChangeTitle] = useState('Auction ending in')
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const delta = deltaTime(endingIn)
@@ -111,7 +112,7 @@ const HeroAuctionItem = ({
               color="primary"
               className={classes.titlePrice}
             >
-              Auction ending in
+              {changeTitle}
             </Typography>
           </Grid>
           <Grid item xs={12} container direction="row" justify="flex-start">

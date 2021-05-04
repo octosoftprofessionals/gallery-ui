@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { Grid, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -55,7 +55,6 @@ const ArtworkDisplay = ({ imgUrl, videoUrl, mimeType }) => {
       handle.enter()
     }
   }
-  console.log('fullscreen :>> ', fullscreen)
 
   const toggleMute = () => {
     setVolume(!volume)
