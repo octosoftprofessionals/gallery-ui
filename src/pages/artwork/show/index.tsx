@@ -2,6 +2,8 @@ import React from 'react'
 
 import ArtworkShow from '../../../components/ArtworkShow'
 import Layout from '../../../components/Layout/Layout'
+import { useQuery } from 'react-query'
+import { getArtwork } from '../../../services/autionsService'
 import CreatorButton from '../../../components/CreatorButton'
 
 import { colors } from '../../../components/Styles/Colors'
@@ -35,6 +37,10 @@ const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 // params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
 const ShowArtwork = () => {
+  const artworkQuery = useQuery('artwork', () =>
+    getArtwork('use_id_from_navigation')
+  )
+
   return (
     <Layout
       backgroundColor={colors.WhiteSmoke}
@@ -53,9 +59,7 @@ const ShowArtwork = () => {
         money={valueMoney}
         endingIn={randEndingInArt()}
       />
-      
     </Layout>
-    
   )
 }
 
