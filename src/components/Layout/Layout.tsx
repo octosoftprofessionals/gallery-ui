@@ -7,6 +7,8 @@ import Footer from './Footer'
 import { Theme } from '../Styles'
 import './Layout.css'
 
+const LocaleContext = React.createContext()
+
 const LayoutContainer = styled('div')({
   padding: ({ padding }) => (padding ? padding : Theme.spacing(0, 8)),
   backgroundColor: ({ backgroundColor }) =>
@@ -22,13 +24,15 @@ const StyledMain = styled('main')({
 
 const Layout = ({ children, padding, backgroundColor, marginTop }) => {
   return (
-    <ThemeProvider theme={Theme}>
-      <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
-        <Navbar />
-        <StyledMain marginTop={marginTop}>{children}</StyledMain>
-      </LayoutContainer>
-      <Footer />
-    </ThemeProvider>
+    <LocaleContext.Provider value={location}>
+      <ThemeProvider theme={Theme}>
+        <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
+          <Navbar pathname={location.pathname} />
+          <StyledMain marginTop={marginTop}>{children}</StyledMain>
+        </LayoutContainer>
+        <Footer />
+      </ThemeProvider>
+    </LocaleContext.Provider>
   )
 }
 

@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import { colors, backgroundGradient } from './Colors'
+import { colors, backgroundGradient, boxShadow } from './Colors'
 
 const {
   DimGray,
@@ -24,7 +24,7 @@ export const Theme = createMuiTheme({
           color: White,
           backgroundColor: Black,
           transform: 'translateY(-2px)',
-          boxShadow: 'rgb(0 0 0 / 25%) 0px 8px 15px',
+          boxShadow: boxShadow.boxShadow4,
         },
         padding: '16px 24px',
       },
@@ -37,9 +37,17 @@ export const Theme = createMuiTheme({
         '&:hover': {
           backgroundColor: Black,
           transform: 'translateY(-2px)',
-          boxShadow: 'rgb(0 0 0 / 25%) 0px 8px 15px',
+          boxShadow: boxShadow.boxShadow4,
         },
         padding: '16px 24px',
+      },
+      containedSecondary: {
+        '&:hover': {
+          backgroundColor: Black,
+          color: White,
+          transform: 'translateY(-2px)',
+          boxShadow: boxShadow.boxShadow4,
+        },
       },
       text: {
         boxShadow: 'none',
@@ -125,7 +133,7 @@ export const Theme = createMuiTheme({
     },
     MuiPaper: {
       elevation1: {
-        boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
+        boxShadow: boxShadow.boxShadow1,
         borderRadius: 16,
         '&:hover': {
           transform: 'translateY(-2px)',
@@ -133,7 +141,7 @@ export const Theme = createMuiTheme({
         },
       },
       elevation2: {
-        boxShadow: '0px 10px 20px rgb(0 0 0 / 5%);',
+        boxShadow: boxShadow.boxShadow1,
         borderRadius: 16,
       },
     },

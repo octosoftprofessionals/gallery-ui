@@ -62,7 +62,7 @@ const useStyles = makeStyles(Theme => ({
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
 }))
 
-const index = () => {
+const index = ({ pathname }) => {
   const classes = useStyles({ logoSrc })
   const [showDrawer, setShowDrawer] = useState(false)
   return (
@@ -79,7 +79,13 @@ const index = () => {
             <Grid item className={classes.container}>
               <Hidden mdDown>
                 <Link to="/" className={classes.link}>
-                  <Button variant="text" color="primary">
+                  <Button
+                    variant="text"
+                    color="primary"
+                    className={
+                      pathname === '/artworcks' ? classes.selected : ''
+                    }
+                  >
                     <Typography variant="button">Artworks</Typography>
                   </Button>
                 </Link>
@@ -87,13 +93,17 @@ const index = () => {
                   <Button
                     variant="text"
                     color="primary"
-                    className={classes.selected}
+                    className={pathname === '/' ? classes.selected : ''}
                   >
                     <Typography variant="button">Home</Typography>
                   </Button>
                 </Link>
                 <Link to="/" className={classes.link}>
-                  <Button variant="text" color="primary">
+                  <Button
+                    variant="text"
+                    color="primary"
+                    className={pathname === '/creators' ? classes.selected : ''}
+                  >
                     <Typography variant="button">Creator</Typography>
                   </Button>
                 </Link>
@@ -102,7 +112,10 @@ const index = () => {
 
             <Hidden smDown>
               <Grid item xs={4} container justify="flex-end">
-                <Button variant="contained">
+                <Button
+                  variant="contained"
+                  color={pathname === '/creator' ? 'secondary' : 'primary'}
+                >
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>
               </Grid>
