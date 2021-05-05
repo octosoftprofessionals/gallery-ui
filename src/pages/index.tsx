@@ -6,55 +6,46 @@ import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
-import { getArtworkAuctions } from '../services/autionsService'
-
-const items = [...new Array(20)].map(() => ({}))
+import { getArtworkAuctions, getArtwork } from '../services/autionsService'
 
 const Home = () => {
-  const [liveAuctionsQueryArtworks, setLiveAuctionsQueryArtworks] = useState([])
-  const [auctionsQueryArtworks, setAuctionsQueryArtworks] = useState([])
-  const [creatorQuery, setCreatorQuery] = useState([])
-  const { status: statusLiveAuctionsQuery } = useQuery(
+  const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
     'liveAuctionsQuery',
-    getArtworkAuctions,
-    {
-      onSuccess: ({ artworks }) => setLiveAuctionsQueryArtworks(artworks),
-    }
+    getArtworkAuctions
   )
-  const { status: statusAuctionsQuery } = useQuery(
+  const { data: AuctionsQuery, status: statusAuctionsQuery } = useQuery(
     'AuctionsQuery',
-    getArtworkAuctions,
-    {
-      onSuccess: ({ artworks }) => setAuctionsQueryArtworks(artworks),
-    }
+    getArtworkAuctions
   )
-  const { status: statusCreatorQuery } = useQuery(
+  const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
     'CreatorQuery',
-    getArtworkAuctions,
-    {
-      onSuccess: ({ artworks }) => setCreatorQuery(artworks),
-    }
+    getArtworkAuctions
   )
+
+  const {
+    data: AuctionArtworkQuery,
+    status: statusAuctionArtworkQuery,
+  } = useQuery('AuctionArtworkQuery', getArtwork)
 
   return (
     <Layout>
-      {/* <HeroAuction auction={} /> */}
+      <HeroAuction auction={AuctionArtworkQuery} />
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"
         link="/"
         icon
       >
-        <Gallery artworks={liveAuctionsQueryArtworks} itemType="artworks" />
+        <Gallery artworksQuery={liveAuctionsQuery} itemType="artworks" />
       </ArtworkGrid>
       <ArtworkGrid title="Featured artworks" titleButton="artworks" link="/">
-        <Gallery artworks={auctionsQueryArtworks} itemType="artworks" />
+        <Gallery artworksQuery={AuctionsQuery} itemType="artworks" />
       </ArtworkGrid>
       <ArtworkGrid title="Featured creators" titleButton="creators" link="/">
-        <Gallery artworks={creatorQuery} itemType="creator" />
+        <Gallery artworksQuery={CreatorQuery} itemType="creator" />
       </ArtworkGrid>
       {/* <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
-        <Gallery artworks={items} itemType="blog" />
+        <Gallery artworksQuery={items} itemType="blog" />
       </ArtworkGrid> */}
     </Layout>
   )
