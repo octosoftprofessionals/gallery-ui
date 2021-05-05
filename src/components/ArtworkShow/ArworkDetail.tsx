@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { ArrowDownward } from '@material-ui/icons'
 import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
+import ArtworkView from './ArtworkView'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -72,6 +73,7 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
+        <ArtworkView linkEtherscan='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' viewIpfs='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' viewMetadata='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' />
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction
