@@ -97,9 +97,8 @@ const randEndingInArt = () => {
   return new Date(endingIn)
 }
 
-const randAsset = () => {
-  const assetUrls = imgUrls.concat(videoUrls)
-  return assetUrls[Math.floor(Math.random() * assetUrls.length)]
+const randVideoUrls = () => {
+  return videoUrls[Math.floor(Math.random() * videoUrls.length)]
 }
 
 const randImgUrl = () => {
@@ -128,6 +127,19 @@ const randBioArt = () => {
 
 const randFollowersArt = () => {
   return followersArt[Math.floor(Math.random() * followersArt.length)]
+}
+
+let mimeTypeAsset = ''
+
+const randAsset = () => {
+  const assetIPFSPath = imgUrls.concat(videoUrls)
+  if (Math.floor(Math.random() * assetIPFSPath.length) % 2 === 0) {
+    mimeTypeAsset = 'video/mp4'
+    return randVideoUrls()
+  } else {
+    mimeTypeAsset = 'img'
+    return randImgUrl()
+  }
 }
 
 type ArtworksProps = {
@@ -228,7 +240,7 @@ function fillAuctions(size): ArtworksProps[] {
       width: 1280,
       height: 1920,
       duration: randEndingInArt(),
-      mimeType: 'video/mp4',
+      mimeType: mimeTypeAsset,
       mintTxHash: `${randPublicKey()}mP1uPQfB6zEsNTQ3v9`,
       muxStatus: 'SUCCESS',
       muxMaxResolution: 'high',
