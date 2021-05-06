@@ -4,14 +4,13 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
-import ArtworkDisplay from './ArtworkDisplay'
 import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
   img: {
-    backgroundImage: props => `url(${props.imgUrl})`,
+    backgroundImage: ({ imgUrl }) => `url(${imgUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -26,9 +25,29 @@ const useStyle = makeStyles(Theme => ({
   },
   containerAvatar: { marginBottom: Theme.spacing(9) },
   link: { textDecoration: 'none' },
+  containerVideo: { position: 'relative', paddingBottom: '100%' },
+  inVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    boxSizing: 'border-box',
+
+    display: 'flex',
+  },
+  video: {
+    display: 'block',
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    borderRadius: Theme.spacing(4, 4, 0, 0),
+  },
 }))
 
 const ArtworkItem = ({
+  mimeType,
   imgUrl,
   avatarUrl,
   price,
@@ -39,7 +58,7 @@ const ArtworkItem = ({
   link,
 }) => {
   const [timer, setTimer] = useState('')
-  const classes = useStyle({ imgUrl: imgUrl })
+  const classes = useStyle({ imgUrl })
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -56,7 +75,25 @@ const ArtworkItem = ({
   return (
     <Link to={link} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
-        <div className={classes.img} />
+        {mimeType === 'video/mp4' ? (
+          <div className={classes.containerVideo}>
+            <div className={classes.inVideo}>
+              <video
+                poster={imgUrl}
+                src={imgUrl}
+                autoPlay={true}
+                loop={true}
+                className={classes.video}
+                muted={true}
+              >
+                <source src={imgUrl} type={mimeType} />
+                <img src={imgUrl} />
+              </video>
+            </div>
+          </div>
+        ) : (
+          <div className={classes.img} />
+        )}
         <div className={classes.infoCard}>
           <Typography variant="h5" color="primary">
             {titleArt}
