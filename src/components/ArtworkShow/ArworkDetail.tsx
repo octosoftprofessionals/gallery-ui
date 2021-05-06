@@ -7,6 +7,11 @@ import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
 import ArtworkView from './ArtworkView'
 
+// ArtworkView params:
+const linkEtherscan = 'https://etherscan.io/'
+const linkIPFS = 'https://ipfs.io/'
+const linkMetadata = 'https://ipfs.io/'
+
 const useStyle = makeStyles(Theme => ({
   root: {
     backgroundColor: Theme.palette.secondary.main,
@@ -73,7 +78,7 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
-        <ArtworkView linkEtherscan='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' viewIpfs='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' viewMetadata='https://www.google.com.ar/maps/@-34.5811123,-58.4287612,15z' />
+        <ArtworkView linkEtherscan={linkEtherscan} viewIpfs={linkIPFS} viewMetadata={linkMetadata} />
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction
