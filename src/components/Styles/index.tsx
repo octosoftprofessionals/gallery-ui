@@ -195,7 +195,7 @@ export const Theme = createMuiTheme({
     500,
   ],
   typography: {
-    fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em'],
+    fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
     fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
       ','
     ),
