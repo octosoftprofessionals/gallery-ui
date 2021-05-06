@@ -18,7 +18,7 @@ const LayoutContainer = styled('div')({
 const BackgroundNavBar = styled('div')({
   backgroundImage: ({ backgroundImage }) =>
     backgroundImage ? `url(${backgroundImage})` : 'transparent',
-  height: `${Theme.spacing(12)}vh`,
+  height: `${Theme.spacing(13)}vh`,
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
