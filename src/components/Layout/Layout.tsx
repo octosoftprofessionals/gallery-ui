@@ -15,6 +15,15 @@ const LayoutContainer = styled('div')({
     backgroundColor ? backgroundColor : Theme.palette.secondary.main,
 })
 
+const BackgroundNavBar = styled('div')({
+  backgroundImage: ({ backgroundImage }) =>
+    backgroundImage ? `url(${backgroundImage})` : 'transparent',
+  height: `${Theme.spacing(12)}vh`,
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+})
+
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
   height: `${Theme.spacing(15)}%`,
@@ -22,12 +31,20 @@ const StyledMain = styled('main')({
   marginBottom: Theme.spacing(7),
 })
 
-const Layout = ({ children, padding, backgroundColor, marginTop }) => {
+const Layout = ({
+  children,
+  padding,
+  backgroundColor,
+  marginTop,
+  backgroundImage,
+}) => {
   return (
     <LocaleContext.Provider value={location}>
       <ThemeProvider theme={Theme}>
         <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
-          <Navbar pathname={location.pathname} />
+          <BackgroundNavBar backgroundImage={backgroundImage}>
+            <Navbar pathname={location.pathname} />
+          </BackgroundNavBar>
           <StyledMain marginTop={marginTop}>{children}</StyledMain>
         </LayoutContainer>
         <Footer />
