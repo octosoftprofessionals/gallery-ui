@@ -95,7 +95,7 @@ export const Theme = createMuiTheme({
       subtitle2: {
         boxSizing: 'border-box',
         WebkitTextFillColor: 'transparent',
-        background: backgroundGradient,
+        background: backgroundGradient.backgroundGradient1,
         WebkitBackgroundClip: 'text',
         margin: 0,
         fontSize: 16,
