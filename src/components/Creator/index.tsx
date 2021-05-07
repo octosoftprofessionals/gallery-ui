@@ -81,10 +81,30 @@ const useStyle = makeStyles(Theme => ({
   info: {},
 }))
 
+const itemAvatar = [
+  'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
+  'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
+  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
+  'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
+  'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
+  'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
+  'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
+  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
+  'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
+  'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
+]
+
 const Creator = ({ creatorQuery }) => {
   const classes = useStyle()
-
-  const { profileImageUrl } = creatorQuery
+  console.log('creatorQuery :>> ', creatorQuery)
+  const {
+    profileImageUrl,
+    name,
+    username,
+    followers,
+    following,
+    links,
+  } = creatorQuery
 
   return (
     <>
@@ -150,7 +170,14 @@ const Creator = ({ creatorQuery }) => {
         className={classes.info}
       >
         <Grid item xs={12} sm={4}>
-          <InfoCreator />
+          <InfoCreator
+            name={name}
+            username={username}
+            followers={followers}
+            following={following}
+            followedes={itemAvatar}
+            links={links}
+          />
         </Grid>
         <Grid item xs={12} sm={7}>
           <GridCreator />

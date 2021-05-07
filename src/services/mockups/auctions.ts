@@ -186,6 +186,7 @@ type CreatorProps = {
   lastName: String
   isAdmin: boolean
   followers: Number
+  following: Number
   links: LinksProps
 }
 
@@ -271,6 +272,7 @@ function fillAuctions(size): ArtworksProps[] {
         profileImageUrl: randAllImgGifUrl(),
         userIndex: i,
         followers: randFollowersArt(),
+        following: randFollowersArt(),
         links: {
           discord: { handle: `${randArtworkTitle()}`, platform: 'discord' },
           facebook: { handle: `${randArtworkTitle()}`, platform: 'facebook' },
