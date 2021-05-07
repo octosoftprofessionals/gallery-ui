@@ -5,6 +5,8 @@ import { Grid } from '@material-ui/core'
 import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
+import CreatorButton from './CreatorButton'
+
 const useStyle = makeStyles(Theme => ({
   root: {
     flex: 1,
@@ -22,6 +24,7 @@ const useStyle = makeStyles(Theme => ({
     top: 0,
     left: 0,
   },
+  containerInfo: { position: 'relative' },
 }))
 
 const HeroAuction = ({ auction }) => {
@@ -63,8 +66,13 @@ const HeroAuction = ({ auction }) => {
               container
               direction="column"
               justify="space-around"
+              className={classes.containerInfo}
             >
-              <Grid item>CreatorButton</Grid>
+              <CreatorButton
+                imgUrl={artwork.creator.profileImageUrl}
+                name={artwork.creator.username}
+                top="-70px"
+              />
 
               <HeroAuctionItem
                 endingIn={artwork.duration}

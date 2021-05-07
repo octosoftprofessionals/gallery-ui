@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CreatorButton = ({ imgUrl, name, link }) => {
+const CreatorButton = ({ imgUrl, name, link, ...otherProps }) => {
   return (
-    <ButtonCreator>
+    <ButtonCreator {...otherProps}>
       <LinkUser id="" href={link}>
         <ImgConteiner className="creator-button-img-cont">
           <ImgUser src={imgUrl} alt={name} />
@@ -39,7 +39,7 @@ const ButtonCreator = styled.button`
   transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   will-change: transform;
   position: absolute;
-  top: -28px;
+  top: ${({ top }) => top || '-28px'};
   :hover {
     box-shadow: 0px 10px 20px rgb(0 0 0 / 10%);
     transform: translateY(-2px);

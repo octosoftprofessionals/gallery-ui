@@ -16,7 +16,7 @@ const LayoutContainer = styled('div')({
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
   height: `${Theme.spacing(15)}%`,
-  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(14)),
+  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(16)),
   marginBottom: Theme.spacing(7),
 })
 
