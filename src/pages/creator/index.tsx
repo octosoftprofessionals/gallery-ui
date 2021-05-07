@@ -16,6 +16,7 @@ const CreatorPage = () => {
     <Layout
       padding="0"
       marginTop="0"
+      height
       backgroundImage={
         'https://f8n-production.imgix.net/creators/profile/fcusz42mh-obs-gif-4i7ctk.gif'
       }

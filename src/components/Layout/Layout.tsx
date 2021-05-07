@@ -18,10 +18,11 @@ const LayoutContainer = styled('div')({
 const BackgroundNavBar = styled('div')({
   backgroundImage: ({ backgroundImage }) =>
     backgroundImage ? `url(${backgroundImage})` : 'transparent',
-  height: `${Theme.spacing(13)}vh`,
+  height: ({ height }) => (height ? `${Theme.spacing(13)}vh` : ''),
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
+  zIndex: 9999,
 })
 
 const StyledMain = styled('main')({
@@ -37,12 +38,13 @@ const Layout = ({
   backgroundColor,
   marginTop,
   backgroundImage,
+  height,
 }) => {
   return (
     <LocaleContext.Provider value={location}>
       <ThemeProvider theme={Theme}>
         <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
-          <BackgroundNavBar backgroundImage={backgroundImage}>
+          <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
             <Navbar pathname={location.pathname} />
           </BackgroundNavBar>
           <StyledMain marginTop={marginTop}>{children}</StyledMain>
