@@ -61,18 +61,14 @@ const useStyle = makeStyles(Theme => ({
 
 const Creator = ({ creatorQuery }) => {
   const classes = useStyle()
-  const { artwork } = creatorQuery ? creatorQuery : []
+
+  const { profileImageUrl } = creatorQuery
 
   return (
     <>
       <Grid container justify="space-around" className={classes.root}>
         <Grid item className={classes.containerAvatar}>
-          <Avatar
-            src={
-              'https://f8n-production.imgix.net/creators/profile/c8gley51s-nyan-cat-large-gif-gif-mbf1sa.gif'
-            }
-            className={classes.avatar}
-          />
+          <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
 
         <Grid
