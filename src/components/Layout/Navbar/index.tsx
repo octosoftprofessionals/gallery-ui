@@ -95,9 +95,7 @@ const index = ({ pathname }) => {
                   <Button
                     variant="text"
                     color="primary"
-                    className={
-                      pathname === '/artworcks' ? classes.selected : ''
-                    }
+                    className={pathname === '/artworks' ? classes.selected : ''}
                   >
                     <Typography variant="button">Artworks</Typography>
                   </Button>
@@ -117,7 +115,7 @@ const index = ({ pathname }) => {
                     color="primary"
                     className={pathname === '/creators' ? classes.selected : ''}
                   >
-                    <Typography variant="button">Creator</Typography>
+                    <Typography variant="button">Creators</Typography>
                   </Button>
                 </Link>
               </Grid>
