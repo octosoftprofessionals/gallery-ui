@@ -83,3 +83,15 @@ export async function getArtwork(id: String) {
     }, 250)
   })
 }
+
+export async function getCreator(id: String) {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        creator:
+          auctionsMockup[Math.floor(Math.random() * auctionsMockup.length)]
+            .creator,
+      })
+    }, 250)
+  })
+}

@@ -26,6 +26,7 @@ const useStyles = makeStyles(Theme => ({
   img: {
     background: `url(${logoSrc})`,
     paddingBottom: Theme.spacing(14),
+    '@media (max-width: 755px)': { paddingBottom: Theme.spacing(13) },
     backgroundPosition: 'left',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
@@ -34,15 +35,27 @@ const useStyles = makeStyles(Theme => ({
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
+    backgroundColor: Theme.palette.secondary.main,
   },
   selected: {
     backgroundColor: Theme.palette.primary.main,
     color: Theme.palette.primary.contrastText,
     '&:hover': { backgroundColor: Theme.palette.primary.main },
   },
+  boxIconButton: { position: 'relative' },
   buttonMenu: {
     boxShadow: boxShadow1,
     fontSize: `${Theme.typography.fontSize[0]}rem`,
+  },
+  buttonCreatorMenu: {
+    boxShadow: boxShadow1,
+    backgroundColor: Theme.palette.secondary.main,
+    fontSize: `${Theme.typography.fontSize[0]}rem`,
+    '@media (max-width: 755px)': { fontSize: Theme.typography.fontSize[9] },
+    '&:hover': {
+      backgroundColor: Theme.palette.secondary.main,
+      fontSize: Theme.typography.fontSize[10],
+    },
   },
   link: {
     textDecoration: 'none',
@@ -51,6 +64,7 @@ const useStyles = makeStyles(Theme => ({
   drawer: { width: `${Theme.spacing(17)}vw`, padding: Theme.spacing(0, 7) },
   offIcon: { fontSize: `${Theme.typography.fontSize[2]}em` },
   containerImg: { marginBottom: Theme.spacing(7) },
+  menuIcon: { fontSize: Theme.typography.fontSize[10] },
   imgMenu: {
     marginLeft: Theme.spacing(3),
     marginTop: Theme.spacing(7),
@@ -62,7 +76,7 @@ const useStyles = makeStyles(Theme => ({
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
 }))
 
-const index = () => {
+const index = ({ pathname }) => {
   const classes = useStyles({ logoSrc })
   const [showDrawer, setShowDrawer] = useState(false)
   return (
@@ -75,11 +89,14 @@ const index = () => {
                 <div className={classes.img} />
               </Link>
             </Grid>
-
-            <Grid item className={classes.container}>
-              <Hidden mdDown>
+            <Hidden mdDown>
+              <Grid item className={classes.container}>
                 <Link to="/" className={classes.link}>
-                  <Button variant="text" color="primary">
+                  <Button
+                    variant="text"
+                    color="primary"
+                    className={pathname === '/artworks' ? classes.selected : ''}
+                  >
                     <Typography variant="button">Artworks</Typography>
                   </Button>
                 </Link>
@@ -87,38 +104,58 @@ const index = () => {
                   <Button
                     variant="text"
                     color="primary"
-                    className={classes.selected}
+                    className={pathname === '/' ? classes.selected : ''}
                   >
                     <Typography variant="button">Home</Typography>
                   </Button>
                 </Link>
                 <Link to="/" className={classes.link}>
-                  <Button variant="text" color="primary">
-                    <Typography variant="button">Creator</Typography>
+                  <Button
+                    variant="text"
+                    color="primary"
+                    className={pathname === '/creators' ? classes.selected : ''}
+                  >
+                    <Typography variant="button">Creators</Typography>
                   </Button>
                 </Link>
-              </Hidden>
-            </Grid>
+              </Grid>
+            </Hidden>
 
             <Hidden smDown>
               <Grid item xs={4} container justify="flex-end">
-                <Button variant="contained">
+                <Button
+                  variant="contained"
+                  color={pathname === '/creator' ? 'secondary' : 'primary'}
+                >
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>
               </Grid>
             </Hidden>
+            <Hidden mdUp>
+              <Grid
+                item
+                xs={2}
+                container
+                justify="flex-end"
+                alignContent="center"
+                className={classes.boxIconButton}
+              >
+                <IconButton
+                  color="inherit"
+                  className={
+                    pathname === '/creator'
+                      ? classes.buttonCreatorMenu
+                      : classes.buttonMenu
+                  }
+                  aria-label="open drawer"
+                  onClick={() => setShowDrawer(true)}
+                  edge="end"
+                >
+                  <MenuIcon className={classes.menuIcon} />
+                </IconButton>
+              </Grid>
+            </Hidden>
           </Grid>
-          <Hidden mdUp>
-            <IconButton
-              color="inherit"
-              className={classes.buttonMenu}
-              aria-label="open drawer"
-              onClick={() => setShowDrawer(true)}
-              edge="end"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
         </Toolbar>
       </AppBar>
 

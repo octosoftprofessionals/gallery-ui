@@ -3,6 +3,14 @@ const videoUrls = [
   'https://fnd.fleek.co/fnd-prod/QmWgrXjKUXs8Eo5ceFar4EqsVn9G88y7BXte6iMRRYjNrH/nft.mp4',
   'https://fnd.fleek.co/fnd-prod/QmbFEbfMmaofj6X4vkjTWALGcXzoptVxb3gCFjXd3G4phe/nft.mp4',
 ]
+
+const gifUrls = [
+  'https://f8n-production.imgix.net/creators/profile/0x46whfhj-fcrgb-1000x1000-gif-19nh67.gif',
+  'https://f8n-production.imgix.net/creators/profile/fcusz42mh-obs-gif-4i7ctk.gif',
+  'https://f8n-production.imgix.net/creators/profile/y06tgrj7i-background-foundation-gif-pnvm71.gif',
+  'https://f8n-production.imgix.net/creators/profile/c8gley51s-nyan-cat-large-gif-gif-mbf1sa.gif',
+]
+
 const stateArt = ['auction', 'reserve', 'sold']
 
 const createdInArt = [
@@ -104,6 +112,11 @@ const randAsset = () => {
 
 const randImgUrl = () => {
   return imgUrls[Math.floor(Math.random() * imgUrls.length)]
+}
+
+const randAllImgGifUrl = () => {
+  const allImgGifUtls = imgUrls.concat(gifUrls)
+  return allImgGifUtls[Math.floor(Math.random() * allImgGifUtls.length)]
 }
 
 const randAuthorName = () => {
@@ -244,7 +257,7 @@ function fillAuctions(size): ArtworksProps[] {
       hiddenAt: 'null',
       creator: {
         bio: randBioArt(),
-        coverImageUrl: randImgUrl(),
+        coverImageUrl: randAllImgGifUrl(),
         createdAt: randCreatedDate(),
         firstName: randAuthorName(),
         isAdmin: false,
@@ -255,7 +268,7 @@ function fillAuctions(size): ArtworksProps[] {
         publicKey: randPublicKey(),
         moderationStatus: 'ACTIVE',
         username: randAuthorName(),
-        profileImageUrl: randImgUrl(),
+        profileImageUrl: randAllImgGifUrl(),
         userIndex: i,
         followers: randFollowersArt(),
         links: {
