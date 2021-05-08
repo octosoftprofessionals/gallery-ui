@@ -10,11 +10,29 @@ const {
   White,
   DarkGray,
   VeryLightGrey,
+  Nero,
 } = colors
 
 export const Theme = createMuiTheme({
   overrides: {
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: Nero,
+        borderRadius: 50,
+        fontWeight: 600,
+        fontSize: 16,
+        fontFamily:
+          '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
+      },
+    },
     MuiButton: {
+      endIcon: {
+        color: VeryLightGrey,
+        paddingRight: 2,
+        '&:hover': {
+          color: Black,
+        },
+      },
       outlined: {
         borderRadius: 50,
         boxShadow: 'none',
@@ -196,8 +214,24 @@ export const Theme = createMuiTheme({
   ],
   typography: {
     fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
-    fontFamily: ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(
-      ','
-    ),
+    fontFamily: [
+      ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(','),
+      [
+        'Formular Mono',
+        'Consolas',
+        'Andale Mono WT',
+        'Andale Mono',
+        'Lucida Console',
+        'Lucida Sans Typewriter',
+        'DejaVu Sans Mono',
+        'Bitstream Vera Sans Mono',
+        'Liberation Mono',
+        'Nimbus Mono L',
+        'Monaco',
+        'Courier New',
+        'Courier',
+        'monospace',
+      ].join(','),
+    ],
   },
 })

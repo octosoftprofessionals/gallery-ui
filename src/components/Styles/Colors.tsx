@@ -14,6 +14,7 @@ export const colors = {
   SpicyPink: '#ff18bd',
   NeonBlue: '#1a4bff',
   MayaBlue: '#62d8f9',
+  Nero: '#1c1c1c',
 }
 
 export const backgroundGradient = {
