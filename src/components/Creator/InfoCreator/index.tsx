@@ -78,17 +78,6 @@ const InfoCreator = ({
   publicKey,
 }) => {
   const classes = useStyle()
-  // const {
-  //   discord,
-  //   facebook,
-  //   instagram,
-  //   snapchat,
-  //   tiktok,
-  //   twitch,
-  //   twitter,
-  //   website,
-  //   youtube,
-  // } = links ? links : ''
   const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
   const year = new Date(createdAt).getFullYear()
   return (
