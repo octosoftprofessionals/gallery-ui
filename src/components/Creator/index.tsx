@@ -104,6 +104,10 @@ const Creator = ({ creatorQuery }) => {
     followers,
     following,
     links,
+    bio,
+    createdAt,
+    userIndex,
+    publicKey,
   } = creatorQuery
 
   return (
@@ -112,7 +116,6 @@ const Creator = ({ creatorQuery }) => {
         <Grid item className={classes.containerAvatar}>
           <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
-
         <Grid
           item
           xs={4}
@@ -130,7 +133,6 @@ const Creator = ({ creatorQuery }) => {
               </IconButton>
             </div>
           </Grid>
-
           <Button variant="contained" className={classes.buttonShare}>
             <Grid
               container
@@ -177,6 +179,10 @@ const Creator = ({ creatorQuery }) => {
             following={following}
             followedes={itemAvatar}
             links={links}
+            bio={bio}
+            createdAt={createdAt}
+            userIndex={userIndex}
+            publicKey={publicKey}
           />
         </Grid>
         <Grid item xs={12} sm={7}>

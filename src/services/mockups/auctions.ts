@@ -14,10 +14,11 @@ const gifUrls = [
 const stateArt = ['auction', 'reserve', 'sold']
 
 const createdInArt = [
-  '2020/06/19 11:43:00 AM',
-  '2020/07/17 11:43:00 PM',
-  '2020/09/18 01:13:30 PM',
+  '2021/06/19 11:43:00 AM',
+  '2019/07/17 11:43:00 PM',
+  '2021/09/18 01:13:30 PM',
   '2020/08/26 11:39:50 AM',
+  '2021/08/26 11:39:50 AM',
 ]
 
 const endingInArt = [

@@ -1,16 +1,68 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Button, Grid, Typography } from '@material-ui/core'
+import {
+  Avatar,
+  Button,
+  Divider,
+  Grid,
+  Typography,
+  Tooltip,
+} from '@material-ui/core'
 import { AvatarGroup } from '@material-ui/lab'
+import { FileCopy } from '@material-ui/icons'
+
+import { boxShadow } from '../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
+  containerButton: { position: 'relative', marginBottom: Theme.spacing(9) },
+  button: {
+    padding: 0,
+    boxShadow: boxShadow.boxShadow1,
+    '&:hover': {
+      backgroundColor: Theme.palette.primary.main,
+      transform: 'none',
+      boxShadow: 'none',
+    },
+    zIndex: 30,
+  },
+  textButton: {
+    fontFamily: Theme.typography.fontFamily[1],
+    fontWeight: 400,
+    padding: Theme.spacing(1, 5),
+  },
+  textKeyPublic: {
+    fontFamily: Theme.typography.fontFamily[1],
+    fontWeight: 400,
+    padding: Theme.spacing(1, 5),
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: '60%',
+  },
+  buttonKeyPublic: {
+    width: '65%',
+    position: 'absolute',
+    left: Theme.spacing(9),
+    backgroundColor: Theme.palette.secondary.main,
+    padding: Theme.spacing(0, 0, 0, 13),
+    boxShadow: boxShadow.boxShadow1,
+    '&:hover': {
+      backgroundColor: Theme.palette.secondary.main,
+      transform: 'none',
+      boxShadow: boxShadow.boxShadow1,
+    },
+  },
   userName: { fontSize: Theme.typography.fontSize[6] },
   textFollow: {
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[4],
     '&:hover': { color: Theme.palette.primary.main },
   },
+  divider: {
+    opacity: Theme.palette.action.disabledOpacity[1],
+    margin: Theme.spacing(5, 0, 5),
+  },
+  textDate: { textTransform: 'capitalize' },
 }))
 
 const InfoCreator = ({
@@ -20,23 +72,54 @@ const InfoCreator = ({
   following,
   followedes,
   links,
+  bio,
+  createdAt,
+  userIndex,
+  publicKey,
 }) => {
   const classes = useStyle()
-  const {
-    discord,
-    facebook,
-    instagram,
-    snapchat,
-    tiktok,
-    twitch,
-    twitter,
-    website,
-    youtube,
-  } = links ? links : ''
-
-  console.log('object :>> ', tiktok)
+  // const {
+  //   discord,
+  //   facebook,
+  //   instagram,
+  //   snapchat,
+  //   tiktok,
+  //   twitch,
+  //   twitter,
+  //   website,
+  //   youtube,
+  // } = links ? links : ''
+  const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
+  const year = new Date(createdAt).getFullYear()
   return (
     <Grid container direction="column" justify="space-around">
+      <Grid item className={classes.containerButton}>
+        <Button variant="contained" className={classes.button}>
+          <Typography
+            variant="caption"
+            color="secondary"
+            className={classes.textButton}
+          >{`#000${userIndex}`}</Typography>
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          endIcon={
+            <Tooltip title="Copy Address" placement="top">
+              <FileCopy />
+            </Tooltip>
+          }
+          className={classes.buttonKeyPublic}
+        >
+          <Typography
+            variant="caption"
+            color="primary"
+            className={classes.textKeyPublic}
+          >
+            {`${publicKey}`}
+          </Typography>
+        </Button>
+      </Grid>
       <Typography variant="h4" color="primary">
         {name}
       </Typography>
@@ -61,8 +144,8 @@ const InfoCreator = ({
             Followers
           </Typography>
         </Grid>
-        <Grid item xs={3}>
-          <Button variant="outlined">
+        <Grid item xs={12} sm={5}>
+          <Button variant="outlined" fullWidth>
             <Typography variant="button">Follow</Typography>
           </Button>
         </Grid>
@@ -84,13 +167,41 @@ const InfoCreator = ({
           View all
         </Typography>
       </div>
-      {/* <Grid item>
-        {links.map(({ link }, i) => (
-          <Button key={i} variant="contained" color="secondary">
-            {`${link.platform} ${link.handle}`}
-          </Button>
-        ))}
-      </Grid> */}
+      <div>keyboard from social media</div>
+      <Grid item xs={12} sm={11}>
+        <Typography variant="caption" color="primary">
+          Bio
+        </Typography>
+        <Divider className={classes.divider} />
+        <Typography variant="body2" color="primary" paragraph>
+          {bio}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} sm={11}>
+        <Typography variant="caption" color="primary">
+          Links
+        </Typography>
+        <Divider className={classes.divider} />
+        <Typography variant="body2" color="primary">
+          links
+        </Typography>
+      </Grid>
+      <Grid item xs={12} sm={11}>
+        <Divider className={classes.divider} />
+        <Grid container justify="space-between">
+          <Typography variant="caption" color="primary">
+            Joined
+          </Typography>
+          <Typography
+            variant="body2"
+            color="primary"
+            className={classes.textDate}
+          >
+            {`${month} ${year}`}
+          </Typography>
+        </Grid>
+        <Divider className={classes.divider} />
+      </Grid>
     </Grid>
   )
 }
