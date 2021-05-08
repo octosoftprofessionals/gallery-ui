@@ -5,13 +5,14 @@ import ArworkDetail from './ArworkDetail'
 
 const ArtworkShow = ({
   imgUrl,
-  videoUrl,
+  name,
   titleArt,
   description,
   namber,
   price,
   money,
   endingIn,
+  linkProfile,
 }) => {
   return (
     <>
@@ -23,11 +24,14 @@ const ArtworkShow = ({
         mimeType={'video/mp4'}
       />
       <ArworkDetail
+        imgUrl={imgUrl}
+        name={name}
         titleArt={titleArt}
         description={description}
         namber={namber}
         price={price}
         money={money}
+        linkProfile={linkProfile}
         endingIn={endingIn}
       />
     </>
