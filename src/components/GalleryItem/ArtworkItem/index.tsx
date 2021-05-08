@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
-import { deltaTime, timeFormat, checkTypeVideo } from '../../../Utils'
+import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
 
 const useStyle = makeStyles(Theme => ({
@@ -75,7 +75,7 @@ const ArtworkItem = ({
   return (
     <Link to={link} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
-        {checkTypeVideo(mimeType) ? (
+        {isTypeVideo(mimeType) ? (
           <div className={classes.containerVideo}>
             <div className={classes.inVideo}>
               <video

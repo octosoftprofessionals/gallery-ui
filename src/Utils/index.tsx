@@ -39,7 +39,7 @@ export const timerArray = (delta: number) => {
   return { Hours, Minutes, Seconds }
 }
 
-export const checkTypeVideo = (typeVide: String) => {
+export const isTypeVideo = (typeVide: String) => {
   switch (typeVide) {
     case 'video/mp4':
       return true
