@@ -5,6 +5,10 @@ import Layout from '../../../components/Layout/Layout'
 
 import { colors } from '../../../components/Styles/Colors'
 
+import iconEtherscan from '../../../assets/etherscan-logo-circle.png'
+import iconView from '../../../assets/view.png'
+import iconBlock from '../../../assets/block.png'
+
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
 const videoUrl = 'http://localhost:8000/float.mp4'
@@ -23,6 +27,13 @@ const endingInArt = [
   '2021/04/17 11:43:00 PM',
   '2021/08/18 01:13:30 PM',
   '2021/07/26 11:39:50 AM',
+]
+
+// ArtworkView params:
+const artworkLinks = [
+  {link:'https://etherscan.io/', text:'View on Etherscan', icon:iconEtherscan},
+  {link:'https://ipfs.io/', text:'View on IPFS', icon: iconView},
+  {link:'https://ipfs.io/', text:'View IPFS Metadata', icon: iconBlock},
 ]
 
 const randEndingInArt = () => {
@@ -48,6 +59,7 @@ const ShowArtwork = () => {
         price={value}
         money={valueMoney}
         endingIn={randEndingInArt()}
+        artworkLinks={artworkLinks}
       />
     </Layout>
   )
