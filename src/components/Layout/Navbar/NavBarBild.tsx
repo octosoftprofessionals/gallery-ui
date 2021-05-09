@@ -14,6 +14,7 @@ import {
   Toolbar,
   Typography,
   withWidth,
+  Hidden,
 } from '@material-ui/core'
 
 const { boxShadow1 } = boxShadow
@@ -28,13 +29,18 @@ const useStyles = makeStyles(Theme => ({
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
   },
-  button: { boxShadow: boxShadow1, padding: Theme.spacing(4, 9) },
+  button: {
+    boxShadow: boxShadow1,
+    padding: Theme.spacing(4, 9),
+    '@media (max-width: 755px)': { padding: Theme.spacing(2, 6) },
+  },
   buttonCreate: { background: backgroundGradient.backgroundGradient1 },
   buttonBox: {
     width: `${Theme.spacing(13)}%`,
     padding: Theme.spacing(2, 9),
     backgroundColor: Theme.palette.secondary.main,
     '&:hover': { backgroundColor: Theme.palette.secondary.main },
+    '@media (max-width: 755px)': { width: `${Theme.spacing(13)}vh` },
   },
   coins: { fontSize: Theme.typography.fontSize[3] },
   keyPublic: {
@@ -47,7 +53,6 @@ const useStyles = makeStyles(Theme => ({
     overflow: 'hidden',
     width: `${Theme.spacing(14)}%`,
   },
-  avatar: {},
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
@@ -60,19 +65,27 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
     <AppBar position="static" color="transparent" elevation={0}>
       <Toolbar className={classes.root}>
         <Grid container justify="space-between" alignItems="center">
-          <Grid item xs={1}>
+          <Grid item xs={3}>
             <Link to="/" className={classes.link}>
               <div className={classes.img} />
             </Link>
           </Grid>
+          <Hidden smUp>
+            <Typography variant="button">Bids</Typography>
+          </Hidden>
           <Grid
             item
-            xs={4}
+            xs={10}
+            sm={9}
+            md={5}
+            lg={4}
             container
             justify="space-around"
             alignItems="center"
           >
-            <Typography variant="button">Bids</Typography>
+            <Hidden xsDown>
+              <Typography variant="button">Bids</Typography>
+            </Hidden>
             <Button
               variant="contained"
               className={[classes.buttonCreate, classes.button]}
