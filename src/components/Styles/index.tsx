@@ -2,6 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { colors, backgroundGradient, boxShadow } from './Colors'
 
 const {
+  IslamicGreen,
   DimGray,
   Gray,
   Black,
@@ -19,6 +20,15 @@ export const Theme = createMuiTheme({
       paperWidthSm: {
         maxWidth: 400,
         borderRadius: 16,
+      },
+    },
+    MuiBadge: {
+      anchorOriginBottomLeftRectangle: {
+        backgroundColor: IslamicGreen,
+        border: `4px solid ${White}`,
+        transform: 'scale(.8) translate(-50%, 50%)',
+        left: 4,
+        bottom: 9,
       },
     },
     MuiTooltip: {
@@ -197,7 +207,6 @@ export const Theme = createMuiTheme({
       },
     },
   },
-
   shape: { borderRadius: [0, 10, 16, 50] },
   palette: {
     action: {
