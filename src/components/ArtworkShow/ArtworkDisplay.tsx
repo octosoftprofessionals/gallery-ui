@@ -38,7 +38,7 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.primary.dark,
     '&:hover': { backgroundColor: Theme.palette.primary.dark },
   },
-  buttons: { position: 'absolute', bottom: 0, right: 0, left: 0 },
+  buttons: { position: 'absolute', bottom: 0, right: 0, left: 0 , paddingBottom: Theme.spacing(9) },
 }))
 
 const ArtworkDisplay = ({ imgUrl, videoUrl, mimeType }) => {
