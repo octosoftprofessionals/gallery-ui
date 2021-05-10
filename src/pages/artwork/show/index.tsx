@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import ArtworkShow from '../../../components/ArtworkShow'
 import Layout from '../../../components/Layout/Layout'
@@ -26,6 +26,14 @@ const endingInArt = [
   '2021/07/26 11:39:50 AM',
 ]
 
+const linkShareTwitter = () => {
+  const SITE_URL = window.location.href
+  const searchParams = new URLSearchParams()
+  searchParams.set('url', SITE_URL)
+  searchParams.set('text', 'Art is lit! Check this out!')
+  return `https://twitter.com/share?${searchParams.toString()}`
+}
+
 const randEndingInArt = () => {
   const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
   return new Date(endingIn)
@@ -37,7 +45,7 @@ const ShowArtwork = () => {
   const artworkQuery = useQuery('artwork', () =>
     getArtwork('use_id_from_navigation')
   )
-
+  const [displayReportModal, setDisplayReportModal] = useState(false)
   return (
     <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
       <ArtworkShow
@@ -50,6 +58,8 @@ const ShowArtwork = () => {
         money={valueMoney}
         linkProfile={'/'}
         endingIn={randEndingInArt()}
+        linkTwitter={linkShareTwitter()}
+        setDisplayReportModal={setDisplayReportModal}
       />
     </Layout>
   )

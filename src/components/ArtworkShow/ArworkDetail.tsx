@@ -25,7 +25,7 @@ const useStyle = makeStyles(Theme => ({
   name: { margin: Theme.spacing(0, 0, 5) },
   title: { margin: 0 },
   creator: { fontSize: Theme.typography.fontSize[8] },
-  buttonsContainer:{position:'absolute', top: Theme.spacing(1),}
+  buttonsContainer: { position: 'absolute', top: Theme.spacing(1) },
 }))
 
 const ArworkDetail = ({
@@ -39,16 +39,27 @@ const ArworkDetail = ({
   endingIn,
   linkProfile,
   link,
+  linkTwitter,
+  setDisplayReportModal,
 }) => {
   const classes = useStyle()
   return (
     <Grid container justify="space-between" className={classes.root}>
-      <Grid container justify="space-between" direction="row" xs={11} className={classes.buttonsContainer}>
+      <Grid
+        container
+        justify="space-between"
+        direction="row"
+        xs={11}
+        className={classes.buttonsContainer}
+      >
         <Grid item xs={6} justify="flex-start">
           <CreatorButton imgUrl={imgUrl} name={name} link={linkProfile} />
         </Grid>
         <Grid item xs={6} justify="flex-end">
-          <ArtworkShare />
+          <ArtworkShare
+            linkTwitter={linkTwitter}
+            setDisplayReportModal={setDisplayReportModal}
+          />
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">

@@ -13,6 +13,8 @@ const ArtworkShow = ({
   money,
   endingIn,
   linkProfile,
+  linkTwitter,
+  setDisplayReportModal,
 }) => {
   return (
     <>
@@ -33,6 +35,8 @@ const ArtworkShow = ({
         money={money}
         linkProfile={linkProfile}
         endingIn={endingIn}
+        linkTwitter={linkTwitter}
+        setDisplayReportModal={setDisplayReportModal}
       />
     </>
   )
