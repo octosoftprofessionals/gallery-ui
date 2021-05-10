@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { ArrowDownward } from '@material-ui/icons'
 import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
+import ArtworkView from './ArtworkLinks'
+
 
 import CreatorButton from '../CreatorButton'
 
@@ -38,6 +40,7 @@ const ArworkDetail = ({
   endingIn,
   linkProfile,
   link,
+  artworkLinks
 }) => {
   const classes = useStyle()
   return (
@@ -79,6 +82,7 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
+        <ArtworkView artworkLinks={artworkLinks} />
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction

@@ -12,6 +12,7 @@ const ArtworkShow = ({
   price,
   money,
   endingIn,
+  artworkLinks,
   linkProfile,
 }) => {
   return (
@@ -33,6 +34,7 @@ const ArtworkShow = ({
         money={money}
         linkProfile={linkProfile}
         endingIn={endingIn}
+        artworkLinks={artworkLinks}
       />
     </>
   )
