@@ -7,28 +7,51 @@ import Footer from './Footer'
 import { Theme } from '../Styles'
 import './Layout.css'
 
+const LocaleContext = React.createContext()
+
 const LayoutContainer = styled('div')({
   padding: ({ padding }) => (padding ? padding : Theme.spacing(0, 8)),
   backgroundColor: ({ backgroundColor }) =>
     backgroundColor ? backgroundColor : Theme.palette.secondary.main,
 })
 
+const BackgroundNavBar = styled('div')({
+  backgroundImage: ({ backgroundImage }) =>
+    backgroundImage ? `url(${backgroundImage})` : 'transparent',
+  height: ({ height }) => (height ? `${Theme.spacing(13)}vh` : ''),
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  zIndex: 9999,
+})
+
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
   height: `${Theme.spacing(15)}%`,
-  marginTop: Theme.spacing(14),
+  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(16)),
   marginBottom: Theme.spacing(7),
 })
 
-const Layout = ({ children, padding, backgroundColor }) => {
+const Layout = ({
+  children,
+  padding,
+  backgroundColor,
+  marginTop,
+  backgroundImage,
+  height,
+}) => {
   return (
-    <ThemeProvider theme={Theme}>
-      <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
-        <Navbar />
-        <StyledMain>{children}</StyledMain>
-      </LayoutContainer>
-      <Footer />
-    </ThemeProvider>
+    <LocaleContext.Provider value={location}>
+      <ThemeProvider theme={Theme}>
+        <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
+          <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
+            <Navbar pathname={location.pathname} />
+          </BackgroundNavBar>
+          <StyledMain marginTop={marginTop}>{children}</StyledMain>
+        </LayoutContainer>
+        <Footer />
+      </ThemeProvider>
+    </LocaleContext.Provider>
   )
 }
 

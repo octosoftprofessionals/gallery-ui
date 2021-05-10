@@ -38,6 +38,9 @@ const useStyle = makeStyles(Theme => ({
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',
   },
+  nameArtis: {
+    fontSize: Theme.typography.fontSize[5],
+  },
 }))
 
 const CreatorsItem = ({
@@ -64,11 +67,15 @@ const CreatorsItem = ({
           </div>
         </div>
         <Grid container justify="flex-start" className={classes.infoCard}>
-          <Typography variant="h5" color="primary">
-            {name}
-          </Typography>
-
-          <Typography variant="subtitle2">{artis}</Typography>
+          <Grid item xs={12}>
+            <Typography variant="h5" color="primary">
+              {name}
+            </Typography>
+          </Grid>
+          <Typography
+            variant="subtitle2"
+            className={classes.nameArtis}
+          >{`@${artis}`}</Typography>
 
           <div className={classes.conatainerBio}>
             <div className={classes.descriptionBio}>

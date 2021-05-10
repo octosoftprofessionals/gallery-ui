@@ -8,8 +8,11 @@ import CardAuction from './CardAuction'
 import ArtworkView from './ArtworkLinks'
 
 
+import CreatorButton from '../CreatorButton'
+
 const useStyle = makeStyles(Theme => ({
   root: {
+    position: 'relative',
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(9),
   },
@@ -27,18 +30,22 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ArworkDetail = ({
+  imgUrl,
+  name,
   titleArt,
   description,
   namber,
   price,
   money,
   endingIn,
+  linkProfile,
   link,
   artworkLinks
 }) => {
   const classes = useStyle()
   return (
     <Grid container justify="space-between" className={classes.root}>
+      <CreatorButton imgUrl={imgUrl} name={name} link={linkProfile} />
       <Grid item xs={12} sm={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>

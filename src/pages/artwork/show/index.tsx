@@ -2,6 +2,8 @@ import React from 'react'
 
 import ArtworkShow from '../../../components/ArtworkShow'
 import Layout from '../../../components/Layout/Layout'
+import { useQuery } from 'react-query'
+import { getArtwork } from '../../../services/autionsService'
 
 import { colors } from '../../../components/Styles/Colors'
 
@@ -11,9 +13,8 @@ import iconBlock from '../../../assets/block.png'
 
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
-const videoUrl = 'http://localhost:8000/float.mp4'
 const title = 'unnamed'
-const artist = '@jandali'
+const artist = 'jandali'
 const descriptionParagraphs = [
   'This is the real deal.',
   'Created by fire and light, it showcases the power of all unknown mysteries witheld.',
@@ -41,23 +42,24 @@ const randEndingInArt = () => {
   return new Date(endingIn)
 }
 
-// params: { imgUrl, videoUrl, title, artist, descriptionParagraphs, value }
+//const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
+
 const ShowArtwork = () => {
+  const artworkQuery = useQuery('artwork', () =>
+    getArtwork('use_id_from_navigation')
+  )
+
   return (
-    <Layout
-      backgroundColor={colors.WhiteSmoke}
-      padding="0"
-      marginBottom="0"
-      marginTop="0"
-    >
+    <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
       <ArtworkShow
         imgUrl={imgUrl}
-        videoUrl={videoUrl}
+        name={artist}
         titleArt={title}
         description={descriptionParagraphs}
         namber={'1'}
         price={value}
         money={valueMoney}
+        linkProfile={'/'}
         endingIn={randEndingInArt()}
         artworkLinks={artworkLinks}
       />
