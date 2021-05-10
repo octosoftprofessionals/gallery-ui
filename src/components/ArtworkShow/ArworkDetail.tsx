@@ -43,6 +43,8 @@ const ArworkDetail = ({
   link,
   artworkLinks,
   descriptionCreator,
+  linkTwitter,
+  setDisplayReportModal,
 }) => {
   const classes = useStyle()
   return (
@@ -62,7 +64,10 @@ const ArworkDetail = ({
           />
         </Grid>
         <Grid item xs={6} justify="flex-end">
-          <ArtworkShare />
+          <ArtworkShare
+            linkTwitter={linkTwitter}
+            setDisplayReportModal={setDisplayReportModal}
+          />
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
