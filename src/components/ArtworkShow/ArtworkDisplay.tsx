@@ -41,7 +41,7 @@ const useStyle = makeStyles(Theme => ({
   buttons: { position: 'absolute', bottom: 0, right: 0, left: 0 },
 }))
 
-const ArtworkDisplay = ({ imgUrl, videoUrl, mimeType }) => {
+const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [volume, setVolume] = useState<boolean>(true)
   const [fullscreen, setFullscreen] = useState<boolean>(false)
@@ -77,21 +77,16 @@ const ArtworkDisplay = ({ imgUrl, videoUrl, mimeType }) => {
       >
         <Grid container justify="center" alignItems="center">
           <video
-            poster={imgUrl}
-            src={videoUrl}
+            poster={assetIPFSPath}
+            src={assetIPFSPath}
             autoPlay={true}
             loop={true}
             onClick={() => toggleFullScreen()}
             className={fullscreen ? classes.fullScreenVideo : classes.video}
             ref={videoRef}
           >
-            <source
-              src={
-                'https://fnd.fleek.co/fnd-prod/QmeKXDYWUvL42en8vH8rz9UYyvLDY71N1ZbRYhK9MHgUDA/nft.mp4'
-              }
-              type={mimeType}
-            />
-            <img src={imgUrl} />
+            <source src={assetIPFSPath} type={mimeType} />
+            <img src={assetIPFSPath} />
           </video>
         </Grid>
         <Grid item container justify="flex-end" className={classes.buttons}>

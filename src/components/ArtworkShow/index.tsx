@@ -3,39 +3,36 @@ import React from 'react'
 import ArtworkDisplay from './ArtworkDisplay'
 import ArworkDetail from './ArworkDetail'
 
-const ArtworkShow = ({
-  imgUrl,
-  name,
-  titleArt,
-  description,
-  namber,
-  price,
-  money,
-  endingIn,
-  artworkLinks,
-  linkProfile,
-}) => {
+const ArtworkShow = ({ artwork }) => {
+  const {
+    assetIPFSPath,
+    mimeType,
+    description,
+    price,
+    duration,
+    creator,
+    name,
+    id,
+  } = artwork ? artwork : ''
+
   return (
     <>
-      <ArtworkDisplay
-        imgUrl={imgUrl}
-        videoUrl={
-          'https://fnd.fleek.co/fnd-prod/QmeKXDYWUvL42en8vH8rz9UYyvLDY71N1ZbRYhK9MHgUDA/nft.mp4'
-        }
-        mimeType={'video/mp4'}
-      />
-      <ArworkDetail
-        imgUrl={imgUrl}
-        name={name}
-        titleArt={titleArt}
-        description={description}
-        namber={namber}
-        price={price}
-        money={money}
-        linkProfile={linkProfile}
-        endingIn={endingIn}
-        artworkLinks={artworkLinks}
-      />
+      <ArtworkDisplay assetIPFSPath={assetIPFSPath} mimeType={mimeType} />
+      {artwork ? (
+        <ArworkDetail
+          profileImageUrl={creator.profileImageUrl}
+          name={creator.name}
+          titleArt={name}
+          description={description}
+          namber={'1'}
+          price={price}
+          money={'23,423.99'}
+          linkProfile={`/creator/?id=${id}`}
+          endingIn={duration}
+        />
+      ) : (
+        ''
+      )}
     </>
   )
 }

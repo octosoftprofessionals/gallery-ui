@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 
@@ -72,6 +72,7 @@ const HeroAuction = ({ auction }) => {
                 imgUrl={artwork.creator.profileImageUrl}
                 name={artwork.creator.username}
                 top="-70px"
+                link={`/creator/?id=${artwork.id}`}
               />
 
               <HeroAuctionItem
@@ -79,6 +80,7 @@ const HeroAuction = ({ auction }) => {
                 money={'$23,023.98'}
                 price={artwork.price}
                 title={artwork.name}
+                linkButtonArtWork={`/artwork/?id=${artwork.id}`}
               />
             </Grid>
           </Grid>
