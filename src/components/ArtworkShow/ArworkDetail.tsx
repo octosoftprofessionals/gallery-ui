@@ -7,7 +7,7 @@ import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
 import ArtworkView from './ArtworkLinks'
 import CreatorSection from './ArtworkCreartor'
-
+import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
 
 const useStyle = makeStyles(Theme => ({
@@ -27,6 +27,7 @@ const useStyle = makeStyles(Theme => ({
   name: { margin: Theme.spacing(0, 0, 5) },
   title: { margin: 0 },
   creator: { fontSize: Theme.typography.fontSize[8] },
+  buttonsContainer: { position: 'absolute', top: Theme.spacing(1) },
 }))
 
 const ArworkDetail = ({
@@ -46,7 +47,24 @@ const ArworkDetail = ({
   const classes = useStyle()
   return (
     <Grid container justify="space-between" className={classes.root}>
-      <CreatorButton imgUrl={profileImageUrl} name={name} link={linkProfile} />
+      <Grid
+        container
+        justify="space-between"
+        direction="row"
+        xs={11}
+        className={classes.buttonsContainer}
+      >
+        <Grid item xs={6} justify="flex-start">
+          <CreatorButton
+            imgUrl={profileImageUrl}
+            name={name}
+            link={linkProfile}
+          />
+        </Grid>
+        <Grid item xs={6} justify="flex-end">
+          <ArtworkShare />
+        </Grid>
+      </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
