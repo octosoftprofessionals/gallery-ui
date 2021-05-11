@@ -74,7 +74,9 @@ const useStyle = makeStyles(Theme => ({
     marginLeft: Theme.spacing(3),
     fontSize: Theme.typography.fontSize[3],
   },
-  info: {},
+  info: {
+    '@media (max-width: 545px)': { justifyContenet: 'center' },
+  },
 }))
 
 const itemAvatar = [
@@ -122,10 +124,10 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
       <Grid
         container
         justify="space-around"
-        direction="row"
+        wrap="wrap"
         className={classes.info}
       >
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={11} md={4}>
           <InfoCreator
             name={name}
             username={username}
@@ -139,7 +141,7 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
             publicKey={publicKey}
           />
         </Grid>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={11} md={7}>
           <GridCreator />
         </Grid>
       </Grid>
