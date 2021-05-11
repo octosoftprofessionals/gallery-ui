@@ -78,6 +78,19 @@ export async function getArtwork(id: String) {
     setTimeout(function () {
       resolve({
         artwork:
+          auctionsMockup[
+            auctionsMockup.findIndex(auctions => auctions.id === id)
+          ],
+      })
+    }, 250)
+  })
+}
+
+export async function getHeroArtwork(id: String) {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        artwork:
           auctionsMockup[Math.floor(Math.random() * auctionsMockup.length)],
       })
     }, 250)

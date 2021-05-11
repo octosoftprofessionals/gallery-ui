@@ -1,11 +1,11 @@
 import React from 'react'
 
-import ArtworkShow from '../../../components/ArtworkShow'
-import Layout from '../../../components/Layout/Layout'
+import ArtworkShow from '../../components/ArtworkShow'
+import Layout from '../../components/Layout/Layout'
 import { useQuery } from 'react-query'
-import { getArtwork } from '../../../services/autionsService'
+import { getArtwork } from '../../services/autionsService'
 
-import { colors } from '../../../components/Styles/Colors'
+import { colors } from '../../components/Styles/Colors'
 
 import iconEtherscan from '../../../assets/etherscan-logo-circle.png'
 import iconView from '../../../assets/view.png'
@@ -32,9 +32,13 @@ const endingInArt = [
 
 // ArtworkView params:
 const artworkLinks = [
-  {link:'https://etherscan.io/', text:'View on Etherscan', icon:iconEtherscan},
-  {link:'https://ipfs.io/', text:'View on IPFS', icon: iconView},
-  {link:'https://ipfs.io/', text:'View IPFS Metadata', icon: iconBlock},
+  {
+    link: 'https://etherscan.io/',
+    text: 'View on Etherscan',
+    icon: iconEtherscan,
+  },
+  { link: 'https://ipfs.io/', text: 'View on IPFS', icon: iconView },
+  { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: iconBlock },
 ]
 
 const randEndingInArt = () => {
@@ -45,24 +49,14 @@ const randEndingInArt = () => {
 //const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 const ShowArtwork = () => {
-  const artworkQuery = useQuery('artwork', () =>
-    getArtwork('use_id_from_navigation')
+  const IdArtwork = new URLSearchParams(location.search)
+  const { data: artworkQuery } = useQuery('artworkQuery', () =>
+    getArtwork(IdArtwork.values().next().value)
   )
 
   return (
     <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
-      <ArtworkShow
-        imgUrl={imgUrl}
-        name={artist}
-        titleArt={title}
-        description={descriptionParagraphs}
-        namber={'1'}
-        price={value}
-        money={valueMoney}
-        linkProfile={'/'}
-        endingIn={randEndingInArt()}
-        artworkLinks={artworkLinks}
-      />
+      {artworkQuery ? <ArtworkShow artwork={artworkQuery.artwork} /> : ''}
     </Layout>
   )
 }
