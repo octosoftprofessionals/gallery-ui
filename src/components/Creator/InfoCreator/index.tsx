@@ -13,6 +13,7 @@ import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow } from '../../Styles/Colors'
 import Links from './Links'
+import ButtonsSocialMedia from './ButtonsSocialMedia'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -157,7 +158,14 @@ const InfoCreator = ({
           View all
         </Typography>
       </div>
-      <div>keyboard from social media</div>
+      <Grid item xs={12} sm={7}>
+        <ButtonsSocialMedia
+          links={links}
+          verified={true}
+          imgUrl={followedes[3]}
+          invited="Diolink"
+        />
+      </Grid>
       <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Bio

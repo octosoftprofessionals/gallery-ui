@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, IconButton, Typography, Button } from '@material-ui/core'
+import { Grid, Typography, Button } from '@material-ui/core'
 
 import {
   Instagram,

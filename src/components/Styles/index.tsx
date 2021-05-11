@@ -29,6 +29,16 @@ export const Theme = createMuiTheme({
       textPrimary: {
         '&:hover': { transform: 'translateY(-2px)', backgroundColor: White },
       },
+      textSecondary: {
+        borderRadius: 50,
+        marginBottom: 12,
+        boxShadow: boxShadow.boxShadow1,
+        '&:hover': {
+          boxShadow: boxShadow.boxShadow4,
+          transform: 'translateY(-2px)',
+          backgroundColor: White,
+        },
+      },
       endIcon: {
         color: VeryLightGrey,
         paddingRight: 2,
@@ -236,6 +246,7 @@ export const Theme = createMuiTheme({
         'Courier',
         'monospace',
       ].join(','),
+      'Bai Jamjuree',
     ],
   },
 })
