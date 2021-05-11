@@ -14,6 +14,7 @@ import { MoreHoriz, ArrowUpward, Maximize } from '@material-ui/icons'
 
 import GridCreator from './GridCreator'
 import InfoCreator from './InfoCreator'
+import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
@@ -38,12 +39,7 @@ const useStyle = makeStyles(Theme => ({
       height: `${Theme.spacing(5)}vh`,
     },
   },
-  containerButtons: {
-    position: 'absolute',
-    top: `-${Theme.spacing(1)}vw`,
-    '@media (max-width: 545px)': { top: `-${Theme.typography.fontSize[2]}vw` },
-    right: Theme.spacing(2),
-  },
+  containerButtons: {},
   boxIconButton: {
     backgroundColor: Theme.palette.secondary.main,
     borderRadius: `${Theme.shape.borderRadius[3]}%`,
@@ -94,7 +90,7 @@ const itemAvatar = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
 ]
 
-const Creator = ({ creatorQuery }) => {
+const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
   const classes = useStyle()
   const {
     profileImageUrl,
@@ -115,54 +111,13 @@ const Creator = ({ creatorQuery }) => {
         <Grid item className={classes.containerAvatar}>
           <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
-        <Grid
-          item
-          xs={4}
-          sm={3}
-          md={2}
-          container
-          justify="space-around"
-          alignItems="center"
-          className={classes.containerButtons}
-        >
-          <Grid item>
-            <div className={classes.boxIconButton}>
-              <IconButton className={classes.buttonReport}>
-                <MoreHoriz className={classes.iconMore} />
-              </IconButton>
-            </div>
-          </Grid>
-          <Button variant="contained" className={classes.buttonShare}>
-            <Grid
-              container
-              alignItems="center"
-              justify="center"
-              direction="row"
-            >
-              <Grid
-                sm={3}
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-              >
-                <ArrowUpward className={classes.icon} />
-                <Maximize className={classes.icon} />
-              </Grid>
-              <Hidden smDown>
-                <Grid item>
-                  <Typography
-                    variant="caption"
-                    color="primary"
-                    className={classes.textShare}
-                  >
-                    Share
-                  </Typography>
-                </Grid>
-              </Hidden>
-            </Grid>
-          </Button>
-        </Grid>
+
+        <div>
+          <CreatorkShare
+            linkTwitter={linkTwitter}
+            setDisplayReportModal={setDisplayReportModal}
+          />
+        </div>
       </Grid>
       <Grid
         container
