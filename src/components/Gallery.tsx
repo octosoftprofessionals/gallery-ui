@@ -73,7 +73,6 @@ const randFollowersArt = () => {
 import GalleryItem from './GalleryItem'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
   containerItem: { padding: Theme.spacing(4) },
 }))
 
@@ -96,7 +95,7 @@ const Gallery = ({ artworksQuery, itemType }) => {
                 key={index}
                 itemType={itemType}
                 artwork={artwork}
-                link={'/artwork/show'}
+                link={`/artwork?id=${artwork.id}`}
               />
             </Grid>
           ))

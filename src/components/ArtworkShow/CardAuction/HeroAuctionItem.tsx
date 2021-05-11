@@ -26,6 +26,7 @@ const useStyle = makeStyles(Theme => ({
   button: { borderRadius: Theme.shape.borderRadius[2] },
   textButton: { fontSize: Theme.typography.fontSize[3] },
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
+  link: { textDecoration: 'none' },
 }))
 
 const HeroAuctionItem = ({
@@ -184,7 +185,7 @@ const HeroAuctionItem = ({
         spacing={4}
       >
         <Grid item xs={12} md={6}>
-          <Link to={linkButtonBid}>
+          <Link to={linkButtonBid} className={classes.link}>
             <Button variant="contained" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
                 Place a bid
@@ -193,7 +194,7 @@ const HeroAuctionItem = ({
           </Link>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Link to={linkButtonArtWork}>
+          <Link to={linkButtonArtWork} className={classes.link}>
             <Button variant="outlined" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
                 View artwork

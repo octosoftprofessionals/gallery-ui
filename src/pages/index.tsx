@@ -6,7 +6,7 @@ import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 
-import { getArtworkAuctions, getArtwork } from '../services/autionsService'
+import { getArtworkAuctions, getHeroArtwork } from '../services/autionsService'
 
 const Home = () => {
   const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
@@ -25,7 +25,7 @@ const Home = () => {
   const {
     data: AuctionArtworkQuery,
     status: statusAuctionArtworkQuery,
-  } = useQuery('AuctionArtworkQuery', getArtwork)
+  } = useQuery('AuctionArtworkQuery', getHeroArtwork)
 
   return (
     <Layout>

@@ -30,7 +30,7 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ArworkDetail = ({
-  imgUrl,
+  profileImageUrl,
   name,
   titleArt,
   description,
@@ -46,7 +46,7 @@ const ArworkDetail = ({
   const classes = useStyle()
   return (
     <Grid container justify="space-between" className={classes.root}>
-      <CreatorButton imgUrl={imgUrl} name={name} link={linkProfile} />
+      <CreatorButton imgUrl={profileImageUrl} name={name} link={linkProfile} />
       <Grid item xs={12} sm={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
@@ -62,16 +62,13 @@ const ArworkDetail = ({
               Description
             </Typography>
           </Grid>
-          {description.map((paragraph, index) => (
-            <Typography
-              variant="body2"
-              color="initial"
-              key={index}
-              className={classes.desciptionText}
-            >
-              {paragraph}
-            </Typography>
-          ))}
+          <Typography
+            variant="body2"
+            color="initial"
+            className={classes.desciptionText}
+          >
+            {description}
+          </Typography>
         </Grid>
         <Typography
           variant="subtitle1"
@@ -99,7 +96,7 @@ const ArworkDetail = ({
       </Grid>
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
       <CreatorSection
-        imgUrl={imgUrl}
+        imgUrl={profileImageUrl}
         name={name}
         descriptionCreator={descriptionCreator}
       />

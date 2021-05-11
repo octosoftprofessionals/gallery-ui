@@ -1,15 +1,15 @@
 import React from 'react'
 
-import ArtworkShow from '../../../components/ArtworkShow'
-import Layout from '../../../components/Layout/Layout'
+import ArtworkShow from '../../components/ArtworkShow'
+import Layout from '../../components/Layout/Layout'
 import { useQuery } from 'react-query'
-import { getArtwork } from '../../../services/autionsService'
+import { getArtwork } from '../../services/autionsService'
 
-import { colors } from '../../../components/Styles/Colors'
+import { colors } from '../../components/Styles/Colors'
 
-import iconEtherscan from '../../../assets/etherscan-logo-circle.png'
-import iconView from '../../../assets/view.png'
-import iconBlock from '../../../assets/block.png'
+import iconEtherscan from '../../assets/etherscan-logo-circle.png'
+import iconView from '../../assets/view.png'
+import iconBlock from '../../assets/block.png'
 
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
@@ -53,25 +53,27 @@ const randEndingInArt = () => {
 //const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 const ShowArtwork = () => {
-  const artworkQuery = useQuery('artwork', () =>
-    getArtwork('use_id_from_navigation')
+  const IdArtwork = new URLSearchParams(location.search)
+  const { data: artworkQuery } = useQuery('artworkQuery', () =>
+    getArtwork(IdArtwork.values().next().value)
   )
 
   return (
-    <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
-      <ArtworkShow
-        imgUrl={imgUrl}
-        name={artist}
-        titleArt={title}
-        description={descriptionParagraphs}
-        namber={'1'}
-        price={value}
-        money={valueMoney}
-        linkProfile={'/'}
-        endingIn={randEndingInArt()}
-        artworkLinks={artworkLinks}
-        descriptionCreator={descriptionCreator}
-      />
+    <Layout
+      backgroundColor={colors.WhiteSmoke}
+      padding="0"
+      marginBottom="0"
+      marginTop="0"
+    >
+      {artworkQuery ? (
+        <ArtworkShow
+          artwork={artworkQuery.artwork}
+          artworkLinks={artworkLinks}
+          descriptionCreator={descriptionCreator}
+        />
+      ) : (
+        ''
+      )}
     </Layout>
   )
 }
