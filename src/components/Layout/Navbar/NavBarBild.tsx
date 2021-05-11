@@ -20,15 +20,6 @@ import {
 const { boxShadow1 } = boxShadow
 
 const useStyles = makeStyles(Theme => ({
-  root: { padding: Theme.spacing(11, 0, 0) },
-  img: {
-    background: `url(${logoSrc})`,
-    paddingBottom: Theme.spacing(14),
-    '@media (max-width: 755px)': { paddingBottom: Theme.spacing(13) },
-    backgroundPosition: 'center',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-  },
   button: {
     boxShadow: boxShadow1,
     padding: Theme.spacing(4, 9),
@@ -59,83 +50,59 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
+const index = ({ cois, publicKey, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc })
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
-      <Toolbar className={classes.root}>
-        <Grid container justify="space-between" alignItems="center">
-          <Grid item xs={3}>
-            <Link to="/" className={classes.link}>
-              <div className={classes.img} />
-            </Link>
-          </Grid>
-          <Hidden smUp>
-            <Typography variant="button">Bids</Typography>
-          </Hidden>
-          <Grid
-            item
-            xs={10}
-            sm={9}
-            md={5}
-            lg={4}
-            container
-            justify="space-around"
-            alignItems="center"
+    <Grid
+      item
+      xs={10}
+      sm={9}
+      md={5}
+      lg={4}
+      container
+      justify="space-around"
+      alignItems="center"
+    >
+      <Hidden xsDown>
+        <Typography variant="button">Bids</Typography>
+      </Hidden>
+      <Button
+        variant="contained"
+        className={[classes.buttonCreate, classes.button]}
+      >
+        <Typography variant="button">Create</Typography>
+      </Button>
+      <Button
+        variant="contained"
+        className={[classes.button, classes.buttonBox]}
+      >
+        <Grid item xs={10} container direction="column" alignItems="center">
+          <Typography
+            variant="button"
+            color="primary"
+            className={classes.coins}
           >
-            <Hidden xsDown>
-              <Typography variant="button">Bids</Typography>
-            </Hidden>
-            <Button
-              variant="contained"
-              className={[classes.buttonCreate, classes.button]}
-            >
-              <Typography variant="button">Create</Typography>
-            </Button>
-            <Button
-              variant="contained"
-              className={[classes.button, classes.buttonBox]}
-            >
-              <Grid
-                item
-                xs={10}
-                container
-                direction="column"
-                alignItems="center"
-              >
-                <Typography
-                  variant="button"
-                  color="primary"
-                  className={classes.coins}
-                >
-                  {`${cois} ETH`}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="primary"
-                  className={classes.keyPublic}
-                >
-                  {publicKey}
-                </Typography>
-              </Grid>
-              <Badge
-                badgeContent=""
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-              >
-                <Avatar
-                  alt={name}
-                  src={profileImageUrl}
-                  className={classes.avatar}
-                />
-              </Badge>
-            </Button>
-          </Grid>
+            {`${cois} ETH`}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="primary"
+            className={classes.keyPublic}
+          >
+            {publicKey}
+          </Typography>
         </Grid>
-      </Toolbar>
-    </AppBar>
+        <Badge
+          badgeContent=""
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+        >
+          <Avatar alt={name} src={profileImageUrl} className={classes.avatar} />
+        </Badge>
+      </Button>
+    </Grid>
   )
 }
 
