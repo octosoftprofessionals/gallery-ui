@@ -4,21 +4,9 @@ import ArtworkDisplay from './ArtworkDisplay'
 import ArworkDetail from './ArworkDetail'
 
 const ArtworkShow = ({
-<<<<<<< HEAD
-  imgUrl,
-  name,
-  titleArt,
-  description,
-  namber,
-  price,
-  money,
-  endingIn,
-  linkProfile,
-=======
   artwork,
   artworkLinks,
   descriptionCreator,
->>>>>>> a7f302e313b0f83cac450d223c58a2a225b1ff1e
   linkTwitter,
   setDisplayReportModal,
 }) => {
@@ -35,28 +23,6 @@ const ArtworkShow = ({
 
   return (
     <>
-<<<<<<< HEAD
-      <ArtworkDisplay
-        imgUrl={imgUrl}
-        videoUrl={
-          'https://fnd.fleek.co/fnd-prod/QmeKXDYWUvL42en8vH8rz9UYyvLDY71N1ZbRYhK9MHgUDA/nft.mp4'
-        }
-        mimeType={'video/mp4'}
-      />
-      <ArworkDetail
-        imgUrl={imgUrl}
-        name={name}
-        titleArt={titleArt}
-        description={description}
-        namber={namber}
-        price={price}
-        money={money}
-        linkProfile={linkProfile}
-        endingIn={endingIn}
-        linkTwitter={linkTwitter}
-        setDisplayReportModal={setDisplayReportModal}
-      />
-=======
       <ArtworkDisplay assetIPFSPath={assetIPFSPath} mimeType={mimeType} />
       {artwork ? (
         <ArworkDetail
@@ -77,7 +43,6 @@ const ArtworkShow = ({
       ) : (
         ''
       )}
->>>>>>> a7f302e313b0f83cac450d223c58a2a225b1ff1e
     </>
   )
 }
