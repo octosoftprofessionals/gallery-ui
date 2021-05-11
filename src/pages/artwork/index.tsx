@@ -34,13 +34,6 @@ const linkShareTwitter = () => {
 const descriptionCreator =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 
-const randEndingInArt = () => {
-  const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
-  return new Date(endingIn)
-}
-
-//const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
-
 const ShowArtwork = () => {
   const IdArtwork = new URLSearchParams(location.search)
   const { data: artworkQuery } = useQuery('artworkQuery', () =>
