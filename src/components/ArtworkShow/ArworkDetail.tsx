@@ -6,7 +6,7 @@ import { ArrowDownward } from '@material-ui/icons'
 import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
 import ArtworkView from './ArtworkLinks'
-
+import CreatorSection from './ArtworkCreartor'
 
 import CreatorButton from '../CreatorButton'
 
@@ -40,7 +40,8 @@ const ArworkDetail = ({
   endingIn,
   linkProfile,
   link,
-  artworkLinks
+  artworkLinks,
+  descriptionCreator,
 }) => {
   const classes = useStyle()
   return (
@@ -94,6 +95,11 @@ const ArworkDetail = ({
         </Typography>
       </Grid>
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
+      <CreatorSection
+        imgUrl={profileImageUrl}
+        name={name}
+        descriptionCreator={descriptionCreator}
+      />
     </Grid>
   )
 }

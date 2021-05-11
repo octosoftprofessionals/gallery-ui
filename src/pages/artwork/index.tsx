@@ -41,6 +41,10 @@ const artworkLinks = [
   { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: iconBlock },
 ]
 
+// ArtworkCreator Param:
+const descriptionCreator =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+
 const randEndingInArt = () => {
   const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
   return new Date(endingIn)
@@ -65,6 +69,7 @@ const ShowArtwork = () => {
         <ArtworkShow
           artwork={artworkQuery.artwork}
           artworkLinks={artworkLinks}
+          descriptionCreator={descriptionCreator}
         />
       ) : (
         ''
