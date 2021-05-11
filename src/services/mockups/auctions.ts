@@ -246,7 +246,7 @@ function fillAuctions(size): ArtworksProps[] {
   const auctions: ArtworksProps[] = []
   for (let i = 0; i < size; i++) {
     auctions.push({
-      id: randIDs(),
+      id: `${i}`,
       name: randArtworkTitle(),
       description: randBioArt(),
       assetIPFSPath: randAsset(),
@@ -304,4 +304,5 @@ function fillAuctions(size): ArtworksProps[] {
   return auctions
 }
 
-export default fillAuctions(60)
+const allAuctions = fillAuctions(60)
+export default allAuctions
