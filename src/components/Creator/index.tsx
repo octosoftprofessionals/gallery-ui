@@ -96,7 +96,6 @@ const itemAvatar = [
 
 const Creator = ({ creatorQuery }) => {
   const classes = useStyle()
-  console.log('creatorQuery :>> ', creatorQuery)
   const {
     profileImageUrl,
     name,

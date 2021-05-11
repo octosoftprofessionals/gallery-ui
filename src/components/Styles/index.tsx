@@ -111,6 +111,7 @@ export const Theme = createMuiTheme({
           '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
       },
       subtitle2: {
+        width: 'fit-content',
         boxSizing: 'border-box',
         WebkitTextFillColor: 'transparent',
         background: backgroundGradient.backgroundGradient1,
