@@ -52,7 +52,7 @@ const useStyle = makeStyles(Theme => ({
       boxShadow: boxShadow.boxShadow1,
     },
   },
-  userName: { fontSize: Theme.typography.fontSize[6] },
+  userName: { fontSize: Theme.typography.fontSize[6], width: 'fit-content' },
   textFollow: {
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[4],

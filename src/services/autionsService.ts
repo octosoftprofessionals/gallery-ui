@@ -102,8 +102,9 @@ export async function getCreator(id: String) {
     setTimeout(function () {
       resolve({
         creator:
-          auctionsMockup[Math.floor(Math.random() * auctionsMockup.length)]
-            .creator,
+          auctionsMockup[
+            auctionsMockup.findIndex(auctions => auctions.id === id)
+          ].creator,
       })
     }, 250)
   })
