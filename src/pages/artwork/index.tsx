@@ -7,9 +7,9 @@ import { getArtwork } from '../../services/autionsService'
 
 import { colors } from '../../components/Styles/Colors'
 
-import iconEtherscan from '../../../assets/etherscan-logo-circle.png'
-import iconView from '../../../assets/view.png'
-import iconBlock from '../../../assets/block.png'
+import iconEtherscan from '../../assets/etherscan-logo-circle.png'
+import iconView from '../../assets/view.png'
+import iconBlock from '../../assets/block.png'
 
 const imgUrl =
   'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
@@ -55,7 +55,12 @@ const ShowArtwork = () => {
   )
 
   return (
-    <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
+    <Layout
+      backgroundColor={colors.WhiteSmoke}
+      padding="0"
+      marginBottom="0"
+      marginTop="0"
+    >
       {artworkQuery ? (
         <ArtworkShow
           artwork={artworkQuery.artwork}
