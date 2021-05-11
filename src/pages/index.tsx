@@ -4,7 +4,7 @@ import { useQuery, useInfiniteQuery } from 'react-query'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
-import Layout from '../components/Layout/Layout'
+import Layout from '../components/Layout'
 import ContactUs from '../components/ContactUs'
 
 import {
