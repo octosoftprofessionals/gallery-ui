@@ -9,6 +9,7 @@ const ArtworkShow = ({
   descriptionCreator,
   linkTwitter,
   setDisplayReportModal,
+  historyInfo,
 }) => {
   const {
     assetIPFSPath,
@@ -39,6 +40,7 @@ const ArtworkShow = ({
           descriptionCreator={descriptionCreator}
           linkTwitter={linkTwitter}
           setDisplayReportModal={setDisplayReportModal}
+          historyInfo={historyInfo}
         />
       ) : (
         ''

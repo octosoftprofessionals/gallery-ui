@@ -34,6 +34,38 @@ const linkShareTwitter = () => {
 const descriptionCreator =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 
+const historyInfo = [
+  {
+    action: 'Bid placed',
+    date: 'May 10, 2021 at 1:50pm',
+    name: 'name',
+    imgUrl: imgUrl,
+    price: '3.025',
+    money: '24.005',
+    link: 'https://etherscan.io/',
+  },
+  {
+    action: 'Listed',
+    date: 'May 10, 2021 at 1:50pm',
+    name: 'name',
+    imgUrl: imgUrl,
+    price: '3.025',
+    money: '24.005',
+    link: 'https://etherscan.io/',
+  },
+  {
+    action: 'Minted',
+    date: 'May 10, 2021 at 1:50pm',
+    name: 'name',
+    imgUrl: imgUrl,
+    price: '',
+    money: '',
+    link: 'https://etherscan.io/',
+  },
+]
+
+//const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
+
 const ShowArtwork = () => {
   const IdArtwork = new URLSearchParams(location.search)
   const { data: artworkQuery } = useQuery('artworkQuery', () =>
@@ -56,6 +88,7 @@ const ShowArtwork = () => {
           descriptionCreator={descriptionCreator}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}
+          historyInfo={historyInfo}
         />
       ) : (
         ''
