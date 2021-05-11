@@ -12,6 +12,7 @@ import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow } from '../../Styles/Colors'
+import Links from './Links'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -171,9 +172,7 @@ const InfoCreator = ({
           Links
         </Typography>
         <Divider className={classes.divider} />
-        <Typography variant="body2" color="primary">
-          links
-        </Typography>
+        <Links links={links} />
       </Grid>
       <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />
