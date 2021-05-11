@@ -3,7 +3,7 @@ import React from 'react'
 import ArtworkDisplay from './ArtworkDisplay'
 import ArworkDetail from './ArworkDetail'
 
-const ArtworkShow = ({ artwork }) => {
+const ArtworkShow = ({ artwork, artworkLinks }) => {
   const {
     assetIPFSPath,
     mimeType,
@@ -29,6 +29,7 @@ const ArtworkShow = ({ artwork }) => {
           money={'23,423.99'}
           linkProfile={`/creator/?id=${id}`}
           endingIn={duration}
+          artworkLinks={artworkLinks}
         />
       ) : (
         ''

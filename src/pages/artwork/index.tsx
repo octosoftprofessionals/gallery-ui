@@ -56,7 +56,14 @@ const ShowArtwork = () => {
 
   return (
     <Layout backgroundColor={colors.WhiteSmoke} padding="0" marginBottom="0">
-      {artworkQuery ? <ArtworkShow artwork={artworkQuery.artwork} /> : ''}
+      {artworkQuery ? (
+        <ArtworkShow
+          artwork={artworkQuery.artwork}
+          artworkLinks={artworkLinks}
+        />
+      ) : (
+        ''
+      )}
     </Layout>
   )
 }
