@@ -39,7 +39,6 @@ const useStyle = makeStyles(Theme => ({
       height: `${Theme.spacing(5)}vh`,
     },
   },
-  containerButtons: {},
   boxIconButton: {
     backgroundColor: Theme.palette.secondary.main,
     borderRadius: `${Theme.shape.borderRadius[3]}%`,
@@ -77,6 +76,7 @@ const useStyle = makeStyles(Theme => ({
   info: {
     '@media (max-width: 545px)': { justifyContenet: 'center' },
   },
+  containerShare: { position: 'absolute', width: 'inherit', right: '-84vw' },
 }))
 
 const itemAvatar = [
@@ -114,7 +114,7 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
           <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
 
-        <div>
+        <div className={classes.containerShare}>
           <CreatorkShare
             linkTwitter={linkTwitter}
             setDisplayReportModal={setDisplayReportModal}
