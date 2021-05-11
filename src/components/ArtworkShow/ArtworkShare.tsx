@@ -14,15 +14,16 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.spacing(2),
     position: 'absolute',
     top: -120,
-    right: -60,
+    right: 0,
   },
   report: {
     backgroundColor: Theme.palette.secondary.main,
     position: 'absolute',
     padding: Theme.spacing(2),
+    width: 130,
     borderRadius: Theme.spacing(2),
     top: '-50px',
-    right: 40,
+    left: -60,
   },
   container: {
     position: 'absolute',
@@ -46,6 +47,7 @@ const useStyle = makeStyles(Theme => ({
     transition: '0.3s all linear',
     borderRadius: '50%',
     minWidth: 50,
+    height: 50,
     padding: 0,
     position: 'relative',
     boxShadow: '0px 10px 20px rgb(0 0 0 / 5%)',
@@ -90,11 +92,10 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal }) => {
 
   return (
     <Grid
-      container
+      item
       direction="column"
       justify="flex-end"
       alignItems="flex-end"
-      xs={6}
       className={classes.container}
     >
       {showButtons ? (
@@ -105,7 +106,6 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal }) => {
           alignItems="center"
           className={classes.root}
           spacing={2}
-          xs={4}
         >
           <TwShareButton linkTwitter={linkTwitter} />
           <CopyLinkButton onClick={getUrl} />
@@ -119,12 +119,12 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal }) => {
           alignItems="center"
           className={classes.report}
           spacing={2}
-          xs={3}
+          xs={12}
         >
           <ReportButton onClick={setDisplayReportModal} />
         </Grid>
       ) : null}
-      <Grid container direction="row" justify="center" xs={4}>
+      <Grid item direction="row" justify="center">
         <Button onClick={displayReport} className={classes.buttonReport}>
           <MoreHorizIcon className={classes.icon} />
         </Button>
