@@ -26,6 +26,9 @@ export const Theme = createMuiTheme({
       },
     },
     MuiButton: {
+      textPrimary: {
+        '&:hover': { transform: 'translateY(-2px)', backgroundColor: White },
+      },
       endIcon: {
         color: VeryLightGrey,
         paddingRight: 2,
