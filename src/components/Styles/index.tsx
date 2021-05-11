@@ -26,6 +26,19 @@ export const Theme = createMuiTheme({
       },
     },
     MuiButton: {
+      textPrimary: {
+        '&:hover': { transform: 'translateY(-2px)', backgroundColor: White },
+      },
+      textSecondary: {
+        borderRadius: 50,
+        marginBottom: 12,
+        boxShadow: boxShadow.boxShadow1,
+        '&:hover': {
+          boxShadow: boxShadow.boxShadow4,
+          transform: 'translateY(-2px)',
+          backgroundColor: White,
+        },
+      },
       endIcon: {
         color: VeryLightGrey,
         paddingRight: 2,
@@ -111,6 +124,7 @@ export const Theme = createMuiTheme({
           '"Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;',
       },
       subtitle2: {
+        width: 'fit-content',
         boxSizing: 'border-box',
         WebkitTextFillColor: 'transparent',
         background: backgroundGradient.backgroundGradient1,
@@ -232,6 +246,7 @@ export const Theme = createMuiTheme({
         'Courier',
         'monospace',
       ].join(','),
+      'Bai Jamjuree',
     ],
   },
 })

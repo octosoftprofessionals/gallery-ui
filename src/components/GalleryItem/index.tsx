@@ -24,6 +24,7 @@ const GalleryItem = ({ itemType, artwork, link }) => {
           endingIn={artwork.duration}
           statesArt={artwork.assetStatus}
           link={link}
+          mimeType={artwork.mimeType}
           avatarUrl={artwork.creator.coverImageUrl}
         />
       ) : itemType === 'creator' ? (

@@ -12,6 +12,8 @@ import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow } from '../../Styles/Colors'
+import Links from './Links'
+import ButtonsSocialMedia from './ButtonsSocialMedia'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -52,7 +54,7 @@ const useStyle = makeStyles(Theme => ({
       boxShadow: boxShadow.boxShadow1,
     },
   },
-  userName: { fontSize: Theme.typography.fontSize[6] },
+  userName: { fontSize: Theme.typography.fontSize[6], width: 'fit-content' },
   textFollow: {
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[4],
@@ -156,7 +158,14 @@ const InfoCreator = ({
           View all
         </Typography>
       </div>
-      <div>keyboard from social media</div>
+      <Grid item xs={12} sm={7}>
+        <ButtonsSocialMedia
+          links={links}
+          verified={true}
+          imgUrl={followedes[3]}
+          invited="Diolink"
+        />
+      </Grid>
       <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Bio
@@ -171,9 +180,7 @@ const InfoCreator = ({
           Links
         </Typography>
         <Divider className={classes.divider} />
-        <Typography variant="body2" color="primary">
-          links
-        </Typography>
+        <Links links={links} />
       </Grid>
       <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />

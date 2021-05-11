@@ -5,6 +5,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { ArrowDownward } from '@material-ui/icons'
 import Creator from '../ArtworkGrid'
 import CardAuction from './CardAuction'
+<<<<<<< HEAD
+=======
+import ArtworkView from './ArtworkLinks'
+import CreatorSection from './ArtworkCreartor'
+>>>>>>> a7f302e313b0f83cac450d223c58a2a225b1ff1e
 import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
 
@@ -29,7 +34,7 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ArworkDetail = ({
-  imgUrl,
+  profileImageUrl,
   name,
   titleArt,
   description,
@@ -39,6 +44,11 @@ const ArworkDetail = ({
   endingIn,
   linkProfile,
   link,
+<<<<<<< HEAD
+=======
+  artworkLinks,
+  descriptionCreator,
+>>>>>>> a7f302e313b0f83cac450d223c58a2a225b1ff1e
   linkTwitter,
   setDisplayReportModal,
 }) => {
@@ -53,7 +63,15 @@ const ArworkDetail = ({
         className={classes.buttonsContainer}
       >
         <Grid item xs={6} justify="flex-start">
+<<<<<<< HEAD
           <CreatorButton imgUrl={imgUrl} name={name} link={linkProfile} />
+=======
+          <CreatorButton
+            imgUrl={profileImageUrl}
+            name={name}
+            link={linkProfile}
+          />
+>>>>>>> a7f302e313b0f83cac450d223c58a2a225b1ff1e
         </Grid>
         <Grid item xs={6} justify="flex-end">
           <ArtworkShare
@@ -77,16 +95,13 @@ const ArworkDetail = ({
               Description
             </Typography>
           </Grid>
-          {description.map((paragraph, index) => (
-            <Typography
-              variant="body2"
-              color="initial"
-              key={index}
-              className={classes.desciptionText}
-            >
-              {paragraph}
-            </Typography>
-          ))}
+          <Typography
+            variant="body2"
+            color="initial"
+            className={classes.desciptionText}
+          >
+            {description}
+          </Typography>
         </Grid>
         <Typography
           variant="subtitle1"
@@ -98,6 +113,7 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
+        <ArtworkView artworkLinks={artworkLinks} />
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction
@@ -112,6 +128,11 @@ const ArworkDetail = ({
         </Typography>
       </Grid>
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
+      <CreatorSection
+        imgUrl={profileImageUrl}
+        name={name}
+        descriptionCreator={descriptionCreator}
+      />
     </Grid>
   )
 }

@@ -38,3 +38,26 @@ export const timerArray = (delta: number) => {
 
   return { Hours, Minutes, Seconds }
 }
+
+export const isTypeVideo = (typeVide: String) => {
+  switch (typeVide) {
+    case 'video/mp4':
+      return true
+      break
+    case 'video/webm':
+      return true
+      break
+    case 'video/ogg':
+      return true
+      break
+    case 'video/3gpp':
+      return true
+      break
+    case 'video/3gpp2':
+      return true
+      break
+    default:
+      return false
+      break
+  }
+}

@@ -9,9 +9,9 @@ import { getCreator } from '../../services/autionsService'
 import { backgroundGradient } from '../../components/Styles/Colors'
 
 const CreatorPage = () => {
-  const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
-    'CreatorQuery',
-    getCreator
+  const IdArtwork = new URLSearchParams(location.search)
+  const { data: CreatorQuery } = useQuery('CreatorQuery', () =>
+    getCreator(IdArtwork.values().next().value)
   )
 
   const urlCover = CreatorQuery
