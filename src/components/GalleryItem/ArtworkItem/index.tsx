@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -77,6 +78,8 @@ const ArtworkItem = ({
     }, 1000)
   }, [])
 
+  // const link = `/artwork?contractAddress=${assetContractAddress}&tokenId=${assetTokenId}`
+
   return (
     <>
       <Paper variant="elevation" elevation={1} className={classes.root}>
@@ -104,7 +107,9 @@ const ArtworkItem = ({
         <Link to={`/creator/?id=${artis}`} className={classes.link}>
           <div className={classes.infoCard}>
             <Typography variant="h5" color="primary">
-              {titleArt}
+              <Truncate lines={2}>
+                {titleArt}
+              </Truncate>
             </Typography>
             <div className={classes.containerAvatar}>
               <Grid container direction="row" alignItems="center">
