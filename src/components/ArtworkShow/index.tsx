@@ -14,6 +14,7 @@ const ArtworkShow = ({
   endingIn,
   artworkLinks,
   linkProfile,
+  descriptionCreator,
 }) => {
   return (
     <>
@@ -35,6 +36,7 @@ const ArtworkShow = ({
         linkProfile={linkProfile}
         endingIn={endingIn}
         artworkLinks={artworkLinks}
+        descriptionCreator={descriptionCreator}
       />
     </>
   )

@@ -32,10 +32,18 @@ const endingInArt = [
 
 // ArtworkView params:
 const artworkLinks = [
-  {link:'https://etherscan.io/', text:'View on Etherscan', icon:iconEtherscan},
-  {link:'https://ipfs.io/', text:'View on IPFS', icon: iconView},
-  {link:'https://ipfs.io/', text:'View IPFS Metadata', icon: iconBlock},
+  {
+    link: 'https://etherscan.io/',
+    text: 'View on Etherscan',
+    icon: iconEtherscan,
+  },
+  { link: 'https://ipfs.io/', text: 'View on IPFS', icon: iconView },
+  { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: iconBlock },
 ]
+
+// ArtworkCreator Param:
+const descriptionCreator =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 
 const randEndingInArt = () => {
   const endingIn = endingInArt[Math.floor(Math.random() * endingInArt.length)]
@@ -62,6 +70,7 @@ const ShowArtwork = () => {
         linkProfile={'/'}
         endingIn={randEndingInArt()}
         artworkLinks={artworkLinks}
+        descriptionCreator={descriptionCreator}
       />
     </Layout>
   )
