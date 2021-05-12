@@ -125,7 +125,7 @@ const index = ({ pathname }) => {
               <Grid item xs={4} container justify="flex-end">
                 <Button
                   variant="contained"
-                  color={pathname === '/creator' ? 'secondary' : 'primary'}
+                  color={pathname === '/creator/' ? 'secondary' : ''}
                 >
                   <Typography variant="button">Connect Wallet</Typography>
                 </Button>

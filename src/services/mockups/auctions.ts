@@ -4,6 +4,9 @@ const videoUrls = [
   'https://fnd.fleek.co/fnd-prod/QmbFEbfMmaofj6X4vkjTWALGcXzoptVxb3gCFjXd3G4phe/nft.mp4',
 ]
 
+const videoPreview =
+  'https://fnd.fleek.co/fnd-prod/QmZrUYz2xNKiRoKa4ecgjekyMs8ohV3zYKYH1FFS7gkcUA/nft_preview.mp4'
+
 const gifUrls = [
   'https://f8n-production.imgix.net/creators/profile/0x46whfhj-fcrgb-1000x1000-gif-19nh67.gif',
   'https://f8n-production.imgix.net/creators/profile/fcusz42mh-obs-gif-4i7ctk.gif',
@@ -161,6 +164,7 @@ type ArtworksProps = {
   name: String
   description: String
   assetIPFSPath: String
+  assetIPFSPreview: String
   metadataIPFSPath: String
   width: Number
   height: Number
@@ -250,6 +254,7 @@ function fillAuctions(size): ArtworksProps[] {
       name: randArtworkTitle(),
       description: randBioArt(),
       assetIPFSPath: randAsset(),
+      assetIPFSPreview: `${videoPreview}`,
       metadataIPFSPath:
         'QmYnFsNTQ3v9wSnEHPmP1uPQfB6zEDvxzYTV6831zdCYMD/metadata.json',
       width: 1280,

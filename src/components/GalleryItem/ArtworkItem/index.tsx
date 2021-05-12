@@ -10,7 +10,7 @@ import FooterCardItem from '../FooterCardItem'
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
   img: {
-    backgroundImage: ({ imgUrl }) => `url(${imgUrl})`,
+    backgroundImage: ({ assetIPFSPath }) => `url(${assetIPFSPath})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -48,7 +48,8 @@ const useStyle = makeStyles(Theme => ({
 
 const ArtworkItem = ({
   mimeType,
-  imgUrl,
+  assetIPFSPath,
+  assetIPFSPreview,
   avatarUrl,
   price,
   artis,
@@ -58,7 +59,7 @@ const ArtworkItem = ({
   link,
 }) => {
   const [timer, setTimer] = useState('')
-  const classes = useStyle({ imgUrl })
+  const classes = useStyle({ assetIPFSPath })
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -79,15 +80,15 @@ const ArtworkItem = ({
           <div className={classes.containerVideo}>
             <div className={classes.inVideo}>
               <video
-                poster={imgUrl}
-                src={imgUrl}
+                poster={assetIPFSPreview}
+                src={assetIPFSPreview}
                 autoPlay={true}
                 loop={true}
                 className={classes.video}
                 muted={true}
               >
-                <source src={imgUrl} type={mimeType} />
-                <img src={imgUrl} />
+                <source src={assetIPFSPreview} type={mimeType} />
+                <img src={assetIPFSPreview} />
               </video>
             </div>
           </div>

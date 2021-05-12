@@ -17,7 +17,8 @@ const GalleryItem = ({ itemType, artwork, link }) => {
       {itemType === 'artworks' ? (
         <ArtworkItem
           key={artwork.assetId}
-          imgUrl={artwork.assetIPFSPath}
+          assetIPFSPath={artwork.assetIPFSPath}
+          assetIPFSPreview={artwork.assetIPFSPreview}
           price={artwork.price}
           artis={artwork.creator.username}
           titleArt={artwork.name}
