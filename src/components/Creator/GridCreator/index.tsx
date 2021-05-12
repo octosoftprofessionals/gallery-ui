@@ -10,13 +10,13 @@ const GridCretor = () => {
   const { data: auctionsQuery } = useQuery('auctionsQuery', getArtworkAuctions)
 
   return (
-    <TabBar>
-      {auctionsQuery ? (
-        <GalleryCreator itemType="artworks" artworksQuery={auctionsQuery} />
-      ) : (
-        ''
-      )}
-    </TabBar>
+    <TabBar
+      titles={['Created', 'Collected']}
+      components={[
+        <GalleryCreator itemType="artworks" artworksQuery={auctionsQuery} />,
+        <GalleryCreator itemType="artworks" artworksQuery={auctionsQuery} />,
+      ]}
+    />
   )
 }
 

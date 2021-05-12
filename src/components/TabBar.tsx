@@ -20,53 +20,34 @@ const useStyle = makeStyles(Theme => ({
   selectButton: { borderBottom: '2px solid' },
 }))
 
-const TabBar = ({ children }) => {
+const TabBar = ({ titles, components }) => {
   const classes = useStyle()
-  const [selectedCreated, setSelectedCreated] = useState(true)
-  const [selectedCollected, setSelectedCollected] = useState(false)
-  const handleSelected = isTrue => {
-    if (isTrue) {
-      setSelectedCreated(selectedCreated)
-      setSelectedCollected(selectedCollected)
-    } else {
-      setSelectedCreated(!selectedCreated)
-      setSelectedCollected(!selectedCollected)
-    }
+  const [selected, setSelected] = useState(0)
+  const handleSelected = selection => {
+    setSelected(selection)
   }
   return (
     <Grid item container direction="column" justify="flex-start">
       <Grid item xs={5} sm={3} container justify="space-between">
-        <Button
-          variant="text"
-          color="primary"
-          className={
-            selectedCreated
-              ? [classes.button, classes.selectButton]
-              : classes.button
-          }
-          onClick={() => handleSelected(selectedCreated)}
-        >
-          <Typography variant="caption" color="primary">
-            Created
-          </Typography>
-        </Button>
-        <Button
-          variant="text"
-          color="primary"
-          className={
-            selectedCollected
-              ? [classes.button, classes.selectButton]
-              : classes.button
-          }
-          onClick={() => handleSelected(selectedCollected)}
-        >
-          <Typography variant="caption" color="primary">
-            Collected
-          </Typography>
-        </Button>
+        {titles.map((title, index) => (
+          <Button
+            variant="text"
+            color="primary"
+            className={
+              selected == index
+                ? [classes.button, classes.selectButton]
+                : classes.button
+            }
+            onClick={() => handleSelected(index)}
+          >
+            <Typography variant="caption" color="primary">
+              {title}
+            </Typography>
+          </Button>
+        ))}
       </Grid>
       <Divider className={classes.divider} />
-      {children}
+      {components[selected]}
     </Grid>
   )
 }
