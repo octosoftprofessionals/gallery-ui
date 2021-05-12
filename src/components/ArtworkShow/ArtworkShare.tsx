@@ -87,7 +87,8 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal }) => {
   }
 
   const getUrl = () => {
-    return navigator.clipboard.writeText(window.location.href)
+    const url = typeof window !== 'undefined' ? window.location.href : ''
+    return navigator.clipboard.writeText(url)
   }
 
   return (

@@ -23,7 +23,8 @@ const artworkLinks = [
 ]
 
 const linkShareTwitter = () => {
-  const SITE_URL = window.location.href
+  const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
+
   const searchParams = new URLSearchParams()
   searchParams.set('url', SITE_URL)
   searchParams.set('text', 'Art is lit! Check this out!')
@@ -70,7 +71,8 @@ const historyInfo = [
 //const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 const ShowArtwork = () => {
-  const IdArtwork = new URLSearchParams(location.search)
+  const search = typeof window !== 'undefined' ? window.location.search : ''
+  const IdArtwork = new URLSearchParams(search)
   const { data: artworkQuery } = useQuery('artworkQuery', () =>
     getArtwork(IdArtwork.values().next().value)
   )
