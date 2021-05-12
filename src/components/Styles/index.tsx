@@ -247,6 +247,7 @@ export const Theme = createMuiTheme({
         'monospace',
       ].join(','),
       'Bai Jamjuree',
+      'Bai Jamjuree Regular',
     ],
   },
 })

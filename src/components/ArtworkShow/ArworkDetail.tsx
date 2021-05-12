@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Paper, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { ArrowDownward } from '@material-ui/icons'
@@ -8,6 +8,7 @@ import CardAuction from './CardAuction'
 
 import ArtworkView from './ArtworkLinks'
 import CreatorSection from './ArtworkCreartor'
+import HistoryItem from './HistoryItem'
 
 import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
@@ -55,6 +56,7 @@ const ArworkDetail = ({
   descriptionCreator,
   linkTwitter,
   setDisplayReportModal,
+  historyInfo,
 }) => {
   const classes = useStyle()
   return (
@@ -99,7 +101,9 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
-        <ArtworkView artworkLinks={artworkLinks} />
+        <Grid item>
+          <ArtworkView artworkLinks={artworkLinks} />
+        </Grid>
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction
@@ -112,6 +116,19 @@ const ArworkDetail = ({
         <Typography variant="h6" color="primary">
           History
         </Typography>
+        {historyInfo.map(elem => {
+          return (
+            <HistoryItem
+              name={elem.name}
+              imgUrl={elem.imgUrl}
+              action={elem.action}
+              price={elem.price}
+              money={elem.money}
+              date={elem.date}
+              link={elem.link}
+            />
+          )
+        })}
       </Grid>
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
       <CreatorSection

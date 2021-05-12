@@ -6,7 +6,6 @@ import LinkButton from '../LinkButton'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
     flexWrap: 'wrap',
     '& > *': {
       marginBottom: theme.spacing(3),
@@ -27,7 +26,6 @@ const ArtworkView = ({ artworkLinks }) => {
       justify="center"
       alignItems="flex-start"
       spacing={0}
-      xs={12}
     >
       {artworkLinks.map(elem => {
         return <LinkButton link={elem.link} text={elem.text} icon={elem.icon} />

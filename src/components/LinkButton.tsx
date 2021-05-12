@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     transition: '0.3s all linear',
-    fontFamily: 'Bai Jamjuree Regular',
+    fontFamily: theme.typography.fontFamily[3],
     '&:hover': {
       color: theme.palette.primary.main,
     },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: theme.spacing(8),
     '&:hover': {
-      color: 'black',
+      color: theme.palette.primary.main,
     },
   },
   iconText: { fontSize: theme.spacing(9) },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(3),
   },
   grid: {
-    margin: '0',
+    margin: 0,
     color: theme.palette.primary.main,
   },
 }))
