@@ -39,7 +39,8 @@ const historyInfo = [
     action: 'Bid placed',
     date: 'May 10, 2021 at 1:50pm',
     name: 'name',
-    imgUrl: imgUrl,
+    imgUrl:
+      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
     price: '3.025',
     money: '24.005',
     link: 'https://etherscan.io/',
@@ -48,7 +49,8 @@ const historyInfo = [
     action: 'Listed',
     date: 'May 10, 2021 at 1:50pm',
     name: 'name',
-    imgUrl: imgUrl,
+    imgUrl:
+      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
     price: '3.025',
     money: '24.005',
     link: 'https://etherscan.io/',
@@ -57,7 +59,8 @@ const historyInfo = [
     action: 'Minted',
     date: 'May 10, 2021 at 1:50pm',
     name: 'name',
-    imgUrl: imgUrl,
+    imgUrl:
+      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
     price: '',
     money: '',
     link: 'https://etherscan.io/',

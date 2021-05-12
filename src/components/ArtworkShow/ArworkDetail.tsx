@@ -101,7 +101,9 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
-        <ArtworkView artworkLinks={artworkLinks} />
+        <Grid item>
+          <ArtworkView artworkLinks={artworkLinks} />
+        </Grid>
       </Grid>
       <Grid item xs={12} sm={6} container direction="column">
         <CardAuction
