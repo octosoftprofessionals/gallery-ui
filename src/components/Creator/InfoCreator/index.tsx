@@ -83,7 +83,7 @@ const InfoCreator = ({
   const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
   const year = new Date(createdAt).getFullYear()
   return (
-    <Grid container direction="column" justify="space-around">
+    <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
         <Button variant="contained" className={classes.button}>
           <Typography
