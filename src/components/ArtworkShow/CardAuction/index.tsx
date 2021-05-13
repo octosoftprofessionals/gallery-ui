@@ -1,10 +1,11 @@
 import React from 'react'
+
 import AuctionItem from './AuctionItem'
 import SoldItem from './SoldItem'
 
-const CardAuction = ({ auctionState, price, money, endingIn, link }) => {
+const CardAuction = ({ auctionState, priceEth, priceUsd, expiration, biddingLink }) => {
   return auctionState ? (
-    <AuctionItem price={price} money={money} endingIn={endingIn} link={link} />
+    <AuctionItem priceEth={priceEth} priceUsd={priceUsd} expiration={expiration} link={biddingLink} />
   ) : (
     <SoldItem />
   )

@@ -92,7 +92,12 @@ type HistoryItem = {
 }
 
 type User = {
-  // either creator or collector
+  // creator and/or collector
+  address: string
+  username: string
+  imageUrl: string
+  profileUrl: string
+  description?: string
 }
 
 // Core Queries

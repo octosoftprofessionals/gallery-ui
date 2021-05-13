@@ -23,7 +23,7 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
 }))
 
-const Creators = ({ followers, link }) => {
+const CreatorFooter = ({ followers, link }) => {
   const classes = useStyle()
   return (
     <Grid
@@ -51,4 +51,4 @@ const Creators = ({ followers, link }) => {
   )
 }
 
-export default Creators
+export default CreatorFooter

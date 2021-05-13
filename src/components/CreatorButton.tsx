@@ -1,14 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CreatorButton = ({ imgUrl, name, link, ...otherProps }) => {
+const CreatorButton = ({
+  username,
+  imageUrl,
+  profileUrl,
+  ...otherProps
+}) => {
   return (
     <ButtonCreator {...otherProps}>
-      <LinkUser id="" href={link}>
+      <LinkUser id="" href={profileUrl}>
         <ImgConteiner className="creator-button-img-cont">
-          <ImgUser src={imgUrl} alt={name} />
+          <ImgUser src={imageUrl} alt={username} />
         </ImgConteiner>
-        <User>{`@${name}`}</User>
+        <User>{`@${username}`}</User>
       </LinkUser>
     </ButtonCreator>
   )

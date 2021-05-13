@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Paper, Avatar, Typography, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import OpenInNewOutlinedIcon from '@material-ui/icons/OpenInNewOutlined'
+import { formatDecimal, formatUsd } from '../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(5, 11, 5, 11) },
@@ -52,7 +53,18 @@ const useStyle = makeStyles(Theme => ({
   containerHistory: { margin: Theme.spacing(3, 0, 0, 0) },
 }))
 
-const HistoryItem = ({ name, imgUrl, action, price, money, date, link }) => {
+const HistoryItem = ({
+  eventFromUsername,
+  eventFromAddress,
+  eventFromImageUrl,
+  eventToUsername,
+  eventToImageUrl,
+  eventType,
+  amountEth,
+  amountUsd,
+  timestamp = new Date(),
+  link,
+}) => {
   const classes = useStyle()
   return (
     <Grid item>
@@ -71,27 +83,27 @@ const HistoryItem = ({ name, imgUrl, action, price, money, date, link }) => {
             justify="flex-start"
             alignItems="center"
           >
-            <Avatar className={classes.avatar} alt={name} src={imgUrl} />
+            <Avatar className={classes.avatar} alt={eventFromUsername} src={eventFromImageUrl} />
             <Grid direction="column" alignContent="flex-start" justify="center">
               <div className={classes.action}>
                 <Typography
                   className={classes.actionText}
                   variant="body1"
-                >{`${action} by `}</Typography>
+                >{`${eventType} by `}</Typography>
                 <Link
                   className={classes.creator}
                   underline="none"
                   variant="body2"
                   href="#"
-                >{`@${name}`}</Link>
+                >{`@${eventFromUsername}`}</Link>
               </div>
               <Typography variant="subtitle1" className={classes.date}>
-                {date}
+                {timestamp}
               </Typography>
             </Grid>
           </Grid>
           <Grid className={classes.action} direction="row" alignItems="center">
-            {price !== '' && money !== '' ? (
+            {amountEth != null && amountUsd != null ? (
               <Grid
                 container
                 direction="column"
@@ -100,10 +112,10 @@ const HistoryItem = ({ name, imgUrl, action, price, money, date, link }) => {
               >
                 <Typography
                   className={classes.actionText}
-                >{`${price} ETH`}</Typography>
+                >{`${formatDecimal(amountEth)} ETH`}</Typography>
                 <Typography
                   className={classes.price}
-                >{`$ ${money} `}</Typography>
+                >{`$ ${formatUsd(amountUsd)} `}</Typography>
               </Grid>
             ) : null}
 

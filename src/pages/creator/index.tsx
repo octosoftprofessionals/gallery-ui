@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import queryString from 'query-string'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
@@ -7,6 +8,7 @@ import Creator from '../../components/Creator'
 import { getCreator } from '../../services/autionsService'
 
 import { backgroundGradient } from '../../components/Styles/Colors'
+import useQueryParams from '../../hooks/useQueryParams'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -17,11 +19,12 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
+  const { id: creatorId } = useQueryParams()
+
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const search = typeof window !== 'undefined' ? window.location.search : ''
-  const IdArtwork = new URLSearchParams(search)
+
   const { data: CreatorQuery } = useQuery('CreatorQuery', () =>
-    getCreator(IdArtwork.values().next().value)
+    getCreator(creatorId)
   )
 
   const urlCover = CreatorQuery
