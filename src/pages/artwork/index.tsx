@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import ArtworkShow from '../../components/ArtworkShow'
-import Layout from '../../components/Layout/Layout'
+import Layout from '../../components/Layout'
 import { useQuery } from 'react-query'
 import { getArtwork } from '../../services/autionsService'
 

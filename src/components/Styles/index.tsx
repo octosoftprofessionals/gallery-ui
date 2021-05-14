@@ -200,7 +200,7 @@ export const Theme = createMuiTheme({
       },
     },
     MuiOutlinedInput: {
-      root: { borderRadius: 50 },
+      root: { borderRadius: 50, background: White },
       input: {
         padding: '12px 20px',
         color: Nero,

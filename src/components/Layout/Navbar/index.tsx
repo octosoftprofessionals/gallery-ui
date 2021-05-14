@@ -18,6 +18,7 @@ import {
 import logoSrc from '../../../assets/logoNew.png'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
+import NavBarBid from './NavBarBid'
 
 const { boxShadow1 } = boxShadow
 
@@ -32,7 +33,7 @@ const useStyles = makeStyles(Theme => ({
     backgroundRepeat: 'no-repeat',
   },
   container: {
-    display: ({ pathname }) => (pathname === '/bild' ? 'none' : 'block'),
+    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
@@ -87,7 +88,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
         <Toolbar className={classes.root}>
           <Grid
             container
-            justify={pathname === '/bild' ? 'space-between' : 'space-around'}
+            justify={pathname === '/bid' ? 'space-between' : 'space-around'}
             alignItems="center"
           >
             <Grid item xs={4}>
@@ -128,7 +129,16 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Hidden>
 
             <Hidden smDown>
-              <ButtonConnectWallet pathname={pathname} />
+              {pathname === '/bid' ? (
+                <NavBarBid
+                  cois={cois}
+                  publicKey={publicKey}
+                  profileImageUrl={profileImageUrl}
+                  name={name}
+                />
+              ) : (
+                <ButtonConnectWallet pathname={pathname} />
+              )}
             </Hidden>
 
             <Hidden mdUp>
@@ -223,7 +233,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                   <Typography variant="caption">Privacy Policy</Typography>
                 </Link>
                 <Link className={classes.link}>
-                  <Typography variant="caption">Discor</Typography>
+                  <Typography variant="caption">Discord</Typography>
                 </Link>
               </Grid>
               <Grid item xs={6} container direction="column">

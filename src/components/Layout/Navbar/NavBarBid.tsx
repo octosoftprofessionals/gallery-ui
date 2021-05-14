@@ -6,12 +6,10 @@ import logoSrc from '../../../assets/logoNew.png'
 import { boxShadow, backgroundGradient } from '../../Styles/Colors'
 
 import {
-  AppBar,
   Avatar,
   Button,
   Badge,
   Grid,
-  Toolbar,
   Typography,
   withWidth,
   Hidden,

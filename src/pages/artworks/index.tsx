@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 
-import Layout from '../../components/Layout/Layout'
+import Layout from '../../components/Layout'
 import GridArtworks from '../../components/Artworks'
 
 const ArtworksPage = () => {
