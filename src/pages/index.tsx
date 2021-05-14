@@ -5,6 +5,7 @@ import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
+import ContactUs from '../components/ContactUs'
 
 import { getArtworkAuctions, getHeroArtwork } from '../services/autionsService'
 
@@ -44,6 +45,7 @@ const Home = () => {
       <ArtworkGrid title="Featured creators" titleButton="creators" link="/">
         <Gallery artworksQuery={CreatorQuery} itemType="creator" />
       </ArtworkGrid>
+      <ContactUs></ContactUs>
       {/* <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
         <Gallery artworksQuery={items} itemType="blog" />
       </ArtworkGrid> */}
