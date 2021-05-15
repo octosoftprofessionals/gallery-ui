@@ -42,13 +42,14 @@ const Home = () => {
       <ArtworkGrid title="Featured artworks" titleButton="artworks" link="/">
         <Gallery artworksQuery={AuctionsQuery} itemType="artworks" />
       </ArtworkGrid>
-      <ArtworkGrid title="Featured creators" titleButton="creators" link="/">
+      <ArtworkGrid
+        title="Featured creators"
+        titleButton="creators"
+        link="/creators"
+      >
         <Gallery artworksQuery={CreatorQuery} itemType="creator" />
       </ArtworkGrid>
-      <ContactUs></ContactUs>
-      {/* <ArtworkGrid title="Blog" titleButton="articles" link="/articles">
-        <Gallery artworksQuery={items} itemType="blog" />
-      </ArtworkGrid> */}
+      <ContactUs />
     </Layout>
   )
 }
