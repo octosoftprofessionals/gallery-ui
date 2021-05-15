@@ -183,6 +183,13 @@ export const Theme = createMuiTheme({
         marginBottom: 8,
       },
     },
+    MuiOutlinedInput: {
+      root: { borderRadius: 50 },
+      input: {
+        padding: '12px 20px',
+        color: Nero,
+      },
+    },
   },
 
   shape: { borderRadius: [0, 10, 16, 50] },
