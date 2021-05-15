@@ -2,14 +2,13 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ArtworkItem from './ArtworkItem'
-import BlogItem from './BlogItem'
 import CreatorsItem from './CreatorsItem'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
 }))
 
-const GalleryItem = ({ itemType, artwork, link }) => {
+const GalleryItem = ({ itemType, artwork }) => {
   const classes = useStyle()
 
   return (
@@ -24,7 +23,7 @@ const GalleryItem = ({ itemType, artwork, link }) => {
           titleArt={artwork.name}
           endingIn={artwork.duration}
           statesArt={artwork.assetStatus}
-          link={link}
+          link={`/artwork?id=${artwork.id}`}
           mimeType={artwork.mimeType}
           avatarUrl={artwork.creator.coverImageUrl}
         />
@@ -36,14 +35,10 @@ const GalleryItem = ({ itemType, artwork, link }) => {
           artis={artwork.creator.name}
           bio={artwork.creator.bio}
           followers={artwork.creator.followers}
-          link={link}
+          link={`/creator?id=${artwork.id}`}
         />
       ) : (
-        <BlogItem
-          link={link}
-          imgUrl={artwork.creator.profileImageUrl}
-          description={artwork.description}
-        />
+        ''
       )}
     </>
   )

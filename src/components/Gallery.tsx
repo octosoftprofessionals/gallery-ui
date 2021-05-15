@@ -24,12 +24,7 @@ const Gallery = ({ artworksQuery, itemType }) => {
               lg={3}
               className={classes.containerItem}
             >
-              <GalleryItem
-                key={index}
-                itemType={itemType}
-                artwork={artwork}
-                link={`/artwork?id=${artwork.id}`}
-              />
+              <GalleryItem key={index} itemType={itemType} artwork={artwork} />
             </Grid>
           ))
         : ''}
