@@ -11,20 +11,11 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const Creators = ({ creatorsQuery, status }) => {
-  const [search, setSearch] = useState<String>('')
   const [creators, setCreators] = useState<Array[]>([])
-
+  const [search, setSearch] = useState<String>('')
   if (creatorsQuery && creators.length <= 0) {
     setCreators(creatorsQuery)
   }
-  console.log('object :>> ', creators)
-
-  // console.log(
-  //   'creators :>> ',
-  //   creators.filter(artworks =>
-  //     artworks.creator.username.toLowerCase().includes(search)
-  //   )
-  // )
 
   const classes = useStyle()
   return (
@@ -36,7 +27,7 @@ const Creators = ({ creatorsQuery, status }) => {
           status={status}
         />
       </Grid>
-      {creatorsQuery ? (
+      {creators ? (
         <GridCreator artworksQuery={creators} itemType="creator" />
       ) : (
         ''
