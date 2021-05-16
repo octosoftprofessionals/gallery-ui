@@ -15,6 +15,12 @@ const {
 
 export const Theme = createMuiTheme({
   overrides: {
+    MuiDialog: {
+      paperWidthSm: {
+        maxWidth: 400,
+        borderRadius: 16,
+      },
+    },
     MuiTooltip: {
       tooltip: {
         backgroundColor: Nero,
