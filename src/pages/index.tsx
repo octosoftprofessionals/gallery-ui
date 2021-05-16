@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useQuery } from 'react-query'
+import React from 'react'
+import { useQuery, useInfiniteQuery } from 'react-query'
 
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
@@ -7,20 +7,29 @@ import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout/Layout'
 import ContactUs from '../components/ContactUs'
 
-import { getArtworkAuctions, getHeroArtwork } from '../services/autionsService'
+import {
+  getHeroArtwork,
+  getArtworkAuctionsPaginated,
+} from '../services/autionsService'
 
 const Home = () => {
+  const { data: artworkAuctionsPaginated, isLoading } = useInfiniteQuery(
+    'artworkAuctionsPaginated',
+    getArtworkAuctionsPaginated
+  )
+
   const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
     'liveAuctionsQuery',
-    getArtworkAuctions
+    getArtworkAuctionsPaginated
   )
+
   const { data: AuctionsQuery, status: statusAuctionsQuery } = useQuery(
     'AuctionsQuery',
-    getArtworkAuctions
+    getArtworkAuctionsPaginated
   )
   const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
     'CreatorQuery',
-    getArtworkAuctions
+    getArtworkAuctionsPaginated
   )
 
   const {
