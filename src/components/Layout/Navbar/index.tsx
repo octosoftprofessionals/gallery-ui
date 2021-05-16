@@ -109,7 +109,7 @@ const index = ({ pathname }) => {
                     <Typography variant="button">Home</Typography>
                   </Button>
                 </Link>
-                <Link to="/" className={classes.link}>
+                <Link to="/creators" className={classes.link}>
                   <Button
                     variant="text"
                     color="primary"
@@ -143,7 +143,7 @@ const index = ({ pathname }) => {
                 <IconButton
                   color="inherit"
                   className={
-                    pathname === '/creator'
+                    pathname === '/creator/'
                       ? classes.buttonCreatorMenu
                       : classes.buttonMenu
                   }
