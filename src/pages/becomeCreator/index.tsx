@@ -4,25 +4,23 @@ import ArtworkShow from '../../components/ArtworkShow'
 import Layout from '../../components/Layout/Layout'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Container, Button } from '@material-ui/core'
-
+import BecomeCreatorCover from '../../components/BecomeCreatorCover'
 import { colors } from '../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {
     flex: 1,
-    margin: Theme.spacing(8, 0),
+    margin: Theme.spacing(10, 10),
+    boxSizing: "border-box",
+    '@media (max-width: 576px)': {
+      padding: Theme.spacing(0, 0),
+      margin: 40,
+    },
   },
-  containerAsset: {
+/*   containerAsset: {
     position: 'relative',
-    /*  paddingBottom: '100%' */
-    /* filter: boxShadow.boxShadow3, */
-  },
-  line: {
-    borderStyle: 'solid',
-    height: 400,
+  }, */
 
-
-  }
 /*   containerInfo: { position: 'relative' },
  */}))
 
@@ -36,11 +34,11 @@ const BecomeCreator = () => {
       marginTop="0"
     >
       <div className={classes.root}>
-        <Container>
+        <BecomeCreatorCover></BecomeCreatorCover>
+        {/*         <Container>
           <Grid
             item
             xs={12}
-            /* md={11} */
             container
             justify="space-around"
             alignItems="center"
@@ -69,7 +67,7 @@ const BecomeCreator = () => {
               </div>
             </Grid>
           </Grid>
-        </Container>
+        </Container> */}
       </div>
     </Layout >
   )
