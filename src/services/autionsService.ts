@@ -1,5 +1,6 @@
 // import { auctions } from '../config/api'
 import auctionsMockup from './mockups/auctions'
+import { paginatedQuery } from '../Utils'
 
 // TODO: replace with API Call
 // async function getArtworkAuctions(
@@ -69,6 +70,14 @@ export async function getArtworkAuctions() {
       resolve({
         artworks: auctionsMockup,
       })
+    }, 250)
+  })
+}
+
+export async function getArtworkAuctionsPaginated() {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve(paginatedQuery(auctionsMockup))
     }, 250)
   })
 }

@@ -61,3 +61,11 @@ export const isTypeVideo = (typeVide: String) => {
       break
   }
 }
+
+export const paginatedQuery = (Query: Array[]) => {
+  const pages = []
+  for (let index = 0; index < Query.length / 12; index++) {
+    pages[index] = Query.slice(index * 12, index * 12 + 12)
+  }
+  return pages
+}
