@@ -3,10 +3,6 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
-
-import logoSrc from '../../../assets/logoNew.png'
-import { boxShadow } from '../../Styles/Colors'
-
 import {
   AppBar,
   Grid,
@@ -18,6 +14,10 @@ import {
   IconButton,
   SwipeableDrawer,
 } from '@material-ui/core'
+
+import logoSrc from '../../../assets/logoNew.png'
+import { boxShadow } from '../../Styles/Colors'
+import ButtonConnectWallet from './ButtonConnectWallet'
 
 const { boxShadow1 } = boxShadow
 
@@ -79,6 +79,7 @@ const useStyles = makeStyles(Theme => ({
 const index = ({ pathname }) => {
   const classes = useStyles({ logoSrc })
   const [showDrawer, setShowDrawer] = useState(false)
+
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
@@ -122,15 +123,9 @@ const index = ({ pathname }) => {
             </Hidden>
 
             <Hidden smDown>
-              <Grid item xs={4} container justify="flex-end">
-                <Button
-                  variant="contained"
-                  color={pathname === '/creator/' ? 'secondary' : ''}
-                >
-                  <Typography variant="button">Connect Wallet</Typography>
-                </Button>
-              </Grid>
+              <ButtonConnectWallet pathname={pathname} />
             </Hidden>
+
             <Hidden mdUp>
               <Grid
                 item
