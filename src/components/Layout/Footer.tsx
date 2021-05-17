@@ -11,9 +11,8 @@ const useStyles = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.light,
     padding: Theme.spacing(10, 15),
     '@media (max-width: 576px)': {
-      padding: 0,
       alignItems: 'flex-start',
-      marginTop: 20,
+      padding: Theme.spacing(2, 0),
     },
   },
   text: {
@@ -22,7 +21,8 @@ const useStyles = makeStyles(Theme => ({
     flexWrap: "wrap",
     '@media (max-width: 576px)': {
       flexDirection: 'row',
-      textAlign: 'left'
+      textAlign: 'left',
+      marginTop: 15,
     },
   },
   link: { textDecoration: 'none', cursor: 'pointer' },
@@ -44,6 +44,7 @@ const useStyles = makeStyles(Theme => ({
     '@media (max-width: 576px)': {
       flexDirection: 'column',
       alignItems: 'left',
+      marginTop: 10,
     },
   },
   icon: {
