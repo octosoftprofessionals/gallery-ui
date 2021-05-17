@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-/* import { Link } from 'gatsby' */
+import React from 'react'
 import {
     Button,
     Divider,
@@ -78,8 +77,8 @@ const BecomeCreatorCover = () => {
     const classes = useStyle()
     return (
         <Grid container className={classes.container} >
-            <Grid item /* xs={12} */ container justify="space-around" alignItems="center">
-                <Grid item /* xs={12} */ container direction="row" alignContent="center" justify="space-between" className={classes.root}>
+            <Grid item container justify="space-around" alignItems="center">
+                <Grid item container direction="row" alignContent="center" justify="space-between" className={classes.root}>
                     <Grid item xs={12} sm={5} md={4}>
                         <Typography variant="h3" color="primary"><Grid container direction="collum" className={classes.coverTitle} ><span>Introducing</span><span>Community</span><span>Upvote</span></Grid></Typography>
                         <Typography variant="caption" color="primary" className={classes.price}>With the Community Upvote, artists are encouraged to support other artists and to set the stage for a model of community-led curation that puts power in the hands of creators.
