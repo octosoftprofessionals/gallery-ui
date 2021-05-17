@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Grid } from '@material-ui/core'
 
 import Layout from '../../components/Layout/Layout'
-import Artworks from '../../components/Artworks'
+import GridArtworks from '../../components/Artworks'
 
 const ArtworksPage = () => {
   return (
     <Layout padding="20px" marginTop="0">
-      <Artworks />
+      <Grid item xs={11} md={12}>
+        <GridArtworks />
+      </Grid>
     </Layout>
   )
 }

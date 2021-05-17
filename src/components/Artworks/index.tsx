@@ -1,13 +1,44 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
-import GridArtworks from './GridArtworks'
+import { useQuery } from 'react-query'
 
-const Artworks = () => {
+import {
+  getArtworkAuctions,
+  getHeroArtwork,
+} from '../../services/autionsService'
+
+import TabBar from '../TabBar'
+// import ArtworkGrid from '../../ArtworkGrid'
+// import Gallery from '../../../components/Gallery'
+import GalleryArtworks from './GalleryArtworks'
+
+const GridArtworks = () => {
+  const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
+    'liveAuctionsQuery',
+    getArtworkAuctions
+  )
+
   return (
-    <Grid item xs={11} md={12}>
-      <GridArtworks />
-    </Grid>
+    <TabBar
+      titles={['Live Auction', 'Reserve not met', 'Sold']}
+      components={[
+        <GalleryArtworks
+          itemType="artworks"
+          artworksQuery={liveAuctionsQuery}
+          statesArt="auction"
+        />,
+        <GalleryArtworks
+          itemType="artworks"
+          artworksQuery={liveAuctionsQuery}
+          statesArt="reserve"
+        />,
+        <GalleryArtworks
+          itemType="artworks"
+          artworksQuery={liveAuctionsQuery}
+          statesArt="sold"
+        />,
+      ]}
+    />
   )
 }
 
-export default Artworks
+export default GridArtworks
