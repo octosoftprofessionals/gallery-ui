@@ -17,6 +17,15 @@ const Creators = ({ creatorsQuery, status }) => {
   if (creatorsQuery && creators.length <= 1) {
     setCreators(creatorsQuery)
   }
+  console.log('creators :>> ', creators)
+  let aux = []
+  if (search.length > 0) {
+    console.log('search :>> ', search)
+    aux = creators.artworks.filter(artworks =>
+      artworks.creator.username.toLowerCase().includes(search.toLowerCase())
+    )
+  }
+  console.log('aux :>> ', aux)
 
   const classes = useStyle()
   return (
