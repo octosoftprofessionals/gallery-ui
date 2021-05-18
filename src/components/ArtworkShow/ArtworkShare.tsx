@@ -6,6 +6,7 @@ import TwShareButton from '../../components/TwShareButton'
 import CopyLinkButton from '../CopyLinkButton'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import ReportButton from '../ReportButton'
+import { boxShadow } from '../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -28,7 +29,7 @@ const useStyle = makeStyles(Theme => ({
   container: {
     position: 'absolute',
     top: '-28px',
-    right: ({ right }) => (right ? right : null),
+    right: ({ right }) => (right ? right : 'auto'),
   },
   button: {
     backgroundColor: Theme.palette.secondary.main,
@@ -36,9 +37,9 @@ const useStyle = makeStyles(Theme => ({
     transition: '0.3s all linear',
     width: 'auto',
     position: 'relative',
-    boxShadow: '0px 10px 20px rgb(0 0 0 / 5%)',
+    boxShadow: boxShadow.boxShadow1,
     '&:hover': {
-      boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
+      boxShadow: boxShadow.boxShadow5,
       transform: 'translateY(-2px)',
       backgroundColor: Theme.palette.secondary.main,
     },
@@ -51,9 +52,9 @@ const useStyle = makeStyles(Theme => ({
     height: 50,
     padding: 0,
     position: 'relative',
-    boxShadow: '0px 10px 20px rgb(0 0 0 / 5%)',
+    boxShadow: boxShadow.boxShadow1,
     '&:hover': {
-      boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
+      boxShadow: boxShadow.boxShadow5,
       transform: 'translateY(-2px)',
       backgroundColor: Theme.palette.secondary.main,
     },
@@ -69,11 +70,11 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkShare = ({ linkTwitter, setDisplayReportModal, ...props }) => {
+const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
 
-  const classes = useStyle({ ...props })
+  const classes = useStyle({ right })
 
   const displayButtons = e => {
     e.preventDefault()

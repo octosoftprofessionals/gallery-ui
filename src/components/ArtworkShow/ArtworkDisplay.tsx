@@ -17,15 +17,25 @@ const useStyle = makeStyles(Theme => ({
     position: 'relative',
     backgroundColor: Theme.palette.secondary.light,
     padding: Theme.spacing(9),
+    '@media (max-width: 576px)': {
+      padding: Theme.spacing(0, 9, 14),
+    },
   },
-  video: { maxWidth: '50vh', filter: boxShadow.boxShadow2, cursor: 'zoom-in' },
+  video: {
+    maxWidth: `${Theme.spacing(14)}vh`,
+    filter: boxShadow.boxShadow2,
+    cursor: 'zoom-in',
+    '@media (max-width: 576px)': {
+      maxWidth: `${Theme.spacing(14)}vw`,
+    },
+  },
   fullScreenVideo: {
     display: 'flex',
     width: '90vw',
     height: '90vh',
   },
   fullScreen: {
-    backgroundColor: '#fff',
+    backgroundColor: Theme.palette.secondary.main,
     display: 'flex',
   },
   normalScreen: {
@@ -38,7 +48,18 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.primary.dark,
     '&:hover': { backgroundColor: Theme.palette.primary.dark },
   },
-  buttons: { position: 'absolute', bottom: 0, right: 0, left: 0 , paddingBottom: Theme.spacing(9) },
+  buttons: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    paddingBottom: Theme.spacing(9),
+    '@media (max-width: 576px)': {
+      flexDirection: 'column',
+      right: Theme.spacing(9),
+      left: 'auto',
+    },
+  },
 }))
 
 const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
@@ -89,7 +110,14 @@ const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
             <img src={assetIPFSPath} />
           </video>
         </Grid>
-        <Grid item container justify="flex-end" className={classes.buttons}>
+        <Grid
+          item
+          xs={1}
+          sm={12}
+          container
+          justify="flex-end"
+          className={classes.buttons}
+        >
           <IconButton
             onClick={() => toggleFullScreen()}
             className={classes.iconButton}

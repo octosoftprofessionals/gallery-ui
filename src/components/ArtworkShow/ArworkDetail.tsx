@@ -33,11 +33,7 @@ const useStyle = makeStyles(Theme => ({
   buttonsContainer: {
     position: 'absolute',
     top: Theme.spacing(1),
-    width: '95vw',
-    height: 30,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    height: Theme.spacing(10),
   },
 }))
 
@@ -62,12 +58,17 @@ const ArworkDetail = ({
   return (
     <Grid container justify="space-between" className={classes.root}>
       <CreatorButton imgUrl={profileImageUrl} name={name} link={linkProfile} />
-      <div className={classes.buttonsContainer}>
+      <ArtworkShare
+        linkTwitter={linkTwitter}
+        setDisplayReportModal={setDisplayReportModal}
+        right="24px"
+      />
+      {/* <div className={classes.buttonsContainer}>
         <ArtworkShare
           linkTwitter={linkTwitter}
           setDisplayReportModal={setDisplayReportModal}
         />
-      </div>
+      </div> */}
       <Grid item xs={12} sm={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
