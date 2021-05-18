@@ -44,6 +44,10 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
+  username: {
+    fontFamily: Theme.typography.fontFamily[2],
+    paddingLeft: Theme.spacing(2),
+  },
 }))
 
 const ArtworkItem = ({
@@ -74,40 +78,45 @@ const ArtworkItem = ({
   }, [])
 
   return (
-    <Link to={link} className={classes.link}>
+    <>
       <Paper variant="elevation" elevation={1} className={classes.root}>
-        {isTypeVideo(mimeType) ? (
-          <div className={classes.containerVideo}>
-            <div className={classes.inVideo}>
-              <video
-                poster={assetIPFSPreview}
-                src={assetIPFSPreview}
-                autoPlay={true}
-                loop={true}
-                className={classes.video}
-                muted={true}
-              >
-                <source src={assetIPFSPreview} type={mimeType} />
-                <img src={assetIPFSPreview} />
-              </video>
+        <Link to={link} className={classes.link}>
+          {isTypeVideo(mimeType) ? (
+            <div className={classes.containerVideo}>
+              <div className={classes.inVideo}>
+                <video
+                  poster={assetIPFSPreview}
+                  src={assetIPFSPreview}
+                  autoPlay={true}
+                  loop={true}
+                  className={classes.video}
+                  muted={true}
+                >
+                  <source src={assetIPFSPreview} type={mimeType} />
+                  <img src={assetIPFSPreview} />
+                </video>
+              </div>
+            </div>
+          ) : (
+            <div className={classes.img} />
+          )}
+        </Link>
+        <Link to={`/creator/?id=${artis}`} className={classes.link}>
+          <div className={classes.infoCard}>
+            <Typography variant="h5" color="primary">
+              {titleArt}
+            </Typography>
+            <div className={classes.containerAvatar}>
+              <Grid container direction="row" alignItems="center">
+                <Avatar alt="avat" src={`${avatarUrl}`} />
+                <Typography
+                  variant="body1"
+                  className={classes.username}
+                >{`@${artis}`}</Typography>
+              </Grid>
             </div>
           </div>
-        ) : (
-          <div className={classes.img} />
-        )}
-        <div className={classes.infoCard}>
-          <Typography variant="h5" color="primary">
-            {titleArt}
-          </Typography>
-          <div className={classes.containerAvatar}>
-            <Grid container direction="row" alignItems="center">
-              <Avatar alt="avat" src={`${avatarUrl}`} />
-              <Typography variant="subtitle1" color="initial">
-                {`@${artis}`}
-              </Typography>
-            </Grid>
-          </div>
-        </div>
+        </Link>
         <FooterCardItem
           price={price}
           timer={timer}
@@ -116,7 +125,7 @@ const ArtworkItem = ({
           followers
         />
       </Paper>
-    </Link>
+    </>
   )
 }
 

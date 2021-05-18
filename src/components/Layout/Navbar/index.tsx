@@ -186,8 +186,10 @@ const index = ({ pathname }) => {
               <Link className={classes.link}>
                 <Typography variant="h4">Artworks</Typography>
               </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Creators</Typography>
+              <Link to="/creators" className={classes.link}>
+                <Typography variant="h4" color="secondary">
+                  Creators
+                </Typography>
               </Link>
               <Link className={classes.link}>
                 <Typography variant="h4">Blog</Typography>
