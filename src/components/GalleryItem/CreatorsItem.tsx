@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
@@ -47,8 +47,8 @@ const CreatorsItem = ({ creator }) => {
   const classes = useStyle({ imgUrl: creator.coverImageUrl })
 
   return (
-    <a href={`/creator?id=${creator.username}`} className={classes.link}>
-      <Paper variant="elevation" elevation={1} className={classes.root}>
+    <Paper variant="elevation" elevation={1} className={classes.root}>
+      <Link to={`/creator?id=${creator.username}`} className={classes.link}>
         <div className={classes.head}>
           <div className={classes.img} />
           <div className={classes.behindAvatar}>
@@ -69,7 +69,6 @@ const CreatorsItem = ({ creator }) => {
             variant="subtitle2"
             className={classes.nameArtis}
           >{`@${creator.name}`}</Typography>
-
           <div className={classes.conatainerBio}>
             <div className={classes.descriptionBio}>
               <Typography variant="body2" color="primary">
@@ -77,16 +76,16 @@ const CreatorsItem = ({ creator }) => {
               </Typography>
             </div>
           </div>
-          <FooterCardItem
-            followers={creator.followers}
-            statesArt="creator"
-            price
-            timer
-            link={`/creator?id=${creator.username}`}
-          />
         </Grid>
-      </Paper>
-    </a>
+      </Link>
+      <FooterCardItem
+        followers={creator.followers}
+        statesArt="creator"
+        price
+        timer
+        link={`/creator?id=${creator.username}`}
+      />
+    </Paper>
   )
 }
 
