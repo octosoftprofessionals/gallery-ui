@@ -57,7 +57,7 @@ const Home = () => {
         titleButton="creators"
         link="/creators"
       >
-        <Gallery creatorsQuery={CreatorQuery} itemType="creator" />
+        <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
       </ArtworkGrid>
       <ContactUs />
     </Layout>

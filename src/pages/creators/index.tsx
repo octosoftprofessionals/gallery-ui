@@ -11,9 +11,10 @@ const creators = () => {
     'CreatorQuery',
     getCreators
   )
+
   return (
     <Layout>
-      <CreatorsPage creatorsQuery={CreatorQuery} status={isLoading} />
+      <CreatorsPage creatorsQuery={CreatorQuery?.creators} status={isLoading} />
     </Layout>
   )
 }
