@@ -12,9 +12,15 @@ import { Search } from '@material-ui/icons'
 import { boxShadow } from '../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
-  root: { padding: Theme.spacing(0, 4) },
+  root: {
+    padding: Theme.spacing(0, 4),
+  },
   searchInput: {
     boxShadow: boxShadow.boxShadow1,
+    borderRadius: Theme.shape.borderRadius[3],
+  },
+  '&.MuiInputBase-root': {
+    borderRadius: Theme.shape.borderRadius[3],
   },
   icon: {
     fontSize: Theme.typography.fontSize[10],
@@ -39,6 +45,7 @@ const SearchCreator = ({ searchBar, setSearchBar, status }) => {
       className={classes.root}
     >
       <TextField
+        className={classes.searchInput}
         placeholder="Search for a creator..."
         fullWidth
         variant="outlined"
@@ -59,7 +66,6 @@ const SearchCreator = ({ searchBar, setSearchBar, status }) => {
             </InputAdornment>
           ),
         }}
-        className={classes.searchInput}
       />
     </Grid>
   )

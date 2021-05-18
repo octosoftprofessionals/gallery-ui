@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 
-import Layout from '../../components/Layout/Layout'
+import Layout from '../../components/Layout'
 import CreatorsPage from '../../components/Creators'
 
 import { getCreators } from '../../services/autionsService'

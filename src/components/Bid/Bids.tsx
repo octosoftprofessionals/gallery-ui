@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Grid, Typography, Button, TextField, SvgIcon } from '@material-ui/core'
+import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import EthSvg from '../../assets/eth.svg'
@@ -11,7 +11,13 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: 16,
     padding: 0,
   },
-  input: { width: '60%', marginRight: 12 },
+  input: {
+    width: '60%',
+    marginRight: 12,
+    borderRadius: Theme.shape.borderRadius[2],
+    fontFamily: Theme.typography.fontFamily[1],
+    fontSize: Theme.typography.fontSize[10],
+  },
   boxBalance: {
     position: 'relative',
     backgroundColor: Theme.palette.secondary.light,
@@ -22,6 +28,7 @@ const useStyle = makeStyles(Theme => ({
   buttonBid: { backgroundColor: Theme.palette.secondary.dark },
   text: { fontSize: Theme.typography.fontSize[3] },
   boxButtonBid: { padding: 0 },
+  icon: { marginLeft: Theme.spacing(3) },
 }))
 
 const Bids = ({ price, money, balance }) => {
@@ -51,9 +58,9 @@ const Bids = ({ price, money, balance }) => {
           alignItems="center"
           className={classes.boxInput}
         >
-          <TextField
+          <OutlinedInput
+            type="number"
             placeholder="0"
-            variant="outlined"
             value={bidAmounts}
             onChange={e => setBidAmounts(e.target.value)}
             className={classes.input}
@@ -61,6 +68,7 @@ const Bids = ({ price, money, balance }) => {
           <Typography variant="h4" color="secondary">
             ETH
           </Typography>
+          <EthSvg className={classes.icon} />
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6}>
