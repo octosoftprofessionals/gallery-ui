@@ -11,9 +11,10 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const Creators = ({ creatorsQuery, status }) => {
-  const [creators, setCreators] = useState<Array[]>([])
+  const [creators, setCreators] = useState<Array[]>([[]])
   const [search, setSearch] = useState<String>('')
-  if (creatorsQuery && creators.length <= 0) {
+
+  if (creatorsQuery && creators.length <= 1) {
     setCreators(creatorsQuery)
   }
 
