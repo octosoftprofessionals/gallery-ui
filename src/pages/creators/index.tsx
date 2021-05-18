@@ -4,16 +4,16 @@ import { useQuery } from 'react-query'
 import Layout from '../../components/Layout/Layout'
 import CreatorsPage from '../../components/Creators'
 
-import { getArtworkAuctionsPaginated } from '../../services/autionsService'
+import { getCreators } from '../../services/autionsService'
 
 const creators = () => {
   const { data: CreatorQuery, isLoading } = useQuery(
     'CreatorQuery',
-    getArtworkAuctionsPaginated
+    getCreators
   )
   return (
     <Layout>
-      <CreatorsPage creatorsQuery={CreatorQuery} status={isLoading} />
+      <CreatorsPage creatorsQuery={CreatorQuery?.creators} status={isLoading} />
     </Layout>
   )
 }

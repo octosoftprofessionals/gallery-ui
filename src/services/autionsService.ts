@@ -64,6 +64,16 @@ import { paginatedQuery } from '../Utils'
 //   })
 // }
 
+export async function getCreators() {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        creators: auctionsMockup.map(artwork => artwork.creator),
+      })
+    }, 250)
+  })
+}
+
 export async function getArtworkAuctions() {
   return new Promise(resolve => {
     setTimeout(function () {
