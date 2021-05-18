@@ -28,6 +28,7 @@ const useStyle = makeStyles(Theme => ({
   container: {
     position: 'absolute',
     top: '-28px',
+    right: ({ right }) => (right ? right : null),
   },
   button: {
     backgroundColor: Theme.palette.secondary.main,
@@ -68,11 +69,11 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkShare = ({ linkTwitter, setDisplayReportModal }) => {
+const ArtworkShare = ({ linkTwitter, setDisplayReportModal, ...props }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
 
-  const classes = useStyle()
+  const classes = useStyle({ ...props })
 
   const displayButtons = e => {
     e.preventDefault()
