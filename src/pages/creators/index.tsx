@@ -13,7 +13,7 @@ const creators = () => {
   )
   return (
     <Layout>
-      <CreatorsPage creatorsQuery={CreatorQuery?.creators} status={isLoading} />
+      <CreatorsPage creatorsQuery={CreatorQuery} status={isLoading} />
     </Layout>
   )
 }

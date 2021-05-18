@@ -43,25 +43,17 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorsItem = ({
-  name,
-  artis,
-  imgUrl,
-  avatarUrl,
-  bio,
-  link,
-  followers,
-}) => {
-  const classes = useStyle({ imgUrl: imgUrl })
+const CreatorsItem = ({ creator }) => {
+  const classes = useStyle({ imgUrl: creator.coverImageUrl })
   return (
-    <a href={link} className={classes.link}>
+    <a href={`/creator?id=${creator.id}`} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
         <div className={classes.head}>
           <div className={classes.img} />
           <div className={classes.behindAvatar}>
             <Avatar
               alt="avat"
-              src={`${avatarUrl}`}
+              src={`${creator.profileImageUrl}`}
               className={classes.avatar}
             />
           </div>
@@ -69,27 +61,27 @@ const CreatorsItem = ({
         <Grid container justify="flex-start" className={classes.infoCard}>
           <Grid item xs={12}>
             <Typography variant="h5" color="primary">
-              {name}
+              {creator.username}
             </Typography>
           </Grid>
           <Typography
             variant="subtitle2"
             className={classes.nameArtis}
-          >{`@${artis}`}</Typography>
+          >{`@${creator.name}`}</Typography>
 
           <div className={classes.conatainerBio}>
             <div className={classes.descriptionBio}>
               <Typography variant="body2" color="primary">
-                {bio}
+                {creator.bio}
               </Typography>
             </div>
           </div>
           <FooterCardItem
-            followers={followers}
+            followers={creator.followers}
             statesArt="creator"
             price
             timer
-            link={link}
+            link={`/creator?id=${creator.id}`}
           />
         </Grid>
       </Paper>

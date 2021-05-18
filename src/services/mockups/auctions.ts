@@ -309,5 +309,5 @@ function fillAuctions(size): ArtworksProps[] {
   return auctions
 }
 
-const allAuctions = fillAuctions(12)
+const allAuctions = fillAuctions(60)
 export default allAuctions

@@ -8,7 +8,7 @@ const useStyle = makeStyles(Theme => ({
   root: {},
 }))
 
-const GalleryItem = ({ itemType, artwork }) => {
+const GalleryItem = ({ itemType, artwork, creator }) => {
   const classes = useStyle()
 
   return (
@@ -28,15 +28,7 @@ const GalleryItem = ({ itemType, artwork }) => {
           avatarUrl={artwork.creator.coverImageUrl}
         />
       ) : itemType === 'creator' ? (
-        <CreatorsItem
-          name={artwork.creator.username}
-          imgUrl={artwork.creator.coverImageUrl}
-          avatarUrl={artwork.creator.profileImageUrl}
-          artis={artwork.creator.name}
-          bio={artwork.creator.bio}
-          followers={artwork.creator.followers}
-          link={`/creator?id=${artwork.id}`}
-        />
+        <CreatorsItem creator={creator} />
       ) : (
         ''
       )}

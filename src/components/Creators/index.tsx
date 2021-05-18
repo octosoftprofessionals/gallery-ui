@@ -24,7 +24,6 @@ const Creators = ({ creatorsQuery = [], status }) => {
       setFilteredCreators(creatorsQuery)
     }
   }, [search, creatorsQuery])
-
   const classes = useStyle()
   return (
     <Grid container justify="center">
@@ -35,7 +34,7 @@ const Creators = ({ creatorsQuery = [], status }) => {
           status={status}
         />
       </Grid>
-      <GridCreator artworksQuery={filteredCreators} itemType="creator" />
+      <GridCreator creatorsQuery={filteredCreators} itemType="creator" />
     </Grid>
   )
 }
