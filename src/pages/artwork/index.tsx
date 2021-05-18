@@ -84,7 +84,7 @@ const ShowArtwork = () => {
       backgroundColor={colors.WhiteSmoke}
       padding="0"
       marginBottom="0"
-      marginTop="0"
+      marginTop="24px"
     >
       {artworkQuery ? (
         <ArtworkShow

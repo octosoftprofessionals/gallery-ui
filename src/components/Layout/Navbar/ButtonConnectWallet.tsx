@@ -13,7 +13,7 @@ const ButtonConnectWallet = ({ pathname }) => {
       <Grid item xs={4} container justify="flex-end">
         <Button
           variant="contained"
-          color={pathname === '/creator/' ? 'secondary' : ''}
+          color={pathname === '/creator' ? 'secondary' : ''}
           onClick={() => setConnectWallet(true)}
         >
           <Typography variant="button">Connect Wallet</Typography>

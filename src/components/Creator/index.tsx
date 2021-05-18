@@ -76,7 +76,6 @@ const useStyle = makeStyles(Theme => ({
   info: {
     '@media (max-width: 545px)': { justifyContenet: 'center' },
   },
-  containerShare: { position: 'absolute', width: 'inherit', right: '-84vw' },
 }))
 
 const itemAvatar = [
@@ -114,12 +113,11 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
           <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
 
-        <div className={classes.containerShare}>
-          <CreatorkShare
-            linkTwitter={linkTwitter}
-            setDisplayReportModal={setDisplayReportModal}
-          />
-        </div>
+        <CreatorkShare
+          linkTwitter={linkTwitter}
+          setDisplayReportModal={setDisplayReportModal}
+          right="24px"
+        />
       </Grid>
       <Grid
         container

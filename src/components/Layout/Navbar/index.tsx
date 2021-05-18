@@ -140,6 +140,8 @@ const index = ({ pathname }) => {
                   className={
                     pathname === '/creator/'
                       ? classes.buttonCreatorMenu
+                      : pathname === '/artwork/'
+                      ? classes.buttonCreatorMenu
                       : classes.buttonMenu
                   }
                   aria-label="open drawer"
