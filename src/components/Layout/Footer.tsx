@@ -16,25 +16,37 @@ const useStyles = makeStyles(Theme => ({
     },
   },
   text: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     '@media (max-width: 576px)': {
       flexDirection: 'row',
       textAlign: 'left',
       marginTop: 15,
     },
   },
+  signature: {
+    display: 'block',
+    lineHeight: '14px',
+  },
+  centerd: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  aligned: {
+    display: 'flex',
+    alignContent: 'center',
+  },
   link: { textDecoration: 'none', cursor: 'pointer' },
   img: {
     flex: 1,
-    width: Theme.spacing(13),
-    height: Theme.spacing(13),
+    width: Theme.spacing(14),
+    height: Theme.spacing(14),
     background: `url(${logoSrc})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right',
     backgroundSize: 'contain',
-
   },
   imgContainer: {
     marginRight: 30,
@@ -61,26 +73,39 @@ const Footer = () => {
   const classes = useStyles()
   const { instagram, twitter, discord, blog } = 'http://localhost:8000/'
   return (
-    <Grid container direction="row" justify="space-evenly" className={classes.root}>
-      <Grid item
+    <Grid
+      container
+      direction="row"
+      justify="space-evenly"
+      className={classes.root}
+    >
+      <Grid
+        item
         container
         justify="space-evenly"
         alignItems="center"
         xs={2}
         md={5}
-        className={classes.containerText}>
-
-        <Grid item
-          container
-          className={classes.text}>
+        className={classes.containerText}
+      >
+        <Grid item container className={classes.text}>
           <Grid item xs={1} className={classes.imgContainer}>
             <div className={classes.img} />
           </Grid>
-          <Typography variant="overline">"made by:</Typography>
-          <Link to="https://octosoftprofessionals.com/" className={classes.link}>
-            <LogoOctosoft className={classes.icon} />
-          </Link>
-          <Typography variant="overline">Octosoft Professionals".</Typography>
+          <div className={classes.centerd}>
+            <Typography variant="overline" className={classes.signature}>
+              Developed by
+            </Typography>
+            <div className={classes.aligned}>
+              <Link
+                to="https://octosoftprofessionals.com/"
+                className={classes.link}
+              >
+                <LogoOctosoft className={classes.icon} />
+              </Link>
+              <Typography variant="caption">Octosoft Professionals</Typography>
+            </div>
+          </div>
         </Grid>
       </Grid>
       <Grid
@@ -139,7 +164,7 @@ const Footer = () => {
           </Link>
         </Grid>
       </Grid>
-    </Grid >
+    </Grid>
   )
 }
 
