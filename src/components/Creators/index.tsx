@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
@@ -10,14 +10,20 @@ const useStyle = makeStyles(Theme => ({
   root: {},
 }))
 
-const Creators = ({ creatorsQuery, status }) => {
-  const [creators, setCreators] = useState<Array[]>([[]])
+const Creators = ({ creatorsQuery = [], status }) => {
+  const [filteredCreators, setFilteredCreators] = useState(creatorsQuery)
   const [search, setSearch] = useState<String>('')
 
-  if (creatorsQuery && creators.length <= 1) {
-    setCreators(creatorsQuery)
-  }
-
+  useEffect(() => {
+    if (search.length > 0) {
+      const filtered = creatorsQuery.filter(creator =>
+        creator.username.toLowerCase().includes(search.toLowerCase())
+      )
+      setFilteredCreators(filtered)
+    } else {
+      setFilteredCreators(creatorsQuery)
+    }
+  }, [search, creatorsQuery])
   const classes = useStyle()
   return (
     <Grid container justify="center">
@@ -28,11 +34,7 @@ const Creators = ({ creatorsQuery, status }) => {
           status={status}
         />
       </Grid>
-      {creators ? (
-        <GridCreator artworksQuery={creators} itemType="creator" />
-      ) : (
-        ''
-      )}
+      <GridCreator creatorsQuery={filteredCreators} itemType="creator" />
     </Grid>
   )
 }

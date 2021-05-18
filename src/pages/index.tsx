@@ -8,8 +8,9 @@ import Layout from '../components/Layout/Layout'
 import ContactUs from '../components/ContactUs'
 
 import {
-  getHeroArtwork,
   getArtworkAuctionsPaginated,
+  getHeroArtwork,
+  getCreators,
 } from '../services/autionsService'
 
 const Home = () => {
@@ -29,7 +30,7 @@ const Home = () => {
   )
   const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
     'CreatorQuery',
-    getArtworkAuctionsPaginated
+    getCreators
   )
 
   const {
@@ -56,7 +57,7 @@ const Home = () => {
         titleButton="creators"
         link="/creators"
       >
-        <Gallery artworksQuery={CreatorQuery} itemType="creator" />
+        <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
       </ArtworkGrid>
       <ContactUs />
     </Layout>

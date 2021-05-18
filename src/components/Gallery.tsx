@@ -11,10 +11,9 @@ const useStyle = makeStyles(Theme => ({
   button: { padding: Theme.spacing(3, 5), margin: Theme.spacing(6) },
 }))
 
-const Gallery = ({ artworksQuery, itemType }) => {
-  const artworks = artworksQuery ? artworksQuery : []
+const Gallery = ({ artworksQuery, creatorsQuery = [], itemType }) => {
+  const artworks = artworksQuery ? artworksQuery : [[]]
   const [pages, setPages] = useState<number>(0)
-
   const handleNextPages = () => {
     setPages(pages + 1)
   }
@@ -43,7 +42,22 @@ const Gallery = ({ artworksQuery, itemType }) => {
                 />
               </Grid>
             ))
-          : ''}
+          : creatorsQuery.map((creator, index) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                className={classes.containerItem}
+              >
+                <GalleryItem
+                  key={index}
+                  itemType={itemType}
+                  creator={creator}
+                />
+              </Grid>
+            ))}
       </Grid>
       <Grid item container justify="center">
         <Button

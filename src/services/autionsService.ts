@@ -64,6 +64,16 @@ import { paginatedQuery } from '../Utils'
 //   })
 // }
 
+export async function getCreators() {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        creators: auctionsMockup.map(artwork => artwork.creator),
+      })
+    }, 250)
+  })
+}
+
 export async function getArtworkAuctions() {
   return new Promise(resolve => {
     setTimeout(function () {
@@ -106,13 +116,17 @@ export async function getHeroArtwork(id: String) {
   })
 }
 
-export async function getCreator(id: String) {
+export async function getCreator(username: String) {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
         creator:
           auctionsMockup[
-            auctionsMockup.findIndex(auctions => auctions.id === id)
+            auctionsMockup.findIndex(
+              artwork =>
+                artwork.creator.username.toLowerCase() ===
+                username.toLowerCase()
+            )
           ].creator,
       })
     }, 250)
