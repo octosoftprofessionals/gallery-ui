@@ -72,7 +72,7 @@ const HeroAuction = ({ auction }) => {
                 imgUrl={artwork.creator.profileImageUrl}
                 name={artwork.creator.username}
                 top="-70px"
-                link={`/creator/?id=${artwork.id}`}
+                link={`/creator/?id=${artwork.creator.username}`}
               />
 
               <HeroAuctionItem

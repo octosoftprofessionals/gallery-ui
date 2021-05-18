@@ -45,8 +45,9 @@ const useStyle = makeStyles(Theme => ({
 
 const CreatorsItem = ({ creator }) => {
   const classes = useStyle({ imgUrl: creator.coverImageUrl })
+
   return (
-    <a href={`/creator?id=${creator.id}`} className={classes.link}>
+    <a href={`/creator?id=${creator.username}`} className={classes.link}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
         <div className={classes.head}>
           <div className={classes.img} />
@@ -81,7 +82,7 @@ const CreatorsItem = ({ creator }) => {
             statesArt="creator"
             price
             timer
-            link={`/creator?id=${creator.id}`}
+            link={`/creator?id=${creator.username}`}
           />
         </Grid>
       </Paper>
