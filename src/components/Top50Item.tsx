@@ -21,7 +21,6 @@ const useStyles = makeStyles(Theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  link: { textDecoration: 'none' },
   icon: {
     width: Theme.typography.fontSize[10],
     height: Theme.typography.fontSize[10],
@@ -37,11 +36,12 @@ const useStyles = makeStyles(Theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    margin: Theme.spacing(0, 0, 0, 6),
   },
   avatar: {
-    width: 65,
-    height: 65,
-    margin: Theme.spacing(0, 0, 0, 3),
+    width: 70,
+    height: 70,
+    margin: Theme.spacing(0, 0, 0, 6),
   },
   iconVerified: { display: 'block' },
   iconArrow: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles(Theme => ({
     padding: 0,
     margin: 0,
   },
-  button: { '&:hover': { backgronundColor: Theme.palette.secondary.main } },
+  button: { '&:hover': { backgroundColor: Theme.palette.secondary.main } },
   buttonIcon: {
     width: 55,
     height: 55,
@@ -63,9 +63,10 @@ const useStyles = makeStyles(Theme => ({
     fontFamily: Theme.typography.fontFamily[2],
   },
   textCreator: {
-    fontSize: Theme.typography.fontSize[9],
-    fontFamily: Theme.typography.fontFamily[5],
+    fontSize: Theme.typography.fontSize[10],
+    fontFamily: Theme.typography.fontFamily[4],
     color: Theme.palette.primary.main,
+    fontWeight: 800,
   },
   creator: {
     display: 'flex',
@@ -110,7 +111,7 @@ const Top50Item = ({
         </div>
       </Grid>
       <Grid item className={classes.creatorContainer}>
-        <Link href={'/'} className={classes.link}>
+        <Link href={'/'} underline="none">
           <Button
             variant="text"
             color="secondary"

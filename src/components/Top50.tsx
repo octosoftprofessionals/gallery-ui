@@ -20,6 +20,7 @@ const useStyles = makeStyles(Theme => ({
     color: Theme.palette.primary.main,
     fontSize: Theme.typography.fontSize[10],
     fontFamily: Theme.typography.fontFamily[5],
+    fontWeight: 800,
   },
 }))
 
