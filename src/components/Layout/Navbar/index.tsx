@@ -48,6 +48,9 @@ const useStyles = makeStyles(Theme => ({
   buttonMenu: {
     boxShadow: boxShadow1,
     fontSize: `${Theme.typography.fontSize[0]}rem`,
+    '@media (max-width: 576px)': {
+      fontSize: Theme.typography.fontSize[9],
+    },
   },
   buttonCreatorMenu: {
     boxShadow: boxShadow1,
@@ -201,7 +204,9 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Grid>
             <Grid container direction="column">
               <Link to={'/artworks'} className={classes.link}>
-                <Typography variant="h4">Artworks</Typography>
+                <Typography variant="h4" color="secondary">
+                  Artworks
+                </Typography>
               </Link>
               <Link to="/creators" className={classes.link}>
                 <Typography variant="h4" color="secondary">
