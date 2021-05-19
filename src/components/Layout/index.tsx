@@ -37,6 +37,10 @@ const Layout = ({
   marginTop,
   backgroundImage,
   height,
+  cois,
+  publicKey,
+  profileImageUrl,
+  name,
 }) => {
   const pathname =
     typeof window !== 'undefined' ? window?.location?.pathname : ''
@@ -45,11 +49,17 @@ const Layout = ({
     <ThemeProvider theme={Theme}>
       <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
         <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
-          <Navbar pathname={pathname} />
+          <Navbar
+            pathname={pathname}
+            cois={cois}
+            publicKey={publicKey}
+            profileImageUrl={profileImageUrl}
+            name={name}
+          />
         </BackgroundNavBar>
         <StyledMain marginTop={marginTop}>{children}</StyledMain>
       </LayoutContainer>
-      <Footer />
+      <Footer pathname={pathname} />
     </ThemeProvider>
   )
 }

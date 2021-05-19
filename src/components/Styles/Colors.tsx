@@ -8,6 +8,7 @@ export const colors = {
   Gray: '#7f7f7f',
   VeryLightGrey: '#cccccc',
   Conifer: '#76e650',
+  IslamicGreen: '#44B700',
   Portica: '#f9d649',
   Sun: '#f08e35',
   BurntSienna: ' #ec5157 ',

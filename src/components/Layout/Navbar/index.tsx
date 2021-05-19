@@ -18,6 +18,7 @@ import {
 import logoSrc from '../../../assets/logoNew.png'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
+import NavBarBid from './NavBarBid'
 
 const { boxShadow1 } = boxShadow
 
@@ -32,6 +33,7 @@ const useStyles = makeStyles(Theme => ({
     backgroundRepeat: 'no-repeat',
   },
   container: {
+    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
@@ -76,15 +78,19 @@ const useStyles = makeStyles(Theme => ({
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
 }))
 
-const index = ({ pathname }) => {
-  const classes = useStyles({ logoSrc })
+const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
+  const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar className={classes.root}>
-          <Grid container justify="space-around" alignItems="center">
+          <Grid
+            container
+            justify={pathname === '/bid' ? 'space-between' : 'space-around'}
+            alignItems="center"
+          >
             <Grid item xs={4}>
               <Link to="/" className={classes.link}>
                 <div className={classes.img} />
@@ -123,7 +129,16 @@ const index = ({ pathname }) => {
             </Hidden>
 
             <Hidden smDown>
-              <ButtonConnectWallet pathname={pathname} />
+              {pathname === '/bid' ? (
+                <NavBarBid
+                  cois={cois}
+                  publicKey={publicKey}
+                  profileImageUrl={profileImageUrl}
+                  name={name}
+                />
+              ) : (
+                <ButtonConnectWallet pathname={pathname} />
+              )}
             </Hidden>
 
             <Hidden mdUp>
@@ -222,7 +237,7 @@ const index = ({ pathname }) => {
                   <Typography variant="caption">Privacy Policy</Typography>
                 </Link>
                 <Link className={classes.link}>
-                  <Typography variant="caption">Discor</Typography>
+                  <Typography variant="caption">Discord</Typography>
                 </Link>
               </Grid>
               <Grid item xs={6} container direction="column">

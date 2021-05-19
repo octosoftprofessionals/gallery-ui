@@ -9,7 +9,8 @@ import logoSrc from '../../assets/logoNew.png'
 const useStyles = makeStyles(Theme => ({
   root: {
     backgroundColor: Theme.palette.secondary.light,
-    padding: Theme.spacing(10, 15),
+    padding: Theme.spacing(13, 9),
+    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
     '@media (max-width: 576px)': {
       alignItems: 'flex-start',
       padding: Theme.spacing(2, 0),
@@ -69,8 +70,8 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const Footer = () => {
-  const classes = useStyles()
+const Footer = ({ pathname }) => {
+  const classes = useStyles({ pathname })
   const { instagram, twitter, discord, blog } = 'http://localhost:8000/'
   return (
     <Grid
