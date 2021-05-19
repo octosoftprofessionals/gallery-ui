@@ -44,12 +44,16 @@ const Home = () => {
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"
-        link="/"
+        link="/artworks"
         icon
       >
         <Gallery artworksQuery={liveAuctionsQuery} itemType="artworks" />
       </ArtworkGrid>
-      <ArtworkGrid title="Featured artworks" titleButton="artworks" link="/">
+      <ArtworkGrid
+        title="Featured artworks"
+        titleButton="artworks"
+        link="/artworks"
+      >
         <Gallery artworksQuery={AuctionsQuery} itemType="artworks" />
       </ArtworkGrid>
       <ArtworkGrid
