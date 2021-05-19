@@ -92,7 +92,7 @@ const index = ({ pathname }) => {
             </Grid>
             <Hidden mdDown>
               <Grid item className={classes.container}>
-                <Link to="/" className={classes.link}>
+                <Link to="/artworks" className={classes.link}>
                   <Button
                     variant="text"
                     color="primary"
@@ -185,7 +185,7 @@ const index = ({ pathname }) => {
               </Grid>
             </Grid>
             <Grid container direction="column">
-              <Link className={classes.link}>
+              <Link to={'/artworks'} className={classes.link}>
                 <Typography variant="h4">Artworks</Typography>
               </Link>
               <Link to="/creators" className={classes.link}>
