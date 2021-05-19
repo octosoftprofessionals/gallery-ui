@@ -59,7 +59,7 @@ const Layout = ({
         </BackgroundNavBar>
         <StyledMain marginTop={marginTop}>{children}</StyledMain>
       </LayoutContainer>
-      <Footer pathname={location.pathname} />
+      <Footer pathname={pathname} />
     </ThemeProvider>
   )
 }
