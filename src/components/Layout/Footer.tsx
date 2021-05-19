@@ -10,7 +10,7 @@ const useStyles = makeStyles(Theme => ({
   root: {
     backgroundColor: Theme.palette.secondary.light,
     padding: Theme.spacing(13, 9),
-    display: ({ pathname }) => (pathname === '/bild' ? 'none' : 'block'),
+    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
     '@media (max-width: 576px)': {
       alignItems: 'flex-start',
       padding: Theme.spacing(2, 0),

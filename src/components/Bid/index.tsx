@@ -10,7 +10,7 @@ const useStyle = makeStyles(Theme => ({
   root: {},
 }))
 
-const Bild = ({ CardArtwork }) => {
+const Bid = ({ CardArtwork }) => {
   const classes = useStyle()
   const { artwork } = CardArtwork ? CardArtwork : ''
 
@@ -39,4 +39,4 @@ const Bild = ({ CardArtwork }) => {
   )
 }
 
-export default Bild
+export default Bid
