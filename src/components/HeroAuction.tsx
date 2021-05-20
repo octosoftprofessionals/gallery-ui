@@ -24,7 +24,12 @@ const useStyle = makeStyles(Theme => ({
     top: 0,
     left: 0,
   },
-  containerInfo: { position: 'relative' },
+  containerInfo: {
+    position: 'relative',
+    '@media (max-width: 576px)': {
+      marginTop: '15vh',
+    },
+  },
 }))
 
 const HeroAuction = ({ auction }) => {
@@ -34,7 +39,7 @@ const HeroAuction = ({ auction }) => {
   return (
     <div className={classes.root}>
       {artwork ? (
-        <Grid container justify="center">
+        <Grid container justify="center" alignItems="center">
           <Grid
             item
             xs={12}
