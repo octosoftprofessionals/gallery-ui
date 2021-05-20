@@ -135,6 +135,7 @@ const ArworkDetail = ({
       <CreatorSection
         imgUrl={profileImageUrl}
         name={name}
+        linkProfile={linkProfile}
         descriptionCreator={descriptionCreator}
       />
     </Grid>

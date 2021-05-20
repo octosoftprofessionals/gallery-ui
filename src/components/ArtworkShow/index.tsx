@@ -34,6 +34,7 @@ const ArtworkShow = ({
           namber={'1'}
           price={price}
           money={'23,423.99'}
+          link={`/bid?id=${id}`}
           linkProfile={`/creator?id=${creator.username}`}
           endingIn={duration}
           artworkLinks={artworkLinks}

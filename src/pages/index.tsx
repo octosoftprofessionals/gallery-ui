@@ -63,7 +63,7 @@ const Home = () => {
       >
         <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
       </ArtworkGrid>
-      <ContactUs />
+      <ContactUs link="/becomeCreator" />
     </Layout>
   )
 }
