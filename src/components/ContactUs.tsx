@@ -17,37 +17,32 @@ const useStyle = makeStyles(Theme => ({
     maxWidth: 520,
     marginLeft: 'auto',
     marginRight: 'auto',
-    paddingTop: 30,
-    paddingBottom: 30,
-    fontSize: 21,
+    paddingTop: Theme.spacing(10),
+    paddingBottom: Theme.spacing(10),
+    fontSize: Theme.spacing(8),
     lineHeight: 1.7,
     textTransform: 'uppercase',
     textAlign: 'center',
     fontWeight: 400,
-    fontFamily:
-      'Formular Mono, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New',
+    fontFamily: Theme.typography.fontFamily[1],
     '&:hover': { color: Theme.palette.primary.main },
     '@media (max-width: 576px)': {
-      fontSize: 14,
+      fontSize: Theme.spacing(4),
     },
   },
   link: { textDecoration: 'none' },
   buttonText: {
-    fontSize: 18,
-    paddingLeft: 21,
-    paddingRight: 21,
-    fontWeight: 600,
+    paddingLeft: Theme.spacing(8),
+    paddingRight: Theme.spacing(8),
     borderColor: '#E6E6E6',
     '@media (max-width: 576px)': {
-      fontSize: 18,
-      margin: 0,
-      paddingLeft: 16,
-      paddingRight: 16,
+      paddingLeft: Theme.spacing(5),
+      paddingRight: Theme.spacing(5),
       marginLeft: 'auto',
       marginRight: 'auto',
       boxSizing: 'border-box',
       display: 'inline-block',
-      border: 2,
+      border: Theme.spacing(1),
       minWidth: 0,
     },
   },
@@ -58,7 +53,7 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   icon: {
-    marginBottom: 30,
+    marginBottom: Theme.spacing(10),
     '@media (max-width: 576px)': {
       marginBottom: 0,
     },
@@ -83,15 +78,15 @@ const ContactUs = ({ link }) => {
             TOGETHER TO MOVE CULTURE FORWARD.
           </Typography>
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <Link to={link} className={classes.link}>
             <Button variant="outlined" className={classes.button}>
               <Typography variant="button" className={classes.buttonText}>
-                Became a creator on SuperChief
+                Became a creator on Superchief
               </Typography>
             </Button>
           </Link>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   )
