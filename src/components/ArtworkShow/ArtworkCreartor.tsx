@@ -37,7 +37,7 @@ const CreatorSection = ({ imgUrl, linkProfile, name, descriptionCreator }) => {
       justify="space-between"
       className={classes.root}
     >
-      <Grid item xs={6} container direction="row">
+      <Grid item sm={6} container direction="row">
         <Avatar className={classes.large} alt={name} src={imgUrl} />
         <div className={classes.creator}>
           <Link underline="none" href={linkProfile}>
@@ -51,7 +51,7 @@ const CreatorSection = ({ imgUrl, linkProfile, name, descriptionCreator }) => {
           </Link>
         </div>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item sm={6}>
         <Typography className={classes.description} variant="h6">
           {descriptionCreator}
         </Typography>

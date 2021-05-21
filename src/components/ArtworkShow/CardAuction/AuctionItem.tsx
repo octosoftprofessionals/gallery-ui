@@ -29,6 +29,7 @@ const useStyle = makeStyles(Theme => ({
   },
   button: { borderRadius: Theme.shape.borderRadius[2] },
   textButton: { fontSize: Theme.typography.fontSize[3] },
+  link: { textDecoration: 'none' },
 }))
 
 const AuctionItem = ({ price, money, endingIn, link }) => {
@@ -183,7 +184,7 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
 
           <Grid container justify="center" className={classes.root}>
             <Grid item xs={12}>
-              <Link to={link}>
+              <Link to={link} className={classes.link}>
                 <Button
                   variant={variantButton}
                   fullWidth
