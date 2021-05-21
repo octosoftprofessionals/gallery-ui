@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Button } from '@material-ui/core'
+import { Grid, Typography, Button, withWidth, Hidden } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import TwShareButton from '../../components/TwShareButton'
@@ -43,11 +43,16 @@ const useStyle = makeStyles(Theme => ({
       transform: 'translateY(-2px)',
       backgroundColor: Theme.palette.secondary.main,
     },
+    '@media (max-width: 576px)': {
+      borderRadius: Theme.shape.borderRadius[3],
+      minWidth: 50,
+      height: 50,
+    },
   },
   buttonReport: {
     backgroundColor: Theme.palette.secondary.main,
     transition: '0.3s all linear',
-    borderRadius: '50%',
+    borderRadius: Theme.shape.borderRadius[3],
     minWidth: 50,
     height: 50,
     padding: 0,
@@ -133,11 +138,13 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
         </Button>
         <Button onClick={displayButtons} className={classes.button}>
           <ArrowUpwardIcon className={classes.icon} />
-          <Typography className={classes.text}>Share</Typography>
+          <Hidden xsDown>
+            <Typography className={classes.text}>Share</Typography>
+          </Hidden>
         </Button>
       </Grid>
     </Grid>
   )
 }
 
-export default ArtworkShare
+export default withWidth()(ArtworkShare)
