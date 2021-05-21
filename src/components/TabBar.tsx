@@ -27,8 +27,8 @@ const TabBar = ({ titles, components }) => {
     setSelected(selection)
   }
   return (
-    <Grid item container direction="column" justify="flex-start">
-      <Grid item xs={5} sm={3} container justify="space-between">
+    <Grid item container justify="flex-start">
+      <Grid item sm={3} container direction="row" justify="space-between">
         {titles.map((title, index) => (
           <Button
             variant="text"
