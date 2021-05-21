@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core'
 
 import logoSrc from '../../../assets/logoNew.png'
+import LogoSCNFT from '../../../assets/SCNFT_Logo_Transparent.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
@@ -79,6 +80,10 @@ const useStyles = makeStyles(Theme => ({
     backgroundRepeat: 'no-repeat',
   },
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
+  logo: {
+    width: Theme.spacing(14),
+    height: Theme.spacing(14),
+  },
 }))
 
 const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
@@ -96,7 +101,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
           >
             <Grid item xs={4}>
               <Link to="/" className={classes.link}>
-                <div className={classes.img} />
+                <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
             <Hidden mdDown>
@@ -190,7 +195,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             >
               <Grid item xs={6}>
                 <Link to="/" className={classes.link}>
-                  <div className={classes.imgMenu} />
+                  <LogoSCNFT className={classes.logo} />
                 </Link>
               </Grid>
               <Grid item xs={2}>

@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Hidden, Typography, withWidth } from '@material-ui/core'
 
 import logoSrc from '../../assets/logoNew.png'
+import LogoSCNFT from '../../assets/SCNFT_Logo_Transparent.svg'
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -43,6 +44,10 @@ const useStyles = makeStyles(Theme => ({
     backgroundPosition: 'center',
     backgroundSize: 'contain',
   },
+  logo: {
+    width: Theme.spacing(14),
+    height: Theme.spacing(14),
+  },
   containerText: {
     flexDirection: 'row',
     '@media (max-width: 576px)': {
@@ -62,7 +67,7 @@ const Footer = ({ pathname }) => {
       <Grid item xs={12} container justify="space-between" alignItems="center">
         <Hidden smUp>
           <Grid item container justify="center" xs={12}>
-            <div className={classes.img} />
+            <LogoSCNFT className={classes.logo} />
           </Grid>
         </Hidden>
         <Grid
@@ -75,9 +80,7 @@ const Footer = ({ pathname }) => {
           alignItems="center"
         >
           <Hidden xsDown>
-            <Grid item xs={2}>
-              <div className={classes.img} />
-            </Grid>
+            <LogoSCNFT className={classes.logo} />
           </Hidden>
           <Link to={instagram} className={classes.link}>
             <Typography variant="overline">Instagram</Typography>
