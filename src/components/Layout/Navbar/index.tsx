@@ -68,7 +68,7 @@ const useStyles = makeStyles(Theme => ({
     cursor: 'pointer',
   },
   drawer: { width: `${Theme.spacing(17)}vw`, padding: Theme.spacing(0, 7) },
-  offIcon: { fontSize: `${Theme.typography.fontSize[2]}em` },
+  offIcon: { fontSize: Theme.typography.fontSize[11] },
   containerImg: { marginBottom: Theme.spacing(7) },
   menuIcon: { fontSize: Theme.typography.fontSize[10] },
   imgMenu: {
@@ -83,6 +83,9 @@ const useStyles = makeStyles(Theme => ({
   logo: {
     width: Theme.spacing(14),
     height: Theme.spacing(14),
+    '@media (max-width: 755px)': {
+      backgroundColor: Theme.palette.secondary.main,
+    },
   },
 }))
 
@@ -184,6 +187,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
           anchor={'right'}
           open={showDrawer}
           onOpen={() => setShowDrawer(true)}
+          onClose={() => setShowDrawer(false)}
         >
           <Grid container direction="column" className={classes.drawer}>
             <Grid
