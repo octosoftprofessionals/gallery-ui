@@ -82,6 +82,11 @@ const InfoCreator = ({
   const classes = useStyle()
   const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
   const year = new Date(createdAt).getFullYear()
+
+  const getPublicKey = () => {
+    return navigator.clipboard.writeText(publicKey)
+  }
+
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
@@ -93,6 +98,7 @@ const InfoCreator = ({
           >{`#000${userIndex}`}</Typography>
         </Button>
         <Button
+          onClick={getPublicKey}
           variant="contained"
           color="primary"
           endIcon={
