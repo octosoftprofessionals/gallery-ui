@@ -5,7 +5,7 @@ import BlockIcon from '@material-ui/icons/Block'
 
 const useStyle = makeStyles(Theme => ({
   root: {
-    padding: Theme.spacing(1),
+    padding: Theme.spacing(3),
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',

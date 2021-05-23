@@ -16,6 +16,11 @@ const {
 
 export const Theme = createMuiTheme({
   overrides: {
+    MuiPopover: {
+      paper: {
+        borderRadius: 16,
+      },
+    },
     MuiDialog: {
       paperWidthSm: {
         maxWidth: 400,

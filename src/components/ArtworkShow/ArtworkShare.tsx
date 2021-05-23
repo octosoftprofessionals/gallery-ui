@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Button, withWidth, Hidden } from '@material-ui/core'
+import {
+  Grid,
+  Typography,
+  Button,
+  withWidth,
+  Hidden,
+  Popover,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import TwShareButton from '../../components/TwShareButton'
@@ -98,6 +105,32 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
     return navigator.clipboard.writeText(url)
   }
 
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorElReport, setAnchorElReport] = useState(null)
+
+  // const [openShare, setOpenShare] = useState(false)
+  // const [openReport, setOpenReport] = useState(false)
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClickReport = event => {
+    setAnchorElReport(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  const handleCloseReport = () => {
+    setAnchorElReport(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
+  const openReport = Boolean(anchorElReport)
+  const idReport = openReport ? 'simple-popover' : undefined
+
   return (
     <Grid
       item
@@ -106,37 +139,52 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
       alignItems="flex-end"
       className={classes.container}
     >
-      {showButtons ? (
-        <Grid
-          container
-          direction="column"
-          justify="space-between"
-          alignItems="center"
-          className={classes.root}
-          spacing={2}
+      {
+        <Popover
+          open={open}
+          onClose={handleClose}
+          id={id}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          anchorPosition={{
+            top: 200,
+            left: 200,
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
         >
           <TwShareButton linkTwitter={linkTwitter} />
           <CopyLinkButton onClick={getUrl} />
-        </Grid>
-      ) : null}
-      {showReport ? (
-        <Grid
-          container
-          direction="column"
-          justify="space-between"
-          alignItems="center"
-          className={classes.report}
-          spacing={2}
-          xs={12}
+        </Popover>
+      }
+      {
+        <Popover
+          open={openReport}
+          onClose={handleCloseReport}
+          id={idReport}
+          anchorEl={anchorElReport}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
         >
           <ReportButton onClick={setDisplayReportModal} />
-        </Grid>
-      ) : null}
+        </Popover>
+      }
       <Grid item direction="row" justify="center">
-        <Button onClick={displayReport} className={classes.buttonReport}>
+        <Button onClick={handleClickReport} className={classes.buttonReport}>
           <MoreHorizIcon className={classes.icon} />
         </Button>
-        <Button onClick={displayButtons} className={classes.button}>
+        <Button onClick={handleClick} className={classes.button}>
           <ArrowUpwardIcon className={classes.icon} />
           <Hidden xsDown>
             <Typography className={classes.text}>Share</Typography>
