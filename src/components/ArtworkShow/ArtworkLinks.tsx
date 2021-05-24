@@ -25,7 +25,6 @@ const ArtworkView = ({ artworkLinks }) => {
       direction="column"
       justify="center"
       alignItems="flex-start"
-      spacing={0}
     >
       {artworkLinks.map(elem => {
         return <LinkButton link={elem.link} text={elem.text} icon={elem.icon} />

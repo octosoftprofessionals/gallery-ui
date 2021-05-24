@@ -83,9 +83,6 @@ const useStyles = makeStyles(Theme => ({
   logo: {
     width: Theme.spacing(14),
     height: Theme.spacing(14),
-    '@media (max-width: 755px)': {
-      backgroundColor: Theme.palette.secondary.main,
-    },
   },
 }))
 

@@ -50,7 +50,7 @@ const useStyle = makeStyles(Theme => ({
       transform: 'translateY(-2px)',
       backgroundColor: Theme.palette.secondary.main,
     },
-    '@media (max-width: 576px)': {
+    '@media (max-width: 585px)': {
       borderRadius: Theme.shape.borderRadius[3],
       minWidth: 50,
       height: 50,
