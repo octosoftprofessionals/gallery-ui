@@ -68,12 +68,13 @@ const ArworkDetail = ({
         setDisplayReportModal={setDisplayReportModal}
         right="24px"
       />
-      <Grid item xs={12} md={6} container direction="column">
-        <Typography variant="h4">{titleArt}</Typography>
-        <Typography variant="body1" className={classes.text}>
-          <ArrowDownward className={classes.icon} /> Artwork information
-        </Typography>
-        <Grid item xs={12} md={6} container direction="column">
+      <Grid container wrap="wrap" justify="space-between">
+        <Grid item xs={12} md={5} container direction="column">
+          <Typography variant="h4">{titleArt}</Typography>
+          <Typography variant="body1" className={classes.text}>
+            <ArrowDownward className={classes.icon} /> Artwork information
+          </Typography>
+
           <Typography
             variant="subtitle1"
             color="initial"
@@ -88,43 +89,44 @@ const ArworkDetail = ({
           >
             {description}
           </Typography>
+
+          <Typography
+            variant="subtitle1"
+            color="initial"
+            className={classes.title}
+          >
+            Edition of
+          </Typography>
+          <Typography variant="h4" color="initial">
+            {namber}
+          </Typography>
+          <ArtworkView artworkLinks={artworkLinks} />
         </Grid>
-        <Typography
-          variant="subtitle1"
-          color="initial"
-          className={classes.title}
-        >
-          Edition of
-        </Typography>
-        <Typography variant="h4" color="initial">
-          {namber}
-        </Typography>
-        <ArtworkView artworkLinks={artworkLinks} />
-      </Grid>
-      <Grid item xs={12} md={6} container direction="column">
-        <CardAuction
-          auctionState={true}
-          price={price}
-          money={money}
-          endingIn={endingIn}
-          link={link}
-        />
-        <Typography variant="h6" color="primary">
-          History
-        </Typography>
-        {historyInfo.map(elem => {
-          return (
-            <HistoryItem
-              name={elem.name}
-              imgUrl={elem.imgUrl}
-              action={elem.action}
-              price={elem.price}
-              money={elem.money}
-              date={elem.date}
-              link={elem.link}
-            />
-          )
-        })}
+        <Grid item xs={12} md={6} container direction="column">
+          <CardAuction
+            auctionState={true}
+            price={price}
+            money={money}
+            endingIn={endingIn}
+            link={link}
+          />
+          <Typography variant="h6" color="primary">
+            History
+          </Typography>
+          {historyInfo.map(elem => {
+            return (
+              <HistoryItem
+                name={elem.name}
+                imgUrl={elem.imgUrl}
+                action={elem.action}
+                price={elem.price}
+                money={elem.money}
+                date={elem.date}
+                link={elem.link}
+              />
+            )
+          })}
+        </Grid>
       </Grid>
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
       <CreatorSection

@@ -70,7 +70,7 @@ const LinkButton = ({ link, text, icon }) => {
       component={Link}
     >
       <Paper elevation={1} className={classes.paper}>
-        <Grid container xs={8} className={classes.grid}>
+        <Grid item xs={8} container className={classes.grid}>
           <img src={icon} className={classes.iconPng} />
           <Typography className={classes.text} variant="h6">
             {text}
