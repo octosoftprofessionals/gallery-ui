@@ -56,28 +56,31 @@ const ArworkDetail = ({
 }) => {
   const classes = useStyle()
   return (
-    <Grid container justify="space-between" className={classes.root}>
+    <Grid
+      container
+      justify="space-between"
+      wrap="wrap"
+      className={classes.root}
+    >
       <CreatorButton imgUrl={profileImageUrl} name={name} link={linkProfile} />
       <ArtworkShare
         linkTwitter={linkTwitter}
         setDisplayReportModal={setDisplayReportModal}
         right="24px"
       />
-      <Grid item xs={12} sm={6} container direction="column">
+      <Grid item xs={12} md={6} container direction="column">
         <Typography variant="h4">{titleArt}</Typography>
         <Typography variant="body1" className={classes.text}>
           <ArrowDownward className={classes.icon} /> Artwork information
         </Typography>
-        <Grid item xs={12} sm={6} container>
-          <Grid item xs={12}>
-            <Typography
-              variant="subtitle1"
-              color="initial"
-              className={classes.title}
-            >
-              Description
-            </Typography>
-          </Grid>
+        <Grid item xs={12} md={6} container direction="column">
+          <Typography
+            variant="subtitle1"
+            color="initial"
+            className={classes.title}
+          >
+            Description
+          </Typography>
           <Typography
             variant="body2"
             color="initial"
@@ -96,11 +99,9 @@ const ArworkDetail = ({
         <Typography variant="h4" color="initial">
           {namber}
         </Typography>
-        <Grid item>
-          <ArtworkView artworkLinks={artworkLinks} />
-        </Grid>
+        <ArtworkView artworkLinks={artworkLinks} />
       </Grid>
-      <Grid item xs={12} sm={6} container direction="column">
+      <Grid item xs={12} md={6} container direction="column">
         <CardAuction
           auctionState={true}
           price={price}

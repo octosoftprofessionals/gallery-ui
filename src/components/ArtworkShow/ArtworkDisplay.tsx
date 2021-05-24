@@ -17,7 +17,7 @@ const useStyle = makeStyles(Theme => ({
     position: 'relative',
     backgroundColor: Theme.palette.secondary.light,
     padding: Theme.spacing(9),
-    '@media (max-width: 576px)': {
+    '@media (max-width: 585px)': {
       padding: Theme.spacing(0, 9, 14),
     },
   },
@@ -25,7 +25,7 @@ const useStyle = makeStyles(Theme => ({
     maxWidth: `${Theme.spacing(14)}vh`,
     filter: boxShadow.boxShadow2,
     cursor: 'zoom-in',
-    '@media (max-width: 576px)': {
+    '@media (max-width: 585px)': {
       maxWidth: `${Theme.spacing(14)}vw`,
     },
   },
@@ -54,7 +54,7 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     left: 0,
     paddingBottom: Theme.spacing(9),
-    '@media (max-width: 576px)': {
+    '@media (max-width: 585px)': {
       flexDirection: 'column',
       right: Theme.spacing(9),
       left: 'auto',
@@ -113,7 +113,7 @@ const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
         <Grid
           item
           xs={1}
-          sm={12}
+          md={12}
           container
           justify="flex-end"
           className={classes.buttons}
