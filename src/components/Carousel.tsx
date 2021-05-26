@@ -5,9 +5,10 @@ import GalleryItem from './GalleryItem'
 
 const Carousel = ({ items }) => (
   <ItemList>
-    {items.map((item, index) => (
+    <GalleryItem></GalleryItem>
+    {/*    {items.map((item, index) => (
       <GalleryItem key={index} {...item} />
-    ))}
+    ))} */}
   </ItemList>
 )
 

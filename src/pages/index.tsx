@@ -6,12 +6,14 @@ import Gallery from '../components/Gallery'
 import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout'
 import ContactUs from '../components/ContactUs'
+import RotatingCarousel from '../components/RotatingCarousel/RotatingCarousel'
 
 import {
   getArtworkAuctionsPaginated,
   getHeroArtwork,
   getCreators,
 } from '../services/autionsService'
+
 
 const Home = () => {
   const { data: artworkAuctionsPaginated, isLoading } = useInfiniteQuery(
@@ -40,6 +42,7 @@ const Home = () => {
 
   return (
     <Layout>
+      <RotatingCarousel></RotatingCarousel>
       <HeroAuction auction={AuctionArtworkQuery} />
       <ArtworkGrid
         title="Live auctions"
