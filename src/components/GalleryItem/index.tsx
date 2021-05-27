@@ -30,8 +30,8 @@ const GalleryItem = ({ itemType, artwork, creator }) => {
       ) : itemType === 'creator' ? (
         <CreatorsItem creator={creator} />
       ) : (
-        ''
-      )}
+            ''
+          )}
     </>
   )
 }
