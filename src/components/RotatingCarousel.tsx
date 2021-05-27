@@ -1,6 +1,8 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import HeroAuction from '../components/HeroAuction'
+import { colors } from '../components/Styles/Colors'
+
 import {
     RadioButtonUnchecked,
     ChevronLeft,
@@ -21,23 +23,21 @@ const useStyle = makeStyles(Theme => ({
         right: 'auto',
 
     },
-
-
 }))
 
 const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
     const classes = useStyle()
     return (
         <Carousel PrevIcon={[<ChevronLeft className={classes.arrowLeft} />,
-        <RadioButtonUnchecked className={classes.radio} />]
+        <RadioButtonUnchecked />]
         }
             NextIcon={[<ChevronRight className={classes.arrowRigt} />,
-            <RadioButtonUnchecked className={classes.radio} />]
+            <RadioButtonUnchecked />]
             }
             navButtonsProps={{
                 style: {
                     backgroundColor: 'transparent',
-                    color: 'black',
+                    color: colors.Black,
                 },
             }}
             navButtonsAlwaysVisible
