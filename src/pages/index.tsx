@@ -42,7 +42,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <RotatingCarousel artworksCarousel={[AuctionArtworkQuery, AuctionArtworkQuery]} />
+      <RotatingCarousel artworksCarousel={[AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery]} />
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"

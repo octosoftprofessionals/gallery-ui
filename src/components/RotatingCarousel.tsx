@@ -13,22 +13,15 @@ const useStyle = makeStyles(Theme => ({
         position: 'absolute',
         top: 'auto',
         left: 'auto',
-        fill: '#000',
-        borderColor: '#000',
-        '&:hover': {
-            backgroundColor: 'none',
-        }
+
     },
     arrowRigt: {
         position: 'absolute',
         top: 'auto',
         right: 'auto',
-        fill: '#000',
-        borderColor: '#000',
-        '&:hover': {
-            backgroundColor: 'none',
-        }
+
     },
+
 
 }))
 
@@ -36,11 +29,19 @@ const RotatingCarousel = ({ artworksCarousel }) => {
     const classes = useStyle()
     return (
         <Carousel PrevIcon={[<ChevronLeft className={classes.arrowLeft} />,
-        <RadioButtonUnchecked className={classes.arrowLeft} />]
+        <RadioButtonUnchecked className={classes.radio} />]
         }
             NextIcon={[<ChevronRight className={classes.arrowRigt} />,
-            <RadioButtonUnchecked className={classes.arrowLeft} />]
+            <RadioButtonUnchecked className={classes.radio} />]
             }
+            navButtonsProps={{
+                style: {
+                    backgroundColor: 'transparent',
+                    color: 'black',
+                },
+            }}
+            navButtonsAlwaysVisible
+            animation="slide"
         >
             {artworksCarousel ?
                 artworksCarousel.map((artwork, i) => (
