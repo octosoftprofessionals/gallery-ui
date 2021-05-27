@@ -25,7 +25,7 @@ const useStyle = makeStyles(Theme => ({
 
 }))
 
-const RotatingCarousel = ({ artworksCarousel }) => {
+const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
     const classes = useStyle()
     return (
         <Carousel PrevIcon={[<ChevronLeft className={classes.arrowLeft} />,
@@ -42,6 +42,8 @@ const RotatingCarousel = ({ artworksCarousel }) => {
             }}
             navButtonsAlwaysVisible
             animation="slide"
+            timeout={timeout}
+            interval={interval}
         >
             {artworksCarousel ?
                 artworksCarousel.map((artwork, i) => (

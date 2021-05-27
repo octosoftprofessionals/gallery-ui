@@ -3,7 +3,6 @@ import { useQuery, useInfiniteQuery } from 'react-query'
 
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
-import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout'
 import ContactUs from '../components/ContactUs'
 import RotatingCarousel from '../components/RotatingCarousel'
@@ -42,7 +41,8 @@ const Home = () => {
 
   return (
     <Layout>
-      <RotatingCarousel artworksCarousel={[AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery]} />
+      <RotatingCarousel artworksCarousel={[AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery]} timeout={1000}
+        interval={7000} />
       <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"
