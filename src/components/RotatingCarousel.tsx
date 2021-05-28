@@ -11,28 +11,66 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyle = makeStyles(Theme => ({
+    /* carousel: {
+        '&:hover': {
+            '@media (max-width: 576px)': {
+                marginTop: 0,
+                paddingTop: 0,
+            },
+        },
+    }, */
     arrowLeft: {
         position: 'absolute',
         top: 'auto',
         left: 'auto',
-
+        fontSize: 50,
+        '&:hover': {
+            '@media (max-width: 576px)': {
+                opacity: 100,
+            },
+        },
+        '@media (max-width: 576px)': {
+            fontSize: 20,
+            opacity: 0,
+        },
     },
     arrowRigt: {
         position: 'absolute',
         top: 'auto',
         right: 'auto',
-
+        fontSize: 50,
+        '&:hover': {
+            '@media (max-width: 576px)': {
+                opacity: 100,
+            },
+        },
+        '@media (max-width: 576px)': {
+            fontSize: 20,
+            opacity: 0,
+        },
     },
+    circle: {
+        fontSize: 50,
+        '&:hover': {
+            '@media (max-width: 576px)': {
+                opacity: 100,
+            },
+        },
+        '@media (max-width: 576px)': {
+            fontSize: 20,
+            opacity: 0,
+        },
+    }
 }))
 
 const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
     const classes = useStyle()
     return (
-        <Carousel PrevIcon={[<ChevronLeft className={classes.arrowLeft} />,
-        <RadioButtonUnchecked />]
+        <Carousel /* className={classes.carousel} */ PrevIcon={[<ChevronLeft className={classes.arrowLeft} />,
+        <RadioButtonUnchecked className={classes.circle} />]
         }
             NextIcon={[<ChevronRight className={classes.arrowRigt} />,
-            <RadioButtonUnchecked />]
+            <RadioButtonUnchecked className={classes.circle} />]
             }
             navButtonsProps={{
                 style: {
