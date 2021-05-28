@@ -1,10 +1,12 @@
 import React from 'react'
 import { useQuery } from 'react-query'
+import { CircularProgress } from '@material-ui/core'
 
 import {
   getArtworkAuctions,
   getHeroArtwork,
 } from '../../services/autionsService'
+import { featuredItemsQuery } from '../../services/gallery'
 
 import TabBar from '../TabBar'
 // import ArtworkGrid from '../../ArtworkGrid'
@@ -12,29 +14,33 @@ import TabBar from '../TabBar'
 import GalleryArtworks from './GalleryArtworks'
 
 const GridArtworks = () => {
-  const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
-    'liveAuctionsQuery',
-    getArtworkAuctions
+  const { data: featuredItems = [], isLoading, status: statusFeaturedItemsQuery } = useQuery(
+    'featuredItemsQuery',
+    featuredItemsQuery,
   )
+
+  console.log('featuredItems:', featuredItems)
+  console.log('featuredItems.map(i => i.status):', featuredItems.map(i => i.status))
+
+  const listedItems = featuredItems.filter(i => i.status === 'listed')
+  const reserveItems = featuredItems.filter(i => i.status === 'reserve')
+  const soldItems = featuredItems.filter(i => i.status === 'sold')
 
   return (
     <TabBar
       titles={['Live Auction', 'Reserve not met', 'Sold']}
       components={[
         <GalleryArtworks
-          itemType="artworks"
-          artworksQuery={liveAuctionsQuery}
-          statesArt="auction"
+          isLoading={isLoading}
+          data={listedItems}
         />,
         <GalleryArtworks
-          itemType="artworks"
-          artworksQuery={liveAuctionsQuery}
-          statesArt="reserve"
+          isLoading={isLoading}
+          data={reserveItems}
         />,
         <GalleryArtworks
-          itemType="artworks"
-          artworksQuery={liveAuctionsQuery}
-          statesArt="sold"
+          isLoading={isLoading}
+          data={soldItems}
         />,
       ]}
     />

@@ -5,7 +5,10 @@ import { Grid } from '@material-ui/core'
 import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
+import { formatUsd } from '../Utils'
+
 import CreatorButton from './CreatorButton'
+import { GalleryItem } from '../services/gallery'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -32,14 +35,32 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const HeroAuction = ({ auction }) => {
-  const { artwork } = auction ? auction : []
+const HeroAuction = ({ galleryItem = {}, isLoading }: { galleryItem: GalleryItem, isLoading: boolean }) => {
+  const {
+    // assetId,
+    assetContractAddress,
+    assetTokenId,
+    title,
+    imageUrl,
+    videoUrl,
+    priceEth,
+    priceUsd,
+    creatorUsername,
+    creatorImageUrl,
+    creatorAddress,
+    status,
+    expiration,
+  } = galleryItem
 
   const classes = useStyle()
+
+  const artworkPath = `/artwork?contractAddress=${assetContractAddress}&tokenId=${assetTokenId}`
+  const creatorPath = `/creator/?address=${creatorAddress}`
+
   return (
     <div className={classes.root}>
-      {artwork ? (
-        <Grid container justify="center" alignItems="center">
+      {galleryItem ? (
+        <Grid container justify="center"  alignItems="center">
           <Grid
             item
             xs={12}
@@ -51,15 +72,15 @@ const HeroAuction = ({ auction }) => {
             <Grid item xs={12} sm={5} md={4}>
               <div className={classes.containerAsset}>
                 <video
-                  poster={artwork.assetIPFSPath}
-                  src={artwork.assetIPFSPath}
+                  poster={imageUrl}
+                  src={videoUrl}
                   autoPlay={true}
                   loop={true}
                   className={classes.video}
                   muted={true}
                 >
-                  <source src={artwork.assetIPFSPath} type={artwork.mimeType} />
-                  <img src={artwork.assetIPFSPath} />
+                  {/* <source src={videoUrl} /> */}
+                  <img src={imageUrl} />
                 </video>
               </div>
             </Grid>
@@ -74,18 +95,21 @@ const HeroAuction = ({ auction }) => {
               className={classes.containerInfo}
             >
               <CreatorButton
-                imgUrl={artwork.creator.profileImageUrl}
-                name={artwork.creator.username}
+                username={creatorUsername}
+                imageUrl={creatorImageUrl}
+                profileUrl={creatorPath}
                 top="-70px"
-                link={`/creator/?id=${artwork.creator.username}`}
+                link={`/creator/?id=${creatorUsername}`}
               />
 
               <HeroAuctionItem
-                endingIn={artwork.duration}
-                money={'$23,023.98'}
-                price={artwork.price}
-                title={artwork.name}
-                linkButtonArtWork={`/artwork/?id=${artwork.id}`}
+                title={title}
+                priceEth={priceEth}
+                priceUsd={priceUsd}
+                expiration={expiration}
+                linkButtonArtWork={artworkPath}
+                linkButtonBid="#"
+                isLoading={isLoading}
               />
             </Grid>
           </Grid>

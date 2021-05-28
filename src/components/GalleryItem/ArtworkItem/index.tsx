@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -6,11 +7,14 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
+import { GalleryItem } from '../../../services/gallery'
+import { Box } from '@material-ui/core'
+import { artworkPathFrom } from '../../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
   img: {
-    backgroundImage: ({ assetIPFSPath }) => `url(${assetIPFSPath})`,
+    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -51,23 +55,26 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ArtworkItem = ({
-  mimeType,
-  assetIPFSPath,
-  assetIPFSPreview,
-  avatarUrl,
-  price,
-  artis,
-  titleArt,
-  endingIn,
-  statesArt,
-  link,
-}) => {
+  galleryItem: {
+    title,
+    imageUrl,
+    videoUrl,
+    assetContractAddress,
+    assetTokenId,
+    creatorUsername,
+    creatorImageUrl,
+    status,
+    priceEth,
+    expiration,
+  } = {},
+  ...rootProps
+}: { galleryItem: GalleryItem | undefined }) => {
   const [timer, setTimer] = useState('')
-  const classes = useStyle({ assetIPFSPath })
+  const classes = useStyle({ imageUrl })
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      const delta = deltaTime(endingIn)
+      const delta = deltaTime(expiration)
       if (delta >= 0) {
         setTimer(timeFormat(delta))
       } else {
@@ -77,11 +84,57 @@ const ArtworkItem = ({
     }, 1000)
   }, [])
 
+  const link = artworkPathFrom(assetContractAddress, assetTokenId)
+
+  // const { height: wHeight, width: wWidth } = useWindowSize()
+
+  // const h = Math.floor(wHeight / 2)
+  // const w = Math.floor(wWidth / 2)
+  // const transform = `h_${h},w_${w},q_100`
+  // console.log('transform:', transform)
+  // videoUrl = `https://res.cloudinary.com/j5743857383/video/upload/${transform}/v1620852155/nft-gallery/adedf80c81473c4de9b58eccd0b35405_vjmf1f.mp4`
+
+  const CreatorInfo = ({
+    username,
+    imageUrl,
+  }) => {
+    const classes = useStyle()
+    return (
+      <div className={classes.containerAvatar}>
+        <Grid container direction="row" alignItems="center">
+          <Avatar alt="avat" src={imageUrl} />
+          <Typography variant="body1" className={classes.username}>
+            {`@${username}`}
+          </Typography>
+        </Grid>
+      </div>
+    )
+  }
+
   return (
-    <>
+    <Link to={link} className={classes.link} {...rootProps}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
-        <Link to={link} className={classes.link}>
-          {isTypeVideo(mimeType) ? (
+        <Box>
+          {(videoUrl != null && videoUrl.length > 0) ? (
+            <div className={classes.containerVideo}>
+              <div className={classes.inVideo}>
+                <video
+                  poster={imageUrl}
+                  src={'' ?? videoUrl}
+                  autoPlay={true}
+                  loop={true}
+                  className={classes.video}
+                  muted={true}
+                >
+                  {/* <source src={videoUrl} type='video/mp4; codecs="vp8, vorbis"' /> */}
+                  <img src={imageUrl} />
+                </video>
+              </div>
+            </div>
+          ) : (
+            <div className={classes.img} />
+          )}
+          {/* {isTypeVideo(mimeType) ? (
             <div className={classes.containerVideo}>
               <div className={classes.inVideo}>
                 <video
@@ -99,33 +152,27 @@ const ArtworkItem = ({
             </div>
           ) : (
             <div className={classes.img} />
-          )}
-        </Link>
-        <Link to={`/creator/?id=${artis}`} className={classes.link}>
+          )} */}
+        </Box>
+        <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
           <div className={classes.infoCard}>
             <Typography variant="h5" color="primary">
-              {titleArt}
+              <Truncate lines={2}>
+                {title}
+              </Truncate>
             </Typography>
-            <div className={classes.containerAvatar}>
-              <Grid container direction="row" alignItems="center">
-                <Avatar alt="avat" src={`${avatarUrl}`} />
-                <Typography
-                  variant="body1"
-                  className={classes.username}
-                >{`@${artis}`}</Typography>
-              </Grid>
-            </div>
+            <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
           </div>
         </Link>
         <FooterCardItem
-          price={price}
+          statesArt={status}
+          price={priceEth}
           timer={timer}
-          statesArt={statesArt}
-          link
-          followers
+          link={link}
+          followers={0}
         />
       </Paper>
-    </>
+    </Link>
   )
 }
 

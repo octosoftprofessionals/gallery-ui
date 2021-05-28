@@ -62,7 +62,11 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
+const ArtworkDisplay = ({
+  imageUrl,
+  videoUrl,
+  mimeType,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [volume, setVolume] = useState<boolean>(true)
   const [fullscreen, setFullscreen] = useState<boolean>(false)
@@ -98,16 +102,16 @@ const ArtworkDisplay = ({ assetIPFSPath, mimeType }) => {
       >
         <Grid container justify="center" alignItems="center">
           <video
-            poster={assetIPFSPath}
-            src={assetIPFSPath}
+            poster={imageUrl}
+            src={videoUrl}
             autoPlay={true}
             loop={true}
             onClick={() => toggleFullScreen()}
             className={fullscreen ? classes.fullScreenVideo : classes.video}
             ref={videoRef}
           >
-            <source src={assetIPFSPath} type={mimeType} />
-            <img src={assetIPFSPath} />
+            <source src={videoUrl} type={mimeType} />
+            <img src={imageUrl} />
           </video>
         </Grid>
         <Grid

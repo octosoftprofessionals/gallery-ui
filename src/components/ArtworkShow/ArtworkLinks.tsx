@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const ArtworkView = ({ artworkLinks }) => {
+const ArtworkView = ({ artworkLinks = [] }) => {
   const classes = useStyles()
   const preventDefault = event => event.preventDefault()
   return (
