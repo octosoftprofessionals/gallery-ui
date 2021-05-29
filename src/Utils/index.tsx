@@ -1,6 +1,9 @@
-export const deltaTime = (start: Date) => {
-  let current = new Date()
-  let delta = start - current
+import { DateTime } from 'luxon'
+
+export const deltaTime = (expiration: string | DateTime | Date) => {
+  let expiration_datetime = typeof expiration === 'string' ? DateTime.fromISO(expiration) : expiration instanceof Date ? DateTime.fromJSDate(expiration) : expiration
+  let now = DateTime.utc()
+  let delta = expiration_datetime - now
   return delta
 }
 
@@ -68,4 +71,22 @@ export const paginatedQuery = (Query: Array[]) => {
     pages[index] = Query.slice(index * 12, index * 12 + 12)
   }
   return pages
+}
+
+export const formatDecimal = (numberish, decimals = 3) => {
+  if (numberish == null) {
+    return '-'
+  }
+  const [integral = '0', fractional = '0'] = String(numberish).split('.')
+  return `${integral}.${fractional.slice(0, decimals)}`
+}
+
+const formatNumberWithCommas = (x) => {
+  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+}
+export const formatUsd = (numberish) => {
+  if (numberish == null) {
+    return '-'
+  }
+  return `$${formatNumberWithCommas(formatDecimal(numberish, 2))}`
 }

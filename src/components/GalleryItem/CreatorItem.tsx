@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import FooterCardItem from './FooterCardItem'
+import CreatorFooter from './FooterCardItem/Creators'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
@@ -43,7 +44,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorsItem = ({ creator }) => {
+const CreatorItem = ({ creator }) => {
   const classes = useStyle({ imgUrl: creator.coverImageUrl })
 
   return (
@@ -76,6 +77,7 @@ const CreatorsItem = ({ creator }) => {
               </Typography>
             </div>
           </div>
+          {/* <CreatorFooter followers={followers} link={link} /> */}
         </Grid>
       </Link>
       <FooterCardItem
@@ -89,4 +91,4 @@ const CreatorsItem = ({ creator }) => {
   )
 }
 
-export default CreatorsItem
+export default CreatorItem

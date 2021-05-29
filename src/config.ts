@@ -14,6 +14,8 @@ const config = {
     process.env.GATSBY_INSTAGRAM_LINK ?? 'https://www.instagram.com/metxr.nft/',
   THEME_COLOR: '#e0bd70',
   TEXT_LINK_COLOR: '#bd9f5d',
+  OPENSEA_API_KEY: process.env.GATSBY_OPENSEA_API_KEY,
+  OPENSEA_GALLERY_ADDRESS: process.env.GATSBY_OPENSEA_GALLERY_ADDRESS,
 }
 
 export default config

@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { deltaTime, timerArray } from '../../../Utils'
+import { deltaTime, formatUsd, formatDecimal, timerArray } from '../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(11) },
@@ -32,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
 }))
 
-const AuctionItem = ({ price, money, endingIn, link }) => {
+const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
   const [timer, setTimer] = useState(0)
   const [changeTitle, setChangeTitle] = useState('Auction ending in')
   const [variantButton, setVariantButton] = useState('contained')
@@ -45,7 +45,7 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
   const [disableTime, setDisableTime] = useState(true)
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      const delta = deltaTime(endingIn)
+      const delta = deltaTime(expiration)
       if (delta >= 0) {
         setTimer(timerArray(delta))
       } else {
@@ -96,10 +96,10 @@ const AuctionItem = ({ price, money, endingIn, link }) => {
                 color="primary"
                 className={classes.price}
               >
-                {price}
+                {`${formatDecimal(priceEth)} ETH`}
               </Typography>
               <Typography variant="button" color="inherit">
-                {money}
+                 {formatUsd(priceUsd)}
               </Typography>
             </Grid>
             <Hidden mdDown>

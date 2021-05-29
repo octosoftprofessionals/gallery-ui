@@ -1,6 +1,7 @@
 // import { auctions } from '../config/api'
 import auctionsMockup from './mockups/auctions'
 import { paginatedQuery } from '../Utils'
+import { getAssetsByCollectionSlug } from './opensea'
 
 // TODO: replace with API Call
 // async function getArtworkAuctions(
@@ -75,13 +76,14 @@ export async function getCreators() {
 }
 
 export async function getArtworkAuctions() {
-  return new Promise(resolve => {
-    setTimeout(function () {
-      resolve({
-        artworks: auctionsMockup,
-      })
-    }, 250)
-  })
+  return await getAssetsByCollectionSlug('superchiefgallery-nifty')
+  // return new Promise(resolve => {
+  //   setTimeout(function () {
+  //     resolve({
+  //       artworks: auctionsMockup,
+  //     })
+  //   }, 250)
+  // })
 }
 
 export async function getArtworkAuctionsPaginated() {
@@ -127,7 +129,8 @@ export async function getCreator(username: String) {
                 artwork.creator.username.toLowerCase() ===
                 username.toLowerCase()
             )
-          ].creator,
+            // auctionsMockup.findIndex(auctions => auctions.id === id)
+          ]?.creator,
       })
     }, 250)
   })

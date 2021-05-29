@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import queryString from 'query-string'
 
 import ArtworkShow from '../../components/ArtworkShow'
 import Layout from '../../components/Layout'
@@ -10,6 +11,8 @@ import { colors } from '../../components/Styles/Colors'
 import iconEtherscan from '../../assets/etherscan-logo-circle.png'
 import iconView from '../../assets/view.png'
 import iconBlock from '../../assets/block.png'
+import { galleryItemQuery } from '../../services/gallery'
+import useQueryParams from '../../hooks/useQueryParams'
 
 // ArtworkView params:
 const artworkLinks = [
@@ -32,7 +35,7 @@ const linkShareTwitter = () => {
 }
 
 // ArtworkCreator Param:
-const descriptionCreator =
+const creatorDescription =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 
 const historyInfo = [
@@ -71,11 +74,12 @@ const historyInfo = [
 //const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 const ShowArtwork = () => {
-  const search = typeof window !== 'undefined' ? window.location.search : ''
-  const IdArtwork = new URLSearchParams(search)
-  const { data: artworkQuery } = useQuery('artworkQuery', () =>
-    getArtwork(IdArtwork.values().next().value)
+  const { contractAddress, tokenId } = useQueryParams()
+  const { data: galleryItem } = useQuery('artworkQuery', () =>
+    galleryItemQuery({ assetContractAddress: contractAddress, assetTokenId: tokenId })
   )
+
+  console.log('ShowArtwork galleryItem:', galleryItem)
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
@@ -86,14 +90,13 @@ const ShowArtwork = () => {
       marginBottom="0"
       marginTop="24px"
     >
-      {artworkQuery ? (
+      {galleryItem ? (
         <ArtworkShow
-          artwork={artworkQuery.artwork}
+          galleryItem={galleryItem}
           artworkLinks={artworkLinks}
-          descriptionCreator={descriptionCreator}
+          creatorDescription={creatorDescription}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}
-          historyInfo={historyInfo}
         />
       ) : (
         ''

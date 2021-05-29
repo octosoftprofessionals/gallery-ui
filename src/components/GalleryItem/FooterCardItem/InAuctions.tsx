@@ -3,6 +3,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
 
+import { formatDecimal } from '../../../Utils'
+
 const useStyle = makeStyles(Theme => ({
   footerCard: {
     left: 0,
@@ -25,7 +27,7 @@ const InAuctions = ({ price, timer }) => {
         </Typography>
         <Grid item xs={12}>
           <Typography variant="caption" color="secondary">
-            {`${price} ETH`}
+            {`${formatDecimal(price)} ETH`}
           </Typography>
         </Grid>
       </Grid>

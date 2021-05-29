@@ -28,7 +28,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorSection = ({ imgUrl, linkProfile, name, descriptionCreator }) => {
+const CreatorSection = ({ username, imageUrl, description, profileUrl }) => {
   const classes = useStyle()
   return (
     <Grid
@@ -38,22 +38,22 @@ const CreatorSection = ({ imgUrl, linkProfile, name, descriptionCreator }) => {
       className={classes.root}
     >
       <Grid item sm={6} container direction="row">
-        <Avatar className={classes.large} alt={name} src={imgUrl} />
+        <Avatar className={classes.large} alt={username} src={imageUrl} />
         <div className={classes.creator}>
-          <Link underline="none" href={linkProfile}>
-            <Typography variant="h4">{name}</Typography>
+          <Link underline="none" href={profileUrl}>
+            <Typography variant="h4">{username}</Typography>
           </Link>
-          <Link underline="none" href={linkProfile}>
+          <Link underline="none" href={profileUrl}>
             <Typography
               variant="subtitle2"
               className={classes.link}
-            >{`@${name}`}</Typography>
+            >{`@${username}`}</Typography>
           </Link>
         </div>
       </Grid>
       <Grid item sm={6}>
         <Typography className={classes.description} variant="h6">
-          {descriptionCreator}
+          {description}
         </Typography>
       </Grid>
     </Grid>

@@ -4,6 +4,7 @@ import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import EthSvg from '../../assets/eth.svg'
+import { formatDecimal, formatUsd } from '../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   boxInput: {
@@ -31,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
   icon: { marginLeft: Theme.spacing(3) },
 }))
 
-const Bids = ({ price, money, balance }) => {
+const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
   const [bidAmounts, setBidAmounts] = useState()
   return (
@@ -48,7 +49,7 @@ const Bids = ({ price, money, balance }) => {
         <Typography
           variant="caption"
           color="primary"
-        >{`${price} ETH`}</Typography>
+        >{`${formatDecimal(priceEth)} ETH`}</Typography>
       </Grid>
       <Grid item xs={12} container alignItems="flex-start">
         <Grid
@@ -72,7 +73,7 @@ const Bids = ({ price, money, balance }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Typography variant="caption">{`$${money}`}</Typography>
+        <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
       </Grid>
       <div className={classes.boxBalance}>
         <Grid container direction="row" justify="space-between">

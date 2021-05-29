@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { deltaTime, timerArray } from '../../../Utils'
+import { formatDecimal, deltaTime, formatUsd, timerArray } from '../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(11, 0) },
@@ -30,12 +30,13 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const HeroAuctionItem = ({
-  price,
-  money,
-  endingIn,
   title,
+  priceEth,
+  priceUsd,
+  expiration,
   linkButtonBid,
   linkButtonArtWork,
+  isLoading,
 }) => {
   const [timer, setTimer] = useState(0)
   const [disableInfo, setDisableInfo] = useState(false)
@@ -44,7 +45,7 @@ const HeroAuctionItem = ({
   const [changeTitle, setChangeTitle] = useState('Auction ending in')
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      const delta = deltaTime(endingIn)
+      const delta = deltaTime(expiration)
       if (delta >= 0) {
         setTimer(timerArray(delta))
       } else {
@@ -95,9 +96,11 @@ const HeroAuctionItem = ({
             color="primary"
             className={classes.price}
           >
-            {`${price} ETH`}
+            {`${formatDecimal(priceEth)} ETH`}
           </Typography>
-          <Typography variant="caption">{money}</Typography>
+          <Typography variant="caption">
+            {formatUsd(priceUsd)}
+          </Typography>
         </Grid>
         <Hidden mdDown>
           <Divider
@@ -118,6 +121,7 @@ const HeroAuctionItem = ({
           </Grid>
           <Grid item xs={12} container direction="row" justify="flex-start">
             <Grid
+              item
               xs={4}
               sm={3}
               style={{ display: disableHours ? 'block' : 'none' }}

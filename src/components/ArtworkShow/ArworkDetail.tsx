@@ -12,6 +12,7 @@ import HistoryItem from './HistoryItem'
 
 import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
+import { biddingPathFrom, profilePathFromAddress } from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -37,24 +38,49 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArworkDetail = ({
-  profileImageUrl,
-  name,
-  titleArt,
-  description,
-  namber,
-  price,
-  money,
-  endingIn,
-  linkProfile,
-  link,
+const ArtworkDetail = ({
+  galleryItem,
   artworkLinks,
-  descriptionCreator,
   linkTwitter,
   setDisplayReportModal,
-  historyInfo,
 }) => {
   const classes = useStyle()
+
+  const {
+    assetContractAddress,
+    assetTokenId,
+    title,
+    description,
+    number,
+    imageUrl,
+    videoUrl,
+    priceEth,
+    priceUsd,
+    creatorUsername,
+    creatorImageUrl,
+    creatorAddress,
+    creatorDescription,
+    status,
+    expiration,
+    historyItems,
+  } = galleryItem
+
+  const creatorProfileLink = profilePathFromAddress(creatorAddress)
+  const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
+
+  const History = ({ data = [] }) => (
+    <div>
+      <Typography variant="h6" color="primary">
+        History
+      </Typography>
+      <div>
+        {data.map(historyItem => (
+          <HistoryItem {...historyItem} />
+        ))}
+      </div>
+    </div>
+  )
+
   return (
     <Grid
       container
@@ -62,7 +88,7 @@ const ArworkDetail = ({
       wrap="wrap"
       className={classes.root}
     >
-      <CreatorButton imgUrl={profileImageUrl} name={name} link={linkProfile} />
+      <CreatorButton username={creatorUsername} imageUrl={creatorImageUrl} profileUrl={creatorProfileLink} />
       <ArtworkShare
         linkTwitter={linkTwitter}
         setDisplayReportModal={setDisplayReportModal}
@@ -70,7 +96,7 @@ const ArworkDetail = ({
       />
       <Grid container wrap="wrap" justify="space-between">
         <Grid item xs={12} md={5} container direction="column">
-          <Typography variant="h4">{titleArt}</Typography>
+          <Typography variant="h4">{title}</Typography>
           <Typography variant="body1" className={classes.text}>
             <ArrowDownward className={classes.icon} /> Artwork information
           </Typography>
@@ -98,45 +124,31 @@ const ArworkDetail = ({
             Edition of
           </Typography>
           <Typography variant="h4" color="initial">
-            {namber}
+            {number}
           </Typography>
           <ArtworkView artworkLinks={artworkLinks} />
         </Grid>
         <Grid item xs={12} md={6} container direction="column">
           <CardAuction
             auctionState={true}
-            price={price}
-            money={money}
-            endingIn={endingIn}
-            link={link}
+            priceEth={priceEth}
+            priceUsd={priceUsd}
+            expiration={expiration}
+            biddingLink={biddingLink}
           />
-          <Typography variant="h6" color="primary">
-            History
-          </Typography>
-          {historyInfo.map(elem => {
-            return (
-              <HistoryItem
-                name={elem.name}
-                imgUrl={elem.imgUrl}
-                action={elem.action}
-                price={elem.price}
-                money={elem.money}
-                date={elem.date}
-                link={elem.link}
-              />
-            )
-          })}
+          <History data={historyItems} />
         </Grid>
       </Grid>
+
       <Creator displayTextButton="none" title="Creator" fontSize="24px" />
       <CreatorSection
-        imgUrl={profileImageUrl}
-        name={name}
-        linkProfile={linkProfile}
-        descriptionCreator={descriptionCreator}
+        username={creatorUsername}
+        imageUrl={creatorImageUrl}
+        profileUrl={creatorProfileLink}
+        description={creatorDescription ?? ''}
       />
     </Grid>
   )
 }
 
-export default ArworkDetail
+export default ArtworkDetail
