@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-import { useQuery, useInfiniteQuery } from 'react-query'
-import { partition } from 'lodash'
+import React from 'react'
+import { useQuery } from 'react-query'
 
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import ArtworkItem from '../components/GalleryItem/ArtworkItem'
-import CreatorItem from '../components/GalleryItem/CreatorItem'
-import HeroAuction from '../components/HeroAuction'
 import Layout from '../components/Layout'
 import ContactUs from '../components/ContactUs'
+import RotatingCarousel from '../components/RotatingCarousel'
 
 import { featuredItemsQuery } from '../services/gallery'
 
@@ -40,10 +38,15 @@ const Home = () => {
   //   getCreators
   // )
 
-  const { data: allFeaturedItems = [], status } = useQuery('FeaturedItems', featuredItemsQuery)
+  const { data: allFeaturedItems = [], status } = useQuery(
+    'FeaturedItems',
+    featuredItemsQuery
+  )
 
   const heroItem = allFeaturedItems[0]
-  const featuredItems = allFeaturedItems.filter(item => item?.assetId !== heroItem?.assetId)
+  const featuredItems = allFeaturedItems.filter(
+    item => item?.assetId !== heroItem?.assetId
+  )
 
   const listedItems = featuredItems.filter(i => i.status === 'listed')
   const reserveItems = featuredItems.filter(i => i.status === 'reserve')
@@ -59,8 +62,11 @@ const Home = () => {
 
   return (
     <Layout>
-      <HeroAuction galleryItem={heroItem} isLoading={isLoading} />
-
+      <RotatingCarousel
+        artworksCarousel={featuredItems.slice(0, 2)}
+        timeout={1000}
+        interval={7000}
+      />
       <ArtworkGrid
         title="Featured artworks"
         titleButton="artworks"
@@ -69,7 +75,9 @@ const Home = () => {
         <Gallery
           isLoading={isLoading}
           items={reserveItems}
-          renderItem={(item, index) => <ArtworkItem key={index} galleryItem={item} />}
+          renderItem={(item, index) => (
+            <ArtworkItem key={index} galleryItem={item} />
+          )}
         />
       </ArtworkGrid>
 
@@ -82,7 +90,9 @@ const Home = () => {
         <Gallery
           isLoading={isLoading}
           items={listedItems}
-          renderItem={(item, index) => <ArtworkItem key={index} galleryItem={item} />}
+          renderItem={(item, index) => (
+            <ArtworkItem key={index} galleryItem={item} />
+          )}
         />
       </ArtworkGrid>
 

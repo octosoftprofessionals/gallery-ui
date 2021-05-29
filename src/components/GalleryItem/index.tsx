@@ -16,12 +16,10 @@ const GalleryItem = ({ itemType, data, link }) => {
   return (
     <>
       {itemType === 'artworks' ? (
-        <ArtworkItem
-          key={data?.assetId}
-          galleryItem={data}
-        />
+        <ArtworkItem key={data?.assetId} galleryItem={data} />
       ) : itemType === 'creator' ? (
         <CreatorsItem creator={data} />
+      ) : (
         // <CreatorsItem
         //   name={data?.creator.username}
         //   imgUrl={data?.creator.coverImageUrl}
@@ -31,12 +29,7 @@ const GalleryItem = ({ itemType, data, link }) => {
         //   followers={data?.creator.followers}
         //   link={link}
         // />
-      ) : (
-        <BlogItem
-          link={link}
-          imgUrl={data?.creator.profileImageUrl}
-          description={data?.description}
-        />
+        ''
       )}
     </>
   )
