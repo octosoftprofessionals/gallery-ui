@@ -60,7 +60,7 @@ const useStyles = makeStyles(Theme => ({
 
 const Footer = ({ pathname }) => {
   const classes = useStyles({ pathname })
-  const { instagram, twitter, discord } = 'http://localhost:8000/'
+  /*  const { instagram, twitter, discord } = 'http://localhost:8000/' */
   const { communityGuidelines, termsOfService, privacy, careers, help } = '/'
   return (
     <Grid container className={classes.root}>
@@ -82,13 +82,13 @@ const Footer = ({ pathname }) => {
           <Hidden xsDown>
             <LogoSCNFT className={classes.logo} />
           </Hidden>
-          <Link to={instagram} className={classes.link}>
+          <Link to='https://www.instagram.com/superchiefgallerynft/' target="_blank" className={classes.link}>
             <Typography variant="overline">Instagram</Typography>
           </Link>
-          <Link to={twitter} className={classes.link}>
+          <Link to='https://twitter.com/SuperchiefNFT' target="_blank" className={classes.link}>
             <Typography variant="overline">Twitter</Typography>
           </Link>
-          <Link to={discord} className={classes.link}>
+          <Link to='https://discord.com/invite/pxjASBky' target="_blank" className={classes.link}>
             <Typography variant="overline">Discord</Typography>
           </Link>
           {/* <Link to={blog} className={classes.link}>
