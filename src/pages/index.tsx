@@ -1,60 +1,73 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useQuery, useInfiniteQuery } from 'react-query'
 
-import BannerImg from '../components/BannerImg'
-import BottomFiller from '../components/Sectional/BottomFiller'
-import FooterSectional from '../components/FooterSectional'
+import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
-import HeroAuction from '../components/HeroAuction'
-import Layout from '../components/Layout/Layout'
+import Layout from '../components/Layout'
+import ContactUs from '../components/ContactUs'
+import RotatingCarousel from '../components/RotatingCarousel'
 
-const items = [...new Array(20)].map(() => ({}))
+import {
+  getArtworkAuctionsPaginated,
+  getHeroArtwork,
+  getCreators,
+} from '../services/autionsService'
 
-const FeaturedArtworkSection = () => (
-  <FeaturedArtwork>
-    <FeaturedArtworkTitle>Featured Artwork</FeaturedArtworkTitle>
-    <Divider />
-    <Gallery items={items} />
-  </FeaturedArtwork>
-)
 
 const Home = () => {
+  const { data: artworkAuctionsPaginated, isLoading } = useInfiniteQuery(
+    'artworkAuctionsPaginated',
+    getArtworkAuctionsPaginated
+  )
+
+  const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
+    'liveAuctionsQuery',
+    getArtworkAuctionsPaginated
+  )
+
+  const { data: AuctionsQuery, status: statusAuctionsQuery } = useQuery(
+    'AuctionsQuery',
+    getArtworkAuctionsPaginated
+  )
+  const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
+    'CreatorQuery',
+    getCreators
+  )
+
+  const {
+    data: AuctionArtworkQuery,
+    status: statusAuctionArtworkQuery,
+  } = useQuery('AuctionArtworkQuery', getHeroArtwork)
+
   return (
     <Layout>
-      <HeroSection>
-        <HeroAuction />
-      </HeroSection>
-      <FeaturedArtworkSection />
-      <FooterSectional />
-      <BottomFiller />
+      <RotatingCarousel artworksCarousel={[AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery, AuctionArtworkQuery]} timeout={1000}
+        interval={7000} />
+      <ArtworkGrid
+        title="Live auctions"
+        titleButton="live auctions"
+        link="/artworks"
+        icon
+      >
+        <Gallery artworksQuery={liveAuctionsQuery} itemType="artworks" />
+      </ArtworkGrid>
+      <ArtworkGrid
+        title="Featured artworks"
+        titleButton="artworks"
+        link="/artworks"
+      >
+        <Gallery artworksQuery={AuctionsQuery} itemType="artworks" />
+      </ArtworkGrid>
+      <ArtworkGrid
+        title="Featured creators"
+        titleButton="creators"
+        link="/creators"
+      >
+        <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
+      </ArtworkGrid>
+      {/* <ContactUs link="/becomeCreator" /> */}
     </Layout>
   )
 }
 
 export default Home
-
-const HeroSection = styled.div`
-  width: 100%;
-  height: 30vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const FeaturedArtwork = styled.div`
-  padding-bottom: 78px;
-`
-
-const FeaturedArtworkTitle = styled.h2`
-  vertical-align: top;
-  height: 21px;
-  line-height: 25px;
-  font-size: 1.5em;
-  margin-bottom: 0;
-`
-
-const Divider = styled.div`
-  border-bottom: 2px solid #333;
-  margin-top: 1.25em;
-  margin-bottom: 1.5em;
-`

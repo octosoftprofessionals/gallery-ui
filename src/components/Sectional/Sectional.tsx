@@ -16,7 +16,7 @@ const Sectional = ({
 export default Sectional
 
 const Container = styled.div`
-  padding: 16px 16px 11px;
+  padding: 16px;
   border-bottom: solid 1px #ffecc3;
   color: black;
   display: flex;

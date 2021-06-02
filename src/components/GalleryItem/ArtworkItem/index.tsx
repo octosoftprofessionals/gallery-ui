@@ -1,0 +1,132 @@
+import React, { useEffect, useState } from 'react'
+import { Link } from 'gatsby'
+
+import { makeStyles } from '@material-ui/core/styles'
+import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
+
+import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils'
+import FooterCardItem from '../FooterCardItem'
+
+const useStyle = makeStyles(Theme => ({
+  root: { position: 'relative' },
+  img: {
+    backgroundImage: ({ assetIPFSPath }) => `url(${assetIPFSPath})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    paddingBottom: '100%',
+    borderRadius: Theme.spacing(4, 4, 0, 0),
+  },
+  infoCard: {
+    padding: Theme.spacing(9),
+    paddingBottom: `${Theme.spacing(6)}vh`,
+    display: 'grid',
+    gridGap: Theme.spacing(9),
+  },
+  containerAvatar: { marginBottom: Theme.spacing(9) },
+  link: { textDecoration: 'none' },
+  containerVideo: { position: 'relative', paddingBottom: '100%' },
+  inVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    boxSizing: 'border-box',
+
+    display: 'flex',
+  },
+  video: {
+    display: 'block',
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    borderRadius: Theme.spacing(4, 4, 0, 0),
+  },
+  username: {
+    fontFamily: Theme.typography.fontFamily[2],
+    paddingLeft: Theme.spacing(2),
+  },
+}))
+
+const ArtworkItem = ({
+  mimeType,
+  assetIPFSPath,
+  assetIPFSPreview,
+  avatarUrl,
+  price,
+  artis,
+  titleArt,
+  endingIn,
+  statesArt,
+  link,
+}) => {
+  const [timer, setTimer] = useState('')
+  const classes = useStyle({ assetIPFSPath })
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      const delta = deltaTime(endingIn)
+      if (delta >= 0) {
+        setTimer(timeFormat(delta))
+      } else {
+        clearInterval(timeInterval)
+        setTimer('Auction has ended')
+      }
+    }, 1000)
+  }, [])
+
+  return (
+    <>
+      <Paper variant="elevation" elevation={1} className={classes.root}>
+        <Link to={link} className={classes.link}>
+          {isTypeVideo(mimeType) ? (
+            <div className={classes.containerVideo}>
+              <div className={classes.inVideo}>
+                <video
+                  poster={assetIPFSPreview}
+                  src={assetIPFSPreview}
+                  autoPlay={true}
+                  loop={true}
+                  className={classes.video}
+                  muted={true}
+                >
+                  <source src={assetIPFSPreview} type={mimeType} />
+                  <img src={assetIPFSPreview} />
+                </video>
+              </div>
+            </div>
+          ) : (
+            <div className={classes.img} />
+          )}
+        </Link>
+        <Link to={`/creator/?id=${artis}`} className={classes.link}>
+          <div className={classes.infoCard}>
+            <Typography variant="h5" color="primary">
+              {titleArt}
+            </Typography>
+            <div className={classes.containerAvatar}>
+              <Grid container direction="row" alignItems="center">
+                <Avatar alt="avat" src={`${avatarUrl}`} />
+                <Typography
+                  variant="body1"
+                  className={classes.username}
+                >{`@${artis}`}</Typography>
+              </Grid>
+            </div>
+          </div>
+        </Link>
+        <FooterCardItem
+          price={price}
+          timer={timer}
+          statesArt={statesArt}
+          link
+          followers
+        />
+      </Paper>
+    </>
+  )
+}
+
+export default ArtworkItem
