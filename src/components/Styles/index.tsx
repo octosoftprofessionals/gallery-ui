@@ -190,6 +190,8 @@ export const Theme = createMuiTheme({
       },
     },
     MuiPaper: {
+      root: { backgroundColor: 'none' },
+      elevation24: { boxShadow: 'none' },
       elevation1: {
         boxShadow: boxShadow.boxShadow1,
         borderRadius: 16,
