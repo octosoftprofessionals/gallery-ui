@@ -21,6 +21,11 @@ export const Theme = createMuiTheme({
         borderRadius: 16,
       },
     },
+    MuiInputBase: {
+      input: {
+        background: 'red',
+      },
+    },
     MuiDialog: {
       paperWidthSm: {
         maxWidth: 400,

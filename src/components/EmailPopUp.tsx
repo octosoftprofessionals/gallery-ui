@@ -6,15 +6,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { /* Grid,  */Typography } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
+import { Typography } from '@material-ui/core'
 import { colors } from '../components/Styles/Colors';
 import { makeStyles } from '@material-ui/core/styles'
 import { Input } from '@material-ui/core';
-/* import useLocalState from 'react';
- */
+
 import { useState, useEffect } from "react";
 
 const useStyle = makeStyles(Theme => ({
+    h1: {
+        color: colors.White,
+    },
     input: {
         borderColor: 'trasnparent',
         background: 'trasnparent',
@@ -26,20 +29,49 @@ const useStyle = makeStyles(Theme => ({
         padding: 20,
 
     },
+    contBtn: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        padding: 5,
+        margin: 15,
+    },
     closeBtn: {
         background: colors.LigthPetroleum,
-        borderRadius: 50,
-        padding: 10,
+        height: 60,
+        borderRadius: '50%',
+        display: 'inline - block',
+        padding: 0,
     },
     field: {
-        padding: 0,
-        background: colors.AquaGreen,
+        padding: 10,
+        background: colors.Black,
         borderRadius: 50,
         borderColor: colors.AquaGreen,
+        border: 'solid 2px',
+        color: colors.AquaGreen,
+        paddingLeft: 20,
     },
     suscribeBtn: {
         background: colors.AquaGreen,
-        fontSize: 20,
+        fontSize: 16,
+        fontWeight: 800,
+        padding: 20,
+        margin: 20,
+        borderRadius: 20,
+        width: 150,
+    },
+    text: {
+        color: colors.Gainsboro,
+        fontWeight: 200,
+        fontSize: 16,
+        marginBottom: 30,
+    },
+    title: {
+        color: colors.White,
+        fontWeight: 100,
+        fontSize: 18,
+        marginBottom: 5,
     }
 }))
 
@@ -66,9 +98,9 @@ const EmailPopUp = () => {
     const [open, setOpen] = useState(true);
     const [value, setValue] = useLocalState("memorable", "");
 
-    /*   const handleOpen = () => {
-          setOpen(true);
-      }; */
+    const handleOpen = () => {
+        setOpen(true);
+    };
     const handleClose = () => {
         setOpen(false);
     };
@@ -92,34 +124,39 @@ const EmailPopUp = () => {
             <Dialog open={open} onClose={handleClose} /* aria-labelledby="form-dialog-title" */ fullWidth>
                 <div className={classes.box}>
                     <DialogActions className={classes.input} >
-                        <Button onClick={handleClose} color="primary" className={classes.closeBtn}>
-                            x
-
-          </Button>
+                        <Button onClick={handleClose} className={classes.closeBtn}>
+                            <CloseIcon /* fontSize="large" */></CloseIcon></Button>
                     </DialogActions>
-                    <DialogTitle id="form-dialog-title">Join Our Mailing List</DialogTitle>
+                    <DialogTitle id="form-dialog-title" className={classes.h1}>Join Our Mailing List</DialogTitle>
                     <DialogContent>
 
-                        <DialogContentText >
+                        <div className={classes.text} >
                             To subscribe to this website, please enter your email address here. We will send updates
+                            occasionally. To subscribe to this website, please enter your email address here. We will send updates
                             occasionally.
-          </DialogContentText >
-                        <Typography>Mail</Typography>
+          </div >
+                        <div className={classes.title}>Mail</div>
                         <Input
                             placeholder='email'
                             className={classes.field}
                             fullWidth
                             color='primary'
                             disableUnderline={true}
-                            margin="dense"
+                            margin="none"
                             type="text"
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
+                            label='email'
                         />
                     </DialogContent>
-                    <DialogActions>
-
-                        <Button onClick={handleClose} color="primary" className={classes.suscribeBtn} >
+                    <DialogActions className={classes.contBtn}>
+                        <Button
+                            onClick={handleClose}
+                            color="primary"
+                            className={classes.suscribeBtn}
+                            size="large"
+                            variant="text"
+                        >
                             Sure!
           </Button>
                     </DialogActions>
