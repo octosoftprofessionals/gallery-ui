@@ -76,12 +76,14 @@ const EmailPopUp = () => {
 
     useEffect(() => {
         if (localStorage) {
-            var popUpShown = localStorage.getItem('popUpShown')
+            var popUpShown = localStorage.getItem(JSON.stringify(value))
+            setOpen(false)
             if (!popUpShown) {
                 setOpen(true)
             }
         }
     }, [])
+
 
     const classes = useStyle()
 
