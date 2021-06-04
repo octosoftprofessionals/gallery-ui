@@ -68,7 +68,9 @@ const ArtworkItem = ({
     expiration,
   } = {},
   ...rootProps
-}: { galleryItem: GalleryItem | undefined }) => {
+}: {
+  galleryItem: GalleryItem | undefined
+}) => {
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
 
@@ -79,7 +81,7 @@ const ArtworkItem = ({
         setTimer(timeFormat(delta))
       } else {
         clearInterval(timeInterval)
-        setTimer('Auction has ended')
+        setTimer('Auction ended')
       }
     }, 1000)
   }, [])
@@ -94,10 +96,7 @@ const ArtworkItem = ({
   // console.log('transform:', transform)
   // videoUrl = `https://res.cloudinary.com/j5743857383/video/upload/${transform}/v1620852155/nft-gallery/adedf80c81473c4de9b58eccd0b35405_vjmf1f.mp4`
 
-  const CreatorInfo = ({
-    username,
-    imageUrl,
-  }) => {
+  const CreatorInfo = ({ username, imageUrl }) => {
     const classes = useStyle()
     return (
       <div className={classes.containerAvatar}>
@@ -115,7 +114,7 @@ const ArtworkItem = ({
     <Link to={link} className={classes.link} {...rootProps}>
       <Paper variant="elevation" elevation={1} className={classes.root}>
         <Box>
-          {(videoUrl != null && videoUrl.length > 0) ? (
+          {videoUrl != null && videoUrl.length > 0 ? (
             <div className={classes.containerVideo}>
               <div className={classes.inVideo}>
                 <video
@@ -157,11 +156,12 @@ const ArtworkItem = ({
         <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
           <div className={classes.infoCard}>
             <Typography variant="h5" color="primary">
-              <Truncate lines={2}>
-                {title}
-              </Truncate>
+              <Truncate lines={2}>{title}</Truncate>
             </Typography>
-            <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
+            <CreatorInfo
+              imageUrl={creatorImageUrl}
+              username={creatorUsername}
+            />
           </div>
         </Link>
         <FooterCardItem
