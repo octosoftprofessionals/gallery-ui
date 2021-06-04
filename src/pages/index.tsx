@@ -7,6 +7,7 @@ import ArtworkItem from '../components/GalleryItem/ArtworkItem'
 import Layout from '../components/Layout'
 import ContactUs from '../components/ContactUs'
 import RotatingCarousel from '../components/RotatingCarousel'
+import EmailPopUp from '../components/EmailPopUp'
 
 import { featuredItemsQuery } from '../services/gallery'
 
@@ -62,6 +63,7 @@ const Home = () => {
 
   return (
     <Layout>
+      <EmailPopUp></EmailPopUp>
       <RotatingCarousel
         artworksCarousel={featuredItems.slice(0, 2)}
         timeout={1000}
