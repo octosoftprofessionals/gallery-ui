@@ -23,7 +23,8 @@ const useStyle = makeStyles(Theme => ({
         background: colors.Petroleum,
         maxWidth: 800,
         borderRadius: 16,
-        padding: 20
+        padding: 20,
+
     },
     closeBtn: {
         background: colors.LigthPetroleum,
@@ -58,27 +59,29 @@ function useLocalState(key, initial) {
         window.localStorage.setItem(key, JSON.stringify(value));
     }, [value]);
 
-    /*    useEffect({
-           if(localStorage) {
-               const popUpShown = localStorage.getItem('popUpShown');
-               if (!popUpShown) {
-                   setOpen(true)
-               }
-           }
-       }, []) */
     return [value, setValue];
 }
 
 const EmailPopUp = () => {
     const [open, setOpen] = useState(true);
     const [value, setValue] = useLocalState("memorable", "");
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+
+    /*   const handleOpen = () => {
+          setOpen(true);
+      }; */
     const handleClose = () => {
         setOpen(false);
     };
 
+
+    useEffect(() => {
+        if (localStorage) {
+            var popUpShown = localStorage.getItem('popUpShown')
+            if (!popUpShown) {
+                setOpen(true)
+            }
+        }
+    }, [])
 
     const classes = useStyle()
 
@@ -86,7 +89,7 @@ const EmailPopUp = () => {
         <div >
             <Dialog open={open} onClose={handleClose} /* aria-labelledby="form-dialog-title" */ fullWidth>
                 <div className={classes.box}>
-                    <DialogActions className={classes.input}>
+                    <DialogActions className={classes.input} >
                         <Button onClick={handleClose} color="primary" className={classes.closeBtn}>
                             x
 
