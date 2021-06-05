@@ -23,7 +23,7 @@
     "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-styled-components": "^4.2.0",
     "gatsby-plugin-typescript": "^3.2.0",
-    "luxon": "^1.26.0",
+    "luxon": "^1.27.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.4",
     "query-string": "^7.0.0",
