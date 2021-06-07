@@ -24,7 +24,12 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ConnectWalletModal = ({ handleClose }) => {
-  const classes = useStyle()
+  const classes = useStyle();
+  
+  async function getAccount() {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  }
+
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
@@ -80,10 +85,12 @@ const ConnectWalletModal = ({ handleClose }) => {
               }}
               className={classes.button}
               endIcon
+              onClick={() => getAccount()}
             >
               <Typography variant="caption" color="secondary">
                 Metamask
               </Typography>
+
             </Button>
             <Button
               variant="contained"
