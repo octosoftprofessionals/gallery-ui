@@ -78,6 +78,7 @@ const InfoCreator = ({
   createdAt,
   userIndex,
   publicKey,
+  type,
 }) => {
   const classes = useStyle()
   const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
@@ -90,13 +91,16 @@ const InfoCreator = ({
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
-        <Button variant="contained" className={classes.button}>
-          <Typography
-            variant="caption"
-            color="secondary"
-            className={classes.textButton}
-          >{`#000${userIndex}`}</Typography>
-        </Button>
+        {type === 'account' ? null : (
+          <Button variant="contained" className={classes.button}>
+            <Typography
+              variant="caption"
+              color="secondary"
+              className={classes.textButton}
+            >{`#000${userIndex}`}</Typography>
+          </Button>
+        )}
+
         <Button
           onClick={getPublicKey}
           variant="contained"
@@ -120,10 +124,13 @@ const InfoCreator = ({
       <Typography variant="h4" color="primary">
         {name}
       </Typography>
-      <Typography
-        variant="subtitle2"
-        className={classes.userName}
-      >{`@${username}`}</Typography>
+      {type === 'account' ? null : (
+        <Typography
+          variant="subtitle2"
+          className={classes.userName}
+        >{`@${username}`}</Typography>
+      )}
+
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
@@ -143,51 +150,65 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={12} sm={5}>
           <Button variant="outlined" fullWidth>
-            <Typography variant="button">Follow</Typography>
+            {type === 'account' ? (
+              <Typography variant="button">Edit Profile</Typography>
+            ) : (
+              <Typography variant="button">Follow</Typography>
+            )}
           </Button>
         </Grid>
       </Grid>
-      <Typography variant="button" color="primary">
-        Followed by
-      </Typography>
-      <AvatarGroup spacing="small">
-        {followedes.map((item, i) => (
-          <Avatar key={i} src={item} />
-        ))}
-      </AvatarGroup>
-      <div
-        onClick={() => {
-          console.log('press hosad')
-        }}
-      >
-        <Typography variant="overline" className={classes.textFollow}>
-          View all
-        </Typography>
-      </div>
-      <Grid item xs={12} sm={7}>
-        <ButtonsSocialMedia
-          links={links}
-          verified={true}
-          imgUrl={followedes[3]}
-          invited="Diolink"
-        />
-      </Grid>
-      <Grid item xs={12} sm={11}>
-        <Typography variant="caption" color="primary">
-          Bio
-        </Typography>
-        <Divider className={classes.divider} />
-        <Typography variant="body2" color="primary" paragraph>
-          {bio}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} sm={11}>
-        <Typography variant="caption" color="primary">
-          Links
-        </Typography>
-        <Divider className={classes.divider} />
-        <Links links={links} />
-      </Grid>
+      {type === 'account' ? null : (
+        <>
+          {' '}
+          <Typography variant="button" color="primary">
+            Followed by
+          </Typography>
+          <AvatarGroup spacing="small">
+            {followedes.map((item, i) => (
+              <Avatar key={i} src={item} />
+            ))}
+          </AvatarGroup>
+          <div
+            onClick={() => {
+              console.log('press hosad')
+            }}
+          >
+            <Typography variant="overline" className={classes.textFollow}>
+              View all
+            </Typography>
+          </div>
+          <Grid item xs={12} sm={7}>
+            <ButtonsSocialMedia
+              links={links}
+              verified={true}
+              imgUrl={followedes[3]}
+              invited="Diolink"
+            />
+          </Grid>
+        </>
+      )}
+
+      {type === 'account' ? null : (
+        <>
+          <Grid item xs={12} sm={11}>
+            <Typography variant="caption" color="primary">
+              Bio
+            </Typography>
+            <Divider className={classes.divider} />
+            <Typography variant="body2" color="primary" paragraph>
+              {bio}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={11}>
+            <Typography variant="caption" color="primary">
+              Links
+            </Typography>
+            <Divider className={classes.divider} />
+            <Links links={links} />
+          </Grid>
+        </>
+      )}
       <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />
         <Grid container justify="space-between">

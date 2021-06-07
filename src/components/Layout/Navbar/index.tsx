@@ -34,7 +34,8 @@ const useStyles = makeStyles(Theme => ({
     backgroundRepeat: 'no-repeat',
   },
   container: {
-    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
+    display: ({ pathname }) =>
+      pathname === '/bid' || pathname === '/account' ? 'none' : 'block',
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
@@ -96,7 +97,11 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
         <Toolbar className={classes.root}>
           <Grid
             container
-            justify={pathname === '/bid' ? 'space-between' : 'space-around'}
+            justify={
+              pathname === '/bid' || pathname === '/account'
+                ? 'space-between'
+                : 'space-around'
+            }
             alignItems="center"
           >
             <Grid item xs={4}>
@@ -137,7 +142,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Hidden>
 
             <Hidden smDown>
-              {pathname === '/bid' ? (
+              {pathname === '/bid' || pathname === '/account' ? (
                 <NavBarBid
                   cois={cois}
                   publicKey={publicKey}
