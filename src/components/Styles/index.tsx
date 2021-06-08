@@ -21,6 +21,11 @@ export const Theme = createMuiTheme({
         borderRadius: 16,
       },
     },
+    MuiInputBase: {
+      input: {
+        background: 'red',
+      },
+    },
     MuiDialog: {
       paperWidthSm: {
         maxWidth: 400,
@@ -185,6 +190,8 @@ export const Theme = createMuiTheme({
       },
     },
     MuiPaper: {
+      root: { backgroundColor: 'none' },
+      elevation24: { boxShadow: 'none' },
       elevation1: {
         boxShadow: boxShadow.boxShadow1,
         borderRadius: 16,

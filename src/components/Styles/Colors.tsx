@@ -17,6 +17,9 @@ export const colors = {
   MayaBlue: '#62d8f9',
   Nero: '#1c1c1c',
   Green: '#3BB143',
+  Petroleum: '#09212f',
+  LigthPetroleum: '#163c56',
+  AquaGreen: '#80fbe5',
 }
 
 export const backgroundGradient = {
