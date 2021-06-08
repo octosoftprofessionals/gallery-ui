@@ -4,6 +4,8 @@ import { Grid, Typography, Button, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
 
+
+
 import { backgroundGradient } from '../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
@@ -26,11 +28,13 @@ const useStyle = makeStyles(Theme => ({
 const ConnectWalletModal = ({ handleClose }) => {
   const classes = useStyle();
   
+  
+
   async function getAccount() {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts[0];
+    //account will be needed in the future
+    const account = accounts[0];   
 
-    
   }
 
   return (
@@ -87,7 +91,7 @@ const ConnectWalletModal = ({ handleClose }) => {
                 background: `${backgroundGradient.backgroundGradient3}`,
               }}
               className={classes.button}
-              endIcon
+              endIcon 
               onClick={() => getAccount()}
             >
               <Typography variant="caption" color="secondary">
