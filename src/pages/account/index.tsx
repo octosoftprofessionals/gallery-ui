@@ -36,6 +36,8 @@ const AccountPage = () => {
       name="Roger"
       padding="20px"
       marginTop="0"
+      height
+      backgroundImage={urlCover}
     >
       <Creator
         creatorQuery={CreatorQuery ? CreatorQuery.creator : ''}
