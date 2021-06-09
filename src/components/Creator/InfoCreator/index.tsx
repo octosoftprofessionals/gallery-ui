@@ -17,7 +17,7 @@ import ButtonsSocialMedia from './ButtonsSocialMedia'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
-  containerButton: { position: 'relative', marginBottom: Theme.spacing(9) },
+  containerButton: { position: 'relative', marginBottom: Theme.spacing(10) },
   button: {
     padding: 0,
     boxShadow: boxShadow.boxShadow1,
@@ -41,12 +41,34 @@ const useStyle = makeStyles(Theme => ({
     overflow: 'hidden',
     width: '60%',
   },
+  textKeyPublicAccount: {
+    fontFamily: Theme.typography.fontFamily[1],
+    fontWeight: 400,
+    padding: Theme.spacing(1, 1),
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    width: '60%',
+    textAlign: 'left',
+  },
   buttonKeyPublic: {
     width: '65%',
     position: 'absolute',
     left: Theme.spacing(9),
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(0, 0, 0, 13),
+    boxShadow: boxShadow.boxShadow1,
+    '&:hover': {
+      backgroundColor: Theme.palette.secondary.main,
+      transform: 'none',
+      boxShadow: boxShadow.boxShadow1,
+    },
+  },
+  buttonKeyPublicAccount: {
+    width: '45%',
+    position: 'absolute',
+    left: Theme.spacing(1),
+    backgroundColor: Theme.palette.secondary.main,
+    padding: Theme.spacing(0, 0, 0, 0),
     boxShadow: boxShadow.boxShadow1,
     '&:hover': {
       backgroundColor: Theme.palette.secondary.main,
@@ -91,45 +113,64 @@ const InfoCreator = ({
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
-        {type === 'account' ? null : (
-          <Button variant="contained" className={classes.button}>
+        {type === 'account' ? (
+          <Button
+            onClick={getPublicKey}
+            variant="contained"
+            color="primary"
+            endIcon={
+              <Tooltip title="Copy Address" placement="top">
+                <FileCopy />
+              </Tooltip>
+            }
+            className={classes.buttonKeyPublicAccount}
+          >
             <Typography
               variant="caption"
-              color="secondary"
-              className={classes.textButton}
-            >{`#000${userIndex}`}</Typography>
+              color="primary"
+              className={classes.textKeyPublicAccount}
+            >
+              {`${publicKey}`}
+            </Typography>
           </Button>
+        ) : (
+          <>
+            <Button variant="contained" className={classes.button}>
+              <Typography
+                variant="caption"
+                color="secondary"
+                className={classes.textButton}
+              >{`#000${userIndex}`}</Typography>
+            </Button>
+            <Button
+              onClick={getPublicKey}
+              variant="contained"
+              color="primary"
+              endIcon={
+                <Tooltip title="Copy Address" placement="top">
+                  <FileCopy />
+                </Tooltip>
+              }
+              className={classes.buttonKeyPublic}
+            >
+              <Typography
+                variant="caption"
+                color="primary"
+                className={classes.textKeyPublic}
+              >
+                {`${publicKey}`}
+              </Typography>
+            </Button>
+          </>
         )}
-
-        <Button
-          onClick={getPublicKey}
-          variant="contained"
-          color="primary"
-          endIcon={
-            <Tooltip title="Copy Address" placement="top">
-              <FileCopy />
-            </Tooltip>
-          }
-          className={classes.buttonKeyPublic}
-        >
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.textKeyPublic}
-          >
-            {`${publicKey}`}
-          </Typography>
-        </Button>
       </Grid>
       <Typography variant="h4" color="primary">
         {name}
       </Typography>
-      {type === 'account' ? null : (
-        <Typography
-          variant="subtitle2"
-          className={classes.userName}
-        >{`@${username}`}</Typography>
-      )}
+      <Typography
+        variant="subtitle2"
+        className={classes.userName}
+      >{`@${username}`}</Typography>
 
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
@@ -189,26 +230,23 @@ const InfoCreator = ({
         </>
       )}
 
-      {type === 'account' ? null : (
-        <>
-          <Grid item xs={12} sm={11}>
-            <Typography variant="caption" color="primary">
-              Bio
-            </Typography>
-            <Divider className={classes.divider} />
-            <Typography variant="body2" color="primary" paragraph>
-              {bio}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={11}>
-            <Typography variant="caption" color="primary">
-              Links
-            </Typography>
-            <Divider className={classes.divider} />
-            <Links links={links} />
-          </Grid>
-        </>
-      )}
+      <Grid item xs={12} sm={11}>
+        <Typography variant="caption" color="primary">
+          Bio
+        </Typography>
+        <Divider className={classes.divider} />
+        <Typography variant="body2" color="primary" paragraph>
+          {bio}
+        </Typography>
+      </Grid>
+      <Grid item xs={12} sm={11}>
+        <Typography variant="caption" color="primary">
+          Links
+        </Typography>
+        <Divider className={classes.divider} />
+        <Links links={links} />
+      </Grid>
+
       <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />
         <Grid container justify="space-between">
