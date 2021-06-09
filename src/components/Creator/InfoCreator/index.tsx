@@ -41,34 +41,12 @@ const useStyle = makeStyles(Theme => ({
     overflow: 'hidden',
     width: '60%',
   },
-  textKeyPublicAccount: {
-    fontFamily: Theme.typography.fontFamily[1],
-    fontWeight: 400,
-    padding: Theme.spacing(1, 1),
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    width: '60%',
-    textAlign: 'left',
-  },
   buttonKeyPublic: {
     width: '65%',
     position: 'absolute',
     left: Theme.spacing(9),
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(0, 0, 0, 13),
-    boxShadow: boxShadow.boxShadow1,
-    '&:hover': {
-      backgroundColor: Theme.palette.secondary.main,
-      transform: 'none',
-      boxShadow: boxShadow.boxShadow1,
-    },
-  },
-  buttonKeyPublicAccount: {
-    width: '45%',
-    position: 'absolute',
-    left: Theme.spacing(1),
-    backgroundColor: Theme.palette.secondary.main,
-    padding: Theme.spacing(0, 0, 0, 0),
     boxShadow: boxShadow.boxShadow1,
     '&:hover': {
       backgroundColor: Theme.palette.secondary.main,
@@ -113,56 +91,34 @@ const InfoCreator = ({
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
-        {type === 'account' ? (
-          <Button
-            onClick={getPublicKey}
-            variant="contained"
-            color="primary"
-            endIcon={
-              <Tooltip title="Copy Address" placement="top">
-                <FileCopy />
-              </Tooltip>
-            }
-            className={classes.buttonKeyPublicAccount}
-          >
+        {userIndex ? (
+          <Button variant="contained" className={classes.button}>
             <Typography
               variant="caption"
-              color="primary"
-              className={classes.textKeyPublicAccount}
-            >
-              {`${publicKey}`}
-            </Typography>
+              color="secondary"
+              className={classes.textButton}
+            >{`#${userIndex}`}</Typography>
           </Button>
-        ) : (
-          <>
-            <Button variant="contained" className={classes.button}>
-              <Typography
-                variant="caption"
-                color="secondary"
-                className={classes.textButton}
-              >{`#000${userIndex}`}</Typography>
-            </Button>
-            <Button
-              onClick={getPublicKey}
-              variant="contained"
-              color="primary"
-              endIcon={
-                <Tooltip title="Copy Address" placement="top">
-                  <FileCopy />
-                </Tooltip>
-              }
-              className={classes.buttonKeyPublic}
-            >
-              <Typography
-                variant="caption"
-                color="primary"
-                className={classes.textKeyPublic}
-              >
-                {`${publicKey}`}
-              </Typography>
-            </Button>
-          </>
-        )}
+        ) : null}
+        <Button
+          onClick={getPublicKey}
+          variant="contained"
+          color="primary"
+          endIcon={
+            <Tooltip title="Copy Address" placement="top">
+              <FileCopy />
+            </Tooltip>
+          }
+          className={classes.buttonKeyPublic}
+        >
+          <Typography
+            variant="caption"
+            color="primary"
+            className={classes.textKeyPublic}
+          >
+            {`${publicKey}`}
+          </Typography>
+        </Button>
       </Grid>
       <Typography variant="h4" color="primary">
         {name}
