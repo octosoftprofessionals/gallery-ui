@@ -47,28 +47,22 @@ const MetaMaskRedirectModal = ({ handleClose }) => {
           alignItems="center"
           className={classes.conteiner}
         >
-          <Typography variant="h6" color="primary" className={classes.title}>
-            You don't have MetaMask installed
+          <Typography 
+            variant="h1" 
+            color="primary" 
+            className={classes.title} 
+            style={{fontWeight: "bold"}}
+          >
+            Install MetaMask. 
           </Typography>
           <Grid item className={classes.conteiner}>
             <Typography
               variant="caption"
               color="primary"
               className={classes.text}
+              style={{display: "inline", textAlign: "center", fontWeight: "normal"}}
             >
-              Please go to https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn and add the extension in order to login to your MetaMask
-              <Link className={classes.link}>
-                <Typography variant="caption" className={classes.textCaption}>
-                  {' Terms of Service '}
-                </Typography>
-              </Link>
-              and our
-              <Link className={classes.link}>
-                <Typography variant="caption" className={classes.textCaption}>
-                  {' Privacy Policy '}
-                </Typography>
-              </Link>
-              .
+              Install MetaMask to connect to Super Chief Gallery.
             </Typography>
           </Grid>
 
@@ -81,42 +75,27 @@ const MetaMaskRedirectModal = ({ handleClose }) => {
             <Button
               variant="contained"
               style={{
-                background: `${backgroundGradient.backgroundGradient3}`,
+                background: "black",
+                color: "white",
               }}
               className={classes.button}
               endIcon 
             >
-              <Typography variant="caption" color="secondary">
-                Metamask
-              </Typography>
+              <a
+                href="https://metamask.io/download.html"
+                target="_blank"
+                style={{
+                  color:"inherit",
+                  textDecoration: "none"
+                }}
+              >
+                <Typography variant="caption" color="secondary">
+                  Go to MetaMask's website
+                </Typography>
+              </a>
 
-            </Button>
-            <Button
-              variant="contained"
-              style={{
-                background: `${backgroundGradient.backgroundGradient4}`,
-              }}
-              className={classes.button}
-              endIcon
-            >
-              <Typography variant="caption" color="secondary">
-                WalletConnect
-              </Typography>
             </Button>
           </Grid>
-
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.text}
-          >
-            New to Ethereum?
-          </Typography>
-          <Link className={classes.link}>
-            <Typography variant="caption" className={classes.textCaption}>
-              Learn more about wallets
-            </Typography>
-          </Link>
         </Grid>
       </Grid>
     </>

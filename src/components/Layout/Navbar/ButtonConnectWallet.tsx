@@ -26,9 +26,6 @@ const ButtonConnectWallet = ({ pathname }) => {
   const handleClose = () => {
     setConnectWallet(null)
   }
-  // const handleConnection = () => {
-  //   checkMetaMaskConnected() ? setConnectWallet(true): setConnectWallet(false)
-  // }
   
   return (
     <>
