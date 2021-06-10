@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
+import Navigator from './Navigator'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import {
   AppBar,
@@ -104,38 +105,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
-            <Hidden mdDown>
-              <Grid item className={classes.container}>
-                <Link to="/artworks" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/artworks' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Artworks</Typography>
-                  </Button>
-                </Link>
-                <Link to="/" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Home</Typography>
-                  </Button>
-                </Link>
-                <Link to="/creators" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/creators' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Creators</Typography>
-                  </Button>
-                </Link>
-              </Grid>
-            </Hidden>
-
+            <Navigator pathname={pathname} />
             <Hidden smDown>
               {pathname === '/bid' ? (
                 <NavBarBid
