@@ -22,5 +22,12 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-svg',
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: '',
+        timeout: 3500,
+      },
+    },
   ],
 }
