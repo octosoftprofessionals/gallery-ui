@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Dialog, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { colors } from '../../Styles/Colors';
-
+import { colors } from '../../Styles/Colors'
 
 import ConnectWalletModal from './ConnectWalletModal'
 
 const useStyle = makeStyles(Theme => ({
   btnGreen: {
-    background: colors.Green,
+    background: Theme.palette.buttons.wallet,
   },
 }))
 

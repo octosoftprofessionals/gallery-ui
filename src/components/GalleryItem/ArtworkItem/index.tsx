@@ -26,6 +26,8 @@ const useStyle = makeStyles(Theme => ({
     paddingBottom: `${Theme.spacing(6)}vh`,
     display: 'grid',
     gridGap: Theme.spacing(9),
+    backgroundColor: Theme.palette.card.main,
+    borderRadius: Theme.spacing(0, 0, 4, 4),
   },
   containerAvatar: { marginBottom: Theme.spacing(9) },
   link: { textDecoration: 'none' },

@@ -1,4 +1,5 @@
 export const colors = {
+  // lightColors
   Black: '#000',
   White: '#fff',
   DimGray: '#666666',
@@ -20,6 +21,15 @@ export const colors = {
   Petroleum: '#09212f',
   LigthPetroleum: '#163c56',
   AquaGreen: '#80fbe5',
+  Aqcua: '#00FFFF',
+}
+
+export const darkColors = {
+  Black: '#010101',
+  White: '#ffffff', // blanco sobre aqcua
+  DarkGray: '#212e36',
+  WhiteSmoke: '#eff3f5', // blanco sobre negros y grises
+  Aqcua: '#00FFFF',
 }
 
 export const backgroundGradient = {

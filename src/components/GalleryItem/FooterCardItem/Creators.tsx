@@ -12,7 +12,7 @@ const useStyle = makeStyles(Theme => ({
     bottom: 0,
     position: 'absolute',
     padding: Theme.spacing(9),
-    backgroundColor: Theme.palette.secondary.main,
+    backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
   text: {

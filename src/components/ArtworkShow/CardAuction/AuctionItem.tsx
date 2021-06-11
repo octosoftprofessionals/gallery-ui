@@ -89,7 +89,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
                 color="primary"
                 className={classes.titlePrice}
               >
-                Current Bid
+                Current Biddddddddd
               </Typography>
               <Typography
                 variant="button"
@@ -99,7 +99,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
                 {`${formatDecimal(priceEth)} ETH`}
               </Typography>
               <Typography variant="button" color="inherit">
-                 {formatUsd(priceUsd)}
+                {formatUsd(priceUsd)}
               </Typography>
             </Grid>
             <Hidden mdDown>
