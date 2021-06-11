@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Grid, Divider, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { featuredItemsQuery } from '../../services/gallery' /// Esto trae la data?
 import { makeStyles } from '@material-ui/core/styles'
 import PartnershipArtworks from './PartnershipArtworks'
@@ -17,6 +17,7 @@ const useStyle = makeStyles(Theme => ({
   subtitle: {
     textAlign: 'left',
     marginTop: Theme.spacing(10),
+    marginBottom: '5px',
     marginLeft: Theme.spacing(10),
   },
 }))
@@ -34,7 +35,8 @@ const GridPartnershipArtworks = () => {
     featuredItems.map(i => i.status)
   )
 
-  const listedItems = featuredItems.filter(i => i.status === 'listed')
+  /* const listedItems = featuredItems.filter(i => i.status === 'listed') */
+  const listedItems = featuredItems.slice(0, 4)
 
   const classes = useStyle()
 

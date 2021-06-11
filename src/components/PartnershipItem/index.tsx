@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
-
 import { deltaTime, timeFormat, isTypeVideo } from '../../Utils/index'
-import FooterCardItem from '../../components/GalleryItem/FooterCardItem'
 import { GalleryItem } from '../../services/gallery'
 import { Box } from '@material-ui/core'
 import { artworkPathFrom } from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
-  root: { position: 'relative' },
+  root: {
+    position: 'relative',
+    borderRadius: '40px',
+    /* margin: Theme.spacing(2), */
+  },
   img: {
     backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    paddingBottom: '100%',
-    borderRadius: Theme.spacing(4, 4, 0, 0),
+    paddingBottom: '140%',
+    borderRadius: Theme.spacing(11, 11, 0, 0),
   },
   infoCard: {
     padding: Theme.spacing(9),
-    paddingBottom: `${Theme.spacing(6)}vh`,
     display: 'grid',
-    gridGap: Theme.spacing(9),
+    gridGap: Theme.spacing(15),
   },
-  containerAvatar: { marginBottom: Theme.spacing(9) },
+  containerAvatar: { marginBottom: Theme.spacing(3) },
   link: { textDecoration: 'none' },
   containerVideo: { position: 'relative', paddingBottom: '100%' },
   inVideo: {
@@ -46,7 +46,7 @@ const useStyle = makeStyles(Theme => ({
     width: '100%',
     height: '100%',
     position: 'absolute',
-    borderRadius: Theme.spacing(4, 4, 0, 0),
+    borderRadius: Theme.spacing(11, 11, 0, 0),
   },
   username: {
     fontFamily: Theme.typography.fontFamily[2],
@@ -87,14 +87,6 @@ const PartnershipItem = ({
   }, [])
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
-
-  // const { height: wHeight, width: wWidth } = useWindowSize()
-
-  // const h = Math.floor(wHeight / 2)
-  // const w = Math.floor(wWidth / 2)
-  // const transform = `h_${h},w_${w},q_100`
-  // console.log('transform:', transform)
-  // videoUrl = `https://res.cloudinary.com/j5743857383/video/upload/${transform}/v1620852155/nft-gallery/adedf80c81473c4de9b58eccd0b35405_vjmf1f.mp4`
 
   const CreatorInfo = ({ username, imageUrl }) => {
     const classes = useStyle()
@@ -164,13 +156,13 @@ const PartnershipItem = ({
             />
           </div>
         </Link>
-        <FooterCardItem
-          statesArt={status}
-          price={priceEth}
-          timer={timer}
-          link={link}
-          followers={0}
-        />
+        {/*   <FooterCardItem
+            statesArt={status}
+            price={priceEth}
+            timer={timer}
+            link={link}
+            followers={0}
+          /> */}
       </Paper>
     </Link>
   )
