@@ -43,7 +43,7 @@ const GridPartnershipArtworks = () => {
   return (
     <>
       <Grid container justify="center">
-        <h1 className={classes.title}>Plataform Colaborations</h1>
+        <h1 className={classes.title}>Platform Collaborations</h1>
         <Grid container justify="left">
           <h3 className={classes.subtitle}>SuperChief x KnownOrigin</h3>
         </Grid>
