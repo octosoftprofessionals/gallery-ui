@@ -3,9 +3,9 @@ import { Button, Dialog, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { colors } from '../../Styles/Colors';
 
-import detectEthereumProvider from '@metamask/detect-provider';
+
 import ConnectWalletModal from './ConnectWalletModal'
-import MetaMaskRedirectModal from './MetaMaskRedirectModal';
+
 
 const useStyle = makeStyles(Theme => ({
   btnGreen: {
@@ -15,14 +15,7 @@ const useStyle = makeStyles(Theme => ({
 
 const ButtonConnectWallet = ({ pathname }) => {
   const classes = useStyle();
-  
   const [connectWallet, setConnectWallet] = useState(null);
-
-  async function checkMetaMaskConnected () {
-    const provider = await detectEthereumProvider();
-    (provider) ? setConnectWallet(true) : setConnectWallet(false);   
-  }
-
   const handleClose = () => {
     setConnectWallet(null)
   }
@@ -34,7 +27,7 @@ const ButtonConnectWallet = ({ pathname }) => {
           variant="contained"
           className={classes.btnGreen}
           color={pathname === '/creator' ? 'secondary' : ''}
-          onClick={() => checkMetaMaskConnected()}
+          onClick={() => setConnectWallet(true)}
         >
           <Typography variant="button">Connect Wallet</Typography>
         </Button>
@@ -44,7 +37,7 @@ const ButtonConnectWallet = ({ pathname }) => {
         aria-labelledby="customized-dialog-title"
         open={connectWallet !== null}
       >
-        { connectWallet ? <ConnectWalletModal handleClose={handleClose} /> : <MetaMaskRedirectModal handleClose={handleClose} /> }
+        { connectWallet ? <ConnectWalletModal handleClose={handleClose} /> : '' }
       </Dialog>
     </>
   )

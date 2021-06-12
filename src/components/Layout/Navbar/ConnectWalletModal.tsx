@@ -1,9 +1,11 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { Grid, Typography, Button, IconButton } from '@material-ui/core'
+import React,{useEffect, useState} from 'react';
+import { Link } from 'gatsby';
+import { Grid, Typography, Button, IconButton, Dialog } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
 
+import detectEthereumProvider from '@metamask/detect-provider';
+import MetaMaskRedirectModal from './MetaMaskRedirectModal';
 
 
 import { backgroundGradient } from '../../Styles/Colors'
@@ -27,14 +29,29 @@ const useStyle = makeStyles(Theme => ({
 
 const ConnectWalletModal = ({ handleClose }) => {
   const classes = useStyle();
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false);
+  const [ethereumAccount, setEthereumAccount] = useState(null)
   
+  useEffect(() => {
+    checkMetaMaskConnected();
+    async function checkMetaMaskConnected () {
+      const provider = await detectEthereumProvider();
+       (provider) && setMetaMaskInstalled(true);   
+    }
+  }, [])
   
-
-  async function getAccount() {
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    //account will be needed in the future
-    const account = accounts[0];   
-
+  const handleConnection = async () => {
+    if(metaMaskInstalled){
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      //handleClose Not working: both modals are opened instead of closing THIS one :/
+      //handleClose();
+      
+      //account will be needed in the future
+      setEthereumAccount(accounts[0]);
+      return;
+    }
+    setEthereumAccount(false);
+    
   }
 
   return (
@@ -92,7 +109,7 @@ const ConnectWalletModal = ({ handleClose }) => {
               }}
               className={classes.button}
               endIcon 
-              onClick={() => getAccount()}
+              onClick={() => handleConnection()}
             >
               <Typography variant="caption" color="secondary">
                 Metamask
@@ -127,6 +144,13 @@ const ConnectWalletModal = ({ handleClose }) => {
           </Link>
         </Grid>
       </Grid>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={ethereumAccount === false}
+      >
+        { ethereumAccount === false ? <MetaMaskRedirectModal handleClose={handleClose} /> : '' }
+      </Dialog>
     </>
   )
 }
