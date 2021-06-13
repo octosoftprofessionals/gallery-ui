@@ -16,6 +16,7 @@ const useStyle = makeStyles(Theme => ({
 const ButtonConnectWallet = ({ pathname }) => {
   const classes = useStyle();
   const [connectWallet, setConnectWallet] = useState(null);
+
   const handleClose = () => {
     setConnectWallet(null)
   }
@@ -43,4 +44,4 @@ const ButtonConnectWallet = ({ pathname }) => {
   )
 }
 
-export default ButtonConnectWallet
+export default ButtonConnectWallet;

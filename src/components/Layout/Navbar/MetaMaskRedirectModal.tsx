@@ -21,7 +21,7 @@ const useStyle = makeStyles(Theme => ({
     paddingLeft: Theme.spacing(4),
     paddingRight: Theme.spacing(4),
     paddingTop: Theme.spacing(3),
-    paddingBottom: Theme.spacing(2),
+    paddingBottom: Theme.spacing(1),
   },
   text: { fontSize: Theme.spacing(4) },
   link: { textDecoration: 'none' },
@@ -37,7 +37,7 @@ const useStyle = makeStyles(Theme => ({
 
 const MetaMaskRedirectModal = ({ handleClose }) => {
   const classes = useStyle();
-    
+
   return (
     <>
       <Grid item xs={12} container justify="flex-end" className={classes.header}>
@@ -64,7 +64,7 @@ const MetaMaskRedirectModal = ({ handleClose }) => {
               Install MetaMask.  
             </Box> 
           </Typography>
-          <Grid xs={12} item className={classes.conteiner} style={{marginBottom: "2rem"}}>
+          <Grid xs={12} item className={classes.conteiner} style={{marginBottom: "1rem"}}>
             <Typography
               variant="caption"
               color="primary"
@@ -80,44 +80,47 @@ const MetaMaskRedirectModal = ({ handleClose }) => {
               
             </Typography>
           </Grid>
+        </Grid>
+      </Grid>
+
 
           <Grid
-            container
-            justify="space-around"
+            justify="center"
             direction="column"
             className={classes.conteiner}
+            style={{width:"85%", textAlign: "center", marginBottom: "1.5em", alignItems: "center"}}
           >
-            <Button
-              variant="contained"
+            <a
+              href="https://metamask.io/download.html"
               style={{
-                background: "black",
-                color: "white",
-                display: "inline-block",
+                color:"inherit",
+                textDecoration: "none",
               }}
-              className={classes.button}
-              endIcon 
             >
-              <a
-                href="https://metamask.io/download.html"
-                target="_blank"
+              <Button
+                variant="contained"
                 style={{
-                  color:"inherit",
-                  textDecoration: "none",
+                  background: "black",
+                  color: "white",
+                  display: "inline-block",
+                  width: "100%",
+                  marginLeft: "1em",
                 }}
+                className={classes.button}
+                endIcon 
               >
+                
                 <Typography 
                   variant="caption" 
                   color="secondary"
-                  style={{fontSize: "12px"}}
+                  style={{fontSize: "16px"}}
                 >
                   Go to MetaMask's website
                 </Typography>
-              </a>
-
-            </Button>
+              </Button>
+            </a>
           </Grid>
-        </Grid>
-      </Grid>
+        
     </>
   )
 }

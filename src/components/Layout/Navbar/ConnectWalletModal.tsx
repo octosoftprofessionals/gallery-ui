@@ -51,7 +51,6 @@ const ConnectWalletModal = ({ handleClose }) => {
       return;
     }
     setEthereumAccount(false);
-    
   }
 
   return (
@@ -155,4 +154,4 @@ const ConnectWalletModal = ({ handleClose }) => {
   )
 }
 
-export default ConnectWalletModal
+export default ConnectWalletModal;
