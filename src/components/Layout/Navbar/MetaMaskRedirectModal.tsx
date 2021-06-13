@@ -1,12 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
-import { Grid, Typography, Button, IconButton,Box } from '@material-ui/core'
+import { Grid, Typography, Button, IconButton, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
-
-
-
-// import { backgroundGradient } from '../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   icon: { fontSize: Theme.typography.fontSize[6] },
@@ -15,8 +11,7 @@ const useStyle = makeStyles(Theme => ({
     marginTop: Theme.spacing(3),
   },
   title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
-  conteiner: 
-  { 
+  conteiner: {
     marginBottom: Theme.spacing(2),
     paddingLeft: Theme.spacing(4),
     paddingRight: Theme.spacing(4),
@@ -30,18 +25,22 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.spacing(4),
     '&:hover': { color: Theme.palette.primary.main },
   },
-  header: {marginBottom: Theme.spacing(1)}
+  header: { marginBottom: Theme.spacing(1) },
 }))
 
-
-
-const MetaMaskRedirectModal = ({ handleClose }) => {
-  const classes = useStyle();
+const MetaMaskRedirectModal = ({ handleCloseRedirect }) => {
+  const classes = useStyle()
 
   return (
     <>
-      <Grid item xs={12} container justify="flex-end" className={classes.header}>
-        <IconButton aria-label="close" onClick={() => handleClose()}>
+      <Grid
+        item
+        xs={12}
+        container
+        justify="flex-end"
+        className={classes.header}
+      >
+        <IconButton aria-label="close" onClick={() => handleCloseRedirect()}>
           <HighlightOff className={classes.icon} />
         </IconButton>
       </Grid>
@@ -55,74 +54,70 @@ const MetaMaskRedirectModal = ({ handleClose }) => {
           alignItems="center"
           className={classes.conteiner}
         >
-          <Typography 
-            variant="h1" 
-            color="primary" 
-            className={classes.title} 
-          >
-            <Box fontWeight="fontWeightRegular">
-              Install MetaMask.  
-            </Box> 
+          <Typography variant="h1" color="primary" className={classes.title}>
+            <Box fontWeight="fontWeightRegular">Install MetaMask.</Box>
           </Typography>
-          <Grid xs={12} item className={classes.conteiner} style={{marginBottom: "1rem"}}>
+          <Grid
+            xs={12}
+            item
+            className={classes.conteiner}
+            style={{ marginBottom: '1rem' }}
+          >
             <Typography
               variant="caption"
               color="primary"
               className={classes.text}
-              
             >
-              <Box 
-                textAlign="center" 
-                fontWeight="fontWeightRegular"
-              >
+              <Box textAlign="center" fontWeight="fontWeightRegular">
                 Install MetaMask to connect to Super Chief Gallery.
               </Box>
-              
             </Typography>
           </Grid>
         </Grid>
       </Grid>
 
-
-          <Grid
-            justify="center"
-            direction="column"
-            className={classes.conteiner}
-            style={{width:"85%", textAlign: "center", marginBottom: "1.5em", alignItems: "center"}}
+      <Grid
+        justify="center"
+        direction="column"
+        className={classes.conteiner}
+        style={{
+          width: '85%',
+          textAlign: 'center',
+          marginBottom: '1.5em',
+          alignItems: 'center',
+        }}
+      >
+        <a
+          href="https://metamask.io/download.html"
+          style={{
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          <Button
+            variant="contained"
+            style={{
+              background: 'black',
+              color: 'white',
+              display: 'inline-block',
+              width: '100%',
+              marginLeft: '1em',
+            }}
+            className={classes.button}
+            endIcon
           >
-            <a
-              href="https://metamask.io/download.html"
-              style={{
-                color:"inherit",
-                textDecoration: "none",
-              }}
+            <Typography
+              variant="caption"
+              color="secondary"
+              style={{ fontSize: '16px' }}
             >
-              <Button
-                variant="contained"
-                style={{
-                  background: "black",
-                  color: "white",
-                  display: "inline-block",
-                  width: "100%",
-                  marginLeft: "1em",
-                }}
-                className={classes.button}
-                endIcon 
-              >
-                
-                <Typography 
-                  variant="caption" 
-                  color="secondary"
-                  style={{fontSize: "16px"}}
-                >
-                  Go to MetaMask's website
-                </Typography>
-              </Button>
-            </a>
-          </Grid>
-        
+              Go to MetaMask's website
+            </Typography>
+          </Button>
+        </a>
+      </Grid>
     </>
   )
 }
 
-export default MetaMaskRedirectModal;
+export default MetaMaskRedirectModal
