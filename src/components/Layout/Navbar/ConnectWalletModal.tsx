@@ -25,7 +25,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ConnectWalletModal = ({ handleClose, setRedirectModal }) => {
+const ConnectWalletModal = ({ handleCloseConnectWalletModal, setRedirectModal }) => {
   const classes = useStyle()
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
   const [ethereumAccount, setEthereumAccount] = useState(null)
@@ -41,14 +41,13 @@ const ConnectWalletModal = ({ handleClose, setRedirectModal }) => {
   const handleConnection = async () => {
     if (metaMaskInstalled) {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-      //handleClose Not working: both modals are opened instead of closing THIS one :/
-      handleClose()
+      handleCloseConnectWalletModal()
 
       //account will be needed in the future
       setEthereumAccount(accounts[0])
       return
     } else {
-      handleClose()
+      handleCloseConnectWalletModal()
       setRedirectModal(true)
     }
     setEthereumAccount(false)
@@ -57,7 +56,7 @@ const ConnectWalletModal = ({ handleClose, setRedirectModal }) => {
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
-        <IconButton aria-label="close" onClick={() => handleClose()}>
+        <IconButton aria-label="close" onClick={() => handleCloseConnectWalletModal()}>
           <HighlightOff className={classes.icon} />
         </IconButton>
       </Grid>
@@ -143,20 +142,6 @@ const ConnectWalletModal = ({ handleClose, setRedirectModal }) => {
           </Link>
         </Grid>
       </Grid>
-      {/* <Dialog
-        onClose={handleCloseRedirect}
-        aria-labelledby="customized-dialog-title"
-        open={ethereumAccount === false}
-      >
-        {!ethereumAccount ? (
-          <MetaMaskRedirectModal
-            handleCloseRedirect={handleCloseRedirect}
-            handleClose={handleClose}
-          />
-        ) : (
-          ''
-        )}
-      </Dialog> */}
     </>
   )
 }

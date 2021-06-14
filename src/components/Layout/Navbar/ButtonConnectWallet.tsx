@@ -16,7 +16,7 @@ const ButtonConnectWallet = ({ pathname }) => {
   const classes = useStyle()
   const [connectWallet, setConnectWallet] = useState(null)
   const [redirectModal, setRedirectModal] = useState(null)
-  const handleClose = () => {
+  const handleCloseConnectWalletModal = () => {
     setConnectWallet(null)
   }
   const handleCloseRedirectModal = () => {
@@ -35,13 +35,13 @@ const ButtonConnectWallet = ({ pathname }) => {
         </Button>
       </Grid>
       <Dialog
-        onClose={handleClose}
+        onClose={handleCloseConnectWalletModal}
         aria-labelledby="customized-dialog-title"
         open={connectWallet !== null}
       >
         {connectWallet ? (
           <ConnectWalletModal
-            handleClose={handleClose}
+            handleCloseConnectWalletModal={handleCloseConnectWalletModal}
             setRedirectModal={setRedirectModal}
           />
         ) : (
