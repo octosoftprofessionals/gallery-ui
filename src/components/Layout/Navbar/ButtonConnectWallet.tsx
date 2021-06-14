@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Dialog, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { colors } from '../../Styles/Colors';
-
+import { colors } from '../../Styles/Colors'
 
 import ConnectWalletModal from './ConnectWalletModal'
 
@@ -20,7 +19,7 @@ const ButtonConnectWallet = ({ pathname }) => {
   }
   return (
     <>
-      <Grid item xs={4} container justify="flex-end">
+      <Grid container xs={3} justify="flex-end">
         <Button
           variant="contained"
           className={classes.btnGreen}

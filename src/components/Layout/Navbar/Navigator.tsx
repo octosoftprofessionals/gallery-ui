@@ -30,7 +30,16 @@ const Navigator = ({ pathname }) => {
   const classes = useStyles({ pathname })
   return (
     <Hidden mdDown>
-      <Grid item className={classes.container}>
+      <Grid justify="center" className={classes.container}>
+        <Link to="/#" className={classes.link}>
+          <Button
+            variant="text"
+            color="primary"
+            className={pathname === '/#' ? classes.selected : ''}
+          >
+            <Typography variant="button">Exhibition</Typography>
+          </Button>
+        </Link>
         <Link to="/artworks" className={classes.link}>
           <Button
             variant="text"

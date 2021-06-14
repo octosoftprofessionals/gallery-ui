@@ -25,7 +25,13 @@ import NavBarBid from './NavBarBid'
 const { boxShadow1 } = boxShadow
 
 const useStyles = makeStyles(Theme => ({
-  root: { padding: Theme.spacing(11, 0, 0) },
+  root: {
+    padding: Theme.spacing(11, 0, 0),
+  },
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
   img: {
     background: `url(${logoSrc})`,
     paddingBottom: Theme.spacing(14),
@@ -99,13 +105,17 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             container
             justify={pathname === '/bid' ? 'space-between' : 'space-around'}
             alignItems="center"
+            className={classes.nav}
           >
-            <Grid item xs={4}>
+            <Grid item xs={3} justify="center">
               <Link to="/" className={classes.link}>
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
-            <Navigator pathname={pathname} />
+            <Grid justify="center">
+              <Navigator pathname={pathname} />
+            </Grid>
+
             <Hidden smDown>
               {pathname === '/bid' ? (
                 <NavBarBid
@@ -118,7 +128,6 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                 <ButtonConnectWallet pathname={pathname} />
               )}
             </Hidden>
-
             <Hidden mdUp>
               <Grid
                 item
