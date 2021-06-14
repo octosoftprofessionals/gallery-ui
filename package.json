@@ -16,6 +16,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
+    "@metamask/detect-provider": "^1.2.0",
     "axios-rate-limit": "^1.3.0",
     "bignumber.js": "^9.0.1",
     "gatsby": "^3.2.1",
