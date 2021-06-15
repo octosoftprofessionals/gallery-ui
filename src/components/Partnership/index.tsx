@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Grid } from '@material-ui/core'
-import { featuredItemsQuery } from '../../services/gallery' /// Esto trae la data?
+import { featuredItemsQuery } from '../../services/gallery'
 import { makeStyles } from '@material-ui/core/styles'
 import PartnershipArtworks from './PartnershipArtworks'
 
@@ -29,13 +29,6 @@ const GridPartnershipArtworks = () => {
     status: statusFeaturedItemsQuery,
   } = useQuery('featuredItemsQuery', featuredItemsQuery)
 
-  console.log('featuredItems:', featuredItems)
-  console.log(
-    'featuredItems.map(i => i.status):',
-    featuredItems.map(i => i.status)
-  )
-
-  /* const listedItems = featuredItems.filter(i => i.status === 'listed') */
   const listedItems = featuredItems.slice(0, 4)
 
   const classes = useStyle()
