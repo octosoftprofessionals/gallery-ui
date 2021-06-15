@@ -34,38 +34,30 @@ const GridPartnershipArtworks = () => {
   const classes = useStyle()
 
   return (
-    <>
-      <Grid container justify="center">
-        <h1 className={classes.title}>Platform Collaborations</h1>
-        <Grid container justify="left">
-          <h3 className={classes.subtitle}>SuperChief x KnownOrigin</h3>
-        </Grid>
-
-        <hr className={classes.divider}></hr>
-        <Grid
-          container
-          item
-          xs={12}
-          spacing={3}
-          className={classes.containerItem}
-        >
-          <PartnershipArtworks isLoading={isLoading} data={listedItems} />
-        </Grid>
-        <Grid container justify="left">
-          <h3 className={classes.subtitle}>SuperChief x Rarible</h3>
-        </Grid>
-        <hr className={classes.divider}></hr>
-        <Grid
-          container
-          item
-          xs={12}
-          spacing={3}
-          className={classes.containerItem}
-        >
-          <PartnershipArtworks isLoading={isLoading} data={listedItems} />
-        </Grid>
+    <Grid container justify="center">
+      <h1 className={classes.title}>Platform Collaborations</h1>
+      <Grid container justify="left">
+        <h3 className={classes.subtitle}>SuperChief x KnownOrigin</h3>
       </Grid>
-    </>
+
+      <hr className={classes.divider}></hr>
+      <Grid container item xs={12} className={classes.containerItem}>
+        <PartnershipArtworks isLoading={isLoading} data={listedItems} />
+      </Grid>
+      <Grid container justify="left">
+        <h3 className={classes.subtitle}>SuperChief x Rarible</h3>
+      </Grid>
+      <hr className={classes.divider}></hr>
+      <Grid
+        container
+        item
+        xs={12}
+        spacing={3}
+        className={classes.containerItem}
+      >
+        <PartnershipArtworks isLoading={isLoading} data={listedItems} />
+      </Grid>
+    </Grid>
   )
 }
 
