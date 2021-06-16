@@ -125,25 +125,6 @@ const PartnershipItem = ({
           ) : (
             <div className={classes.img} />
           )}
-          {/* {isTypeVideo(mimeType) ? (
-            <div className={classes.containerVideo}>
-              <div className={classes.inVideo}>
-                <video
-                  poster={assetIPFSPreview}
-                  src={assetIPFSPreview}
-                  autoPlay={true}
-                  loop={true}
-                  className={classes.video}
-                  muted={true}
-                >
-                  <source src={assetIPFSPreview} type={mimeType} />
-                  <img src={assetIPFSPreview} />
-                </video>
-              </div>
-            </div>
-          ) : (
-            <div className={classes.img} />
-          )} */}
         </Box>
         <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
           <div className={classes.infoCard}>
@@ -156,13 +137,6 @@ const PartnershipItem = ({
             />
           </div>
         </Link>
-        {/*   <FooterCardItem
-            statesArt={status}
-            price={priceEth}
-            timer={timer}
-            link={link}
-            followers={0}
-          /> */}
       </Paper>
     </Link>
   )
