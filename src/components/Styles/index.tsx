@@ -32,6 +32,7 @@ export const darkTheme = createMuiTheme({
       paperWidthSm: {
         maxWidth: 400,
         borderRadius: 16,
+        backgroundColor: darkColors.DarkGray,
       },
     },
     MuiBadge: {
@@ -338,6 +339,7 @@ export const Theme = createMuiTheme({
       paperWidthSm: {
         maxWidth: 400,
         borderRadius: 16,
+        backgroundColor: White,
       },
     },
     MuiBadge: {
