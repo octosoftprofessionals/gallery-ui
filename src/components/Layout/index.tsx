@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider, styled } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import Navbar from './Navbar'
@@ -39,11 +39,12 @@ const Layout = ({
   profileImageUrl,
   name,
 }) => {
+  const [theme, setTheme] = useState(darkTheme)
   const pathname =
     typeof window !== 'undefined' ? window?.location?.pathname : ''
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline>
         <LayoutContainer padding={padding}>
           <BackgroundNavBar backgroundImage={backgroundImage} height={height}>

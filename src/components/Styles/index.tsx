@@ -55,7 +55,12 @@ export const darkTheme = createMuiTheme({
     },
     MuiButton: {
       textPrimary: {
-        '&:hover': { transform: 'translateY(-2px)', backgroundColor: White },
+        color: darkColors.WhiteSmoke,
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          backgroundColor: Aqcua,
+          color: darkColors.White,
+        },
       },
       textSecondary: {
         borderRadius: 50,
@@ -77,13 +82,15 @@ export const darkTheme = createMuiTheme({
       outlined: {
         borderRadius: 50,
         boxShadow: 'none',
-        color: Black,
-        backgroundColor: White,
+        color: White,
+        backgroundColor: Aqcua,
         '&:hover': {
           color: White,
           backgroundColor: Black,
           transform: 'translateY(-2px)',
           boxShadow: boxShadow.boxShadow4,
+          borderColor: Aqcua,
+          border: '1px solid',
         },
         padding: '16px 24px',
       },
@@ -91,12 +98,14 @@ export const darkTheme = createMuiTheme({
         borderRadius: 50,
         margin: '0 2px',
         boxShadow: 'none',
-        color: White,
-        backgroundColor: Black,
+        color: darkColors.WhiteSmoke,
+        backgroundColor: darkColors.DarkGray,
         '&:hover': {
           backgroundColor: Black,
           transform: 'translateY(-2px)',
           boxShadow: boxShadow.boxShadow4,
+          borderColor: darkColors.DarkGray,
+          border: '1px solid',
         },
         padding: '16px 24px',
       },
@@ -116,6 +125,10 @@ export const darkTheme = createMuiTheme({
       },
     },
     MuiTypography: {
+      colorInherit: {
+        color: darkColors.WhiteSmoke,
+        '&:hover': { color: darkColors.Aqcua },
+      },
       overline: {
         color: darkColors.WhiteSmoke,
         textTransform: 'capitalize',
@@ -174,8 +187,8 @@ export const darkTheme = createMuiTheme({
         fontWeight: 600,
         textTransform: 'none',
         cursor: 'pointer',
-        color: DimGray,
-        '&:hover': { color: Black },
+        color: darkColors.WhiteSmoke,
+        '&:hover': { color: Aqcua },
       },
       body2: {
         fontSize: 15,
@@ -216,9 +229,9 @@ export const darkTheme = createMuiTheme({
     MuiOutlinedInput: {
       root: { borderRadius: 50 },
       input: {
-        background: White,
+        background: Black,
         padding: '12px 20px',
-        color: Nero,
+        color: darkColors.WhiteSmoke,
       },
     },
     MuiInputBase: {
@@ -245,6 +258,7 @@ export const darkTheme = createMuiTheme({
     card: {
       footer: darkColors.Black,
       main: darkColors.DarkGray,
+      secondary: Black,
     },
     primary: {
       main: darkColors.WhiteSmoke,
@@ -255,7 +269,7 @@ export const darkTheme = createMuiTheme({
     secondary: {
       main: darkColors.DarkGray,
       light: darkColors.DarkGray,
-      dark: darkColors.DarkGray,
+      dark: Black,
       contrastText: darkColors.White,
     },
     text: { primary: darkColors.WhiteSmoke, secondary: darkColors.WhiteSmoke },
@@ -408,6 +422,9 @@ export const Theme = createMuiTheme({
       },
     },
     MuiTypography: {
+      colorInherit: {
+        color: DimGray,
+      },
       overline: {
         color: DarkGray,
         textTransform: 'capitalize',
@@ -531,6 +548,7 @@ export const Theme = createMuiTheme({
     },
     card: {
       footer: Black,
+      secondary: White,
     },
     primary: {
       main: Black,

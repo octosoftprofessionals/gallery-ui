@@ -35,7 +35,13 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const HeroAuction = ({ galleryItem = {}, isLoading }: { galleryItem: GalleryItem, isLoading: boolean }) => {
+const HeroAuction = ({
+  galleryItem = {},
+  isLoading,
+}: {
+  galleryItem: GalleryItem
+  isLoading: boolean
+}) => {
   const {
     // assetId,
     assetContractAddress,
@@ -60,7 +66,7 @@ const HeroAuction = ({ galleryItem = {}, isLoading }: { galleryItem: GalleryItem
   return (
     <div className={classes.root}>
       {galleryItem ? (
-        <Grid container justify="center"  alignItems="center">
+        <Grid container justify="center" alignItems="center">
           <Grid
             item
             xs={12}

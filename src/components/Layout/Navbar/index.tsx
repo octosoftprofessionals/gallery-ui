@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core'
 
 import logoSrc from '../../../assets/logoNew.png'
+import LogoDarkSrc from '../../../assets/logoSVGlight.svg'
 import LogoSCNFT from '../../../assets/SCNFT_Logo_Transparent.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
@@ -81,6 +82,12 @@ const useStyles = makeStyles(Theme => ({
   },
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
   logo: {
+    display: ({}) => (Theme.palette.type === 'dark' ? 'none' : 'block'),
+    width: Theme.spacing(14),
+    height: Theme.spacing(14),
+  },
+  logoDark: {
+    display: ({}) => (Theme.palette.type === 'dark' ? 'block' : 'none'),
     width: Theme.spacing(14),
     height: Theme.spacing(14),
   },
@@ -101,6 +108,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
           >
             <Grid item xs={4}>
               <Link to="/" className={classes.link}>
+                <LogoDarkSrc className={classes.logoDark} />
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
@@ -196,7 +204,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             >
               <Grid item xs={6}>
                 <Link to="/" className={classes.link}>
-                  <LogoSCNFT className={classes.logo} />
+                  <LogoDarkSrc className={classes.logoDark} />
                 </Link>
               </Grid>
               <Grid item xs={2}>

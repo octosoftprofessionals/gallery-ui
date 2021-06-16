@@ -89,7 +89,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
                 color="primary"
                 className={classes.titlePrice}
               >
-                Current Biddddddddd
+                Current Bid
               </Typography>
               <Typography
                 variant="button"
