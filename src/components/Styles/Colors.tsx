@@ -1,6 +1,5 @@
 export const colors = {
-  // lightColors
-  Black: '#000',
+  Black: '#010101',
   White: '#fff',
   DimGray: '#666666',
   WhiteSmoke: '#f2f2f2',
@@ -21,15 +20,17 @@ export const colors = {
   Petroleum: '#09212f',
   LigthPetroleum: '#163c56',
   AquaGreen: '#80fbe5',
-  Aqcua: '#00FFFF',
+  Aqua: '#00FFFF',
+  DarkGrey: '#212E36',
+  LigthGrey: '#EFF3F5',
 }
 
 export const darkColors = {
   Black: '#010101',
-  White: '#ffffff', // blanco sobre aqcua
+  White: '#ffffff', // blanco sobre Aqua
   DarkGray: '#212e36',
   WhiteSmoke: '#eff3f5', // blanco sobre negros y grises
-  Aqcua: '#00FFFF',
+  Aqua: '#00FFFF',
 }
 
 export const backgroundGradient = {

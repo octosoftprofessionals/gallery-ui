@@ -13,7 +13,7 @@ const {
   DarkGray,
   VeryLightGrey,
   Nero,
-  Aqcua,
+  Aqua,
 } = colors
 
 export const darkTheme = createMuiTheme({
@@ -59,7 +59,7 @@ export const darkTheme = createMuiTheme({
         color: darkColors.WhiteSmoke,
         '&:hover': {
           transform: 'translateY(-2px)',
-          backgroundColor: Aqcua,
+          backgroundColor: Aqua,
           color: darkColors.White,
         },
       },
@@ -84,13 +84,13 @@ export const darkTheme = createMuiTheme({
         borderRadius: 50,
         boxShadow: 'none',
         color: White,
-        backgroundColor: Aqcua,
+        backgroundColor: Aqua,
         '&:hover': {
           color: White,
           backgroundColor: Black,
           transform: 'translateY(-2px)',
           boxShadow: boxShadow.boxShadow4,
-          borderColor: Aqcua,
+          borderColor: Aqua,
           border: '1px solid',
         },
         padding: '16px 24px',
@@ -128,7 +128,7 @@ export const darkTheme = createMuiTheme({
     MuiTypography: {
       colorInherit: {
         color: darkColors.WhiteSmoke,
-        '&:hover': { color: darkColors.Aqcua },
+        '&:hover': { color: darkColors.Aqua },
       },
       colorSecondary: {
         color: darkColors.WhiteSmoke,
@@ -138,7 +138,7 @@ export const darkTheme = createMuiTheme({
         textTransform: 'capitalize',
         fontSize: 14,
         fontWeight: 600,
-        '&:hover': { color: darkColors.Aqcua },
+        '&:hover': { color: darkColors.Aqua },
       },
       button: {
         margin: 0,
@@ -192,7 +192,7 @@ export const darkTheme = createMuiTheme({
         textTransform: 'none',
         cursor: 'pointer',
         color: darkColors.WhiteSmoke,
-        '&:hover': { color: Aqcua },
+        '&:hover': { color: Aqua },
       },
       body2: {
         fontSize: 15,
@@ -256,8 +256,8 @@ export const darkTheme = createMuiTheme({
       disabledOpacity: [0, 0.2, 0.38],
     },
     buttons: {
-      wallet: Aqcua,
-      selected: Aqcua,
+      wallet: Aqua,
+      selected: Aqua,
     },
     card: {
       footer: darkColors.Black,
@@ -267,7 +267,7 @@ export const darkTheme = createMuiTheme({
     primary: {
       main: darkColors.WhiteSmoke,
       light: Green,
-      dark: Aqcua,
+      dark: Aqua,
       contrastText: White,
     },
     secondary: {

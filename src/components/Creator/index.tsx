@@ -13,9 +13,11 @@ import {
 import { MoreHoriz, ArrowUpward, Maximize } from '@material-ui/icons'
 
 import GridCreator from './GridCreator'
+import GridCreatorAccount from './GridCreatorAccount'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
+import { truncateSync } from 'node:fs'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -91,7 +93,12 @@ const itemAvatar = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
 ]
 
-const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
+const Creator = ({
+  creatorQuery,
+  linkTwitter,
+  setDisplayReportModal,
+  type,
+}) => {
   const classes = useStyle()
   const {
     profileImageUrl,
@@ -117,6 +124,7 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
           linkTwitter={linkTwitter}
           setDisplayReportModal={setDisplayReportModal}
           right="24px"
+          account={type === 'account' ? true : false}
         />
       </Grid>
       <Grid
@@ -137,10 +145,11 @@ const Creator = ({ creatorQuery, linkTwitter, setDisplayReportModal }) => {
             createdAt={createdAt}
             userIndex={userIndex}
             publicKey={publicKey}
+            type={type}
           />
         </Grid>
         <Grid item xs={11} md={7}>
-          <GridCreator />
+          {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
         </Grid>
       </Grid>
     </>
