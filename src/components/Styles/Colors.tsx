@@ -52,4 +52,5 @@ export const boxShadow = {
   boxShadow5: '0px 10px 20px rgb(0 0 0 / 10%)',
   boxShadow6: `0px 3px 7px ${darkColors.DarkGray}`,
   boxShadow7: `0px 3px 20px ${darkColors.DarkGray}`,
+  boxShadow8: '0px 0px 5px 0px rgb(0 0 0 / 15%)',
 }

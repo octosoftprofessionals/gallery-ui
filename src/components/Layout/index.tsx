@@ -3,6 +3,7 @@ import { ThemeProvider, styled } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import ButtonDM from '../ButtonDM'
 
 import { Theme, darkTheme } from '../Styles'
 import './Layout.css'
@@ -58,6 +59,7 @@ const Layout = ({
           </BackgroundNavBar>
           <StyledMain marginTop={marginTop}>{children}</StyledMain>
         </LayoutContainer>
+        <ButtonDM theme={theme} setTheme={setTheme} />
         <Footer pathname={pathname} />
       </CssBaseline>
     </ThemeProvider>
