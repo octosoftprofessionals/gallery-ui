@@ -25,6 +25,14 @@ export const colors = {
   LigthGrey: '#EFF3F5',
 }
 
+export const darkColors = {
+  Black: '#010101',
+  White: '#ffffff', // blanco sobre Aqua
+  DarkGray: '#212e36',
+  WhiteSmoke: '#eff3f5', // blanco sobre negros y grises
+  Aqua: '#00FFFF',
+}
+
 export const backgroundGradient = {
   backgroundGradient1:
     'linear-gradient(110.78deg, rgb(118, 230, 80) -1.13%, rgb(249, 214, 73) 15.22%, rgb(240, 142, 53) 32.09%, rgb(236, 81, 87) 48.96%, rgb(255, 24, 189) 67.94%, rgb(26, 75, 255) 85.34%, rgb(98, 216, 249) 99.57%)',
@@ -42,4 +50,6 @@ export const boxShadow = {
   boxShadow3: 'drop-shadow(rgba(0, 0, 0, 0.25) 0px 20px 20px)',
   boxShadow4: 'rgb(0 0 0 / 25%) 0px 8px 15px',
   boxShadow5: '0px 10px 20px rgb(0 0 0 / 10%)',
+  boxShadow6: `0px 3px 7px ${darkColors.DarkGray}`,
+  boxShadow7: `0px 3px 20px ${darkColors.DarkGray}`,
 }

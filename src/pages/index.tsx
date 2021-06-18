@@ -68,6 +68,7 @@ const Home = () => {
         artworksCarousel={featuredItems.slice(0, 2)}
         timeout={1000}
         interval={7000}
+        theme="dark"
       />
       <ArtworkGrid
         title="Featured artworks"

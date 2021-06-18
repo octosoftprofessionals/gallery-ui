@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core'
 
 import logoSrc from '../../../assets/logoNew.png'
+import LogoDarkSrc from '../../../assets/logoSVGlight.svg'
 import LogoSCNFT from '../../../assets/SCNFT_Logo_Transparent.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
@@ -49,9 +50,9 @@ const useStyles = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.main,
   },
   selected: {
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: Theme.palette.buttons.selected,
     color: Theme.palette.primary.contrastText,
-    '&:hover': { backgroundColor: Theme.palette.primary.main },
+    '&:hover': { backgroundColor: Theme.palette.buttons.selected },
   },
   boxIconButton: { position: 'relative' },
   buttonMenu: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles(Theme => ({
   },
   buttonCreatorMenu: {
     boxShadow: boxShadow1,
-    backgroundColor: Theme.palette.secondary.main,
+    backgroundColor: Theme.palette.buttons.selected,
     fontSize: `${Theme.typography.fontSize[0]}rem`,
     '@media (max-width: 755px)': { fontSize: Theme.typography.fontSize[9] },
     '&:hover': {
@@ -89,6 +90,12 @@ const useStyles = makeStyles(Theme => ({
   },
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
   logo: {
+    display: ({}) => (Theme.palette.type === 'dark' ? 'none' : 'block'),
+    width: Theme.spacing(14),
+    height: Theme.spacing(14),
+  },
+  logoDark: {
+    display: ({}) => (Theme.palette.type === 'dark' ? 'block' : 'none'),
     width: Theme.spacing(14),
     height: Theme.spacing(14),
   },
@@ -114,6 +121,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
           >
             <Grid item xs={3} justify="center">
               <Link to="/" className={classes.link}>
+                <LogoDarkSrc className={classes.logoDark} />
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
@@ -180,7 +188,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             >
               <Grid item xs={6}>
                 <Link to="/" className={classes.link}>
-                  <LogoSCNFT className={classes.logo} />
+                  <LogoDarkSrc className={classes.logoDark} />
                 </Link>
               </Grid>
               <Grid item xs={2}>

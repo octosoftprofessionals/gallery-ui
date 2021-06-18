@@ -16,7 +16,7 @@ const useStyles = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.main,
   },
   selected: {
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: Theme.palette.buttons.selected,
     color: Theme.palette.primary.contrastText,
     '&:hover': { backgroundColor: Theme.palette.primary.main },
   },

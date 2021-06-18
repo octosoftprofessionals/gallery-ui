@@ -57,6 +57,7 @@ const useStyle = makeStyles(Theme => ({
     '@media (max-width: 576px)': {
       marginBottom: 0,
     },
+    fill: Theme.palette.secondary.contrastText,
   },
 }))
 

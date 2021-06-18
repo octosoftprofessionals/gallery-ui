@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider, styled } from '@material-ui/core/styles'
+import { CssBaseline } from '@material-ui/core'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-import { Theme } from '../Styles'
+import { Theme, darkTheme } from '../Styles'
 import './Layout.css'
 
 const LayoutContainer = styled('div')({
   padding: ({ padding }) => (padding ? padding : Theme.spacing(0, 8)),
-  backgroundColor: ({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : Theme.palette.secondary.main,
 })
 
 const BackgroundNavBar = styled('div')({
@@ -32,7 +31,6 @@ const StyledMain = styled('main')({
 const Layout = ({
   children,
   padding,
-  backgroundColor,
   marginTop,
   backgroundImage,
   height,
@@ -41,24 +39,27 @@ const Layout = ({
   profileImageUrl,
   name,
 }) => {
+  const [theme, setTheme] = useState(darkTheme)
   const pathname =
     typeof window !== 'undefined' ? window?.location?.pathname : ''
 
   return (
-    <ThemeProvider theme={Theme}>
-      <LayoutContainer padding={padding} backgroundColor={backgroundColor}>
-        <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
-          <Navbar
-            pathname={pathname}
-            cois={cois}
-            publicKey={publicKey}
-            profileImageUrl={profileImageUrl}
-            name={name}
-          />
-        </BackgroundNavBar>
-        <StyledMain marginTop={marginTop}>{children}</StyledMain>
-      </LayoutContainer>
-      <Footer pathname={pathname} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <LayoutContainer padding={padding}>
+          <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
+            <Navbar
+              pathname={pathname}
+              cois={cois}
+              publicKey={publicKey}
+              profileImageUrl={profileImageUrl}
+              name={name}
+            />
+          </BackgroundNavBar>
+          <StyledMain marginTop={marginTop}>{children}</StyledMain>
+        </LayoutContainer>
+        <Footer pathname={pathname} />
+      </CssBaseline>
     </ThemeProvider>
   )
 }
