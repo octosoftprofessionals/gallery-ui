@@ -59,7 +59,7 @@ const Layout = ({
           </BackgroundNavBar>
           <StyledMain marginTop={marginTop}>{children}</StyledMain>
         </LayoutContainer>
-        <ButtonDM />
+        <ButtonDM theme={theme} setTheme={setTheme} />
         <Footer pathname={pathname} />
       </CssBaseline>
     </ThemeProvider>

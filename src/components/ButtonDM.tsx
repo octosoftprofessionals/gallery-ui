@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent'
-import { colors } from './Styles/Colors'
+import { colors, boxShadow } from './Styles/Colors'
+import { Theme, darkTheme } from './Styles'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -13,7 +14,7 @@ const useStyle = makeStyles(Theme => ({
     right: 10,
     width: '18px',
     backgroundColor: colors.White,
-    boxShadow: '0px 0px 5px 0px rgb(0 0 0 / 15%)',
+    boxShadow: boxShadow.boxShadow8,
     borderRadius: '60px',
     '&:focus': {
       backgroundColor: colors.DarkGrey,
@@ -31,14 +32,13 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ButtonDM = () => {
+const ButtonDM = ({ theme, setTheme }) => {
   const classes = useStyle()
-  const [theme, setTheme] = useState('ligth')
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark')
+    if (theme === Theme) {
+      setTheme(darkTheme)
     } else {
-      setTheme('light')
+      setTheme(Theme)
     }
   }
   return (
