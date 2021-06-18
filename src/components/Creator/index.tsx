@@ -25,7 +25,7 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     top: `-${Theme.spacing(3)}vw`,
     left: Theme.spacing(9),
-    backgroundColor: Theme.palette.secondary.main,
+    backgroundColor: Theme.palette.card.secondary,
     padding: Theme.spacing(3),
     borderRadius: `${Theme.shape.borderRadius[3]}%`,
     '@media (max-width: 545px)': {

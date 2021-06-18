@@ -63,7 +63,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
+const RotatingCarousel = ({ artworksCarousel, interval, timeout, theme }) => {
   const classes = useStyle()
   return (
     <Carousel
@@ -75,12 +75,21 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
         <ChevronRight className={classes.arrowRigt} />,
         <RadioButtonUnchecked className={classes.circle} />,
       ]}
-      navButtonsProps={{
-        style: {
-          backgroundColor: 'transparent',
-          color: colors.Black,
-        },
-      }}
+      navButtonsProps={
+        theme === 'dark'
+          ? {
+              style: {
+                backgroundColor: 'transparent',
+                color: colors.WhiteSmoke,
+              },
+            }
+          : {
+              style: {
+                backgroundColor: 'transparent',
+                color: colors.Black,
+              },
+            }
+      }
       navButtonsAlwaysVisible
       animation="slide"
       timeout={timeout}

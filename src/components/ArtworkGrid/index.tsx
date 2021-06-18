@@ -29,6 +29,9 @@ const useStyle = makeStyles(Theme => ({
     display: ({ displayTextButton }) => displayTextButton,
     '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[8] },
   },
+  divider: {
+    backgroundColor: Theme.palette.primary.main,
+  },
 }))
 
 const ArtworkGrid = ({
@@ -64,7 +67,7 @@ const ArtworkGrid = ({
           <Link to={link} className={classes.link}>
             <Typography
               variant="body1"
-              color="initial"
+              color="inherit"
               className={classes.textButton}
             >
               {`View all ${titleButton}`}
@@ -72,7 +75,7 @@ const ArtworkGrid = ({
           </Link>
         </Grid>
       </Grid>
-      <Divider />
+      <Divider className={classes.divider} />
       {children}
     </Grid>
   )

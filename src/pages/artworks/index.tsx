@@ -6,7 +6,7 @@ import GridArtworks from '../../components/Artworks'
 
 const ArtworksPage = () => {
   return (
-    <Layout padding="20px" marginTop="0">
+    <Layout padding="0 24px" marginTop="0">
       <Grid item xs={11} md={12}>
         <GridArtworks />
       </Grid>

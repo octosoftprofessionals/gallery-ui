@@ -49,6 +49,7 @@ const SearchCreator = ({ searchBar, setSearchBar, status }) => {
         placeholder="Search for a creator..."
         fullWidth
         variant="outlined"
+        color="primary"
         value={searchBar}
         onChange={e => setSearchBar(e.target.value)}
         InputProps={{

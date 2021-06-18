@@ -8,7 +8,7 @@ import MetaMaskRedirectModal from './MetaMaskRedirectModal'
 
 const useStyle = makeStyles(Theme => ({
   btnGreen: {
-    background: colors.Green,
+    background: Theme.palette.buttons.wallet,
   },
 }))
 

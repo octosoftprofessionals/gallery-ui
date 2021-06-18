@@ -12,7 +12,7 @@ const useStyle = makeStyles(Theme => ({
     bottom: 0,
     position: 'absolute',
     padding: Theme.spacing(9),
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
 }))
@@ -35,7 +35,6 @@ const InAuctions = ({ price, timer }) => {
         <Typography variant="caption" color="textSecondary">
           Ending in
         </Typography>
-
         <Grid item xs={12}>
           <Typography variant="caption" color="secondary">
             {timer}
