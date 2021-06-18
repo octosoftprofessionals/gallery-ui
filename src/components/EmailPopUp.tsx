@@ -36,7 +36,7 @@ const useStyle = makeStyles(Theme => ({
     background: 'trasnparent',
   },
   box: {
-    background: colors.Petroleum,
+    background: colors.Black,
     maxWidth: 800,
     borderRadius: 50,
     padding: 20,
@@ -54,7 +54,7 @@ const useStyle = makeStyles(Theme => ({
     alignItems: 'center',
   },
   closeBtn: {
-    background: colors.LigthPetroleum,
+    background: colors.DarkGrey,
     height: 60,
     borderRadius: '50%',
     display: 'inline - block',
@@ -64,15 +64,16 @@ const useStyle = makeStyles(Theme => ({
     padding: 10,
     background: colors.Black,
     borderRadius: 50,
-    borderColor: colors.AquaGreen,
+    borderColor: colors.Aqua,
     border: 'solid 2px',
-    color: colors.AquaGreen,
+    color: colors.Aqua,
     paddingLeft: 20,
     maxWidth: 500,
   },
   suscribeBtn: {
-    background: colors.AquaGreen,
+    background: colors.Aqua,
     fontSize: 16,
+    color: colors.White,
     fontWeight: 800,
     padding: 20,
     margin: 20,
@@ -84,7 +85,7 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   text: {
-    color: colors.Gainsboro,
+    color: colors.LigthGrey,
     fontWeight: 200,
     fontSize: 16,
     marginBottom: 60,
@@ -107,7 +108,7 @@ const useStyle = makeStyles(Theme => ({
   },
   icon: {
     fontSize: 50,
-    color: colors.AquaGreen,
+    color: colors.Aqua,
   },
 }))
 

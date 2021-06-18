@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
+import Navigator from './Navigator'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import {
   AppBar,
@@ -24,7 +25,13 @@ import NavBarBid from './NavBarBid'
 const { boxShadow1 } = boxShadow
 
 const useStyles = makeStyles(Theme => ({
-  root: { padding: Theme.spacing(11, 0, 0) },
+  root: {
+    padding: Theme.spacing(11, 0, 0),
+  },
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
   img: {
     background: `url(${logoSrc})`,
     paddingBottom: Theme.spacing(14),
@@ -34,7 +41,8 @@ const useStyles = makeStyles(Theme => ({
     backgroundRepeat: 'no-repeat',
   },
   container: {
-    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
+    display: ({ pathname }) =>
+      pathname === '/bid' || pathname === '/account' ? 'none' : 'block',
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
@@ -96,48 +104,25 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
         <Toolbar className={classes.root}>
           <Grid
             container
-            justify={pathname === '/bid' ? 'space-between' : 'space-around'}
+            justify={
+              pathname === '/bid' || pathname === '/account'
+                ? 'space-between'
+                : 'space-around'
+            }
             alignItems="center"
+            className={classes.nav}
           >
-            <Grid item xs={4}>
+            <Grid item xs={3} justify="center">
               <Link to="/" className={classes.link}>
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
-            <Hidden mdDown>
-              <Grid item className={classes.container}>
-                <Link to="/artworks" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/artworks' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Artworks</Typography>
-                  </Button>
-                </Link>
-                <Link to="/" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Home</Typography>
-                  </Button>
-                </Link>
-                <Link to="/creators" className={classes.link}>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    className={pathname === '/creators' ? classes.selected : ''}
-                  >
-                    <Typography variant="button">Creators</Typography>
-                  </Button>
-                </Link>
-              </Grid>
-            </Hidden>
+            <Grid justify="center">
+              <Navigator pathname={pathname} />
+            </Grid>
 
             <Hidden smDown>
-              {pathname === '/bid' ? (
+              {pathname === '/bid' || pathname === '/account' ? (
                 <NavBarBid
                   cois={cois}
                   publicKey={publicKey}
@@ -148,7 +133,6 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                 <ButtonConnectWallet pathname={pathname} />
               )}
             </Hidden>
-
             <Hidden mdUp>
               <Grid
                 item

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Dialog, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { colors } from '../../Styles/Colors';
-
+import { colors } from '../../Styles/Colors'
 
 import ConnectWalletModal from './ConnectWalletModal'
+import MetaMaskRedirectModal from './MetaMaskRedirectModal'
 
 const useStyle = makeStyles(Theme => ({
   btnGreen: {
@@ -15,12 +15,16 @@ const useStyle = makeStyles(Theme => ({
 const ButtonConnectWallet = ({ pathname }) => {
   const classes = useStyle()
   const [connectWallet, setConnectWallet] = useState(null)
-  const handleClose = () => {
+  const [redirectModal, setRedirectModal] = useState(null)
+  const handleCloseConnectWalletModal = () => {
     setConnectWallet(null)
+  }
+  const handleCloseRedirectModal = () => {
+    setRedirectModal(null)
   }
   return (
     <>
-      <Grid item xs={4} container justify="flex-end">
+      <Grid container xs={3} justify="flex-end">
         <Button
           variant="contained"
           className={classes.btnGreen}
@@ -31,11 +35,31 @@ const ButtonConnectWallet = ({ pathname }) => {
         </Button>
       </Grid>
       <Dialog
-        onClose={handleClose}
+        onClose={handleCloseConnectWalletModal}
         aria-labelledby="customized-dialog-title"
         open={connectWallet !== null}
       >
-        {connectWallet ? <ConnectWalletModal handleClose={handleClose} /> : ''}
+        {connectWallet ? (
+          <ConnectWalletModal
+            handleCloseConnectWalletModal={handleCloseConnectWalletModal}
+            setRedirectModal={setRedirectModal}
+          />
+        ) : (
+          ''
+        )}
+      </Dialog>
+      <Dialog
+        onClose={handleCloseRedirectModal}
+        aria-labelledby="customized-dialog-title"
+        open={redirectModal !== null}
+      >
+        {redirectModal ? (
+          <MetaMaskRedirectModal
+            handleCloseRedirect={handleCloseRedirectModal}
+          />
+        ) : (
+          ''
+        )}
       </Dialog>
     </>
   )
