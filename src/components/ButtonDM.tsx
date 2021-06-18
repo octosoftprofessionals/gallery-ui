@@ -11,19 +11,13 @@ const useStyle = makeStyles(Theme => ({
     position: 'fixed',
     bottom: 10,
     right: 10,
-    width: '20px',
+    width: '18px',
     backgroundColor: colors.White,
-    boxShadow: '2px 2px 15px 2px rgb(0 0 0 / 15%)',
+    boxShadow: '0px 0px 5px 0px rgb(0 0 0 / 15%)',
     borderRadius: '60px',
     '&:focus': {
       backgroundColor: colors.DarkGrey,
     },
-  },
-  text: {
-    fontSize: Theme.typography.fontSize[9.5],
-    color: Theme.palette.primary.main,
-    fontFamily: 'Bai Jamjuree',
-    marginLeft: Theme.spacing(1),
   },
   icon: {
     fontSize: Theme.spacing(10),
