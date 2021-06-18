@@ -130,6 +130,9 @@ export const darkTheme = createMuiTheme({
         color: darkColors.WhiteSmoke,
         '&:hover': { color: darkColors.Aqcua },
       },
+      colorSecondary: {
+        color: darkColors.WhiteSmoke,
+      },
       overline: {
         color: darkColors.WhiteSmoke,
         textTransform: 'capitalize',
@@ -209,15 +212,15 @@ export const darkTheme = createMuiTheme({
       root: { backgroundColor: 'none' },
       elevation24: { boxShadow: 'none' },
       elevation1: {
-        boxShadow: boxShadow.boxShadow1,
+        boxShadow: boxShadow.boxShadow6,
         borderRadius: 16,
         '&:hover': {
           transform: 'translateY(-2px)',
-          boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
+          boxShadow: boxShadow.boxShadow7,
         },
       },
       elevation2: {
-        boxShadow: boxShadow.boxShadow1,
+        boxShadow: boxShadow.boxShadow6,
         borderRadius: 16,
       },
     },

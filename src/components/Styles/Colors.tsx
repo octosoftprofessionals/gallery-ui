@@ -49,4 +49,6 @@ export const boxShadow = {
   boxShadow3: 'drop-shadow(rgba(0, 0, 0, 0.25) 0px 20px 20px)',
   boxShadow4: 'rgb(0 0 0 / 25%) 0px 8px 15px',
   boxShadow5: '0px 10px 20px rgb(0 0 0 / 10%)',
+  boxShadow6: `0px 3px 7px ${darkColors.DarkGray}`,
+  boxShadow7: `0px 3px 20px ${darkColors.DarkGray}`,
 }

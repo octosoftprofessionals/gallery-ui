@@ -35,7 +35,6 @@ const InAuctions = ({ price, timer }) => {
         <Typography variant="caption" color="textSecondary">
           Ending in
         </Typography>
-
         <Grid item xs={12}>
           <Typography variant="caption" color="secondary">
             {timer}
