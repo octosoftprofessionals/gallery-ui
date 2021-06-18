@@ -14,6 +14,7 @@ const {
   VeryLightGrey,
   Nero,
   Aqua,
+  DarkGrey,
 } = colors
 
 export const darkTheme = createMuiTheme({
@@ -123,6 +124,11 @@ export const darkTheme = createMuiTheme({
         borderRadius: 15,
         margin: '0 2px',
         padding: '10px 20px',
+      },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        backgroundColor: DarkGrey,
       },
     },
     MuiTypography: {
@@ -540,6 +546,12 @@ export const Theme = createMuiTheme({
         borderRadius: 16,
       },
       root: { color: Nero },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        backgroundColor: White,
+        boxShadow: boxShadow.boxShadow8,
+      },
     },
   },
   shape: { borderRadius: [0, 10, 16, 50] },
