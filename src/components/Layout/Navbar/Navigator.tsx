@@ -11,7 +11,7 @@ const useStyles = makeStyles(Theme => ({
   container: {
     display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
     boxShadow: boxShadow1,
-    padding: Theme.spacing(2),
+    padding: '9px 7px 9px 6px',
     borderRadius: Theme.shape.borderRadius[1],
     backgroundColor: Theme.palette.secondary.main,
   },
@@ -23,6 +23,10 @@ const useStyles = makeStyles(Theme => ({
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
+  },
+  btn: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 }))
 
@@ -37,7 +41,9 @@ const Navigator = ({ pathname }) => {
             color="primary"
             className={pathname === '/#' ? classes.selected : ''}
           >
-            <Typography variant="button">Exhibition</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Exhibition
+            </Typography>
           </Button>
         </Link>
         <Link to="/artworks" className={classes.link}>
@@ -46,7 +52,9 @@ const Navigator = ({ pathname }) => {
             color="primary"
             className={pathname === '/artworks' ? classes.selected : ''}
           >
-            <Typography variant="button">Artworks</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Artworks
+            </Typography>
           </Button>
         </Link>
         <Link to="/" className={classes.link}>
@@ -55,7 +63,9 @@ const Navigator = ({ pathname }) => {
             color="primary"
             className={pathname === '/' ? classes.selected : ''}
           >
-            <Typography variant="button">Home</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Home
+            </Typography>
           </Button>
         </Link>
         <Link to="/creators" className={classes.link}>
@@ -64,7 +74,9 @@ const Navigator = ({ pathname }) => {
             color="primary"
             className={pathname === '/creators' ? classes.selected : ''}
           >
-            <Typography variant="button">Creators</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Creators
+            </Typography>
           </Button>
         </Link>
         <Link to="/collabs" className={classes.link}>
@@ -73,7 +85,9 @@ const Navigator = ({ pathname }) => {
             color="primary"
             className={pathname === '/collabs' ? classes.selected : ''}
           >
-            <Typography variant="button">Collabs</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Collabs
+            </Typography>
           </Button>
         </Link>
       </Grid>
