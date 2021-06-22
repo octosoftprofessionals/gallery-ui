@@ -8,9 +8,6 @@ import { getArtwork } from '../../services/autionsService'
 
 import { colors } from '../../components/Styles/Colors'
 
-import iconEtherscan from '../../assets/etherscan-logo-circle.png'
-import iconView from '../../assets/view.png'
-import iconBlock from '../../assets/block.png'
 import { galleryItemQuery } from '../../services/gallery'
 import useQueryParams from '../../hooks/useQueryParams'
 
@@ -19,10 +16,14 @@ const artworkLinks = [
   {
     link: 'https://etherscan.io/',
     text: 'View on Etherscan',
-    icon: iconEtherscan,
+    icon: 'iconEtherscan',
   },
-  { link: 'https://ipfs.io/', text: 'View on IPFS', icon: iconView },
-  { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: iconBlock },
+  {
+    link: 'https://ipfs.io/',
+    text: 'View on IPFS',
+    icon: 'iconView',
+  },
+  { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: 'iconBlock' },
 ]
 
 const linkShareTwitter = () => {
@@ -76,7 +77,10 @@ const historyInfo = [
 const ShowArtwork = () => {
   const { contractAddress, tokenId } = useQueryParams()
   const { data: galleryItem } = useQuery('artworkQuery', () =>
-    galleryItemQuery({ assetContractAddress: contractAddress, assetTokenId: tokenId })
+    galleryItemQuery({
+      assetContractAddress: contractAddress,
+      assetTokenId: tokenId,
+    })
   )
 
   console.log('ShowArtwork galleryItem:', galleryItem)

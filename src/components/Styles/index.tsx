@@ -22,6 +22,7 @@ export const darkTheme = createMuiTheme({
     MuiPopover: {
       paper: {
         borderRadius: 16,
+        backgroundColor: darkColors.DarkGray,
       },
     },
     MuiInputBase: {
@@ -272,7 +273,7 @@ export const darkTheme = createMuiTheme({
     },
     primary: {
       main: darkColors.WhiteSmoke,
-      light: Green,
+      light: darkColors.WhiteSmoke,
       dark: Aqua,
       contrastText: White,
     },
@@ -337,6 +338,7 @@ export const Theme = createMuiTheme({
     MuiPopover: {
       paper: {
         borderRadius: 16,
+        backgroundColor: White,
       },
     },
     MuiInputBase: {
@@ -576,7 +578,8 @@ export const Theme = createMuiTheme({
     secondary: {
       main: White,
       light: WhiteSmoke,
-      dark: Gainsboro,
+      dark: WhiteSmoke,
+      // dark: Gainsboro,
       contrastText: Black,
     },
     text: { primary: Gray, secondary: VeryLightGrey },

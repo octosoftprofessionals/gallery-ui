@@ -27,8 +27,20 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[3],
     marginTop: Theme.spacing(2),
   },
-  button: { borderRadius: Theme.shape.borderRadius[2] },
-  textButton: { fontSize: Theme.typography.fontSize[3] },
+  button: {
+    borderRadius: Theme.shape.borderRadius[2],
+    backgroundColor: Theme.palette.buttons.selected,
+    '&:hover': {
+      border:
+        Theme.palette.type === 'light'
+          ? '1px solid #010101'
+          : '1px solid #00FFFF',
+    },
+  },
+  textButton: {
+    fontSize: Theme.typography.fontSize[3],
+    color: Theme.palette.primary.contrastText,
+  },
   link: { textDecoration: 'none' },
 }))
 
