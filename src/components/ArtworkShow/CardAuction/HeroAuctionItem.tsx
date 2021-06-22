@@ -98,9 +98,7 @@ const HeroAuctionItem = ({
           >
             {`${formatDecimal(priceEth)} ETH`}
           </Typography>
-          <Typography variant="caption">
-            {formatUsd(priceUsd)}
-          </Typography>
+          <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
         </Grid>
         <Hidden mdDown>
           <Divider

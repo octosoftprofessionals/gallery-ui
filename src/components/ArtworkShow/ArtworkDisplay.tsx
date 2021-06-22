@@ -15,7 +15,7 @@ import { boxShadow } from '../Styles/Colors'
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
-    backgroundColor: Theme.palette.secondary.light,
+    backgroundColor: Theme.palette.secondary.dark,
     padding: Theme.spacing(9),
     '@media (max-width: 585px)': {
       padding: Theme.spacing(0, 9, 14),
@@ -23,7 +23,10 @@ const useStyle = makeStyles(Theme => ({
   },
   video: {
     maxWidth: `${Theme.spacing(14)}vh`,
-    filter: boxShadow.boxShadow2,
+    filter:
+      Theme.palette.type == 'light'
+        ? boxShadow.boxShadow2
+        : boxShadow.boxShadow9,
     cursor: 'zoom-in',
     '@media (max-width: 585px)': {
       maxWidth: `${Theme.spacing(14)}vw`,
@@ -40,7 +43,7 @@ const useStyle = makeStyles(Theme => ({
   },
   normalScreen: {
     display: 'block',
-    backgroundColor: Theme.palette.secondary.light,
+    backgroundColor: Theme.palette.secondary.dark,
   },
   icon: { fontSize: Theme.spacing(8) },
   iconButton: {
@@ -62,11 +65,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkDisplay = ({
-  imageUrl,
-  videoUrl,
-  mimeType,
-}) => {
+const ArtworkDisplay = ({ imageUrl, videoUrl, mimeType }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [volume, setVolume] = useState<boolean>(true)
   const [fullscreen, setFullscreen] = useState<boolean>(false)

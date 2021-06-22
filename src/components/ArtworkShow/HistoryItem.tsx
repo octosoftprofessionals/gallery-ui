@@ -29,6 +29,7 @@ const useStyle = makeStyles(Theme => ({
   },
   icon: {
     fontSize: Theme.spacing(7),
+    color: Theme.palette.primary.main,
     '&:hover': {
       color: Theme.palette.primary.main,
     },
@@ -83,7 +84,11 @@ const HistoryItem = ({
             justify="flex-start"
             alignItems="center"
           >
-            <Avatar className={classes.avatar} alt={eventFromUsername} src={eventFromImageUrl} />
+            <Avatar
+              className={classes.avatar}
+              alt={eventFromUsername}
+              src={eventFromImageUrl}
+            />
             <Grid direction="column" alignContent="flex-start" justify="center">
               <div className={classes.action}>
                 <Typography
@@ -110,12 +115,12 @@ const HistoryItem = ({
                 alignItems="flex-end"
                 justify="center"
               >
-                <Typography
-                  className={classes.actionText}
-                >{`${formatDecimal(amountEth)} ETH`}</Typography>
-                <Typography
-                  className={classes.price}
-                >{`$ ${formatUsd(amountUsd)} `}</Typography>
+                <Typography className={classes.actionText}>{`${formatDecimal(
+                  amountEth
+                )} ETH`}</Typography>
+                <Typography className={classes.price}>{`${formatUsd(
+                  amountUsd
+                )} `}</Typography>
               </Grid>
             ) : null}
 
