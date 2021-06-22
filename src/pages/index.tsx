@@ -105,9 +105,9 @@ const Home = () => {
         link="/creators"
       >
         <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
-      </ArtworkGrid> */}
+      </ArtworkGrid> 
 
-      <ContactUs />
+      <ContactUs />*/}
     </Layout>
   )
 }
