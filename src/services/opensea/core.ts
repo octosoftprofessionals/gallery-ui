@@ -25,7 +25,7 @@ const get = async (url, queryParams = {}) => {
 
 // https://docs.opensea.io/reference#retrieving-a-single-asset
 export const getAsset = async ({ assetContractAddress, assetTokenId }) => {
-  const url = `${ROOT}/asset/${assetContractAddress}/${assetTokenId}/`
+  const url = `${ROOT}/asset/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
   const asset = res.data ?? {}
   return asset
