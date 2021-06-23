@@ -1,10 +1,16 @@
 import axios from 'axios'
 import axiosRateLimit from 'axios-rate-limit'
-
 import config from '../../config'
+import process from '@types/node' //Not working  
+import process from 'node' // Not working either.
+// https://stackoverflow.com/questions/44416902/how-to-fix-types-node-index-d-ts-is-not-a-module
+//ENV
+const { API_URL } = process.env;
 
-const ROOT = 'https://api.opensea.io/api/v1'
-const API_KEY = config.OPENSEA_API_KEY ?? ''
+
+const ROOT = API_URL || process.env.NODE_ENV; // Not working
+
+const API_KEY = config.OPENSEA_API_KEY ?? '' // None for now (if so, should come from gallery-api, backend)
 
 const DEFAULT_HEADERS = {
   'X-API-KEY': API_KEY,
@@ -25,7 +31,7 @@ const get = async (url, queryParams = {}) => {
 
 // https://docs.opensea.io/reference#retrieving-a-single-asset
 export const getAsset = async ({ assetContractAddress, assetTokenId }) => {
-  const url = `${ROOT}/asset/${assetContractAddress}/${assetTokenId}`
+  const url = `${ROOT}//asset${assetContractAddress}/${assetTokenId}/`
   const res = await get(url)
   const asset = res.data ?? {}
   return asset
