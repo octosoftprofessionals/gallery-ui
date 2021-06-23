@@ -16,6 +16,7 @@ const config = {
   TEXT_LINK_COLOR: '#bd9f5d',
   OPENSEA_API_KEY: process.env.GATSBY_OPENSEA_API_KEY,
   OPENSEA_GALLERY_ADDRESS: process.env.GATSBY_OPENSEA_GALLERY_ADDRESS,
+  API_URL: "localhost:3000",
 }
 
 export default config
