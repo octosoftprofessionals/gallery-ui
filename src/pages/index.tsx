@@ -98,16 +98,6 @@ const Home = () => {
           )}
         />
       </ArtworkGrid>
-
-      {/* <ArtworkGrid
-        title="Featured creators"
-        titleButton="creators"
-        link="/creators"
-      >
-        <Gallery creatorsQuery={CreatorQuery?.creators} itemType="creator" />
-      </ArtworkGrid> 
-
-      <ContactUs />*/}
     </Layout>
   )
 }
