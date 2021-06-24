@@ -25,7 +25,6 @@ export const getAsset = async ({ assetContractAddress, assetTokenId }) => {
 export const getAssets = async (queryParams = {}) => {
   const url = `${ROOT}/assets`
   const res = await get(url, queryParams)
-  console.log(res);
   const assets = res.data ?? []
   return assets
 }
