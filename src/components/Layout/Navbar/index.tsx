@@ -17,8 +17,8 @@ import {
 } from '@material-ui/core'
 
 import logoSrc from '../../../assets/logoNew.png'
-import LogoDarkSrc from '../../../assets/logoSVGlight.svg'
-import LogoSCNFT from '../../../assets/SCNFT_Logo_Transparent.svg'
+import LogoDarkSrc from '../../../assets/light-logo-SC.svg'
+import LogoSCNFT from '../../../assets/dark-logo-SC.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
@@ -91,13 +91,13 @@ const useStyles = makeStyles(Theme => ({
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
   logo: {
     display: ({}) => (Theme.palette.type === 'dark' ? 'none' : 'block'),
-    width: Theme.spacing(14),
-    height: Theme.spacing(14),
+    width: Theme.spacing(15),
+    height: Theme.spacing(15),
   },
   logoDark: {
     display: ({}) => (Theme.palette.type === 'dark' ? 'block' : 'none'),
-    width: Theme.spacing(14),
-    height: Theme.spacing(14),
+    width: Theme.spacing(15),
+    height: Theme.spacing(15),
   },
 }))
 
