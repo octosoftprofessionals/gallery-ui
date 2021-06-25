@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { SnackbarContent } from '@material-ui/core'
-
+import BidMessages from './BidMessages'
 import EthSvg from '../../assets/eth.svg'
 import { formatDecimal, formatUsd } from '../../Utils'
-import Alert from '@material-ui/lab/Alert'
-/* import Slide, { SlideProps } from '@material-ui/core/Slide'
- */
-/* type TransitionProps = Omit<SlideProps, 'direction'>
- */
+
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
@@ -53,45 +46,16 @@ const useStyle = makeStyles(Theme => ({
     padding: 0,
   },
   icon: { marginLeft: Theme.spacing(3) },
-  message: {
-    position: 'relative',
-    width: '100%',
-    zIndex: -1,
-  },
-  alert: {
-    bottom: '60%',
-    /* transform: 'translateX(-80%)', */
-    borderRadius: Theme.shape.borderRadius[2],
-    position: 'absolute',
-    margin: 0,
-    left: 1,
-    textAlign: 'center',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    padding: '10px 20px 30px 60px',
-    width: '100%',
-    '@media (max-width: 780px)': {
-      padding: '0px 50px 50px 15px ',
-      marginLeft: '-6px',
-      marginBotton: '20px',
-    },
-  },
 }))
 
 const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
   const [bidAmounts, setBidAmounts] = useState()
   const [open, setOpen] = useState(false)
+  const [state, setState] = useState('')
 
   const handleClick = () => () => {
     setOpen(true)
-  }
-
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setOpen(false)
   }
 
   return (
@@ -174,16 +138,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             Place a Bid
           </Typography>
         </Button>
-        <Snackbar
-          open={open}
-          autoHideDuration={3000}
-          onClose={handleClose}
-          className={classes.message}
-        >
-          <Alert severity="success" variant="filled" className={classes.alert}>
-            "Bid successfully placed!"
-          </Alert>
-        </Snackbar>
+        <BidMessages state={setState} setOpen={setOpen} open={open} />
       </Grid>
     </Grid>
   )
