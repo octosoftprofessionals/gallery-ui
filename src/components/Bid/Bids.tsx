@@ -52,7 +52,6 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
   const [bidAmounts, setBidAmounts] = useState()
   const [open, setOpen] = useState(false)
-  const [state, setState] = useState('')
 
   const handleClick = () => () => {
     setOpen(true)
@@ -138,7 +137,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             Place a Bid
           </Typography>
         </Button>
-        <BidMessages state={setState} setOpen={setOpen} open={open} />
+        <BidMessages setOpen={setOpen} open={open} />
       </Grid>
     </Grid>
   )

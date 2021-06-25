@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
@@ -15,26 +15,7 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     margin: 0,
     fontSize: 14,
-    left: 1,
-    textAlign: 'center',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    padding: '0px 0px 20px 10px',
-    width: '100%',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-w',
-    '@media (max-width: 780px)': {
-      marginLeft: '-6px',
-      marginBotton: '20px',
-    },
-  },
-  alert2: {
-    bottom: '60%',
-    borderRadius: Theme.shape.borderRadius[2],
-    position: 'absolute',
-    margin: 0,
-    fontSize: 13,
+    fontWeight: 800,
     left: 1,
     textAlign: 'center',
     overflow: 'hidden',
@@ -45,13 +26,13 @@ const useStyle = makeStyles(Theme => ({
     flexWrap: 'wrap',
     alignItems: 'center',
     '@media (max-width: 780px)': {
-      padding: '0px 10px 40px 10px ',
+      padding: '0px 5px 40px 5px ',
       marginLeft: '-7px',
     },
   },
 }))
 
-const BidMessages = ({ state, setOpen, open }) => {
+const BidMessages = ({ setOpen, open }) => {
   const classes = useStyle()
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -61,6 +42,24 @@ const BidMessages = ({ state, setOpen, open }) => {
     setOpen(false)
   }
 
+  const messages = {
+    ok: {
+      severity: 'success',
+      message: 'Bid successfully placed!',
+    },
+    outbid: {
+      severity: 'warning',
+      message: `We're sorry, there was an unexpected error placing your bid.\nPlease refresh the page or wait and try again.`,
+    },
+    error: {
+      severity: 'error',
+      message: 'You were outbid! Place a higher bid to continue.',
+    },
+    noBid: {
+      severity: 'info',
+      message: 'You currently have no bids!',
+    },
+  }
   return (
     <Snackbar
       open={open}
@@ -68,54 +67,14 @@ const BidMessages = ({ state, setOpen, open }) => {
       onClose={handleClose}
       className={classes.message}
     >
-      {(() => {
-        switch (state) {
-          case 'ok':
-            return (
-              <Alert
-                icon={false}
-                severity="success"
-                variant="filled"
-                className={classes.alert}
-              >
-                "Bid successfully placed!"
-              </Alert>
-            )
-          case 'outbid':
-            return (
-              <Alert
-                icon={false}
-                severity="warning"
-                variant="filled"
-                className={classes.alert2}
-              >
-                {`We're sorry, there was an unexpected error placing your bid.\nPlease refresh the page or wait a few minutes and try again.`}
-              </Alert>
-            )
-          case 'error':
-            return (
-              <Alert
-                icon={false}
-                severity="error"
-                variant="filled"
-                className={classes.alert2}
-              >
-                You were outbid! Place a higher bid to continue.
-              </Alert>
-            )
-          default:
-            return (
-              <Alert
-                severity="info"
-                variant="filled"
-                className={classes.alert2}
-                icon={false}
-              >
-                You currently have no bids!
-              </Alert>
-            )
-        }
-      })()}
+      <Alert
+        icon={false}
+        severity={messages[state].severity}
+        variant="filled"
+        className={classes.alert}
+      >
+        {messages[state].message}
+      </Alert>
     </Snackbar>
   )
 }
