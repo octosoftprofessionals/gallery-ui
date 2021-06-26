@@ -5,7 +5,7 @@ import Exhibition from '../../components/Exhibition'
 
 const ExhibitionPage = () => {
   return (
-    <Layout padding="0 24px" marginTop="0">
+    <Layout padding="0 24px" marginTop="12px">
       <Exhibition />
     </Layout>
   )

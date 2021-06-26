@@ -2,33 +2,109 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography, Paper, Button } from '@material-ui/core'
 
-import { galleryItemQuery } from '../../services/gallery'
-import GalleryArtworks from '../Artworks/GalleryArtworks'
+import { featuredItemsQuery } from '../../services/gallery'
+import GalleryExhibition from './GalleryExhibition'
 import useQueryParams from '../../hooks/useQueryParams'
 
-const useStyles = makeStyles(theme => ({}))
+const useStyles = makeStyles(theme => ({
+  root: {},
+  button: {
+    borderRadius: theme.shape.borderRadius[2],
+    padding: theme.spacing(4, 2),
+    justifyContent: 'none',
+    marginBottom: theme.spacing(5),
+  },
+  containerCollection: {
+    padding: theme.spacing(0, 7),
+  },
+  typographyButton: {
+    alignSelf: 'left',
+    color: theme.palette.primary.contrastText,
+  },
+  img: {
+    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+  },
+  paper: {
+    padding: theme.spacing(3, 5),
+  },
+  containerButtons: {
+    height: `${theme.spacing(13)}vh`,
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    padding: theme.spacing(2),
+  },
+}))
+
+const imgUrls = [
+  'https://i.pinimg.com/originals/7f/08/52/7f0852baa4ec65a696b2a54c833215d4.jpg',
+]
+
+const collectionTitles = [
+  'Shapes in Art',
+  'Art 101',
+  'Superchief Collections',
+  'Ashes to Ashes',
+  'Play the Game',
+  'Shapes in Art',
+  'Art 101',
+  'Superchief Collections',
+  'Ashes to Ashes',
+  'Play the Game',
+]
 
 const Exhibition = () => {
-  const classes = useStyles()
+  const classes = useStyles({ imageUrl: imgUrls })
   const { contractAddress, tokenId } = useQueryParams()
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const { data: galleryItem, isLoading } = useQuery('artworkQuery', () =>
-    galleryItemQuery({
-      assetContractAddress: contractAddress,
-      assetTokenId: tokenId,
-    })
-  )
+  const {
+    data: featuredItems = [],
+    isLoading,
+    status: statusFeaturedItemsQuery,
+  } = useQuery('featuredItemsQuery', featuredItemsQuery)
+  console.log(featuredItems)
   return (
-    <Grid item container justify="space-around">
-      <Grid item xs={12} sm={4}>
-        cuadro filtro
+    <>
+      <Typography variant="h5" display="block" align="center" color="primary">
+        Superchief Collections, Curated by our staff
+      </Typography>
+      <Grid item container justify="space-between">
+        <Grid item xs={12} sm={3} className={classes.containerCollection}>
+          <Paper elevation={1} className={classes.paper}>
+            <Typography variant="body1" align="center" color="primary">
+              Collections
+            </Typography>
+            <div className={classes.containerButtons}>
+              {collectionTitles.map(title => {
+                return (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={[classes.img, classes.button]}
+                  >
+                    <Typography
+                      className={classes.typographyButton}
+                      variant="caption"
+                      color="textSecondary"
+                    >
+                      {title}
+                    </Typography>
+                  </Button>
+                )
+              })}
+            </div>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={9}>
+          <GalleryExhibition isLoading={isLoading} data={featuredItems} />
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={7}>
-        <GalleryArtworks isLoading={isLoading} data={galleryItem} />
-      </Grid>
-    </Grid>
+    </>
   )
 }
 
