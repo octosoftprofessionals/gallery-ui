@@ -17,7 +17,7 @@ import { biddingPathFrom, profilePathFromAddress } from '../../config/routes'
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
-    backgroundColor: Theme.palette.secondary.main,
+    backgroundColor: Theme.palette.secondary.dark,
     padding: Theme.spacing(9),
   },
   icon: { fontSize: `${Theme.typography.fontSize[0]}em` },
@@ -35,6 +35,9 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     top: Theme.spacing(1),
     height: Theme.spacing(10),
+  },
+  history: {
+    marginTop: Theme.spacing(3),
   },
 }))
 
@@ -69,7 +72,7 @@ const ArtworkDetail = ({
   const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
 
   const History = ({ data = [] }) => (
-    <div>
+    <div className={classes.history}>
       <Typography variant="h6" color="primary">
         History
       </Typography>
@@ -88,7 +91,11 @@ const ArtworkDetail = ({
       wrap="wrap"
       className={classes.root}
     >
-      <CreatorButton username={creatorUsername} imageUrl={creatorImageUrl} profileUrl={creatorProfileLink} />
+      <CreatorButton
+        username={creatorUsername}
+        imageUrl={creatorImageUrl}
+        profileUrl={creatorProfileLink}
+      />
       <ArtworkShare
         linkTwitter={linkTwitter}
         setDisplayReportModal={setDisplayReportModal}
@@ -96,21 +103,22 @@ const ArtworkDetail = ({
       />
       <Grid container wrap="wrap" justify="space-between">
         <Grid item xs={12} md={5} container direction="column">
-          <Typography variant="h4">{title}</Typography>
-          <Typography variant="body1" className={classes.text}>
+          <Typography color="primary" variant="h4">
+            {title}
+          </Typography>
+          <Typography color="primary" variant="body1" className={classes.text}>
             <ArrowDownward className={classes.icon} /> Artwork information
           </Typography>
-
           <Typography
             variant="subtitle1"
-            color="initial"
+            color="primary"
             className={classes.title}
           >
             Description
           </Typography>
           <Typography
             variant="body2"
-            color="initial"
+            color="primary"
             className={classes.desciptionText}
           >
             {description}
@@ -118,7 +126,7 @@ const ArtworkDetail = ({
 
           <Typography
             variant="subtitle1"
-            color="initial"
+            color="primary"
             className={classes.title}
           >
             Edition of

@@ -82,7 +82,9 @@ export const formatDecimal = (numberish, decimals = 3) => {
 }
 
 const formatNumberWithCommas = (x) => {
-  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  const [integral = '0', fractional = '0'] = x.toString().split('.')
+  const integral_with_commas = integral.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+  return [integral_with_commas, fractional].join('.')
 }
 export const formatUsd = (numberish) => {
   if (numberish == null) {

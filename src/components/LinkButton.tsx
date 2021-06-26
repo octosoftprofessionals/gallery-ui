@@ -1,7 +1,10 @@
 import React from 'react'
 import { Grid, Typography, Button, Link, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import OpenInNewOutlinedIcon from '@material-ui/icons/OpenInNewOutlined'
+
+import { VisibilityOutlined, OpenInNewOutlined } from '@material-ui/icons'
+import BlockIcon from '../assets/block.svg'
+import EtherScanIcon from '../assets/etherscan-logo-circle.svg'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,10 +18,13 @@ const useStyles = makeStyles(theme => ({
   box: {
     boxSizing: 'border-box',
     width: '60%',
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.secondary.dark,
     alignItems: 'center',
     borderRadius: theme.spacing(2),
     padding: theme.spacing(0),
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.dark,
+    },
   },
   paper: {
     width: '100%',
@@ -42,10 +48,10 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.primary.main,
     },
   },
-  iconText: { fontSize: theme.spacing(9) },
-  iconPng: {
+  iconSVG: {
     width: theme.spacing(9),
     height: theme.spacing(9),
+    fill: theme.palette.primary.main,
   },
   text: {
     fontSize: theme.spacing(5),
@@ -71,12 +77,18 @@ const LinkButton = ({ link, text, icon }) => {
     >
       <Paper elevation={1} className={classes.paper}>
         <Grid item xs={8} container className={classes.grid}>
-          <img src={icon} className={classes.iconPng} />
+          {icon === 'iconEtherscan' ? (
+            <EtherScanIcon className={classes.iconSVG} />
+          ) : icon === 'iconView' ? (
+            <VisibilityOutlined className={classes.iconSVG} />
+          ) : (
+            <BlockIcon className={classes.iconSVG} />
+          )}
           <Typography className={classes.text} variant="h6">
             {text}
           </Typography>
         </Grid>
-        <OpenInNewOutlinedIcon className={classes.icon} />
+        <OpenInNewOutlined className={classes.icon} />
       </Paper>
     </Button>
   )
