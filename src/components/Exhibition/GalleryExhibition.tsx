@@ -12,9 +12,6 @@ const useStyle = makeStyles(Theme => ({
 const GalleryExhibition = ({ isLoading, data = [] }) => {
   const classes = useStyle()
 
-  console.log('isLoading:', isLoading)
-  console.log('data:', data)
-
   const Loading = () => (
     <Box
       width="100%"

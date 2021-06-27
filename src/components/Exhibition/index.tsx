@@ -80,7 +80,6 @@ const Exhibition = () => {
     isLoading,
     status: statusFeaturedItemsQuery,
   } = useQuery('featuredItemsQuery', featuredItemsQuery)
-  console.log(featuredItems)
   return (
     <Grid container justify="center">
       <Typography className={classes.title} variant="h5" color="primary">
