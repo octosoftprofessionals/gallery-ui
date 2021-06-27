@@ -76,8 +76,10 @@ const Footer = ({ pathname }) => {
       <Grid item xs={12} container justify="space-between" alignItems="center">
         <Hidden smUp>
           <Grid item container justify="center" xs={12}>
-            <LogoSCNFT className={classes.logo} />
-            <LogoDarkSrc className={classes.logoDark} />
+            <Link to="/" className={classes.link}>
+              <LogoSCNFT className={classes.logo} />
+              <LogoDarkSrc className={classes.logoDark} />
+            </Link>
           </Grid>
         </Hidden>
         <Grid

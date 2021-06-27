@@ -25,8 +25,11 @@ const BackgroundNavBar = styled('div')({
 const StyledMain = styled('main')({
   minHeight: `${Theme.spacing(15)}vh`,
   height: `${Theme.spacing(15)}%`,
-  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(16)),
+  marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(15)),
   marginBottom: Theme.spacing(7),
+  '@media (max-width: 576px)': {
+    marginTop: ({ marginTop }) => (marginTop ? marginTop : Theme.spacing(14)),
+  },
 })
 
 const Layout = ({

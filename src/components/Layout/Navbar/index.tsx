@@ -27,7 +27,7 @@ const { boxShadow1 } = boxShadow
 
 const useStyles = makeStyles(Theme => ({
   root: {
-    padding: Theme.spacing(11, 0, 0),
+    padding: Theme.spacing(8, 0, 0),
   },
   nav: {
     display: 'flex',
@@ -91,13 +91,21 @@ const useStyles = makeStyles(Theme => ({
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
   logo: {
     display: ({}) => (Theme.palette.type === 'dark' ? 'none' : 'block'),
-    width: Theme.spacing(15),
-    height: Theme.spacing(15),
+    width: 150,
+    height: 150,
+    '@media (max-width: 576px)': {
+      width: Theme.spacing(17),
+      height: Theme.spacing(17),
+    },
   },
   logoDark: {
-    display: ({}) => (Theme.palette.type === 'dark' ? 'block' : 'none'),
-    width: Theme.spacing(15),
-    height: Theme.spacing(15),
+    display: Theme.palette.type === 'dark' ? 'block' : 'none',
+    width: 150,
+    height: 150,
+    '@media (max-width: 576px)': {
+      width: Theme.spacing(17),
+      height: Theme.spacing(17),
+    },
   },
 }))
 
