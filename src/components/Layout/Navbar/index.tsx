@@ -99,7 +99,7 @@ const useStyles = makeStyles(Theme => ({
     },
   },
   logoDark: {
-    display: ({}) => (Theme.palette.type === 'dark' ? 'block' : 'none'),
+    display: Theme.palette.type === 'dark' ? 'block' : 'none',
     width: 150,
     height: 150,
     '@media (max-width: 576px)': {
