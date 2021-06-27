@@ -3,17 +3,14 @@ import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import GalleryItem from '../GalleryItem'
-import ArtworkItem from '../../components/GalleryItem/ArtworkItem'
+import ArtworkItem from '../GalleryItem/ArtworkItem'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
 }))
 
-const GalleryArtworks = ({ isLoading, data = [] }) => {
+const GalleryExhibition = ({ isLoading, data = [] }) => {
   const classes = useStyle()
-
-  console.log('isLoading:', isLoading)
-  console.log('data:', data)
 
   const Loading = () => (
     <Box
@@ -38,7 +35,7 @@ const GalleryArtworks = ({ isLoading, data = [] }) => {
             key={index}
             xs={12}
             sm={6}
-            md={3}
+            md={4}
             className={classes.containerItem}
           >
             <ArtworkItem galleryItem={galleryItem} />
@@ -49,4 +46,4 @@ const GalleryArtworks = ({ isLoading, data = [] }) => {
   )
 }
 
-export default GalleryArtworks
+export default GalleryExhibition

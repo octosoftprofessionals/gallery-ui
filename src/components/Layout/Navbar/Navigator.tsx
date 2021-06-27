@@ -31,11 +31,11 @@ const Navigator = ({ pathname }) => {
   return (
     <Hidden mdDown>
       <Grid justify="center" className={classes.container}>
-        <Link to="/#" className={classes.link}>
+        <Link to="/exhibition" className={classes.link}>
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/#' ? classes.selected : ''}
+            className={pathname === '/exhibition' ? classes.selected : ''}
           >
             <Typography variant="button">Exhibition</Typography>
           </Button>

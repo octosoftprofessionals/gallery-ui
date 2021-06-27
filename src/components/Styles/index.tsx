@@ -112,6 +112,9 @@ export const darkTheme = createMuiTheme({
         },
         padding: '16px 24px',
       },
+      containedPrimary: {
+        justifyContent: 'flex-start',
+      },
       containedSecondary: {
         '&:hover': {
           backgroundColor: Black,
@@ -418,6 +421,9 @@ export const Theme = createMuiTheme({
           boxShadow: boxShadow.boxShadow4,
         },
         padding: '16px 24px',
+      },
+      containedPrimary: {
+        justifyContent: 'flex-start',
       },
       containedSecondary: {
         '&:hover': {
