@@ -59,7 +59,9 @@ const useStyles = makeStyles(Theme => ({
 
 const MenuDrawer = ({ showDrawer, setShowDrawer, LogoDarkSrc }) => {
   const classes = useStyles()
-
+  const discord = 'https://discord.com/invite/pxjASBky'
+  const instagram = 'https://www.instagram.com/superchiefgallerynft/'
+  const twitter = 'https://twitter.com/SuperchiefNFT'
   return (
     <Hidden mdUp>
       <SwipeableDrawer
@@ -99,35 +101,41 @@ const MenuDrawer = ({ showDrawer, setShowDrawer, LogoDarkSrc }) => {
                   Creators
                 </Typography>
               </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Blog</Typography>
+              <Link to={'/exhibition'} className={classes.link}>
+                <Typography variant="h4" color="secondary">
+                  Exhibition
+                </Typography>
               </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Help</Typography>
+              <Link to={'/collabs'} className={classes.link}>
+                <Typography variant="h4" color="secondary">
+                  Collabs
+                </Typography>
               </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Discord</Typography>
+              {/*     <Link className={classes.link}>
+                <Typography variant="h4" color="secondary">Help</Typography>
               </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Careers</Typography>
-              </Link>
+           <Link className={classes.link}>
+                <Typography variant="h4" color="secondary">Careers</Typography>
+              </Link> */}
             </Grid>
             <Grid
               item
+              xs={11}
+              sm={12}
               container
               direction="row"
               justify="space-between"
               alignItems="flex-start"
               className={classes.drawerFooter}
             >
-              <Grid item xs={6} container direction="column">
-                <Link className={classes.link}>
+              <Grid item xs={5} container direction="column">
+                <Link to={twitter} className={classes.link}>
                   <Typography variant="caption">Twitter</Typography>
                 </Link>
                 <Link className={classes.link}>
                   <Typography variant="caption">Privacy Policy</Typography>
                 </Link>
-                <Link className={classes.link}>
+                <Link to={discord} className={classes.link}>
                   <Typography variant="caption">Discord</Typography>
                 </Link>
               </Grid>
@@ -135,7 +143,7 @@ const MenuDrawer = ({ showDrawer, setShowDrawer, LogoDarkSrc }) => {
                 <Link className={classes.link}>
                   <Typography variant="caption">Terms of Service</Typography>
                 </Link>
-                <Link className={classes.link}>
+                <Link to={instagram} className={classes.link}>
                   <Typography variant="caption">Instagram</Typography>
                 </Link>
               </Grid>
