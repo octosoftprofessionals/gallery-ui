@@ -1,3 +1,5 @@
+import axios from 'axios'
+import axiosRateLimit from 'axios-rate-limit'
 import {
   getAsset,
   getAssetsByCollectionSlug,
@@ -6,6 +8,7 @@ import {
 } from './opensea'
 import { isBidOrOfferEvent, listingPriceData } from './opensea/asset'
 import { priceFromPriceData } from './opensea/util'
+import config from '../config'
 
 // Types
 
@@ -100,27 +103,51 @@ type User = {
   description?: string
 }
 
-// Core Queries
+const ROOT = config.API_URL || 'http://localhost:3000/v1'
 
-export const featuredItemsQuery = async (): Promise<GalleryItem[]> => {
-  // TODO: filter by featured
-  const collectionAssets = await getAssetsByCollectionSlug()
-  const hydratedAssets = await getMetadataForAssets(collectionAssets)
-  const collectionItems = hydratedAssets.map(galleryItemFromHydratedAsset)
-  // const pricedCollectionItems = collectionItems.map(pricedItemFromGalleryItem)
-  return collectionItems
+const http = axiosRateLimit(axios.create(), {
+  maxRequests: 5,
+  perMilliseconds: 1000,
+})
+
+const get = async (url, queryParams = {}) => {
+  return await http.get(url, { params: queryParams })
 }
+// Core Queries
+export const featuredItemsQuery = async (queryParams = {}) => {
+  const url = `${ROOT}/gallery/featured-items`
+  const res = await get(url, queryParams)
+  const itemsQuery = res.data ?? []
+  return itemsQuery
+}
+// export const featuredItemsQuery = async (): Promise<GalleryItem[]> => {
+//   // TODO: filter by featured
+//   const collectionAssets = await getAssetsByCollectionSlug()
+//   const hydratedAssets = await getMetadataForAssets(collectionAssets)
+//   const collectionItems = hydratedAssets.map(galleryItemFromHydratedAsset)
+//   // const pricedCollectionItems = collectionItems.map(pricedItemFromGalleryItem)
+//   return collectionItems
+// }
 
 export const galleryItemQuery = async ({
   assetContractAddress,
-  assetTokenId,
-}): Promise<GalleryItem> => {
-  const asset = await getAsset({ assetContractAddress, assetTokenId })
-  const hydratedAsset = await getMetadataForAsset(asset)
-  const galleryItem = galleryItemFromHydratedAsset(hydratedAsset)
-  const historyItems = historyItemsFrom({ galleryItem, hydratedAsset })
-  return Object.assign({}, galleryItem, { historyItems })
+  assetTokenId }) => {
+  const url = `${ROOT}/gallery/gallery-item/${assetContractAddress}/${assetTokenId}`
+  const res = await get(url)
+  const galleryItem = res.data ?? {}
+  return galleryItem
 }
+
+// export const galleryItemQuery = async ({
+//   assetContractAddress,
+//   assetTokenId,
+// }): Promise<GalleryItem> => {
+//   const asset = await getAsset({ assetContractAddress, assetTokenId })
+//   const hydratedAsset = await getMetadataForAsset(asset)
+//   const galleryItem = galleryItemFromHydratedAsset(hydratedAsset)
+//   const historyItems = historyItemsFrom({ galleryItem, hydratedAsset })
+//   return Object.assign({}, galleryItem, { historyItems })
+// }
 
 // Helper Methods
 
