@@ -76,7 +76,15 @@ const useStyles = makeStyles(Theme => ({
     textDecoration: 'none',
     cursor: 'pointer',
   },
-  drawer: { width: `${Theme.spacing(17)}vw`, padding: Theme.spacing(0, 7) },
+  drawer: {
+    width: `${Theme.spacing(17)}vw`,
+    padding: Theme.spacing(0, 7),
+    display: 'flex',
+    wrap: 'wrap',
+    flexDirection: 'column',
+    top: 0,
+    left: 0,
+  },
   offIcon: { fontSize: Theme.typography.fontSize[11] },
   containerImg: { marginBottom: Theme.spacing(7) },
   menuIcon: { fontSize: Theme.typography.fontSize[10] },
@@ -106,6 +114,13 @@ const useStyles = makeStyles(Theme => ({
       width: Theme.spacing(17),
       height: Theme.spacing(17),
     },
+  },
+  menu: {
+    display: 'flex',
+    justifyContent: 'center',
+    position: 'fixed',
+    top: 110,
+    left: 20,
   },
 }))
 
@@ -208,56 +223,58 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                 </IconButton>
               </Grid>
             </Grid>
-            <Grid container direction="column">
-              <Link to={'/artworks'} className={classes.link}>
-                <Typography variant="h4" color="secondary">
-                  Artworks
-                </Typography>
-              </Link>
-              <Link to="/creators" className={classes.link}>
-                <Typography variant="h4" color="secondary">
-                  Creators
-                </Typography>
-              </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Blog</Typography>
-              </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Help</Typography>
-              </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Discord</Typography>
-              </Link>
-              <Link className={classes.link}>
-                <Typography variant="h4">Careers</Typography>
-              </Link>
-            </Grid>
-            <Grid
-              item
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="flex-start"
-              className={classes.drawerFooter}
-            >
-              <Grid item xs={6} container direction="column">
-                <Link className={classes.link}>
-                  <Typography variant="caption">Twitter</Typography>
+            <Grid container direction="column" className={classes.menu}>
+              <Grid /* container */ direction="column">
+                <Link to={'/artworks'} className={classes.link}>
+                  <Typography variant="h4" color="secondary">
+                    Artworks
+                  </Typography>
+                </Link>
+                <Link to="/creators" className={classes.link}>
+                  <Typography variant="h4" color="secondary">
+                    Creators
+                  </Typography>
                 </Link>
                 <Link className={classes.link}>
-                  <Typography variant="caption">Privacy Policy</Typography>
+                  <Typography variant="h4">Blog</Typography>
                 </Link>
                 <Link className={classes.link}>
-                  <Typography variant="caption">Discord</Typography>
+                  <Typography variant="h4">Help</Typography>
+                </Link>
+                <Link className={classes.link}>
+                  <Typography variant="h4">Discord</Typography>
+                </Link>
+                <Link className={classes.link}>
+                  <Typography variant="h4">Careers</Typography>
                 </Link>
               </Grid>
-              <Grid item xs={6} container direction="column">
-                <Link className={classes.link}>
-                  <Typography variant="caption">Terms of Service</Typography>
-                </Link>
-                <Link className={classes.link}>
-                  <Typography variant="caption">Instagram</Typography>
-                </Link>
+              <Grid
+                item
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="flex-start"
+                className={classes.drawerFooter}
+              >
+                <Grid item xs={6} container direction="column">
+                  <Link className={classes.link}>
+                    <Typography variant="caption">Twitter</Typography>
+                  </Link>
+                  <Link className={classes.link}>
+                    <Typography variant="caption">Privacy Policy</Typography>
+                  </Link>
+                  <Link className={classes.link}>
+                    <Typography variant="caption">Discord</Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={6} container direction="column">
+                  <Link className={classes.link}>
+                    <Typography variant="caption">Terms of Service</Typography>
+                  </Link>
+                  <Link className={classes.link}>
+                    <Typography variant="caption">Instagram</Typography>
+                  </Link>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
