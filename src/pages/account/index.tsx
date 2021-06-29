@@ -6,6 +6,7 @@ import { getCreator } from '../../services/autionsService'
 import { backgroundGradient } from '../../components/Styles/Colors'
 import useQueryParams from '../../hooks/useQueryParams'
 import { galleryItemQuery } from '../../services/gallery'
+import { useSetMetamaskAccount, useMetamaskAccount } from '../../atom'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -14,8 +15,13 @@ const linkShareTwitter = () => {
   searchParams.set('text', 'Art is lit! Check this out!')
   return `https://twitter.com/share?${searchParams.toString()}`
 }
+// const setMetamaskAccount = useSetMetamaskAccount()
+
+// TODO use to get the user account where needed
+const metamaskAccount = useMetamaskAccount()
 
 const AccountPage = () => {
+  console.log(metamaskAccount)
   const { id: creatorId } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
@@ -23,7 +29,6 @@ const AccountPage = () => {
   const { data: CreatorQuery } = useQuery('CreatorQuery', () =>
     getCreator(creatorId)
   )
-
   const urlCover = CreatorQuery
     ? CreatorQuery.creator.coverImageUrl
     : backgroundGradient.backgroundGradient2
