@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { Grid, Typography, Button, IconButton, Dialog } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
+import { useSetMetamaskAccount, useMetamaskAccount } from '../../../atom'
 
 import detectEthereumProvider from '@metamask/detect-provider'
 
@@ -25,10 +26,18 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ConnectWalletModal = ({ handleCloseConnectWalletModal, setRedirectModal }) => {
+const ConnectWalletModal = ({
+  handleCloseConnectWalletModal,
+  setRedirectModal,
+}) => {
   const classes = useStyle()
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
   const [ethereumAccount, setEthereumAccount] = useState(null)
+
+  const setMetamaskAccount = useSetMetamaskAccount()
+
+  // TODO use to get the user account where needed
+  const metamaskAccount = useMetamaskAccount()
 
   useEffect(() => {
     checkMetaMaskConnected()
@@ -45,6 +54,7 @@ const ConnectWalletModal = ({ handleCloseConnectWalletModal, setRedirectModal })
 
       //account will be needed in the future
       setEthereumAccount(accounts[0])
+      setMetamaskAccount(accounts[0])
       return
     } else {
       handleCloseConnectWalletModal()
@@ -56,7 +66,10 @@ const ConnectWalletModal = ({ handleCloseConnectWalletModal, setRedirectModal })
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
-        <IconButton aria-label="close" onClick={() => handleCloseConnectWalletModal()}>
+        <IconButton
+          aria-label="close"
+          onClick={() => handleCloseConnectWalletModal()}
+        >
           <HighlightOff className={classes.icon} />
         </IconButton>
       </Grid>
