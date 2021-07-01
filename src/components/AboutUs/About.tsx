@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { colors } from '../Styles/Colors'
 /* import Top50Grid from './Top50'
 
 import { getCreators } from '../services/autionsService' */
@@ -16,6 +17,10 @@ const useStyle = makeStyles(Theme => ({
   },
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
+    padding: 1,
+    marginLeft: '30px',
+    marginRight: '30px',
+    height: 'inherit',
   },
   link: { textDecoration: 'none' },
   title: {
@@ -46,7 +51,7 @@ const AboutUsMain = () => {
       </Typography>
 
       <Grid container spacing={10} direction="row">
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={5}>
           <Typography
             variant="caption"
             color="primary"
@@ -62,13 +67,14 @@ const AboutUsMain = () => {
             </span>
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={6} /* className={classes.textBlock} */>
+        <Divider className={classes.divider} orientation="vertical"></Divider>
+        <Grid item xs={12} sm={5} /* className={classes.textBlock} */>
           <Typography
             variant="caption"
             color="primary"
             className={classes.text}
           >
-            <span className={classes.textBlock}>
+            <span /* className={classes.textBlock} */>
               We’re forging a community-driven path, providing culturally
               pioneering curation, and sharing our tools with the rapidly
               evolving group of developers who are excited to define this future
