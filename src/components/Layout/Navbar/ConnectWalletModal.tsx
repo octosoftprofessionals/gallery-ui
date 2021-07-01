@@ -55,7 +55,6 @@ const ConnectWalletModal = ({
       //account will be needed in the future
       setEthereumAccount(accounts[0])
       setMetamaskAccount(accounts[0])
-      console.log(metamaskAccount)
       return
     } else {
       handleCloseConnectWalletModal()
