@@ -4,7 +4,7 @@ import About from '../AboutUs/About'
 import TeamCard from './ReviewCard'
 import MakingHistory from './MakingHistory'
 import HowItWorks from './HowItWorks'
-
+import Newsletter from './Newsletter'
 import ReviewGrid from './ReviewGrid'
 
 /* import Top50Grid from './Top50'
@@ -24,13 +24,16 @@ const useStyle = makeStyles(Theme => ({
   block: {
     marginBottom: 60,
   },
+  block2: {
+    marginBottom: 80,
+  },
 }))
 
 const AboutUsMain = () => {
   const classes = useStyle()
   return (
     <div className={classes.root}>
-      <div className={classes.block}>
+      <div className={classes.block2}>
         <About />
       </div>
       <div className={classes.block}>
@@ -41,6 +44,9 @@ const AboutUsMain = () => {
       </div>
       <div className={classes.block}>
         <HowItWorks />
+      </div>
+      <div className={classes.block}>
+        <Newsletter />
       </div>
     </div>
   )

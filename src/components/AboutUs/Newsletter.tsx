@@ -8,6 +8,7 @@ import {
   Typography,
   withWidth,
 } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
@@ -34,9 +35,20 @@ const useStyle = makeStyles(Theme => ({
     fontSize: 24,
     fontWeight: 400,
   },
+  btnGreen: {
+    background: Theme.palette.buttons.wallet,
+    width: 200,
+    height: 50,
+    marginLeft: 40,
+    marginTop: 20,
+  },
+  textField: {
+    color: Theme.palette.primary.main,
+    width: 400,
+  },
 }))
 
-const MakingHistory = () => {
+const Newsletter = ({ pathname }) => {
   const [disableInfo, setDisableInfo] = useState(false)
 
   const classes = useStyle({ disableInfo })
@@ -46,7 +58,7 @@ const MakingHistory = () => {
     <Grid container direction="column">
       <Grid item xs={12}>
         <Typography variant="h3" color="primary">
-          Making History{' '}
+          Can’t get enough?
         </Typography>
       </Grid>
       <Grid
@@ -58,28 +70,34 @@ const MakingHistory = () => {
         justify="space-between"
         className={classes.root}
       >
-        <Grid item xs={12} lg={4} container direction="column">
+        <Grid item xs={12} container direction="column">
           <Typography
             variant="button"
             color="primary"
             className={classes.subTitle}
           >
-            Since launching in February 2021, creators have earned...
+            Subscribe to our newsletter.
           </Typography>
           <Divider orientation="horizontal" className={classes.divider} />
-
-          <Typography
-            variant="button"
-            color="primary"
-            className={classes.price}
-          >
-            {`${price} ETH`}
-          </Typography>
-          <Typography variant="caption">{money}</Typography>
+          <Grid container xs={12} direction="row">
+            <TextField
+              id="filled-email-input"
+              label="Email"
+              className={classes.textField}
+              type="email"
+              name="email"
+              autoComplete="email"
+              margin="normal"
+              variant="filled"
+            />
+            <Button variant="contained" className={classes.btnGreen}>
+              <Typography variant="button">Subscribe</Typography>
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
   )
 }
 
-export default withWidth()(MakingHistory)
+export default withWidth()(Newsletter)

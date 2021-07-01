@@ -12,8 +12,7 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   divider: {
-    opacity: Theme.palette.action.disabledOpacity[1],
-    padding: 1,
+    backgroundColor: Theme.palette.primary.main,
     marginBottom: '30px',
     marginTop: '30px',
     width: 'inherit',
@@ -21,7 +20,6 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
   title: {
     padding: 0,
-    marginBottom: 40,
   },
   text: {
     textAlign: 'center',
@@ -44,7 +42,7 @@ const HowItWorks = () => {
   return (
     <Grid item container direction="column">
       <Typography variant="h3" color="primary" className={classes.title}>
-        About Foundation
+        How it Works
       </Typography>
       <Divider orientation="horizontal" className={classes.divider} />
       <Grid container spacing={10} direction="row">

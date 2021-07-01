@@ -38,8 +38,7 @@ const useStyle = makeStyles(Theme => ({
     margin: 10,
   }, */
   divider: {
-    opacity: Theme.palette.action.disabledOpacity[1],
-    padding: 1,
+    backgroundColor: Theme.palette.primary.main,
     marginTop: '30px',
     marginBottom: '30px',
     width: 'inherit',

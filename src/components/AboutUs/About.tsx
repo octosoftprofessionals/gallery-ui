@@ -16,11 +16,16 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   divider: {
-    opacity: Theme.palette.action.disabledOpacity[1],
-    padding: 1,
+    backgroundColor: Theme.palette.primary.main,
     marginLeft: '30px',
     marginRight: '30px',
     height: 'inherit',
+  },
+  divider2: {
+    backgroundColor: Theme.palette.primary.main,
+    marginLeft: '30px',
+    marginRight: '30px',
+    width: 'inherit',
   },
   link: { textDecoration: 'none' },
   title: {
@@ -49,7 +54,8 @@ const AboutUsMain = () => {
       <Typography variant="h3" color="primary" className={classes.title}>
         About Foundation
       </Typography>
-
+      {/*       <Divider orientation="horizontal" className={classes.divider} />
+       */}
       <Grid container spacing={10} direction="row">
         <Grid item xs={12} sm={5}>
           <Typography
