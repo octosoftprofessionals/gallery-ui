@@ -24,11 +24,10 @@ const AccountPage = () => {
   }
   handleConnection()
 
-  const { id: creatorId } = useQueryParams()
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
   const { data: CreatorQuery } = useQuery('CreatorQuery', () =>
-    getCreator(creatorId)
+    getCreator(metamaskAccount)
   )
 
   const urlCover = CreatorQuery
