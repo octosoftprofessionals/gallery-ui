@@ -116,10 +116,11 @@ export const darkTheme = createMuiTheme({
         justifyContent: 'flex-start',
       },
       containedSecondary: {
+        borderRadius: 10,
+        backgroundColor: 'red',
         '&:hover': {
           backgroundColor: Black,
-          color: White,
-          transform: 'translateY(-2px)',
+          color: darkColors.WhiteSmoke,
           boxShadow: boxShadow.boxShadow4,
         },
       },
@@ -429,7 +430,6 @@ export const Theme = createMuiTheme({
         '&:hover': {
           backgroundColor: Black,
           color: White,
-          transform: 'translateY(-2px)',
           boxShadow: boxShadow.boxShadow4,
         },
       },

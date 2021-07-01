@@ -9,7 +9,6 @@ import {
   Grid,
   Toolbar,
   Typography,
-  Button,
   withWidth,
   Hidden,
   IconButton,
@@ -22,6 +21,7 @@ import LogoSCNFT from '../../../assets/dark-logo-SC.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
+import LoggedButton from './LoggedButton'
 
 const { boxShadow1 } = boxShadow
 
@@ -146,7 +146,8 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                   name={name}
                 />
               ) : (
-                <ButtonConnectWallet pathname={pathname} />
+                // <ButtonConnectWallet pathname={pathname} />
+                <LoggedButton profileImageUrl={profileImageUrl} name={name} />
               )}
             </Hidden>
             <Hidden mdUp>
