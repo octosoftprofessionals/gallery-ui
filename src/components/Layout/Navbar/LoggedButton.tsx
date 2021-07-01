@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   Button,
   MenuItem,
@@ -10,33 +10,54 @@ import {
   Avatar,
   Typography,
 } from '@material-ui/core'
+import { ArrowDropDownRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // display: 'flex',
-  },
+  root: {},
   paper: {
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
+    borderRadius: `0 0 ${theme.spacing(5)}px ${theme.spacing(5)}px`,
   },
   button: {
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
+    boxShadow: '0px 3px 7px #212e36',
+    padding: theme.spacing(3, 5),
+    borderRadius: theme.spacing(5),
+    zIndex: 2,
+    display: 'flex',
+    justifyContent: 'space-between',
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
       transition: 'none',
+      boxShadow: 'none',
     },
+  },
+  menuList: {
+    marginTop: -theme.spacing(3),
+    zIndex: 1,
+    paddingTop: theme.spacing(4),
+  },
+  menuItem: {
+    // textAlign: 'center',
+    justifyContent: 'center',
   },
   name: {
     marginLeft: theme.spacing(2),
   },
+  icon: {
+    fontSize: theme.spacing(10),
+  },
 }))
+
+const menu = ['My Profile', 'Playlist', 'Favorites', 'Bids', 'Log-Out']
 
 const LoggedButton = ({ profileImageUrl, name }) => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
-  const anchorRef = React.useRef(null)
+  const [open, setOpen] = useState(false)
+  const anchorRef = useRef(null)
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen)
@@ -46,7 +67,6 @@ const LoggedButton = ({ profileImageUrl, name }) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return
     }
-
     setOpen(false)
   }
 
@@ -58,14 +78,14 @@ const LoggedButton = ({ profileImageUrl, name }) => {
   }
 
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open)
-  React.useEffect(() => {
+  const prevOpen = useRef(open)
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus()
     }
-
     prevOpen.current = open
   }, [open])
+
   return (
     <div>
       <Button
@@ -81,6 +101,7 @@ const LoggedButton = ({ profileImageUrl, name }) => {
           className={classes.name}
           variant="body1"
         >{`@${name}`}</Typography>
+        <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>
       <Popper
         open={open}
@@ -100,15 +121,19 @@ const LoggedButton = ({ profileImageUrl, name }) => {
             <Paper className={classes.paper}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
+                  className={classes.menuList}
                   autoFocusItem={open}
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>My Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Playlist</MenuItem>
-                  <MenuItem onClick={handleClose}>Favorites</MenuItem>
-                  <MenuItem onClick={handleClose}>Bids</MenuItem>
-                  <MenuItem onClick={handleClose}>Log-Out</MenuItem>
+                  {menu.map(item => (
+                    <MenuItem
+                      className={classes.menuItem}
+                      onClick={handleClose}
+                    >
+                      {item}
+                    </MenuItem>
+                  ))}
                 </MenuList>
               </ClickAwayListener>
             </Paper>

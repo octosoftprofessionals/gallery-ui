@@ -139,15 +139,15 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
             <Hidden smDown>
               {pathname === '/bid' || pathname === '/account' ? (
-                <NavBarBid
-                  cois={cois}
-                  publicKey={publicKey}
-                  profileImageUrl={profileImageUrl}
-                  name={name}
-                />
-              ) : (
-                // <ButtonConnectWallet pathname={pathname} />
+                // <NavBarBid
+                //   cois={cois}
+                //   publicKey={publicKey}
+                //   profileImageUrl={profileImageUrl}
+                //   name={name}
+                // />
                 <LoggedButton profileImageUrl={profileImageUrl} name={name} />
+              ) : (
+                <ButtonConnectWallet pathname={pathname} />
               )}
             </Hidden>
             <Hidden mdUp>
