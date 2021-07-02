@@ -6,21 +6,13 @@ import MakingHistory from './MakingHistory'
 import HowItWorks from './HowItWorks'
 import Newsletter from './Newsletter'
 import ReviewGrid from './ReviewGrid'
+import { Grid } from '@material-ui/core'
 
 /* import Top50Grid from './Top50'
 
 import { getCreators } from '../services/autionsService' */
 
 const useStyle = makeStyles(Theme => ({
-  /* root: {
-    boxSizing: 'border-box',
-    flexGrow: 1,
-    '@media (max-width: 576px)': {
-      padding: 0,
-      margin: 0,
-      height: '100%',
-    },
-  }, */
   block: {
     marginBottom: 60,
   },
@@ -32,23 +24,23 @@ const useStyle = makeStyles(Theme => ({
 const AboutUsMain = () => {
   const classes = useStyle()
   return (
-    <div className={classes.root}>
-      <div className={classes.block2}>
+    <Grid container justify="center">
+      <Grid item xs={12} className={classes.block2}>
         <About />
-      </div>
-      <div className={classes.block}>
+      </Grid>
+      <Grid item xs={12} className={classes.block}>
         <MakingHistory />
-      </div>
-      <div className={classes.block}>
+      </Grid>
+      <Grid item xs={12} className={classes.block}>
         <ReviewGrid />
-      </div>
-      <div className={classes.block}>
+      </Grid>
+      <Grid item xs={12} className={classes.block}>
         <HowItWorks />
-      </div>
-      <div className={classes.block}>
+      </Grid>
+      <Grid item xs={12} className={classes.block}>
         <Newsletter />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   )
 }
 
