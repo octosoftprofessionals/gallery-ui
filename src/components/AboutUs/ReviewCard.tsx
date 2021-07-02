@@ -6,8 +6,6 @@ import { Paper, Typography } from '@material-ui/core'
 import CardInfo from './CardInfo'
 
 const useStyle = makeStyles(Theme => ({
-  /*  root: { position: 'relative' },
-   */
   infoCard: {
     padding: Theme.spacing(4, 4, 6, 6),
     paddingBottom: `${Theme.spacing(2)}vh`,
@@ -22,32 +20,33 @@ const useStyle = makeStyles(Theme => ({
     fontFamily: Theme.typography.fontFamily[2],
   },
   text: {
-    fontFamily: 'Bai Jamjuree',
-    fontWeight: 300,
+    fontFamily: Theme.typography.fontFamily[2],
+    fontWeight: 400,
     fontSize: Theme.spacing(6),
     width: '100%',
   },
 }))
 
-const ReviewCard = ({ card }) => {
+const ReviewCard = ({ card, link }) => {
   const classes = useStyle()
 
   return (
-    <Link className={classes.link}>
-      <Paper variant="elevation" elevation={1} className={classes.root}>
-        <Link className={classes.link}>
-          <div className={classes.infoCard}>
-            <Typography variant="h5" color="primary">
-              <Truncate lines={2}>{card.creatorUsername}</Truncate>
-            </Typography>
-            <Typography color="primary" variant="body" className={classes.text}>
-              {card.opinion}
-            </Typography>
-            <CardInfo imageUrl={card.creatorImageUrl} />
-          </div>
-        </Link>
-      </Paper>
-    </Link>
+    <Paper variant="elevation" elevation={1}>
+      <Link to={link} className={classes.link}>
+        <div className={classes.infoCard}>
+          <Typography variant="h5" color="primary">
+            {card.useName}
+          </Typography>
+          <Typography color="primary" variant="body2" className={classes.text}>
+            {card.opinion}
+          </Typography>
+          <CardInfo
+            creatorImageUrl={card.creatorImageUrl}
+            creatorUsername={card.creatorUsername}
+          />
+        </div>
+      </Link>
+    </Paper>
   )
 }
 

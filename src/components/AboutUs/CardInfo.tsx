@@ -19,7 +19,7 @@ const useStyle = makeStyles(Theme => ({
   large: {
     marginRight: Theme.spacing(11),
   },
-  link: {
+  userName: {
     fontSize: Theme.spacing(8),
     margin: Theme.spacing(0, 0, 0, 0),
     fontFamily: 'Bai Jamjuree',
@@ -30,7 +30,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorInfo = ({ username, imageUrl }) => {
+const CreatorInfo = ({ creatorImageUrl, creatorUsername }) => {
   const classes = useStyle()
   return (
     <Grid
@@ -39,18 +39,20 @@ const CreatorInfo = ({ username, imageUrl }) => {
       justify="space-between"
       className={classes.root}
     >
-      <Link>
-        <Typography>{username}</Typography>
-      </Link>
+      <Typography variant="h5" color="primary">
+        {creatorUsername}
+      </Typography>
       <Grid item sm={12} container direction="row">
-        <Avatar className={classes.large} alt={username} src={imageUrl} />
+        <Avatar
+          className={classes.large}
+          alt={creatorUsername}
+          src={creatorImageUrl}
+        />
         <div className={classes.creator}>
-          <Link>
-            <Typography
-              variant="subtitle2"
-              className={classes.link}
-            >{`@${username}`}</Typography>
-          </Link>
+          <Typography
+            variant="subtitle2"
+            className={classes.userName}
+          >{`@${creatorUsername}`}</Typography>
         </div>
       </Grid>
     </Grid>

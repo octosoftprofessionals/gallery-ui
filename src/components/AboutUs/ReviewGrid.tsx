@@ -3,7 +3,8 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider } from '@material-ui/core'
 import ReviewCard from './ReviewCard'
-import data from './TeamCardData'
+import reviewItem from '../../services/mockups/AboutUsMockUp'
+import { link } from 'fs'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -34,13 +35,13 @@ const useStyle = makeStyles(Theme => ({
   divider: {
     backgroundColor: Theme.palette.primary.main,
   },
-  /*   containerItem: {
-    margin: 10,
-  }, */
+  containerItem: {
+    padding: Theme.spacing(3),
+  },
   divider: {
     backgroundColor: Theme.palette.primary.main,
-    marginTop: '30px',
-    marginBottom: '30px',
+    marginTop: Theme.spacing(10),
+    marginBottom: Theme.spacing(10),
     width: 'inherit',
   },
   text: {
@@ -48,19 +49,19 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ReviewGrid = ({ icon, displayTextButton, fontSize }) => {
-  const classes = useStyle({ icon, displayTextButton, fontSize })
-
+const ReviewGrid = () => {
+  const classes = useStyle()
+  console.log('que trae', reviewItem)
   return (
     <Grid item container xs={12} direction="column">
       <Typography variant="h5" color="primary" className={classes.text}>
         What Creators Think
       </Typography>
       <Divider className={classes.divider} orientation="horizontal" />
-      <Grid container /* spacing={10} */ xs={12} direction="row">
-        {data.map((card, index) => (
+      <Grid container item xs={12} direction="row">
+        {reviewItem.map((card, index) => (
           <Grid item xs={12} md={6} className={classes.containerItem}>
-            <ReviewCard card={card} key={index} />
+            <ReviewCard card={card} key={index} link={'/'} />
           </Grid>
         ))}
       </Grid>
