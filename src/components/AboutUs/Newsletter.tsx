@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import {
   Button,
@@ -56,7 +56,11 @@ const useStyle = makeStyles(Theme => ({
 
 const Newsletter = () => {
   const classes = useStyle()
+  const [email, setEmail] = useState('')
 
+  const handleSend = () => {
+    setEmail('')
+  }
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
@@ -86,18 +90,24 @@ const Newsletter = () => {
           <Grid item>
             <Divider orientation="horizontal" className={classes.divider} />
           </Grid>
-          <Grid item>
+          <Grid item xs={12} md={8}>
             <TextField
               id="filled-email-input"
               label="Email"
               className={classes.textField}
               type="email"
               name="email"
+              value={email}
               autoComplete="email"
               margin="normal"
               variant="filled"
+              onChange={e => setEmail(e.target.value)}
             />
-            <Button variant="contained" className={classes.btnGreen}>
+            <Button
+              variant="contained"
+              className={classes.btnGreen}
+              onClick={handleSend}
+            >
               <Typography variant="button">Subscribe</Typography>
             </Button>
           </Grid>
