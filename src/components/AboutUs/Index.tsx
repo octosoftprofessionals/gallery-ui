@@ -12,7 +12,7 @@ import ReviewGrid from './ReviewGrid'
 import { getCreators } from '../services/autionsService' */
 
 const useStyle = makeStyles(Theme => ({
-  root: {
+  /* root: {
     boxSizing: 'border-box',
     flexGrow: 1,
     '@media (max-width: 576px)': {
@@ -20,7 +20,7 @@ const useStyle = makeStyles(Theme => ({
       margin: 0,
       height: '100%',
     },
-  },
+  }, */
   block: {
     marginBottom: 60,
   },

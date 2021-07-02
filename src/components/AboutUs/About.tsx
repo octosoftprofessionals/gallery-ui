@@ -51,7 +51,7 @@ const AboutUsMain = () => {
   const classes = useStyle()
   return (
     <>
-      <Typography variant="h3" color="primary" className={classes.title}>
+      <Typography variant="h5" color="primary" className={classes.title}>
         About Foundation
       </Typography>
       {/*       <Divider orientation="horizontal" className={classes.divider} />

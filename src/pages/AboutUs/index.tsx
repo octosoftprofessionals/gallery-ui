@@ -12,6 +12,7 @@ const useStyle = makeStyles(Theme => ({
     boxSizing: 'border-box',
     height: '100%',
     '@media (max-width: 576px)': {
+      margin: Theme.spacing(2, 4),
       padding: Theme.spacing(0, 0),
       height: '100%',
     },

@@ -41,23 +41,26 @@ const useStyle = makeStyles(Theme => ({
     height: 50,
     marginLeft: 40,
     marginTop: 20,
+    '@media (max-width: 576px)': {
+      width: 150,
+    },
   },
   textField: {
     color: Theme.palette.primary.main,
     width: 400,
+    '@media (max-width: 576px)': {
+      width: 300,
+    },
   },
 }))
 
-const Newsletter = ({ pathname }) => {
-  const [disableInfo, setDisableInfo] = useState(false)
+const Newsletter = () => {
+  const classes = useStyle()
 
-  const classes = useStyle({ disableInfo })
-  const price = '22,353'
-  const money = '$47,526,749.46'
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <Typography variant="h3" color="primary">
+        <Typography variant="h5" color="primary">
           Can’t get enough?
         </Typography>
       </Grid>
@@ -71,15 +74,19 @@ const Newsletter = ({ pathname }) => {
         className={classes.root}
       >
         <Grid item xs={12} container direction="column">
-          <Typography
-            variant="button"
-            color="primary"
-            className={classes.subTitle}
-          >
-            Subscribe to our newsletter.
-          </Typography>
-          <Divider orientation="horizontal" className={classes.divider} />
-          <Grid container xs={12} direction="row">
+          <Grid item>
+            <Typography
+              variant="button"
+              color="primary"
+              className={classes.subTitle}
+            >
+              Subscribe to our newsletter.
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Divider orientation="horizontal" className={classes.divider} />
+          </Grid>
+          <Grid item>
             <TextField
               id="filled-email-input"
               label="Email"

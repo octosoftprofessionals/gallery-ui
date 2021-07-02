@@ -31,8 +31,11 @@ const useStyle = makeStyles(Theme => ({
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
   subTitle: {
-    fontSize: 24,
+    fontSize: 21,
     fontWeight: 400,
+    fontFamily: 'Bai Jamjuree',
+    lineHeight: '24px',
+    marginBottom: 10,
   },
 }))
 
@@ -45,8 +48,8 @@ const MakingHistory = () => {
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <Typography variant="h3" color="primary">
-          Making History{' '}
+        <Typography variant="h5" color="primary">
+          Making History
         </Typography>
       </Grid>
       <Grid

@@ -52,12 +52,12 @@ const ReviewGrid = ({ icon, displayTextButton, fontSize }) => {
   const classes = useStyle({ icon, displayTextButton, fontSize })
 
   return (
-    <Grid item container direction="column">
-      <Typography variant="h3" color="primary" className={classes.text}>
+    <Grid item container xs={12} direction="column">
+      <Typography variant="h5" color="primary" className={classes.text}>
         What Creators Think
       </Typography>
       <Divider className={classes.divider} orientation="horizontal" />
-      <Grid container spacing={10} xs={12} direction="row">
+      <Grid container /* spacing={10} */ xs={12} direction="row">
         {data.map((card, index) => (
           <Grid item xs={12} md={6} className={classes.containerItem}>
             <ReviewCard card={card} key={index} />

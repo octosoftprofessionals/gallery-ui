@@ -30,8 +30,10 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   subTitle: {
-    fontSize: 40,
+    fontSize: 32,
     fontWeight: 400,
+    marginBottom: 20,
+    fontFamily: 'Bai Jamjuree',
   },
 }))
 
@@ -41,7 +43,7 @@ const HowItWorks = () => {
   const classes = useStyle()
   return (
     <Grid item container direction="column">
-      <Typography variant="h3" color="primary" className={classes.title}>
+      <Typography variant="h5" color="primary" className={classes.title}>
         How it Works
       </Typography>
       <Divider orientation="horizontal" className={classes.divider} />
@@ -99,7 +101,7 @@ const HowItWorks = () => {
       <Grid container spacing={10} direction="row">
         <Grid item xs={12} md={6}>
           <Typography color="primary" className={classes.subTitle}>
-            For the Community{' '}
+            For the Community
           </Typography>
           <Typography
             variant="caption"
