@@ -22,7 +22,7 @@ const useStyle = makeStyles(Theme => ({
     padding: 0,
   },
   text: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 18,
     fontWeight: 400,
     '@media (max-width: 576px)': {
@@ -47,17 +47,17 @@ const HowItWorks = () => {
         How it Works
       </Typography>
       <Divider orientation="horizontal" className={classes.divider} />
-      <Grid container spacing={10} direction="row">
+      <Grid container item xs={12} direction="row">
         <Grid item xs={12} md={6}>
           <Typography color="primary" className={classes.subTitle}>
             For Collectors
           </Typography>
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.text}
-          >
-            <span /* className={classes.textBlock} */>
+          <Grid item xs={12} sm={9}>
+            <Typography
+              variant="body2"
+              color="primary"
+              className={classes.text}
+            >
               Creators are invited to join Foundation by members of the
               community. Once you’ve received an invite, you’ll need to set up a
               MetaMask wallet with ETH before you can create an artist profile
@@ -68,8 +68,8 @@ const HowItWorks = () => {
               piece is resold on Foundation (or OpenSea and Rarible), a 10%
               royalty goes back to the wallet that originally minted the NFT—in
               perpetuity.
-            </span>
-          </Typography>
+            </Typography>
+          </Grid>
         </Grid>
 
         <Grid item xs={12} md={6} className={classes.textBlock}>

@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import {
-  Button,
-  Divider,
-  Grid,
-  Hidden,
-  Typography,
-  withWidth,
-} from '@material-ui/core'
+import { Divider, Grid, Hidden, Typography, withWidth } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
@@ -46,22 +39,30 @@ const MakingHistory = () => {
   const price = '22,353'
   const money = '$47,526,749.46'
   return (
-    <Grid container direction="column">
-      <Grid item xs={12}>
+    <Grid container direction="column" justify="center" alignItems="center">
+      <Grid item xs={12} md={9}>
         <Typography variant="h5" color="primary">
           Making History
         </Typography>
       </Grid>
       <Grid
         item
-        xs={11}
+        xs={12}
+        md={10}
         container
         direction="row"
         alignContent="center"
         justify="space-between"
         className={classes.root}
       >
-        <Grid item xs={12} lg={4} container direction="column">
+        <Grid
+          container
+          item
+          xs={12}
+          justify="center"
+          alignItems="center"
+          direction="column"
+        >
           <Typography
             variant="button"
             color="primary"
