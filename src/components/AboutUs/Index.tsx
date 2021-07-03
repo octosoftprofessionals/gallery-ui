@@ -6,6 +6,7 @@ import MakingHistory from './MakingHistory'
 import HowItWorks from './HowItWorks'
 import Newsletter from './Newsletter'
 import ReviewGrid from './ReviewGrid'
+import OurTeam from './OutTeam'
 import { Grid } from '@material-ui/core'
 
 /* import Top50Grid from './Top50'
@@ -36,6 +37,9 @@ const AboutUsMain = () => {
       </Grid>
       <Grid item xs={12} className={classes.block}>
         <HowItWorks />
+      </Grid>
+      <Grid item xs={12} className={classes.block}>
+        <OurTeam />
       </Grid>
       <Grid item xs={12} className={classes.block}>
         <Newsletter />

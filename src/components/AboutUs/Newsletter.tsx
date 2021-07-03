@@ -21,6 +21,7 @@ const useStyle = makeStyles(Theme => ({
 
   divider: {
     backgroundColor: Theme.palette.primary.main,
+    width: 'inherit',
   },
 
   texTimer: {
@@ -49,7 +50,7 @@ const useStyle = makeStyles(Theme => ({
     color: Theme.palette.primary.main,
     width: 400,
     '@media (max-width: 576px)': {
-      width: 300,
+      width: 250,
     },
   },
 }))
@@ -77,7 +78,7 @@ const Newsletter = () => {
         justify="space-between"
         className={classes.root}
       >
-        <Grid item xs={12} container direction="column">
+        <Grid container item xs={12} sm={6} md={6} direction="column">
           <Grid item>
             <Typography
               variant="button"
@@ -90,7 +91,7 @@ const Newsletter = () => {
           <Grid item>
             <Divider orientation="horizontal" className={classes.divider} />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item>
             <TextField
               id="filled-email-input"
               label="Email"
@@ -103,11 +104,7 @@ const Newsletter = () => {
               variant="filled"
               onChange={e => setEmail(e.target.value)}
             />
-            <Button
-              variant="contained"
-              className={classes.btnGreen}
-              onClick={handleSend}
-            >
+            <Button className={classes.btnGreen} onClick={handleSend}>
               <Typography variant="button">Subscribe</Typography>
             </Button>
           </Grid>

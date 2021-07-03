@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import { Divider, Grid, Hidden, Typography, withWidth } from '@material-ui/core'
+import {
+  Divider,
+  Grid,
+  Hidden,
+  Typography,
+  withWidth,
+  Paper,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
@@ -26,9 +33,15 @@ const useStyle = makeStyles(Theme => ({
   subTitle: {
     fontSize: 21,
     fontWeight: 400,
-    fontFamily: 'Bai Jamjuree',
+    fontFamily: Theme.typography.fontFamily[1],
     lineHeight: '24px',
     marginBottom: 10,
+    textAlign: 'center',
+  },
+  box: {
+    padding: Theme.spacing(12, 12, 3, 12),
+    borderColor: Theme.palette.primary.main,
+    marginBottom: 20,
   },
 }))
 
@@ -40,48 +53,58 @@ const MakingHistory = () => {
   const money = '$47,526,749.46'
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Grid item xs={12} md={9}>
-        <Typography variant="h5" color="primary">
-          Making History
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={10}
-        container
-        direction="row"
-        alignContent="center"
-        justify="space-between"
-        className={classes.root}
-      >
+      <Paper variant="outlined" square className={classes.box}>
+        <Grid
+          item
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          xs={12}
+          /*     md={11} */
+        >
+          <Typography variant="h5" color="primary">
+            Making History
+          </Typography>
+        </Grid>
         <Grid
           container
           item
           xs={12}
-          justify="center"
+          /*      md={11} */
           alignItems="center"
-          direction="column"
+          direction="row"
+          justify="space-between"
+          className={classes.root}
         >
-          <Typography
-            variant="button"
-            color="primary"
-            className={classes.subTitle}
+          <Grid
+            container
+            item
+            xs={12}
+            justify="center"
+            alignItems="center"
+            direction="column"
           >
-            Since launching in February 2021, creators have earned...
-          </Typography>
-          <Divider orientation="horizontal" className={classes.divider} />
+            <Typography
+              variant="button"
+              color="primary"
+              className={classes.subTitle}
+            >
+              Since launching in February 2021, creators have earned...
+            </Typography>
+            <Divider orientation="horizontal" className={classes.divider} />
 
-          <Typography
-            variant="button"
-            color="primary"
-            className={classes.price}
-          >
-            {`${price} ETH`}
-          </Typography>
-          <Typography variant="caption">{money}</Typography>
+            <Typography
+              variant="button"
+              color="primary"
+              className={classes.price}
+            >
+              {`${price} ETH`}
+            </Typography>
+            <Typography variant="caption">{money}</Typography>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
     </Grid>
   )
 }

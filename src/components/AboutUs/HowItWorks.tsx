@@ -25,21 +25,23 @@ const useStyle = makeStyles(Theme => ({
     textAlign: 'left',
     fontSize: 18,
     fontWeight: 400,
+    marginBottom: Theme.spacing(12),
     '@media (max-width: 576px)': {
-      marginBottom: 20,
+      marginBottom: 40,
     },
   },
   subTitle: {
     fontSize: 32,
     fontWeight: 400,
     marginBottom: 20,
-    fontFamily: 'Bai Jamjuree',
+    color: Theme.palette.primary.dark,
+  },
+  textBlock: {
+    marginBottom: Theme.spacing(12),
   },
 }))
 
 const HowItWorks = () => {
-  /*   const { data: CreatorQuery } = useQuery('CreatorQuery', getCreators)
-   */
   const classes = useStyle()
   return (
     <Grid item container direction="column">
@@ -74,14 +76,14 @@ const HowItWorks = () => {
 
         <Grid item xs={12} md={6} className={classes.textBlock}>
           <Typography color="primary" className={classes.subTitle}>
-            For Collectors
+            For Creators
           </Typography>
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.text}
-          >
-            <span className={classes.textBlock}>
+          <Grid item xs={12} sm={9}>
+            <Typography
+              variant="caption"
+              color="primary"
+              className={classes.text}
+            >
               On Foundation, anyone can create a profile to start collecting
               NFTs. All you’ll need is a MetaMask wallet and ETH, the
               cryptocurrency used to pay for all transactions on Ethereum.
@@ -94,21 +96,21 @@ const HowItWorks = () => {
               virtual gallery, share it on social media, sell it later on the
               secondary market, or pioneer a new approach to appreciating
               digital art and championing the artists in your collection.
-            </span>
-          </Typography>
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={10} direction="row">
+      <Grid container direction="row">
         <Grid item xs={12} md={6}>
           <Typography color="primary" className={classes.subTitle}>
             For the Community
           </Typography>
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.text}
-          >
-            <span /* className={classes.textBlock} */>
+          <Grid item xs={12} sm={9}>
+            <Typography
+              variant="caption"
+              color="primary"
+              className={classes.text}
+            >
               There are many ways to get involved with Foundation beyond joining
               as a creator, collector, or developer. We welcome anyone
               interested in collectively building the future of digital culture
@@ -117,23 +119,23 @@ const HowItWorks = () => {
               participate in, and even imagine new possibilities for. We
               actively encourage community members to create new groups based
               around their interests.
-            </span>
-          </Typography>
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} /* className={classes.textBlock} */>
+        <Grid item xs={12} md={6}>
           <Typography color="primary" className={classes.subTitle}>
             For Developers
           </Typography>
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.text}
-          >
-            <span className={classes.textBlock}>
+          <Grid item xs={12} sm={9}>
+            <Typography
+              variant="caption"
+              color="primary"
+              className={classes.text}
+            >
               We love collaborating, and invite developers to experiment with
               our free and open API.
-            </span>
-          </Typography>
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
