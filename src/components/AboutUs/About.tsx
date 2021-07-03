@@ -48,7 +48,7 @@ const AboutUsMain = () => {
   return (
     <Grid>
       <Typography variant="h3" color="primary" className={classes.title}>
-        About Foundation
+        About SuperChief
       </Typography>
       <Grid container justify="center" spacing={10} direction="row">
         <Grid item xs={12} md={5}>

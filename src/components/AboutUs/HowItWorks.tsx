@@ -67,7 +67,7 @@ const HowItWorks = () => {
               to IPFS, a decentralized peer-to-peer storage network. It will
               then be an NFT you can price in ETH and put up for auction on
               Foundation. Creators receive 85% of the final sale price. If the
-              piece is resold on Foundation (or OpenSea and Rarible), a 10%
+              piece is resold on SuperChief (or OpenSea and Rarible), a 10%
               royalty goes back to the wallet that originally minted the NFT—in
               perpetuity.
             </Typography>
@@ -84,7 +84,7 @@ const HowItWorks = () => {
               color="primary"
               className={classes.text}
             >
-              On Foundation, anyone can create a profile to start collecting
+              On SuperChief, anyone can create a profile to start collecting
               NFTs. All you’ll need is a MetaMask wallet and ETH, the
               cryptocurrency used to pay for all transactions on Ethereum.
               Artists list NFTs for auction at a reserve price, and once the
@@ -111,7 +111,7 @@ const HowItWorks = () => {
               color="primary"
               className={classes.text}
             >
-              There are many ways to get involved with Foundation beyond joining
+              There are many ways to get involved with SuperChief beyond joining
               as a creator, collector, or developer. We welcome anyone
               interested in collectively building the future of digital culture
               to join us on Discord, Instagram, or Twitter. There are a number
