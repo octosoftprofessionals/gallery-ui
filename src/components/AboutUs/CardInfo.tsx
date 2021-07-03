@@ -17,7 +17,7 @@ const useStyle = makeStyles(Theme => ({
     justifyContent: 'center',
   },
   large: {
-    marginRight: Theme.spacing(11),
+    marginRight: Theme.spacing(10),
   },
   userName: {
     fontSize: Theme.spacing(8),
@@ -27,6 +27,9 @@ const useStyle = makeStyles(Theme => ({
   description: {
     fontFamily: 'Bai Jamjuree',
     fontWeight: 500,
+  },
+  userName: {
+    marginBottom: Theme.spacing(6),
   },
 }))
 
@@ -39,7 +42,7 @@ const CreatorInfo = ({ creatorImageUrl, creatorUsername }) => {
       justify="space-between"
       className={classes.root}
     >
-      <Typography variant="h5" color="primary">
+      <Typography variant="h5" color="primary" className={classes.userName}>
         {creatorUsername}
       </Typography>
       <Grid item sm={12} container direction="row">
@@ -51,7 +54,7 @@ const CreatorInfo = ({ creatorImageUrl, creatorUsername }) => {
         <div className={classes.creator}>
           <Typography
             variant="subtitle2"
-            className={classes.userName}
+            /*  className={classes.userName} */
           >{`@${creatorUsername}`}</Typography>
         </div>
       </Grid>

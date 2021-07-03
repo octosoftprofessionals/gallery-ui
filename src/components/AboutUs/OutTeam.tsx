@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider } from '@material-ui/core'
-import ReviewCard from './ReviewCard'
 import reviewItem from '../../services/mockups/AboutUsMockUp'
 import { link } from 'fs'
+import TeamCard from './TeamCard'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -49,19 +49,19 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ReviewGrid = () => {
+const OurTeam = () => {
   const classes = useStyle()
   console.log('que trae', reviewItem)
   return (
     <Grid item container xs={12} direction="column">
       <Typography variant="h5" color="primary" className={classes.text}>
-        What Creators Think
+        Our Team
       </Typography>
       <Divider className={classes.divider} orientation="horizontal" />
       <Grid container item xs={12} direction="row">
         {reviewItem.map((card, index) => (
-          <Grid item xs={12} md={4} className={classes.containerItem}>
-            <ReviewCard card={card} key={index} link={'/'} />
+          <Grid item xs={12} md={3} className={classes.containerItem}>
+            <TeamCard card={card} key={index} link={'/'} />
           </Grid>
         ))}
       </Grid>
@@ -69,4 +69,4 @@ const ReviewGrid = () => {
   )
 }
 
-export default ReviewGrid
+export default OurTeam
