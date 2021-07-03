@@ -9,10 +9,6 @@ import ReviewGrid from './ReviewGrid'
 import OurTeam from './OutTeam'
 import { Grid } from '@material-ui/core'
 
-/* import Top50Grid from './Top50'
-
-import { getCreators } from '../services/autionsService' */
-
 const useStyle = makeStyles(Theme => ({
   block: {
     marginBottom: 60,

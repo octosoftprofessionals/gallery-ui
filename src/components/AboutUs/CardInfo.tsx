@@ -4,7 +4,6 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 import { Box } from '@material-ui/core'
-/* import { artworkPathFrom } from '../../../config/routes' */
 import data from './TeamCardData'
 
 const useStyle = makeStyles(Theme => ({
@@ -52,10 +51,7 @@ const CreatorInfo = ({ creatorImageUrl, creatorUsername }) => {
           src={creatorImageUrl}
         />
         <div className={classes.creator}>
-          <Typography
-            variant="subtitle2"
-            /*  className={classes.userName} */
-          >{`@${creatorUsername}`}</Typography>
+          <Typography variant="subtitle2">{`@${creatorUsername}`}</Typography>
         </div>
       </Grid>
     </Grid>

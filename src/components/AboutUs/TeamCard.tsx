@@ -8,12 +8,10 @@ import CardInfo from './CardInfo'
 const useStyle = makeStyles(Theme => ({
   infoCard: {
     padding: Theme.spacing(10),
-    /*   paddingBottom: `${Theme.spacing(2)}vh`, */
     backgroundColor: Theme.palette.card.main,
     borderRadius: Theme.spacing(4, 4, 4, 4),
     width: '100%',
   },
-  /* containerAvatar: { marginBottom: Theme.spacing(2) }, */
   link: { textDecoration: 'none' },
   containerVideo: { position: 'relative', paddingBottom: '100%' },
   job: {

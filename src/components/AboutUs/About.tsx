@@ -50,8 +50,6 @@ const AboutUsMain = () => {
       <Typography variant="h3" color="primary" className={classes.title}>
         About Foundation
       </Typography>
-      {/*       <Divider orientation="horizontal" className={classes.divider2} />
-       */}
       <Grid container justify="center" spacing={10} direction="row">
         <Grid item xs={12} md={5}>
           <Typography

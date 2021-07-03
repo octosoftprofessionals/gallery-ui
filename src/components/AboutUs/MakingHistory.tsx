@@ -61,7 +61,6 @@ const MakingHistory = () => {
           justify="center"
           alignItems="center"
           xs={12}
-          /*     md={11} */
         >
           <Typography variant="h5" color="primary">
             Making History
@@ -71,7 +70,6 @@ const MakingHistory = () => {
           container
           item
           xs={12}
-          /*      md={11} */
           alignItems="center"
           direction="row"
           justify="space-between"
