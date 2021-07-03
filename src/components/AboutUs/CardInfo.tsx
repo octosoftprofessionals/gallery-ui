@@ -2,9 +2,7 @@ import React from 'react'
 import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
-import { Box } from '@material-ui/core'
-import data from './TeamCardData'
+import { Avatar, Box, Grid, Paper, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   root: {

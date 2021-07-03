@@ -48,7 +48,7 @@ const AboutUsMain = () => {
   return (
     <Grid>
       <Typography variant="h3" color="primary" className={classes.title}>
-        About SuperChief
+        About Superchief
       </Typography>
       <Grid container justify="center" spacing={10} direction="row">
         <Grid item xs={12} md={5}>
@@ -57,7 +57,7 @@ const AboutUsMain = () => {
             color="primary"
             className={classes.text}
           >
-            SuperChief is a platform that aims to build a new creative economy—a
+            Superchief is a platform that aims to build a new creative economy—a
             world where creators can use the Ethereum blockchain to value their
             online expression in entirely new ways, and build stronger
             connections with their supporters. SuperChief bridges crypto and

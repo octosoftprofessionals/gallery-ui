@@ -22,13 +22,8 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.primary.main,
   },
 
-  texTimer: {
-    fontSize: Theme.typography.fontSize[3],
-    marginTop: Theme.spacing(2),
-  },
   button: { borderRadius: Theme.shape.borderRadius[2] },
   textButton: { fontSize: Theme.typography.fontSize[3] },
-  numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
   subTitle: {
     fontSize: 21,
@@ -41,7 +36,7 @@ const useStyle = makeStyles(Theme => ({
   box: {
     padding: Theme.spacing(12, 12, 3, 12),
     borderColor: Theme.palette.primary.main,
-    marginBottom: 20,
+    marginBottom: Theme.spacing(7),
   },
 }))
 
