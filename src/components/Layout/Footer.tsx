@@ -118,8 +118,8 @@ const Footer = ({ pathname }) => {
           className={classes.containerText}
           alignItems="center"
         >
-          <Link to={communityGuidelines} className={classes.link}>
-            <Typography variant="overline">Community Guidelines</Typography>
+          <Link to="/AboutUs" className={classes.link}>
+            <Typography variant="overline">About Us</Typography>
           </Link>
           <Link to={termsOfService} className={classes.link}>
             <Typography variant="overline">Terms of Service</Typography>
