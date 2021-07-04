@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
   },
   menuItem: {
-    // textAlign: 'center',
     justifyContent: 'center',
   },
   name: {
@@ -64,9 +63,6 @@ const LoggedButton = ({ profileImageUrl, name }) => {
   }
 
   const handleClose = event => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
-    }
     setOpen(false)
   }
 
@@ -87,7 +83,7 @@ const LoggedButton = ({ profileImageUrl, name }) => {
   }, [open])
 
   return (
-    <div>
+    <>
       <Button
         className={classes.button}
         variant="containedSecondary"
@@ -140,7 +136,7 @@ const LoggedButton = ({ profileImageUrl, name }) => {
           </Grow>
         )}
       </Popper>
-    </div>
+    </>
   )
 }
 
