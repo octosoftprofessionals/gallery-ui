@@ -1,5 +1,6 @@
 // import { auctions } from '../config/api'
 import auctionsMockup from './mockups/auctions'
+import accountInfo from './mockups/account'
 import { paginatedQuery } from '../Utils'
 import { getAssetsByCollectionSlug } from './opensea'
 
@@ -131,6 +132,20 @@ export async function getCreator(username: String) {
             )
             // auctionsMockup.findIndex(auctions => auctions.id === id)
           ]?.creator,
+      })
+    }, 250)
+  })
+}
+
+export async function getAccount(contractAddress: String) {
+  return new Promise(resolve => {
+    setTimeout(function () {
+      resolve({
+        account: accountInfo[0],
+        // account: accountInfo,
+        // account: accountInfo.findIndex(
+        //   account => account.address === contractAddress
+        // ),
       })
     }, 250)
   })
