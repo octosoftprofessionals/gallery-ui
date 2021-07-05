@@ -21,7 +21,6 @@ const AccountPage = () => {
   const handleConnection = async () => {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
     setMetamaskAccount(accounts[0])
-    console.log(metamaskAccount)
   }
 
   handleConnection()
