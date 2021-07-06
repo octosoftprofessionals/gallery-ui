@@ -133,7 +133,7 @@ const Creator = ({
         wrap="wrap"
         className={classes.info}
       >
-        <Grid item xs={11} md={4}>
+        <Grid item xs={10} md={6}>
           <InfoCreator
             name={name}
             username={username}
@@ -148,7 +148,7 @@ const Creator = ({
             type={type}
           />
         </Grid>
-        <Grid item xs={11} md={7}>
+        <Grid item xs={10} sm={12}>
           {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
         </Grid>
       </Grid>
