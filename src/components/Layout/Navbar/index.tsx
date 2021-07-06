@@ -9,7 +9,6 @@ import {
   Grid,
   Toolbar,
   Typography,
-  Button,
   withWidth,
   Hidden,
   IconButton,
@@ -22,6 +21,7 @@ import LogoSCNFT from '../../../assets/dark-logo-SC.svg'
 import { boxShadow } from '../../Styles/Colors'
 import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
+import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 
 const { boxShadow1 } = boxShadow
@@ -155,12 +155,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
             <Hidden smDown>
               {pathname === '/bid' || pathname === '/account' ? (
-                <NavBarBid
-                  cois={cois}
-                  publicKey={publicKey}
-                  profileImageUrl={profileImageUrl}
-                  name={name}
-                />
+                <LoggedButton profileImageUrl={profileImageUrl} name={name} />
               ) : (
                 <ButtonConnectWallet pathname={pathname} />
               )}
