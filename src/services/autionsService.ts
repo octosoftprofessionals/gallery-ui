@@ -142,10 +142,6 @@ export async function getAccount(contractAddress: String) {
     setTimeout(function () {
       resolve({
         account: accountInfo[0],
-        // account: accountInfo,
-        // account: accountInfo.findIndex(
-        //   account => account.address === contractAddress
-        // ),
       })
     }, 250)
   })
