@@ -1,16 +1,14 @@
 import React from 'react'
-import {
-  Button,
-  Divider,
-  Grid,
-  Hidden,
-  Typography,
-  ListItemText,
-} from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
+  root: {
+    fontSize: 130,
+    '@media (max-width: 576px)': {
+      fontSize: 60,
+    },
+  },
   paragraph: {
     margin: Theme.spacing(4, 0),
   },
@@ -20,10 +18,10 @@ const Terms = () => {
   const classes = useStyle()
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Typography color="primary" variant="h3">
+      <Typography color="primary" variant="h3" className={classes.root}>
         Terms of Service
       </Typography>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           Welcome
         </Typography>
@@ -79,7 +77,7 @@ const Terms = () => {
           of the new Terms of Service.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           What is Superchief?
         </Typography>
@@ -142,7 +140,7 @@ const Terms = () => {
           or discontinuance of the Platform.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           What are the rules for using Superchief?
         </Typography>
@@ -229,7 +227,7 @@ const Terms = () => {
           </Typography>
         </ul>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           How do I become a creator?
         </Typography>
@@ -254,7 +252,7 @@ const Terms = () => {
           will be approved as Creators even if Superchief solicited the request.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           How do I become a creator?
         </Typography>
@@ -816,7 +814,7 @@ const Terms = () => {
           technical, or other support for the Beta Platforms.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           What about my privacy?
         </Typography>
@@ -830,7 +828,7 @@ const Terms = () => {
           Users of our data collection practices.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           Other Legal Terms
         </Typography>
@@ -946,7 +944,7 @@ const Terms = () => {
           APPLICABLE SECTIONS.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           Here are our termination rights.
         </Typography>
@@ -975,7 +973,7 @@ const Terms = () => {
           any termination of your access to the Platform.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           We do not get involved with User disputes.
         </Typography>
@@ -991,7 +989,7 @@ const Terms = () => {
           way with disputes between you and any other user of the Platform.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           General Legal Terms
         </Typography>
@@ -1037,7 +1035,7 @@ const Terms = () => {
           links to notices generally on the Platform.
         </Typography>
       </Grid>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={5}>
         <Typography color="primary" variant="h5">
           Your Privacy{' '}
         </Typography>
