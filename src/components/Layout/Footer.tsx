@@ -71,7 +71,8 @@ const Footer = ({ pathname }) => {
   const twitter = 'https://twitter.com/SuperchiefNFT'
   const discord = 'https://discord.com/invite/pxjASBky'
   const termsOfService = '/termsOfService'
-  const { communityGuidelines, privacy, careers, help } = '/'
+  const privacy = '/privacyPolicity'
+  const { communityGuidelines, careers, help } = '/'
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} container justify="space-between" alignItems="center">
