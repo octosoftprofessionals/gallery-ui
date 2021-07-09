@@ -36,6 +36,11 @@ export const darkTheme = createMuiTheme({
         borderRadius: 16,
         backgroundColor: darkColors.DarkGray,
       },
+      paperWidthMd: {
+        maxWidth: 700,
+        borderRadius: 16,
+        backgroundColor: Nero,
+      },
     },
     MuiBadge: {
       anchorOriginBottomLeftRectangle: {
@@ -355,6 +360,11 @@ export const Theme = createMuiTheme({
     MuiDialog: {
       paperWidthSm: {
         maxWidth: 400,
+        borderRadius: 16,
+        backgroundColor: White,
+      },
+      paperWidthMd: {
+        maxWidth: 700,
         borderRadius: 16,
         backgroundColor: White,
       },
