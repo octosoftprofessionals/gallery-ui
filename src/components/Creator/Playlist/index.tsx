@@ -5,6 +5,7 @@ import { Add } from '@material-ui/icons'
 import { colors } from '../../Styles/Colors'
 
 import PlaylistItem from './PlaylistItem'
+import ModalPlaylist from './Modal'
 
 const useStyles = makeStyles(Theme => ({
   button: {
@@ -42,6 +43,13 @@ const items = [
 
 const Playlist = () => {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <>
@@ -55,7 +63,7 @@ const Playlist = () => {
           </Grid>
         ))}
         <Grid item xs={12} sm={5} container>
-          <Button className={classes.button} fullWidth>
+          <Button className={classes.button} fullWidth onClick={handleOpen}>
             <Grid container alignItems="center" direction="column">
               <Add className={classes.icon} />
               <Typography variant="caption" className={classes.textButton}>
@@ -65,6 +73,7 @@ const Playlist = () => {
           </Button>
         </Grid>
       </Grid>
+      <ModalPlaylist onClose={handleClose} open={open} setOpen={setOpen} />
     </>
   )
 }
