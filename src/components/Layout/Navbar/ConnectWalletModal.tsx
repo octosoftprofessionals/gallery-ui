@@ -92,7 +92,7 @@ const ConnectWalletModal = ({
               color="primary"
               className={classes.text}
             >
-              By connnectin your wallet, you agree to our
+              By connecting your wallet, you agree to our
               <Link className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
                   {' Terms of Service '}
@@ -101,7 +101,7 @@ const ConnectWalletModal = ({
               and our
               <Link className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
-                  {' Privacy Policy '}
+                  {' Privacy Policy'}
                 </Typography>
               </Link>
               .
