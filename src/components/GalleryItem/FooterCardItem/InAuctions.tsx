@@ -11,7 +11,7 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     bottom: 0,
     position: 'absolute',
-    padding: Theme.spacing(9, 9, 2, 9),
+    padding: Theme.spacing(6, 9, 2, 9),
     backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography } from '@material-ui/core'
+import { Button, Grid, Typography, Hidden } from '@material-ui/core'
 import { StarBorderRounded, SlideshowOutlined } from '@material-ui/icons/'
 
 const useStyle = makeStyles(Theme => ({
@@ -31,9 +31,11 @@ const ButtonPlaylist = ({}) => {
         <Grid item xs={6}>
           <Button className={classes.button}>
             <div className={classes.root}>
-              <Typography variant="overline" color="secondary">
-                Add to Favorites
-              </Typography>
+              <Hidden only="xs">
+                <Typography variant="overline" color="secondary">
+                  Add to Favorites
+                </Typography>
+              </Hidden>
               <StarBorderRounded className={classes.icon} />
             </div>
           </Button>
@@ -41,9 +43,11 @@ const ButtonPlaylist = ({}) => {
         <Grid item xs={6}>
           <Button className={classes.button}>
             <div className={classes.root}>
-              <Typography variant="overline" color="secondary">
-                Add to Playlist
-              </Typography>
+              <Hidden only="xs">
+                <Typography variant="overline" color="secondary">
+                  Add to Playlist
+                </Typography>
+              </Hidden>
               <SlideshowOutlined className={classes.icon} />
             </div>
           </Button>
