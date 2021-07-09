@@ -242,11 +242,13 @@ export const darkTheme = createMuiTheme({
       },
     },
     MuiOutlinedInput: {
-      root: { borderRadius: 50 },
       input: {
-        background: Black,
         padding: '12px 20px',
         color: darkColors.WhiteSmoke,
+      },
+      multiline: {
+        borderRadius: 10,
+        background: 'trasnparent',
       },
     },
     MuiInputBase: {
@@ -542,11 +544,14 @@ export const Theme = createMuiTheme({
       },
     },
     MuiOutlinedInput: {
-      root: { borderRadius: 50 },
       input: {
         background: White,
         padding: '12px 20px',
         color: Nero,
+      },
+      multiline: {
+        borderRadius: 10,
+        background: 'trasnparent',
       },
     },
     MuiInputBase: {
