@@ -62,7 +62,8 @@ const ConnectWalletModal = ({
     }
     setEthereumAccount(false)
   }
-
+  const termsOfService = '/termsOfService'
+  const privacyPolicity = '/privacyPolicity'
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
@@ -93,13 +94,13 @@ const ConnectWalletModal = ({
               className={classes.text}
             >
               By connecting your wallet, you agree to our
-              <Link className={classes.link}>
+              <Link to={termsOfService} className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
                   {' Terms of Service '}
                 </Typography>
               </Link>
               and our
-              <Link className={classes.link}>
+              <Link to={privacyPolicity} className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
                   {' Privacy Policy'}
                 </Typography>
@@ -148,7 +149,7 @@ const ConnectWalletModal = ({
           >
             New to Ethereum?
           </Typography>
-          <Link className={classes.link}>
+          <Link to={'/'} className={classes.link}>
             <Typography variant="caption" className={classes.textCaption}>
               Learn more about wallets
             </Typography>
