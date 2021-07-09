@@ -128,18 +128,6 @@ const ConnectWalletModal = ({
                 Metamask
               </Typography>
             </Button>
-            <Button
-              variant="contained"
-              style={{
-                background: `${backgroundGradient.backgroundGradient4}`,
-              }}
-              className={classes.button}
-              endIcon
-            >
-              <Typography variant="caption" color="secondary">
-                WalletConnect
-              </Typography>
-            </Button>
           </Grid>
 
           <Typography
