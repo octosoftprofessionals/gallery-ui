@@ -69,10 +69,9 @@ const Footer = ({ pathname }) => {
   const classes = useStyles({ pathname })
   const instagram = 'https://www.instagram.com/superchiefgallerynft/'
   const twitter = 'https://twitter.com/SuperchiefNFT'
-  const discord = 'https://discord.com/invite/pxjASBky'
+  const discord = 'https://discord.gg/mAauHRz5aH'
   const termsOfService = '/termsOfService'
   const privacy = '/privacyPolicity'
-  const { communityGuidelines, careers, help } = '/'
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} container justify="space-between" alignItems="center">
@@ -116,7 +115,7 @@ const Footer = ({ pathname }) => {
           xs={6}
           sm={5}
           container
-          justify="space-between"
+          justify="space-around"
           className={classes.containerText}
           alignItems="center"
         >
@@ -128,12 +127,6 @@ const Footer = ({ pathname }) => {
           </Link>
           <Link to={privacy} className={classes.link}>
             <Typography variant="overline">Privacy</Typography>
-          </Link>
-          <Link to={careers} className={classes.link}>
-            <Typography variant="overline">Careers</Typography>
-          </Link>
-          <Link to={help} className={classes.link}>
-            <Typography variant="overline">Help</Typography>
           </Link>
         </Grid>
       </Grid>
