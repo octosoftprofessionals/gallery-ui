@@ -27,7 +27,7 @@ const useStyle = makeStyles(Theme => ({
   mainTitle: {
     fontSize: 42,
     color: colors.White,
-    isplay: 'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     textAlign: 'center',
@@ -44,10 +44,13 @@ const useStyle = makeStyles(Theme => ({
     background: 'trasnparent',
   },
   box: {
-    background: colors.Black,
+    background: colors.DarkGrey,
     maxWidth: 800,
     borderRadius: Theme.shape.borderRadius[3],
     padding: Theme.spacing(7),
+    '@media (min-width: 330px)': {
+      overflow: 'hidden',
+    },
   },
   contBtn: {
     display: 'flex',
