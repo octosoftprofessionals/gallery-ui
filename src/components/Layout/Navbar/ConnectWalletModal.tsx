@@ -64,6 +64,9 @@ const ConnectWalletModal = ({
   }
   const termsOfService = '/termsOfService'
   const privacyPolicity = '/privacyPolicity'
+  const aboutWallets =
+    'https://medium.com/@decryptmedia/metamask-the-beginners-guide-6111143f2581'
+
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
@@ -137,7 +140,7 @@ const ConnectWalletModal = ({
           >
             New to Ethereum?
           </Typography>
-          <Link to={'/'} className={classes.link}>
+          <Link to={aboutWallets} target="_blank" className={classes.link}>
             <Typography variant="caption" className={classes.textCaption}>
               Learn more about wallets
             </Typography>
