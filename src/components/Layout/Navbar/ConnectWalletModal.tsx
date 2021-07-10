@@ -62,7 +62,8 @@ const ConnectWalletModal = ({
     }
     setEthereumAccount(false)
   }
-
+  const termsOfService = '/termsOfService'
+  const privacyPolicity = '/privacyPolicity'
   return (
     <>
       <Grid item xs={12} container justify="flex-end">
@@ -92,16 +93,16 @@ const ConnectWalletModal = ({
               color="primary"
               className={classes.text}
             >
-              By connnectin your wallet, you agree to our
-              <Link className={classes.link}>
+              By connecting your wallet, you agree to our
+              <Link to={termsOfService} className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
                   {' Terms of Service '}
                 </Typography>
               </Link>
               and our
-              <Link className={classes.link}>
+              <Link to={privacyPolicity} className={classes.link}>
                 <Typography variant="caption" className={classes.textCaption}>
-                  {' Privacy Policy '}
+                  {' Privacy Policy'}
                 </Typography>
               </Link>
               .
@@ -127,18 +128,6 @@ const ConnectWalletModal = ({
                 Metamask
               </Typography>
             </Button>
-            <Button
-              variant="contained"
-              style={{
-                background: `${backgroundGradient.backgroundGradient4}`,
-              }}
-              className={classes.button}
-              endIcon
-            >
-              <Typography variant="caption" color="secondary">
-                WalletConnect
-              </Typography>
-            </Button>
           </Grid>
 
           <Typography
@@ -148,7 +137,7 @@ const ConnectWalletModal = ({
           >
             New to Ethereum?
           </Typography>
-          <Link className={classes.link}>
+          <Link to={'/'} className={classes.link}>
             <Typography variant="caption" className={classes.textCaption}>
               Learn more about wallets
             </Typography>
