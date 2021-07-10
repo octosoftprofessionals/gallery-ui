@@ -14,7 +14,9 @@ const FooterCardItem = ({ statesArt, price, timer }) => {
         <Reserve price={price} />
       ) : statesArt === 'sold' ? (
         <Sold price={price} />
-      ) : ''}
+      ) : (
+        ''
+      )}
     </>
   )
 }
