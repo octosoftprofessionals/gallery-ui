@@ -24,7 +24,6 @@ const CreatorPage = () => {
   return (
     <Layout padding="0" marginTop="0" height backgroundImage={''}>
       <Creator
-        // creatorQuery={CreatorQuery ? CreatorQuery.creator : ''}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
         isLoading={isLoading}

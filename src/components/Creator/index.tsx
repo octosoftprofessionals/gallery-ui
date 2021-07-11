@@ -8,11 +8,6 @@ import GridCreatorAccount from './GridCreatorAccount'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
-<<<<<<< HEAD
-import { truncateSync } from 'node:fs'
-import Spinner from '../Spinner'
-=======
->>>>>>> Creators and creators The page is modified to see the playlist
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -88,12 +83,7 @@ const itemAvatar = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
 ]
 
-const Creator = ({
-  linkTwitter,
-  setDisplayReportModal,
-  type,
-  isLoading,
-}) => {
+const Creator = ({ linkTwitter, setDisplayReportModal, type, isLoading }) => {
   const classes = useStyle()
   const {
     profileImageUrl,
