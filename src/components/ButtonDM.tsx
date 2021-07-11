@@ -22,14 +22,16 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ButtonDM = ({ theme, setTheme }) => {
+const ButtonDM = ({ theme, setTheme, setValue }) => {
   const classes = useStyle()
 
   const toggleTheme = () => {
     if (theme === Theme) {
       setTheme(darkTheme)
+      setValue(darkTheme)
     } else {
       setTheme(Theme)
+      setValue(Theme)
     }
   }
   return (
