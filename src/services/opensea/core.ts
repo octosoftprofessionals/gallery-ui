@@ -2,7 +2,8 @@ import axios from 'axios'
 import axiosRateLimit from 'axios-rate-limit'
 import config from '../../config'
 
-const ROOT = config.API_URL || 'http://localhost:3000/v1/opensea';
+
+const ROOT = `${config.API_URL || 'http://localhost:3000/v1'}/opensea`
 
 const http = axiosRateLimit(axios.create(), {
   maxRequests: 2,

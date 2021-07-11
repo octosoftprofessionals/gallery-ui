@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Dialog, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { colors } from '../../Styles/Colors'
 
 import ConnectWalletModal from './ConnectWalletModal'
 import MetaMaskRedirectModal from './MetaMaskRedirectModal'

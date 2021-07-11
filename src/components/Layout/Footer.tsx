@@ -69,15 +69,18 @@ const Footer = ({ pathname }) => {
   const classes = useStyles({ pathname })
   const instagram = 'https://www.instagram.com/superchiefgallerynft/'
   const twitter = 'https://twitter.com/SuperchiefNFT'
-  const discord = 'https://discord.com/invite/pxjASBky'
-  const { communityGuidelines, termsOfService, privacy, careers, help } = '/'
+  const discord = 'https://discord.gg/mAauHRz5aH'
+  const termsOfService = '/termsOfService'
+  const privacy = '/privacyPolicity'
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} container justify="space-between" alignItems="center">
         <Hidden smUp>
           <Grid item container justify="center" xs={12}>
-            <LogoSCNFT className={classes.logo} />
-            <LogoDarkSrc className={classes.logoDark} />
+            <Link to="/" className={classes.link}>
+              <LogoSCNFT className={classes.logo} />
+              <LogoDarkSrc className={classes.logoDark} />
+            </Link>
           </Grid>
         </Hidden>
         <Grid
@@ -112,24 +115,18 @@ const Footer = ({ pathname }) => {
           xs={6}
           sm={5}
           container
-          justify="space-between"
+          justify="space-around"
           className={classes.containerText}
           alignItems="center"
         >
-          <Link to={communityGuidelines} className={classes.link}>
-            <Typography variant="overline">Community Guidelines</Typography>
+          <Link to="/AboutUs" className={classes.link}>
+            <Typography variant="overline">About Us</Typography>
           </Link>
           <Link to={termsOfService} className={classes.link}>
             <Typography variant="overline">Terms of Service</Typography>
           </Link>
           <Link to={privacy} className={classes.link}>
             <Typography variant="overline">Privacy</Typography>
-          </Link>
-          <Link to={careers} className={classes.link}>
-            <Typography variant="overline">Careers</Typography>
-          </Link>
-          <Link to={help} className={classes.link}>
-            <Typography variant="overline">Help</Typography>
           </Link>
         </Grid>
       </Grid>

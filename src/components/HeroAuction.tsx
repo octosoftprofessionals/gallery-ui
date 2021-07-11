@@ -14,6 +14,9 @@ const useStyle = makeStyles(Theme => ({
   root: {
     flex: 1,
     margin: Theme.spacing(11, 0),
+    '@media (max-width: 576px)': {
+      marginTop: '0px',
+    },
   },
   containerAsset: {
     position: 'relative',

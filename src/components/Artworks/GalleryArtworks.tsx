@@ -16,14 +16,22 @@ const GalleryArtworks = ({ isLoading, data = [] }) => {
   console.log('data:', data)
 
   const Loading = () => (
-    <Box width="100%" height="60vh" display="flex" justifyContent="center" alignItems="center">
+    <Box
+      width="100%"
+      height="60vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
       <CircularProgress />
     </Box>
   )
 
   return (
     <Grid container direction="row" justify="space-between" wrap="wrap">
-      {isLoading ? <Loading /> :
+      {isLoading ? (
+        <Loading />
+      ) : (
         data.map((galleryItem, index) => (
           <Grid
             item
@@ -36,7 +44,7 @@ const GalleryArtworks = ({ isLoading, data = [] }) => {
             <ArtworkItem galleryItem={galleryItem} />
           </Grid>
         ))
-      }
+      )}
     </Grid>
   )
 }

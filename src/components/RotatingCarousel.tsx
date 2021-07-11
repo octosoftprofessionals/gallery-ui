@@ -11,14 +11,24 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
-  /* carousel: {
-        '&:hover': {
-            '@media (max-width: 576px)': {
-                marginTop: 0,
-                paddingTop: 0,
-            },
-        },
-    }, */
+  carousel: {
+    height: 'auto',
+    minHeight: '100%',
+    margin: '0px auto',
+    padding: '0px auto',
+    overflowY: 'visible',
+    width: '100%',
+    '@media (max-width: 1400px)': {
+      paddingTop: '40px',
+    },
+    '@media (max-width: 768px)': {
+      paddingTop: '40px',
+    },
+    '@media (max-width: 375px)': {
+      paddingTop: '0px',
+      marginTop: '0px',
+    },
+  },
   arrowLeft: {
     position: 'absolute',
     top: 'auto',
@@ -67,7 +77,8 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout, theme }) => {
   const classes = useStyle()
   return (
     <Carousel
-      /* className={classes.carousel} */ PrevIcon={[
+      className={classes.carousel}
+      PrevIcon={[
         <ChevronLeft className={classes.arrowLeft} />,
         <RadioButtonUnchecked className={classes.circle} />,
       ]}

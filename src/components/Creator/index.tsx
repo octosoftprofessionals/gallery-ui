@@ -94,6 +94,7 @@ const itemAvatar = [
 ]
 
 const Creator = ({
+  accountQuery,
   creatorQuery,
   linkTwitter,
   setDisplayReportModal,
@@ -111,13 +112,44 @@ const Creator = ({
     createdAt,
     userIndex,
     publicKey,
-  } = creatorQuery
+  } = creatorQuery ? creatorQuery : ''
+
+  const {
+    collection,
+    name: accountName,
+    username: accountUsername,
+    twitter_username,
+    instagram_username,
+    short_description,
+    description,
+    created_date,
+    image_url,
+    owner,
+    discord_url,
+    external_url,
+    address,
+  } = accountQuery
+
+  const accountLinks = {
+    discord: { handle: discord_url, platform: 'discord' },
+    instagram: { handle: instagram_username, platform: 'instagram' },
+    twitter: { handle: twitter_username, platform: 'twitter' },
+    website: { handle: external_url, platform: 'website' },
+    facebook: { handle: '', platform: 'facebook' },
+    snapchat: { handle: '', platform: 'snapchat' },
+    tiktok: { handle: '', platform: 'tiktok' },
+    twitch: { handle: '', platform: 'twitch' },
+    youtube: { handle: '', platform: 'youtube' },
+  }
 
   return (
     <>
       <Grid container justify="space-around" className={classes.root}>
         <Grid item className={classes.containerAvatar}>
-          <Avatar src={profileImageUrl} className={classes.avatar} />
+          <Avatar
+            src={type === 'account' ? image_url : profileImageUrl}
+            className={classes.avatar}
+          />
         </Grid>
 
         <CreatorkShare
@@ -133,22 +165,22 @@ const Creator = ({
         wrap="wrap"
         className={classes.info}
       >
-        <Grid item xs={11} md={4}>
+        <Grid item xs={10} md={6}>
           <InfoCreator
-            name={name}
-            username={username}
+            name={type === 'account' ? accountName : name}
+            username={type === 'account' ? accountUsername : username}
             followers={followers}
             following={following}
             followedes={itemAvatar}
-            links={links}
-            bio={bio}
-            createdAt={createdAt}
-            userIndex={userIndex}
-            publicKey={publicKey}
+            links={type === 'account' ? accountLinks : links}
+            bio={type === 'account' ? description : bio}
+            createdAt={type === 'account' ? created_date : createdAt}
+            userIndex={type === 'account' ? owner : userIndex}
+            publicKey={type === 'account' ? address : publicKey}
             type={type}
           />
         </Grid>
-        <Grid item xs={11} md={7}>
+        <Grid item xs={10} sm={12}>
           {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
         </Grid>
       </Grid>

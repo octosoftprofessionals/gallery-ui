@@ -1,14 +1,17 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
+import React, { useState, useEffect } from 'react'
+
 import CloseIcon from '@material-ui/icons/Close'
 import { colors } from '../components/Styles/Colors'
 import { makeStyles } from '@material-ui/core/styles'
-import { Input, Typography } from '@material-ui/core'
-
-import { useState, useEffect } from 'react'
+import {
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Input,
+  Typography,
+} from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   container: {
@@ -16,19 +19,22 @@ const useStyle = makeStyles(Theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    borderRadius: 20,
+    borderRadius: Theme.spacing(7),
     padding: 0,
   },
   mainTitle: {
     fontSize: 42,
     color: colors.White,
-    isplay: 'flex',
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: Theme.spacing(7),
     '&hover': {
       color: colors.White,
+    },
+    '@media (max-width: 576px)': {
+      fontSize: Theme.typography.fontSize[6],
     },
   },
   input: {
@@ -36,10 +42,13 @@ const useStyle = makeStyles(Theme => ({
     background: 'trasnparent',
   },
   box: {
-    background: colors.Black,
+    backgroundColor: Theme.palette.background.paper,
     maxWidth: 800,
-    borderRadius: 50,
-    padding: 20,
+    borderRadius: Theme.shape.borderRadius[3],
+    padding: Theme.spacing(7),
+    '@media (min-width: 330px)': {
+      overflow: 'hidden',
+    },
   },
   contBtn: {
     display: 'flex',
@@ -47,6 +56,9 @@ const useStyle = makeStyles(Theme => ({
     justifyContent: 'center',
     padding: 5,
     margin: 15,
+    '@media (max-width: 576px)': {
+      margin: 0,
+    },
   },
   dialogCont: {
     display: 'flex',
@@ -55,39 +67,40 @@ const useStyle = makeStyles(Theme => ({
   },
   closeBtn: {
     background: colors.DarkGrey,
-    height: 60,
-    borderRadius: '50%',
-    display: 'inline - block',
     padding: 0,
   },
   field: {
     padding: 10,
     background: colors.Black,
-    borderRadius: 50,
+    borderRadius: Theme.shape.borderRadius[3],
     borderColor: colors.Aqua,
     border: 'solid 2px',
     color: colors.Aqua,
-    paddingLeft: 20,
+    paddingLeft: Theme.spacing(7),
     maxWidth: 500,
   },
   suscribeBtn: {
     background: colors.Aqua,
-    fontSize: 16,
+    fontSize: Theme.typography.fontSize[3],
     color: colors.White,
     fontWeight: 800,
-    padding: 20,
-    margin: 20,
-    borderRadius: 20,
+    padding: Theme.spacing(7),
+    margin: Theme.spacing(7),
+    borderRadius: Theme.spacing(7),
     width: 150,
     '&hover': {
       background: colors.LigthPetroleum,
       color: colors.Black,
     },
+    '@media (max-width: 576px)': {
+      margin: Theme.spacing(3),
+      padding: Theme.spacing(3),
+    },
   },
   text: {
     color: colors.LigthGrey,
     fontWeight: 200,
-    fontSize: 16,
+    fontSize: Theme.typography.fontSize[3],
     marginBottom: 60,
     textAlign: 'center',
     marginRight: 50,
@@ -95,20 +108,24 @@ const useStyle = makeStyles(Theme => ({
     '@media (max-width: 576px)': {
       marginRight: 5,
       marginLeft: 5,
+      marginBottom: Theme.spacing(7),
     },
   },
   title: {
     color: colors.White,
     fontWeight: 100,
-    fontSize: 18,
+    fontSize: Theme.typography.fontSize[4],
     marginBottom: 5,
     textAlign: 'left',
     alignItems: 'left',
-    marginLeft: '20%',
+    marginLeft: `${Theme.spacing(7)}%`,
   },
   icon: {
     fontSize: 50,
     color: colors.Aqua,
+    '@media (max-width: 576px)': {
+      fontSize: Theme.spacing(12),
+    },
   },
 }))
 
@@ -120,7 +137,6 @@ function useLocalState(key, initial) {
         return JSON.parse(saved)
       }
     }
-
     return initial
   })
 
@@ -146,7 +162,7 @@ const EmailPopUp = () => {
   const classes = useStyle()
 
   return (
-    <div>
+    <>
       <Dialog
         className={classes.container}
         open={open}
@@ -156,22 +172,26 @@ const EmailPopUp = () => {
       >
         <div className={classes.box}>
           <DialogActions className={classes.input}>
-            <Button onClick={handleClose} className={classes.closeBtn}>
-              <CloseIcon className={classes.icon}></CloseIcon>
-            </Button>
+            <IconButton onClick={handleClose} className={classes.closeBtn}>
+              <CloseIcon className={classes.icon} />
+            </IconButton>
           </DialogActions>
-          <Typography id="form-dialog-title" className={classes.mainTitle}>
-            Join Our Mailing List
+          <Typography className={classes.mainTitle}>
+            Join Our Mailing List!
           </Typography>
           <DialogContent>
             <div className={classes.text}>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally. To subscribe to this
-              website, please enter your email address here. We will send
-              updates occasionally. We will send updates occasionally. To
-              subscribe to this website, please enter your email address here.
+              <Typography variant="body2">
+                To subscribe to this website, please enter your email address
+                here. We will send updates occasionally. To subscribe to this
+                website, please enter your email address here. We will send
+                updates occasionally. We will send updates occasionally. To
+                subscribe to this website, please enter your email address here.
+              </Typography>
             </div>
-            <div className={classes.title}>Mail</div>
+            <div className={classes.title}>
+              <Typography>Mail</Typography>
+            </div>
             <div className={classes.dialogCont}>
               <Input
                 placeholder="email"
@@ -191,15 +211,13 @@ const EmailPopUp = () => {
               onClick={handleClose}
               color="primary"
               className={classes.suscribeBtn}
-              size="large"
-              variant="text"
             >
               Sure!
             </Button>
           </DialogActions>
         </div>
       </Dialog>
-    </div>
+    </>
   )
 }
 export default EmailPopUp
