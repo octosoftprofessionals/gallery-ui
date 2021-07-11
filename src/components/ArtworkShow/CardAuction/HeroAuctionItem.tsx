@@ -13,7 +13,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { formatDecimal, deltaTime, formatUsd, timerArray } from '../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
-  root: { padding: Theme.spacing(11, 0) },
+  root: {
+    padding: Theme.spacing(11, 0),
+  },
   price: { fontSize: Theme.typography.fontSize[6] },
   titlePrice: { fontSize: Theme.typography.fontSize[3] },
   divider: {
@@ -27,6 +29,11 @@ const useStyle = makeStyles(Theme => ({
   textButton: { fontSize: Theme.typography.fontSize[3] },
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
+  title: {
+    '@media (max-width: 768px)': {
+      fontSize: Theme.typography.fontSize[4],
+    },
+  },
 }))
 
 const HeroAuctionItem = ({
@@ -70,7 +77,7 @@ const HeroAuctionItem = ({
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <Typography variant="h3" color="primary">
+        <Typography variant="h4" color="primary" className={classes.title}>
           {title}
         </Typography>
       </Grid>
