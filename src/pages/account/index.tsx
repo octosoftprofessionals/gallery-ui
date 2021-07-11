@@ -25,9 +25,11 @@ const AccountPage = () => {
 
   handleConnection()
 
-  const { data: AccountQuery } = useQuery('AccountQuery', () =>
+  const { data: AccountQuery, status } = useQuery('AccountQuery', () =>
     getAccount(metamaskAccount)
   )
+
+  const isLoading = status === 'loading'
 
   const urlCover = AccountQuery
     ? AccountQuery.account.collection.banner_image_url
@@ -52,6 +54,7 @@ const AccountPage = () => {
         accountQuery={AccountQuery ? AccountQuery.account : ''}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
+        isLoading={isLoading}
         type="account"
       />
     </Layout>

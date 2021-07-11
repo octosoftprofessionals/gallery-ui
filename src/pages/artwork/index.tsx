@@ -10,6 +10,7 @@ import { colors } from '../../components/Styles/Colors'
 
 import { galleryItemQuery } from '../../services/gallery'
 import useQueryParams from '../../hooks/useQueryParams'
+import Spinner from '../../components/Spinner'
 
 // ArtworkView params:
 const artworkLinks = [
@@ -76,14 +77,14 @@ const historyInfo = [
 
 const ShowArtwork = () => {
   const { contractAddress, tokenId } = useQueryParams()
-  const { data: galleryItem } = useQuery('artworkQuery', () =>
+  const { data: galleryItem, status } = useQuery('artworkQuery', () =>
     galleryItemQuery({
       assetContractAddress: contractAddress,
       assetTokenId: tokenId,
     })
   )
-
-  console.log('ShowArtwork galleryItem:', galleryItem)
+  const isLoading = status === 'loading'
+  console.log('ShowArtwork loading:', isLoading)
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
@@ -94,7 +95,7 @@ const ShowArtwork = () => {
       marginBottom="0"
       marginTop="24px"
     >
-      {galleryItem ? (
+      {galleryItem && !isLoading ? (
         <ArtworkShow
           galleryItem={galleryItem}
           artworkLinks={artworkLinks}
@@ -103,7 +104,7 @@ const ShowArtwork = () => {
           setDisplayReportModal={setDisplayReportModal}
         />
       ) : (
-        ''
+        <Spinner height="60vh" />
       )}
     </Layout>
   )

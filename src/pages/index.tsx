@@ -5,7 +5,7 @@ import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import ArtworkItem from '../components/GalleryItem/ArtworkItem'
 import Layout from '../components/Layout'
-import ContactUs from '../components/ContactUs'
+import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
 
@@ -64,24 +64,32 @@ const Home = () => {
   return (
     <Layout>
       <EmailPopUp></EmailPopUp>
-      <RotatingCarousel
-        artworksCarousel={featuredItems.slice(0, 2)}
-        timeout={1000}
-        interval={7000}
-        theme="dark"
-      />
+      {isLoading ? (
+        <Spinner height="50vh" />
+      ) : (
+        <RotatingCarousel
+          artworksCarousel={featuredItems.slice(0, 2)}
+          timeout={1000}
+          interval={7000}
+          theme="dark"
+        />
+      )}
       <ArtworkGrid
         title="Featured artworks"
         titleButton="artworks"
         link="/artworks"
       >
-        <Gallery
-          isLoading={isLoading}
-          items={reserveItems}
-          renderItem={(item, index) => (
-            <ArtworkItem key={index} galleryItem={item} />
-          )}
-        />
+        {isLoading ? (
+          <Spinner height="50vh" />
+        ) : (
+          <Gallery
+            isLoading={isLoading}
+            items={reserveItems}
+            renderItem={(item, index) => (
+              <ArtworkItem key={index} galleryItem={item} />
+            )}
+          />
+        )}
       </ArtworkGrid>
 
       <ArtworkGrid
@@ -90,13 +98,17 @@ const Home = () => {
         link="/artworks"
         icon
       >
-        <Gallery
-          isLoading={isLoading}
-          items={listedItems}
-          renderItem={(item, index) => (
-            <ArtworkItem key={index} galleryItem={item} />
-          )}
-        />
+        {isLoading ? (
+          <Spinner height="60vh" />
+        ) : (
+          <Gallery
+            isLoading={isLoading}
+            items={listedItems}
+            renderItem={(item, index) => (
+              <ArtworkItem key={index} galleryItem={item} />
+            )}
+          />
+        )}
       </ArtworkGrid>
     </Layout>
   )
