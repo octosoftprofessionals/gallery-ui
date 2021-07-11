@@ -18,6 +18,7 @@ import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
 import { truncateSync } from 'node:fs'
+import Spinner from '../Spinner'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -99,6 +100,7 @@ const Creator = ({
   linkTwitter,
   setDisplayReportModal,
   type,
+  isLoading,
 }) => {
   const classes = useStyle()
   const {
@@ -180,9 +182,13 @@ const Creator = ({
             type={type}
           />
         </Grid>
-        <Grid item xs={10} sm={12}>
-          {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
-        </Grid>
+        {isLoading ? (
+          <Spinner height="50vh" />
+        ) : (
+          <Grid item xs={10} sm={12}>
+            {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
+          </Grid>
+        )}
       </Grid>
     </>
   )

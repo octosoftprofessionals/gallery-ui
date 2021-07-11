@@ -23,9 +23,11 @@ const CreatorPage = () => {
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
-  const { data: CreatorQuery } = useQuery('CreatorQuery', () =>
+  const { data: CreatorQuery, status } = useQuery('CreatorQuery', () =>
     getCreator(creatorId)
   )
+
+  const isLoading = status === 'loading'
 
   const urlCover = CreatorQuery
     ? CreatorQuery.creator.coverImageUrl
@@ -37,6 +39,7 @@ const CreatorPage = () => {
         creatorQuery={CreatorQuery ? CreatorQuery.creator : ''}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
+        isLoading={isLoading}
       />
     </Layout>
   )
