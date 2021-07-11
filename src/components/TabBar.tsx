@@ -20,10 +20,16 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: 0,
     margin: 0,
     transform: 'none',
+    '@media (max-width: 300px)': {
+      borderRadius: 0,
+    },
     '&:hover': {
       transform: 'none',
       borderRadius: 15,
       padding: Theme.spacing(2, 2),
+      '@media (max-width: 300px)': {
+        borderRadius: 0,
+      },
     },
   },
   selectButton: { borderBottom: '2px solid' },
