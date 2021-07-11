@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import CloseIcon from '@material-ui/icons/Close'
 import { colors } from '../components/Styles/Colors'
@@ -12,8 +12,6 @@ import {
   Input,
   Typography,
 } from '@material-ui/core'
-
-import { useState, useEffect } from 'react'
 
 const useStyle = makeStyles(Theme => ({
   container: {
@@ -44,7 +42,7 @@ const useStyle = makeStyles(Theme => ({
     background: 'trasnparent',
   },
   box: {
-    background: colors.DarkGrey,
+    backgroundColor: Theme.palette.background.paper,
     maxWidth: 800,
     borderRadius: Theme.shape.borderRadius[3],
     padding: Theme.spacing(7),
@@ -164,7 +162,7 @@ const EmailPopUp = () => {
   const classes = useStyle()
 
   return (
-    <div>
+    <>
       <Dialog
         className={classes.container}
         open={open}
@@ -179,17 +177,21 @@ const EmailPopUp = () => {
             </IconButton>
           </DialogActions>
           <Typography className={classes.mainTitle}>
-            Join Our Mailing List
+            Join Our Mailing List!
           </Typography>
           <DialogContent>
             <div className={classes.text}>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally. To subscribe to this
-              website, please enter your email address here. We will send
-              updates occasionally. We will send updates occasionally. To
-              subscribe to this website, please enter your email address here.
+              <Typography variant="body2">
+                To subscribe to this website, please enter your email address
+                here. We will send updates occasionally. To subscribe to this
+                website, please enter your email address here. We will send
+                updates occasionally. We will send updates occasionally. To
+                subscribe to this website, please enter your email address here.
+              </Typography>
             </div>
-            <div className={classes.title}>Mail</div>
+            <div className={classes.title}>
+              <Typography>Mail</Typography>
+            </div>
             <div className={classes.dialogCont}>
               <Input
                 placeholder="email"
@@ -215,7 +217,7 @@ const EmailPopUp = () => {
           </DialogActions>
         </div>
       </Dialog>
-    </div>
+    </>
   )
 }
 export default EmailPopUp

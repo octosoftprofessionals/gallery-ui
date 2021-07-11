@@ -91,6 +91,11 @@ const MenuDrawer = ({ showDrawer, setShowDrawer, LogoDarkSrc }) => {
           </Grid>
           <Grid container direction="column" className={classes.menu}>
             <Grid container direction="column">
+              <Link to={'/exhibition'} className={classes.link}>
+                <Typography variant="h4" color="secondary">
+                  Exhibition
+                </Typography>
+              </Link>
               <Link to={'/artworks'} className={classes.link}>
                 <Typography variant="h4" color="secondary">
                   Artworks
@@ -101,11 +106,7 @@ const MenuDrawer = ({ showDrawer, setShowDrawer, LogoDarkSrc }) => {
                   Creators
                 </Typography>
               </Link>
-              <Link to={'/exhibition'} className={classes.link}>
-                <Typography variant="h4" color="secondary">
-                  Exhibition
-                </Typography>
-              </Link>
+
               <Link to={'/collabs'} className={classes.link}>
                 <Typography variant="h4" color="secondary">
                   Collabs
