@@ -1,24 +1,13 @@
 import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  Avatar,
-  Grid,
-  Typography,
-  Button,
-  IconButton,
-  withWidth,
-  Hidden,
-} from '@material-ui/core'
-import { MoreHoriz, ArrowUpward, Maximize } from '@material-ui/icons'
+import { Avatar, Grid } from '@material-ui/core'
 
 import GridCreator from './GridCreator'
 import GridCreatorAccount from './GridCreatorAccount'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
-import { truncateSync } from 'node:fs'
-import Spinner from '../Spinner'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -94,14 +83,7 @@ const itemAvatar = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
 ]
 
-const Creator = ({
-  accountQuery,
-  creatorQuery,
-  linkTwitter,
-  setDisplayReportModal,
-  type,
-  isLoading,
-}) => {
+const Creator = ({ linkTwitter, setDisplayReportModal, type, isLoading }) => {
   const classes = useStyle()
   const {
     profileImageUrl,
@@ -194,4 +176,4 @@ const Creator = ({
   )
 }
 
-export default withWidth()(Creator)
+export default Creator

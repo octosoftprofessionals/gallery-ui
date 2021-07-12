@@ -12,6 +12,11 @@ import { Search } from '@material-ui/icons'
 import { boxShadow } from '../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.MuiOutlinedInput-root': {
+      borderRadius: 50,
+    },
+  },
   root: {
     padding: Theme.spacing(0, 4),
   },
