@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { Link } from 'gatsby'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
-  containerAvatar: { marginBottom: Theme.spacing(9) },
+  containerAvatar: {
+    marginBottom: Theme.spacing(9),
+    padding: Theme.spacing(2, 0),
+  },
   username: {
     fontFamily: Theme.typography.fontFamily[2],
     paddingLeft: Theme.spacing(2),
