@@ -11,46 +11,51 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     bottom: 0,
     position: 'absolute',
-    padding: Theme.spacing(6, 9, 2, 9),
     backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
+  conateinerTop: { padding: Theme.spacing(0, 6, 2) },
+  conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
   timer: {
     marginBottom: Theme.spacing(4),
   },
 }))
 
-const InAuctions = ({ price, timer }) => {
+const InAuctions = ({ price, timer, children }) => {
   const classes = useStyle()
   return (
-    <Grid item container className={classes.footerCard}>
-      <Grid item xs={6} container>
-        <Typography variant="caption" color="textSecondary">
-          Current bid
-        </Typography>
-        <Grid item xs={12}>
-          <Typography variant="caption" color="secondary">
-            {`${formatDecimal(price)} ETH`}
+    <Grid container className={classes.footerCard}>
+      <Grid item xs={12} container className={classes.conateinerTop}>
+        <Grid item xs={6} container>
+          <Typography variant="caption" color="textSecondary">
+            Current bid
           </Typography>
+          <Grid item xs={12}>
+            <Typography variant="caption" color="secondary">
+              {`${formatDecimal(price)} ETH`}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          container
+          alignItems="flex-start"
+          className={classes.timer}
+        >
+          <Typography variant="caption" color="textSecondary">
+            Ending in
+          </Typography>
+          <Grid item xs={12}>
+            <Typography variant="caption" color="secondary">
+              {timer}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid
-        item
-        xs={6}
-        container
-        alignItems="flex-start"
-        className={classes.timer}
-      >
-        <Typography variant="caption" color="textSecondary">
-          Ending in
-        </Typography>
-        <Grid item xs={12}>
-          <Typography variant="caption" color="secondary">
-            {timer}
-          </Typography>
-        </Grid>
+      <Grid item xs={12} className={classes.conateinerButtom}>
+        {children}
       </Grid>
-      <ButtonPlaylist />
     </Grid>
   )
 }
