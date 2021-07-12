@@ -5,6 +5,8 @@ import queryString from 'query-string'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
+import { getCreator } from '../../services/autionsService'
+
 import { backgroundGradient } from '../../components/Styles/Colors'
 import useQueryParams from '../../hooks/useQueryParams'
 
@@ -20,6 +22,10 @@ const CreatorPage = () => {
   const { id: creatorId } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
+  const { data: creatorQuery, isLoading } = useQuery(
+    'CreatorQuery',
+    async () => await getCreator({ creatorId })
+  )
 
   return (
     <Layout padding="0" marginTop="0" height backgroundImage={''}>
@@ -27,6 +33,7 @@ const CreatorPage = () => {
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
         isLoading={isLoading}
+        creatorQuery={creatorQuery}
       />
     </Layout>
   )

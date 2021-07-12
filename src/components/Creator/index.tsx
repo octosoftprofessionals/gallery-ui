@@ -8,6 +8,7 @@ import GridCreatorAccount from './GridCreatorAccount'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
+import Spinner from '../../components/Spinner'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -83,7 +84,13 @@ const itemAvatar = [
   'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
 ]
 
-const Creator = ({ linkTwitter, setDisplayReportModal, type, isLoading }) => {
+const Creator = ({
+  linkTwitter,
+  setDisplayReportModal,
+  type,
+  isLoading,
+  creatorQuery,
+}) => {
   const classes = useStyle()
   const {
     profileImageUrl,
@@ -96,7 +103,8 @@ const Creator = ({ linkTwitter, setDisplayReportModal, type, isLoading }) => {
     createdAt,
     userIndex,
     publicKey,
-  } = creatorQuery ? creatorQuery : ''
+    accountQuery,
+  } = creatorQuery ? creatorQuery : {}
 
   const {
     collection,
@@ -112,7 +120,7 @@ const Creator = ({ linkTwitter, setDisplayReportModal, type, isLoading }) => {
     discord_url,
     external_url,
     address,
-  } = accountQuery
+  } = accountQuery || {}
 
   const accountLinks = {
     discord: { handle: discord_url, platform: 'discord' },

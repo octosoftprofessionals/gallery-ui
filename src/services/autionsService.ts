@@ -119,7 +119,7 @@ export async function getHeroArtwork(id: String) {
   })
 }
 
-export async function getCreator(username: String) {
+export async function getCreator({ creatorId }) {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
@@ -128,7 +128,7 @@ export async function getCreator(username: String) {
             auctionsMockup.findIndex(
               artwork =>
                 artwork.creator.username.toLowerCase() ===
-                username.toLowerCase()
+                creatorId.toLowerCase()
             )
             // auctionsMockup.findIndex(auctions => auctions.id === id)
           ]?.creator,
