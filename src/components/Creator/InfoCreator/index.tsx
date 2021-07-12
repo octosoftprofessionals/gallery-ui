@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Avatar,
+  Box,
   Button,
   Divider,
   Grid,
@@ -75,16 +76,16 @@ const InfoCreator = ({
   followers,
   following,
   followedes,
-  links,
-  bio,
-  createdAt,
-  userIndex,
+  // links,
+  // bio,
+  // createdAt,
+  userIndex = null,
   publicKey,
   type,
 }) => {
   const classes = useStyle()
-  const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
-  const year = new Date(createdAt).getFullYear()
+  // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
+  // const year = new Date(createdAt).getFullYear()
 
   const getPublicKey = () => {
     return navigator.clipboard.writeText(publicKey)
@@ -168,7 +169,7 @@ const InfoCreator = ({
               <Avatar key={i} src={item} />
             ))}
           </AvatarGroup>
-          <div
+          {/* <div
             onClick={() => {
               console.log('press hosad')
             }}
@@ -176,10 +177,10 @@ const InfoCreator = ({
             <Typography variant="overline" className={classes.textFollow}>
               View all
             </Typography>
-          </div>
+          </div> */}
           <Grid item xs={12} sm={7}>
             <ButtonsSocialMedia
-              links={links}
+              // links={links}
               verified={true}
               imgUrl={followedes[3]}
               invited="Diolink"
@@ -188,7 +189,7 @@ const InfoCreator = ({
         </>
       )}
 
-      <Grid item xs={12} sm={11}>
+      {/* <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Bio
         </Typography>
@@ -196,16 +197,15 @@ const InfoCreator = ({
         <Typography variant="body2" color="primary" paragraph>
           {bio !== undefined && bio !== ' ' ? bio : '—'}
         </Typography>
-      </Grid>
-      <Grid item xs={12} sm={11}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Links
         </Typography>
         <Divider className={classes.divider} />
         {links ? <Links links={links} /> : '—'}
-      </Grid>
-
-      <Grid item xs={12} sm={11}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />
         <Grid container justify="space-between">
           <Typography variant="caption" color="primary">
@@ -220,7 +220,8 @@ const InfoCreator = ({
           </Typography>
         </Grid>
         <Divider className={classes.divider} />
-      </Grid>
+      </Grid> */}
+      <Box height="24px" />
     </Grid>
   )
 }
