@@ -119,7 +119,7 @@ export async function getHeroArtwork(id: String) {
   })
 }
 
-export async function getCreator(username: String) {
+export async function getCreator(username: String = '') {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
