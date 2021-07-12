@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core'
 import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
-import { artworkPathFrom, profilePathFromAddress } from '../config/routes'
+import { artworkPathFrom, biddingPathFrom, profilePathFromAddress } from '../config/routes'
 
 import CreatorButton from './CreatorButton'
 import { GalleryItem } from '../services/gallery'
@@ -63,6 +63,7 @@ const HeroAuction = ({
   const classes = useStyle()
 
   const artworkPath = artworkPathFrom(assetContractAddress, assetTokenId)
+  const biddingPath = biddingPathFrom(assetContractAddress, assetTokenId)
   const creatorPath = profilePathFromAddress(creatorAddress)
 
   return (
@@ -107,7 +108,6 @@ const HeroAuction = ({
                 imageUrl={creatorImageUrl}
                 profileUrl={creatorPath}
                 top="-70px"
-                link={`/creator/?id=${creatorUsername}`}
               />
 
               <HeroAuctionItem
@@ -116,7 +116,7 @@ const HeroAuction = ({
                 priceUsd={priceUsd}
                 expiration={expiration}
                 linkButtonArtWork={artworkPath}
-                linkButtonBid="#"
+                linkButtonBid={biddingPath}
                 isLoading={isLoading}
               />
             </Grid>
