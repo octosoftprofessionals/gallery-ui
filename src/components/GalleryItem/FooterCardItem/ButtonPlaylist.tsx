@@ -17,8 +17,6 @@ const useStyle = makeStyles(Theme => ({
   },
   icon: {
     fontSize: Theme.spacing(12),
-    color: Theme.palette.primary.contrastText,
-    '&:hover': { color: Theme.palette.primary.contrastText },
   },
   button: { padding: 0 },
 }))
@@ -31,7 +29,7 @@ const ButtonPlaylist = ({}) => {
         <Button fullWidth className={classes.button}>
           <div className={classes.root}>
             <Hidden only="xs">
-              <Typography variant="overline" color="secondary">
+              <Typography variant="overline" color="textSecondary">
                 Add to Favorites
               </Typography>
             </Hidden>
@@ -43,7 +41,7 @@ const ButtonPlaylist = ({}) => {
         <Button fullWidth className={classes.button}>
           <div className={classes.root}>
             <Hidden only="xs">
-              <Typography variant="overline" color="secondary">
+              <Typography variant="overline" color="textSecondary">
                 Add to Playlist
               </Typography>
             </Hidden>
