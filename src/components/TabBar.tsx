@@ -5,7 +5,7 @@ import { Grid, Typography, Divider, Button } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   head: {
-    padding: Theme.spacing(16, 0, 9),
+    marginTop: 20,
   },
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
@@ -16,10 +16,21 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.primary.main,
   },
   button: {
-    padding: Theme.spacing(3, 0),
+    padding: Theme.spacing(2, 2),
     borderRadius: 0,
     margin: 0,
-    '&:hover': { transform: 'none' },
+    transform: 'none',
+    '@media (max-width: 300px)': {
+      borderRadius: 0,
+    },
+    '&:hover': {
+      transform: 'none',
+      borderRadius: 15,
+      padding: Theme.spacing(2, 2),
+      '@media (max-width: 300px)': {
+        borderRadius: 0,
+      },
+    },
   },
   selectButton: { borderBottom: '2px solid' },
   selectButtonPlaylist: { backgroundColor: Theme.palette.secondary.light },
@@ -39,7 +50,12 @@ const TabBar = ({
     setSelected(selection)
   }
   return (
-    <Grid item container justify={justify ? justify : 'flex-start'}>
+    <Grid
+      item
+      container
+      justify={justify ? justify : 'flex-start'}
+      className={classes.head}
+    >
       <Grid
         item
         sm={3}

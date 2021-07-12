@@ -2,7 +2,7 @@ import React from 'react'
 import { IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent'
-import { colors, boxShadow } from './Styles/Colors'
+import { colors } from './Styles/Colors'
 import { Theme, darkTheme } from './Styles'
 
 const useStyle = makeStyles(Theme => ({
@@ -22,16 +22,14 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ButtonDM = ({ theme, setTheme, setValue }) => {
+const ButtonDM = ({ theme, setTheme }) => {
   const classes = useStyle()
 
   const toggleTheme = () => {
     if (theme === Theme) {
       setTheme(darkTheme)
-      setValue(darkTheme)
     } else {
       setTheme(Theme)
-      setValue(Theme)
     }
   }
   return (
