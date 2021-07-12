@@ -1,7 +1,6 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import HeroAuction from '../components/HeroAuction'
-import { colors } from '../components/Styles/Colors'
 
 import {
   RadioButtonUnchecked,
@@ -11,6 +10,12 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.bottom': {
+      backgroundColor: 'transparent !important',
+      color: Theme.palette.secondary.contrastText,
+    },
+  },
   carousel: {
     height: 'auto',
     minHeight: '100%',
@@ -19,28 +24,28 @@ const useStyle = makeStyles(Theme => ({
     overflowY: 'visible',
     width: '100%',
     '@media (max-width: 1400px)': {
-      paddingTop: '40px',
+      paddingTop: Theme.spacing(13),
     },
     '@media (max-width: 768px)': {
-      paddingTop: '40px',
+      paddingTop: Theme.spacing(13),
     },
     '@media (max-width: 375px)': {
-      paddingTop: '0px',
-      marginTop: '0px',
+      paddingTop: 0,
+      marginTop: 0,
     },
   },
   arrowLeft: {
     position: 'absolute',
     top: 'auto',
     left: 'auto',
-    fontSize: 50,
+    fontSize: Theme.typography.fontSize[7],
     '&:hover': {
       '@media (max-width: 576px)': {
-        opacity: 100,
+        opacity: 1,
       },
     },
     '@media (max-width: 576px)': {
-      fontSize: 20,
+      fontSize: Theme.typography.fontSize[5],
       opacity: 0,
     },
   },
@@ -48,32 +53,32 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     top: 'auto',
     right: 'auto',
-    fontSize: 50,
+    fontSize: Theme.typography.fontSize[7],
     '&:hover': {
       '@media (max-width: 576px)': {
-        opacity: 100,
+        opacity: 1,
       },
     },
     '@media (max-width: 576px)': {
-      fontSize: 20,
+      fontSize: Theme.typography.fontSize[5],
       opacity: 0,
     },
   },
   circle: {
-    fontSize: 50,
+    fontSize: Theme.typography.fontSize[7],
     '&:hover': {
       '@media (max-width: 576px)': {
-        opacity: 100,
+        opacity: 1,
       },
     },
     '@media (max-width: 576px)': {
-      fontSize: 20,
+      fontSize: Theme.typography.fontSize[5],
       opacity: 0,
     },
   },
 }))
 
-const RotatingCarousel = ({ artworksCarousel, interval, timeout, theme }) => {
+const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
   const classes = useStyle()
   return (
     <Carousel
@@ -86,21 +91,7 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout, theme }) => {
         <ChevronRight className={classes.arrowRigt} />,
         <RadioButtonUnchecked className={classes.circle} />,
       ]}
-      navButtonsProps={
-        theme === 'dark'
-          ? {
-              style: {
-                backgroundColor: 'transparent',
-                color: colors.WhiteSmoke,
-              },
-            }
-          : {
-              style: {
-                backgroundColor: 'transparent',
-                color: colors.Black,
-              },
-            }
-      }
+      navButtonsProps={{ className: 'bottom' }}
       navButtonsAlwaysVisible
       animation="slide"
       timeout={timeout}
