@@ -90,6 +90,7 @@ const Creator = ({
   type,
   isLoading,
   creatorQuery,
+  accountQuery,
 }) => {
   const classes = useStyle()
   const {
@@ -103,7 +104,7 @@ const Creator = ({
     createdAt,
     userIndex,
     publicKey,
-    accountQuery,
+    // accountQuery,
   } = creatorQuery ? creatorQuery : {}
 
   const {

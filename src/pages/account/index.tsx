@@ -35,6 +35,7 @@ const AccountPage = () => {
     ? AccountQuery.account.collection.banner_image_url
     : backgroundGradient.backgroundGradient2
 
+  console.log(AccountQuery)
   return (
     <Layout
       cois="0.2222"
