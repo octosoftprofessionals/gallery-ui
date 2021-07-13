@@ -17,43 +17,39 @@ const useStyle = makeStyles(Theme => ({
   },
   icon: {
     fontSize: Theme.spacing(12),
-    color: Theme.palette.primary.contrastText,
-    '&:hover': { color: Theme.palette.primary.contrastText },
   },
-  button: { padding: 'none', width: '100%' },
+  button: { padding: 0 },
 }))
 
 const ButtonPlaylist = ({}) => {
   const classes = useStyle()
   return (
-    <>
-      <Grid item xs={12} className={classes.container}>
-        <Grid item xs={6}>
-          <Button className={classes.button}>
-            <div className={classes.root}>
-              <Hidden only="xs">
-                <Typography variant="overline" color="secondary">
-                  Add to Favorites
-                </Typography>
-              </Hidden>
-              <StarBorderRounded className={classes.icon} />
-            </div>
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button className={classes.button}>
-            <div className={classes.root}>
-              <Hidden only="xs">
-                <Typography variant="overline" color="secondary">
-                  Add to Playlist
-                </Typography>
-              </Hidden>
-              <SlideshowOutlined className={classes.icon} />
-            </div>
-          </Button>
-        </Grid>
+    <Grid container direction="row" justify="space-around">
+      <Grid item xs={5}>
+        <Button fullWidth className={classes.button}>
+          <div className={classes.root}>
+            <Hidden only="xs">
+              <Typography variant="overline" color="textSecondary">
+                Add to Favorites
+              </Typography>
+            </Hidden>
+            <StarBorderRounded className={classes.icon} />
+          </div>
+        </Button>
       </Grid>
-    </>
+      <Grid item xs={5}>
+        <Button fullWidth className={classes.button}>
+          <div className={classes.root}>
+            <Hidden only="xs">
+              <Typography variant="overline" color="textSecondary">
+                Add to Playlist
+              </Typography>
+            </Hidden>
+            <SlideshowOutlined className={classes.icon} />
+          </div>
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 

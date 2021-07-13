@@ -14,25 +14,22 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: Theme.spacing(9, 9, 2, 9),
-  },
-  buttonsPlaylist: {
-    backgroundColor: Theme.palette.card.footer,
-    borderRadius: Theme.spacing(0, 0, 4, 4),
-    padding: Theme.spacing(2),
-  },
+  conateinerTop: { padding: Theme.spacing(0, 6, 2) },
+  conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
 }))
 
-const Sold = ({ price }) => {
+const Sold = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
-      <Grid item xs={12} className={classes.container}>
+      <Grid
+        item
+        container
+        alignContent="flex-start"
+        justify="center"
+        direction="column"
+        className={classes.conateinerTop}
+      >
         <Typography variant="caption" color="textPrimary">
           Sold for
         </Typography>
@@ -40,8 +37,8 @@ const Sold = ({ price }) => {
           {`${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
-      <Grid item xs={12} className={classes.buttonsPlaylist}>
-        <ButtonPlaylist />
+      <Grid item xs={12} className={classes.conateinerButtom}>
+        {children}
       </Grid>
     </Grid>
   )
