@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import queryString from 'query-string'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
 import { getCreator } from '../../services/autionsService'
 
-import { backgroundGradient } from '../../components/Styles/Colors'
 import useQueryParams from '../../hooks/useQueryParams'
 
 const linkShareTwitter = () => {

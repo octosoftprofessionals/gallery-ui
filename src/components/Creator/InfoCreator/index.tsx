@@ -21,6 +21,7 @@ const useStyle = makeStyles(Theme => ({
   button: {
     padding: 0,
     boxShadow: boxShadow.boxShadow1,
+    backgroundColor: Theme.palette.secondary.main,
     '&:hover': {
       backgroundColor: Theme.palette.primary.main,
       transform: 'none',
@@ -44,7 +45,7 @@ const useStyle = makeStyles(Theme => ({
   buttonKeyPublic: {
     width: '65%',
     position: 'absolute',
-    left: Theme.spacing(9),
+    left: Theme.spacing(13),
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(0, 0, 0, 13),
     boxShadow: boxShadow.boxShadow1,
@@ -61,6 +62,7 @@ const useStyle = makeStyles(Theme => ({
     '&:hover': { color: Theme.palette.primary.main },
   },
   divider: {
+    backgroundColor: Theme.palette.primary.main,
     opacity: Theme.palette.action.disabledOpacity[1],
     margin: Theme.spacing(5, 0, 5),
   },
@@ -131,7 +133,7 @@ const InfoCreator = ({
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {following}
+            {following ? following : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Following
@@ -139,7 +141,7 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {followers}
+            {followers ? followers : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Followers
@@ -192,7 +194,7 @@ const InfoCreator = ({
         </Typography>
         <Divider className={classes.divider} />
         <Typography variant="body2" color="primary" paragraph>
-          {bio}
+          {bio !== undefined && bio !== ' ' ? bio : '—'}
         </Typography>
       </Grid>
       <Grid item xs={12} sm={11}>
@@ -200,7 +202,7 @@ const InfoCreator = ({
           Links
         </Typography>
         <Divider className={classes.divider} />
-        <Links links={links} />
+        {links ? <Links links={links} /> : '—'}
       </Grid>
 
       <Grid item xs={12} sm={11}>
@@ -214,7 +216,7 @@ const InfoCreator = ({
             color="primary"
             className={classes.textDate}
           >
-            {`${month} ${year}`}
+            {createdAt ? `${month} ${year}` : '—'}
           </Typography>
         </Grid>
         <Divider className={classes.divider} />
