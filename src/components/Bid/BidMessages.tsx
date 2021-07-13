@@ -32,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const BidMessages = ({ setOpen, open }) => {
+const BidMessages = ({ setOpen, open, state = null }) => {
   const classes = useStyle()
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -60,6 +60,11 @@ const BidMessages = ({ setOpen, open }) => {
       message: 'You currently have no bids!',
     },
   }
+
+  if (state == null) {
+    return null
+  }
+
   return (
     <Snackbar
       open={open}
@@ -69,13 +74,14 @@ const BidMessages = ({ setOpen, open }) => {
     >
       <Alert
         icon={false}
-        severity={messages[state].severity}
+        severity={messages[state]?.severity}
         variant="filled"
         className={classes.alert}
       >
-        {messages[state].message}
+        {messages[state]?.message}
       </Alert>
     </Snackbar>
   )
 }
+
 export default BidMessages
