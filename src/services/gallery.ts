@@ -81,3 +81,21 @@ export const galleryItemQuery = async ({
   const res = await get(url)
   return res.data ?? {}
 }
+
+export const getProfileAccountByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/account`
+  const res = await get(url)
+  return res.data ?? {}
+}
+
+export const getProfileCreatedItemsByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/created-items`
+  const res = await get(url)
+  return res.data ?? []
+}
+
+export const getProfileOwnedItemsByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/owned-items`
+  const res = await get(url)
+  return res.data ?? []
+}
