@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ThemeProvider, styled } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import Navbar from './Navbar'
@@ -32,6 +32,24 @@ const StyledMain = styled('main')({
   },
 })
 
+function useLocalState(key, initial) {
+  const [themeSelected, setThemeSelected] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = window.localStorage.getItem(key)
+      if (saved !== null) {
+        return JSON.parse(saved)
+      }
+    }
+    return initial
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(themeSelected))
+  }, [themeSelected])
+
+  return [themeSelected, setThemeSelected]
+}
+
 const Layout = ({
   children,
   padding,
@@ -43,12 +61,18 @@ const Layout = ({
   profileImageUrl,
   name,
 }) => {
-  const [theme, setTheme] = useState(darkTheme)
+  const [theme, setTheme] = useLocalState('dark-theme', true)
+  const [themeSelected, setThemeSelected] = useState(theme ? darkTheme : Theme)
+
+  useEffect(() => {
+    theme ? setThemeSelected(darkTheme) : setThemeSelected(Theme)
+  }, [theme])
+
   const pathname =
     typeof window !== 'undefined' ? window?.location?.pathname : ''
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeSelected}>
       <CssBaseline>
         <LayoutContainer padding={padding}>
           <BackgroundNavBar backgroundImage={backgroundImage} height={height}>

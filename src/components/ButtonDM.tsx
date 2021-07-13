@@ -26,11 +26,7 @@ const ButtonDM = ({ theme, setTheme }) => {
   const classes = useStyle()
 
   const toggleTheme = () => {
-    if (theme === Theme) {
-      setTheme(darkTheme)
-    } else {
-      setTheme(Theme)
-    }
+    setTheme(!theme)
   }
   return (
     <IconButton onClick={toggleTheme} className={classes.root} color="primary">
