@@ -1,14 +1,16 @@
 import axios from 'axios'
-import axiosRateLimit from 'axios-rate-limit'
+// import axiosRateLimit from 'axios-rate-limit'
+import urlJoin from 'url-join'
 import config from '../../config'
 
+const ROOT = urlJoin(config.API_URL, '/opensea')
 
-const ROOT = `${config.API_URL || 'http://localhost:3000/v1'}/opensea`
+const http = axios
 
-const http = axiosRateLimit(axios.create(), {
-  maxRequests: 2,
-  perMilliseconds: 1000,
-})
+// const http = axiosRateLimit(axios.create(), {
+//   maxRequests: 2,
+//   perMilliseconds: 1000,
+// })
 
 const get = async (url, queryParams = {}) => {
   return await http.get(url, { params: queryParams })
