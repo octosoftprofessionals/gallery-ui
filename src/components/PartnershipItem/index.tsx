@@ -6,7 +6,7 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 import { deltaTime, timeFormat, isTypeVideo } from '../../Utils/index'
 import { GalleryItem } from '../../services/gallery'
 import { Box } from '@material-ui/core'
-import { artworkPathFrom } from '../../config/routes'
+import { artworkPathFrom, profilePathFromUsername } from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -88,7 +88,7 @@ const PartnershipItem = ({
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
 
-  const CreatorInfo = ({ username, imageUrl }) => {
+  const CreatorInfo = ({ address, username, imageUrl }) => {
     const classes = useStyle()
     return (
       <div className={classes.containerAvatar}>
@@ -126,7 +126,7 @@ const PartnershipItem = ({
             <div className={classes.img} />
           )}
         </Box>
-        <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
+        <Link to={profilePathFromAddress(address)} className={classes.link}>
           <div className={classes.infoCard}>
             <Typography variant="h5" color="primary">
               <Truncate lines={2}>{title}</Truncate>
