@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
+import { Grid, Hidden } from '@material-ui/core'
 
-import ConstructionImg from '../assets/Under-construction-SC.svg'
+import ConstructionImg from '../assets/Under-construction-SChief.svg'
+import ConstructionImgMobile from '../assets/Under-construction-mobile-SC.svg'
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -26,7 +27,15 @@ const Construction = () => {
       justify="center"
       className={classes.root}
     >
-      <ConstructionImg className={classes.img} />
+      <Hidden smDown>
+        <ConstructionImg className={classes.img} />
+      </Hidden>
+      <Hidden smUp>
+        <ConstructionImgMobile className={classes.img} />
+      </Hidden>
+      <Hidden mdUp>
+        <ConstructionImg className={classes.img} />
+      </Hidden>
     </Grid>
   )
 }
