@@ -5,7 +5,11 @@ import { Grid } from '@material-ui/core'
 import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
-import { artworkPathFrom, profilePathFromAddress } from '../config/routes'
+import {
+  artworkPathFrom,
+  profilePathFromAddress,
+  biddingPathFrom,
+} from '../config/routes'
 
 import CreatorButton from './CreatorButton'
 import { GalleryItem } from '../services/gallery'
@@ -64,6 +68,7 @@ const HeroAuction = ({
 
   const artworkPath = artworkPathFrom(assetContractAddress, assetTokenId)
   const creatorPath = profilePathFromAddress(creatorAddress)
+  const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
 
   return (
     <div className={classes.root}>
@@ -87,7 +92,6 @@ const HeroAuction = ({
                   className={classes.video}
                   muted={true}
                 >
-                  {/* <source src={videoUrl} /> */}
                   <img src={imageUrl} />
                 </video>
               </div>
@@ -107,7 +111,7 @@ const HeroAuction = ({
                 imageUrl={creatorImageUrl}
                 profileUrl={creatorPath}
                 top="-70px"
-                link={`/creator/?id=${creatorUsername}`}
+                link={creatorPath}
               />
 
               <HeroAuctionItem
@@ -116,7 +120,7 @@ const HeroAuction = ({
                 priceUsd={priceUsd}
                 expiration={expiration}
                 linkButtonArtWork={artworkPath}
-                linkButtonBid="#"
+                linkButtonBid={biddingLink}
                 isLoading={isLoading}
               />
             </Grid>
