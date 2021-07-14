@@ -49,7 +49,7 @@ const EmptyAccount = ({
       : null}
       {showExploreButton ? <>
         <Box height={16} />
-        <Button className={classes.button} variant="outlined" disableElevation>
+        <Button className={classes.button} variant="outlined" disableElevation href="/">
           <Typography variant="button">Explore</Typography>
         </Button>
       </> : null}
