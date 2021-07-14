@@ -71,8 +71,10 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const InfoCreator = ({
-  name,
+  isMyAccount = false,
   username,
+  publicKey,
+  // name,
   followers,
   following,
   followedes,
@@ -80,8 +82,6 @@ const InfoCreator = ({
   // bio,
   // createdAt,
   userIndex = null,
-  publicKey,
-  type,
 }) => {
   const classes = useStyle()
   // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
@@ -123,9 +123,9 @@ const InfoCreator = ({
           </Typography>
         </Button>
       </Grid>
-      <Typography variant="h4" color="primary">
+      {/* <Typography variant="h4" color="primary">
         {name}
-      </Typography>
+      </Typography> */}
       <Typography
         variant="subtitle2"
         className={classes.userName}
@@ -150,7 +150,7 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={12} sm={5}>
           <Button variant="outlined" fullWidth>
-            {type === 'account' ? (
+            {isMyAccount ? (
               <Typography variant="button">Edit Profile</Typography>
             ) : (
               <Typography variant="button">Follow</Typography>
@@ -158,7 +158,7 @@ const InfoCreator = ({
           </Button>
         </Grid>
       </Grid>
-      {type === 'account' ? null : (
+      {isMyAccount ? null : (
         <>
           {' '}
           <Typography variant="button" color="primary">

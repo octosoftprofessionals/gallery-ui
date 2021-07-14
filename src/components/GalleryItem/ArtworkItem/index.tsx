@@ -5,10 +5,11 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
+import { GalleryItem } from '../../../services/gallery'
+import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
-import { GalleryItem } from '../../../services/gallery'
-import { artworkPathFrom } from '../../../config/routes'
+
 import CreatorInfo from './CreatorInfo'
 
 const useStyle = makeStyles(Theme => ({
@@ -51,22 +52,25 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const ArtworkItem = ({
-  galleryItem: {
+  galleryItem = {},
+  ...rootProps
+}: {
+  galleryItem: GalleryItem | undefined
+}) => {
+  const {
     title,
     imageUrl,
     videoUrl,
     assetContractAddress,
     assetTokenId,
+    creatorAddress,
     creatorUsername,
     creatorImageUrl,
     status,
     priceEth,
     expiration,
-  } = {},
-  ...rootProps
-}: {
-  galleryItem: GalleryItem | undefined
-}) => {
+  } = galleryItem
+
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
 
@@ -109,7 +113,7 @@ const ArtworkItem = ({
           )}
         </Box>
       </Link>
-      <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
+      <Link to={profilePathFromAddress(creatorAddress)} className={classes.link}>
         <div className={classes.infoCard}>
           <Typography variant="h6" color="primary">
             <Truncate lines={2}>{title}</Truncate>

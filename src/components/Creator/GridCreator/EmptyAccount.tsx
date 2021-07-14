@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography, Button } from '@material-ui/core'
+import { Box, Button, Grid, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -29,19 +29,30 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const EmptyAccount = () => {
+const EmptyAccount = ({
+  primaryText = 'Nothing to see here.',
+  secondaryText = null,
+  showExploreButton = false,
+}) => {
   const classes = useStyle()
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Typography className={classes.text}>
-        Your collection is empty.
-      </Typography>
-      <Typography className={classes.textSecondary}>
-        Start building your collection by placing bids on artwork.
-      </Typography>
-      <Button className={classes.button} variant="outlined" disableElevation>
-        <Typography variant="button">Explore</Typography>
-      </Button>
+      {primaryText != null ?
+        <Typography className={classes.text}>
+          {primaryText}
+        </Typography>
+      : null}
+      {secondaryText != null ?
+        <Typography className={classes.textSecondary}>
+          {secondaryText}
+        </Typography>
+      : null}
+      {showExploreButton ? <>
+        <Box height={16} />
+        <Button className={classes.button} variant="outlined" disableElevation>
+          <Typography variant="button">Explore</Typography>
+        </Button>
+      </> : null}
     </Grid>
   )
 }
