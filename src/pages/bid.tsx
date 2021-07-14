@@ -4,14 +4,16 @@ import { useQuery } from 'react-query'
 import Layout from '../components/Layout'
 import Bid from '../components/Bid'
 
-import { getHeroArtwork } from '../services/autionsService'
 import useQueryParams from '../hooks/useQueryParams'
 import { galleryItemQuery } from '../services/gallery'
 
 const BidPage = () => {
   const { contractAddress, tokenId } = useQueryParams()
   const { data: galleryItem } = useQuery('artworkQuery', () =>
-    galleryItemQuery({ assetContractAddress: contractAddress, assetTokenId: tokenId })
+    galleryItemQuery({
+      assetContractAddress: contractAddress,
+      assetTokenId: tokenId,
+    })
   )
 
   return (
