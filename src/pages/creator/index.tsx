@@ -4,9 +4,10 @@ import { useMetamaskAccount } from '../../atom'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
-import { createdItemsQuery } from '../../services/gallery'
+import { getProfileCreatedItemsByAddress } from '../../services/gallery'
 
 import useQueryParams from '../../hooks/useQueryParams'
+import { useQuery } from 'react-query'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -20,17 +21,22 @@ const CreatorPage = () => {
   const { address: address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const { data: creatorQuery, isLoading } = useQuery('createdItemsQuery', () =>
-    createdItemsQuery({ address })
+  const {
+    data: creatorQuery,
+    isLoading,
+    status,
+  } = useQuery('getProfileCreatedItemsByAddress', () =>
+    getProfileCreatedItemsByAddress(address)
   )
   console.log('creatorQuery :>> ', creatorQuery)
   console.log('address :>> ', address)
+  console.log('status :>> ', status)
   return (
     <Layout padding="0" marginTop="0" height>
       <Creator
-        isMyAccount={isMyAccount}
-        username={creatorId}
-        address={creatorAddress}
+        isMyAccount={false}
+        username={'Agus'}
+        address={address}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
       />
