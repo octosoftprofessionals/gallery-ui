@@ -1,4 +1,10 @@
 import React from 'react'
+
+import { useMutation } from 'react-query'
+import { createFollow } from '../../../services/follow'
+import useQueryParams from '../../../hooks/useQueryParams'
+// import axios from 'axios'
+
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Avatar,
@@ -69,6 +75,13 @@ const useStyle = makeStyles(Theme => ({
   textDate: { textTransform: 'capitalize' },
 }))
 
+//Fake mockup data just to send something and check that route is working properly
+const mockUpData = {
+  user_name: "Roger",
+  artist_name: "@MetaDrillMinter",
+  artist_id: 1
+}
+
 const InfoCreator = ({
   name,
   username,
@@ -83,6 +96,25 @@ const InfoCreator = ({
   type,
 }) => {
   const classes = useStyle()
+  // https://react-query.tanstack.com/guides/mutations
+  // 1st attempt)
+  //const mutation = useMutation(newFollow => axios.post('http://localhost:3000/v1/follow', newFollow))
+  //2nd attempt)
+  // const mutation = useMutation(createFollow)
+
+  //3rd attempt)
+  const mutation = useMutation( newFollow => createFollow())
+
+  // How can I pass the user_name, artist_name and artist_id into the mutation?
+  //Try with useQueryParams? VBut doesn't make sense, because this is not comming/going from PARAMS, but from BODY (req.body on original route at server)...
+  const { user_name, artist_name, artist_id } = useQueryParams()
+  //Still, doesn't work. This error arise:
+  /*
+  error: el valor nulo en la columna «user_name» de la relación «follow» viola la restricción de no nulo
+  Is like
+  */
+
+
   const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
   const year = new Date(createdAt).getFullYear()
 
@@ -148,12 +180,21 @@ const InfoCreator = ({
           </Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Button variant="outlined" fullWidth>
-            {type === 'account' ? (
-              <Typography variant="button">Edit Profile</Typography>
-            ) : (
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => {
+               mutation.mutate({user_name: mockUpData.user_name, artist_name: mockUpData. artist_name, artist_id: mockUpData.artist_id}) //What should I pass here? Passing fake data just to check.
+             }}
+          >
+            {mutation.isError ? (
+             <div>An error occurred: {mutation.error.message}</div>
+           ) : null}
+
+           {mutation.isSuccess ? <div>Mutation able to add!</div> : null}
+
               <Typography variant="button">Follow</Typography>
-            )}
+
           </Button>
         </Grid>
       </Grid>
