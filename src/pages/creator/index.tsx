@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
+import { useMetamaskAccount } from '../../atom'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
-
 import useQueryParams from '../../hooks/useQueryParams'
 
 const linkShareTwitter = () => {
@@ -14,11 +14,13 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
-  const { id: creatorId, address: creatorAddress } = useQueryParams()
+  const { id: creatorId, address: creatorAddress = '' } = useQueryParams()
 
-  // TODO
-  // const { isMyAccount = false } = useAccount()
-  const isMyAccount = false
+  // TODO: if creatorAddress is invalid, show not found or redirect
+  // ...
+
+  const accountAddress = useMetamaskAccount()
+  const isMyAccount = (typeof accountAddress === 'string') && (creatorAddress.toLowerCase() === accountAddress.toLowerCase())
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
