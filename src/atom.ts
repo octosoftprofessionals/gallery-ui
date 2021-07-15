@@ -7,7 +7,7 @@ import {
 
 import { MetamaskAccountType } from './types'
 
-const metamaskAccount = atom<MetamaskAccountType>({
+export const metamaskAccount = atom<MetamaskAccountType>({
   key: 'account',
   default: {},
 })

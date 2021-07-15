@@ -84,7 +84,6 @@ const ShowArtwork = () => {
     })
   )
   const isLoading = status === 'loading'
-  console.log('ShowArtwork loading:', isLoading)
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 

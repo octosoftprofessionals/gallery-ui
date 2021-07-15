@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import BidMessages from './BidMessages'
 import EthSvg from '../../assets/eth.svg'
 import { formatDecimal, formatUsd } from '../../Utils'
+import { colors } from '../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.MuiOutlinedInput-input': {
+      color: colors.Nero,
+    },
+  },
   root: {
     position: 'relative',
   },
   boxInput: {
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: 'black',
     borderRadius: 16,
     padding: 0,
   },
@@ -20,13 +26,20 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.shape.borderRadius[2],
     fontFamily: Theme.typography.fontFamily[1],
     fontSize: Theme.typography.fontSize[10],
+    backgroundColor: Theme.palette.primary.contrastText,
   },
   boxBalance: {
     backgroundColor: Theme.palette.primary.light,
     borderRadius: Theme.shape.borderRadius[2],
     padding: Theme.spacing(7, 7, 7, 9),
   },
-  textBalance: { fontSize: Theme.typography.fontSize[3], cursor: 'default' },
+  textBalance: {
+    fontSize: Theme.typography.fontSize[3],
+    cursor: 'default',
+  },
+  valueBalance: {
+    color: colors.Black,
+  },
   buttonBid: {
     backgroundColor: Theme.palette.primary.dark,
     marginTop: 50,
@@ -46,6 +59,7 @@ const useStyle = makeStyles(Theme => ({
     padding: 0,
   },
   icon: { marginLeft: Theme.spacing(3) },
+  textEth: { color: Theme.palette.primary.light },
 }))
 
 const Bids = ({ priceEth, priceUsd, balance }) => {
@@ -93,7 +107,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             value={bidAmounts}
             className={classes.input}
           />
-          <Typography variant="h4" color="secondary">
+          <Typography variant="h4" className={classes.textEth}>
             ETH
           </Typography>
           <EthSvg className={classes.icon} />
@@ -109,8 +123,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           </Typography>
           <Typography
             variant="caption"
-            color="primary"
-            className={classes.textBalance}
+            className={[classes.textBalance, classes.valueBalance]}
           >
             {`${balance} ETH`}
           </Typography>
@@ -137,7 +150,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             Place a Bid
           </Typography>
         </Button>
-        <BidMessages setOpen={setOpen} open={open} />
+        {/* <BidMessages setOpen={setOpen} open={open} /> */}
       </Grid>
     </Grid>
   )

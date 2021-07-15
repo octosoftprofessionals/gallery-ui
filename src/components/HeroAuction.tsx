@@ -5,7 +5,11 @@ import { Grid } from '@material-ui/core'
 import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
-import { artworkPathFrom, biddingPathFrom, profilePathFromAddress } from '../config/routes'
+import {
+  artworkPathFrom,
+  profilePathFromAddress,
+  biddingPathFrom,
+} from '../config/routes'
 
 import CreatorButton from './CreatorButton'
 import { GalleryItem } from '../services/gallery'
@@ -88,7 +92,6 @@ const HeroAuction = ({
                   className={classes.video}
                   muted={true}
                 >
-                  {/* <source src={videoUrl} /> */}
                   <img src={imageUrl} />
                 </video>
               </div>
