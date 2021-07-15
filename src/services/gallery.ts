@@ -74,10 +74,31 @@ export const featuredItemsQuery = async (queryParams = {}) => {
 
 export const galleryItemQuery = async ({
   assetContractAddress,
-  assetTokenId }) => {
+  assetTokenId,
+}) => {
   const url = `${ROOT}/gallery/gallery-item/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
   const galleryItem = res.data ?? {}
   return galleryItem
 }
 
+export const accountProfileQuery = async ({ address }) => {
+  const url = `${ROOT}/gallery/profile/${address}/account`
+  const res = await get(url)
+  const accountProfile = res.data ?? {}
+  return accountProfile
+}
+
+export const createdItemsQuery = async ({ address }) => {
+  const url = `${ROOT}/gallery/profile/${address}/created-items`
+  const res = await get(url)
+  const createdItems = res.data ?? {}
+  return createdItems
+}
+
+export const ownedItemsQuery = async ({ address }) => {
+  const url = `${ROOT}/gallery/profile/${address}/owned-items`
+  const res = await get(url)
+  const ownedItems = res.data ?? {}
+  return ownedItems
+}
