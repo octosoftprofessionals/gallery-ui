@@ -26,18 +26,52 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
+// save metamask account value on localStorage
+function useLocalState(key, initial) {
+  const [storedAccount, setStoredAccount] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = window.localStorage.getItem(key)
+      if (saved !== null) {
+        return JSON.parse(saved)
+      }
+    }
+    return initial
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(storedAccount))
+  }, [storedAccount])
+
+  const setAccount = account => {
+    try {
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        account instanceof Function ? account(storedAccount) : account
+      // Save state
+      setStoredAccount(valueToStore)
+      // Save to local storage
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error)
+    }
+  }
+  return [storedAccount, setAccount]
+}
+
 const ConnectWalletModal = ({
   handleCloseConnectWalletModal,
   setRedirectModal,
 }) => {
   const classes = useStyle()
-  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
-  const [ethereumAccount, setEthereumAccount] = useState(null)
 
   const setMetamaskAccount = useSetMetamaskAccount()
-
-  // TODO use to get the user account where needed
   const metamaskAccount = useMetamaskAccount()
+
+  const [value, setValue] = useLocalState('metamask-account', 'disconect')
+
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
+  const [ethereumAccount, setEthereumAccount] = useState(null)
 
   useEffect(() => {
     checkMetaMaskConnected()
@@ -52,16 +86,20 @@ const ConnectWalletModal = ({
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       handleCloseConnectWalletModal()
 
-      //account will be needed in the future
+      setValue({ acount: accounts[0] })
       setEthereumAccount(accounts[0])
-      setMetamaskAccount(accounts[0])
+      //recoil state
+      setMetamaskAccount(() => accounts[0])
+
       return
     } else {
       handleCloseConnectWalletModal()
       setRedirectModal(true)
     }
+
     setEthereumAccount(false)
   }
+
   const termsOfService = '/termsOfService'
   const privacyPolicity = '/privacyPolicity'
   const aboutWallets =
@@ -125,7 +163,7 @@ const ConnectWalletModal = ({
               }}
               className={classes.button}
               endIcon
-              onClick={() => handleConnection()}
+              onClick={handleConnection}
             >
               <Typography variant="caption" color="secondary">
                 Metamask
