@@ -23,7 +23,7 @@ const ButtonConnectWallet = ({ pathname }) => {
   }
   return (
     <>
-      <Grid container xs={3} justify="flex-end">
+      <Grid item>
         <Button
           variant="contained"
           className={classes.btnGreen}

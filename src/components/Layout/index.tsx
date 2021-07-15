@@ -4,7 +4,6 @@ import { CssBaseline } from '@material-ui/core'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import ButtonDM from '../ButtonDM'
-import { useMetamaskAccount } from '../../atom'
 import { Theme, darkTheme } from '../Styles'
 import './Layout.css'
 
@@ -63,7 +62,6 @@ const Layout = ({
 }) => {
   const [theme, setTheme] = useLocalState('dark-theme', true)
   const [themeSelected, setThemeSelected] = useState(theme ? darkTheme : Theme)
-  const metamaskAccount = useMetamaskAccount()
 
   useEffect(() => {
     theme ? setThemeSelected(darkTheme) : setThemeSelected(Theme)

@@ -3,16 +3,13 @@ import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import Navigator from './Navigator'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import {
   AppBar,
   Grid,
   Toolbar,
-  Typography,
   withWidth,
   Hidden,
   IconButton,
-  SwipeableDrawer,
 } from '@material-ui/core'
 
 import logoSrc from '../../../assets/logoNew.png'
@@ -23,6 +20,8 @@ import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
 import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
+
+import { useLocalState } from '../../../hooks/localStoreHook'
 
 const { boxShadow1 } = boxShadow
 
@@ -99,7 +98,7 @@ const useStyles = makeStyles(Theme => ({
   },
   drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
   logo: {
-    display: ({}) => (Theme.palette.type === 'dark' ? 'none' : 'block'),
+    display: Theme.palette.type === 'dark' ? 'none' : 'block',
     width: 150,
     height: 150,
     '@media (max-width: 576px)': {
@@ -129,32 +128,30 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
+  const [metamaskAccount, setValue] = useLocalState('metamask-account', null)
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar className={classes.root}>
           <Grid
             container
-            justify={
-              pathname === '/bid' || pathname === '/account'
-                ? 'space-between'
-                : 'space-around'
-            }
+            justify="space-between"
             alignItems="center"
             className={classes.nav}
           >
-            <Grid item xs={3} justify="center">
+            <Grid item>
               <Link to="/" className={classes.link}>
                 <LogoDarkSrc className={classes.logoDark} />
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
-            <Grid justify="center">
+
+            <Grid item>
               <Navigator pathname={pathname} />
             </Grid>
 
             <Hidden smDown>
-              {pathname === '/bid' || pathname === '/account' ? (
+              {metamaskAccount ? (
                 <LoggedButton profileImageUrl={profileImageUrl} name={name} />
               ) : (
                 <ButtonConnectWallet pathname={pathname} />
