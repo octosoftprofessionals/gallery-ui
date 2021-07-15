@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useQuery } from 'react-query'
+import useQueryParams from '../../hooks/useQueryParams'
 import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import GalleryItem from '../GalleryItem'
 import ArtworkItem from '../GalleryItem/ArtworkItem'
+
+import { getArtworkByExhibitionId } from '../../services/exhibition'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
@@ -11,6 +15,15 @@ const useStyle = makeStyles(Theme => ({
 
 const GalleryExhibition = ({ isLoading, data = [] }) => {
   const classes = useStyle()
+  const { exhibitionId } = useQueryParams()
+  const[id, setId] = useState(1);
+
+  const {
+      data: getArtworks = {},
+      status: statusgetArtworkByExhibitionId,
+    } = useQuery('getArtworkByExhibitionId', () => getArtworkByExhibitionId({exhibitionId:exhibitionId}))
+
+    console.log("get Artworks :>>", getArtworks)
 
   const Loading = () => (
     <Box

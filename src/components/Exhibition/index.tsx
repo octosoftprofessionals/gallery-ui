@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Paper, Button } from '@material-ui/core'
 
 import { featuredItemsQuery } from '../../services/gallery'
+
+import { getAllExhibitions } from '../../services/exhibition'
+
 import GalleryExhibition from './GalleryExhibition'
 import useQueryParams from '../../hooks/useQueryParams'
 
@@ -58,28 +61,18 @@ const imgUrls = [
   'https://i.pinimg.com/originals/7f/08/52/7f0852baa4ec65a696b2a54c833215d4.jpg',
 ]
 
-const collectionTitles = [
-  'Shapes in Art',
-  'Art 101',
-  'Superchief Collections',
-  'Ashes to Ashes',
-  'Play the Game',
-  'Shapes in Art',
-  'Art 101',
-  'Superchief Collections',
-  'Ashes to Ashes',
-  'Play the Game',
-]
-
 const Exhibition = () => {
   const classes = useStyles({ imageUrl: imgUrls })
-  const { contractAddress, tokenId } = useQueryParams()
+  const { exhibitionid } = useQueryParams()
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const {
-    data: featuredItems = [],
-    isLoading,
-    status: statusFeaturedItemsQuery,
-  } = useQuery('featuredItemsQuery', featuredItemsQuery)
+  const [showGallery, setShowGallery] = useState(false)
+
+    const {
+      data: allExhibitions = [],
+      isLoading,
+      status: statusGetAllExhibitions,
+    } = useQuery('getAllExhibitions', getAllExhibitions)
+
   return (
     <Grid container justify="center">
       <Typography className={classes.title} variant="h5" color="primary">
@@ -92,20 +85,23 @@ const Exhibition = () => {
               Collections
             </Typography>
             <div className={classes.containerButtons}>
-              {collectionTitles.map(title => {
+              {!isLoading && allExhibitions.data.map(({title}) => {
                 return (
                   <Button
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={[classes.img, classes.button]}
+                    onClick={() => setShowGallery(true)}
                   >
                     <Typography
                       className={classes.typographyButton}
                       variant="caption"
                       color="textSecondary"
+                      key={title}
                     >
                       {title}
+
                     </Typography>
                   </Button>
                 )
@@ -113,9 +109,13 @@ const Exhibition = () => {
             </div>
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={9} className={classes.containerGallery}>
-          <GalleryExhibition isLoading={isLoading} data={featuredItems} />
-        </Grid>
+        {
+
+          // !isLoading && allExhibitions.data.lenght > 0 && showGallery &&
+          <Grid item xs={12} sm={9} className={classes.containerGallery}>
+            <GalleryExhibition isLoading={isLoading} data={allExhibitions.data} />
+          </Grid>
+        }
       </Grid>
     </Grid>
   )
