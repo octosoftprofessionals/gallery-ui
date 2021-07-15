@@ -81,7 +81,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
     >
       <Grid item xs={12}>
         <Typography variant="h4" color="primary">
-          Pleace a bid
+          Place a bid
         </Typography>
       </Grid>
       <Grid item xs={12} container direction="column">

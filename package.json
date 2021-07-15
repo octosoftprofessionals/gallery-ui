@@ -39,7 +39,8 @@
     "react-query": "^3.13.12",
     "react-truncate": "^2.4.0",
     "recoil": "^0.3.1",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "url-join": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^14.17.3",

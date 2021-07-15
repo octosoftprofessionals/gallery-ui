@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
-
-import { getCreator } from '../../services/autionsService'
 
 import useQueryParams from '../../hooks/useQueryParams'
 
@@ -17,21 +14,22 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
-  const { id: creatorId } = useQueryParams()
+  const { id: creatorId, address: creatorAddress } = useQueryParams()
+
+  // TODO
+  // const { isMyAccount = false } = useAccount()
+  const isMyAccount = false
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const { data: creatorQuery, isLoading } = useQuery(
-    'CreatorQuery',
-    async () => await getCreator({ creatorId })
-  )
 
   return (
-    <Layout padding="0" marginTop="0" height backgroundImage={''}>
+    <Layout padding="0" marginTop="0" height>
       <Creator
+        isMyAccount={isMyAccount}
+        username={creatorId}
+        address={creatorAddress}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
-        isLoading={isLoading}
-        creatorQuery={creatorQuery}
       />
     </Layout>
   )

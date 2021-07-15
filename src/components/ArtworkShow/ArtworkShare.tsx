@@ -86,7 +86,6 @@ const ArtworkShare = ({
   linkTwitter,
   setDisplayReportModal,
   right,
-  account,
 }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
@@ -189,14 +188,12 @@ const ArtworkShare = ({
         <Button onClick={handleClickReport} className={classes.buttonReport}>
           <MoreHorizIcon className={classes.icon} />
         </Button>
-        {!account ? (
-          <Button onClick={handleClick} className={classes.button}>
-            <ArrowUpwardIcon className={classes.icon} />
-            <Hidden xsDown>
-              <Typography className={classes.text}>Share</Typography>
-            </Hidden>
-          </Button>
-        ) : null}
+        <Button onClick={handleClick} className={classes.button}>
+          <ArrowUpwardIcon className={classes.icon} />
+          <Hidden xsDown>
+            <Typography className={classes.text}>Share</Typography>
+          </Hidden>
+        </Button>
       </Grid>
     </Grid>
   )

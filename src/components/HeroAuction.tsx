@@ -67,8 +67,8 @@ const HeroAuction = ({
   const classes = useStyle()
 
   const artworkPath = artworkPathFrom(assetContractAddress, assetTokenId)
+  const biddingPath = biddingPathFrom(assetContractAddress, assetTokenId)
   const creatorPath = profilePathFromAddress(creatorAddress)
-  const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
 
   return (
     <div className={classes.root}>
@@ -111,7 +111,6 @@ const HeroAuction = ({
                 imageUrl={creatorImageUrl}
                 profileUrl={creatorPath}
                 top="-70px"
-                link={creatorPath}
               />
 
               <HeroAuctionItem
@@ -120,7 +119,7 @@ const HeroAuction = ({
                 priceUsd={priceUsd}
                 expiration={expiration}
                 linkButtonArtWork={artworkPath}
-                linkButtonBid={biddingLink}
+                linkButtonBid={biddingPath}
                 isLoading={isLoading}
               />
             </Grid>

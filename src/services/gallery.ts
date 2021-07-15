@@ -1,5 +1,6 @@
 import axios from 'axios'
-import axiosRateLimit from 'axios-rate-limit'
+// import axiosRateLimit from 'axios-rate-limit'
+import urlJoin from 'url-join'
 import config from '../config'
 
 // Types
@@ -54,51 +55,47 @@ export type GalleryItem = {
   // - all bids
 }
 
-const ROOT = config.API_URL || 'http://localhost:3000/v1'
+const ROOT = urlJoin(config.API_URL, '/gallery')
 
-const http = axiosRateLimit(axios.create(), {
-  maxRequests: 5,
-  perMilliseconds: 1000,
-})
+const http = axios
+// const http = axiosRateLimit(axios.create(), {
+//   maxRequests: 5,
+//   perMilliseconds: 1000,
+// })
 
 const get = async (url, queryParams = {}) => {
   return await http.get(url, { params: queryParams })
 }
 
 export const featuredItemsQuery = async (queryParams = {}) => {
-  const url = `${ROOT}/gallery/featured-items`
+  const url = `${ROOT}/featured-items`
   const res = await get(url, queryParams)
-  const itemsQuery = res.data ?? []
-  return itemsQuery
+  return res.data ?? []
 }
 
 export const galleryItemQuery = async ({
   assetContractAddress,
   assetTokenId,
 }) => {
-  const url = `${ROOT}/gallery/gallery-item/${assetContractAddress}/${assetTokenId}`
+  const url = `${ROOT}/gallery-item/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
-  const galleryItem = res.data ?? {}
-  return galleryItem
+  return res.data ?? {}
 }
 
-export const accountProfileQuery = async ({ address }) => {
-  const url = `${ROOT}/gallery/profile/${address}/account`
+export const getProfileAccountByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/account`
   const res = await get(url)
-  const accountProfile = res.data ?? {}
-  return accountProfile
+  return res.data ?? {}
 }
 
-export const createdItemsQuery = async ({ address }) => {
-  const url = `${ROOT}/gallery/profile/${address}/created-items`
+export const getProfileCreatedItemsByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/created-items`
   const res = await get(url)
-  const createdItems = res.data ?? {}
-  return createdItems
+  return res.data ?? []
 }
 
-export const ownedItemsQuery = async ({ address }) => {
-  const url = `${ROOT}/gallery/profile/${address}/owned-items`
+export const getProfileOwnedItemsByAddress = async (address: string) => {
+  const url = `${ROOT}/profile/${address}/owned-items`
   const res = await get(url)
-  const ownedItems = res.data ?? {}
-  return ownedItems
+  return res.data ?? []
 }

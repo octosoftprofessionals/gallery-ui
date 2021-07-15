@@ -1,32 +1,59 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
-import { Grid } from '@material-ui/core'
+import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import GalleryItem from '../../GalleryItem'
+import ArtworkItem from '../../../components/GalleryItem/ArtworkItem'
+import { GalleryItem } from '../../../services/gallery'
+
+import EmptyAccount from './EmptyAccount'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
 }))
 
-const Gallery = ({ artworksQuery, itemType }) => {
-  const { artworks } = artworksQuery ? artworksQuery : []
+const Gallery = ({ emptyMessageProps, queryName, queryFunction }: { emptyMessageProps: Record<string, any>, queryName: string, queryFunction: () => Promise<GalleryItem[]> }) => {
+  const { data: galleryItems = [], isLoading } = useQuery(queryName, queryFunction)
   const classes = useStyle()
+
+  const Loading = () => (
+    <Box
+      width="100%"
+      height="60vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <CircularProgress />
+    </Box>
+  )
+
+  if (!isLoading && galleryItems.length === 0) {
+    return (
+      <Box style={{ padding: 48 }}>
+        <EmptyAccount {...emptyMessageProps} />
+      </Box>
+    )
+  }
+
   return (
-    <Grid container direction="row" justify="space-between" wrap="wrap">
-      {artworks
-        ? artworks.map((artwork, index) => (
+    isLoading ? (
+      <Loading />
+    ) : (
+      <Grid container direction="row" justify="space-between" wrap="wrap">
+        {galleryItems
+          ? galleryItems.map((galleryItem, index) => (
             <Grid item xs={12} sm={6} md={5} className={classes.containerItem}>
-              <GalleryItem
+              <ArtworkItem
                 key={index}
-                itemType={itemType}
-                artwork={artwork}
-                link={`/artwork?id=${artwork.id}`}
+                galleryItem={galleryItem}
               />
             </Grid>
           ))
         : ''}
-    </Grid>
+      </Grid>
+    )
   )
 }
 
