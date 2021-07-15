@@ -32,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const BidMessages = ({ setOpen, open, state = null }) => {
+const BidMessages = ({ setOpen, open, state }) => {
   const classes = useStyle()
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -61,10 +61,7 @@ const BidMessages = ({ setOpen, open, state = null }) => {
     },
   }
 
-  if (state == null) {
-    return null
-  }
-
+  console.log('messages.[state]?.message :>> ', messages.[state]?.message)
   return (
     <Snackbar
       open={open}
@@ -74,11 +71,11 @@ const BidMessages = ({ setOpen, open, state = null }) => {
     >
       <Alert
         icon={false}
-        severity={messages[state]?.severity}
+        severity={messages.[state]?.severity}
         variant="filled"
         className={classes.alert}
       >
-        {messages[state]?.message}
+        {messages.[state]?.message}
       </Alert>
     </Snackbar>
   )

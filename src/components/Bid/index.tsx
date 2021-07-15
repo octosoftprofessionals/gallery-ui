@@ -16,7 +16,7 @@ const Bid = ({ galleryItem }) => {
         justify="space-around"
         alignItems="center"
       >
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={5}>
           {galleryItem ? (
             <GalleryItem itemType="artworks" data={galleryItem} />
           ) : (
