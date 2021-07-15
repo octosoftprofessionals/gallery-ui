@@ -34,7 +34,7 @@ const Navigator = ({ pathname }) => {
   const classes = useStyles({ pathname })
   return (
     <Hidden mdDown>
-      <Grid justify="center" className={classes.container}>
+      <div className={classes.container}>
         <Link to="/exhibition" className={classes.link}>
           <Button
             variant="text"
@@ -90,7 +90,7 @@ const Navigator = ({ pathname }) => {
             </Typography>
           </Button>
         </Link>
-      </Grid>
+      </div>
     </Hidden>
   )
 }
