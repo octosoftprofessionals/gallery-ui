@@ -78,6 +78,12 @@ const useStyle = makeStyles(Theme => ({
     color: colors.Aqua,
     paddingLeft: Theme.spacing(7),
     maxWidth: 500,
+    '@global': {
+      '.MuiInput-input': {
+        margin: '6px 0 7px',
+        padding: '0 5px',
+      },
+    },
   },
   suscribeBtn: {
     background: colors.Aqua,
