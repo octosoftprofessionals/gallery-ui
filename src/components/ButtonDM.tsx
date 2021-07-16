@@ -30,7 +30,7 @@ const ButtonDM = ({ theme, setTheme }) => {
   } */
   return (
     <IconButton
-      /* onClick={toggleTheme} */ className={classes.root}
+      /* onClick={toggleTheme}*/ className={classes.root}
       color="primary"
     >
       <WbIncandescentIcon className={classes.icon} />
