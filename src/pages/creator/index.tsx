@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
 
-import { useMetamaskAccount } from '../../atom'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
+
+import { getProfileAccountByAddress } from '../../services/gallery'
+
 import useQueryParams from '../../hooks/useQueryParams'
+import Spinner from '../../components/Spinner'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -14,25 +18,30 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
-  const { id: creatorId, address: creatorAddress = '' } = useQueryParams()
-
-  // TODO: if creatorAddress is invalid, show not found or redirect
-  // ...
-
-  const accountAddress = useMetamaskAccount()
-  const isMyAccount = (typeof accountAddress === 'string') && (creatorAddress.toLowerCase() === accountAddress.toLowerCase())
+  const { address: address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
+  const {
+    data: creatorQuery,
+    isLoading,
+  } = useQuery('getProfileAccountByAddress', () =>
+    getProfileAccountByAddress(address)
+  )
 
   return (
     <Layout padding="0" marginTop="0" height>
-      <Creator
-        isMyAccount={isMyAccount}
-        username={creatorId}
-        address={creatorAddress}
-        linkTwitter={linkShareTwitter()}
-        setDisplayReportModal={setDisplayReportModal}
-      />
+      {isLoading ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Creator
+          isMyAccount={false}
+          username={creatorQuery.username}
+          address={creatorQuery.address}
+          profileImageUrl={creatorQuery.profileImageUrl}
+          linkTwitter={linkShareTwitter()}
+          setDisplayReportModal={setDisplayReportModal}
+        />
+      )}
     </Layout>
   )
 }

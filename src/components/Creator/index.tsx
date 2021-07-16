@@ -145,15 +145,11 @@ const Creator = ({
   //   youtube: { handle: '', platform: 'youtube' },
   // }
 
-
   return (
     <>
       <Grid container justify="space-around" className={classes.root}>
         <Grid item className={classes.containerAvatar}>
-          <Avatar
-            src={profileImageUrl}
-            className={classes.avatar}
-          />
+          <Avatar src={profileImageUrl} className={classes.avatar} />
         </Grid>
 
         <CreatorkShare
@@ -176,14 +172,6 @@ const Creator = ({
             followers={followers}
             following={following}
             followedes={itemAvatar}
-            // name={type === 'account' ? accountName : name}
-            // name={username}
-            // username={type === 'account' ? accountUsername : username}
-            // links={type === 'account' ? accountLinks : links}
-            // bio={type === 'account' ? description : bio}
-            // createdAt={type === 'account' ? created_date : createdAt}
-            // userIndex={type === 'account' ? owner : userIndex}
-            // publicKey={type === 'account' ? address : publicKey}
           />
         </Grid>
         <Grid item xs={10} sm={12}>
