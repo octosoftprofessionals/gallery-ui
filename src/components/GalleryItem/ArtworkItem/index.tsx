@@ -23,12 +23,15 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
   infoCard: {
-    padding: Theme.spacing(9),
-    paddingBottom: `${Theme.spacing(8)}vh`,
+    padding: Theme.spacing(3, 9),
+    paddingBottom: `${Theme.spacing(9)}vh`,
     display: 'grid',
-    gridGap: Theme.spacing(9),
+    gridGap: Theme.spacing(3),
     backgroundColor: Theme.palette.card.main,
     borderRadius: Theme.spacing(0, 0, 4, 4),
+    '@media (max-width: 576px)': {
+      paddingBottom: `${Theme.spacing(6)}vh`,
+    },
   },
   link: { textDecoration: 'none' },
   containerVideo: { position: 'relative', paddingBottom: '100%' },
@@ -103,7 +106,6 @@ const ArtworkItem = ({
                   className={classes.video}
                   muted={true}
                 >
-                  {/* <source src={videoUrl} type='video/mp4; codecs="vp8, vorbis"' /> */}
                   <img src={imageUrl} />
                 </video>
               </div>
@@ -113,7 +115,10 @@ const ArtworkItem = ({
           )}
         </Box>
       </Link>
-      <Link to={profilePathFromAddress(creatorAddress)} className={classes.link}>
+      <Link
+        to={profilePathFromAddress(creatorAddress)}
+        className={classes.link}
+      >
         <div className={classes.infoCard}>
           <Typography variant="h6" color="primary">
             <Truncate lines={2}>{title}</Truncate>
