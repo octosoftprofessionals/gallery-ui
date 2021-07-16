@@ -62,13 +62,21 @@ const useStyle = makeStyles(Theme => ({
   textEth: { color: Theme.palette.primary.light },
 }))
 
+const messages = ['ok', 'outbid', 'error', 'noBid']
+
+const messagesRand = () => {
+  return messages[Math.floor(Math.random() * messages.length)]
+}
+
 const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
   const [bidAmounts, setBidAmounts] = useState()
   const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState()
 
-  const handleClick = () => () => {
+  const handleClick = () => {
     setOpen(true)
+    setMessage(() => messagesRand())
   }
 
   return (
@@ -81,7 +89,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
     >
       <Grid item xs={12}>
         <Typography variant="h4" color="primary">
-          Pleace a bid
+          Place a bid
         </Typography>
       </Grid>
       <Grid item xs={12} container direction="column">
@@ -144,13 +152,13 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           variant="text"
           color="primary"
           className={classes.buttonBid}
-          onClick={handleClick()}
+          onClick={handleClick}
         >
           <Typography variant="button" color="primary" className={classes.text}>
             Place a Bid
           </Typography>
         </Button>
-        {/* <BidMessages setOpen={setOpen} open={open} /> */}
+        <BidMessages setOpen={setOpen} open={open} state={message} />
       </Grid>
     </Grid>
   )

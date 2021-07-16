@@ -1,4 +1,5 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
 import { useMutation } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
@@ -7,11 +8,11 @@ import { Avatar, Grid } from '@material-ui/core'
 import { createFollow } from '../../services/follow'
 
 import GridCreator from './GridCreator'
-import GridCreatorAccount from './GridCreatorAccount'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
 import Spinner from '../../components/Spinner'
+import { getProfileAccountByAddress } from '../../services/gallery'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -88,55 +89,61 @@ const itemAvatar = [
 ]
 
 const Creator = ({
+  isMyAccount = false,
+  username: usernameProp,
+  address: addressProp,
+  profileImageUrl,
+  followers = 0,
+  following = 0,
   linkTwitter,
   setDisplayReportModal,
-  type,
-  isLoading,
-  creatorQuery,
-  accountQuery,
 }) => {
   const classes = useStyle()
-  const {
-    profileImageUrl,
-    name,
-    username,
-    followers,
-    following,
-    links,
-    bio,
-    createdAt,
-    userIndex,
-    publicKey,
-    // accountQuery,
-  } = creatorQuery ? creatorQuery : {}
 
-  const {
-    collection,
-    name: accountName,
-    username: accountUsername,
-    twitter_username,
-    instagram_username,
-    short_description,
-    description,
-    created_date,
-    image_url,
-    owner,
-    discord_url,
-    external_url,
-    address,
-  } = accountQuery || {}
+  // const {
+  //   profileImageUrl,
+  //   name,
+  //   username,
+  //   followers,
+  //   following,
+  //   links,
+  //   bio,
+  //   createdAt,
+  //   userIndex,
+  //   publicKey,
+  // } = creatorQuery
 
-  const accountLinks = {
-    discord: { handle: discord_url, platform: 'discord' },
-    instagram: { handle: instagram_username, platform: 'instagram' },
-    twitter: { handle: twitter_username, platform: 'twitter' },
-    website: { handle: external_url, platform: 'website' },
-    facebook: { handle: '', platform: 'facebook' },
-    snapchat: { handle: '', platform: 'snapchat' },
-    tiktok: { handle: '', platform: 'tiktok' },
-    twitch: { handle: '', platform: 'twitch' },
-    youtube: { handle: '', platform: 'youtube' },
-  }
+  // const urlCover = CreatorQuery
+  //   ? CreatorQuery?.coverImageUrl
+  //   : backgroundGradient.backgroundGradient2
+
+  // const {
+  //   collection,
+  //   name: accountName,
+  //   username: accountUsername,
+  //   twitter_username,
+  //   instagram_username,
+  //   short_description,
+  //   description,
+  //   created_date,
+  //   image_url,
+  //   owner,
+  //   discord_url,
+  //   external_url,
+  //   address,
+  // } = accountQuery
+
+  // const accountLinks = {
+  //   discord: { handle: discord_url, platform: 'discord' },
+  //   instagram: { handle: instagram_username, platform: 'instagram' },
+  //   twitter: { handle: twitter_username, platform: 'twitter' },
+  //   website: { handle: external_url, platform: 'website' },
+  //   facebook: { handle: '', platform: 'facebook' },
+  //   snapchat: { handle: '', platform: 'snapchat' },
+  //   tiktok: { handle: '', platform: 'tiktok' },
+  //   twitch: { handle: '', platform: 'twitch' },
+  //   youtube: { handle: '', platform: 'youtube' },
+  // }
 
 
   return (
@@ -144,7 +151,7 @@ const Creator = ({
       <Grid container justify="space-around" className={classes.root}>
         <Grid item className={classes.containerAvatar}>
           <Avatar
-            src={type === 'account' ? image_url : profileImageUrl}
+            src={profileImageUrl}
             className={classes.avatar}
           />
         </Grid>
@@ -153,7 +160,6 @@ const Creator = ({
           linkTwitter={linkTwitter}
           setDisplayReportModal={setDisplayReportModal}
           right="24px"
-          account={type === 'account' ? true : false}
         />
       </Grid>
       <Grid
@@ -164,26 +170,25 @@ const Creator = ({
       >
         <Grid item xs={10} md={6}>
           <InfoCreator
-            name={type === 'account' ? accountName : name}
-            username={type === 'account' ? accountUsername : username}
+            isMyAccount={isMyAccount}
+            username={usernameProp}
+            publicKey={addressProp}
             followers={followers}
             following={following}
             followedes={itemAvatar}
-            links={type === 'account' ? accountLinks : links}
-            bio={type === 'account' ? description : bio}
-            createdAt={type === 'account' ? created_date : createdAt}
-            userIndex={type === 'account' ? owner : userIndex}
-            publicKey={type === 'account' ? address : publicKey}
-            type={type}
+            // name={type === 'account' ? accountName : name}
+            // name={username}
+            // username={type === 'account' ? accountUsername : username}
+            // links={type === 'account' ? accountLinks : links}
+            // bio={type === 'account' ? description : bio}
+            // createdAt={type === 'account' ? created_date : createdAt}
+            // userIndex={type === 'account' ? owner : userIndex}
+            // publicKey={type === 'account' ? address : publicKey}
           />
         </Grid>
-        {isLoading ? (
-          <Spinner height="50vh" />
-        ) : (
-          <Grid item xs={10} sm={12}>
-            {type === 'account' ? <GridCreatorAccount /> : <GridCreator />}
-          </Grid>
-        )}
+        <Grid item xs={10} sm={12}>
+          <GridCreator isMyAccount={isMyAccount} profileAddress={addressProp} />
+        </Grid>
       </Grid>
     </>
   )
