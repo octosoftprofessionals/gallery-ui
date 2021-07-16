@@ -51,9 +51,13 @@ const useStyle = makeStyles(Theme => ({
       backgroundColor: Theme.palette.secondary.main,
     },
     '@media (max-width: 585px)': {
+      backgroundColor: Theme.palette.secondary.main,
+      transition: '0.3s all linear',
       borderRadius: Theme.shape.borderRadius[3],
       minWidth: 50,
       height: 50,
+      padding: 0,
+      position: 'relative',
     },
   },
   buttonReport: {
@@ -82,11 +86,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkShare = ({
-  linkTwitter,
-  setDisplayReportModal,
-  right,
-}) => {
+const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
 
