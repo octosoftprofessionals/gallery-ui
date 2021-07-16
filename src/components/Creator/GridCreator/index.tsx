@@ -2,14 +2,14 @@ import React from 'react'
 
 import TabBar from '../../TabBar'
 import Playlist from './../Playlist'
-import { getProfileCreatedItemsByAddress, getProfileOwnedItemsByAddress } from '../../../services/gallery'
+import {
+  getProfileCreatedItemsByAddress,
+  getProfileOwnedItemsByAddress,
+} from '../../../services/gallery'
 
 import GalleryCreator from './GalleryCreator'
 
-const GridCreator = ({
-  isMyAccount = false,
-  profileAddress,
-}) => (
+const GridCreator = ({ isMyAccount = false, profileAddress }) => (
   <TabBar
     justify="center"
     sm={9}
@@ -21,32 +21,46 @@ const GridCreator = ({
     components={[
       <GalleryCreator
         emptyMessageProps={{
-          primaryText: isMyAccount ? 'No creations. Go get busy! 🧑‍🎨' : 'Nothing to see here.',
+          primaryText: isMyAccount
+            ? 'No creations. Go get busy! 🧑‍🎨'
+            : 'Nothing to see here.',
         }}
         queryName="CreatedItemsQuery"
-        queryFunction={async () => await getProfileCreatedItemsByAddress(profileAddress)}
+        queryFunction={async () =>
+          await getProfileCreatedItemsByAddress(profileAddress)
+        }
       />,
 
       <GalleryCreator
         emptyMessageProps={{
-          primaryText: isMyAccount ? 'Your collection is empty.' : 'Nothing to see here.',
-          secondaryText: isMyAccount ? 'Start building your collection by placing bids on artwork.' : null,
+          primaryText: isMyAccount
+            ? 'Your collection is empty.'
+            : 'Nothing to see here.',
+          secondaryText: isMyAccount
+            ? 'Start building your collection by placing bids on artwork.'
+            : null,
           showExploreButton: true,
         }}
         queryName="OwnedItemsQuery"
-        queryFunction={async () => await getProfileOwnedItemsByAddress(profileAddress)}
+        queryFunction={async () =>
+          await getProfileOwnedItemsByAddress(profileAddress)
+        }
       />,
 
       <Playlist />,
 
       <GalleryCreator
         emptyMessageProps={{
-          primaryText: isMyAccount ? 'Your favorites are empty.' : 'Nothing to see here.',
-          secondaryText: isMyAccount ? 'Start building your collection by placing bids on artwork.' : null,
+          primaryText: isMyAccount
+            ? 'Your favorites are empty.'
+            : 'Nothing to see here.',
+          secondaryText: isMyAccount
+            ? 'Start building your collection by placing bids on artwork.'
+            : null,
           showExploreButton: true,
         }}
         queryName="FavoriteItemsQuery"
-        queryFunction={async () => ([])}
+        queryFunction={async () => []}
       />,
     ]}
   />

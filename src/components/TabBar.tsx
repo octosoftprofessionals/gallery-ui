@@ -12,12 +12,11 @@ const useStyle = makeStyles(Theme => ({
     marginBlockStart: `-0.1em`,
   },
   dividerPlaylist: {
-    width: '100%',
-    backgroundColor: Theme.palette.primary.main,
+    display: 'none',
   },
   button: {
     padding: Theme.spacing(2, 2),
-    borderRadius: 0,
+    borderRadius: 15,
     margin: 0,
     transform: 'none',
     '@media (max-width: 300px)': {
@@ -33,7 +32,10 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   selectButton: { borderBottom: '2px solid' },
-  selectButtonPlaylist: { backgroundColor: Theme.palette.secondary.light },
+  selectButtonPlaylist: {
+    backgroundColor: Theme.palette.secondary.light,
+  },
+  boxButton: { padding: '0 16px' },
 }))
 
 const TabBar = ({
@@ -58,14 +60,14 @@ const TabBar = ({
     >
       <Grid
         item
-        sm={3}
+        sm={6}
         {...props}
         container
         direction="row"
         justify="space-between"
       >
         {titles.map((title, index) => (
-          <Grid item sm={inSize}>
+          <Grid item sm={inSize} className={classes.boxButton}>
             <Button
               {...props}
               variant="text"
