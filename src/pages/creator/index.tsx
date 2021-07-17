@@ -18,14 +18,16 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
-  const { address: address } = useQueryParams()
+  const { address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const {
     data: creatorQuery,
     isLoading,
   } = useQuery('getProfileAccountByAddress', () =>
-    getProfileAccountByAddress(address)
+    getProfileAccountByAddress(
+      typeof address == 'string' ? address : address[0]
+    )
   )
 
   return (

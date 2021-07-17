@@ -1,6 +1,15 @@
 import BigNumber from 'bignumber.js'
 
-export const priceFromPriceData = ({ price, token } = {}) => {
+import { TokenType } from '../../types'
+
+type priceFromPriceDataProps = {
+  price?: number
+  token?: TokenType
+}
+export const priceFromPriceData = ({
+  price,
+  token,
+}: priceFromPriceDataProps = {}) => {
   if (price == null || token == null) {
     return null
   }

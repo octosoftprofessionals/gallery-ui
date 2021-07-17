@@ -2,58 +2,7 @@ import axios from 'axios'
 // import axiosRateLimit from 'axios-rate-limit'
 import urlJoin from 'url-join'
 import config from '../config'
-
-// Types
-
-enum GalleryItemStatus {
-  reserve = 'reserve',
-  listed = 'listed',
-  sold = 'sold',
-}
-
-export type GalleryItem = {
-  // identifiers
-  // contract & token reference metadata
-  assetId: string
-  assetContractAddress: string
-  assetTokenId: string
-
-  // core item metadata
-  title: string
-  description: string
-
-  // media
-  imageUrl: string
-  videoUrl?: string
-
-  // creator
-  creatorUsername: string
-  creatorImageUrl: string
-  creatorAddress: string
-
-  // owner
-  ownerUsername: string
-  ownerImageUrl: string
-  ownerAddress: string
-
-  // status
-  status: GalleryItemStatus
-
-  // price
-  priceEth?: string
-  priceUsd?: string
-
-  // history
-  historyItems: HistoryItem[]
-
-  // open offers
-  // - offers
-
-  // auction
-  expiration: string // iso8601
-  // - highest bid
-  // - all bids
-}
+import { GalleryItem, CreatorProps } from '../types'
 
 const ROOT = urlJoin(config.API_URL, '/gallery')
 
@@ -76,25 +25,31 @@ export const featuredItemsQuery = async (queryParams = {}) => {
 export const galleryItemQuery = async ({
   assetContractAddress,
   assetTokenId,
-}) => {
+}): Promise<GalleryItem> => {
   const url = `${ROOT}/gallery-item/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
   return res.data ?? {}
 }
 
-export const getProfileAccountByAddress = async (address: string) => {
+export const getProfileAccountByAddress = async (
+  address: string
+): Promise<CreatorProps> => {
   const url = `${ROOT}/profile/${address}/account`
   const res = await get(url)
   return res.data ?? {}
 }
 
-export const getProfileCreatedItemsByAddress = async (address: string) => {
+export const getProfileCreatedItemsByAddress = async (
+  address: string
+): Promise<GalleryItem[]> => {
   const url = `${ROOT}/profile/${address}/created-items`
   const res = await get(url)
   return res.data ?? []
 }
 
-export const getProfileOwnedItemsByAddress = async (address: string) => {
+export const getProfileOwnedItemsByAddress = async (
+  address: string
+): Promise<GalleryItem[]> => {
   const url = `${ROOT}/profile/${address}/owned-items`
   const res = await get(url)
   return res.data ?? []

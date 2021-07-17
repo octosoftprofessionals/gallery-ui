@@ -6,6 +6,7 @@ import Footer from './Footer'
 import ButtonDM from '../ButtonDM'
 import { Theme, darkTheme } from '../Styles'
 import './Layout.css'
+import { MetamaskAccountType } from '../../types'
 
 const LayoutContainer = styled('div')({
   padding: ({ padding }) => (padding ? padding : Theme.spacing(0, 8)),
@@ -59,7 +60,7 @@ const Layout = ({
   publicKey,
   profileImageUrl,
   name,
-}) => {
+}: Props) => {
   const [theme, setTheme] = useLocalState('dark-theme', true)
   const [themeSelected, setThemeSelected] = useState(theme ? darkTheme : Theme)
 
@@ -90,6 +91,19 @@ const Layout = ({
       </CssBaseline>
     </ThemeProvider>
   )
+}
+
+type Props = {
+  children: React.ReactNode
+  padding?: string
+  marginTop?: string
+  marginBottom?: string
+  backgroundImage?: string
+  height?: boolean
+  cois?: string
+  publicKey?: MetamaskAccountType
+  profileImageUrl?: string
+  name?: string
 }
 
 export default Layout

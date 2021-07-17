@@ -3,70 +3,9 @@ import auctionsMockup from './mockups/auctions'
 import accountInfo from './mockups/account'
 import { paginatedQuery } from '../Utils'
 import { getAssetsByCollectionSlug } from './opensea'
+import { ArtworksProps, CreatorProps, GalleryItem } from '../types'
 
-// TODO: replace with API Call
-// async function getArtworkAuctions(
-//   page: number,
-//   type: string,
-//   size: number = 12,
-// ) {
-//   const res = await auctions.get(
-//     `/auctions/${type}?offset=${page}&limit=${size}`,
-//   );
-
-//   const {data} = res;
-
-//   if (res.status === 200) {
-//     return data;
-//   } else {
-//     return Promise.reject(data);
-//   }
-// }
-
-// export async function getArtworkAuctions(
-//   page: number,
-//   type: string,
-//   size: number = 12
-// ) {
-//   return new Promise(resolve => {
-//     setTimeout(function () {
-//       resolve({
-//         content: {
-//           data: {
-//             artworks: auctionsMockup.slice(page * size, page + size),
-//           },
-//         },
-//         pageable: {
-//           sort: {
-//             sorted: false,
-//             unsorted: true,
-//             empty: true,
-//           },
-//           page: page,
-//           page_number: page,
-//           page_size: size,
-//           paged: true,
-//           unpaged: false,
-//         },
-//         last: true,
-//         total_pages: Math.floor(auctionsMockup.length / size),
-//         total_elements: auctionsMockup.length,
-//         number_of_elements: auctionsMockup.slice(page * size, page + size)
-//           .length,
-//         size: size,
-//         first: true,
-//         number: 0,
-//         sort: {
-//           sorted: false,
-//           unsorted: true,
-//           empty: true,
-//         },
-//       })
-//     }, 250)
-//   })
-// }
-
-export async function getCreators() {
+export async function getCreators(): Promise<{ creators: CreatorProps[] }> {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
@@ -95,7 +34,9 @@ export async function getArtworkAuctionsPaginated() {
   })
 }
 
-export async function getArtwork(id: String) {
+export async function getArtwork(
+  id: String
+): Promise<{ artwork: ArtworksProps }> {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
@@ -108,7 +49,9 @@ export async function getArtwork(id: String) {
   })
 }
 
-export async function getHeroArtwork(id: String) {
+export async function getHeroArtwork(
+  id: String
+): Promise<{ artwork: ArtworksProps }> {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
@@ -119,7 +62,9 @@ export async function getHeroArtwork(id: String) {
   })
 }
 
-export async function getCreator({ creatorId }) {
+export async function getCreator({
+  creatorId,
+}): Promise<{ creator: CreatorProps }> {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({
@@ -137,7 +82,9 @@ export async function getCreator({ creatorId }) {
   })
 }
 
-export async function getAccount(contractAddress: String) {
+export async function getAccount(
+  contractAddress: String
+): Promise<{ account: CreatorProps }> {
   return new Promise(resolve => {
     setTimeout(function () {
       resolve({

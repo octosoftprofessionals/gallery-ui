@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import queryString from 'query-string'
 
 import ArtworkShow from '../../components/ArtworkShow'
 import Layout from '../../components/Layout'
 import { useQuery } from 'react-query'
-import { getArtwork } from '../../services/autionsService'
-
-import { colors } from '../../components/Styles/Colors'
 
 import { galleryItemQuery } from '../../services/gallery'
 import useQueryParams from '../../hooks/useQueryParams'
@@ -88,12 +84,7 @@ const ShowArtwork = () => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
   return (
-    <Layout
-      backgroundColor={colors.WhiteSmoke}
-      padding="0"
-      marginBottom="0"
-      marginTop="24px"
-    >
+    <Layout padding="0" marginBottom="0" marginTop="24px">
       {galleryItem && !isLoading ? (
         <ArtworkShow
           galleryItem={galleryItem}

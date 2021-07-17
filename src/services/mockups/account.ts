@@ -1,3 +1,5 @@
+import { CreatorProps } from '../../types'
+
 const imgUrls = [
   'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
   'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
@@ -72,39 +74,8 @@ const randOwner = () => {
   return owner[Math.floor(Math.random() * owner.length)]
 }
 
-type account = {
-  address: String
-  created_date: String
-  name: String
-  owner: Number
-  description: String
-  external_link: String
-  image_url: String
-  username: String
-  collection: collection
-}
-
-type collection = {
-  banner_image_url: String
-  description: String
-  discord_url: String
-  external_url: String
-  safelist_request_status: String
-  image_url: String
-  short_description: String
-  telegram_url: String
-  twitter_username: String
-  instagram_username: String
-  wiki_url: String
-  display_data: imagesData
-}
-
-type imagesData = {
-  images: Array<String>
-}
-
-function fillAccount(size): account[] {
-  const account: account[] = []
+function fillAccount(size): CreatorProps[] {
+  const account: CreatorProps[] = []
   for (let i = 0; i < size; i++) {
     account.push({
       address: randAddress(),

@@ -8,41 +8,19 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-
 import { featuredItemsQuery } from '../services/gallery'
-
-// import {
-//   getArtworkAuctionsPaginated,
-//   getHeroArtwork,
-//   getCreators,
-//   getArtworkAuctions,
-//   getArtwork,
-// } from '../services/autionsService'
+import { GalleryItem } from '../types'
 
 const Home = () => {
-  // const { data: artworkAuctionsPaginated, isLoading: isArtworkLoading } = useInfiniteQuery(
-  //   'artworkAuctionsPaginated',
-  //   getArtworkAuctionsPaginated
-  // )
+  type featureItemsQueryProps = {
+    data: GalleryItem[]
+    status: 'idle' | 'error' | 'loading' | 'success'
+  }
 
-  // const { data: liveAuctionsQuery, status: statusLiveAuctionsQuery } = useQuery(
-  //   'liveAuctionsQuery',
-  //   getArtworkAuctionsPaginated
-  // )
-
-  // const { data: AuctionsQuery, status: statusAuctionsQuery } = useQuery(
-  //   'AuctionsQuery',
-  //   getArtworkAuctionsPaginated
-  // )
-  // const { data: CreatorQuery, status: statusCreatorQuery } = useQuery(
-  //   'CreatorQuery',
-  //   getCreators
-  // )
-
-  const { data: allFeaturedItems = [], status } = useQuery(
-    'FeaturedItems',
-    featuredItemsQuery
-  )
+  const {
+    data: allFeaturedItems = [],
+    status,
+  }: featureItemsQueryProps = useQuery('FeaturedItems', featuredItemsQuery)
 
   const heroItem = allFeaturedItems[0]
   const featuredItems = allFeaturedItems.filter(
@@ -51,15 +29,9 @@ const Home = () => {
 
   const listedItems = featuredItems.filter(i => i.status === 'listed')
   const reserveItems = featuredItems.filter(i => i.status === 'reserve')
-  const soldItems = featuredItems.filter(i => i.status === 'sold')
+  // const soldItems = featuredItems.filter(i => i.status === 'sold')
 
   const isLoading = status === 'loading'
-
-  // <GalleryItem
-  //   key={index}
-  //   itemType={itemType}
-  //   artwork={artwork}
-  // />
 
   return (
     <Layout>
@@ -71,7 +43,7 @@ const Home = () => {
           artworksCarousel={featuredItems.slice(0, 2)}
           timeout={1000}
           interval={7000}
-          theme="dark"
+          // theme="dark"
         />
       )}
       <ArtworkGrid

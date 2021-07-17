@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider } from '@material-ui/core'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
-import Gallery from '../Gallery'
-
 const useStyle = makeStyles(Theme => ({
   root: {},
   head: {
@@ -42,7 +40,7 @@ const ArtworkGrid = ({
   link,
   displayTextButton,
   fontSize,
-}) => {
+}: Props) => {
   const classes = useStyle({ icon, displayTextButton, fontSize })
 
   return (
@@ -79,6 +77,16 @@ const ArtworkGrid = ({
       {children}
     </Grid>
   )
+}
+
+type Props = {
+  children?: React.ReactNode
+  title?: string
+  titleButton?: string
+  icon?: boolean
+  link?: string
+  displayTextButton?: string
+  fontSize?: string
 }
 
 export default ArtworkGrid

@@ -1,18 +1,10 @@
 import React from 'react'
-import { useQuery } from 'react-query'
-
-import { useMutation } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid } from '@material-ui/core'
-
-import { createFollow } from '../../services/follow'
-
 import GridCreator from './GridCreator'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
-import Spinner from '../../components/Spinner'
-import { getProfileAccountByAddress } from '../../services/gallery'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -97,7 +89,7 @@ const Creator = ({
   following = 0,
   linkTwitter,
   setDisplayReportModal,
-}) => {
+}: Props) => {
   const classes = useStyle()
 
   // const {
@@ -180,6 +172,17 @@ const Creator = ({
       </Grid>
     </>
   )
+}
+
+type Props = {
+  isMyAccount: boolean
+  username: string
+  address: string
+  profileImageUrl: string
+  followers: number
+  following: number
+  linkTwitter: string
+  setDisplayReportModal: Function
 }
 
 export default Creator

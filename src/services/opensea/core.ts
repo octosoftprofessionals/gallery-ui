@@ -2,6 +2,7 @@ import axios from 'axios'
 // import axiosRateLimit from 'axios-rate-limit'
 import urlJoin from 'url-join'
 import config from '../../config'
+import { ArtworksProps, CollectionProps, EventType } from '../../types'
 
 const ROOT = urlJoin(config.API_URL, '/opensea')
 
@@ -17,7 +18,10 @@ const get = async (url, queryParams = {}) => {
 }
 
 // https://docs.opensea.io/reference#retrieving-a-single-asset
-export const getAsset = async ({ assetContractAddress, assetTokenId }) => {
+export const getAsset = async ({
+  assetContractAddress,
+  assetTokenId,
+}): Promise<ArtworksProps> => {
   const url = `${ROOT}/asset/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
   const asset = res.data ?? {}
@@ -25,7 +29,7 @@ export const getAsset = async ({ assetContractAddress, assetTokenId }) => {
 }
 
 // https://docs.opensea.io/reference#getting-assets
-export const getAssets = async (queryParams = {}) => {
+export const getAssets = async (queryParams = {}): Promise<ArtworksProps[]> => {
   const url = `${ROOT}/assets`
   const res = await get(url, queryParams)
   const assets = res.data ?? []
@@ -33,7 +37,7 @@ export const getAssets = async (queryParams = {}) => {
 }
 
 // https://docs.opensea.io/reference#retrieving-asset-events
-export const getEvents = async (queryParams = {}) => {
+export const getEvents = async (queryParams = {}): Promise<EventType[]> => {
   const url = `${ROOT}/events`
   const res = await get(url, queryParams)
   const events = res.data ?? []
@@ -41,7 +45,9 @@ export const getEvents = async (queryParams = {}) => {
 }
 
 // https://docs.opensea.io/reference#retrieving-collections
-export const getCollections = async (queryParams = {}) => {
+export const getCollections = async (
+  queryParams = {}
+): Promise<CollectionProps[]> => {
   const url = `${ROOT}/collections`
   const res = await get(url, queryParams)
   const collections = res.data ?? []
