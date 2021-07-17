@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 import { getAccount } from '../../services/autionsService'
 import { backgroundGradient } from '../../components/Styles/Colors'
-import useQueryParams from '../../hooks/useQueryParams'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -51,7 +50,7 @@ const AccountPage = () => {
       backgroundImage={urlCover}
     >
       <Creator
-        accountQuery={AccountQuery ? AccountQuery.account : ''}
+        accountQuery={AccountQuery ? AccountQuery.account : undefined}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
         isLoading={isLoading}

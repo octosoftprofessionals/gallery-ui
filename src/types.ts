@@ -1,22 +1,24 @@
-export type MetamaskAccountType = {}
+export type MetamaskAccountType = {
+  acount: string
+}
 
 export type Exhibition = {
-  id: Number
-  title: String
-  description: String
-  artist: String
-  priority: Number
+  id: number
+  title: string
+  description: string
+  artist: string
+  priority: number
   deliverydate: Date
 }
 
 export type ExhibitionArtworks = {
-  id: Number
-  name: String
-  artist_wallet_address: String
-  asset_contract_address: String
-  asset_token_id: String
-  priority: Number
-  exhibitionid: Number
+  id: number
+  name: string
+  artist_wallet_address: string
+  asset_contract_address: string
+  asset_token_id: string
+  priority: number
+  exhibitionid: number
 }
 
 export type FollowData = {
@@ -55,23 +57,32 @@ export type ArtworksProps = {
 }
 
 export type CreatorProps = {
-  userIndex: number
-  publicKey: string
-  username: string
-  profileImageUrl: string
-  coverImageUrl: string
-  name: string
-  bio: string
-  isApprovedCreator: boolean
-  moderationStatus: string
-  joinedWaitlistAt: string
-  createdAt: Date
-  firstName: string
-  lastName: string
-  isAdmin: boolean
-  followers: number
-  following: number
-  links: LinksProps
+  address: string
+  username?: string
+  imageUrl?: string
+  profileUrl?: string
+  description?: string
+  userIndex?: number
+  publicKey?: string
+  profileImageUrl?: string
+  coverImageUrl?: string
+  name?: string
+  bio?: string
+  isApprovedCreator?: boolean
+  moderationStatus?: string
+  joinedWaitlistAt?: string
+  createdAt?: Date
+  firstName?: string
+  lastName?: string
+  isAdmin?: boolean
+  followers?: number
+  following?: number
+  links?: LinksProps
+  created_date?: string
+  owner?: number
+  external_link?: string
+  image_url?: string
+  collection?: CollectionProps
 }
 
 export type LinksProps = {
@@ -261,4 +272,35 @@ export type TokenType = {
   decimals: number
   eth_price: number
   usd_price: number
+}
+
+export type account = {
+  address: string
+  created_date: string
+  name: string
+  owner: number
+  description: string
+  external_link: string
+  image_url: string
+  username: string
+  collection: CollectionProps
+}
+
+export type CollectionProps = {
+  banner_image_url: string
+  description: string
+  discord_url: string
+  external_url: string
+  safelist_request_status: string
+  image_url: string
+  short_description: string
+  telegram_url: string
+  twitter_username: string
+  instagram_username: string
+  wiki_url: string
+  display_data: imagesData
+}
+
+export type imagesData = {
+  images: Array<string>
 }

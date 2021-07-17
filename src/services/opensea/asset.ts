@@ -5,12 +5,13 @@ import config from '../../config'
 
 import { getAsset, getEvents } from './core'
 import { priceFromPriceData } from './util'
+import { AssetType, EventType } from '../../types'
 
 const GALLERY_ADDRESS = config.OPENSEA_GALLERY_ADDRESS ?? ''
 
 // Asset
 
-export const getMetadataForAsset = async (asset = {}) => {
+export const getMetadataForAsset = async (asset: AssetType) => {
   const assetContractAddress =
     asset?.asset_contract_address ?? asset?.asset_contract?.address
   const assetTokenId = asset?.token_id
@@ -34,7 +35,7 @@ export const getMetadataForAssets = async (assets = []) => {
 }
 
 // Use when you need more fields than those returned by a getAssets query
-export const getExpandedAsset = async (asset = {}) => {
+export const getExpandedAsset = async (asset: AssetType = {}) => {
   const expandedAsset = await getAsset({
     assetContractAddress: asset?.asset_contract?.address,
     assetTokenId: asset?.token_id,
@@ -43,7 +44,7 @@ export const getExpandedAsset = async (asset = {}) => {
 }
 
 // Use when you need more fields than those returned by a getAssets query
-export const getExpandedAssets = async (assets = []) => {
+export const getExpandedAssets = async (assets: AssetType[] = []) => {
   const expandedAssets = await Promise.all(assets.map(getExpandedAsset))
   return expandedAssets
 }
@@ -61,9 +62,11 @@ export const getEventsForAsset = async ({
 
 // Helpers
 
-const orderByTimestamp = (events = []) => sortBy(events, 'created_date')
+const orderByTimestamp = (events: EventType[] = []) =>
+  sortBy(events, 'created_date')
 
-const mostRecentEvent = (events = []) => last(orderByTimestamp(events))
+const mostRecentEvent = (events: EventType[] = []) =>
+  last(orderByTimestamp(events))
 
 // status: reserve, listed, sold
 
@@ -89,12 +92,20 @@ const STATUS_DETERMINING_EVENT_TYPES = RESERVE_OR_SOLD_EVENT_TYPES.concat(
 )
 
 const BID_EVENT_TYPES = ['bid_entered', 'offer_entered']
-export const isBidOrOfferEvent = (event = {}) =>
+export const isBidOrOfferEvent = (event: EventType = {}) =>
   BID_EVENT_TYPES.includes(event?.event_type)
 
 const NULL_ADDRESS = '0x0000000000000000000000000000000000000000'
 
-export const assetStatusFrom = ({ asset = {}, events = [] }) => {
+type assetFunctionProps = {
+  asset: AssetType
+  events: EventType[]
+}
+
+export const assetStatusFrom = ({
+  asset = {},
+  events = [],
+}: assetFunctionProps) => {
   //   - special case: transfer after auction created?
   //     - seems like yes, but what happens? is it still on auction?
   //   - special case: can bids & offers be entered after an auction is cancelled?
@@ -126,7 +137,7 @@ export const assetStatusFrom = ({ asset = {}, events = [] }) => {
 // listed       |   created               |   auction_type,starting_price,ending_price,payment_token
 //              |   offer_entered         |   bid_amount,payment_token
 
-const assetPriceData = ({ asset = {}, events = [] }) => {
+const assetPriceData = ({ asset = {}, events = [] }: assetFunctionProps) => {
   const status = assetStatusFrom({ asset, events })
   if (status === 'listed') {
     return (
@@ -138,7 +149,7 @@ const assetPriceData = ({ asset = {}, events = [] }) => {
   return mostRecentSalePriceData({ asset, events })
 }
 
-export const assetPrice = ({ asset = {}, events = [] }) => {
+export const assetPrice = ({ asset = {}, events = [] }: assetFunctionProps) => {
   const { price, token } = assetPriceData({ asset, events }) ?? {}
   if (price == null) {
     return null
@@ -147,7 +158,10 @@ export const assetPrice = ({ asset = {}, events = [] }) => {
   return { price_eth, price_usd }
 }
 
-const assetExpirationDateTime = ({ asset = {}, events = [] }) => {
+const assetExpirationDateTime = ({
+  asset = {},
+  events = [],
+}: assetFunctionProps) => {
   const most_recent_listing_event = mostRecentEvent(
     events.filter(e => e?.event_type === 'created')
   )
@@ -165,7 +179,10 @@ const assetExpirationDateTime = ({ asset = {}, events = [] }) => {
 
 // Helpers
 
-const highestOpenBidOrOfferPriceData = ({ asset = {}, events = [] }) => {
+const highestOpenBidOrOfferPriceData = ({
+  asset = {},
+  events = [],
+}: assetFunctionProps) => {
   // This is difficult to determine because:
   //   - how do we know which offers are open?
   //   - have to get the latest events that occurred after the most recent
@@ -185,7 +202,7 @@ const highestOpenBidOrOfferPriceData = ({ asset = {}, events = [] }) => {
   return null
 }
 
-const bidOrOfferPriceData = event => {
+const bidOrOfferPriceData = (event: EventType) => {
   if (event == null || !isBidOrOfferEvent(event)) {
     return null
   }
@@ -195,7 +212,7 @@ const bidOrOfferPriceData = event => {
   }
 }
 
-const mostRecentBidOrOfferPriceData = (events = []) => {
+const mostRecentBidOrOfferPriceData = (events: EventType[] = []) => {
   const most_recent_bid_event = mostRecentEvent(
     events.filter(isBidOrOfferEvent)
   )
@@ -212,7 +229,10 @@ const salePriceData = event => {
   }
 }
 
-const mostRecentSalePriceData = ({ asset = {}, events = [] }) => {
+const mostRecentSalePriceData = ({
+  asset = {},
+  events = [],
+}: assetFunctionProps) => {
   const asset_last_sale = asset?.last_sale
   const most_recent_sale_event = mostRecentEvent(
     events.filter(e => e?.event_type === 'successful')
@@ -221,7 +241,7 @@ const mostRecentSalePriceData = ({ asset = {}, events = [] }) => {
   return salePriceData(sale_event)
 }
 
-export const listingPriceData = event => {
+export const listingPriceData = (event: EventType) => {
   if (event == null || event?.event_type !== 'created') {
     return null
   }
@@ -231,7 +251,7 @@ export const listingPriceData = event => {
   }
 }
 
-const mostRecentListingPriceData = (events = []) => {
+const mostRecentListingPriceData = (events: EventType[] = []) => {
   const most_recent_listing_event = mostRecentEvent(
     events.filter(e => e?.event_type === 'created')
   )

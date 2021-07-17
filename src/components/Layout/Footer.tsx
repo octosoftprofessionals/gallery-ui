@@ -102,7 +102,7 @@ const Footer = ({ pathname }) => {
           <Link to={twitter} target="_blank" className={classes.link}>
             <Typography variant="overline">Twitter</Typography>
           </Link>
-          <Link to="/" target="_blank" className={classes.link}>
+          <Link to="/construction" target="_blank" className={classes.link}>
             <Typography variant="overline">Discord</Typography>
           </Link>
           {/* <Link to={blog} className={classes.link}>
@@ -119,7 +119,7 @@ const Footer = ({ pathname }) => {
           className={classes.containerText}
           alignItems="center"
         >
-          <Link to="/" className={classes.link}>
+          <Link to="/construction" className={classes.link}>
             <Typography variant="overline">About Us</Typography>
           </Link>
           <Link to={termsOfService} className={classes.link}>

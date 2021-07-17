@@ -5,6 +5,7 @@ import {
   getExpandedAsset,
   getExpandedAssets,
 } from './asset'
+import { ArtworksProps, EventType } from '../../types'
 
 // Core
 
@@ -24,7 +25,7 @@ export {
 export const getAssetsByCollectionSlug = async (
   collectionSlug = 'superchief-gallery-nifty',
   { sort_by = 'listing_date', order_direction = 'desc', limit = 9 } = {}
-) => {
+): Promise<ArtworksProps[]> => {
   const assets = await getAssets({
     collection: collectionSlug,
     sort_by,
@@ -37,7 +38,7 @@ export const getAssetsByCollectionSlug = async (
 export const getEventsByCollectionSlug = async (
   collectionSlug = 'superchief-gallery-nifty'
   // {  } = {}
-) => {
+): Promise<EventType[]> => {
   // asset_contract_address, token_id, account_address, event_type
   // only_opensea: false
   // offset, limit

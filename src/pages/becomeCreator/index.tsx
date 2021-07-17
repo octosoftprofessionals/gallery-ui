@@ -3,7 +3,6 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { makeStyles } from '@material-ui/core/styles'
 import BecomeCreatorCover from '../../components/BecomeCreatorCover'
-import { colors } from '../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -21,12 +20,7 @@ const useStyle = makeStyles(Theme => ({
 const BecomeCreator = () => {
   const classes = useStyle()
   return (
-    <Layout
-      backgroundColor={colors.WhiteSmoke}
-      padding="0"
-      marginBottom="0"
-      marginTop="0"
-    >
+    <Layout padding="0" marginBottom="0" marginTop="0">
       <div className={classes.root}>
         <BecomeCreatorCover></BecomeCreatorCover>
       </div>

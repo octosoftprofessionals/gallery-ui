@@ -1,3 +1,5 @@
+import { ArtworksProps } from '../../types'
+
 const videoUrls = [
   'https://fnd.fleek.co/fnd-prod/QmWLWhYZyjTe13BF22SpSo6RdnAoA2LsPuBgzFbdmuSvcg/nft.mp4',
   'https://fnd.fleek.co/fnd-prod/QmWgrXjKUXs8Eo5ceFar4EqsVn9G88y7BXte6iMRRYjNrH/nft.mp4',
@@ -156,93 +158,6 @@ const randAsset = () => {
   } else {
     mimeTypeAsset = 'img'
     return randImgUrl()
-  }
-}
-
-type ArtworksProps = {
-  id: String
-  name: String
-  description: String
-  assetIPFSPath: String
-  assetIPFSPreview: String
-  metadataIPFSPath: String
-  width: Number
-  height: Number
-  duration: Date
-  mimeType: String
-  mintTxHash: String
-  muxStatus: String
-  muxMaxResolution: String
-  muxPlaybackId: String
-  assetId: String
-  assetProcessor: String
-  assetStatus: String
-  muxId: String
-  tokenId: Number
-  status: String
-  hiddenAt: String
-  deletedAt: String
-  moderationStatus: String
-  price: String
-  creator: CreatorProps
-}
-
-type CreatorProps = {
-  userIndex: Number
-  publicKey: String
-  username: String
-  profileImageUrl: String
-  coverImageUrl: String
-  name: String
-  bio: String
-  isApprovedCreator: boolean
-  moderationStatus: String
-  joinedWaitlistAt: String
-  createdAt: Date
-  firstName: String
-  lastName: String
-  isAdmin: boolean
-  followers: Number
-  following: Number
-  links: LinksProps
-}
-
-type LinksProps = {
-  tiktok: {
-    handle: String
-    platform: String
-  }
-  twitch: {
-    handle: String
-    platform: String
-  }
-  discord: {
-    handle: String
-    platform: String
-  }
-  twitter: {
-    handle: String
-    platform: String
-  }
-  website: {
-    handle: String
-    platform: String
-  }
-  youtube: {
-    handle: String
-    platform: String
-  }
-  facebook: {
-    handle: String
-    platform: String
-  }
-  snapchat: {
-    handle: String
-    platform: String
-  }
-  instagram: {
-    handle: String
-    platform: String
   }
 }
 
