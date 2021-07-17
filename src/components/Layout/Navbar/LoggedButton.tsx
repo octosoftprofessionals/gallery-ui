@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
   menuList: {
     marginTop: -theme.spacing(3),
-    zIndex: 1,
     paddingTop: theme.spacing(4),
   },
   menuItem: {
@@ -53,6 +52,7 @@ const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: theme.spacing(10),
   },
+  popper: { zIndex: 4 },
 }))
 
 const menu = [
@@ -130,6 +130,7 @@ const LoggedButton = ({ profileImageUrl, name, account }: Props) => {
         role={undefined}
         transition
         disablePortal
+        className={classes.popper}
       >
         {({ TransitionProps, placement }) => (
           <Grow
