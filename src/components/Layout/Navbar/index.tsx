@@ -154,7 +154,11 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
             <Hidden smDown>
               {account ? (
-                <LoggedButton profileImageUrl={profileImageUrl} name={name} />
+                <LoggedButton
+                  profileImageUrl={profileImageUrl}
+                  name={name}
+                  account={account}
+                />
               ) : (
                 <ButtonConnectWallet pathname={pathname} />
               )}

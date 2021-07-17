@@ -119,7 +119,7 @@ const Footer = ({ pathname }) => {
           className={classes.containerText}
           alignItems="center"
         >
-          <Link to="/" className={classes.link}>
+          <Link to="/construction" className={classes.link}>
             <Typography variant="overline">About Us</Typography>
           </Link>
           <Link to={termsOfService} className={classes.link}>

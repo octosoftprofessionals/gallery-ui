@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { Link } from 'gatsby'
 import {
   Button,
   MenuItem,
@@ -12,6 +13,7 @@ import {
 } from '@material-ui/core'
 import { ArrowDropDownRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+import { MetamaskAccountType } from '../../../types'
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -42,6 +44,8 @@ const useStyles = makeStyles(theme => ({
   },
   menuItem: {
     justifyContent: 'center',
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
   },
   name: {
     marginLeft: theme.spacing(2),
@@ -51,9 +55,30 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const menu = ['My Profile', 'Playlist', 'Favorites', 'Bids', 'Log-Out']
+const menu = [
+  {
+    name: 'My Profile',
+    link: address => `/creator/?address=${address}`,
+  },
+  {
+    name: `Playlist`,
+    link: address => `/creator/?address=${address}`,
+  },
+  {
+    name: `Favorites`,
+    link: address => `/creator/?address=${address}`,
+  },
+  {
+    name: `Bids`,
+    link: address => `/creator/?address=${address}`,
+  },
+  {
+    name: `Log-Out`,
+    link: address => `/creator/?address=${address}`,
+  },
+]
 
-const LoggedButton = ({ profileImageUrl, name }) => {
+const LoggedButton = ({ profileImageUrl, name, account }: Props) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
@@ -86,7 +111,7 @@ const LoggedButton = ({ profileImageUrl, name }) => {
     <>
       <Button
         className={classes.button}
-        variant="containedSecondary"
+        variant="contained"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
@@ -123,12 +148,14 @@ const LoggedButton = ({ profileImageUrl, name }) => {
                   onKeyDown={handleListKeyDown}
                 >
                   {menu.map(item => (
-                    <MenuItem
+                    <Link
+                      to={item.link(account.acount)}
                       className={classes.menuItem}
-                      onClick={handleClose}
                     >
-                      {item}
-                    </MenuItem>
+                      <MenuItem className={classes.menuItem}>
+                        {item.name}
+                      </MenuItem>
+                    </Link>
                   ))}
                 </MenuList>
               </ClickAwayListener>
@@ -138,6 +165,12 @@ const LoggedButton = ({ profileImageUrl, name }) => {
       </Popper>
     </>
   )
+}
+
+type Props = {
+  profileImageUrl: string
+  name: string
+  account: MetamaskAccountType
 }
 
 export default LoggedButton

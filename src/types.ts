@@ -1,4 +1,6 @@
-export type MetamaskAccountType = {}
+export type MetamaskAccountType = {
+  acount: string
+}
 
 export type Exhibition = {
   id: number
