@@ -4,8 +4,6 @@ import { useQuery } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Paper, Button } from '@material-ui/core'
 
-import { featuredItemsQuery } from '../../services/gallery'
-
 import { getAllExhibitions } from '../../services/exhibition'
 
 import GalleryExhibition from './GalleryExhibition'
@@ -63,15 +61,17 @@ const imgUrls = [
 
 const Exhibition = () => {
   const classes = useStyles({ imageUrl: imgUrls })
-  const { exhibitionid } = useQueryParams()
-  const [displayReportModal, setDisplayReportModal] = useState(false)
-  const [showGallery, setShowGallery] = useState(false)
 
-    const {
-      data: allExhibitions = [],
-      isLoading,
-      status: statusGetAllExhibitions,
-    } = useQuery('getAllExhibitions', getAllExhibitions)
+  const {
+    data: allExhibitions = [],
+    isLoading,
+    status: statusGetAllExhibitions,
+  } = useQuery('getAllExhibitions', getAllExhibitions)
+
+  const exhibitionQueryParam = useQueryParams()?.exhibitionid
+  const queryParamInNumberOrUndefined = exhibitionQueryParam?exhibitionQueryParam*1:undefined
+  const [exhibitionid, setExhibitionid] = useState(queryParamInNumberOrUndefined)
+
 
   return (
     <Grid container justify="center">
@@ -85,14 +85,16 @@ const Exhibition = () => {
               Collections
             </Typography>
             <div className={classes.containerButtons}>
-              {!isLoading && allExhibitions.data.map(({title}) => {
+              {!isLoading && allExhibitions.map(({ title, id  }) => {
                 return (
                   <Button
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={[classes.img, classes.button]}
-                    onClick={() => setShowGallery(true)}
+                    onClick={() => {
+                      setExhibitionid(id);
+                    }}
                   >
                     <Typography
                       className={classes.typographyButton}
@@ -111,9 +113,9 @@ const Exhibition = () => {
         </Grid>
         {
 
-          // !isLoading && allExhibitions.data.lenght > 0 && showGallery &&
+          !isLoading && !!allExhibitions.length  &&
           <Grid item xs={12} sm={9} className={classes.containerGallery}>
-            <GalleryExhibition isLoading={isLoading} data={allExhibitions.data} />
+            <GalleryExhibition exhibitionId={exhibitionid || allExhibitions[0]?.id} />
           </Grid>
         }
       </Grid>
