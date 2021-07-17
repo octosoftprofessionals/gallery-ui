@@ -3,7 +3,7 @@ import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import BidMessages from './BidMessages'
 import EthSvg from '../../assets/eth.svg'
-import { formatDecimal, formatUsd } from '../../Utils'
+import { formatDecimal, formatUsd, minValueToBid } from '../../Utils'
 import { colors } from '../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
@@ -71,7 +71,7 @@ const messagesRand = () => {
 
 const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
-  const [bidAmounts, setBidAmounts] = useState()
+  const [bidAmounts, setBidAmounts] = useState(0)
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState()
 
@@ -115,6 +115,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             placeholder="0"
             value={bidAmounts}
             className={classes.input}
+            onChange={e => setBidAmounts(e.target.value)}
           />
           <Typography variant="h4" className={classes.textEth}>
             ETH
@@ -154,6 +155,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           color="primary"
           className={classes.buttonBid}
           onClick={handleClick}
+          disabled={minValueToBid(bidAmounts)}
         >
           <Typography variant="button" color="primary" className={classes.text}>
             Place a Bid
