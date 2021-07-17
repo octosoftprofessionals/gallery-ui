@@ -1,6 +1,5 @@
 import axios from 'axios'
 import axiosRateLimit from 'axios-rate-limit'
-import config from '../config'
 
 export type Exhibition = {
     id: Number
@@ -58,7 +57,7 @@ export const createExhibition = async ( queryParams = {} ) => {
 export const getAllExhibitions = async () => {
   const url = `${ROOT}/exhibition`
   const res = await get(url)
-  const allExhibitions = res.data ?? []
+  const allExhibitions = res.data.exhibitions ?? []
   return allExhibitions
 }
 
@@ -93,7 +92,7 @@ export const addArtworkToExhibition = async ({ exhibitionid }) => {
 export const getArtworkByExhibitionId = async ({ exhibitionId }) => {
   const url = `${ROOT}/exhibition/${exhibitionId}/assets`
   const res = await get(url)
-  const artworkById = res.data ?? {}
+  const artworkById = res.data.artworks ?? []
   return artworkById
 }
 
