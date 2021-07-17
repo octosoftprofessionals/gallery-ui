@@ -124,7 +124,7 @@ const BecomeCreatorCover = () => {
             <Typography color="primary" className={classes.titlePrice}>
               <Grid container direction="collum">
                 <span>
-                  If you want to join the creator foundation, set up and verify
+                  If you want to join the creator SuperChief, set up and verify
                   your profile. Add your name to de Community Upvote.
                 </span>
                 <span>

@@ -92,7 +92,7 @@ const HowItWorks = () => {
               is placed within the last 15 minutes, the auction extends for
               another 15 minutes. When you win an auction and claim the NFT, the
               artwork gets transferred to your wallet and appears on your
-              Foundation collector profile. You can also then display it in your
+              SuperChief collector profile. You can also then display it in your
               virtual gallery, share it on social media, sell it later on the
               secondary market, or pioneer a new approach to appreciating
               digital art and championing the artists in your collection.

@@ -12,7 +12,7 @@ const videoPreview =
 const gifUrls = [
   'https://f8n-production.imgix.net/creators/profile/0x46whfhj-fcrgb-1000x1000-gif-19nh67.gif',
   'https://f8n-production.imgix.net/creators/profile/fcusz42mh-obs-gif-4i7ctk.gif',
-  'https://f8n-production.imgix.net/creators/profile/y06tgrj7i-background-foundation-gif-pnvm71.gif',
+  'https://f8n-production.imgix.net/creators/profile/y06tgrj7i-background-SuperChief-gif-pnvm71.gif',
   'https://f8n-production.imgix.net/creators/profile/c8gley51s-nyan-cat-large-gif-gif-mbf1sa.gif',
 ]
 
