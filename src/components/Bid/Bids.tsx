@@ -28,6 +28,11 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
     backgroundColor: Theme.palette.primary.contrastText,
   },
+  colorInput: {
+    '@global': {
+      '.MuiOutlinedInput-input': { color: 'red' },
+    },
+  },
   boxBalance: {
     backgroundColor: Theme.palette.primary.light,
     borderRadius: Theme.shape.borderRadius[2],
@@ -69,15 +74,19 @@ const messagesRand = () => {
   return messages[Math.floor(Math.random() * messages.length)]
 }
 
-const Bids = ({ priceEth, priceUsd, balance }) => {
+const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
   const classes = useStyle()
-  const [bidAmounts, setBidAmounts] = useState(0)
+  const [bidAmounts, setBidAmounts] = useState<number>(0)
+  const [valueCurrentMaxBid, setValueCurrentMaxBid] = useState<number>(
+    currentMaxBid
+  )
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState()
 
   const handleClick = () => {
     setOpen(true)
     setMessage(() => messagesRand())
+    setValueCurrentMaxBid(+bidAmounts)
   }
 
   return (
@@ -111,10 +120,13 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
         >
           <OutlinedInput
             type="number"
-            name=""
             placeholder="0"
             value={bidAmounts}
-            className={classes.input}
+            className={
+              minValueToBid(bidAmounts, valueCurrentMaxBid)
+                ? [classes.input, classes.colorInput]
+                : classes.input
+            }
             onChange={e => setBidAmounts(e.target.value)}
           />
           <Typography variant="h4" className={classes.textEth}>
@@ -155,7 +167,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           color="primary"
           className={classes.buttonBid}
           onClick={handleClick}
-          disabled={minValueToBid(bidAmounts)}
+          disabled={minValueToBid(bidAmounts, valueCurrentMaxBid)}
         >
           <Typography variant="button" color="primary" className={classes.text}>
             Place a Bid

@@ -98,8 +98,8 @@ export const formatUsd = numberish => {
   return `$${formatNumberWithCommas(formatDecimal(numberish, 2))}`
 }
 
-export const minValueToBid = (value: number) => {
-  if (value >= 0.01) {
+export const minValueToBid = (value: number, currentMaxBid: number) => {
+  if (value > currentMaxBid && value >= 0.01) {
     return false
   }
   return true
