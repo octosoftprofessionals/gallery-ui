@@ -31,7 +31,8 @@ const useStyle = makeStyles(Theme => ({
   boxBalance: {
     backgroundColor: Theme.palette.primary.light,
     borderRadius: Theme.shape.borderRadius[2],
-    padding: Theme.spacing(7, 7, 7, 9),
+    padding: Theme.spacing(7, 7, 7, 7),
+    marginLeft: Theme.spacing(3),
   },
   textBalance: {
     fontSize: Theme.typography.fontSize[3],
