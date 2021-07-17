@@ -3,13 +3,14 @@ import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
+import { Box, Paper, Typography } from '@material-ui/core'
 
-import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils'
-import FooterCardItem from '../FooterCardItem'
 import { GalleryItem } from '../../../services/gallery'
-import { Box } from '@material-ui/core'
-import { artworkPathFrom } from '../../../config/routes'
+import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
+import { deltaTime, timeFormat } from '../../../Utils'
+import FooterCardItem from '../FooterCardItem'
+
+import CreatorInfo from './CreatorInfo'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
@@ -22,14 +23,16 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
   infoCard: {
-    padding: Theme.spacing(9),
-    paddingBottom: `${Theme.spacing(6)}vh`,
+    padding: Theme.spacing(3, 9),
+    paddingBottom: `${Theme.spacing(9)}vh`,
     display: 'grid',
-    gridGap: Theme.spacing(9),
+    gridGap: Theme.spacing(3),
     backgroundColor: Theme.palette.card.main,
     borderRadius: Theme.spacing(0, 0, 4, 4),
+    '@media (max-width: 576px)': {
+      paddingBottom: `${Theme.spacing(6)}vh`,
+    },
   },
-  containerAvatar: { marginBottom: Theme.spacing(9) },
   link: { textDecoration: 'none' },
   containerVideo: { position: 'relative', paddingBottom: '100%' },
   inVideo: {
@@ -39,7 +42,6 @@ const useStyle = makeStyles(Theme => ({
     bottom: 0,
     right: 0,
     boxSizing: 'border-box',
-
     display: 'flex',
   },
   video: {
@@ -50,29 +52,28 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     borderRadius: Theme.spacing(4, 4, 0, 0),
   },
-  username: {
-    fontFamily: Theme.typography.fontFamily[2],
-    paddingLeft: Theme.spacing(2),
-  },
 }))
 
 const ArtworkItem = ({
-  galleryItem: {
+  galleryItem = {},
+  ...rootProps
+}: {
+  galleryItem: GalleryItem | undefined
+}) => {
+  const {
     title,
     imageUrl,
     videoUrl,
     assetContractAddress,
     assetTokenId,
+    creatorAddress,
     creatorUsername,
     creatorImageUrl,
     status,
     priceEth,
     expiration,
-  } = {},
-  ...rootProps
-}: {
-  galleryItem: GalleryItem | undefined
-}) => {
+  } = galleryItem
+
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
 
@@ -90,31 +91,9 @@ const ArtworkItem = ({
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
 
-  // const { height: wHeight, width: wWidth } = useWindowSize()
-
-  // const h = Math.floor(wHeight / 2)
-  // const w = Math.floor(wWidth / 2)
-  // const transform = `h_${h},w_${w},q_100`
-  // console.log('transform:', transform)
-  // videoUrl = `https://res.cloudinary.com/j5743857383/video/upload/${transform}/v1620852155/nft-gallery/adedf80c81473c4de9b58eccd0b35405_vjmf1f.mp4`
-
-  const CreatorInfo = ({ username, imageUrl }) => {
-    const classes = useStyle()
-    return (
-      <div className={classes.containerAvatar}>
-        <Grid container direction="row" alignItems="center">
-          <Avatar alt="avat" src={imageUrl} />
-          <Typography variant="body1" className={classes.username}>
-            {`@${username}`}
-          </Typography>
-        </Grid>
-      </div>
-    )
-  }
-
   return (
-    <Link to={link} className={classes.link} {...rootProps}>
-      <Paper variant="elevation" elevation={1} className={classes.root}>
+    <Paper variant="elevation" elevation={1} className={classes.root}>
+      <Link to={link} className={classes.link} {...rootProps}>
         <Box>
           {videoUrl != null && videoUrl.length > 0 ? (
             <div className={classes.containerVideo}>
@@ -127,7 +106,6 @@ const ArtworkItem = ({
                   className={classes.video}
                   muted={true}
                 >
-                  {/* <source src={videoUrl} type='video/mp4; codecs="vp8, vorbis"' /> */}
                   <img src={imageUrl} />
                 </video>
               </div>
@@ -135,46 +113,21 @@ const ArtworkItem = ({
           ) : (
             <div className={classes.img} />
           )}
-          {/* {isTypeVideo(mimeType) ? (
-            <div className={classes.containerVideo}>
-              <div className={classes.inVideo}>
-                <video
-                  poster={assetIPFSPreview}
-                  src={assetIPFSPreview}
-                  autoPlay={true}
-                  loop={true}
-                  className={classes.video}
-                  muted={true}
-                >
-                  <source src={assetIPFSPreview} type={mimeType} />
-                  <img src={assetIPFSPreview} />
-                </video>
-              </div>
-            </div>
-          ) : (
-            <div className={classes.img} />
-          )} */}
         </Box>
-        <Link to={`/creator/?id=${creatorUsername}`} className={classes.link}>
-          <div className={classes.infoCard}>
-            <Typography variant="h5" color="primary">
-              <Truncate lines={2}>{title}</Truncate>
-            </Typography>
-            <CreatorInfo
-              imageUrl={creatorImageUrl}
-              username={creatorUsername}
-            />
-          </div>
-        </Link>
-        <FooterCardItem
-          statesArt={status}
-          price={priceEth}
-          timer={timer}
-          link={link}
-          followers={0}
-        />
-      </Paper>
-    </Link>
+      </Link>
+      <Link
+        to={profilePathFromAddress(creatorAddress)}
+        className={classes.link}
+      >
+        <div className={classes.infoCard}>
+          <Typography variant="h6" color="primary">
+            <Truncate lines={2}>{title}</Truncate>
+          </Typography>
+          <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
+        </div>
+      </Link>
+      <FooterCardItem statesArt={status} price={priceEth} timer={timer} />
+    </Paper>
   )
 }
 

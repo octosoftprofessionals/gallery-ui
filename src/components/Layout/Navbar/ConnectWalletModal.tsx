@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
 import { useSetMetamaskAccount, useMetamaskAccount } from '../../../atom'
 
+import { useLocalState } from '../../../hooks/localStoreHook'
+
 import detectEthereumProvider from '@metamask/detect-provider'
 
 import { backgroundGradient } from '../../Styles/Colors'
@@ -31,13 +33,14 @@ const ConnectWalletModal = ({
   setRedirectModal,
 }) => {
   const classes = useStyle()
-  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
-  const [ethereumAccount, setEthereumAccount] = useState(null)
 
   const setMetamaskAccount = useSetMetamaskAccount()
-
-  // TODO use to get the user account where needed
   const metamaskAccount = useMetamaskAccount()
+
+  const [value, setValue] = useLocalState('metamask-account', 'disconect')
+
+  const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
+  const [ethereumAccount, setEthereumAccount] = useState(null)
 
   useEffect(() => {
     checkMetaMaskConnected()
@@ -52,16 +55,20 @@ const ConnectWalletModal = ({
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       handleCloseConnectWalletModal()
 
-      //account will be needed in the future
+      setValue({ acount: accounts[0] })
       setEthereumAccount(accounts[0])
-      setMetamaskAccount(accounts[0])
+      //recoil state
+      setMetamaskAccount(() => accounts[0])
+
       return
     } else {
       handleCloseConnectWalletModal()
       setRedirectModal(true)
     }
+
     setEthereumAccount(false)
   }
+
   const termsOfService = '/termsOfService'
   const privacyPolicity = '/privacyPolicity'
   const aboutWallets =
@@ -125,7 +132,7 @@ const ConnectWalletModal = ({
               }}
               className={classes.button}
               endIcon
-              onClick={() => handleConnection()}
+              onClick={handleConnection}
             >
               <Typography variant="caption" color="secondary">
                 Metamask

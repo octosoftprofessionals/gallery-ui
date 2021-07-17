@@ -51,9 +51,13 @@ const useStyle = makeStyles(Theme => ({
       backgroundColor: Theme.palette.secondary.main,
     },
     '@media (max-width: 585px)': {
+      backgroundColor: Theme.palette.secondary.main,
+      transition: '0.3s all linear',
       borderRadius: Theme.shape.borderRadius[3],
       minWidth: 50,
       height: 50,
+      padding: 0,
+      position: 'relative',
     },
   },
   buttonReport: {
@@ -82,12 +86,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkShare = ({
-  linkTwitter,
-  setDisplayReportModal,
-  right,
-  account,
-}) => {
+const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
 
@@ -189,14 +188,12 @@ const ArtworkShare = ({
         <Button onClick={handleClickReport} className={classes.buttonReport}>
           <MoreHorizIcon className={classes.icon} />
         </Button>
-        {!account ? (
-          <Button onClick={handleClick} className={classes.button}>
-            <ArrowUpwardIcon className={classes.icon} />
-            <Hidden xsDown>
-              <Typography className={classes.text}>Share</Typography>
-            </Hidden>
-          </Button>
-        ) : null}
+        <Button onClick={handleClick} className={classes.button}>
+          <ArrowUpwardIcon className={classes.icon} />
+          <Hidden xsDown>
+            <Typography className={classes.text}>Share</Typography>
+          </Hidden>
+        </Button>
       </Grid>
     </Grid>
   )

@@ -1,7 +1,14 @@
 import React from 'react'
+
+import { useMutation } from 'react-query'
+import { createFollow } from '../../../services/follow'
+import useQueryParams from '../../../hooks/useQueryParams'
+// import axios from 'axios'
+
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Avatar,
+  Box,
   Button,
   Divider,
   Grid,
@@ -21,6 +28,7 @@ const useStyle = makeStyles(Theme => ({
   button: {
     padding: 0,
     boxShadow: boxShadow.boxShadow1,
+    backgroundColor: Theme.palette.secondary.main,
     '&:hover': {
       backgroundColor: Theme.palette.primary.main,
       transform: 'none',
@@ -44,7 +52,7 @@ const useStyle = makeStyles(Theme => ({
   buttonKeyPublic: {
     width: '65%',
     position: 'absolute',
-    left: Theme.spacing(9),
+    left: Theme.spacing(13),
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(0, 0, 0, 13),
     boxShadow: boxShadow.boxShadow1,
@@ -61,28 +69,56 @@ const useStyle = makeStyles(Theme => ({
     '&:hover': { color: Theme.palette.primary.main },
   },
   divider: {
+    backgroundColor: Theme.palette.primary.main,
     opacity: Theme.palette.action.disabledOpacity[1],
     margin: Theme.spacing(5, 0, 5),
   },
   textDate: { textTransform: 'capitalize' },
 }))
 
+//Fake mockup data just to send something and check that route is working properly
+const mockUpData = {
+  user_name: "Roger",
+  artist_name: "@MetaDrillMinter",
+  artist_id: 1
+}
+
 const InfoCreator = ({
-  name,
+  isMyAccount = false,
   username,
+  publicKey,
+  // name,
   followers,
   following,
   followedes,
-  links,
-  bio,
-  createdAt,
-  userIndex,
-  publicKey,
-  type,
+  // links,
+  // bio,
+  // createdAt,
+  userIndex = null,
 }) => {
   const classes = useStyle()
-  const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
-  const year = new Date(createdAt).getFullYear()
+
+  // https://react-query.tanstack.com/guides/mutations
+  // 1st attempt)
+  //const mutation = useMutation(newFollow => axios.post('http://localhost:3000/v1/follow', newFollow))
+  //2nd attempt)
+  // const mutation = useMutation(createFollow)
+
+  //3rd attempt)
+  const mutation = useMutation( newFollow => createFollow())
+
+  // How can I pass the user_name, artist_name and artist_id into the mutation?
+  //Try with useQueryParams? VBut doesn't make sense, because this is not comming/going from PARAMS, but from BODY (req.body on original route at server)...
+  const { user_name, artist_name, artist_id } = useQueryParams()
+  //Still, doesn't work. This error arise:
+  /*
+  error: el valor nulo en la columna «user_name» de la relación «follow» viola la restricción de no nulo
+  Is like
+  */
+
+  // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
+  // const year = new Date(createdAt).getFullYear()
+
 
   const getPublicKey = () => {
     return navigator.clipboard.writeText(publicKey)
@@ -120,9 +156,9 @@ const InfoCreator = ({
           </Typography>
         </Button>
       </Grid>
-      <Typography variant="h4" color="primary">
+      {/* <Typography variant="h4" color="primary">
         {name}
-      </Typography>
+      </Typography> */}
       <Typography
         variant="subtitle2"
         className={classes.userName}
@@ -131,7 +167,7 @@ const InfoCreator = ({
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {following}
+            {following ? following : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Following
@@ -139,23 +175,34 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {followers}
+            {followers ? followers : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Followers
           </Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Button variant="outlined" fullWidth>
-            {type === 'account' ? (
-              <Typography variant="button">Edit Profile</Typography>
-            ) : (
+
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => {
+               mutation.mutate({user_name: mockUpData.user_name, artist_name: mockUpData. artist_name, artist_id: mockUpData.artist_id}) //What should I pass here? Passing fake data just to check.
+             }}
+          >
+            {mutation.isError ? (
+             <div>An error occurred: {mutation.error.message}</div>
+           ) : null}
+
+           {mutation.isSuccess ? <div>Mutation able to add!</div> : null}
+
+
               <Typography variant="button">Follow</Typography>
-            )}
+
           </Button>
         </Grid>
       </Grid>
-      {type === 'account' ? null : (
+      {isMyAccount ? null : (
         <>
           {' '}
           <Typography variant="button" color="primary">
@@ -166,7 +213,7 @@ const InfoCreator = ({
               <Avatar key={i} src={item} />
             ))}
           </AvatarGroup>
-          <div
+          {/* <div
             onClick={() => {
               console.log('press hosad')
             }}
@@ -174,10 +221,10 @@ const InfoCreator = ({
             <Typography variant="overline" className={classes.textFollow}>
               View all
             </Typography>
-          </div>
+          </div> */}
           <Grid item xs={12} sm={7}>
             <ButtonsSocialMedia
-              links={links}
+              // links={links}
               verified={true}
               imgUrl={followedes[3]}
               invited="Diolink"
@@ -186,24 +233,23 @@ const InfoCreator = ({
         </>
       )}
 
-      <Grid item xs={12} sm={11}>
+      {/* <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Bio
         </Typography>
         <Divider className={classes.divider} />
         <Typography variant="body2" color="primary" paragraph>
-          {bio}
+          {bio !== undefined && bio !== ' ' ? bio : '—'}
         </Typography>
-      </Grid>
-      <Grid item xs={12} sm={11}>
+      </Grid> */}
+      {/* <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">
           Links
         </Typography>
         <Divider className={classes.divider} />
-        <Links links={links} />
-      </Grid>
-
-      <Grid item xs={12} sm={11}>
+        {links ? <Links links={links} /> : '—'}
+      </Grid> */}
+      {/* <Grid item xs={12} sm={11}>
         <Divider className={classes.divider} />
         <Grid container justify="space-between">
           <Typography variant="caption" color="primary">
@@ -214,11 +260,12 @@ const InfoCreator = ({
             color="primary"
             className={classes.textDate}
           >
-            {`${month} ${year}`}
+            {createdAt ? `${month} ${year}` : '—'}
           </Typography>
         </Grid>
         <Divider className={classes.divider} />
-      </Grid>
+      </Grid> */}
+      <Box height="24px" />
     </Grid>
   )
 }

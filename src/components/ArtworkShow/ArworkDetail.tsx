@@ -126,7 +126,9 @@ const ArtworkDetail = ({
             color="primary"
             className={classes.desciptionText}
           >
-            {description}
+            {description.length !== 0 && description !== ' '
+              ? description
+              : '—'}
           </Typography>
 
           <Typography
@@ -137,7 +139,7 @@ const ArtworkDetail = ({
             Edition of
           </Typography>
           <Typography variant="h4" color="initial">
-            {number}
+            {number ? number : '1'}
           </Typography>
           <ArtworkView artworkLinks={artworkLinks} />
         </Grid>

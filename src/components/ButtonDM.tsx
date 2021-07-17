@@ -25,15 +25,14 @@ const useStyle = makeStyles(Theme => ({
 const ButtonDM = ({ theme, setTheme }) => {
   const classes = useStyle()
 
-  const toggleTheme = () => {
-    if (theme === Theme) {
-      setTheme(darkTheme)
-    } else {
-      setTheme(Theme)
-    }
-  }
+  /*   const toggleTheme = () => {
+    setTheme(!theme)
+  } */
   return (
-    <IconButton onClick={toggleTheme} className={classes.root} color="primary">
+    <IconButton
+      /* onClick={toggleTheme}*/ className={classes.root}
+      color="primary"
+    >
       <WbIncandescentIcon className={classes.icon} />
     </IconButton>
   )

@@ -78,6 +78,12 @@ const useStyle = makeStyles(Theme => ({
     color: colors.Aqua,
     paddingLeft: Theme.spacing(7),
     maxWidth: 500,
+    '@global': {
+      '.MuiInput-input': {
+        margin: '6px 0 7px',
+        padding: '0 5px',
+      },
+    },
   },
   suscribeBtn: {
     background: colors.Aqua,
@@ -101,7 +107,7 @@ const useStyle = makeStyles(Theme => ({
     color: colors.LigthGrey,
     fontWeight: 200,
     fontSize: Theme.typography.fontSize[3],
-    marginBottom: 60,
+    marginBottom: 40,
     textAlign: 'center',
     marginRight: 50,
     marginLeft: 50,
@@ -181,12 +187,9 @@ const EmailPopUp = () => {
           </Typography>
           <DialogContent>
             <div className={classes.text}>
-              <Typography variant="body2">
-                To subscribe to this website, please enter your email address
-                here. We will send updates occasionally. To subscribe to this
-                website, please enter your email address here. We will send
-                updates occasionally. We will send updates occasionally. To
-                subscribe to this website, please enter your email address here.
+              <Typography variant="body1">
+                To subscribe to this website, please enter your email address.
+                We will send updates occasionally.
               </Typography>
             </div>
             <div className={classes.title}>

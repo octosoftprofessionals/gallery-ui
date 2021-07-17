@@ -18,6 +18,7 @@ const useStyle = makeStyles(Theme => ({
   price: { fontSize: Theme.typography.fontSize[6] },
   titlePrice: { fontSize: Theme.typography.fontSize[3] },
   divider: {
+    backgroundColor: Theme.palette.primary.main,
     opacity: Theme.palette.action.disabledOpacity[1],
   },
   infoAution: {

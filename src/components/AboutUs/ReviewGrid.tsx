@@ -51,7 +51,6 @@ const useStyle = makeStyles(Theme => ({
 
 const ReviewGrid = () => {
   const classes = useStyle()
-  console.log('que trae', reviewItem)
   return (
     <Grid item container xs={12} direction="column">
       <Typography variant="h5" color="primary" className={classes.text}>

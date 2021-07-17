@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import BidMessages from './BidMessages'
 import EthSvg from '../../assets/eth.svg'
 import { formatDecimal, formatUsd } from '../../Utils'
+import { colors } from '../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.MuiOutlinedInput-input': {
+      color: colors.Nero,
+    },
+  },
   root: {
     position: 'relative',
   },
   boxInput: {
-    backgroundColor: Theme.palette.primary.main,
+    backgroundColor: 'black',
     borderRadius: 16,
     padding: 0,
   },
@@ -20,13 +26,20 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: Theme.shape.borderRadius[2],
     fontFamily: Theme.typography.fontFamily[1],
     fontSize: Theme.typography.fontSize[10],
+    backgroundColor: Theme.palette.primary.contrastText,
   },
   boxBalance: {
     backgroundColor: Theme.palette.primary.light,
     borderRadius: Theme.shape.borderRadius[2],
     padding: Theme.spacing(7, 7, 7, 9),
   },
-  textBalance: { fontSize: Theme.typography.fontSize[3], cursor: 'default' },
+  textBalance: {
+    fontSize: Theme.typography.fontSize[3],
+    cursor: 'default',
+  },
+  valueBalance: {
+    color: colors.Black,
+  },
   buttonBid: {
     backgroundColor: Theme.palette.primary.dark,
     marginTop: 50,
@@ -46,15 +59,24 @@ const useStyle = makeStyles(Theme => ({
     padding: 0,
   },
   icon: { marginLeft: Theme.spacing(3) },
+  textEth: { color: Theme.palette.primary.light },
 }))
+
+const messages = ['ok', 'outbid', 'error', 'noBid']
+
+const messagesRand = () => {
+  return messages[Math.floor(Math.random() * messages.length)]
+}
 
 const Bids = ({ priceEth, priceUsd, balance }) => {
   const classes = useStyle()
   const [bidAmounts, setBidAmounts] = useState()
   const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState()
 
-  const handleClick = () => () => {
+  const handleClick = () => {
     setOpen(true)
+    setMessage(() => messagesRand())
   }
 
   return (
@@ -67,7 +89,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
     >
       <Grid item xs={12}>
         <Typography variant="h4" color="primary">
-          Pleace a bid
+          Place a bid
         </Typography>
       </Grid>
       <Grid item xs={12} container direction="column">
@@ -93,7 +115,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
             value={bidAmounts}
             className={classes.input}
           />
-          <Typography variant="h4" color="secondary">
+          <Typography variant="h4" className={classes.textEth}>
             ETH
           </Typography>
           <EthSvg className={classes.icon} />
@@ -109,8 +131,7 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           </Typography>
           <Typography
             variant="caption"
-            color="primary"
-            className={classes.textBalance}
+            className={[classes.textBalance, classes.valueBalance]}
           >
             {`${balance} ETH`}
           </Typography>
@@ -131,13 +152,13 @@ const Bids = ({ priceEth, priceUsd, balance }) => {
           variant="text"
           color="primary"
           className={classes.buttonBid}
-          onClick={handleClick()}
+          onClick={handleClick}
         >
           <Typography variant="button" color="primary" className={classes.text}>
             Place a Bid
           </Typography>
         </Button>
-        <BidMessages setOpen={setOpen} open={open} />
+        <BidMessages setOpen={setOpen} open={open} state={message} />
       </Grid>
     </Grid>
   )

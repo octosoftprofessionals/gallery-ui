@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import queryString from 'query-string'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
-import { getCreator } from '../../services/autionsService'
+import { getProfileAccountByAddress } from '../../services/gallery'
 
-import { backgroundGradient } from '../../components/Styles/Colors'
 import useQueryParams from '../../hooks/useQueryParams'
+import Spinner from '../../components/Spinner'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -19,22 +18,30 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
-  const { id: creatorId } = useQueryParams()
+  const { address: address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const { data: creatorQuery, isLoading } = useQuery(
-    'CreatorQuery',
-    async () => await getCreator({ creatorId })
+  const {
+    data: creatorQuery,
+    isLoading,
+  } = useQuery('getProfileAccountByAddress', () =>
+    getProfileAccountByAddress(address)
   )
 
   return (
-    <Layout padding="0" marginTop="0" height backgroundImage={''}>
-      <Creator
-        linkTwitter={linkShareTwitter()}
-        setDisplayReportModal={setDisplayReportModal}
-        isLoading={isLoading}
-        creatorQuery={creatorQuery}
-      />
+    <Layout padding="0" marginTop="0" height>
+      {isLoading ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Creator
+          isMyAccount={false}
+          username={creatorQuery.username}
+          address={creatorQuery.address}
+          profileImageUrl={creatorQuery.profileImageUrl}
+          linkTwitter={linkShareTwitter()}
+          setDisplayReportModal={setDisplayReportModal}
+        />
+      )}
     </Layout>
   )
 }
