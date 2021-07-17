@@ -6,7 +6,7 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 import { deltaTime, timeFormat, isTypeVideo } from '../../Utils/index'
 import { GalleryItem } from '../../services/gallery'
 import { Box } from '@material-ui/core'
-import { artworkPathFrom, profilePathFromUsername } from '../../config/routes'
+import { artworkPathFrom, profilePathFromAddress } from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -66,6 +66,7 @@ const PartnershipItem = ({
     status,
     priceEth,
     expiration,
+    creatorAddress,
   } = {},
   ...rootProps
 }: {
@@ -126,7 +127,10 @@ const PartnershipItem = ({
             <div className={classes.img} />
           )}
         </Box>
-        <Link to={profilePathFromAddress(address)} className={classes.link}>
+        <Link
+          to={profilePathFromAddress(creatorAddress)}
+          className={classes.link}
+        >
           <div className={classes.infoCard}>
             <Typography variant="h5" color="primary">
               <Truncate lines={2}>{title}</Truncate>
