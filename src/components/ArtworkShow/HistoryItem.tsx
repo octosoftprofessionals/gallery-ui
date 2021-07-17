@@ -116,7 +116,10 @@ const HistoryItem = ({
             </Grid>
           </Grid>
           <Grid className={classes.action} direction="row" alignItems="center">
-            {amountEth != null && amountUsd != null ? (
+            {amountEth != null &&
+            amountUsd != null &&
+            amountEth != 'NaN' &&
+            amountUsd != 'NaN' ? (
               <Grid
                 container
                 direction="column"
