@@ -1,7 +1,12 @@
 import { DateTime } from 'luxon'
 
 export const deltaTime = (expiration: string | DateTime | Date) => {
-  let expiration_datetime = typeof expiration === 'string' ? DateTime.fromISO(expiration) : expiration instanceof Date ? DateTime.fromJSDate(expiration) : expiration
+  let expiration_datetime =
+    typeof expiration === 'string'
+      ? DateTime.fromISO(expiration)
+      : expiration instanceof Date
+      ? DateTime.fromJSDate(expiration)
+      : expiration
   let now = DateTime.utc()
   let delta = expiration_datetime - now
   return delta
@@ -81,14 +86,21 @@ export const formatDecimal = (numberish, decimals = 3) => {
   return `${integral}.${fractional.slice(0, decimals)}`
 }
 
-const formatNumberWithCommas = (x) => {
+const formatNumberWithCommas = x => {
   const [integral = '0', fractional = '0'] = x.toString().split('.')
   const integral_with_commas = integral.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
   return [integral_with_commas, fractional].join('.')
 }
-export const formatUsd = (numberish) => {
+export const formatUsd = numberish => {
   if (numberish == null) {
     return '-'
   }
   return `$${formatNumberWithCommas(formatDecimal(numberish, 2))}`
+}
+
+export const minValueToBid = (value: number, currentMaxBid: number) => {
+  if (value > currentMaxBid && value >= 0.01) {
+    return false
+  }
+  return true
 }

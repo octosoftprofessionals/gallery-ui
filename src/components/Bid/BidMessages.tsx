@@ -61,7 +61,6 @@ const BidMessages = ({ setOpen, open, state }) => {
     },
   }
 
-  console.log('messages.[state]?.message :>> ', messages.[state]?.message)
   return (
     <Snackbar
       open={open}

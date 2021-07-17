@@ -29,6 +29,7 @@ const Bid = ({ galleryItem }) => {
               priceEth={galleryItem.priceEth}
               priceUsd={galleryItem.priceUsd}
               balance={'0'}
+              currentMaxBid={2}
             />
           ) : (
             ''
