@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Grid, Paper, Avatar, Typography, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import OpenInNewOutlinedIcon from '@material-ui/icons/OpenInNewOutlined'
@@ -53,6 +54,12 @@ const useStyle = makeStyles(Theme => ({
   },
   containerHistory: { margin: Theme.spacing(3, 0, 0, 0) },
 }))
+const ethereumIoLinkTx = (txHash: string) => {
+  if (txHash) {
+    return `https://etherscan.io/tx/${txHash}`
+  }
+  return '#'
+}
 
 const HistoryItem = ({
   eventFromUsername,
@@ -64,9 +71,10 @@ const HistoryItem = ({
   amountEth,
   amountUsd,
   timestamp = new Date(),
-  link,
+  txHash,
 }) => {
   const classes = useStyle()
+
   return (
     <Grid item>
       <Paper className={classes.containerHistory} elevation={2}>
@@ -124,7 +132,7 @@ const HistoryItem = ({
               </Grid>
             ) : null}
 
-            <Link href={link} className={classes.link} target="_blank">
+            <Link href={ethereumIoLinkTx(txHash)} className={classes.link}>
               <OpenInNewOutlinedIcon className={classes.icon} />
             </Link>
           </Grid>
