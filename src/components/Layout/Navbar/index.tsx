@@ -22,6 +22,7 @@ import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 
 import { useLocalState } from '../../../hooks/localStoreHook'
+import { useSetMetamaskAccount, useMetamaskAccount } from '../../../atom'
 
 const { boxShadow1 } = boxShadow
 
@@ -128,7 +129,8 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
-  const [metamaskAccount, setValue] = useLocalState('metamask-account', null)
+  const metamaskAccount = useMetamaskAccount()
+  const [account, setValue] = useLocalState('metamask-account', metamaskAccount)
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
@@ -151,7 +153,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Grid>
 
             <Hidden smDown>
-              {metamaskAccount ? (
+              {account ? (
                 <LoggedButton profileImageUrl={profileImageUrl} name={name} />
               ) : (
                 <ButtonConnectWallet pathname={pathname} />
