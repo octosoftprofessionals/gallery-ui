@@ -43,11 +43,8 @@ const InAuctions = ({ price, timer, children }) => {
           alignItems="flex-start"
           className={classes.timer}
         >
-          <Typography variant="caption" color="textSecondary">
-            Ending in
-          </Typography>
           <Grid item xs={12}>
-            <Typography variant="caption" color="secondary">
+            <Typography variant="caption" color="textSecondary">
               {timer}
             </Typography>
           </Grid>
