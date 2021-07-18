@@ -1,0 +1,10 @@
+Installation Directory: /Library/PostgreSQL/13
+Server Installation Directory: /Library/PostgreSQL/13
+Data Directory: /Library/PostgreSQL/13/data
+Database Port: 5433
+Database Superuser: postgres
+Operating System Account: postgres
+Database Service: postgresql-13
+Command Line Tools Installation Directory: /Library/PostgreSQL/13
+pgAdmin4 Installation Directory: /Library/PostgreSQL/13/pgAdmin 4
+Stack Builder Installation Directory: /Library/PostgreSQL/13

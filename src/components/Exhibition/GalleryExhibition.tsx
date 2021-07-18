@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
-import { useQuery } from 'react-query'
-import useQueryParams from '../../hooks/useQueryParams'
+import React, { useEffect, useState } from 'react'
 import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import GalleryItem from '../GalleryItem'
 import ArtworkItem from '../GalleryItem/ArtworkItem'
 
 import { getArtworkByExhibitionId } from '../../services/exhibition'
@@ -13,17 +10,21 @@ const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
 }))
 
-const GalleryExhibition = ({ isLoading, data = [] }) => {
+const GalleryExhibition = ({ exhibitionId }) => {
   const classes = useStyle()
-  const { exhibitionId } = useQueryParams()
-  const[id, setId] = useState(1);
+  const [artworks, setArtworks] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  const {
-      data: getArtworks = {},
-      status: statusgetArtworkByExhibitionId,
-    } = useQuery('getArtworkByExhibitionId', () => getArtworkByExhibitionId({exhibitionId:exhibitionId}))
+  useEffect(() => {
+    async function fetch() {
+      setIsLoading(true)
+      const data  = await getArtworkByExhibitionId({ exhibitionId })
+      setArtworks(data)
+      setIsLoading(false)
+    }
 
-    console.log("get Artworks :>>", getArtworks)
+    fetch()
+  }, [exhibitionId])
 
   const Loading = () => (
     <Box
@@ -42,7 +43,7 @@ const GalleryExhibition = ({ isLoading, data = [] }) => {
       {isLoading ? (
         <Loading />
       ) : (
-        data.map((galleryItem, index) => (
+        artworks.map((galleryItem, index) => (
           <Grid
             item
             key={index}

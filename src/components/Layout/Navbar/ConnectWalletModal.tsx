@@ -54,7 +54,6 @@ const ConnectWalletModal = ({
     if (metaMaskInstalled) {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       handleCloseConnectWalletModal()
-
       setValue({ acount: accounts[0] })
       setEthereumAccount(accounts[0])
       //recoil state
