@@ -61,12 +61,25 @@ const useStyle = makeStyles(Theme => ({
       transform: 'none',
       boxShadow: boxShadow.boxShadow1,
     },
+    '@media (max-width: 576px)': {
+      width: '100%',
+      left: Theme.spacing(0),
+      padding: Theme.spacing(0, 0, 0, 15),
+    },
   },
   userName: { fontSize: Theme.typography.fontSize[6], width: 'fit-content' },
   textFollow: {
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[4],
     '&:hover': { color: Theme.palette.primary.main },
+  },
+  textFollowers: {
+    cursor: 'pointer',
+    fontSize: Theme.typography.fontSize[4],
+    '&:hover': { color: Theme.palette.primary.main },
+    '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(8),
+    },
   },
   divider: {
     backgroundColor: Theme.palette.primary.main,
@@ -78,9 +91,9 @@ const useStyle = makeStyles(Theme => ({
 
 //Fake mockup data just to send something and check that route is working properly
 const mockUpData = {
-  user_name: "Roger",
-  artist_name: "@MetaDrillMinter",
-  artist_id: 1
+  user_name: 'Roger',
+  artist_name: '@MetaDrillMinter',
+  artist_id: 1,
 }
 
 const InfoCreator = ({
@@ -105,7 +118,7 @@ const InfoCreator = ({
   // const mutation = useMutation(createFollow)
 
   //3rd attempt)
-  const mutation = useMutation( newFollow => createFollow())
+  const mutation = useMutation(newFollow => createFollow())
 
   // How can I pass the user_name, artist_name and artist_id into the mutation?
   //Try with useQueryParams? VBut doesn't make sense, because this is not comming/going from PARAMS, but from BODY (req.body on original route at server)...
@@ -118,7 +131,6 @@ const InfoCreator = ({
 
   // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
   // const year = new Date(createdAt).getFullYear()
-
 
   const getPublicKey = () => {
     return navigator.clipboard.writeText(publicKey)
@@ -177,28 +189,29 @@ const InfoCreator = ({
           <Typography variant="h6" color="primary">
             {followers ? followers : '—'}
           </Typography>
-          <Typography variant="overline" className={classes.textFollow}>
+          <Typography variant="overline" className={classes.textFollowers}>
             Followers
           </Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
-
           <Button
             variant="outlined"
             fullWidth
             onClick={() => {
-               mutation.mutate({user_name: mockUpData.user_name, artist_name: mockUpData. artist_name, artist_id: mockUpData.artist_id}) //What should I pass here? Passing fake data just to check.
-             }}
+              mutation.mutate({
+                user_name: mockUpData.user_name,
+                artist_name: mockUpData.artist_name,
+                artist_id: mockUpData.artist_id,
+              }) //What should I pass here? Passing fake data just to check.
+            }}
           >
             {mutation.isError ? (
-             <div>An error occurred: {mutation.error.message}</div>
-           ) : null}
+              <div>An error occurred: {mutation.error.message}</div>
+            ) : null}
 
-           {mutation.isSuccess ? <div>Mutation able to add!</div> : null}
+            {mutation.isSuccess ? <div>Mutation able to add!</div> : null}
 
-
-              <Typography variant="button">Follow</Typography>
-
+            <Typography variant="button">Follow</Typography>
           </Button>
         </Grid>
       </Grid>
