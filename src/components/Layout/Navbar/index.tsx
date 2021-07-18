@@ -130,7 +130,21 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const [showDrawer, setShowDrawer] = useState(false)
 
   const metamaskAccount = useMetamaskAccount()
+  const setMetamaskAccount = useSetMetamaskAccount()
   const [account, setValue] = useLocalState('metamask-account', metamaskAccount)
+
+  const handleLogOut = async () => {
+    setMetamaskAccount(null)
+    setValue(null)
+    await window.ethereum.request({
+      method: 'eth_requestAccounts',
+      params: [
+        {
+          eth_accounts: {},
+        },
+      ],
+    })
+  }
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
@@ -158,6 +172,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
                   profileImageUrl={profileImageUrl}
                   name={name}
                   account={account}
+                  onLogOut={handleLogOut}
                 />
               ) : (
                 <ButtonConnectWallet pathname={pathname} />

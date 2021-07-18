@@ -62,23 +62,19 @@ const menu = [
   },
   {
     name: `Playlist`,
-    link: address => `/creator/?address=${address}`,
+    link: address => `/construction`,
   },
   {
     name: `Favorites`,
-    link: address => `/creator/?address=${address}`,
+    link: address => `/construction`,
   },
   {
     name: `Bids`,
-    link: address => `/creator/?address=${address}`,
-  },
-  {
-    name: `Log-Out`,
-    link: address => `/creator/?address=${address}`,
+    link: address => `/construction`,
   },
 ]
 
-const LoggedButton = ({ profileImageUrl, name, account }: Props) => {
+const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
@@ -158,6 +154,9 @@ const LoggedButton = ({ profileImageUrl, name, account }: Props) => {
                       </MenuItem>
                     </Link>
                   ))}
+                  <MenuItem className={classes.menuItem} onClick={onLogOut}>
+                    Log-out
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
@@ -172,6 +171,7 @@ type Props = {
   profileImageUrl: string
   name: string
   account: MetamaskAccountType
+  onLogOut: () => void
 }
 
 export default LoggedButton
