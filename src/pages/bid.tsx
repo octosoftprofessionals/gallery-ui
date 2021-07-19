@@ -7,6 +7,8 @@ import Bid from '../components/Bid'
 import useQueryParams from '../hooks/useQueryParams'
 import { galleryItemQuery } from '../services/gallery'
 import { useMetamaskAccount } from '../atom'
+import { getInfoStorage } from '../Utils/getStorage'
+import { truncateString } from '../Utils/stringUtils'
 
 const BidPage = () => {
   const { contractAddress, tokenId } = useQueryParams()
@@ -16,13 +18,16 @@ const BidPage = () => {
       assetTokenId: tokenId,
     })
   )
+
+  //getting metamask account from the storage
+  const metamaskStorage = getInfoStorage('metamask-account')
+
   const accountAddress = useMetamaskAccount()
 
   return (
     <Layout
       publicKey={accountAddress}
-      profileImageUrl="https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png"
-      name="Roger"
+      name={truncateString(metamaskStorage.acount, 10)}
     >
       <Bid galleryItem={galleryItem} />
     </Layout>

@@ -14,6 +14,7 @@ import {
 import { ArrowDropDownRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { MetamaskAccountType } from '../../../types'
+import { backgroundGradient } from '../../Styles/Colors'
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -53,6 +54,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.spacing(10),
   },
   popper: { zIndex: 4 },
+  profileColor: {
+    color: '#FFF',
+    background: backgroundGradient.backgroundGradient1,
+  },
 }))
 
 const menu = [
@@ -113,11 +118,18 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Avatar alt={name} src={profileImageUrl} />
+        {profileImageUrl ? (
+          <Avatar alt={name} src={profileImageUrl} />
+        ) : (
+          <Avatar alt={name} className={classes.profileColor}>
+            {' '}
+          </Avatar>
+        )}
+
         <Typography
           className={classes.name}
           variant="body1"
-        >{`@${name}`}</Typography>
+        >{`${name}`}</Typography>
         <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>
       <Popper
