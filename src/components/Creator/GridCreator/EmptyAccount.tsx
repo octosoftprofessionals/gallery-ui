@@ -9,6 +9,7 @@ const useStyle = makeStyles(Theme => ({
     fontFamily: Theme.typography.fontFamily[2],
     color: Theme.palette.primary.main,
     '&:hover': { color: Theme.palette.primary.main },
+    '@media (max-width: 545px)': { textAlign: 'center' },
   },
   textSecondary: {
     fontSize: Theme.typography.fontSize[4],
@@ -16,16 +17,6 @@ const useStyle = makeStyles(Theme => ({
     color: Theme.palette.primary.main,
     width: Theme.spacing(18),
     textAlign: 'center',
-  },
-  button: {
-    backgroundColor: Theme.palette.primary.main,
-    color: Theme.palette.secondary.main,
-    marginTop: Theme.spacing(3),
-    '&:hover': {
-      backgroundColor: Theme.palette.secondary.main,
-      color: Theme.palette.primary.main,
-      borderColor: Theme.palette.primary.main,
-    },
   },
 }))
 
@@ -37,22 +28,22 @@ const EmptyAccount = ({
   const classes = useStyle()
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      {primaryText != null ?
-        <Typography className={classes.text}>
-          {primaryText}
-        </Typography>
-      : null}
-      {secondaryText != null ?
+      {primaryText != null ? (
+        <Typography className={classes.text}>{primaryText}</Typography>
+      ) : null}
+      {secondaryText != null ? (
         <Typography className={classes.textSecondary}>
           {secondaryText}
         </Typography>
-      : null}
-      {showExploreButton ? <>
-        <Box height={16} />
-        <Button className={classes.button} variant="outlined" disableElevation href="/">
-          <Typography variant="button">Explore</Typography>
-        </Button>
-      </> : null}
+      ) : null}
+      {showExploreButton ? (
+        <>
+          <Box height={16} />
+          <Button variant="outlined" disableElevation href="/">
+            <Typography variant="button">Explore</Typography>
+          </Button>
+        </>
+      ) : null}
     </Grid>
   )
 }
