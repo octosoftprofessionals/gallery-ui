@@ -34,7 +34,7 @@ const Sold = ({ price, children }) => {
           Sold for
         </Typography>
         <Typography variant="caption" color="primary">
-          {`${formatDecimal(price)} ETH`}
+          {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>
