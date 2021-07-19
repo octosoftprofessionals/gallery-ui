@@ -35,7 +35,9 @@ const Navigator = ({ pathname }) => {
   return (
     <Hidden mdDown>
       <div className={classes.container}>
-        <Link to="/exhibition" className={classes.link}>
+        <Link to="/construction" className={classes.link}>
+          {' '}
+          {/*  to="/exhibition" */}
           <Button
             variant="text"
             color="primary"
@@ -68,7 +70,9 @@ const Navigator = ({ pathname }) => {
             </Typography>
           </Button>
         </Link>
-        <Link to="/creators" className={classes.link}>
+        <Link to="/construction" className={classes.link}>
+          {' '}
+          {/* to="/creators" */}
           <Button
             variant="text"
             color="primary"
@@ -79,7 +83,8 @@ const Navigator = ({ pathname }) => {
             </Typography>
           </Button>
         </Link>
-        <Link to="/collabs" className={classes.link}>
+        <Link to="/construction" className={classes.link}>
+          {/* to="/collabs" */}
           <Button
             variant="text"
             color="primary"
