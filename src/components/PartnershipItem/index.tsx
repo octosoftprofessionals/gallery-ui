@@ -19,8 +19,8 @@ const useStyle = makeStyles(Theme => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    paddingBottom: '140%',
-    borderRadius: Theme.spacing(11, 11, 0, 0),
+    paddingBottom: '100%',
+    borderRadius: Theme.spacing(4, 4, 0, 0),
   },
   infoCard: {
     padding: Theme.spacing(9),
