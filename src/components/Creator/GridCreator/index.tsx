@@ -24,6 +24,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           primaryText: isMyAccount
             ? 'No creations. Go get busy! 🧑‍🎨'
             : 'Nothing to see here.',
+          showExploreButton: true,
         }}
         queryName="CreatedItemsQuery"
         queryFunction={async () =>
