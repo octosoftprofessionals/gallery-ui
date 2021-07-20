@@ -22,7 +22,7 @@ const useStyles = makeStyles(Theme => ({
   icon: { fontSize: Theme.spacing(13), color: colors.Gray },
 }))
 
-const items = [
+/* const items = [
   {
     imageUrl:
       'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
@@ -40,7 +40,7 @@ const items = [
       'Officia culpa deserunt Officia culpa deserunt Officia culpa deserunt',
   },
 ]
-
+ */
 const Playlist = () => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
@@ -54,14 +54,14 @@ const Playlist = () => {
   return (
     <>
       <Grid container justify="center" direction="row" wrap="wrap">
-        {items.map((item, index) => (
+        {/*   {items.map((item, index) => (
           <Grid item xs={12} sm={5} container justify="center" key={index}>
             <PlaylistItem
               imageUrl={item.imageUrl}
               titlePlaylist={item.titlePlaylist}
             />
           </Grid>
-        ))}
+        ))} */}
         <Grid item xs={12} sm={5} container>
           <Button className={classes.button} fullWidth onClick={handleOpen}>
             <Grid container alignItems="center" direction="column">
