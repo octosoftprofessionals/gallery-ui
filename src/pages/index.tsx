@@ -8,14 +8,12 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-import {
-  featuredItemsQuery,
-  featuredInfinitItemsQuery,
-} from '../services/gallery'
+import { featuredInfinitItemsQuery } from '../services/gallery'
 import { GalleryItem } from '../types'
 
 const Home = () => {
-  const [offset, setOffset] = useState(0)
+  const [featuredArtworks, setFeaturedArtworks] = useState(0)
+  const [liveAuctions, setLiveAuctions] = useState(0)
   type featureItemsQueryProps = {
     data: GalleryItem[]
     status: 'idle' | 'error' | 'loading' | 'success'
@@ -23,10 +21,27 @@ const Home = () => {
 
   const {
     data: allFeaturedItems = [],
-    isLoading: isAllFeaturedItems,
+    isLoading,
     isFetching,
     fetchNextPage,
     hasNextPage,
+  } = useInfiniteQuery(
+    'featuredArtworksItemsItems',
+    ({ pageParam = 0 }) => featuredInfinitItemsQuery({ offset: pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        return lastPage.length >= 20
+      },
+    }
+  )
+
+  const {
+    data: FeaturedArtworksItems = [],
+    isLoading: isLoadingFA,
+    isFetching: isFetchingFA,
+    fetchNextPage: fetchNextPageFA,
+    hasNextPage: hasNextPageFA,
   } = useInfiniteQuery(
     'featuredItems',
     ({ pageParam = 0 }) => featuredInfinitItemsQuery({ offset: pageParam }),
@@ -37,13 +52,20 @@ const Home = () => {
       },
     }
   )
-  const getMore = () => {
-    const newPages = offset + 20
-    setOffset(newPages)
+
+  const getMoreFeaturedArtworks = () => {
+    const newPages = featuredArtworks + 20
+    setFeaturedArtworks(newPages)
+    fetchNextPageFA({ pageParam: newPages })
+  }
+
+  const getMoreLiveAuctions = () => {
+    const newPages = liveAuctions + 20
+    setLiveAuctions(newPages)
     fetchNextPage({ pageParam: newPages })
   }
 
-  // const featuredItems = allFeaturedItems.filter(
+  // const featuredItems = allFeaturedItems.page.filter(
   //   item => item?.assetId !== heroItem?.assetId
   // )
 
@@ -59,28 +81,28 @@ const Home = () => {
   return (
     <Layout>
       <EmailPopUp />
-      {/* {isLoading ? (
+      {isLoadingFA ? (
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={featuredItems.slice(0, 2)}
+          artworksCarousel={allFeaturedItems.pages[0].slice(0, 2)}
           timeout={1000}
           interval={7000}
         />
-      )} */}
+      )}
       <ArtworkGrid
         title="Featured artworks"
         titleButton="artworks"
         link="/artworks"
       >
-        {isAllFeaturedItems ? (
+        {isLoadingFA ? (
           <Spinner height="50vh" />
         ) : (
           <Gallery
-            isLoading={isFetching}
-            handleNext={getMore}
-            pages={allFeaturedItems.pages}
-            hasNextPage={hasNextPage}
+            isLoading={isFetchingFA}
+            handleNext={getMoreFeaturedArtworks}
+            pages={FeaturedArtworksItems.pages}
+            hasNextPage={hasNextPageFA}
             renderItem={(items, index) => (
               <ArtworkItem key={index} galleryItem={items} />
             )}
@@ -88,7 +110,7 @@ const Home = () => {
         )}
       </ArtworkGrid>
 
-      {/* <ArtworkGrid
+      <ArtworkGrid
         title="Live auctions"
         titleButton="live auctions"
         link="/artworks"
@@ -99,14 +121,15 @@ const Home = () => {
         ) : (
           <Gallery
             isLoading={isFetching}
-            items={listedItems}
+            handleNext={getMoreLiveAuctions}
+            pages={allFeaturedItems.pages}
             hasNextPage={hasNextPage}
             renderItem={(item, index) => (
               <ArtworkItem key={index} galleryItem={item} />
             )}
           />
         )}
-      </ArtworkGrid> */}
+      </ArtworkGrid>
     </Layout>
   )
 }
