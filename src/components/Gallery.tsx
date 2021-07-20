@@ -1,76 +1,62 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Grid, Button, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import GalleryItem from './GalleryItem'
+import Spinner from '../components/Spinner'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
   textButton: { fontSize: Theme.typography.fontSize[3] },
-  button: { padding: Theme.spacing(3, 5), margin: Theme.spacing(6) },
+  button: {
+    padding: Theme.spacing(3, 5),
+    margin: Theme.spacing(6),
+    display: ({ hasNextPage }) => (hasNextPage ? 'block' : 'none'),
+  },
 }))
 
-const Gallery = ({ items = [], renderItem, isLoading }) => {
-  const [pages, setPages] = useState<number>(0)
-  const handleNextPages = () => {
-    setPages(pages + 1)
-  }
-  const handleBeforePages = () => {
-    if (pages > 0) setPages(pages - 1)
-  }
+const Gallery = ({
+  pages = [],
+  renderItem,
+  handleNext,
+  hasNextPage,
+  isLoading,
+}) => {
+  const classes = useStyle({ hasNextPage })
 
-  const classes = useStyle()
   return (
     <>
       <Grid container direction="row" justify="space-around" wrap="wrap">
-        {Array.isArray(items[0])
-          ? items[pages].map((artwork, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                className={classes.containerItem}
-              >
-                {renderItem(artwork, index)}
-              </Grid>
-            ))
-          : items.map((creator, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                className={classes.containerItem}
-              >
-                {renderItem(creator, index)}
-              </Grid>
-            ))}
+        {pages.map(items => {
+          return items.map((artwork, index) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              className={classes.containerItem}
+            >
+              {renderItem(artwork, index)}
+            </Grid>
+          ))
+        })}
       </Grid>
-      <Grid item container justify="center">
-        <Button
-          variant="outlined"
-          className={classes.button}
-          onClick={() => handleNextPages()}
-        >
-          <Typography variant="button" className={classes.textButton}>
-            Next Pages
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          className={classes.button}
-          style={{ display: pages != 0 ? 'block' : 'none' }}
-          onClick={() => handleBeforePages()}
-        >
-          <Typography variant="button" className={classes.textButton}>
-            Before Pages
-          </Typography>
-        </Button>
-      </Grid>
+      {isLoading ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Grid item container justify="center">
+          <Button
+            variant="outlined"
+            className={classes.button}
+            onClick={handleNext}
+          >
+            <Typography variant="button" className={classes.textButton}>
+              Load More
+            </Typography>
+          </Button>
+        </Grid>
+      )}
     </>
   )
 }

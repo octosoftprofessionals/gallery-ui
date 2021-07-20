@@ -15,10 +15,19 @@ const http = axios
 const get = async (url, queryParams = {}) => {
   return await http.get(url, { params: queryParams })
 }
-
 export const featuredItemsQuery = async (queryParams = {}) => {
   const url = `${ROOT}/featured-items`
   const res = await get(url, queryParams)
+  return res.data ?? []
+}
+
+export const featuredInfinitItemsQuery = async ({
+  offset,
+}: {
+  offset: number
+}) => {
+  const url = `${ROOT}/featured-items?offset=${offset}&limit=20`
+  const res = await get(url)
   return res.data ?? []
 }
 
