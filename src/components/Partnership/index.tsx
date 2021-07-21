@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { featuredItemsQuery } from '../../services/gallery'
 import { makeStyles } from '@material-ui/core/styles'
 import PartnershipArtworks from './PartnershipArtworks'
@@ -37,7 +37,13 @@ const GridPartnershipArtworks = () => {
     <Grid container justify="center">
       <h1 className={classes.title}>Platform Collaborations</h1>
       <Grid container justify="left">
-        <h3 className={classes.subtitle}>SuperChief x KnownOrigin</h3>
+        <Typography
+          variant="caption"
+          color="primary"
+          className={classes.subtitle}
+        >
+          SuperChief x KnownOrigin
+        </Typography>
       </Grid>
 
       <hr className={classes.divider}></hr>
@@ -45,7 +51,13 @@ const GridPartnershipArtworks = () => {
         <PartnershipArtworks isLoading={isLoading} data={listedItems} />
       </Grid>
       <Grid container justify="left">
-        <h3 className={classes.subtitle}>SuperChief x Rarible</h3>
+        <Typography
+          variant="caption"
+          color="primary"
+          className={classes.subtitle}
+        >
+          SuperChief x Rarible
+        </Typography>
       </Grid>
       <hr className={classes.divider}></hr>
       <Grid

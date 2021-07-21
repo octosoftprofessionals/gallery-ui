@@ -10,7 +10,7 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     bottom: 0,
     position: 'absolute',
-    backgroundColor: Theme.palette.secondary.light,
+    backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
   conateinerTop: { padding: Theme.spacing(0, 6, 2) },
@@ -33,7 +33,7 @@ const Reserve = ({ price, children }) => {
           Reserve price
         </Typography>
         <Typography variant="caption" color="primary">
-          {!!price ? `${formatDecimal(price)} ETH` : '—'}
+          {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>

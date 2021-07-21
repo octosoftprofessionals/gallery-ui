@@ -32,7 +32,7 @@ const InAuctions = ({ price, timer, children }) => {
           </Typography>
           <Grid item xs={12}>
             <Typography variant="caption" color="secondary">
-              {`${formatDecimal(price)} ETH`}
+              {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
             </Typography>
           </Grid>
         </Grid>
