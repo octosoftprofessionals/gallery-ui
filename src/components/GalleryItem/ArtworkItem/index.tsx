@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,7 +12,10 @@ import FooterCardItem from '../FooterCardItem'
 import CreatorInfo from './CreatorInfo'
 
 const useStyle = makeStyles(Theme => ({
-  root: { position: 'relative' },
+  root: {
+    position: 'relative',
+    transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
+  },
   img: {
     backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
@@ -51,6 +53,15 @@ const useStyle = makeStyles(Theme => ({
     height: '100%',
     position: 'absolute',
     borderRadius: Theme.spacing(4, 4, 0, 0),
+  },
+  line: {
+    display: 'box',
+    lineClamp: 2,
+    boxOrient: 'vertical',
+    overflow: 'hidden',
+  },
+  footer: {
+    marginTop: Theme.spacing(11),
   },
 }))
 
@@ -120,8 +131,8 @@ const ArtworkItem = ({
         className={classes.link}
       >
         <div className={classes.infoCard}>
-          <Typography variant="h6" color="primary">
-            <Truncate lines={2}>{title}</Truncate>
+          <Typography variant="h6" color="primary" className={classes.line}>
+            {title}
           </Typography>
           <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
         </div>
