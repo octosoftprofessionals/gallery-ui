@@ -59,9 +59,9 @@ const useStyle = makeStyles(Theme => ({
     lineClamp: 2,
     boxOrient: 'vertical',
     overflow: 'hidden',
-  },
-  footer: {
-    marginTop: Theme.spacing(11),
+    '@media (max-width: 576px)': {
+      lineClamp: 1,
+    },
   },
 }))
 
