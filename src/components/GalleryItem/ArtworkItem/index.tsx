@@ -32,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.card.main,
     borderRadius: Theme.spacing(0, 0, 4, 4),
     '@media (max-width: 576px)': {
-      paddingBottom: `${Theme.spacing(6)}vh`,
+      paddingBottom: `${Theme.spacing(8)}vh`,
     },
   },
   link: { textDecoration: 'none' },
