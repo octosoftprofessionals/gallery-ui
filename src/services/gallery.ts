@@ -31,10 +31,10 @@ export const featuredInfinitItemsQuery = async ({
   return res.data ?? []
 }
 
-export const galleryItemQuery = async ({
-  assetContractAddress,
-  assetTokenId,
-}): Promise<GalleryItem> => {
+export const galleryItemQuery = async (
+  assetContractAddress: string,
+  assetTokenId: number
+): Promise<GalleryItem> => {
   const url = `${ROOT}/gallery-item/${assetContractAddress}/${assetTokenId}`
   const res = await get(url)
   return res.data ?? {}

@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
-import { getProfileAccountByAddress } from '../../services/gallery'
+import { galleryItemQuery } from '../../services/gallery'
 
 import useQueryParams from '../../hooks/useQueryParams'
 import Spinner from '../../components/Spinner'
@@ -21,25 +21,32 @@ const CreatorPage = () => {
   const { address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const {
-    data: creatorQuery,
-    isLoading,
-  } = useQuery('getProfileAccountByAddress', () =>
-    getProfileAccountByAddress(
-      typeof address == 'string' ? address : address[0]
-    )
+  const contractAddress = '0x495f947276749ce646f68ac8c248420045cb7b5e'
+  const tokenId =
+    '109357140932249174184232105731133177415490681567806678064024980607176452079646'
+  const { data: creatorItem, isLoading } = useQuery(
+    'creatorQuery',
+    () => galleryItemQuery(contractAddress, tokenId),
+    {
+      refetchOnWindowFocus: false,
+    }
   )
 
   return (
-    <Layout padding="0" marginTop="0" height>
+    <Layout
+      padding="0"
+      marginTop="0"
+      height
+      backgroundImage={isLoading ? null : creatorItem.creatorImageUrl}
+    >
       {isLoading ? (
         <Spinner height="50vh" />
       ) : (
         <Creator
           isMyAccount={false}
-          username={creatorQuery.username}
-          address={creatorQuery.address}
-          profileImageUrl={creatorQuery.profileImageUrl}
+          username={creatorItem.creatorUsername}
+          address={address}
+          profileImageUrl={creatorItem.creatorImageUrl}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}
         />

@@ -5,12 +5,14 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
 
 import FooterCardItem from './FooterCardItem'
 import CreatorFooter from './FooterCardItem/Creators'
+import { GalleryItem } from '../../../services/gallery'
+import { profilePathFromAddress } from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative' },
   link: { textDecoration: 'none' },
   img: {
-    backgroundImage: props => `url(${props.imgUrl})`,
+    backgroundImage: ({ imgUrl }) => `url(${imgUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -44,18 +46,25 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorItem = ({ creator }) => {
-  const classes = useStyle({ imgUrl: creator.coverImageUrl })
+const CreatorItem = ({
+  galleryItem = {},
+  ...rootProps
+}: {
+  galleryItem: GalleryItem | undefined
+}) => {
+  const { creatorUsername, creatorImageUrl, creatorAddress } = galleryItem
+  const classes = useStyle({ imgUrl: creatorImageUrl })
+  const linkCreator = profilePathFromAddress(creatorAddress)
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
-      <Link to={`/creator?id=${creator.username}`} className={classes.link}>
+      <Link to={linkCreator} className={classes.link}>
         <div className={classes.head}>
           <div className={classes.img} />
           <div className={classes.behindAvatar}>
             <Avatar
               alt="avat"
-              src={`${creator.profileImageUrl}`}
+              src={`${creatorImageUrl}`}
               className={classes.avatar}
             />
           </div>
@@ -63,29 +72,28 @@ const CreatorItem = ({ creator }) => {
         <Grid container justify="flex-start" className={classes.infoCard}>
           <Grid item xs={12}>
             <Typography variant="h5" color="primary">
-              {creator.username}
+              {creatorUsername}
             </Typography>
           </Grid>
           <Typography
             variant="subtitle2"
             className={classes.nameArtis}
-          >{`@${creator.name}`}</Typography>
+          >{`@${creatorUsername}`}</Typography>
           <div className={classes.conatainerBio}>
             <div className={classes.descriptionBio}>
               <Typography variant="body2" color="primary">
-                {creator.bio}
+                {''}
               </Typography>
             </div>
           </div>
-          {/* <CreatorFooter followers={followers} link={link} /> */}
         </Grid>
       </Link>
       <FooterCardItem
-        followers={creator.followers}
+        followers={0}
         statesArt="creator"
         price
         timer
-        link={`/creator?id=${creator.username}`}
+        link={linkCreator}
       />
     </Paper>
   )
