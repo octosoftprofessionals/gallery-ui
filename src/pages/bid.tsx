@@ -27,7 +27,7 @@ const BidPage = () => {
   return (
     <Layout
       publicKey={accountAddress}
-      name={truncateString(metamaskStorage.acount, 10)}
+      name={truncateString(metamaskStorage?.acount, 10)}
     >
       <Bid galleryItem={galleryItem} />
     </Layout>
