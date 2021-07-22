@@ -147,7 +147,9 @@ function useLocalState(key, initial) {
   })
 
   useEffect(() => {
-    window.localStorage.setItem(key, value)
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(key, value)
+    }
   }, [value])
 
   return [value, setValue]
