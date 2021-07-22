@@ -44,7 +44,9 @@ function useLocalState(key, initial) {
   })
 
   useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(themeSelected))
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(key, JSON.stringify(themeSelected))
+    }
   }, [themeSelected])
 
   return [themeSelected, setThemeSelected]

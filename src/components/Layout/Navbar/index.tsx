@@ -136,14 +136,16 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const handleLogOut = async () => {
     setMetamaskAccount(null)
     setValue(null)
-    await window.ethereum.request({
-      method: 'eth_requestAccounts',
-      params: [
-        {
-          eth_accounts: {},
-        },
-      ],
-    })
+    if (typeof window !== 'undefined') {
+      await window.ethereum.request({
+        method: 'eth_requestAccounts',
+        params: [
+          {
+            eth_accounts: {},
+          },
+        ],
+      })
+    }
   }
   return (
     <>
