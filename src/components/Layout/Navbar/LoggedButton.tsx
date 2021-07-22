@@ -58,6 +58,13 @@ const useStyles = makeStyles(theme => ({
     color: '#FFF',
     background: backgroundGradient.backgroundGradient1,
   },
+  textKeyPublic: {
+    fontFamily: theme.typography.fontFamily[1],
+    fontWeight: 400,
+    paddingLeft: theme.spacing(2),
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+  },
 }))
 
 const menu = [
@@ -127,9 +134,11 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
         )}
 
         <Typography
-          className={classes.name}
+          className={name ? classes.name : classes.textKeyPublic}
           variant="body1"
-        >{`${name}`}</Typography>
+        >
+          {name ? `${name}` : `${account.acount}`}
+        </Typography>
         <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>
       <Popper
