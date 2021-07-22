@@ -13,7 +13,9 @@ export function useLocalState(key, initial) {
   })
 
   useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(storedAccount))
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(key, JSON.stringify(storedAccount))
+    }
   }, [storedAccount])
 
   const setAccount = account => {
@@ -24,7 +26,9 @@ export function useLocalState(key, initial) {
       // Save state
       setStoredAccount(valueToStore)
       // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      }
     } catch (error) {
       // A more advanced implementation would handle the error case
       console.log(error)

@@ -25,10 +25,7 @@ const BidPage = () => {
   const accountAddress = useMetamaskAccount()
 
   return (
-    <Layout
-      publicKey={accountAddress}
-      name={truncateString(metamaskStorage.acount, 10)}
-    >
+    <Layout publicKey={accountAddress}>
       <Bid galleryItem={galleryItem} />
     </Layout>
   )
