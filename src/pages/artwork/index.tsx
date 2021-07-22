@@ -36,48 +36,12 @@ const linkShareTwitter = () => {
 const creatorDescription =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 
-const historyInfo = [
-  {
-    action: 'Bid placed',
-    date: 'May 10, 2021 at 1:50pm',
-    name: 'name',
-    imgUrl:
-      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-    price: '3.025',
-    money: '24.005',
-    link: 'https://etherscan.io/',
-  },
-  {
-    action: 'Listed',
-    date: 'May 10, 2021 at 1:50pm',
-    name: 'name',
-    imgUrl:
-      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-    price: '3.025',
-    money: '24.005',
-    link: 'https://etherscan.io/',
-  },
-  {
-    action: 'Minted',
-    date: 'May 10, 2021 at 1:50pm',
-    name: 'name',
-    imgUrl:
-      'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-    price: '',
-    money: '',
-    link: 'https://etherscan.io/',
-  },
-]
-
 //const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
 
 const ShowArtwork = () => {
   const { contractAddress, tokenId } = useQueryParams()
   const { data: galleryItem, status } = useQuery('artworkQuery', () =>
-    galleryItemQuery({
-      assetContractAddress: contractAddress,
-      assetTokenId: tokenId,
-    })
+    galleryItemQuery(contractAddress, tokenId)
   )
   const isLoading = status === 'loading'
 
@@ -89,7 +53,6 @@ const ShowArtwork = () => {
         <ArtworkShow
           galleryItem={galleryItem}
           artworkLinks={artworkLinks}
-          creatorDescription={creatorDescription}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}
         />

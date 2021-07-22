@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useMutation } from 'react-query'
 import { createFollow } from '../../../services/follow'
@@ -10,7 +10,6 @@ import {
   Avatar,
   Box,
   Button,
-  Divider,
   Grid,
   Typography,
   Tooltip,
@@ -18,7 +17,7 @@ import {
 import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
-import { boxShadow } from '../../Styles/Colors'
+import { boxShadow, colors } from '../../Styles/Colors'
 import Links from './Links'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 
@@ -87,14 +86,8 @@ const useStyle = makeStyles(Theme => ({
     margin: Theme.spacing(5, 0, 5),
   },
   textDate: { textTransform: 'capitalize' },
+  iconCopy: { color: colors.IslamicGreen },
 }))
-
-//Fake mockup data just to send something and check that route is working properly
-const mockUpData = {
-  user_name: 'Roger',
-  artist_name: '@MetaDrillMinter',
-  artist_id: 1,
-}
 
 const InfoCreator = ({
   isMyAccount = false,
@@ -110,7 +103,7 @@ const InfoCreator = ({
   userIndex = null,
 }) => {
   const classes = useStyle()
-
+  const [isCopy, setIsCopy] = useState(false)
   // https://react-query.tanstack.com/guides/mutations
   // 1st attempt)
   //const mutation = useMutation(newFollow => axios.post('http://localhost:3000/v1/follow', newFollow))
@@ -133,7 +126,8 @@ const InfoCreator = ({
   // const year = new Date(createdAt).getFullYear()
 
   const getPublicKey = () => {
-    return navigator.clipboard.writeText(publicKey)
+    navigator.clipboard.writeText(publicKey)
+    setIsCopy(true)
   }
 
   return (
@@ -153,8 +147,11 @@ const InfoCreator = ({
           variant="contained"
           color="primary"
           endIcon={
-            <Tooltip title="Copy Address" placement="top">
-              <FileCopy />
+            <Tooltip
+              title={isCopy ? 'Address has copied' : 'Copy Address'}
+              placement="top"
+            >
+              <FileCopy className={isCopy ? classes.iconCopy : null} />
             </Tooltip>
           }
           className={classes.buttonKeyPublic}
@@ -217,7 +214,6 @@ const InfoCreator = ({
       </Grid>
       {isMyAccount ? null : (
         <>
-          {' '}
           <Typography variant="button" color="primary">
             Followed by
           </Typography>
