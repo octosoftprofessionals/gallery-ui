@@ -51,8 +51,11 @@ const ConnectWalletModal = ({
   }, [])
 
   const handleConnection = async () => {
-    if (metaMaskInstalled) {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+    if (metaMaskInstalled && typeof window !== 'undefined') {
+      const accounts =
+        (await window.ethereum?.request({
+          method: 'eth_requestAccounts',
+        })) ?? []
       handleCloseConnectWalletModal()
       setValue({ acount: accounts[0] })
       setEthereumAccount(accounts[0])

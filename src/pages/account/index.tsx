@@ -18,8 +18,12 @@ const AccountPage = () => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
   const handleConnection = async () => {
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-    setMetamaskAccount(accounts[0])
+    if (typeof window !== 'undefined') {
+      const accounts =
+        (await window.ethereum?.request({ method: 'eth_requestAccounts' })) ??
+        []
+      setMetamaskAccount(accounts[0])
+    }
   }
 
   handleConnection()
