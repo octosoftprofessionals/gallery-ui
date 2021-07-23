@@ -21,8 +21,7 @@ import NavBarBid from './NavBarBid'
 import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 
-import { useLocalState } from '../../../hooks/localStoreHook'
-import { useSetMetamaskAccount, useMetamaskAccount } from '../../../atom'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 
 const { boxShadow1 } = boxShadow
 
@@ -129,22 +128,12 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
-  const metamaskAccount = useMetamaskAccount()
-  const setMetamaskAccount = useSetMetamaskAccount()
-  const [account, setValue] = useLocalState('metamask-account', metamaskAccount)
+  const [account, setAccount] = useAccountStore()
 
   const handleLogOut = async () => {
-    setMetamaskAccount(null)
-    setValue(null)
+    setAccount(null)
     if (typeof window !== 'undefined') {
-      await window.ethereum.request({
-        method: 'eth_requestAccounts',
-        params: [
-          {
-            eth_accounts: {},
-          },
-        ],
-      })
+      window.ethereum.on('disconnect', () => {})
     }
   }
   return (

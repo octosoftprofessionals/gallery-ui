@@ -3,9 +3,8 @@ import { Link } from 'gatsby'
 import { Grid, Typography, Button, IconButton, Dialog } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
-import { useSetMetamaskAccount, useMetamaskAccount } from '../../../atom'
 
-import { useLocalState } from '../../../hooks/localStoreHook'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 
 import detectEthereumProvider from '@metamask/detect-provider'
 
@@ -34,13 +33,9 @@ const ConnectWalletModal = ({
 }) => {
   const classes = useStyle()
 
-  const setMetamaskAccount = useSetMetamaskAccount()
-  const metamaskAccount = useMetamaskAccount()
-
-  const [value, setValue] = useLocalState('metamask-account', 'disconect')
+  const [_, setMetamaskAccount] = useAccountStore()
 
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
-  const [ethereumAccount, setEthereumAccount] = useState(null)
 
   useEffect(() => {
     checkMetaMaskConnected()
@@ -52,23 +47,39 @@ const ConnectWalletModal = ({
 
   const handleConnection = async () => {
     if (metaMaskInstalled && typeof window !== 'undefined') {
-      const accounts =
-        (await window.ethereum?.request({
-          method: 'eth_requestAccounts',
-        })) ?? []
-      handleCloseConnectWalletModal()
-      setValue({ acount: accounts[0] })
-      setEthereumAccount(accounts[0])
-      //recoil state
-      setMetamaskAccount(() => accounts[0])
+      try {
+        const isConnected = await window.ethereum?.isConnected()
 
-      return
+        const accounts =
+          (await window.ethereum?.request({
+            method: 'eth_requestAccounts',
+            params: [
+              {
+                eth_accounts: {},
+              },
+            ],
+          })) ?? []
+
+        if (isConnected) {
+          await window.ethereum?.request({
+            method: 'wallet_requestPermissions',
+            params: [
+              {
+                eth_accounts: {},
+              },
+            ],
+          })
+        }
+
+        setMetamaskAccount(accounts[0])
+        handleCloseConnectWalletModal()
+      } catch (e) {
+        console.log(e)
+      }
     } else {
       handleCloseConnectWalletModal()
       setRedirectModal(true)
     }
-
-    setEthereumAccount(false)
   }
 
   const termsOfService = '/termsOfService'

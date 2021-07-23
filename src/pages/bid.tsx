@@ -6,9 +6,7 @@ import Bid from '../components/Bid'
 
 import useQueryParams from '../hooks/useQueryParams'
 import { galleryItemQuery } from '../services/gallery'
-import { useMetamaskAccount } from '../atom'
-import { getInfoStorage } from '../Utils/getStorage'
-import { truncateString } from '../Utils/stringUtils'
+import { useAccountStore } from '../hooks/useAccountStore'
 
 const BidPage = () => {
   const { contractAddress, tokenId } = useQueryParams()
@@ -20,12 +18,10 @@ const BidPage = () => {
   )
 
   //getting metamask account from the storage
-  const metamaskStorage = getInfoStorage('metamask-account')
-
-  const accountAddress = useMetamaskAccount()
+  const metamaskStorage = useAccountStore()
 
   return (
-    <Layout publicKey={accountAddress}>
+    <Layout publicKey={metamaskStorage}>
       <Bid galleryItem={galleryItem} />
     </Layout>
   )
