@@ -158,11 +158,11 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Grid>
 
             <Hidden smDown>
-              {account ? (
+              {metamaskAccount ? (
                 <LoggedButton
                   profileImageUrl={profileImageUrl}
                   name={name}
-                  account={account}
+                  account={metamaskAccount}
                   onLogOut={handleLogOut}
                 />
               ) : (
