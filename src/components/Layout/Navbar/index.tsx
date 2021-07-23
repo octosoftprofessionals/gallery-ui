@@ -135,14 +135,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
   const handleLogOut = async () => {
     setAccount(null)
     if (typeof window !== 'undefined') {
-      await window.ethereum.request({
-        method: 'eth_requestAccounts',
-        params: [
-          {
-            eth_accounts: {},
-          },
-        ],
-      })
+      window.ethereum.on('disconnect', () => {})
     }
   }
   return (

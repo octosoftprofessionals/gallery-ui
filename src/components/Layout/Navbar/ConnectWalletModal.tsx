@@ -47,31 +47,35 @@ const ConnectWalletModal = ({
 
   const handleConnection = async () => {
     if (metaMaskInstalled && typeof window !== 'undefined') {
-      const isConnected = await window.ethereum?.isConnected()
+      try {
+        const isConnected = await window.ethereum?.isConnected()
 
-      const accounts =
-        (await window.ethereum?.request({
-          method: 'eth_requestAccounts',
-          params: [
-            {
-              eth_accounts: {},
-            },
-          ],
-        })) ?? []
+        const accounts =
+          (await window.ethereum?.request({
+            method: 'eth_requestAccounts',
+            params: [
+              {
+                eth_accounts: {},
+              },
+            ],
+          })) ?? []
 
-      if (isConnected) {
-        await window.ethereum?.request({
-          method: 'wallet_requestPermissions',
-          params: [
-            {
-              eth_accounts: {},
-            },
-          ],
-        })
+        if (isConnected) {
+          await window.ethereum?.request({
+            method: 'wallet_requestPermissions',
+            params: [
+              {
+                eth_accounts: {},
+              },
+            ],
+          })
+        }
+
+        setMetamaskAccount(accounts[0])
+        handleCloseConnectWalletModal()
+      } catch (e) {
+        console.log(e)
       }
-
-      setMetamaskAccount(accounts[0])
-      handleCloseConnectWalletModal()
     } else {
       handleCloseConnectWalletModal()
       setRedirectModal(true)
