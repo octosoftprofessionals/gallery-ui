@@ -137,7 +137,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
           className={name ? classes.name : classes.textKeyPublic}
           variant="body1"
         >
-          {name ? `${name}` : `${account.acount}`}
+          {name ? `${name}` : `${account}`}
         </Typography>
         <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>

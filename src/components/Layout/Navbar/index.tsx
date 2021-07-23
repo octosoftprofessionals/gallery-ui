@@ -130,8 +130,6 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
   const [account, setAccount] = useAccountStore()
 
-  console.log('account:::', account)
-
   const handleLogOut = async () => {
     setAccount(null)
     if (typeof window !== 'undefined') {
