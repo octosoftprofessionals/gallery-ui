@@ -13,7 +13,7 @@ const useStyle = makeStyles(Theme => ({
   },
   title: {
     fontSize: Theme.spacing(9),
-    marginBottom: Theme.spacing(4),
+    marginBottom: Theme.spacing(7),
   },
   textButton: {
     cursor: 'pointer',
@@ -22,31 +22,20 @@ const useStyle = makeStyles(Theme => ({
   text: {
     fontSize: Theme.spacing(4),
     textAlign: 'center',
-    fontWeight: 400,
-  },
-  conteiner: {
     marginBottom: Theme.spacing(2),
-    paddingLeft: Theme.spacing(4),
-    paddingRight: Theme.spacing(4),
-    paddingBottom: Theme.spacing(1),
+    padding: Theme.spacing(0, 14),
   },
   containerTitle: {
-    marginBottom: '1rem',
+    marginBottom: Theme.spacing(6),
   },
   conteinerButton: {
-    marginBottom: Theme.spacing(12),
-    width: Theme.spacing(10.62),
+    marginBottom: Theme.spacing(14),
     textAlign: 'center',
     alignItems: 'center',
   },
   buttonRedirect: {
     borderRadius: 10,
     backgroundColor: 'Black',
-    width: Theme.spacing(12.5),
-  },
-  header: {
-    paddingTop: Theme.spacing(7),
-    paddingRight: Theme.spacing(5),
   },
   anchortag: {
     color: Theme.palette.secondary.main,
@@ -61,13 +50,7 @@ const MetaMaskRedirectModal = ({ handleCloseRedirect }) => {
 
   return (
     <Grid container justify="center">
-      <Grid
-        item
-        xs={12}
-        container
-        justify="flex-end"
-        className={classes.header}
-      >
+      <Grid item xs={12} container justify="flex-end">
         <IconButton aria-label="close" onClick={handleCloseRedirect}>
           <HighlightOff className={classes.icon} />
         </IconButton>
@@ -85,7 +68,6 @@ const MetaMaskRedirectModal = ({ handleCloseRedirect }) => {
           Install MetaMask.
         </Typography>
         <Grid
-          xs={6}
           item
           className={classes.containerTitle}
           container
@@ -102,11 +84,7 @@ const MetaMaskRedirectModal = ({ handleCloseRedirect }) => {
         </Grid>
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        className={[classes.conteiner, classes.conteinerButton]}
-      >
+      <Grid item xs={12} className={classes.conteinerButton}>
         <Link to={linkMetamask} className={classes.link}>
           <Button variant="contained" className={classes.buttonRedirect}>
             <Typography variant="button" className={classes.textButton}>
