@@ -13,7 +13,7 @@ const useStyle = makeStyles(Theme => ({
   },
   title: {
     fontSize: Theme.spacing(9),
-    marginBottom: Theme.spacing(7),
+    margin: Theme.spacing(2, 0, 2, 0),
   },
   textButton: {
     cursor: 'pointer',
@@ -22,11 +22,9 @@ const useStyle = makeStyles(Theme => ({
   text: {
     fontSize: Theme.spacing(4),
     textAlign: 'center',
-    marginBottom: Theme.spacing(2),
-    padding: Theme.spacing(0, 14),
   },
   containerTitle: {
-    marginBottom: Theme.spacing(6),
+    margin: Theme.spacing(5, 0),
   },
   conteinerButton: {
     marginBottom: Theme.spacing(14),
