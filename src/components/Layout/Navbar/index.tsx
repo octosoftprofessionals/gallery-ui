@@ -132,9 +132,6 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
   const handleLogOut = async () => {
     setAccount(null)
-    if (typeof window !== 'undefined') {
-      window.ethereum.on('disconnect', () => {})
-    }
   }
   return (
     <>
@@ -158,11 +155,11 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
             </Grid>
 
             <Hidden smDown>
-              {metamaskAccount ? (
+              {account ? (
                 <LoggedButton
                   profileImageUrl={profileImageUrl}
                   name={name}
-                  account={metamaskAccount}
+                  account={account}
                   onLogOut={handleLogOut}
                 />
               ) : (

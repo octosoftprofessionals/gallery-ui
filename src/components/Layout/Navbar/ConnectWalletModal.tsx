@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
-import { Grid, Typography, Button, IconButton, Dialog } from '@material-ui/core'
+
+import { Grid, Typography, Button, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { HighlightOff } from '@material-ui/icons'
 
@@ -33,9 +34,13 @@ const ConnectWalletModal = ({
 }) => {
   const classes = useStyle()
 
-  const [_, setMetamaskAccount] = useAccountStore()
+  const [acount, setMetamaskAccount] = useAccountStore()
 
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
+
+  const provider = window.ethereum.on('', () => {})
+
+  console.log('isReturningUser :>> ', provider._state)
 
   useEffect(() => {
     checkMetaMaskConnected()
@@ -48,7 +53,18 @@ const ConnectWalletModal = ({
   const handleConnection = async () => {
     if (metaMaskInstalled && typeof window !== 'undefined') {
       try {
-        const isConnected = await window.ethereum?.isConnected()
+        if (
+          (await window.ethereum?.on('', () => {})._state.accounts.length) !== 0
+        ) {
+          await window.ethereum?.request({
+            method: 'wallet_requestPermissions',
+            params: [
+              {
+                eth_accounts: {},
+              },
+            ],
+          })
+        }
 
         const accounts =
           (await window.ethereum?.request({
@@ -59,17 +75,6 @@ const ConnectWalletModal = ({
               },
             ],
           })) ?? []
-
-        if (isConnected) {
-          await window.ethereum?.request({
-            method: 'wallet_requestPermissions',
-            params: [
-              {
-                eth_accounts: {},
-              },
-            ],
-          })
-        }
 
         setMetamaskAccount(accounts[0])
         handleCloseConnectWalletModal()
