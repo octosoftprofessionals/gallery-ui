@@ -25,9 +25,7 @@ const Sold = ({ price, children }) => {
       <Grid
         item
         container
-        alignContent="flex-start"
-        justify="center"
-        direction="column"
+        justify="space-between"
         className={classes.conateinerTop}
       >
         <Typography variant="caption" color="textPrimary">

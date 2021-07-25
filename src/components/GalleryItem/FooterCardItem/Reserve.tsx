@@ -13,7 +13,7 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
-  conateinerTop: { padding: Theme.spacing(0, 6, 2) },
+  conateinerTop: { padding: Theme.spacing(2, 6) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
 }))
 
@@ -24,9 +24,7 @@ const Reserve = ({ price, children }) => {
       <Grid
         item
         container
-        alignContent="flex-start"
-        justify="center"
-        direction="column"
+        justify="space-between"
         className={classes.conateinerTop}
       >
         <Typography variant="caption" color="textPrimary">
