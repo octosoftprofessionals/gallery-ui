@@ -35,16 +35,14 @@ const useStyle = makeStyles(Theme => ({
 const CreatorButton = ({ username, imageUrl, profileUrl, ...otherProps }) => {
   const classes = useStyle({ ...otherProps })
   return (
-    <Button className={classes.root}>
-      <LinkUser id="" href={profileUrl}>
-        <ImgConteiner className="creator-button-img-cont">
-          <ImgUser src={imageUrl} alt={username} />
-        </ImgConteiner>
-        <Typography
-          className={classes.user}
-          color="inherit"
-        >{`@${username}`}</Typography>
-      </LinkUser>
+    <Button href={profileUrl} className={classes.root}>
+      <ImgConteiner className="creator-button-img-cont">
+        <ImgUser src={imageUrl} alt={username} />
+      </ImgConteiner>
+      <Typography
+        className={classes.user}
+        color="inherit"
+      >{`@${username}`}</Typography>
     </Button>
   )
 }
