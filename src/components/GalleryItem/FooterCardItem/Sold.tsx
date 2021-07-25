@@ -22,17 +22,9 @@ const Sold = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
-      <Grid
-        item
-        container
-        justify="space-between"
-        className={classes.conateinerTop}
-      >
-        <Typography variant="caption" color="textPrimary">
-          Sold for
-        </Typography>
+      <Grid item container justify="center" className={classes.conateinerTop}>
         <Typography variant="caption" color="primary">
-          {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
+          {isNaN(price) ? 'Sold for —' : `Sold for ${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>

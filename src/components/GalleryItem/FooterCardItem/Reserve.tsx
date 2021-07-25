@@ -21,17 +21,11 @@ const Reserve = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
-      <Grid
-        item
-        container
-        justify="space-between"
-        className={classes.conateinerTop}
-      >
-        <Typography variant="caption" color="textPrimary">
-          Reserve price
-        </Typography>
+      <Grid item container justify="center" className={classes.conateinerTop}>
         <Typography variant="caption" color="primary">
-          {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
+          {isNaN(price)
+            ? 'Reserve price —'
+            : `Reserve price ${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>
