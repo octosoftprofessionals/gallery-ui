@@ -15,9 +15,9 @@ import { ArrowDropDownRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { MetamaskAccountType } from '../../../types'
 import { backgroundGradient } from '../../Styles/Colors'
+import { myProfilePathFromAddress } from '../../../config/routes'
 
 const useStyles = makeStyles(theme => ({
-  root: {},
   paper: {
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 const menu = [
   {
     name: 'My Profile',
-    link: address => `/creator/?address=${address}`,
+    link: address => myProfilePathFromAddress(address),
   },
   {
     name: `Playlist`,
@@ -166,10 +166,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
                   onKeyDown={handleListKeyDown}
                 >
                   {menu.map(item => (
-                    <Link
-                      to={item.link(account.acount)}
-                      className={classes.menuItem}
-                    >
+                    <Link to={item.link(account)} className={classes.menuItem}>
                       <MenuItem className={classes.menuItem}>
                         {item.name}
                       </MenuItem>
