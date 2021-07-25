@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
-import { getAccount } from '../../services/autionsService'
-import { backgroundGradient } from '../../components/Styles/Colors'
+
+import useQueryParams from '../../hooks/useQueryParams'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -14,51 +14,23 @@ const linkShareTwitter = () => {
 }
 
 const AccountPage = () => {
-  const [metamaskAccount, setMetamaskAccount] = useState(null)
   const [displayReportModal, setDisplayReportModal] = useState(false)
-
-  const handleConnection = async () => {
-    if (typeof window !== 'undefined') {
-      const accounts =
-        (await window.ethereum?.request({ method: 'eth_requestAccounts' })) ??
-        []
-      setMetamaskAccount(accounts[0])
-    }
-  }
-
-  handleConnection()
-
-  const { data: AccountQuery, status } = useQuery('AccountQuery', () =>
-    getAccount(metamaskAccount)
-  )
-
-  const isLoading = status === 'loading'
-
-  const urlCover = AccountQuery
-    ? AccountQuery.account.collection.banner_image_url
-    : backgroundGradient.backgroundGradient2
+  const { address } = useQueryParams()
 
   return (
     <Layout
-      cois="0.2222"
-      publicKey={metamaskAccount}
-      profileImageUrl={
-        AccountQuery
-          ? AccountQuery.account.image_url
-          : 'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
-      }
-      name={AccountQuery ? AccountQuery.account.name : 'Peter Parker'}
-      padding="20px"
+      padding="0"
       marginTop="0"
       height
-      backgroundImage={urlCover}
+      backgroundImage={
+        'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
+      }
     >
       <Creator
-        accountQuery={AccountQuery ? AccountQuery.account : undefined}
+        isMyAccount={false}
+        address={address}
         linkTwitter={linkShareTwitter()}
         setDisplayReportModal={setDisplayReportModal}
-        isLoading={isLoading}
-        type="account"
       />
     </Layout>
   )

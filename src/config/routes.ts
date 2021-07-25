@@ -10,3 +10,6 @@ export const profilePathFromUsername = (username: string) =>
 
 export const accountPathFrom = (tokenId: string) =>
   `/account/?tokenId=${tokenId}`
+
+export const myProfilePathFromAddress = (address: string) =>
+  `/account/?address=${address}`
