@@ -59,6 +59,7 @@ const useStyle = makeStyles(Theme => ({
     lineClamp: 2,
     boxOrient: 'vertical',
     overflow: 'hidden',
+    height: Theme.spacing(15),
     '@media (max-width: 576px)': {
       lineClamp: 1,
     },
