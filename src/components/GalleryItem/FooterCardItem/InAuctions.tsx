@@ -19,6 +19,15 @@ const useStyle = makeStyles(Theme => ({
   timer: {
     marginBottom: Theme.spacing(4),
   },
+  timerAlign: {
+    marginLeft: Theme.spacing(8),
+    '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(13),
+    },
+    '@media (max-width: 320px)': {
+      marginLeft: Theme.spacing(12),
+    },
+  },
 }))
 
 const InAuctions = ({ price, timer, children }) => {
@@ -43,7 +52,7 @@ const InAuctions = ({ price, timer, children }) => {
           alignItems="flex-start"
           className={classes.timer}
         >
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.timerAlign}>
             <Typography variant="caption" color="textSecondary">
               {timer}
             </Typography>

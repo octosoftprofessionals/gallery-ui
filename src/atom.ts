@@ -9,7 +9,7 @@ import { MetamaskAccountType } from './types'
 
 export const metamaskAccount = atom<MetamaskAccountType>({
   key: 'account',
-  default: {},
+  default: null,
 })
 
 export const useSetMetamaskAccount = () => useSetRecoilState(metamaskAccount)

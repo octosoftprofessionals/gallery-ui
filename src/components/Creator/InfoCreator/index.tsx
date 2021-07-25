@@ -168,10 +168,9 @@ const InfoCreator = ({
       {/* <Typography variant="h4" color="primary">
         {name}
       </Typography> */}
-      <Typography
-        variant="subtitle2"
-        className={classes.userName}
-      >{`@${username}`}</Typography>
+      <Typography variant="subtitle2" className={classes.userName}>
+        {username ? `@${username}` : publicKey}
+      </Typography>
 
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
