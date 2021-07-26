@@ -74,8 +74,8 @@ const Creator = ({
   username: usernameProp,
   address: addressProp,
   profileImageUrl,
-  followers = 0,
-  following = 0,
+  followers,
+  following,
   linkTwitter,
   setDisplayReportModal,
 }: Props) => {
