@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js'
+import { ethers } from 'ethers'
 import { DateTime } from 'luxon'
 
 export const deltaTime = (expiration: string | DateTime | Date) => {
@@ -153,3 +155,7 @@ export const findeArtwork = (arry, assetId, status) => {
   )
   res.isFavorite = status
 }
+
+export const isError = (e: any): boolean => e && e.stack && e.message && typeof e.stack === 'string' && typeof e.message === 'string'
+
+export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) => formatDecimal(ethers.utils.formatUnits(bn.toString()))

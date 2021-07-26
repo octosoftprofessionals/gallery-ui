@@ -17,6 +17,7 @@ const config = {
   OPENSEA_API_KEY: process.env.GATSBY_OPENSEA_API_KEY,
   OPENSEA_GALLERY_ADDRESS: process.env.GATSBY_OPENSEA_GALLERY_ADDRESS,
   API_URL: process.env.GATSBY_API_URL ?? 'http://localhost:3000/v1',
+  INFURA_PROJECT_ID: process.env.GATSBY_INFURA_PROJECT_ID,
 }
 
 export default config

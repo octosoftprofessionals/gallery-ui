@@ -32,7 +32,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const BidMessages = ({ setOpen, open, state }) => {
+const BidMessages = ({ setOpen, open, state, severity = null, message = null }) => {
   const classes = useStyle()
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -61,20 +61,22 @@ const BidMessages = ({ setOpen, open, state }) => {
     },
   }
 
+  const isStateDefined = state != null && Object.keys(messages).includes(state)
+
   return (
     <Snackbar
       open={open}
-      autoHideDuration={3000}
+      autoHideDuration={null}
       onClose={handleClose}
       className={classes.message}
     >
       <Alert
         icon={false}
-        severity={messages.[state]?.severity}
+        severity={isStateDefined ? messages[state].severity : severity ?? 'error'}
         variant="filled"
         className={classes.alert}
       >
-        {messages.[state]?.message}
+        {isStateDefined ? messages[state].message : message ?? 'Unknown Error.'}
       </Alert>
     </Snackbar>
   )

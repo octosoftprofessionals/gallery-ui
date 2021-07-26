@@ -6,30 +6,34 @@ import GalleryItem from '../GalleryItem'
 import Bids from './Bids'
 
 const Bid = ({ galleryItem }) => {
+  const { priceEth } = galleryItem ?? {}
+
   return (
     <Grid container justify="center">
       <Grid
         item
-        xs={12}
+        xs={8}
         sm={8}
+        md={8}
         container
         justify="space-around"
         alignItems="center"
       >
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={8} md={5}>
           {galleryItem ? (
             <GalleryItem itemType="artworks" data={galleryItem} />
           ) : (
             ''
           )}
         </Grid>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={8} md={5} style={{ marginTop: 40 }}>
           {galleryItem ? (
             <Bids
+              assetContractAddress={galleryItem?.assetContractAddress}
+              assetTokenId={galleryItem?.assetTokenId}
               priceEth={galleryItem.priceEth}
               priceUsd={galleryItem.priceUsd}
-              balance={'0'}
-              currentMaxBid={2}
+              currentMaxBid={priceEth}
             />
           ) : (
             ''

@@ -10,11 +10,13 @@ import { useAccountStore } from '../hooks/useAccountStore'
 
 const BidPage = () => {
   const { contractAddress, tokenId } = useQueryParams()
+  console.log('contractAddress:', contractAddress)
+  console.log('tokenId:', tokenId)
   const { data: galleryItem } = useQuery('artworkQuery', () =>
-    galleryItemQuery({
-      assetContractAddress: contractAddress,
-      assetTokenId: tokenId,
-    })
+    galleryItemQuery(
+      contractAddress,
+      tokenId,
+    )
   )
 
   //getting metamask account from the storage
