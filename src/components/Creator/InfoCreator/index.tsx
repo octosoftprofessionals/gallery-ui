@@ -49,9 +49,9 @@ const useStyle = makeStyles(Theme => ({
     width: '60%',
   },
   buttonKeyPublic: {
-    width: '65%',
+    width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
     position: 'absolute',
-    left: Theme.spacing(13),
+    left: ({ userIndex }) => (userIndex ? Theme.spacing(13) : 0),
     backgroundColor: Theme.palette.secondary.main,
     padding: Theme.spacing(0, 0, 0, 13),
     boxShadow: boxShadow.boxShadow1,
@@ -102,7 +102,7 @@ const InfoCreator = ({
   // createdAt,
   userIndex = null,
 }) => {
-  const classes = useStyle()
+  const classes = useStyle({ userIndex, isMyAccount })
   const [isCopy, setIsCopy] = useState(false)
   // https://react-query.tanstack.com/guides/mutations
   // 1st attempt)
@@ -165,9 +165,6 @@ const InfoCreator = ({
           </Typography>
         </Button>
       </Grid>
-      {/* <Typography variant="h4" color="primary">
-        {name}
-      </Typography> */}
       <Typography variant="subtitle2" className={classes.userName}>
         {username ? `@${username}` : publicKey}
       </Typography>
@@ -190,24 +187,12 @@ const InfoCreator = ({
           </Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Button
-            variant="outlined"
-            fullWidth
-            onClick={() => {
-              mutation.mutate({
-                user_name: mockUpData.user_name,
-                artist_name: mockUpData.artist_name,
-                artist_id: mockUpData.artist_id,
-              }) //What should I pass here? Passing fake data just to check.
-            }}
-          >
-            {mutation.isError ? (
-              <div>An error occurred: {mutation.error.message}</div>
-            ) : null}
-
-            {mutation.isSuccess ? <div>Mutation able to add!</div> : null}
-
-            <Typography variant="button">Follow</Typography>
+          <Button variant="outlined" fullWidth>
+            {isMyAccount ? (
+              <Typography variant="button">Edit profile</Typography>
+            ) : (
+              <Typography variant="button">Follow</Typography>
+            )}
           </Button>
         </Grid>
       </Grid>
@@ -221,21 +206,13 @@ const InfoCreator = ({
               <Avatar key={i} src={item} />
             ))}
           </AvatarGroup>
-          {/* <div
-            onClick={() => {
-              console.log('press hosad')
-            }}
-          >
-            <Typography variant="overline" className={classes.textFollow}>
-              View all
-            </Typography>
-          </div> */}
+
           <Grid item xs={12} sm={7}>
             <ButtonsSocialMedia
               // links={links}
               verified={true}
               imgUrl={followedes[3]}
-              invited="Diolink"
+              invited={''}
             />
           </Grid>
         </>
