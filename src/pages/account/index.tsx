@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 import Account from '../../components/Creator'
 import {
   getOneFolloweeByIdWithAllHisFollowers,
-  getOneFollowerByIdWithAllHisFollowees
+  getOneFollowerByIdWithAllHisFollowees,
 } from '../../services/follow'
 import Spinner from '../../components/Spinner'
 
@@ -22,10 +22,17 @@ const AccountPage = () => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const { address } = useQueryParams()
 
-    const { data: followeeItem, isLoading: isLoadingFollowees, error } = useQuery('followeeQuery', () => getOneFolloweeByIdWithAllHisFollowers(1))
+  const {
+    data: followeeItem,
+    isLoading: isLoadingFollowees,
+    error: errorFollowees,
+  } = useQuery('followeeQuery', () => getOneFolloweeByIdWithAllHisFollowers(1))
 
-    const { data: followersItem, isLoading: isLoadingFollowers, error: errorFollowers } = useQuery('followersQuery', () => getOneFollowerByIdWithAllHisFollowees(1))
-
+  const {
+    data: followersItem,
+    isLoading: isLoadingFollowers,
+    error: errorFollowers,
+  } = useQuery('followersQuery', () => getOneFollowerByIdWithAllHisFollowees(1))
 
   return (
     <Layout
@@ -36,21 +43,18 @@ const AccountPage = () => {
         'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
       }
     >
-    { isLoadingFollowers ?
-      <Spinner height="50vh"/>
-      :
-      <Account
-        isMyAccount={false}
-  
-        followers={followeeItem.followers.length}
-        following={followersItem.followees.length}
-
-        address={address}
-        linkTwitter={linkShareTwitter()}
-        setDisplayReportModal={setDisplayReportModal}
-      />
-
-    }
+      {isLoadingFollowers ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Account
+          isMyAccount={true}
+          followers={followeeItem.followers.length}
+          following={followersItem.followees.length}
+          address={address}
+          linkTwitter={linkShareTwitter()}
+          setDisplayReportModal={setDisplayReportModal}
+        />
+      )}
     </Layout>
   )
 }

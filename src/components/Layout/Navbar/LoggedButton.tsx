@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   menuList: {
-    marginTop: -theme.spacing(3),
+    marginTop: -theme.spacing(2),
     paddingTop: theme.spacing(4),
   },
   menuItem: {
@@ -82,6 +82,10 @@ const menu = [
   },
   {
     name: `Bids`,
+    link: address => `/construction`,
+  },
+  {
+    name: `Edit Profile`,
     link: address => `/construction`,
   },
 ]
