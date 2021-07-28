@@ -4,49 +4,48 @@ import { Button, Grid, Typography, Hidden } from '@material-ui/core'
 import { StarBorderRounded, SlideshowOutlined } from '@material-ui/icons/'
 
 const useStyle = makeStyles(Theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    padding: Theme.spacing(0),
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
   icon: {
     fontSize: Theme.spacing(12),
   },
-  button: { padding: 0 },
+  button: { padding: Theme.spacing(1), margin: Theme.spacing(1) },
 }))
 
-const ButtonPlaylist = ({}) => {
+const ButtonPlaylist = () => {
   const classes = useStyle()
   return (
-    <Grid container direction="row" justify="space-around">
+    <Grid container direction="row" justify="space-between">
       <Grid item xs={5}>
         <Button fullWidth className={classes.button}>
-          <div className={classes.root}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
             <Hidden only="xs">
               <Typography variant="overline" color="textSecondary">
                 Add to Favorites
               </Typography>
             </Hidden>
             <StarBorderRounded className={classes.icon} />
-          </div>
+          </Grid>
         </Button>
       </Grid>
       <Grid item xs={5}>
         <Button fullWidth className={classes.button}>
-          <div className={classes.root}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
             <Hidden only="xs">
               <Typography variant="overline" color="textSecondary">
                 Add to Playlist
               </Typography>
             </Hidden>
             <SlideshowOutlined className={classes.icon} />
-          </div>
+          </Grid>
         </Button>
       </Grid>
     </Grid>

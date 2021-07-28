@@ -13,7 +13,7 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
-  conateinerTop: { padding: Theme.spacing(0, 6, 2) },
+  conateinerTop: { padding: Theme.spacing(2, 6) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
 }))
 
@@ -21,19 +21,11 @@ const Reserve = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
-      <Grid
-        item
-        container
-        alignContent="flex-start"
-        justify="center"
-        direction="column"
-        className={classes.conateinerTop}
-      >
-        <Typography variant="caption" color="textPrimary">
-          Reserve price
-        </Typography>
+      <Grid item container justify="center" className={classes.conateinerTop}>
         <Typography variant="caption" color="primary">
-          {isNaN(price) ? '—' : `${formatDecimal(price)} ETH`}
+          {isNaN(price)
+            ? 'Reserve price —'
+            : `Reserve price ${formatDecimal(price)} ETH`}
         </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>

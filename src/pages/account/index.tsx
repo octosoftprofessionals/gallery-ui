@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
-import Creator from '../../components/Creator'
+import Account from '../../components/Creator'
+import {
+  getOneFolloweeByIdWithAllHisFollowers,
+  getOneFollowerByIdWithAllHisFollowees,
+} from '../../services/follow'
+import Spinner from '../../components/Spinner'
 
 import useQueryParams from '../../hooks/useQueryParams'
 
@@ -17,6 +22,18 @@ const AccountPage = () => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const { address } = useQueryParams()
 
+  const {
+    data: followeeItem,
+    isLoading: isLoadingFollowees,
+    error: errorFollowees,
+  } = useQuery('followeeQuery', () => getOneFolloweeByIdWithAllHisFollowers(1))
+
+  const {
+    data: followersItem,
+    isLoading: isLoadingFollowers,
+    error: errorFollowers,
+  } = useQuery('followersQuery', () => getOneFollowerByIdWithAllHisFollowees(1))
+
   return (
     <Layout
       padding="0"
@@ -26,12 +43,18 @@ const AccountPage = () => {
         'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg'
       }
     >
-      <Creator
-        isMyAccount={false}
-        address={address}
-        linkTwitter={linkShareTwitter()}
-        setDisplayReportModal={setDisplayReportModal}
-      />
+      {isLoadingFollowers ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Account
+          isMyAccount={true}
+          followers={followeeItem.followers.length}
+          following={followersItem.followees.length}
+          address={address}
+          linkTwitter={linkShareTwitter()}
+          setDisplayReportModal={setDisplayReportModal}
+        />
+      )}
     </Layout>
   )
 }

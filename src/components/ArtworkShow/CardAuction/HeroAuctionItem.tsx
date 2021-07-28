@@ -34,6 +34,7 @@ const useStyle = makeStyles(Theme => ({
       fontSize: Theme.typography.fontSize[4],
     },
   },
+  boxTimer: { display: ({ disableTime }) => (disableTime ? 'block' : 'none') },
 }))
 
 const HeroAuctionItem = ({
@@ -48,17 +49,20 @@ const HeroAuctionItem = ({
   const [timer, setTimer] = useState(0)
   const [disableInfo, setDisableInfo] = useState(false)
   const [disableHours, setDisableHours] = useState(true)
-  const [disableTime, setDisableTime] = useState(true)
-  const [changeTitle, setChangeTitle] = useState('Auction ending in')
+  const [disableTime, setDisableTime] = useState(false)
+  const [changeTitle, setChangeTitle] = useState('')
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const delta = deltaTime(expiration)
       if (delta >= 0) {
         setTimer(timerArray(delta))
+        setDisableTime(true)
+        setChangeTitle('Auction ending in')
       } else {
         clearInterval(timeInterval)
         setDisableTime(false)
         setTimer(0)
+        setChangeTitle('This auction is ending soon!')
       }
 
       let { Hours, Minutes } = timerArray(delta)
@@ -73,7 +77,7 @@ const HeroAuctionItem = ({
   }, [])
   let { Hours, Minutes, Seconds } = timer
 
-  const classes = useStyle({ disableInfo })
+  const classes = useStyle({ disableTime })
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
@@ -124,7 +128,14 @@ const HeroAuctionItem = ({
               {changeTitle}
             </Typography>
           </Grid>
-          <Grid item xs={12} container direction="row" justify="flex-start">
+          <Grid
+            item
+            xs={12}
+            container
+            direction="row"
+            justify="flex-start"
+            className={classes.boxTimer}
+          >
             <Grid
               item
               xs={4}

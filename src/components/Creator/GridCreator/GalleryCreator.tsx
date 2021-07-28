@@ -1,11 +1,12 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 
-import { Box, CircularProgress, Grid } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ArtworkItem from '../../../components/GalleryItem/ArtworkItem'
 import { GalleryItem } from '../../../services/gallery'
+import Spinner from '../../Spinner'
 
 import EmptyAccount from './EmptyAccount'
 
@@ -13,21 +14,20 @@ const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
 }))
 
-const Gallery = ({ emptyMessageProps, queryName, queryFunction }: { emptyMessageProps: Record<string, any>, queryName: string, queryFunction: () => Promise<GalleryItem[]> }) => {
-  const { data: galleryItems = [], isLoading } = useQuery(queryName, queryFunction)
-  const classes = useStyle()
-
-  const Loading = () => (
-    <Box
-      width="100%"
-      height="60vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Box>
+const Gallery = ({
+  emptyMessageProps,
+  queryName,
+  queryFunction,
+}: {
+  emptyMessageProps: Record<string, any>
+  queryName: string
+  queryFunction: () => Promise<GalleryItem[]>
+}) => {
+  const { data: galleryItems = [], isLoading } = useQuery(
+    queryName,
+    queryFunction
   )
+  const classes = useStyle()
 
   if (!isLoading && galleryItems.length === 0) {
     return (
@@ -37,23 +37,18 @@ const Gallery = ({ emptyMessageProps, queryName, queryFunction }: { emptyMessage
     )
   }
 
-  return (
-    isLoading ? (
-      <Loading />
-    ) : (
-      <Grid container direction="row" justify="space-between" wrap="wrap">
-        {galleryItems
-          ? galleryItems.map((galleryItem, index) => (
+  return isLoading ? (
+    <Spinner height="50vh" />
+  ) : (
+    <Grid container direction="row" justify="space-between" wrap="wrap">
+      {galleryItems
+        ? galleryItems.map((galleryItem, index) => (
             <Grid item xs={12} sm={6} md={5} className={classes.containerItem}>
-              <ArtworkItem
-                key={index}
-                galleryItem={galleryItem}
-              />
+              <ArtworkItem key={index} galleryItem={galleryItem} />
             </Grid>
           ))
         : ''}
-      </Grid>
-    )
+    </Grid>
   )
 }
 

@@ -48,7 +48,19 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
         }
       />,
 
-      <Playlist />,
+      <Playlist
+        isMyAccount={isMyAccount}
+        renderItem={[]}
+        emptyMessageProps={{
+          primaryText: isMyAccount
+            ? 'Your playlist are empty.'
+            : 'Nothing to see here.',
+          secondaryText: isMyAccount
+            ? 'Start building your collection by placing bids on artwork.'
+            : null,
+          showExploreButton: true,
+        }}
+      />,
 
       <GalleryCreator
         emptyMessageProps={{
