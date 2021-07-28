@@ -10,6 +10,7 @@ import { useAccountStore } from '../../../hooks/useAccountStore'
 import detectEthereumProvider from '@metamask/detect-provider'
 
 import { backgroundGradient } from '../../Styles/Colors'
+import { login } from '../../../services/auth'
 
 const useStyle = makeStyles(Theme => ({
   icon: { fontSize: Theme.typography.fontSize[6] },
@@ -75,6 +76,10 @@ const ConnectWalletModal = ({
               },
             ],
           })) ?? []
+
+        const account = await login()
+        // TODO: save account instead of metamaskone
+        console.log('Logged in with account: ', account)
 
         setMetamaskAccount(accounts[0])
         handleCloseConnectWalletModal()
