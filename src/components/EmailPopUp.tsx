@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 import CloseIcon from '@material-ui/icons/Close'
 import { colors } from '../components/Styles/Colors'
+import { Alert, AlertTitle } from '@material-ui/lab'
+import { Collapse } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { validateEmail } from '../Utils/stringUtils'
 import {
   IconButton,
   Button,
@@ -71,6 +74,7 @@ const useStyle = makeStyles(Theme => ({
   },
   field: {
     padding: 10,
+    marginBottom: 20,
     background: colors.Black,
     borderRadius: Theme.shape.borderRadius[3],
     borderColor: colors.Aqua,
@@ -126,6 +130,9 @@ const useStyle = makeStyles(Theme => ({
     alignItems: 'left',
     marginLeft: `${Theme.spacing(7)}%`,
   },
+  alert: {
+    borderRadius: 10,
+  },
   icon: {
     fontSize: 50,
     color: colors.Aqua,
@@ -158,13 +165,18 @@ function useLocalState(key, initial) {
 const EmailPopUp = () => {
   const [open, setOpen] = useLocalState('show-popup', true)
   const [value, setValue] = useState('')
+  const [error, setError] = useState<boolean>(false)
 
   const handleOpen = () => {
     setOpen(true)
   }
 
   const handleClose = () => {
-    setOpen(false)
+    if (validateEmail(value)) {
+      setOpen(false)
+    } else {
+      setError(true)
+    }
   }
 
   const classes = useStyle()
@@ -202,6 +214,7 @@ const EmailPopUp = () => {
                 placeholder="email"
                 className={classes.field}
                 fullWidth
+                error
                 color="primary"
                 disableUnderline={true}
                 margin="none"
@@ -210,6 +223,15 @@ const EmailPopUp = () => {
                 onChange={e => setValue(e.target.value)}
               />
             </div>
+            <Collapse in={error}>
+              <Alert
+                variant="filled"
+                severity="error"
+                className={classes.alert}
+              >
+                <strong>Error:</strong> invalid entry
+              </Alert>
+            </Collapse>
           </DialogContent>
           <DialogActions className={classes.contBtn}>
             <Button
