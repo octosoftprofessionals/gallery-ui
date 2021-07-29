@@ -35,15 +35,21 @@ const update = async (url: string, queryParams = {}) => {
   return await http.put(url, { params: queryParams })
 }
 
-export const createAssociationFavoritesArtworks = async () => {
-  const url = `${ROOT}/favorites`
+export const createAssociationFavoritesArtworks = async (
+  public_address: string,
+  asset_id: number
+
+) => {
+  const url = `${ROOT}/favorites/add/${public_address}/${asset_id}`
   const res = await post(url)
   const favoriteAssociation = res.data ?? {}
   return favoriteAssociation
 }
 
-export const getAllFavoritesArtworksFromOneUserById = async (user_id: number) => {
-  const url = `${ROOT}/favorites/${user_id}`
+export const getAllFavoritesArtworksFromOneUserByAddress = async (
+  public_address: string
+) => {
+  const url = `${ROOT}/favorites/${public_address}`
   const res = await get(url)
   const userFavoritesArtworks = res.data ?? {}
   return userFavoritesArtworks
@@ -51,20 +57,20 @@ export const getAllFavoritesArtworksFromOneUserById = async (user_id: number) =>
 
 
 export const deleteOneFavoriteArtworkFromOneUser = async (
-  artwork_id: number,
-  user_id: number
+  asset_id: number,
+  public_address: string
 ) => {
-  const url = `${ROOT}/favorites/${artwork_id}/${user_id}`
+  const url = `${ROOT}/favorites/${asset_id}/${public_address}`
   const res = await destroy(url)
   const deletedFavorite = res.data ?? {}
   return deletedFavorite
 }
 
 export const updatePriorityOfOneFavoriteArtwork = async (
-  artwork_id: number,
-  user_id: number
+  asset_id: number,
+  public_address: string
 ) => {
-  const url = `${ROOT}/favorites/priority/${artwork_id}/${user_id}`
+  const url = `${ROOT}/favorites/priority/${asset_id}/${public_address}`
   const res = await update(url)
   const updatePriorityFromAFavoriteArtwork = res.data ?? {}
   return updatePriorityFromAFavoriteArtwork
