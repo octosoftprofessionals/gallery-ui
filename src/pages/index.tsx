@@ -63,7 +63,7 @@ const Home = () => {
   const getMoreLiveAuctions = () => {
     const newPages = liveAuctions + 20
     setLiveAuctions(newPages)
-    fetchNextPage({ pageParam: newPages })
+    fetchNextPageLA({ pageParam: newPages })
   }
 
   return (
