@@ -17,6 +17,11 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       new webpack.ProvidePlugin({
         Buffer: [require.resolve('buffer'), 'Buffer'],
       }),
+
+      // required to fix SSR build on Netlify
+      // https://github.com/sindresorhus/got/issues/345
+      // https://github.com/webpack/webpack/issues/5294
+      new webpack.IgnorePlugin({ resourceRegExp: /^electron$/ }),
     ],
   })
 }
