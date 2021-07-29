@@ -51,7 +51,7 @@ export const getProfileAccountByAddress = async (
 export const getProfileCreatedItemsByAddress = async (
   address: string
 ): Promise<GalleryItem[]> => {
-  const url = `${ROOT}/profile/${address}/created-items`
+  const url = `${ROOT}/gallery-items?creator_address=${address}`
   const res = await get(url)
   return res.data ?? []
 }
@@ -59,7 +59,7 @@ export const getProfileCreatedItemsByAddress = async (
 export const getProfileOwnedItemsByAddress = async (
   address: string
 ): Promise<GalleryItem[]> => {
-  const url = `${ROOT}/profile/${address}/owned-items`
+  const url = `${ROOT}/gallery-items?owner_address=${address}`
   const res = await get(url)
   return res.data ?? []
 }
