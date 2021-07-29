@@ -171,11 +171,15 @@ const EmailPopUp = () => {
     setOpen(true)
   }
 
-  const handleClose = () => {
-    if (validateEmail(value)) {
+  const handleClose = (close?: boolean) => {
+    if (close) {
       setOpen(false)
     } else {
-      setError(true)
+      if (validateEmail(value)) {
+        setOpen(false)
+      } else {
+        setError(true)
+      }
     }
   }
 
@@ -192,7 +196,10 @@ const EmailPopUp = () => {
       >
         <div className={classes.box}>
           <DialogActions className={classes.input}>
-            <IconButton onClick={handleClose} className={classes.closeBtn}>
+            <IconButton
+              onClick={() => handleClose(true)}
+              className={classes.closeBtn}
+            >
               <CloseIcon className={classes.icon} />
             </IconButton>
           </DialogActions>
@@ -235,7 +242,7 @@ const EmailPopUp = () => {
           </DialogContent>
           <DialogActions className={classes.contBtn}>
             <Button
-              onClick={handleClose}
+              onClick={() => handleClose(false)}
               color="primary"
               className={classes.suscribeBtn}
             >
