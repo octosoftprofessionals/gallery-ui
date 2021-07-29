@@ -31,6 +31,18 @@ export const featuredInfinitItemsQuery = async ({
   return res.data ?? []
 }
 
+export const allQuerysItems = async ({
+  query,
+  offset,
+}: {
+  query: string
+  offset: number
+}) => {
+  const url = `${ROOT}/gallery-items?${query}&offset=${offset}&limit=20`
+  const res = await get(url)
+  return res.data.data ?? []
+}
+
 export const galleryItemQuery = async (
   assetContractAddress: string,
   assetTokenId: number
