@@ -8,7 +8,10 @@ import { OpenInNewOutlined } from '@material-ui/icons'
 import LanguageIcon from '@material-ui/icons/Language'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import FacebookIcon from '@material-ui/icons/Facebook'
-import TwitterIcon from '@material-ui/icons/Twitter'
+import Discord from '../../assets/discord.svg'
+import Twitch from '../../assets/twitch.svg'
+import SnapChat from '../../assets/snapchat.svg'
+import TickTock from '../../assets/tiktok.svg'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,17 +38,23 @@ const useStyles = makeStyles(theme => ({
       flexDirection: 'column',
     },
   },
-  /*   divider: {
-    backgroundColor: theme.palette.primary.main,
-    marginLeft: '30px',
-    marginRight: '30px',
-    height: 'inherit',
-  }, */
   icon: {
     fontSize: theme.spacing(8),
     '&:hover': {
       color: theme.palette.primary.main,
     },
+  },
+  icon2: {
+    width: '20px',
+    heigth: '20px',
+    fill: theme.palette.primary.main,
+  },
+  icon3: {
+    width: '20px',
+    heigth: '20px',
+    fill: theme.palette.primary.main,
+    marginTop: 0,
+    padding: 0,
   },
   iconSVG: {
     width: theme.spacing(9),
@@ -121,9 +130,9 @@ const LinkButton = () => {
       </Grid>
       <Grid container direction="row" className={classes.paper}>
         <Grid container xs={12} sm={6}>
-          <OpenInNewOutlined className={classes.icon} />
+          <Discord className={classes.icon2} />
           <Typography className={classes.text} variant="h6">
-            Twitter
+            Discord
           </Typography>
         </Grid>
         <Grid container xs={12} sm={6}>
@@ -178,7 +187,7 @@ const LinkButton = () => {
       </Grid>
       <Grid container direction="row" className={classes.paper}>
         <Grid container xs={12} sm={6}>
-          <OpenInNewOutlined className={classes.icon} />
+          <Twitch className={classes.icon2} />
           <Typography className={classes.text} variant="h6">
             Twitch
           </Typography>
@@ -197,7 +206,7 @@ const LinkButton = () => {
       </Grid>
       <Grid container direction="row" className={classes.paper}>
         <Grid container xs={12} sm={6}>
-          <OpenInNewOutlined className={classes.icon} />
+          <TickTock className={classes.icon2} />
           <Typography className={classes.text} variant="h6">
             TickTock
           </Typography>
@@ -216,7 +225,7 @@ const LinkButton = () => {
       </Grid>
       <Grid container direction="row" className={classes.paper}>
         <Grid container xs={12} sm={6}>
-          <OpenInNewOutlined className={classes.icon} />
+          <SnapChat className={classes.icon3} />
           <Typography className={classes.text} variant="h6">
             SnapChat
           </Typography>
