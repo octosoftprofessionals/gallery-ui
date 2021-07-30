@@ -141,11 +141,10 @@ const EditForm = () => {
   }
   const handleSubmit = () => {
     if (validateEmail(value)) {
-      setOpen(false)
-    } else {
       setError(true)
     }
   }
+
   return (
     <Grid
       container
@@ -191,12 +190,12 @@ const EditForm = () => {
               />
             </FormControl>
             <FormControl variant="outlined" className={classes.formInput}>
-              <InputLabel htmlFor="component-outlined">UserName</InputLabel>
+              <InputLabel htmlFor="component-outlined">Email</InputLabel>
               <OutlinedInput
                 id="component-outlined"
                 value={userName}
                 onChange={handleChangeUser}
-                label="UserName"
+                label="Email"
                 fullWidth
                 /* className={classes.field} */
               />
@@ -231,7 +230,7 @@ const EditForm = () => {
                 variant="outlined"
                 fullWidth
               />
-              <Collapse in={false}>
+              <Collapse in={error}>
                 <Alert
                   variant="filled"
                   severity="error"
