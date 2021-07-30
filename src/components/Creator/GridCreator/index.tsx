@@ -7,6 +7,8 @@ import {
   getProfileOwnedItemsByAddress,
 } from '../../../services/gallery'
 
+import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
+
 import GalleryCreator from './GalleryCreator'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => (
@@ -73,7 +75,9 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           showExploreButton: true,
         }}
         queryName="FavoriteItemsQuery"
-        queryFunction={async () => []}
+        queryFunction={async () =>
+          await getAllFavoritesArtworksFromOneUserByAddress(profileAddress)
+        }
       />,
     ]}
   />
