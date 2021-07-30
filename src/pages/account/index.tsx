@@ -48,8 +48,8 @@ const AccountPage = () => {
       ) : (
         <Account
           isMyAccount={true}
-          followers={followeeItem.followers.length}
-          following={followersItem.followees.length}
+          followers={followeeItem ? followeeItem.followers.length : 0}
+          following={followersItem ? followersItem.followees.length : 0}
           address={address}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}

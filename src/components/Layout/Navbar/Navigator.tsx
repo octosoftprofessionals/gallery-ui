@@ -70,9 +70,7 @@ const Navigator = ({ pathname }) => {
             </Typography>
           </Button>
         </Link>
-        <Link to="/construction" className={classes.link}>
-          {' '}
-          {/* to="/creators" */}
+        <Link to="/creators" className={classes.link}>
           <Button
             variant="text"
             color="primary"

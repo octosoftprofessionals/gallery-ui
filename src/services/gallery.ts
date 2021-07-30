@@ -17,6 +17,18 @@ export const featuredInfinitItemsQuery = async ({
   return res.data ?? []
 }
 
+export const allQuerysItems = async ({
+  query,
+  offset,
+}: {
+  query: string
+  offset: number
+}) => {
+  const url = `/gallery/gallery-items?${query}&offset=${offset}&limit=20`
+  const res = await get(url)
+  return res.data.data ?? []
+}
+
 export const galleryItemQuery = async (
   assetContractAddress: string,
   assetTokenId: number
@@ -37,7 +49,7 @@ export const getProfileAccountByAddress = async (
 export const getProfileCreatedItemsByAddress = async (
   address: string
 ): Promise<GalleryItem[]> => {
-  const url = `/gallery/profile/${address}/created-items`
+  const url = `/gallery/gallery-items?creator_address=${address}`
   const res = await get(url)
   return res.data ?? []
 }
@@ -45,7 +57,7 @@ export const getProfileCreatedItemsByAddress = async (
 export const getProfileOwnedItemsByAddress = async (
   address: string
 ): Promise<GalleryItem[]> => {
-  const url = `/gallery/profile/${address}/owned-items`
+  const url = `/gallery/gallery-items?owner_address=${address}`
   const res = await get(url)
   return res.data ?? []
 }

@@ -1,46 +1,109 @@
-import React from 'react'
-import { useQuery } from 'react-query'
-import { CircularProgress } from '@material-ui/core'
+import React, { useState } from 'react'
+import { useInfiniteQuery } from 'react-query'
 
-import {
-  getArtworkAuctions,
-  getHeroArtwork,
-} from '../../services/autionsService'
-import { featuredItemsQuery } from '../../services/gallery'
+import { allQuerysItems } from '../../services/gallery'
 
 import TabBar from '../TabBar'
-// import ArtworkGrid from '../../ArtworkGrid'
-// import Gallery from '../../../components/Gallery'
 import GalleryArtworks from './GalleryArtworks'
 
 const GridArtworks = () => {
-  const { data: featuredItems = [], isLoading, status: statusFeaturedItemsQuery } = useQuery(
-    'featuredItemsQuery',
-    featuredItemsQuery,
+  const [listedNextPage, setListedNextPage] = useState(0)
+  const [reserveNextPage, setReserveNextPage] = useState(0)
+  const [soldNextPage, setSoldNextPage] = useState(0)
+
+  const {
+    data: listedItemsQuery = [],
+    isLoading: isLoadingLA,
+    isFetching: isFetchingLA,
+    fetchNextPage: fetchNextPageLA,
+    hasNextPage: hasNextPageLA,
+  } = useInfiniteQuery(
+    'liveAcutions',
+    ({ pageParam = 0, querys = 'status=aution' }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        return lastPage.length >= 20
+      },
+    }
+  )
+  const getMorelisted = () => {
+    const newPages = listedNextPage + 20
+    setListedNextPage(newPages)
+    fetchNextPageLA({ pageParam: newPages })
+  }
+
+  const {
+    data: reserveItemsQuery = [],
+    isLoading: isLoadingReserve,
+    isFetching: isFetchingReserve,
+    fetchNextPage: fetchNextPageReserve,
+    hasNextPage: hasNextPageReserve,
+  } = useInfiniteQuery(
+    'reserveItemsQuery',
+    ({ pageParam = 0, querys = 'status=reserve' }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        return lastPage.length >= 20
+      },
+    }
+  )
+  const getMoreReserve = () => {
+    const newPages = reserveNextPage + 20
+    setReserveNextPage(newPages)
+    fetchNextPageReserve({ pageParam: newPages })
+  }
+
+  const {
+    data: soldItemsQuery = [],
+    isLoading: isLoadingSold,
+    isFetching: isFetchingSold,
+    fetchNextPage: fetchNextPageSold,
+    hasNextPage: hasNextPageSold,
+  } = useInfiniteQuery(
+    'soldItemsQuery',
+    ({ pageParam = 0, querys = 'status=sold' }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        return lastPage.length >= 20
+      },
+    }
   )
 
-  console.log('featuredItems:', featuredItems)
-  console.log('featuredItems.map(i => i.status):', featuredItems.map(i => i.status))
-
-  const listedItems = featuredItems.filter(i => i.status === 'listed')
-  const reserveItems = featuredItems.filter(i => i.status === 'reserve')
-  const soldItems = featuredItems.filter(i => i.status === 'sold')
-
+  const getMoreSold = () => {
+    const newPages = soldNextPage + 20
+    setSoldNextPage(newPages)
+    fetchNextPageSold({ pageParam: newPages })
+  }
   return (
     <TabBar
       titles={['Live Auction', 'Reserve not met', 'Sold']}
       components={[
         <GalleryArtworks
-          isLoading={isLoading}
-          data={listedItems}
+          isLoading={isLoadingLA}
+          isFetching={isFetchingLA}
+          handleNext={getMorelisted}
+          hasNextPage={hasNextPageLA}
+          pages={listedItemsQuery.pages}
         />,
         <GalleryArtworks
-          isLoading={isLoading}
-          data={reserveItems}
+          isLoading={isLoadingReserve}
+          isFetching={isFetchingReserve}
+          handleNext={getMoreReserve}
+          hasNextPage={hasNextPageReserve}
+          pages={reserveItemsQuery.pages}
         />,
         <GalleryArtworks
-          isLoading={isLoading}
-          data={soldItems}
+          isLoading={isLoadingSold}
+          isFetching={isFetchingSold}
+          handleNext={getMoreSold}
+          hasNextPage={hasNextPageSold}
+          pages={soldItemsQuery.pages}
         />,
       ]}
     />

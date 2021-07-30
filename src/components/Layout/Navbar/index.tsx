@@ -125,7 +125,7 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
+const index = ({ pathname, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
