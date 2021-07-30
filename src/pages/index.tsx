@@ -8,7 +8,7 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-import { featuredInfinitItemsQuery } from '../services/gallery'
+import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
 import { GalleryItem } from '../types'
 
 const Home = () => {
@@ -21,10 +21,10 @@ const Home = () => {
 
   const {
     data: allFeaturedItems = [],
-    isLoading,
-    isFetching,
-    fetchNextPage,
-    hasNextPage,
+    isLoading: isLoadingFA,
+    isFetching: isFetchingFA,
+    fetchNextPage: fetchNextPageFA,
+    hasNextPage: hasNextPageFA,
   } = useInfiniteQuery(
     'featuredArtworksItemsItems',
     ({ pageParam = 0 }) => featuredInfinitItemsQuery({ offset: pageParam }),
@@ -37,14 +37,15 @@ const Home = () => {
   )
 
   const {
-    data: FeaturedArtworksItems = [],
-    isLoading: isLoadingFA,
-    isFetching: isFetchingFA,
-    fetchNextPage: fetchNextPageFA,
-    hasNextPage: hasNextPageFA,
+    data: liveAcutionItems = [],
+    isLoading: isLoadingLA,
+    isFetching: isFetchingLA,
+    fetchNextPage: fetchNextPageLA,
+    hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
-    'featuredItems',
-    ({ pageParam = 0 }) => featuredInfinitItemsQuery({ offset: pageParam }),
+    'liveAcutions',
+    ({ pageParam = 0, querys = 'status=aution' }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: lastPage => {
@@ -62,21 +63,8 @@ const Home = () => {
   const getMoreLiveAuctions = () => {
     const newPages = liveAuctions + 20
     setLiveAuctions(newPages)
-    fetchNextPage({ pageParam: newPages })
+    fetchNextPageLA({ pageParam: newPages })
   }
-
-  // const featuredItems = allFeaturedItems.page.filter(
-  //   item => item?.assetId !== heroItem?.assetId
-  // )
-
-  // const listedItems = featuredItems.filter(i => i.status === 'listed')
-  // const reserveItems = allFeaturedItems.pages.filter(
-  //   i => i.status === 'reserve'
-  // )
-  // console.log('reserveItems :>> ', reserveItems)
-  // // const soldItems = featuredItems.filter(i => i.status === 'sold')
-
-  // const isLoading = status === 'loading'
 
   return (
     <Layout>
@@ -101,7 +89,7 @@ const Home = () => {
           <Gallery
             isLoading={isFetchingFA}
             handleNext={getMoreFeaturedArtworks}
-            pages={FeaturedArtworksItems.pages}
+            pages={allFeaturedItems.pages}
             hasNextPage={hasNextPageFA}
             renderItem={(items, index) => (
               <ArtworkItem key={index} galleryItem={items} />
@@ -116,14 +104,14 @@ const Home = () => {
         link="/artworks"
         icon
       >
-        {isLoading ? (
+        {isLoadingLA ? (
           <Spinner height="50vh" />
         ) : (
           <Gallery
-            isLoading={isFetching}
+            isLoading={isFetchingLA}
             handleNext={getMoreLiveAuctions}
-            pages={allFeaturedItems.pages}
-            hasNextPage={hasNextPage}
+            pages={liveAcutionItems.pages}
+            hasNextPage={hasNextPageLA}
             renderItem={(item, index) => (
               <ArtworkItem key={index} galleryItem={item} />
             )}

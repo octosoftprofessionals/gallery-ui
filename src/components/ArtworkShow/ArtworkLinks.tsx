@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     '& > *': {
       marginBottom: theme.spacing(3),
-      width: '100%',
       maxWidth: 400,
     },
   },
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 const ArtworkView = ({ artworkLinks = [] }) => {
   const classes = useStyles()
-  const preventDefault = event => event.preventDefault()
+
   return (
     <Grid
       container

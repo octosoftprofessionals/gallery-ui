@@ -1,6 +1,6 @@
 export const loadStore = (key, defaultValue) => {
   if (typeof window !== 'undefined') {
-    const saved = window.localStorage.getItem(key)
+    const saved = window.sessionStorage.getItem(key)
     if (saved !== null) {
       return JSON.parse(saved)
     }
@@ -10,6 +10,6 @@ export const loadStore = (key, defaultValue) => {
 
 export const saveStore = (key, value) => {
   if (typeof window !== 'undefined') {
-    window.localStorage.setItem(key, JSON.stringify(value))
+    window.sessionStorage.setItem(key, JSON.stringify(value))
   }
 }

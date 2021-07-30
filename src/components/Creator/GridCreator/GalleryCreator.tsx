@@ -28,8 +28,9 @@ const Gallery = ({
     queryFunction
   )
   const classes = useStyle()
+  const { data: ItemsToShow = [], favoriteArtworks = [] } = galleryItems
 
-  if (!isLoading && galleryItems.length === 0) {
+  if (!isLoading && ItemsToShow.length === 0 && favoriteArtworks.length === 0) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
@@ -41,9 +42,9 @@ const Gallery = ({
     <Spinner height="50vh" />
   ) : (
     <Grid container direction="row" justify="space-between" wrap="wrap">
-      {galleryItems
-        ? galleryItems.map((galleryItem, index) => (
-            <Grid item xs={12} sm={6} md={5} className={classes.containerItem}>
+      {ItemsToShow
+        ? ItemsToShow.map((galleryItem, index) => (
+            <Grid item xs={12} sm={6} md={3} className={classes.containerItem}>
               <ArtworkItem key={index} galleryItem={galleryItem} />
             </Grid>
           ))

@@ -20,6 +20,7 @@ import ButtonConnectWallet from './ButtonConnectWallet'
 import NavBarBid from './NavBarBid'
 import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
+import Cookies from 'js-cookie'
 
 import { useAccountStore } from '../../../hooks/useAccountStore'
 
@@ -124,7 +125,7 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
+const index = ({ pathname, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
@@ -132,6 +133,7 @@ const index = ({ pathname, cois, publicKey, profileImageUrl, name }) => {
 
   const handleLogOut = async () => {
     setAccount(null)
+    Cookies.remove('jwt')
   }
   return (
     <>
