@@ -8,21 +8,6 @@ import { galleryItemQuery } from '../../services/gallery'
 import useQueryParams from '../../hooks/useQueryParams'
 import Spinner from '../../components/Spinner'
 
-// ArtworkView params:
-const artworkLinks = [
-  {
-    link: 'https://etherscan.io/',
-    text: 'View on Etherscan',
-    icon: 'iconEtherscan',
-  },
-  {
-    link: 'https://ipfs.io/',
-    text: 'View on IPFS',
-    icon: 'iconView',
-  },
-  { link: 'https://ipfs.io/', text: 'View IPFS Metadata', icon: 'iconBlock' },
-]
-
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
 
@@ -40,24 +25,22 @@ const creatorDescription =
 
 const ShowArtwork = () => {
   const { contractAddress, tokenId } = useQueryParams()
-  const { data: galleryItem, status } = useQuery('artworkQuery', () =>
+  const { data: galleryItem, isLoading } = useQuery('artworkQuery', () =>
     galleryItemQuery(contractAddress, tokenId)
   )
-  const isLoading = status === 'loading'
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
 
   return (
     <Layout padding="0" marginBottom="0" marginTop="24px">
-      {galleryItem && !isLoading ? (
+      {isLoading ? (
+        <Spinner height="60vh" />
+      ) : (
         <ArtworkShow
           galleryItem={galleryItem}
-          artworkLinks={artworkLinks}
           linkTwitter={linkShareTwitter()}
           setDisplayReportModal={setDisplayReportModal}
         />
-      ) : (
-        <Spinner height="60vh" />
       )}
     </Layout>
   )
