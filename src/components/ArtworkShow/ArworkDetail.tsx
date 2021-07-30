@@ -12,7 +12,11 @@ import HistoryItem from './HistoryItem'
 
 import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
-import { biddingPathFrom, profilePathFromAddress } from '../../config/routes'
+import {
+  biddingPathFrom,
+  profilePathFromAddress,
+  artworkLinks,
+} from '../../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -42,12 +46,7 @@ const useStyle = makeStyles(Theme => ({
   titleArtwork: { marginTop: Theme.spacing(9) },
 }))
 
-const ArtworkDetail = ({
-  galleryItem,
-  artworkLinks,
-  linkTwitter,
-  setDisplayReportModal,
-}) => {
+const ArtworkDetail = ({ galleryItem, linkTwitter, setDisplayReportModal }) => {
   const classes = useStyle()
 
   const {
@@ -67,10 +66,36 @@ const ArtworkDetail = ({
     status,
     expiration,
     historyItems,
+    imageOriginalUrl,
   } = galleryItem
 
   const creatorProfileLink = profilePathFromAddress(creatorAddress)
   const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
+
+  const artworkLinks = ({
+    token,
+    id,
+    linkOriginImg,
+  }: {
+    token: string
+    id: string
+    linkOriginImg: string
+  }) => {
+    return [
+      {
+        link: `https://etherscan.io/token/${token}?a=${id}`,
+        text: 'View on Etherscan',
+        icon: 'iconEtherscan',
+      },
+      { link: linkOriginImg, text: 'View Image Origin', icon: 'iconView' },
+    ]
+  }
+
+  const linksArtworkView = artworkLinks({
+    token: assetContractAddress,
+    id: assetTokenId,
+    linkOriginImg: imageOriginalUrl,
+  })
 
   const History = ({ data = [] }) => (
     <div className={classes.history}>
@@ -141,7 +166,7 @@ const ArtworkDetail = ({
           <Typography variant="h4" color="initial">
             {number ? number : '1'}
           </Typography>
-          <ArtworkView artworkLinks={artworkLinks} />
+          <ArtworkView artworkLinks={linksArtworkView} />
         </Grid>
         <Grid item xs={12} md={6} container direction="column">
           <CardAuction

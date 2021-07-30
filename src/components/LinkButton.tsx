@@ -65,32 +65,34 @@ const useStyles = makeStyles(theme => ({
 
 const LinkButton = ({ link, text, icon }) => {
   const classes = useStyles()
-  const preventDefault = event => event.preventDefault()
 
   return (
-    <Button
-      href={link}
-      underline="none"
-      target="_blank"
-      className={classes.box}
-      component={Link}
-    >
-      <Paper elevation={1} className={classes.paper}>
-        <Grid item xs={8} container className={classes.grid}>
-          {icon === 'iconEtherscan' ? (
-            <EtherScanIcon className={classes.iconSVG} />
-          ) : icon === 'iconView' ? (
-            <VisibilityOutlined className={classes.iconSVG} />
-          ) : (
-            <BlockIcon className={classes.iconSVG} />
-          )}
-          <Typography className={classes.text} variant="h6">
-            {text}
-          </Typography>
-        </Grid>
-        <OpenInNewOutlined className={classes.icon} />
-      </Paper>
-    </Button>
+    <>
+      {link ? (
+        <Button
+          href={link}
+          underline="none"
+          className={classes.box}
+          component={Link}
+        >
+          <Paper elevation={1} className={classes.paper}>
+            <Grid item xs={8} container className={classes.grid}>
+              {icon === 'iconEtherscan' ? (
+                <EtherScanIcon className={classes.iconSVG} />
+              ) : icon === 'iconView' ? (
+                <VisibilityOutlined className={classes.iconSVG} />
+              ) : (
+                <BlockIcon className={classes.iconSVG} />
+              )}
+              <Typography className={classes.text} variant="h6">
+                {text}
+              </Typography>
+            </Grid>
+            <OpenInNewOutlined className={classes.icon} />
+          </Paper>
+        </Button>
+      ) : null}
+    </>
   )
 }
 
