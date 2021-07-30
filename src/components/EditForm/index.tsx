@@ -140,7 +140,9 @@ const EditForm = () => {
     setBio(event.target.value)
   }
   const handleSubmit = () => {
-    if (validateEmail(value)) {
+    if (validateEmail(userName)) {
+      setError(false)
+    } else {
       setError(true)
     }
   }
@@ -200,6 +202,15 @@ const EditForm = () => {
                 /* className={classes.field} */
               />
             </FormControl>
+            <Collapse in={error}>
+              <Alert
+                variant="filled"
+                severity="error"
+                className={classes.alert}
+              >
+                <strong>Error:</strong> invalid entry
+              </Alert>
+            </Collapse>
           </Grid>
 
           <Grid
@@ -230,15 +241,6 @@ const EditForm = () => {
                 variant="outlined"
                 fullWidth
               />
-              <Collapse in={error}>
-                <Alert
-                  variant="filled"
-                  severity="error"
-                  className={classes.alert}
-                >
-                  <strong>Error:</strong> invalid entry
-                </Alert>
-              </Collapse>
             </Grid>
 
             <Grid item xs={12} sm={6} className={classes.form}>
