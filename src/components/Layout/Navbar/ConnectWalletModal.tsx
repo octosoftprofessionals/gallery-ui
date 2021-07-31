@@ -39,10 +39,6 @@ const ConnectWalletModal = ({
 
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
 
-  const provider = window.ethereum.on('', () => {})
-
-  console.log('isReturningUser :>> ', provider._state)
-
   useEffect(() => {
     checkMetaMaskConnected()
     async function checkMetaMaskConnected() {
