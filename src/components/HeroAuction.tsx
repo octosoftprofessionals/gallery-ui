@@ -54,6 +54,7 @@ const HeroAuction = ({
     assetTokenId,
     title,
     imageUrl,
+    imagePreviewUrl,
     videoUrl,
     priceEth,
     priceUsd,
@@ -85,14 +86,14 @@ const HeroAuction = ({
             <Grid item xs={12} sm={5} md={4}>
               <div className={classes.containerAsset}>
                 <video
-                  poster={imageUrl}
+                  poster={imagePreviewUrl}
                   src={videoUrl}
                   autoPlay={true}
                   loop={true}
                   className={classes.video}
                   muted={true}
                 >
-                  <img src={imageUrl} />
+                  <img src={imagePreviewUrl} />
                 </video>
               </div>
             </Grid>
