@@ -21,15 +21,27 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const DragDrop = () => {
+const DragDrop = ({ setFiles, typeFile, files }) => {
   const classes = useStyles()
+
+  const uploadFile = file => {
+    switch (typeFile) {
+      case 'user':
+        setFiles({ ...files, picture: file })
+        break
+      case 'cover':
+        setFiles({ ...files, cover: file })
+        break
+    }
+  }
+
   return (
     <DropzoneArea
       dropzoneClass={classes.dropzone}
       dropzoneParagraphClass={classes.dropzoneParagraph}
       acceptedFiles={['image/*']}
       dropzoneText={'Drag and drop an image here or click'}
-      onChange={files => console.log('Files:', files)}
+      onChange={file => uploadFile(file)}
     />
   )
 }

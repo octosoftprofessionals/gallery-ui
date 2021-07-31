@@ -87,7 +87,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const LinkForm = () => {
+const LinkForm = ({ socialNetwork, setSocialNetwork }) => {
   const classes = useStyle()
   return (
     <Grid
@@ -97,7 +97,10 @@ const LinkForm = () => {
       justify="center"
       alignItems="flex-start"
     >
-      <BtnForm />
+      <BtnForm
+        socialNetwork={socialNetwork}
+        setSocialNetwork={setSocialNetwork}
+      />
     </Grid>
   )
 }
