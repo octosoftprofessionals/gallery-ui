@@ -1,4 +1,3 @@
-// import { auctions } from '../config/api'
 import auctionsMockup from './mockups/auctions'
 import accountInfo from './mockups/account'
 import { paginatedQuery } from '../Utils'

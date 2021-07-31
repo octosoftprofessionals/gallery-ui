@@ -28,9 +28,9 @@ const Gallery = ({
     queryFunction
   )
   const classes = useStyle()
-  const { data: ItemsToShow } = galleryItems
-  console.log(ItemsToShow)
-  if (!isLoading && ItemsToShow.length === 0) {
+  const { data: ItemsToShow = [], favoriteArtworks = [] } = galleryItems
+
+  if (!isLoading && ItemsToShow.length === 0 && favoriteArtworks.length === 0) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
