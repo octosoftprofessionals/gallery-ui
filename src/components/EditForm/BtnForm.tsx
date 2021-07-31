@@ -149,6 +149,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
           direction="row"
           justify="space-between"
           className={classes.paper}
+          key={network.key}
         >
           <Grid container item justify="space-between" xs={12}>
             <div className={classes.titleSocialNetwork}>
