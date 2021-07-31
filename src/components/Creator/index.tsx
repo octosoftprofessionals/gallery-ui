@@ -5,6 +5,11 @@ import GridCreator from './GridCreator'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
+import { useQuery } from 'react-query'
+import {
+  getOneFolloweeByIdWithAllHisFollowers,
+  getOneFollowerByIdWithAllHisFollowees,
+} from '../../services/follow'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -67,64 +72,32 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const itemAvatar = []
-
 const Creator = ({
   isMyAccount = false,
   username: usernameProp,
   address: addressProp,
   profileImageUrl,
-  followers,
-  following,
   linkTwitter,
   setDisplayReportModal,
 }: Props) => {
   const classes = useStyle()
 
-  // const {
-  //   profileImageUrl,
-  //   name,
-  //   username,
-  //   followers,
-  //   following,
-  //   links,
-  //   bio,
-  //   createdAt,
-  //   userIndex,
-  //   publicKey,
-  // } = creatorQuery
+  const {
+    data: followeeItem = [],
+    isLoading: isLoadingFollowees,
+  } = useQuery('followeeQuery', () =>
+    getOneFolloweeByIdWithAllHisFollowers(addressProp)
+  )
 
-  // const urlCover = CreatorQuery
-  //   ? CreatorQuery?.coverImageUrl
-  //   : backgroundGradient.backgroundGradient2
+  const {
+    data: followersItem = [],
+    isLoading: isLoadingFollowers,
+  } = useQuery('followersQuery', () =>
+    getOneFollowerByIdWithAllHisFollowees(addressProp)
+  )
 
-  // const {
-  //   collection,
-  //   name: accountName,
-  //   username: accountUsername,
-  //   twitter_username,
-  //   instagram_username,
-  //   short_description,
-  //   description,
-  //   created_date,
-  //   image_url,
-  //   owner,
-  //   discord_url,
-  //   external_url,
-  //   address,
-  // } = accountQuery
-
-  // const accountLinks = {
-  //   discord: { handle: discord_url, platform: 'discord' },
-  //   instagram: { handle: instagram_username, platform: 'instagram' },
-  //   twitter: { handle: twitter_username, platform: 'twitter' },
-  //   website: { handle: external_url, platform: 'website' },
-  //   facebook: { handle: '', platform: 'facebook' },
-  //   snapchat: { handle: '', platform: 'snapchat' },
-  //   tiktok: { handle: '', platform: 'tiktok' },
-  //   twitch: { handle: '', platform: 'twitch' },
-  //   youtube: { handle: '', platform: 'youtube' },
-  // }
+  const { followees } = followersItem
+  const { followers } = followeeItem
 
   return (
     <>
@@ -150,9 +123,9 @@ const Creator = ({
             isMyAccount={isMyAccount}
             username={usernameProp}
             publicKey={addressProp}
-            followers={followers}
-            following={following}
-            followedes={itemAvatar}
+            followers={followees ? followees.length : 0}
+            following={followers ? followers.length : 0}
+            followedes={followers ? followers : []}
           />
         </Grid>
         <Grid item xs={10} sm={12}>

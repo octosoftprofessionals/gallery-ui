@@ -15,18 +15,18 @@ export const createFollow = async (queryParams = {}) => {
 }
 
 export const getOneFolloweeByIdWithAllHisFollowers = async (
-  followee_id: number
+  address: string
 ) => {
-  const url = `/follow/${followee_id}/followers`
+  const url = `/follow/${address}/followers`
   const res = await get(url)
   const followeeWithFollowers = res.data ?? {}
   return followeeWithFollowers
 }
 
 export const getOneFollowerByIdWithAllHisFollowees = async (
-  follower_id: number
+  address: string
 ) => {
-  const url = `/follow/${follower_id}/followees`
+  const url = `/follow/${address}/followees`
   const res = await get(url)
   const followerWithFollowees = res.data ?? {}
   return followerWithFollowees

@@ -16,7 +16,7 @@ const useStyle = makeStyles(Theme => ({
   button: { padding: Theme.spacing(1), margin: Theme.spacing(1) },
 }))
 
-const ButtonPlaylist = () => {
+const ButtonPlaylist = ({ handleSubmitFavorite, handleSubmitPlaylist }) => {
   const classes = useStyle()
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
   const [isPlaylist, setIsPlaylist] = useState<boolean>(false)
@@ -31,54 +31,60 @@ const ButtonPlaylist = () => {
   return (
     <Grid container direction="row" justify="space-between">
       <Grid item xs={5}>
-        <Button
-          fullWidth
-          className={classes.button}
-          onClick={handleClickIsFavorite}
-        >
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
+        <form onSubmit={handleSubmitFavorite}>
+          <Button
+            type="submit"
+            fullWidth
+            className={classes.button}
+            onClick={handleClickIsFavorite}
           >
-            <Hidden only="xs">
-              <Typography variant="overline" color="textSecondary">
-                Add to Favorites
-              </Typography>
-            </Hidden>
-            {isFavorite ? (
-              <GradeSharp className={classes.icon} />
-            ) : (
-              <StarBorderRounded className={classes.icon} />
-            )}
-          </Grid>
-        </Button>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Hidden only="xs">
+                <Typography variant="overline" color="textSecondary">
+                  Add to Favorites
+                </Typography>
+              </Hidden>
+              {isFavorite ? (
+                <GradeSharp className={classes.icon} />
+              ) : (
+                <StarBorderRounded className={classes.icon} />
+              )}
+            </Grid>
+          </Button>
+        </form>
       </Grid>
       <Grid item xs={5}>
-        <Button
-          fullWidth
-          className={classes.button}
-          onClick={handleClickIsPlaylist}
-        >
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
+        <form onSubmit={handleSubmitPlaylist}>
+          <Button
+            fullWidth
+            type="submit"
+            className={classes.button}
+            onClick={handleClickIsPlaylist}
           >
-            <Hidden only="xs">
-              <Typography variant="overline" color="textSecondary">
-                Add to Playlist
-              </Typography>
-            </Hidden>
-            {isPlaylist ? (
-              <SlideshowTwoTone className={classes.icon} />
-            ) : (
-              <SlideshowOutlined className={classes.icon} />
-            )}
-          </Grid>
-        </Button>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Hidden only="xs">
+                <Typography variant="overline" color="textSecondary">
+                  Add to Playlist
+                </Typography>
+              </Hidden>
+              {isPlaylist ? (
+                <SlideshowTwoTone className={classes.icon} />
+              ) : (
+                <SlideshowOutlined className={classes.icon} />
+              )}
+            </Grid>
+          </Button>
+        </form>
       </Grid>
     </Grid>
   )
