@@ -10,6 +10,7 @@ import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
 } from '../../services/follow'
+import { Users } from '../../types'
 
 const useStyle = makeStyles(Theme => ({
   root: { position: 'relative', paddingBottom: Theme.spacing(16) },
@@ -74,10 +75,7 @@ const useStyle = makeStyles(Theme => ({
 
 const Creator = ({
   isMyAccount = false,
-  username: usernameProp,
-  address: addressProp,
-  profileImageUrl,
-  linkTwitter,
+  user = undefined,
   setDisplayReportModal,
 }: Props) => {
   const classes = useStyle()
@@ -86,28 +84,28 @@ const Creator = ({
     data: followeeItem = [],
     isLoading: isLoadingFollowees,
   } = useQuery('followeeQuery', () =>
-    getOneFolloweeByIdWithAllHisFollowers(addressProp)
+    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
   const {
     data: followersItem = [],
     isLoading: isLoadingFollowers,
   } = useQuery('followersQuery', () =>
-    getOneFollowerByIdWithAllHisFollowees(addressProp)
+    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem
   const { followers } = followeeItem
 
-  return (
+  return user ? (
     <>
       <Grid container justify="space-around" className={classes.root}>
         <Grid item className={classes.containerAvatar}>
-          <Avatar src={profileImageUrl} className={classes.avatar} />
+          <Avatar src={user.profileImgUrl} className={classes.avatar} />
         </Grid>
 
         <CreatorkShare
-          linkTwitter={linkTwitter}
+          linkTwitter={user.twitter}
           setDisplayReportModal={setDisplayReportModal}
           right="24px"
         />
@@ -121,29 +119,27 @@ const Creator = ({
         <Grid item xs={10} md={6}>
           <InfoCreator
             isMyAccount={isMyAccount}
-            username={usernameProp}
-            publicKey={addressProp}
+            username={user.username}
+            publicKey={user.publicAddress}
             followers={followees ? followees.length : 0}
             following={followers ? followers.length : 0}
             followedes={followers ? followers : []}
           />
         </Grid>
         <Grid item xs={10} sm={12}>
-          <GridCreator isMyAccount={isMyAccount} profileAddress={addressProp} />
+          <GridCreator
+            isMyAccount={isMyAccount}
+            profileAddress={user.publicAddress}
+          />
         </Grid>
       </Grid>
     </>
-  )
+  ) : null
 }
 
 type Props = {
   isMyAccount: boolean
-  username: string
-  address: string
-  profileImageUrl: string
-  followers: number
-  following: number
-  linkTwitter: string
+  user?: Users
   setDisplayReportModal: Function
 }
 

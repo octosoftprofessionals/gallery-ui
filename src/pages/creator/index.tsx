@@ -8,6 +8,7 @@ import { galleryItemQuery } from '../../services/gallery'
 
 import useQueryParams from '../../hooks/useQueryParams'
 import Spinner from '../../components/Spinner'
+import { getUser } from '../../services/users'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -21,15 +22,8 @@ const CreatorPage = () => {
   const { address } = useQueryParams()
 
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const contractAddress = '0x495f947276749ce646f68ac8c248420045cb7b5e'
-  const tokenId =
-    '109357140932249174184232105731133177415490681567806678064024980607176452079646'
-  const { data: creatorItem, isLoading } = useQuery(
-    'creatorQuery',
-    () => galleryItemQuery(contractAddress, tokenId),
-    {
-      refetchOnWindowFocus: false,
-    }
+  const { data: user, isLoading } = useQuery('creatorQuery', () =>
+    getUser({ public_address: address })
   )
 
   return (
@@ -37,17 +31,14 @@ const CreatorPage = () => {
       padding="0"
       marginTop="0"
       height
-      backgroundImage={isLoading ? null : creatorItem.creatorImageUrl}
+      backgroundImage={isLoading ? null : user?.coverImgUrl}
     >
       {isLoading ? (
         <Spinner height="50vh" />
       ) : (
         <Creator
           isMyAccount={false}
-          username={creatorItem.creatorUsername}
-          address={address}
-          profileImageUrl={creatorItem.creatorImageUrl}
-          linkTwitter={linkShareTwitter()}
+          user={user}
           setDisplayReportModal={setDisplayReportModal}
         />
       )}
