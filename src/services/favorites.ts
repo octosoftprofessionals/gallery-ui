@@ -27,10 +27,13 @@ const update = async (url: string, queryParams = {}) => {
   return await http.put(url, { params: queryParams })
 }
 
-export const createAssociationFavoritesArtworks = async (
-  public_address: string,
+export const createAssociationFavoritesArtworks = async ({
+  public_address,
+  asset_id,
+}: {
+  public_address: string
   asset_id: number
-) => {
+}) => {
   const url = `${ROOT}/favorites/add/${public_address}/${asset_id}`
   const res = await post(url)
   const favoriteAssociation = res.data ?? {}

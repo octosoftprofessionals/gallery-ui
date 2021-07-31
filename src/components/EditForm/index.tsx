@@ -13,7 +13,8 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import LinkForm from './LinkForm'
-
+import { updateUser } from '../../services/users'
+import { useAccountStore } from '../../hooks/useAccountStore'
 // Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
@@ -143,24 +144,54 @@ const useStyle = makeStyles(theme => ({
 const EditForm = () => {
   const classes = useStyle()
   const [name, setName] = React.useState('')
-  const [userName, setUserName] = React.useState('')
+  const [email, setEmail] = React.useState('')
   const [bio, setBio] = React.useState('')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
+  const [socialNetwork, setSocialNetwork] = useState({
+    web: '',
+    discord: '',
+    youtube: '',
+    fb: '',
+    twitch: '',
+    tiktok: '',
+    snapchat: '',
+  })
+  const [files, setFiles] = useState({ picture: '', cover: '' })
+  const [metamaskAccount, setMetamaskAccount] = useAccountStore()
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value)
+    setEmail(event.target.value)
   }
   const handleChangeBio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBio(event.target.value)
   }
   const handleSubmit = () => {
-    if (validateEmail(userName)) {
+    if (validateEmail(email)) {
       setError(false)
+      let data = {
+        username: name,
+        profile_img_url: '',
+        cover_img_url: '',
+        public_address: metamaskAccount,
+        config: {},
+        email: email,
+        nonce: '',
+        bio: bio,
+        website: socialNetwork.web,
+        twitter: '',
+        instagram: '',
+        discord: socialNetwork.discord,
+        youtube: socialNetwork.youtube,
+        facebook: socialNetwork.fb,
+        tiktok: socialNetwork.tiktok,
+        snapchat: socialNetwork.snapchat,
+      }
+      updateUser(data)
     } else {
       setError(true)
     }
@@ -218,7 +249,7 @@ const EditForm = () => {
                   fullWidth
                   className={classes.inputProfile}
                   onChange={handleChangeUser}
-                  value={userName}
+                  value={email}
                 />
               </Grid>
 
@@ -284,7 +315,7 @@ const EditForm = () => {
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
-                <DragDrop />
+                <DragDrop setFiles={setFiles} typeFile="user" files={files} />
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <Typography
@@ -302,7 +333,7 @@ const EditForm = () => {
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
-                <DragDrop />
+                <DragDrop setFiles={setFiles} typeFile="cover" files={files} />
               </Grid>
               {/* <Grid
               container
@@ -357,7 +388,10 @@ const EditForm = () => {
               </Button>
             </Grid> */}
             </Grid>
-            <LinkForm />
+            <LinkForm
+              socialNetwork={socialNetwork}
+              setSocialNetwork={setSocialNetwork}
+            />
             <Button
               onClick={handleSubmit}
               color="primary"

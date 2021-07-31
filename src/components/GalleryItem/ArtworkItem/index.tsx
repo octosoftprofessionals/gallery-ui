@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
+import { useMutation } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
 import { GalleryItem } from '../../../services/gallery'
+import { createAssociationFavoritesArtworks } from '../../../services/favorites'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
@@ -73,6 +76,7 @@ const ArtworkItem = ({
   galleryItem: GalleryItem | undefined
 }) => {
   const {
+    assetId,
     title,
     imageUrl,
     videoUrl,
@@ -88,6 +92,7 @@ const ArtworkItem = ({
 
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
+  const [account, _] = useAccountStore()
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -102,7 +107,19 @@ const ArtworkItem = ({
   }, [])
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
+  const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
 
+  const handleSubmitFavorite = e => {
+    e.preventDefault()
+    favoritesMutation.mutate({
+      public_address: account as string,
+      asset_id: assetId,
+    })
+  }
+
+  const handleSubmitPlaylist = e => {
+    e.preventDefault()
+  }
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={link} className={classes.link} {...rootProps}>
@@ -138,7 +155,14 @@ const ArtworkItem = ({
           <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
         </div>
       </Link>
-      <FooterCardItem statesArt={status} price={priceEth} timer={timer} />
+      <FooterCardItem
+        account={account}
+        statesArt={status}
+        price={priceEth}
+        timer={timer}
+        handleSubmitPlaylist={handleSubmitPlaylist}
+        handleSubmitFavorite={handleSubmitFavorite}
+      />
     </Paper>
   )
 }

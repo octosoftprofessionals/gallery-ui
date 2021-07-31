@@ -23,8 +23,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(6),
     backgroundColor: theme.palette.secondary.dark,
     fontFamily: theme.typography.fontFamily[3],
-    display: 'flex',
-    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     '&:hover': {
@@ -65,6 +63,9 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: theme.palette.primary.main,
   },
+  containerInput: {
+    paddingLeft: theme.spacing(2),
+  },
   inputProfile: {
     '@media (max-width: 576px)': {
       marginTop: 15,
@@ -77,10 +78,16 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  titleSocialNetwork: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 }))
 
-const LinkButton = () => {
+const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
   const classes = useStyles()
+
   const [web, setWeb] = React.useState('')
   const [discord, setDiscord] = React.useState('')
   const [youtube, setYouTube] = React.useState('')
@@ -90,25 +97,34 @@ const LinkButton = () => {
   const [snapChat, setSnapChat] = React.useState('')
 
   const handleChangeWeb = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWeb(event.target.value)
+    setSocialNetwork({ ...socialNetwork, web: `https://${event.target.value}` })
   }
   const handleChangeDiscord = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDiscord(event.target.value)
+    setSocialNetwork({ ...socialNetwork, discord: event.target.value })
   }
   const handleChangeYT = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setYouTube(event.target.value)
+    setSocialNetwork({ ...socialNetwork, youtube: event.target.value })
   }
   const handleChangeFB = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFacebook(event.target.value)
+    setSocialNetwork({
+      ...socialNetwork,
+      fb: `facebook.com/${event.target.value}`,
+    })
   }
   const handleChangeTwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTwitch(event.target.value)
+    setSocialNetwork({
+      ...socialNetwork,
+      twitch: `twitch.tv/${event.target.value}`,
+    })
   }
   const handleChangeTickTock = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTickTock(event.target.value)
+    setSocialNetwork({
+      ...socialNetwork,
+      tiktok: `tiktok.com/${event.target.value}`,
+    })
   }
   const handleChangeSnapChat = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSnapChat(event.target.value)
+    setSocialNetwork({ ...socialNetwork, snapchat: event.target.value })
   }
   return (
     <Grid
@@ -117,14 +133,25 @@ const LinkButton = () => {
       alignItems="center"
       className={classes.root}
     >
-      <Grid container direction="row" className={classes.paper}>
-        <Grid container item xs={12} sm={3}>
-          <LanguageIcon className={classes.icon} />
-          <Typography className={classes.text} variant="h6">
-            Website
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
+        <Grid container item justify="space-between" xs={12} sm={4}>
+          <div className={classes.titleSocialNetwork}>
+            <LanguageIcon className={classes.icon} />
+            <Typography className={classes.text} variant="h6">
+              Website
+            </Typography>
+          </div>
+
+          <Typography className={classes.text} variant="caption">
+            https://
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
@@ -132,18 +159,23 @@ const LinkButton = () => {
             fullWidth
             className={classes.inputProfile}
             onChange={handleChangeWeb}
-            value={web}
+            value={socialNetwork.web}
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
         <Grid container item alignItems="center" xs={12} sm={3}>
           <Discord className={classes.icon2} />
           <Typography className={classes.text} variant="h6">
             Discord
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
@@ -151,100 +183,139 @@ const LinkButton = () => {
             fullWidth
             className={classes.inputProfile}
             onChange={handleChangeDiscord}
-            value={discord}
+            value={socialNetwork.discord}
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
         <Grid container item xs={12} sm={3}>
           <YouTubeIcon className={classes.icon} />
           <Typography className={classes.text} variant="h6">
             YouTube
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
             fullWidth
             className={classes.inputProfile}
-            value={youtube}
+            value={socialNetwork.youtube}
             onChange={handleChangeYT}
             label="YouTube"
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
-        <Grid container item xs={12} sm={3}>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
+        <Grid container item xs={12} sm={4}>
           <FacebookIcon className={classes.icon} />
           <Typography className={classes.text} variant="h6">
             Facebook
           </Typography>
+          <Typography className={classes.text} variant="caption">
+            facebook.com/
+          </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
             fullWidth
             className={classes.inputProfile}
-            value={Facebook}
+            value={socialNetwork.fb}
             onChange={handleChangeFB}
             label="Facebook"
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
-        <Grid container item xs={12} sm={3}>
-          <Twitch className={classes.icon2} />
-          <Typography className={classes.text} variant="h6">
-            Twitch
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
+        <Grid container justify="space-between" item xs={12} sm={4}>
+          <div className={classes.titleSocialNetwork}>
+            <Twitch className={classes.icon2} />
+            <Typography className={classes.text} variant="h6">
+              Twitch
+            </Typography>
+          </div>
+
+          <Typography className={classes.text} variant="caption">
+            twitch.tv/
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
             fullWidth
             className={classes.inputProfile}
-            value={twitch}
+            value={socialNetwork.twitch}
             onChange={handleChangeTwitch}
             label="Twitch"
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
-        <Grid container item xs={12} sm={3}>
-          <TickTock className={classes.icon2} />
-          <Typography className={classes.text} variant="h6">
-            TickTock
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
+        <Grid container justify="space-between" item xs={12} sm={4}>
+          <div className={classes.titleSocialNetwork}>
+            <TickTock className={classes.icon2} />
+            <Typography className={classes.text} variant="h6">
+              TikTok
+            </Typography>
+          </div>
+          <Typography className={classes.text} variant="caption">
+            tiktok.com/
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
             fullWidth
             className={classes.inputProfile}
-            value={tickTock}
+            value={socialNetwork.tiktok}
             onChange={handleChangeTickTock}
             label="TickTock"
           />
         </Grid>
       </Grid>
-      <Grid container direction="row" className={classes.paper}>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        className={classes.paper}
+      >
         <Grid container item xs={12} sm={3}>
           <SnapChat className={classes.icon3} />
           <Typography className={classes.text} variant="h6">
             SnapChat
           </Typography>
         </Grid>
-        <Grid container item xs={12} sm={9}>
+        <Grid container item xs={12} sm={8} className={classes.containerInput}>
           <TextField
             variant="outlined"
             color="primary"
             fullWidth
             className={classes.inputProfile}
-            value={snapChat}
+            value={socialNetwork.snapchat}
             onChange={handleChangeSnapChat}
             label="Snapchat"
           />
