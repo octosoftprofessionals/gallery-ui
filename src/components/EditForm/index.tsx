@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Grid, Typography, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
@@ -13,6 +13,8 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import LinkForm from './LinkForm'
+
+// Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -98,7 +100,8 @@ const useStyle = makeStyles(theme => ({
     marginTop: theme.spacing(12),
     borderRadius: theme.spacing(7),
     '@media (max-width: 576px)': {
-      margin: theme.spacing(3),
+      // margin: theme.spacing(3),
+      margin: theme.spacing(3, 0),
       padding: theme.spacing(3),
     },
   },
@@ -119,6 +122,22 @@ const useStyle = makeStyles(theme => ({
       margin: theme.spacing(0, 16, 0, 16),
     },
   },
+  inputProfile: {
+    '@global': {
+      '.MuiOutlinedInput-root': {
+        borderRadius: 50,
+        padding: theme.spacing(2, 0),
+      },
+    },
+  },
+  inputBio: {
+    marginTop: theme.spacing(3),
+    '@global': {
+      '.MuiInputBase-input': {
+        borderRadius: 0,
+      },
+    },
+  },
 }))
 
 const EditForm = () => {
@@ -126,7 +145,7 @@ const EditForm = () => {
   const [name, setName] = React.useState('')
   const [userName, setUserName] = React.useState('')
   const [bio, setBio] = React.useState('')
-  const [word, setWord] = useState(0)
+  const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
 
@@ -154,70 +173,23 @@ const EditForm = () => {
       alignItems="center"
       className={classes.root}
     >
-      <Grid
-        item
-        xs={12}
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-      >
-        <Typography variant="h4" className={classes.Title}>
-          Edit Your Profile
-        </Typography>
+      <FormControl>
         <Grid
+          item
+          xs={12}
           container
-          direction="row"
+          direction="column"
           justify="space-around"
-          className={classes.formContainer}
+          alignItems="center"
         >
-          <Grid item xs={12} sm={6}>
-            <Typography
-              variant="h1"
-              color="primary"
-              className={classes.formTitle}
-            >
-              Enter your details:
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} className={classes.field}>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="component-outlined">Name</InputLabel>
-              <OutlinedInput
-                id="component-outlined"
-                value={name}
-                onChange={handleChangeName}
-                label="Name"
-                fullWidth
-              />
-            </FormControl>
-            <FormControl variant="outlined" className={classes.formInput}>
-              <InputLabel htmlFor="component-outlined">Email</InputLabel>
-              <OutlinedInput
-                id="component-outlined"
-                value={userName}
-                onChange={handleChangeUser}
-                label="Email"
-                fullWidth
-                /* className={classes.field} */
-              />
-            </FormControl>
-            <Collapse in={error}>
-              <Alert
-                variant="filled"
-                severity="error"
-                className={classes.alert}
-              >
-                <strong>Error:</strong> invalid entry
-              </Alert>
-            </Collapse>
-          </Grid>
-
+          <Typography variant="h4" className={classes.Title}>
+            Edit Your Profile
+          </Typography>
           <Grid
             container
             direction="row"
             justify="space-around"
-            className={classes.form}
+            className={classes.formContainer}
           >
             <Grid item xs={12} sm={6}>
               <Typography
@@ -225,63 +197,114 @@ const EditForm = () => {
                 color="primary"
                 className={classes.formTitle}
               >
-                Add a short bio.
+                Enter your details
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} className={classes.field}>
               <TextField
-                label="Add Bio"
-                name="Add Bio"
-                inputProps={{ maxLength: 200 }}
-                helperText={`${word.length}/200`}
-                multiline
-                value={word}
-                rows={6}
-                onChange={event => setWord(event.target.value)}
                 variant="outlined"
+                color="primary"
+                label="Name"
                 fullWidth
+                className={classes.inputProfile}
+                onChange={handleChangeName}
+                value={name}
               />
+              <Grid item className={classes.formInput}>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  label="Email"
+                  fullWidth
+                  className={classes.inputProfile}
+                  onChange={handleChangeUser}
+                  value={userName}
+                />
+              </Grid>
+
+              <Collapse in={error}>
+                <Alert
+                  variant="filled"
+                  severity="error"
+                  className={classes.alert}
+                >
+                  <strong>Error:</strong> invalid entry
+                </Alert>
+              </Collapse>
             </Grid>
 
-            <Grid item xs={12} sm={6} className={classes.form}>
-              <Typography
-                variant="h1"
-                color="primary"
-                className={classes.formTitle}
-              >
-                Upload a profile image
-              </Typography>
-              <Grid>
-                <Typography
-                  variant="body2"
-                  color="primary"
-                  className={classes.formText}
-                >
-                  Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max size.
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} sm={6} className={classes.form}>
-              <DragDrop />
-            </Grid>
-            <Grid item xs={12} sm={6} className={classes.form}>
-              <Typography
-                variant="h1"
-                color="primary"
-                className={classes.formTitle}
-              >
-                Upload a cover image
-              </Typography>
-              <Grid className={classes.formText}>
-                <Typography variant="body2" color="primary">
-                  Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max size.
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} sm={6} className={classes.form}>
-              <DragDrop />
-            </Grid>
             <Grid
+              container
+              direction="row"
+              justify="space-around"
+              className={classes.form}
+            >
+              <Grid item xs={12} sm={6}>
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  className={classes.formTitle}
+                >
+                  Add a short bio
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Add Bio"
+                  name="Add Bio"
+                  inputProps={{ maxLength: 200 }}
+                  helperText={`${word.length}/200`}
+                  multiline
+                  className={classes.inputBio}
+                  value={word}
+                  rows={6}
+                  onChange={event => setWord(event.target.value)}
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6} className={classes.form}>
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  className={classes.formTitle}
+                >
+                  Upload a profile image
+                </Typography>
+                <Grid>
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    className={classes.formText}
+                  >
+                    Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max
+                    size.
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.form}>
+                <DragDrop />
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.form}>
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  className={classes.formTitle}
+                >
+                  Upload a cover image
+                </Typography>
+                <Grid className={classes.formText}>
+                  <Typography variant="body2" color="primary">
+                    Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max
+                    size.
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.form}>
+                <DragDrop />
+              </Grid>
+              {/* <Grid
               container
               justify="flex-end"
               item
@@ -306,8 +329,8 @@ const EditForm = () => {
                   Show the Foundation community that your profile is authentic.
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid
+            </Grid> */}
+              {/* <Grid
               item
               xs={12}
               sm={6}
@@ -332,20 +355,21 @@ const EditForm = () => {
               >
                 Verify via Instagram
               </Button>
+            </Grid> */}
             </Grid>
+            <LinkForm />
+            <Button
+              onClick={handleSubmit}
+              color="primary"
+              className={classes.suscribeBtn}
+              variant="outlined"
+              fullWidth
+            >
+              Save Changes
+            </Button>
           </Grid>
-          <LinkForm />
-          <Button
-            onClick={handleSubmit}
-            color="primary"
-            className={classes.suscribeBtn}
-            variant="outlined"
-            fullWidth
-          >
-            Save Changes
-          </Button>
         </Grid>
-      </Grid>
+      </FormControl>
     </Grid>
   )
 }

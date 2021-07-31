@@ -18,6 +18,7 @@ import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow, colors } from '../../Styles/Colors'
+import { Link } from 'gatsby'
 import Links from './Links'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 
@@ -187,13 +188,17 @@ const InfoCreator = ({
           </Typography>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Button variant="outlined" fullWidth>
-            {isMyAccount ? (
-              <Typography variant="button">Edit profile</Typography>
-            ) : (
+          {isMyAccount ? (
+            <Link to="/editProfile">
+              <Button variant="outlined" fullWidth>
+                <Typography variant="button">Edit profile</Typography>
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="outlined" fullWidth>
               <Typography variant="button">Follow</Typography>
-            )}
-          </Button>
+            </Button>
+          )}
         </Grid>
       </Grid>
       {isMyAccount ? null : (
