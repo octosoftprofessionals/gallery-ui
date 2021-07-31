@@ -85,7 +85,7 @@ const menu = [
     link: address => `/construction`,
   },
   {
-    name: `Setting`,
+    name: `Settings`,
     link: address => `/editProfile`,
   },
 ]
@@ -177,7 +177,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
                     </Link>
                   ))}
                   <MenuItem className={classes.menuItem} onClick={onLogOut}>
-                    Log-out
+                    Log Out
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>
