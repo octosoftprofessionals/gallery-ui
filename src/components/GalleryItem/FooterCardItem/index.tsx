@@ -5,20 +5,42 @@ import Reserve from './Reserve'
 import Sold from './Sold'
 import ButtonPlaylist from './ButtonPlaylist'
 
-const FooterCardItem = ({ statesArt, price, timer }) => {
+const FooterCardItem = ({
+  statesArt,
+  price,
+  timer,
+  handleSubmitPlaylist,
+  handleSubmitFavorite,
+  account,
+}) => {
   return (
     <>
       {statesArt === 'listed' ? (
         <InAuctions price={price} timer={timer}>
-          <ButtonPlaylist />
+          {account ? (
+            <ButtonPlaylist
+              handleSubmitPlaylist={handleSubmitPlaylist}
+              handleSubmitFavorite={handleSubmitFavorite}
+            />
+          ) : null}
         </InAuctions>
       ) : statesArt === 'reserve' ? (
         <Reserve price={price}>
-          <ButtonPlaylist />
+          {account ? (
+            <ButtonPlaylist
+              handleSubmitPlaylist={handleSubmitPlaylist}
+              handleSubmitFavorite={handleSubmitFavorite}
+            />
+          ) : null}
         </Reserve>
       ) : statesArt === 'sold' ? (
         <Sold price={price}>
-          <ButtonPlaylist />
+          {account ? (
+            <ButtonPlaylist
+              handleSubmitPlaylist={handleSubmitPlaylist}
+              handleSubmitFavorite={handleSubmitFavorite}
+            />
+          ) : null}
         </Sold>
       ) : (
         ''

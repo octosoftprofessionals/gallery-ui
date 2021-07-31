@@ -41,14 +41,17 @@ const Gallery = ({
   return isLoading ? (
     <Spinner height="50vh" />
   ) : (
-    <Grid container direction="row" justify="space-between" wrap="wrap">
-      {ItemsToShow
-        ? ItemsToShow.map((galleryItem, index) => (
-            <Grid item xs={12} sm={6} md={3} className={classes.containerItem}>
-              <ArtworkItem key={index} galleryItem={galleryItem} />
-            </Grid>
-          ))
-        : ''}
+    <Grid container direction="row" justify="center" wrap="wrap">
+      {ItemsToShow.map((galleryItem, index) => (
+        <Grid item xs={12} sm={6} md={3} className={classes.containerItem}>
+          <ArtworkItem key={index} galleryItem={galleryItem} />
+        </Grid>
+      ))}
+      {favoriteArtworks.map((galleryItem, index) => (
+        <Grid item xs={12} sm={6} md={3} className={classes.containerItem}>
+          <ArtworkItem key={index} galleryItem={galleryItem} />
+        </Grid>
+      ))}
     </Grid>
   )
 }
