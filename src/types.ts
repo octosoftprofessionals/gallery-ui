@@ -316,22 +316,22 @@ export type FavoritesArtworks = {
 
 export type Users = {
   id: number
-  username: string
-  profile_img_url: string
-  cover_img_url: string
-  public_address: string
-  config: string
-  email: string
-  nonce: number
-  bio: string
-  website: string
-  twitter: string
-  instagram: string
-  discord_id: string
-  youtube: string
-  facebook: string
-  tiktok: string
-  snapchat: string
+  username?: string
+  profileImgUrl?: string
+  coverImgUrl?: string
+  publicAddress: string
+  config?: string
+  email?: string
+  nonce?: string
+  bio?: string
+  website?: string
+  twitter?: string
+  instagram?: string
+  discordId?: string
+  youtube?: string
+  facebook?: string
+  tiktok?: string
+  snapchat?: string
 }
 
 export type Artworks = {

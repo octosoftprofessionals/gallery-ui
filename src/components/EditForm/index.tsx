@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Button } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
@@ -15,6 +15,7 @@ import InstagramIcon from '@material-ui/icons/Instagram'
 import LinkForm from './LinkForm'
 import { updateUser } from '../../services/users'
 import { useAccountStore } from '../../hooks/useAccountStore'
+import { Users } from '../../types'
 // Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
@@ -141,22 +142,29 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const EditForm = () => {
+type Props = {
+  userAccount: Users
+}
+
+const EditForm = ({ userAccount }: Props) => {
+  console.log(userAccount)
+
   const classes = useStyle()
-  const [name, setName] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [bio, setBio] = React.useState('')
+  const [name, setName] = React.useState(userAccount.username)
+  const [email, setEmail] = React.useState(userAccount.email)
+  const [bio, setBio] = React.useState(userAccount.bio)
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
   const [socialNetwork, setSocialNetwork] = useState({
-    web: '',
-    discord: '',
-    youtube: '',
-    fb: '',
-    twitch: '',
-    tiktok: '',
-    snapchat: '',
+    website: userAccount.website,
+    twitter: userAccount.twitter,
+    instagram: userAccount.instagram,
+    discordId: userAccount.discordId,
+    youtube: userAccount.youtube,
+    facebook: userAccount.facebook,
+    tiktok: userAccount.tiktok,
+    snapchat: userAccount.snapchat,
   })
   const [files, setFiles] = useState({ picture: '', cover: '' })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
@@ -170,6 +178,7 @@ const EditForm = () => {
   const handleChangeBio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBio(event.target.value)
   }
+
   const handleSubmit = () => {
     if (validateEmail(email)) {
       setError(false)
@@ -178,19 +187,18 @@ const EditForm = () => {
         profile_img_url: '',
         cover_img_url: '',
         public_address: metamaskAccount,
-        config: {},
         email: email,
-        nonce: '',
         bio: bio,
-        website: socialNetwork.web,
-        twitter: '',
-        instagram: '',
-        discord: socialNetwork.discord,
+        website: socialNetwork.website,
+        twitter: socialNetwork.twitter,
+        instagram: socialNetwork.instagram,
+        discordId: socialNetwork.discordId,
         youtube: socialNetwork.youtube,
-        facebook: socialNetwork.fb,
+        facebook: socialNetwork.facebook,
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       }
+      console.log('data::', data)
       updateUser(data)
     } else {
       setError(true)
@@ -335,58 +343,6 @@ const EditForm = () => {
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="cover" files={files} />
               </Grid>
-              {/* <Grid
-              container
-              justify="flex-end"
-              item
-              xs={12}
-              sm={6}
-              className={classes.form}
-            >
-              <VerifiedUserIcon className={classes.icon} />
-              <Typography
-                variant="h1"
-                color="primary"
-                className={classes.formTitle}
-              >
-                Verify your profile
-              </Typography>
-              <Grid>
-                <Typography
-                  variant="body2"
-                  color="primary"
-                  className={classes.formText}
-                >
-                  Show the Foundation community that your profile is authentic.
-                </Typography>
-              </Grid>
-            </Grid> */}
-              {/* <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction="column"
-              className={classes.form}
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                startIcon={<TwitterIcon />}
-                fullWidth
-              >
-                Verify via Twitter
-              </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.Btn}
-                startIcon={<InstagramIcon />}
-                fullWidth
-              >
-                Verify via Instagram
-              </Button>
-            </Grid> */}
             </Grid>
             <LinkForm
               socialNetwork={socialNetwork}
