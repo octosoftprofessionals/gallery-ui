@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { useMutation } from 'react-query'
+import Truncate from 'react-truncate'
 import { createFollow } from '../../../services/follow'
 import useQueryParams from '../../../hooks/useQueryParams'
 // import axios from 'axios'
@@ -18,8 +19,6 @@ import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow, colors } from '../../Styles/Colors'
-import { Link } from 'gatsby'
-import Links from './Links'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 
 const useStyle = makeStyles(Theme => ({
@@ -166,9 +165,17 @@ const InfoCreator = ({
           </Typography>
         </Button>
       </Grid>
-      <Typography variant="subtitle2" className={classes.userName}>
-        {username ? `@${username}` : publicKey}
-      </Typography>
+      {username ? (
+        <Typography variant="subtitle2" className={classes.userName}>
+          `@${username}`
+        </Typography>
+      ) : (
+        <Typography variant="subtitle2" className={classes.userName}>
+          <Truncate lines={1} width={366}>
+            {publicKey}
+          </Truncate>
+        </Typography>
+      )}
 
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
@@ -189,11 +196,9 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={12} sm={5}>
           {isMyAccount ? (
-            <Link to="/editProfile">
-              <Button variant="outlined" fullWidth>
-                <Typography variant="button">Edit profile</Typography>
-              </Button>
-            </Link>
+            <Button variant="outlined" fullWidth href="/editProfile">
+              <Typography variant="button">Edit profile</Typography>
+            </Button>
           ) : (
             <Button variant="outlined" fullWidth>
               <Typography variant="button">Follow</Typography>
