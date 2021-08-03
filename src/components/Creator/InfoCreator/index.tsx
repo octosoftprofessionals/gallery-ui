@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 
 import { useMutation } from 'react-query'
 import { createFollow } from '../../../services/follow'
-import useQueryParams from '../../../hooks/useQueryParams'
+import { useAccountStore } from '../../../hooks/useAccountStore'
+// import useQueryParams from '../../../hooks/useQueryParams'
 // import axios from 'axios'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -105,26 +106,18 @@ const InfoCreator = ({
 }) => {
   const classes = useStyle({ userIndex, isMyAccount })
   const [isCopy, setIsCopy] = useState(false)
-  // https://react-query.tanstack.com/guides/mutations
-  // 1st attempt)
-  //const mutation = useMutation(newFollow => axios.post('http://localhost:3000/v1/follow', newFollow))
-  //2nd attempt)
-  // const mutation = useMutation(createFollow)
+  const [account, _] = useAccountStore()
+  const followMutation = useMutation(createFollow)
 
-  //3rd attempt)
-  const mutation = useMutation(newFollow => createFollow())
 
-  // How can I pass the user_name, artist_name and artist_id into the mutation?
-  //Try with useQueryParams? VBut doesn't make sense, because this is not comming/going from PARAMS, but from BODY (req.body on original route at server)...
-  const { user_name, artist_name, artist_id } = useQueryParams()
-  //Still, doesn't work. This error arise:
-  /*
-  error: el valor nulo en la columna «user_name» de la relación «follow» viola la restricción de no nulo
-  Is like
-  */
+  const handleSubmitFollow = e => {
+    e.preventDefault()
+    followMutation.mutate({
+      follower_address: publicKey,
+      followee_address: account as string,
+    })
+  }
 
-  // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
-  // const year = new Date(createdAt).getFullYear()
 
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
@@ -195,7 +188,11 @@ const InfoCreator = ({
               </Button>
             </Link>
           ) : (
-            <Button variant="outlined" fullWidth>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={handleSubmitFollow}
+            >
               <Typography variant="button">Follow</Typography>
             </Button>
           )}
