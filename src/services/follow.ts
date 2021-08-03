@@ -38,20 +38,26 @@ export const getOneFollowerByIdWithAllHisFollowees = async (
   return followerWithFollowees
 }
 
-export const unFollow = async (
-  follower_address: string,
+export const unFollow = async ({
+  follower_address,
+  followee_address,
+}: {
+  follower_address: string
   followee_address: string
-  ) => {
+}) => {
   const url = `/follow/${follower_address}/${followee_address}`
   const res = await destroy(url)
   const deletedFollow = res.data ?? {}
   return deletedFollow
 }
 
-export const checkExistingFollow = async (
-  follower_address: string,
+export const checkExistingFollow = async ({
+  follower_address,
+  followee_address,
+}: {
+  follower_address: string
   followee_address: string
-) => {
+}) => {
   const url = `/follow/${follower_address}/${followee_address}`
   const res = await get(url)
   const checkedFollow = res.data ?? {}
