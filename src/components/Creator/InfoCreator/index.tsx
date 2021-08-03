@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { useMutation } from 'react-query'
-import { createFollow } from '../../../services/follow'
+import { useMutation, useQuery } from 'react-query'
+import {
+  createFollow,
+  unFollow,
+  checkExistingFollow,
+} from '../../../services/follow'
 import { useAccountStore } from '../../../hooks/useAccountStore'
-// import useQueryParams from '../../../hooks/useQueryParams'
-// import axios from 'axios'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -20,7 +22,6 @@ import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow, colors } from '../../Styles/Colors'
 import { Link } from 'gatsby'
-import Links from './Links'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 
 const useStyle = makeStyles(Theme => ({
@@ -108,16 +109,32 @@ const InfoCreator = ({
   const [isCopy, setIsCopy] = useState(false)
   const [account, _] = useAccountStore()
   const followMutation = useMutation(createFollow)
+  const unFollowMutation = useMutation(unFollow)
+  const { data: FollowQuery = false } = useQuery('FollowQuery', () =>
+    checkExistingFollow({
+      follower_address: publicKey,
+      followee_address: account as string,
+    })
+  )
+  const [isFollow, setIsFollow] = useState(FollowQuery)
 
-
+  console.log('FollowQuery :>> ', FollowQuery)
   const handleSubmitFollow = e => {
     e.preventDefault()
     followMutation.mutate({
       follower_address: publicKey,
       followee_address: account as string,
     })
+    setIsFollow(!isFollow)
   }
-
+  const handleSubmitUnfollow = e => {
+    e.preventDefault()
+    unFollowMutation.mutate({
+      follower_address: account as string,
+      followee_address: publicKey,
+    })
+    setIsFollow(!isFollow)
+  }
 
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
@@ -191,9 +208,13 @@ const InfoCreator = ({
             <Button
               variant="outlined"
               fullWidth
-              onClick={handleSubmitFollow}
+              onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
             >
-              <Typography variant="button">Follow</Typography>
+              {isFollow ? (
+                <Typography variant="button">Unfollow</Typography>
+              ) : (
+                <Typography variant="button">Follow</Typography>
+              )}
             </Button>
           )}
         </Grid>
