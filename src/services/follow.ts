@@ -7,9 +7,15 @@ export type FollowData = {
   artist_id: number
 }
 
-export const createFollow = async (queryParams = {}) => {
-  const url = `/follow`
-  const res = await post(url, queryParams)
+export const createFollow = async ({
+  follower_address,
+  followee_address,
+}: {
+  follower_address: string
+  followee_address: string
+}) => {
+  const url = `/follow/${follower_address}/${followee_address}`
+  const res = await post(url)
   const createdFollow = res.data ?? {}
   return createdFollow
 }
@@ -32,9 +38,22 @@ export const getOneFollowerByIdWithAllHisFollowees = async (
   return followerWithFollowees
 }
 
-export const unFollow = async (follower_id: number, followee_id: number) => {
-  const url = `/follow/${follower_id}/${followee_id}`
+export const unFollow = async (
+  follower_address: string,
+  followee_address: string
+  ) => {
+  const url = `/follow/${follower_address}/${followee_address}`
   const res = await destroy(url)
   const deletedFollow = res.data ?? {}
   return deletedFollow
+}
+
+export const checkExistingFollow = async (
+  follower_address: string,
+  followee_address: string
+) => {
+  const url = `/follow/${follower_address}/${followee_address}`
+  const res = await get(url)
+  const checkedFollow = res.data ?? {}
+  return checkedFollow
 }

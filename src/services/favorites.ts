@@ -68,3 +68,13 @@ export const updatePriorityOfOneFavoriteArtwork = async (
   const updatePriorityFromAFavoriteArtwork = res.data ?? {}
   return updatePriorityFromAFavoriteArtwork
 }
+
+export const checkExistingFavoriteAssociation = async (
+  public_address: string,
+  asset_id: number
+) => {
+  const url = `${ROOT}/favorites/${public_address}/${asset_id}`
+  const res = await get(url)
+  const checkedExistingFavorite = res.data ?? {}
+  return checkedExistingFavorite
+}
