@@ -1,10 +1,5 @@
-import React, { useState } from 'react'
-
-import { useMutation } from 'react-query'
-
-import { createFollow } from '../../../services/follow'
-import useQueryParams from '../../../hooks/useQueryParams'
-// import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import { useMutation, useQuery } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -18,6 +13,13 @@ import {
 import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
+import Spinner from '../../Spinner'
+import {
+  createFollow,
+  unFollow,
+  checkExistingFollow,
+} from '../../../services/follow'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 import { boxShadow, colors } from '../../Styles/Colors'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
@@ -105,26 +107,39 @@ const InfoCreator = ({
 }) => {
   const classes = useStyle({ userIndex, isMyAccount })
   const [isCopy, setIsCopy] = useState(false)
-  // https://react-query.tanstack.com/guides/mutations
-  // 1st attempt)
-  //const mutation = useMutation(newFollow => axios.post('http://localhost:3000/v1/follow', newFollow))
-  //2nd attempt)
-  // const mutation = useMutation(createFollow)
+  const [account, _] = useAccountStore()
+  const followMutation = useMutation(createFollow)
+  const unFollowMutation = useMutation(unFollow)
+  const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
+    checkExistingFollow({
+      follower_address: publicKey,
+      followee_address: account as string,
+    })
+  )
 
-  //3rd attempt)
-  const mutation = useMutation(newFollow => createFollow())
+  const [isFollow, setIsFollow] = useState('')
 
-  // How can I pass the user_name, artist_name and artist_id into the mutation?
-  //Try with useQueryParams? VBut doesn't make sense, because this is not comming/going from PARAMS, but from BODY (req.body on original route at server)...
-  const { user_name, artist_name, artist_id } = useQueryParams()
-  //Still, doesn't work. This error arise:
-  /*
-  error: el valor nulo en la columna «user_name» de la relación «follow» viola la restricción de no nulo
-  Is like
-  */
+  useEffect(() => {
+    const { follow } = FollowQuery
+    setIsFollow(follow)
+  }, [FollowQuery, following, followers])
 
-  // const month = new Date(createdAt).toLocaleString('default', { month: 'long' })
-  // const year = new Date(createdAt).getFullYear()
+  const handleSubmitFollow = e => {
+    e.preventDefault()
+    followMutation.mutate({
+      follower_address: publicKey,
+      followee_address: account as string,
+    })
+    setIsFollow(true)
+  }
+  const handleSubmitUnfollow = e => {
+    e.preventDefault()
+    unFollowMutation.mutate({
+      follower_address: publicKey,
+      followee_address: account as string,
+    })
+    setIsFollow(false)
+  }
 
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
@@ -199,8 +214,18 @@ const InfoCreator = ({
               <Typography variant="button">Edit profile</Typography>
             </Button>
           ) : (
-            <Button variant="outlined" fullWidth>
-              <Typography variant="button">Follow</Typography>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
+            >
+              {isLoading ? (
+                <Spinner height="20vh" />
+              ) : isFollow ? (
+                <Typography variant="button">Unfollow</Typography>
+              ) : (
+                <Typography variant="button">Follow</Typography>
+              )}
             </Button>
           )}
         </Grid>
