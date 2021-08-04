@@ -27,6 +27,7 @@ const ButtonPlaylist = ({
   const [isFavorite, setIsFavorite] = useState<boolean>(inFavorite)
   const [isPlaylist, setIsPlaylist] = useState<boolean>(false)
 
+  console.log("inFavorite from ButtonPlaylist :>>", inFavorite)
   const handleClickIsFavorite = () => {
     setIsFavorite(!isFavorite)
   }
