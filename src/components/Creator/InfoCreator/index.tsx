@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 
 import { useMutation, useQuery } from 'react-query'
+import Spinner from '../../Spinner'
 import {
   createFollow,
   unFollow,
@@ -110,13 +111,20 @@ const InfoCreator = ({
   const [account, _] = useAccountStore()
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
-  const { data: FollowQuery = false } = useQuery('FollowQuery', () =>
+  const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
     checkExistingFollow({
       follower_address: publicKey,
       followee_address: account as string,
     })
   )
-  const [isFollow, setIsFollow] = useState(FollowQuery)
+
+  const [isFollow, setIsFollow] = useState("")
+
+  useEffect(() =>{
+    const { follow } = FollowQuery
+    setIsFollow(follow)
+  },[FollowQuery, following, followers])
+
 
   console.log('FollowQuery :>> ', FollowQuery)
   const handleSubmitFollow = e => {
@@ -125,15 +133,15 @@ const InfoCreator = ({
       follower_address: publicKey,
       followee_address: account as string,
     })
-    setIsFollow(!isFollow)
+    setIsFollow(true)
   }
   const handleSubmitUnfollow = e => {
     e.preventDefault()
     unFollowMutation.mutate({
-      follower_address: account as string,
-      followee_address: publicKey,
+      follower_address: publicKey,
+      followee_address: account as string,
     })
-    setIsFollow(!isFollow)
+    setIsFollow(false)
   }
 
   const getPublicKey = () => {
@@ -183,7 +191,7 @@ const InfoCreator = ({
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {following ? following : '—'}
+            {valueFollowing ? valueFollowing : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Following
@@ -191,7 +199,7 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {followers ? followers : '—'}
+            {valueFollowers ? valueFollowers : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollowers}>
             Followers
@@ -210,11 +218,13 @@ const InfoCreator = ({
               fullWidth
               onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
             >
-              {isFollow ? (
+              {isLoading ?
+                <Spinner height="20vh" />
+                : isFollow?
                 <Typography variant="button">Unfollow</Typography>
-              ) : (
+                :
                 <Typography variant="button">Follow</Typography>
-              )}
+              }
             </Button>
           )}
         </Grid>
