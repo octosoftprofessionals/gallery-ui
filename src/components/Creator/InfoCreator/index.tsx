@@ -1,13 +1,5 @@
-import React, { useState,useEffect } from 'react'
-
+import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
-import Spinner from '../../Spinner'
-import {
-  createFollow,
-  unFollow,
-  checkExistingFollow,
-} from '../../../services/follow'
-import { useAccountStore } from '../../../hooks/useAccountStore'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -21,9 +13,16 @@ import {
 import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
 
+import Spinner from '../../Spinner'
+import {
+  createFollow,
+  unFollow,
+  checkExistingFollow,
+} from '../../../services/follow'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 import { boxShadow, colors } from '../../Styles/Colors'
-import { Link } from 'gatsby'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
+import { truncateMiddleText } from '../../../Utils/stringUtils'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -118,13 +117,12 @@ const InfoCreator = ({
     })
   )
 
-  const [isFollow, setIsFollow] = useState("")
+  const [isFollow, setIsFollow] = useState('')
 
-  useEffect(() =>{
+  useEffect(() => {
     const { follow } = FollowQuery
     setIsFollow(follow)
-  },[FollowQuery, following, followers])
-
+  }, [FollowQuery, following, followers])
 
   const handleSubmitFollow = e => {
     e.preventDefault()
@@ -183,14 +181,20 @@ const InfoCreator = ({
           </Typography>
         </Button>
       </Grid>
-      <Typography variant="subtitle2" className={classes.userName}>
-        {username ? `@${username}` : publicKey}
-      </Typography>
+      {username ? (
+        <Typography variant="subtitle2" className={classes.userName}>
+          `@${username}`
+        </Typography>
+      ) : (
+        <Typography variant="subtitle2" className={classes.userName}>
+          {truncateMiddleText(publicKey)}
+        </Typography>
+      )}
 
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {valueFollowing ? valueFollowing : '—'}
+            {following ? following : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollow}>
             Following
@@ -198,7 +202,7 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {valueFollowers ? valueFollowers : '—'}
+            {followers ? followers : '—'}
           </Typography>
           <Typography variant="overline" className={classes.textFollowers}>
             Followers
@@ -206,24 +210,22 @@ const InfoCreator = ({
         </Grid>
         <Grid item xs={12} sm={5}>
           {isMyAccount ? (
-            <Link to="/editProfile">
-              <Button variant="outlined" fullWidth>
-                <Typography variant="button">Edit profile</Typography>
-              </Button>
-            </Link>
+            <Button variant="outlined" fullWidth href="/editProfile">
+              <Typography variant="button">Edit profile</Typography>
+            </Button>
           ) : (
             <Button
               variant="outlined"
               fullWidth
               onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
             >
-              {isLoading ?
+              {isLoading ? (
                 <Spinner height="20vh" />
-                : isFollow?
+              ) : isFollow ? (
                 <Typography variant="button">Unfollow</Typography>
-                :
+              ) : (
                 <Typography variant="button">Follow</Typography>
-              }
+              )}
             </Button>
           )}
         </Grid>
