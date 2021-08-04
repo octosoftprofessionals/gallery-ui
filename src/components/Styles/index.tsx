@@ -41,6 +41,12 @@ export const darkTheme = createMuiTheme({
         borderRadius: 16,
         backgroundColor: Nero,
       },
+      paper: {
+        minWidth: '700px !important',
+        maxHeight: '500px !important',
+        minHeight: '300px !important',
+        overflowX: 'hidden',
+      },
     },
     MuiBadge: {
       anchorOriginBottomLeftRectangle: {
