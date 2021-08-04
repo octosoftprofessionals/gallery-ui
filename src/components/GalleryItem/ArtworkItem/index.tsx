@@ -6,7 +6,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
 import { GalleryItem } from '../../../services/gallery'
-import { createAssociationFavoritesArtworks } from '../../../services/favorites'
+import {
+  createAssociationFavoritesArtworks,
+  deleteOneFavoriteArtworkFromOneUser,
+} from '../../../services/favorites'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
@@ -108,6 +111,7 @@ const ArtworkItem = ({
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
+  const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
   const handleSubmitFavorite = e => {
     e.preventDefault()
@@ -116,10 +120,18 @@ const ArtworkItem = ({
       asset_id: assetId,
     })
   }
+  const handleSubmitUnFavorite = e => {
+    e.preventDefault()
+    unFavoritesMutation.mutate({
+      public_address: account as string,
+      asset_id: assetId,
+    })
+  }
 
   const handleSubmitPlaylist = e => {
     e.preventDefault()
   }
+
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={link} className={classes.link} {...rootProps}>
@@ -163,6 +175,7 @@ const ArtworkItem = ({
         timer={timer}
         handleSubmitPlaylist={handleSubmitPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
+        handleSubmitUnFavorite={handleSubmitUnFavorite}
       />
     </Paper>
   )

@@ -16,7 +16,12 @@ const useStyle = makeStyles(Theme => ({
   button: { padding: Theme.spacing(1), margin: Theme.spacing(1) },
 }))
 
-const ButtonPlaylist = ({ handleSubmitFavorite, handleSubmitPlaylist }) => {
+const ButtonPlaylist = ({
+  handleSubmitFavorite,
+  handleSubmitUnFavorite,
+  handleSubmitPlaylist,
+  handleSubmitUnPlaylist,
+}) => {
   const classes = useStyle()
   const [isFavorite, setIsFavorite] = useState<boolean>(false)
   const [isPlaylist, setIsPlaylist] = useState<boolean>(false)
@@ -31,7 +36,9 @@ const ButtonPlaylist = ({ handleSubmitFavorite, handleSubmitPlaylist }) => {
   return (
     <Grid container direction="row" justify="space-between">
       <Grid item xs={5}>
-        <form onSubmit={handleSubmitFavorite}>
+        <form
+          onSubmit={isFavorite ? handleSubmitUnFavorite : handleSubmitFavorite}
+        >
           <Button
             type="submit"
             fullWidth
@@ -59,7 +66,9 @@ const ButtonPlaylist = ({ handleSubmitFavorite, handleSubmitPlaylist }) => {
         </form>
       </Grid>
       <Grid item xs={5}>
-        <form onSubmit={handleSubmitPlaylist}>
+        <form
+          onSubmit={isPlaylist ? handleSubmitUnPlaylist : handleSubmitPlaylist}
+        >
           <Button
             fullWidth
             type="submit"

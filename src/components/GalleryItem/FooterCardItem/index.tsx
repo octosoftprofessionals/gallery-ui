@@ -11,6 +11,8 @@ const FooterCardItem = ({
   timer,
   handleSubmitPlaylist,
   handleSubmitFavorite,
+  handleSubmitUnFavorite,
+  handleSubmitUnPlaylist,
   account,
 }) => {
   return (
@@ -21,6 +23,8 @@ const FooterCardItem = ({
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
+              handleSubmitUnFavorite={handleSubmitUnFavorite}
+              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
             />
           ) : null}
         </InAuctions>
@@ -30,6 +34,8 @@ const FooterCardItem = ({
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
+              handleSubmitUnFavorite={handleSubmitUnFavorite}
+              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
             />
           ) : null}
         </Reserve>
@@ -39,6 +45,8 @@ const FooterCardItem = ({
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
+              handleSubmitUnFavorite={handleSubmitUnFavorite}
+              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
             />
           ) : null}
         </Sold>
