@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useMutation } from 'react-query'
-import Truncate from 'react-truncate'
+
 import { createFollow } from '../../../services/follow'
 import useQueryParams from '../../../hooks/useQueryParams'
 // import axios from 'axios'
@@ -20,6 +20,7 @@ import { FileCopy } from '@material-ui/icons'
 
 import { boxShadow, colors } from '../../Styles/Colors'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
+import { truncateMiddleText } from '../../../Utils/stringUtils'
 
 const useStyle = makeStyles(Theme => ({
   root: {},
@@ -171,9 +172,7 @@ const InfoCreator = ({
         </Typography>
       ) : (
         <Typography variant="subtitle2" className={classes.userName}>
-          <Truncate lines={1} width={366}>
-            {publicKey}
-          </Truncate>
+          {truncateMiddleText(publicKey)}
         </Typography>
       )}
 
