@@ -5,11 +5,6 @@ import config from '../config'
 
 const ROOT = config.API_URL || 'http://localhost:3000/v1'
 
-export const http = axiosRateLimit(axios.create({ baseURL: ROOT }), {
-  maxRequests: 5,
-  perMilliseconds: 1000,
-})
-
 export const httpWithCredentials = axiosRateLimit(
   axios.create({ withCredentials: true, baseURL: ROOT }),
   {
@@ -19,7 +14,7 @@ export const httpWithCredentials = axiosRateLimit(
 )
 
 export const get = async (url, queryParams = {}) => {
-  return await http.get(url, { params: queryParams })
+  return await httpWithCredentials.get(url, { params: queryParams })
 }
 
 export const post = async (url, queryParams = {}) => {
