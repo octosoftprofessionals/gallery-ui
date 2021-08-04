@@ -21,9 +21,10 @@ const ButtonPlaylist = ({
   handleSubmitUnFavorite,
   handleSubmitPlaylist,
   handleSubmitUnPlaylist,
+  inFavorite,
 }) => {
   const classes = useStyle()
-  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+  const [isFavorite, setIsFavorite] = useState<boolean>(inFavorite)
   const [isPlaylist, setIsPlaylist] = useState<boolean>(false)
 
   const handleClickIsFavorite = () => {

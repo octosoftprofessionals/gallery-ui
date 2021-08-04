@@ -91,8 +91,9 @@ const ArtworkItem = ({
     status,
     priceEth,
     expiration,
+    //isFavorite
   } = galleryItem
-
+  console.log('galleryItem :>> ', galleryItem)
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
@@ -131,6 +132,12 @@ const ArtworkItem = ({
   const handleSubmitPlaylist = e => {
     e.preventDefault()
   }
+<<<<<<< HEAD
+=======
+  const handleSubmitUnPlaylist = e => {
+    e.preventDefault()
+  }
+>>>>>>> connected to favorites
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
@@ -174,8 +181,10 @@ const ArtworkItem = ({
         price={priceEth}
         timer={timer}
         handleSubmitPlaylist={handleSubmitPlaylist}
+        handleSubmitUnPlaylist={handleSubmitUnPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
+        isFavorite={isFavorite}
       />
     </Paper>
   )

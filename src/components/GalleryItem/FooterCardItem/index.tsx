@@ -13,6 +13,7 @@ const FooterCardItem = ({
   handleSubmitFavorite,
   handleSubmitUnFavorite,
   handleSubmitUnPlaylist,
+  isFavorite,
   account,
 }) => {
   return (
@@ -25,6 +26,7 @@ const FooterCardItem = ({
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
+              inFavorite={isFavorite}
             />
           ) : null}
         </InAuctions>
@@ -36,6 +38,7 @@ const FooterCardItem = ({
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
+              isFavorite={isFavorite}
             />
           ) : null}
         </Reserve>
@@ -47,6 +50,7 @@ const FooterCardItem = ({
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
+              isFavorite={isFavorite}
             />
           ) : null}
         </Sold>
