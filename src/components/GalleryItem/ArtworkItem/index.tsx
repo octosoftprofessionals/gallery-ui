@@ -91,9 +91,9 @@ const ArtworkItem = ({
     status,
     priceEth,
     expiration,
-    //isFavorite
+    isFavorite
   } = galleryItem
-  console.log('galleryItem :>> ', galleryItem)
+  console.log("inFavorite from ArtworkItem :>>", isFavorite)
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
