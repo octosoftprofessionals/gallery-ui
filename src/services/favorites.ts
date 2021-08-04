@@ -1,31 +1,7 @@
-import axios from 'axios'
-import axiosRateLimit from 'axios-rate-limit'
 import config from '../config'
+import { get, post, destroy, update } from './http'
 
 const ROOT = config.API_URL || 'http://localhost:3000/v1'
-
-const http = axiosRateLimit(axios.create(), {
-  maxRequests: 5,
-  perMilliseconds: 1000,
-})
-
-// Helper functions
-
-const get = async (url: string) => {
-  return await http.get(url)
-}
-
-const post = async (url: string) => {
-  return await http.post(url)
-}
-
-const destroy = async (url: string, queryParams = {}) => {
-  return await http.delete(url, { params: queryParams })
-}
-
-const update = async (url: string, queryParams = {}) => {
-  return await http.put(url, { params: queryParams })
-}
 
 export const createAssociationFavoritesArtworks = async ({
   public_address,
@@ -67,4 +43,14 @@ export const updatePriorityOfOneFavoriteArtwork = async (
   const res = await update(url)
   const updatePriorityFromAFavoriteArtwork = res.data ?? {}
   return updatePriorityFromAFavoriteArtwork
+}
+
+export const checkExistingFavoriteAssociation = async (
+  public_address: string,
+  asset_id: number
+) => {
+  const url = `${ROOT}/favorites/${public_address}/${asset_id}`
+  const res = await get(url)
+  const checkedExistingFavorite = res.data ?? {}
+  return checkedExistingFavorite
 }
