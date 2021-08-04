@@ -40,6 +40,7 @@ function FollowItem({ user }) {
       >
         <Grid
           md={9}
+          xs={5}
           item
           container
           direction="row"
@@ -49,7 +50,7 @@ function FollowItem({ user }) {
           <Avatar className={classes.avatar}></Avatar>
           <Typography variant="subtitle2">{`@${user.username}`}</Typography>
         </Grid>
-        <Grid md={3} item container justify="flex-end">
+        <Grid md={3} xs={6} item container justify="flex-end">
           <Button variant="outlined" className={classes.btnFollow}>
             <Typography variant="button" className={classes.btnText}>
               Follow
