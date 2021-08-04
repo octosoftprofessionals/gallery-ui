@@ -126,7 +126,6 @@ const InfoCreator = ({
   },[FollowQuery, following, followers])
 
 
-  console.log('FollowQuery :>> ', FollowQuery)
   const handleSubmitFollow = e => {
     e.preventDefault()
     followMutation.mutate({
