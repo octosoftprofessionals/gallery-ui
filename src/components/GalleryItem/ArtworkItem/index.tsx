@@ -91,9 +91,9 @@ const ArtworkItem = ({
     status,
     priceEth,
     expiration,
-    isFavorite
+    isFavorite,
   } = galleryItem
-  console.log("inFavorite from ArtworkItem :>>", isFavorite)
+
   const [timer, setTimer] = useState('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
@@ -110,6 +110,12 @@ const ArtworkItem = ({
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    setInFavorite(isFavorite)
+  }, [isFavorite])
+
+  const [inFavorite, setInFavorite] = useState<boolean>(false)
+
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
@@ -120,6 +126,7 @@ const ArtworkItem = ({
       public_address: account as string,
       asset_id: assetId,
     })
+    setInFavorite(true)
   }
   const handleSubmitUnFavorite = e => {
     e.preventDefault()
@@ -127,17 +134,15 @@ const ArtworkItem = ({
       public_address: account as string,
       asset_id: assetId,
     })
+    setInFavorite(false)
   }
 
   const handleSubmitPlaylist = e => {
     e.preventDefault()
   }
-<<<<<<< HEAD
-=======
   const handleSubmitUnPlaylist = e => {
     e.preventDefault()
   }
->>>>>>> connected to favorites
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
@@ -184,7 +189,7 @@ const ArtworkItem = ({
         handleSubmitUnPlaylist={handleSubmitUnPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
-        isFavorite={isFavorite}
+        isFavorite={inFavorite}
       />
     </Paper>
   )
