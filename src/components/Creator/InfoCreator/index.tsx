@@ -183,7 +183,7 @@ const InfoCreator = ({
       </Grid>
       {username ? (
         <Typography variant="subtitle2" className={classes.userName}>
-          `@${username}`
+          {`@${username}`}
         </Typography>
       ) : (
         <Typography variant="subtitle2" className={classes.userName}>
@@ -213,15 +213,15 @@ const InfoCreator = ({
             <Button variant="outlined" fullWidth href="/editProfile">
               <Typography variant="button">Edit profile</Typography>
             </Button>
+          ) : isLoading ? (
+            <Spinner height="20vh" />
           ) : (
             <Button
               variant="outlined"
               fullWidth
               onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
             >
-              {isLoading ? (
-                <Spinner height="20vh" />
-              ) : isFollow ? (
+              {isFollow ? (
                 <Typography variant="button">Unfollow</Typography>
               ) : (
                 <Typography variant="button">Follow</Typography>
