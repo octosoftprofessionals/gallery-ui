@@ -69,11 +69,7 @@ function FollowItem({ user, handleClick, publicKey }) {
   }
 
   return (
-    <Button
-      fullWidth
-      className={classes.btnContainer}
-      onClick={() => handleClick(false)}
-    >
+    <Paper fullWidth className={classes.btnContainer}>
       <Grid
         md={12}
         item
@@ -90,6 +86,7 @@ function FollowItem({ user, handleClick, publicKey }) {
           direction="row"
           justify="flex-start"
           alignItems="center"
+          // onClick={() => handleClick(false)}
         >
           <Avatar className={classes.avatar}></Avatar>
           <Link to={`/creator/?address=${user.publicAddress}`}>
@@ -116,7 +113,7 @@ function FollowItem({ user, handleClick, publicKey }) {
           ) : null}
         </Grid>
       </Grid>
-    </Button>
+    </Paper>
   )
 }
 
