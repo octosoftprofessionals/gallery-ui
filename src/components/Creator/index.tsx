@@ -1,15 +1,18 @@
 import React from 'react'
+import { useQuery } from 'react-query'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid } from '@material-ui/core'
+
 import GridCreator from './GridCreator'
 import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import { boxShadow } from '../../components/Styles/Colors'
-import { useQuery } from 'react-query'
 import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
 } from '../../services/follow'
+
 import { Users } from '../../types'
 
 const useStyle = makeStyles(Theme => ({
