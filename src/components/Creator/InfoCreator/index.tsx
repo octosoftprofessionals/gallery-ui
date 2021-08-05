@@ -220,6 +220,7 @@ const InfoCreator = ({
             setOpenFollowModal={setOpenFollowModal}
             followers={followers}
             following={following}
+            publicKey={publicKey}
           />
         </Grid>
         <Grid item xs={12} sm={5}>

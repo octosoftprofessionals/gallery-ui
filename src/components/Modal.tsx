@@ -33,6 +33,7 @@ const useStyle = makeStyles(Theme => ({
   dialogAction: {
     margin: 0,
     padding: Theme.spacing(1),
+    height: Theme.spacing(5),
   },
 }))
 
@@ -51,7 +52,7 @@ const DialogTitle = props => {
   )
 }
 
-function Modal({ children, showTitle, setOpen, open }) {
+function Modal({ children, showTitle, setOpen, open, btnFooter = false }) {
   const classes = useStyle()
 
   const handleClickOpen = () => {
@@ -87,9 +88,11 @@ function Modal({ children, showTitle, setOpen, open }) {
           {children}
         </DialogContent>
         <DialogActions className={classes.dialogAction}>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
-          </Button>
+          {btnFooter ? (
+            <Button autoFocus onClick={handleClose} color="primary">
+              Save changes
+            </Button>
+          ) : null}
         </DialogActions>
       </Dialog>
     </>

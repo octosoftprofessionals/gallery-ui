@@ -59,6 +59,7 @@ const FollowersModal = ({
   setOpenFollowModal,
   followers,
   following,
+  publicKey,
 }) => {
   const classes = useStyles()
   const [value, setValue] = useState('1')
@@ -66,9 +67,6 @@ const FollowersModal = ({
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-  console.log('HOLI')
-  console.log('followers', followers)
-  console.log('following', following)
 
   return (
     <div>
@@ -102,7 +100,11 @@ const FollowersModal = ({
             {following
               ? following.map(user => {
                   return (
-                    <FollowItem user={user} handleClick={setOpenFollowModal} />
+                    <FollowItem
+                      user={user}
+                      handleClick={setOpenFollowModal}
+                      publicKey={publicKey}
+                    />
                   )
                 })
               : null}
@@ -111,7 +113,11 @@ const FollowersModal = ({
             {followers
               ? followers.map(user => {
                   return (
-                    <FollowItem user={user} handleClick={setOpenFollowModal} />
+                    <FollowItem
+                      user={user}
+                      handleClick={setOpenFollowModal}
+                      publicKey={publicKey}
+                    />
                   )
                 })
               : null}
