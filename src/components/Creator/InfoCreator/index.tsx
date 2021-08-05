@@ -148,7 +148,7 @@ const InfoCreator = ({
   }
 
   const [openFollowModal, setOpenFollowModal] = useState(false)
-  console.log('follow', followers)
+
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>

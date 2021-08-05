@@ -35,7 +35,6 @@ const useStyles = makeStyles(Theme => ({
 
 function FollowItem({ user, handleClick, publicKey }) {
   const classes = useStyles()
-  console.log(user.publicAddress)
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
   const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
@@ -53,7 +52,6 @@ function FollowItem({ user, handleClick, publicKey }) {
   }, [FollowQuery])
 
   const handleSubmitFollow = e => {
-    console.log(e)
     e.preventDefault()
     followMutation.mutate({
       follower_address: publicKey,
@@ -69,9 +67,6 @@ function FollowItem({ user, handleClick, publicKey }) {
     })
     setIsFollow(false)
   }
-
-  console.log('yo', account)
-  console.log('el folloer', publicKey)
 
   return (
     <Button
