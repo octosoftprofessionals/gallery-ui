@@ -101,14 +101,18 @@ const FollowersModal = ({
           <TabPanel className={classes.panel} value="1">
             {following
               ? following.map(user => {
-                  return <FollowItem user={user} />
+                  return (
+                    <FollowItem user={user} handleClick={setOpenFollowModal} />
+                  )
                 })
               : null}
           </TabPanel>
           <TabPanel className={classes.panel} value="2">
             {followers
               ? followers.map(user => {
-                  return <FollowItem user={user} />
+                  return (
+                    <FollowItem user={user} handleClick={setOpenFollowModal} />
+                  )
                 })
               : null}
           </TabPanel>

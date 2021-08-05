@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { Link } from 'gatsby'
 import {
   Avatar,
   Box,
@@ -25,11 +26,15 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-function FollowItem({ user }) {
+function FollowItem({ user, handleClick }) {
   const classes = useStyles()
-  console.log(user)
+  console.log(user.publicAddress)
   return (
-    <Button fullWidth className={classes.btnContainer}>
+    <Button
+      fullWidth
+      className={classes.btnContainer}
+      onClick={() => handleClick(false)}
+    >
       <Grid
         md={12}
         item
@@ -48,14 +53,22 @@ function FollowItem({ user }) {
           alignItems="center"
         >
           <Avatar className={classes.avatar}></Avatar>
-          <Typography variant="subtitle2">{`@${user.username}`}</Typography>
+          <Link to={`/creator/?address=${user.publicAddress}`}>
+            <Typography variant="subtitle2">{`@${user.username}`}</Typography>
+          </Link>
         </Grid>
         <Grid md={3} xs={6} item container justify="flex-end">
-          <Button variant="outlined" className={classes.btnFollow}>
-            <Typography variant="button" className={classes.btnText}>
-              Follow
-            </Typography>
-          </Button>
+          <Link to={`/creator/?address=${user.publicAddress}`}>
+            <Button
+              onClick={() => handleClick(false)}
+              variant="outlined"
+              className={classes.btnFollow}
+            >
+              <Typography variant="button" className={classes.btnText}>
+                Follow
+              </Typography>
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </Button>
