@@ -25,7 +25,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
-        endpoint: '',
+        endpoint:
+          'https://superchiefgallerynft.us1.list-manage.com/subscribe/post?u=cb140b2351789f045bd91a92a&amp;id=57d8b04989',
         timeout: 3500,
       },
     },

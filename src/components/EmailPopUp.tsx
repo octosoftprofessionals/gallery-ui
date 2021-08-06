@@ -16,11 +16,8 @@ import {
   DialogContent,
 } from '@material-ui/core'
 
-<<<<<<< HEAD
-=======
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 
->>>>>>> implement mailchimp in popup
 const useStyle = makeStyles(Theme => ({
   container: {
     margin: 0,
@@ -185,6 +182,7 @@ const EmailPopUp = () => {
         alert(err)
       })
     setValue('')
+    handleClose(false)
   }
 
   const handleClose = (close?: boolean) => {
@@ -255,7 +253,7 @@ const EmailPopUp = () => {
           </DialogContent>
           <DialogActions className={classes.contBtn}>
             <Button
-              onClick={() => handleClose(false)}
+              onClick={handleSubmit}
               color="primary"
               className={classes.suscribeBtn}
               size="large"
