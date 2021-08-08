@@ -18,12 +18,13 @@ const useStyles = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.main,
   },
   selected: {
+    padding: '5px 20px',
     backgroundColor: Theme.palette.buttons.selected,
     borderRadius: Theme.shape.borderRadius[1],
-    color: '#2E2E2ED9',
+    color: Theme.palette.buttons.navbar,
     '&:hover': {
       backgroundColor: Theme.palette.primary.main,
-      color: '#2E2E2ED9',
+      color: Theme.palette.primary.contrastText,
     },
   },
   link: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles(Theme => ({
     '&:hover': {
       backgroundColor: Theme.palette.buttons.selected,
       borderRadius: Theme.shape.borderRadius[1],
-      color: '#2E2E2ED9',
+      color: Theme.palette.primary.contrastText,
     },
   },
 }))

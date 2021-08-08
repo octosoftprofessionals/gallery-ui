@@ -31,6 +31,7 @@ export const darkColors = {
   DarkGray: '#212e36',
   WhiteSmoke: '#eff3f5', // blanco sobre negros y grises
   Aqua: '#00FFFF',
+  LightDark: '#2E2E2ED9',
 }
 
 export const backgroundGradient = {

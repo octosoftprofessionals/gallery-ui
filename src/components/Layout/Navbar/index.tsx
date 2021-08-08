@@ -11,6 +11,9 @@ import {
   Hidden,
   IconButton,
 } from '@material-ui/core'
+import useQueryParams from '../../../hooks/useQueryParams'
+import { getUser } from '../../../services/users'
+import { useQuery } from 'react-query'
 
 import logoSrc from '../../../assets/logoNew.png'
 import LogoDarkSrc from '../../../assets/light-logo-SC.svg'
@@ -133,6 +136,11 @@ const index = ({ pathname, profileImageUrl, name }) => {
   const [showDrawer, setShowDrawer] = useState(false)
 
   const [account, setAccount] = useAccountStore()
+  const { address } = useQueryParams()
+
+  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
+    getUser({ public_address: address })
+  )
 
   const handleLogOut = async () => {
     setAccount(null)
@@ -169,13 +177,20 @@ const index = ({ pathname, profileImageUrl, name }) => {
                 >
                   <LoggedButton
                     profileImageUrl={profileImageUrl}
-                    name={name}
+                    name={userAccount ? userAccount.username : name}
                     account={account}
                     onLogOut={handleLogOut}
                   />
                 </Grid>
               ) : (
-                <ButtonConnectWallet pathname={pathname} />
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  className={classes.navbarElement}
+                >
+                  <ButtonConnectWallet pathname={pathname} />
+                </Grid>
               )}
             </Hidden>
             <Hidden mdUp>
