@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  IconButton,
+} from '@material-ui/core'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogActions from '@material-ui/core/DialogActions'
-import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({})
 
 const useStyle = makeStyles(Theme => ({
-  modal: {
-    // width: '500px',
-  },
   root: {
     margin: 0,
     padding: Theme.spacing(2),
@@ -28,7 +27,6 @@ const useStyle = makeStyles(Theme => ({
   },
   dialogContent: {
     padding: 0,
-    // overflowY: 'scroll',
   },
   dialogAction: {
     margin: 0,
@@ -64,12 +62,7 @@ function Modal({ children, showTitle, setOpen, open, btnFooter = false }) {
 
   return (
     <>
-      <Dialog
-        // scroll="paper"
-        onClose={handleClose}
-        className={classes.modal}
-        open={open}
-      >
+      <Dialog onClose={handleClose} className={classes.modal} open={open}>
         {showTitle ? (
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
             Modal title

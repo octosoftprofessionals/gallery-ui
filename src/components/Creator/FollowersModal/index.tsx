@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import Modal from '../../Modal'
 import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Tab from '@material-ui/core/Tab'
-import TabContext from '@material-ui/lab/TabContext'
-import Tabs from '@material-ui/core/Tabs'
-import TabPanel from '@material-ui/lab/TabPanel'
-import TabList from '@material-ui/lab/TabList'
+import { AppBar, Tab } from '@material-ui/core'
+import { TabContext, TabPanel, TabList } from '@material-ui/lab'
 import FollowItem from './FollowItem'
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +11,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
   },
   tab: {
-    // backgroundColor: 'transparent',
     backgroundColor: theme.palette.background.paper,
     boxShadow: 'none',
     position: 'absolute',
@@ -48,9 +43,6 @@ const useStyles = makeStyles(theme => ({
     '&:focus': {
       opacity: 1,
     },
-  },
-  tabContainer: {
-    // width: '600px',
   },
 }))
 
