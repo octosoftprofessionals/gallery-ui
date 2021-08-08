@@ -8,15 +8,7 @@ import {
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
-import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Typography,
-  Tooltip,
-  Paper,
-} from '@material-ui/core'
+import { Avatar, Button, Grid, Typography, Paper } from '@material-ui/core'
 
 const useStyles = makeStyles(Theme => ({
   avatar: {
@@ -86,7 +78,6 @@ function FollowItem({ user, handleClick, publicKey }) {
           direction="row"
           justify="flex-start"
           alignItems="center"
-          // onClick={() => handleClick(false)}
         >
           <Avatar className={classes.avatar}></Avatar>
           <Link to={`/creator/?address=${user.publicAddress}`}>
