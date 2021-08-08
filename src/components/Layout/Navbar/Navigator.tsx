@@ -9,24 +9,37 @@ const { boxShadow1 } = boxShadow
 
 const useStyles = makeStyles(Theme => ({
   container: {
-    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'block'),
+    display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'flex'),
+    justifyContent: 'space-between',
+    height: 55,
     boxShadow: boxShadow1,
     padding: '9px 7px 9px 6px',
-    borderRadius: Theme.shape.borderRadius[1],
+    borderRadius: Theme.shape.borderRadius[2],
     backgroundColor: Theme.palette.secondary.main,
   },
   selected: {
     backgroundColor: Theme.palette.buttons.selected,
-    color: Theme.palette.primary.contrastText,
-    '&:hover': { backgroundColor: Theme.palette.primary.main },
+    borderRadius: Theme.shape.borderRadius[1],
+    color: '#2E2E2ED9',
+    '&:hover': {
+      backgroundColor: Theme.palette.primary.main,
+      color: '#2E2E2ED9',
+    },
   },
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
   },
   btn: {
-    display: 'flex',
-    justifyContent: 'center',
+    fontSize: Theme.typography.fontSize[3],
+  },
+  btnNavbar: {
+    padding: '5px 20px',
+    '&:hover': {
+      backgroundColor: Theme.palette.buttons.selected,
+      borderRadius: Theme.shape.borderRadius[1],
+      color: '#2E2E2ED9',
+    },
   },
 }))
 
@@ -36,23 +49,24 @@ const Navigator = ({ pathname }) => {
     <Hidden mdDown>
       <div className={classes.container}>
         <Link to="/construction" className={classes.link}>
-          {' '}
           {/*  to="/exhibition" */}
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/exhibition' ? classes.selected : ''}
+            className={
+              pathname === '/exhibition' ? classes.selected : classes.btnNavbar
+            }
           >
-            <Typography variant="button" className={classes.btn}>
-              Exhibition
-            </Typography>
+            <Typography className={classes.btn}>Exhibition</Typography>
           </Button>
         </Link>
         <Link to="/artworks" className={classes.link}>
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/artworks' ? classes.selected : ''}
+            className={
+              pathname === '/artworks' ? classes.selected : classes.btnNavbar
+            }
           >
             <Typography variant="button" className={classes.btn}>
               Artworks
@@ -63,7 +77,7 @@ const Navigator = ({ pathname }) => {
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/' ? classes.selected : ''}
+            className={pathname === '/' ? classes.selected : classes.btnNavbar}
           >
             <Typography variant="button" className={classes.btn}>
               Home
@@ -74,7 +88,9 @@ const Navigator = ({ pathname }) => {
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/creators' ? classes.selected : ''}
+            className={
+              pathname === '/creators' ? classes.selected : classes.btnNavbar
+            }
           >
             <Typography variant="button" className={classes.btn}>
               Creators
@@ -86,7 +102,9 @@ const Navigator = ({ pathname }) => {
           <Button
             variant="text"
             color="primary"
-            className={pathname === '/collabs' ? classes.selected : ''}
+            className={
+              pathname === '/collabs' ? classes.selected : classes.btnNavbar
+            }
           >
             <Typography variant="button" className={classes.btn}>
               Collabs

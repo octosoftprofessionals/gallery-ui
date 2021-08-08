@@ -123,6 +123,9 @@ const useStyles = makeStyles(Theme => ({
     top: 110,
     left: 20,
   },
+  navbarElement: {
+    padding: Theme.spacing(0, 13),
+  },
 }))
 
 const index = ({ pathname, profileImageUrl, name }) => {
@@ -145,25 +148,32 @@ const index = ({ pathname, profileImageUrl, name }) => {
             alignItems="center"
             className={classes.nav}
           >
-            <Grid item>
+            <Grid item md={4} className={classes.navbarElement}>
               <Link to="/" className={classes.link}>
                 <LogoDarkSrc className={classes.logoDark} />
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
 
-            <Grid item>
+            <Grid item md={4}>
               <Navigator pathname={pathname} />
             </Grid>
 
             <Hidden smDown>
               {account ? (
-                <LoggedButton
-                  profileImageUrl={profileImageUrl}
-                  name={name}
-                  account={account}
-                  onLogOut={handleLogOut}
-                />
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  className={classes.navbarElement}
+                >
+                  <LoggedButton
+                    profileImageUrl={profileImageUrl}
+                    name={name}
+                    account={account}
+                    onLogOut={handleLogOut}
+                  />
+                </Grid>
               ) : (
                 <ButtonConnectWallet pathname={pathname} />
               )}

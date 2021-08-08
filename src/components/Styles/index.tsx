@@ -131,7 +131,7 @@ export const darkTheme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
         padding: '10px 20px',
       },
@@ -263,7 +263,7 @@ export const darkTheme = createMuiTheme({
       root: { color: Nero },
     },
   },
-  shape: { borderRadius: [0, 10, 16, 50] },
+  shape: { borderRadius: [0, 10, 15, 50] },
   palette: {
     type: 'dark',
     background: {
@@ -447,8 +447,9 @@ export const Theme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
+        backgroundColor: 'red',
         padding: '10px 20px',
       },
     },
