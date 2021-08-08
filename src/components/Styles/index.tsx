@@ -90,7 +90,7 @@ export const darkTheme = createMuiTheme({
       outlined: {
         borderRadius: 50,
         boxShadow: 'none',
-        color: White,
+        color: darkColors.Black,
         backgroundColor: Aqua,
         '&:hover': {
           color: White,
@@ -251,6 +251,9 @@ export const darkTheme = createMuiTheme({
         padding: '12px 20px',
         color: darkColors.WhiteSmoke,
       },
+      root: {
+        // border: `1px solid ${darkColors.Aqua}`,
+      },
       multiline: {
         borderRadius: 10,
         background: 'trasnparent',
@@ -319,7 +322,7 @@ export const darkTheme = createMuiTheme({
     500,
   ],
   typography: {
-    fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
+    fontSize: [2, 4, 14, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
     fontFamily: [
       ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(','),
       [

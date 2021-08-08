@@ -12,12 +12,15 @@ import { DropzoneArea } from 'material-ui-dropzone'
 const useStyles = makeStyles(Theme => ({
   dropzone: {
     borderRadius: 15,
+    border: `1px solid ${Theme.palette.primary.dark}`,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: 90,
   },
   dropzoneParagraph: {
-    fontSize: Theme.typography.fontSize[4],
+    fontSize: Theme.typography.fontSize[2],
+    fontWeight: 400,
   },
 }))
 
@@ -40,7 +43,7 @@ const DragDrop = ({ setFiles, typeFile, files }) => {
       dropzoneClass={classes.dropzone}
       dropzoneParagraphClass={classes.dropzoneParagraph}
       acceptedFiles={['image/*']}
-      dropzoneText={'Drag and drop an image here or click'}
+      dropzoneText={'Drag and drop, or click to select from your computer.'}
       onChange={file => uploadFile(file)}
     />
   )
