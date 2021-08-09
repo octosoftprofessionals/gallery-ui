@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-
     '& > span': {
       maxWidth: 40,
       width: '100%',
@@ -36,12 +35,26 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     textTransform: 'none',
-    color: '#fff',
+    color: theme.palette.secondary.contrastText,
     fontWeight: 'bold',
     fontSize: theme.typography.fontSize[4],
     marginRight: theme.spacing(1),
     '&:focus': {
       opacity: 1,
+    },
+  },
+  '@global': {
+    '.MuiDialog-paper': {
+      minWidth: '700px !important',
+      maxHeight: '500px !important',
+      minHeight: '300px !important',
+      overflowX: 'hidden',
+      '@media (max-width: 576px)': {
+        minWidth: '320px !important',
+        maxHeight: '600px !important',
+        minHeight: '400px !important',
+        overflowX: 'hidden',
+      },
     },
   },
 }))

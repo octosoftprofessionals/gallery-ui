@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
   },
   extraText: {
+    textAlign: 'center',
     margin: theme.spacing(0, 2),
     color: theme.palette.primary.dark,
     fontSize: 30,
@@ -81,7 +82,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: 50,
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
-        width: 190,
+        // width: 190,
       },
     },
   },
@@ -103,6 +104,11 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.dark,
     marginLeft: theme.spacing(2),
     fontSize: theme.spacing(9),
+  },
+  networkName: {
+    '@media (max-width: 576px)': {
+      marginBottom: theme.spacing(5),
+    },
   },
 }))
 
@@ -171,7 +177,14 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
           className={classes.paper}
           key={network.key}
         >
-          <Grid container item justify="space-between" xs={12} md={6}>
+          <Grid
+            className={classes.networkName}
+            container
+            item
+            justify="space-between"
+            xs={12}
+            md={6}
+          >
             <div className={classes.titleSocialNetwork}>
               {network.icon}
               <Typography className={classes.text} variant="h6">
@@ -188,34 +201,39 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
               justify="space-between"
               alignItems="center"
               className={classes.containerInput}
-              fullWidth
             >
-              <TextField
-                variant="outlined"
-                color="primary"
-                className={classes.inputProfileDiscord}
-                onChange={e => handleChange(network.key, e.currentTarget.value)}
-                value={socialNetwork.web}
-              />
-              <Typography className={classes.extraText} variant="h6">
-                #
-              </Typography>
-              <TextField
-                variant="outlined"
-                color="primary"
-                className={classes.inputProfileDiscord}
-                onChange={e => handleChange(network.key, e.currentTarget.value)}
-                value={socialNetwork.web}
-              />
+              <Grid item md={5} sm={5}>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  className={classes.inputProfileDiscord}
+                  fullWidth
+                  onChange={e =>
+                    handleChange(network.key, e.currentTarget.value)
+                  }
+                  value={socialNetwork.web}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <Typography className={classes.extraText} variant="h6">
+                  #
+                </Typography>
+              </Grid>
+              <Grid item md={5} sm={5}>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  className={classes.inputProfileDiscord}
+                  fullWidth
+                  onChange={e =>
+                    handleChange(network.key, e.currentTarget.value)
+                  }
+                  value={socialNetwork.web}
+                />
+              </Grid>
             </Grid>
           ) : (
-            <Grid
-              item
-              xs={12}
-              md={6}
-              className={classes.containerInput}
-              fullWidth
-            >
+            <Grid item xs={12} md={6} className={classes.containerInput}>
               <TextField
                 variant="outlined"
                 color="primary"

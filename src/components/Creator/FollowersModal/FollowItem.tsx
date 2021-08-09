@@ -7,6 +7,7 @@ import {
 } from '../../../services/follow'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { makeStyles } from '@material-ui/core/styles'
+import { backgroundGradient } from '../../Styles/Colors'
 import { Link } from 'gatsby'
 import { Avatar, Button, Grid, Typography, Paper } from '@material-ui/core'
 
@@ -23,6 +24,11 @@ const useStyles = makeStyles(Theme => ({
   btnFollow: {
     padding: Theme.spacing(2, 6),
   },
+  profileColor: {
+    color: '#FFF',
+    background: backgroundGradient.backgroundGradient1,
+  },
+  link: { textDecoration: 'none' },
 }))
 
 function FollowItem({ user, handleClick, publicKey }) {
@@ -79,8 +85,16 @@ function FollowItem({ user, handleClick, publicKey }) {
           justify="flex-start"
           alignItems="center"
         >
-          <Avatar className={classes.avatar}></Avatar>
-          <Link to={`/creator/?address=${user.publicAddress}`}>
+          <Avatar
+            alt={user.username}
+            className={[classes.profileColor, classes.avatar]}
+          >
+            {' '}
+          </Avatar>
+          <Link
+            to={`/creator/?address=${user.publicAddress}`}
+            className={classes.link}
+          >
             <Typography variant="subtitle2">{`@${user.username}`}</Typography>
           </Link>
         </Grid>
