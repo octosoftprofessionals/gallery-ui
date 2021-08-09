@@ -22,6 +22,7 @@ import {
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { boxShadow, colors } from '../../Styles/Colors'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
+import FollowersModal from '../FollowersModal'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
 
 const useStyle = makeStyles(Theme => ({
@@ -146,6 +147,8 @@ const InfoCreator = ({
     setIsCopy(true)
   }
 
+  const [openFollowModal, setOpenFollowModal] = useState(false)
+
   return (
     <Grid item xs={12} container direction="column" justify="space-around">
       <Grid item className={classes.containerButton}>
@@ -194,19 +197,31 @@ const InfoCreator = ({
       <Grid item container direction="row">
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {following ? following : '—'}
+            {following ? following.length : '—'}
           </Typography>
-          <Typography variant="overline" className={classes.textFollow}>
-            Following
-          </Typography>
+          <Button onClick={() => setOpenFollowModal(true)}>
+            <Typography variant="overline" className={classes.textFollow}>
+              Following
+            </Typography>
+          </Button>
         </Grid>
         <Grid item xs={3} container direction="column">
           <Typography variant="h6" color="primary">
-            {followers ? followers : '—'}
+            {followers ? followers.length : '—'}
           </Typography>
-          <Typography variant="overline" className={classes.textFollowers}>
-            Followers
-          </Typography>
+          <Button onClick={() => setOpenFollowModal(true)}>
+            <Typography variant="overline" className={classes.textFollowers}>
+              Followers
+            </Typography>
+          </Button>
+
+          <FollowersModal
+            openFollowModal={openFollowModal}
+            setOpenFollowModal={setOpenFollowModal}
+            followers={followers}
+            following={following}
+            publicKey={publicKey}
+          />
         </Grid>
         <Grid item xs={12} sm={5}>
           {isMyAccount ? (
@@ -230,7 +245,7 @@ const InfoCreator = ({
           )}
         </Grid>
       </Grid>
-      {isMyAccount ? null : (
+      {/* {isMyAccount ? null : (
         <>
           <Typography variant="button" color="primary">
             Followed by
@@ -250,7 +265,7 @@ const InfoCreator = ({
             />
           </Grid>
         </>
-      )}
+      )} */}
 
       {/* <Grid item xs={12} sm={11}>
         <Typography variant="caption" color="primary">

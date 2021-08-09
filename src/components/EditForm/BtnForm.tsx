@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Typography, TextField } from '@material-ui/core'
+import { Grid, Typography, TextField, InputAdornment } from '@material-ui/core'
+import { AlternateEmail } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import LanguageIcon from '@material-ui/icons/Language'
 import TwitterIcon from '@material-ui/icons/Twitter'
@@ -20,9 +21,9 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100%',
-    padding: theme.spacing(3, 10),
+    padding: theme.spacing(10),
     borderRadius: theme.spacing(6),
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: '#FFFFFF1A',
     fontFamily: theme.typography.fontFamily[3],
     flexDirection: 'row',
     alignItems: 'center',
@@ -34,31 +35,39 @@ const useStyles = makeStyles(theme => ({
     },
   },
   icon: {
-    fontSize: theme.spacing(8),
+    fontSize: theme.spacing(10),
     '&:hover': {
       color: theme.palette.primary.main,
     },
   },
   icon2: {
-    width: '20px',
-    heigth: '20px',
+    width: '32px',
+    heigth: '32px',
     fill: theme.palette.primary.main,
   },
   icon3: {
-    width: '20px',
-    heigth: '20px',
+    width: 32,
+    heigth: 32,
     fill: theme.palette.primary.main,
     marginTop: 0,
     padding: 0,
   },
   iconSVG: {
-    width: theme.spacing(9),
-    height: theme.spacing(9),
+    width: 32,
+    height: 32,
     fill: theme.palette.primary.main,
   },
   text: {
     fontSize: theme.spacing(5),
     marginLeft: theme.spacing(3),
+    color: theme.palette.primary.main,
+  },
+  extraText: {
+    textAlign: 'center',
+    margin: theme.spacing(0, 2),
+    color: theme.palette.primary.dark,
+    fontSize: 30,
+    fontWeight: 800,
   },
   grid: {
     margin: 0,
@@ -67,15 +76,22 @@ const useStyles = makeStyles(theme => ({
   containerInput: {
     paddingLeft: theme.spacing(2),
   },
-  inputProfile: {
-    '@media (max-width: 576px)': {
-      marginTop: 15,
-    },
-
+  inputProfileDiscord: {
     '@global': {
       '.MuiOutlinedInput-root': {
         borderRadius: 50,
-        padding: theme.spacing(2, 0),
+        padding: theme.spacing(1, 0),
+        border: `1px solid ${theme.palette.primary.dark}`,
+        // width: 190,
+      },
+    },
+  },
+  inputProfile: {
+    '@global': {
+      '.MuiOutlinedInput-root': {
+        borderRadius: 50,
+        padding: theme.spacing(1, 0),
+        border: `1px solid ${theme.palette.primary.dark}`,
       },
     },
   },
@@ -83,6 +99,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  iconMail: {
+    color: theme.palette.primary.dark,
+    marginLeft: theme.spacing(2),
+    fontSize: theme.spacing(9),
+  },
+  networkName: {
+    '@media (max-width: 576px)': {
+      marginBottom: theme.spacing(5),
+    },
   },
 }))
 
@@ -110,8 +136,8 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
       icon: <InstagramIcon className={classes.icon} />,
     },
     {
-      key: 'discord_id',
-      name: 'Discord_id',
+      key: 'discord',
+      name: 'Discord',
       icon: <DiscordIcon className={classes.icon2} />,
     },
     {
@@ -151,32 +177,84 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
           className={classes.paper}
           key={network.key}
         >
-          <Grid container item justify="space-between" xs={12}>
+          <Grid
+            className={classes.networkName}
+            container
+            item
+            justify="space-between"
+            xs={12}
+            md={6}
+          >
             <div className={classes.titleSocialNetwork}>
               {network.icon}
               <Typography className={classes.text} variant="h6">
                 {network.name}
               </Typography>
             </div>
+          </Grid>
+          {network.key === 'discord' ? (
             <Grid
-              container
               item
               xs={12}
-              sm={8}
+              md={6}
+              container
+              justify="space-between"
+              alignItems="center"
               className={classes.containerInput}
-              fullWidth
             >
+              <Grid item md={5} sm={5}>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  className={classes.inputProfileDiscord}
+                  fullWidth
+                  onChange={e =>
+                    handleChange(network.key, e.currentTarget.value)
+                  }
+                  value={socialNetwork.web}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <Typography className={classes.extraText} variant="h6">
+                  #
+                </Typography>
+              </Grid>
+              <Grid item md={5} sm={5}>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  className={classes.inputProfileDiscord}
+                  fullWidth
+                  onChange={e =>
+                    handleChange(network.key, e.currentTarget.value)
+                  }
+                  value={socialNetwork.web}
+                />
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid item xs={12} md={6} className={classes.containerInput}>
               <TextField
                 variant="outlined"
                 color="primary"
-                label={network.name}
                 fullWidth
+                InputProps={
+                  network.key === 'tiktok' || network.key === 'snapchat'
+                    ? {
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AlternateEmail className={classes.iconMail} />
+                          </InputAdornment>
+                        ),
+                      }
+                    : null
+                }
                 className={classes.inputProfile}
                 onChange={e => handleChange(network.key, e.currentTarget.value)}
                 value={socialNetwork.web}
               />
             </Grid>
-          </Grid>
+          )}
         </Grid>
       ))}
     </Grid>

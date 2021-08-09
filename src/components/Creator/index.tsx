@@ -124,8 +124,8 @@ const Creator = ({
             isMyAccount={isMyAccount}
             username={user.username}
             publicKey={user.publicAddress}
-            followers={followees ? followees.length : 0}
-            following={followers ? followers.length : 0}
+            followers={followees ? followees : 0}
+            following={followers ? followers : 0}
             followedes={followers ? followers : []}
           />
         </Grid>

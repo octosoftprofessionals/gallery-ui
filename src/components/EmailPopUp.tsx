@@ -7,14 +7,16 @@ import { Collapse } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { validateEmail } from '../Utils/stringUtils'
 import {
+  Input,
+  Typography,
   IconButton,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  Input,
-  Typography,
 } from '@material-ui/core'
+
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 
 const useStyle = makeStyles(Theme => ({
   container: {
@@ -167,8 +169,20 @@ const EmailPopUp = () => {
   const [value, setValue] = useState('')
   const [error, setError] = useState<boolean>(false)
 
-  const handleOpen = () => {
-    setOpen(true)
+  const handleSubmit = event => {
+    event.preventDefault()
+    addToMailchimp(value)
+      .then(({ msg, result }) => {
+        if (result !== 'success') {
+          throw msg
+        }
+        alert(msg)
+      })
+      .catch(err => {
+        alert(err)
+      })
+    setValue('')
+    handleClose(false)
   }
 
   const handleClose = (close?: boolean) => {
@@ -186,7 +200,7 @@ const EmailPopUp = () => {
   const classes = useStyle()
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <Dialog
         className={classes.container}
         open={open}
@@ -208,13 +222,10 @@ const EmailPopUp = () => {
           </Typography>
           <DialogContent>
             <div className={classes.text}>
-              <Typography variant="body1">
-                To subscribe to this website, please enter your email address.
-                We will send updates occasionally.
-              </Typography>
-            </div>
-            <div className={classes.title}>
-              <Typography>Mail</Typography>
+              To subscribe to this website, please enter your email address
+              here. We will send updates occasionally. We will send updates
+              occasionally. To subscribe to this website, please enter your
+              email address here.
             </div>
             <div className={classes.dialogCont}>
               <Input
@@ -225,7 +236,7 @@ const EmailPopUp = () => {
                 color="primary"
                 disableUnderline={true}
                 margin="none"
-                type="text"
+                type="email"
                 value={value}
                 onChange={e => setValue(e.target.value)}
               />
@@ -242,16 +253,19 @@ const EmailPopUp = () => {
           </DialogContent>
           <DialogActions className={classes.contBtn}>
             <Button
-              onClick={() => handleClose(false)}
+              onClick={handleSubmit}
               color="primary"
               className={classes.suscribeBtn}
+              size="large"
+              variant="text"
+              type="submit"
             >
               Sure!
             </Button>
           </DialogActions>
         </div>
       </Dialog>
-    </>
+    </form>
   )
 }
 export default EmailPopUp

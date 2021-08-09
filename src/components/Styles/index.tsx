@@ -41,6 +41,18 @@ export const darkTheme = createMuiTheme({
         borderRadius: 16,
         backgroundColor: Nero,
       },
+      paper: {
+        // minWidth: '700px !important',
+        // maxHeight: '500px !important',
+        // minHeight: '300px !important',
+        // overflowX: 'hidden',
+        // '@media (max-width: 576px)': {
+        //   minWidth: '320px !important',
+        //   maxHeight: '600px !important',
+        //   minHeight: '400px !important',
+        //   overflowX: 'hidden',
+        // },
+      },
     },
     MuiBadge: {
       anchorOriginBottomLeftRectangle: {
@@ -90,7 +102,7 @@ export const darkTheme = createMuiTheme({
       outlined: {
         borderRadius: 50,
         boxShadow: 'none',
-        color: White,
+        color: darkColors.Black,
         backgroundColor: Aqua,
         '&:hover': {
           color: White,
@@ -122,7 +134,7 @@ export const darkTheme = createMuiTheme({
       },
       containedSecondary: {
         borderRadius: 10,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         '&:hover': {
           backgroundColor: Black,
           color: darkColors.WhiteSmoke,
@@ -131,7 +143,7 @@ export const darkTheme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
         padding: '10px 20px',
       },
@@ -251,6 +263,9 @@ export const darkTheme = createMuiTheme({
         padding: '12px 20px',
         color: darkColors.WhiteSmoke,
       },
+      root: {
+        // border: `1px solid ${darkColors.Aqua}`,
+      },
       multiline: {
         borderRadius: 10,
         background: 'trasnparent',
@@ -263,7 +278,7 @@ export const darkTheme = createMuiTheme({
       root: { color: Nero },
     },
   },
-  shape: { borderRadius: [0, 10, 16, 50] },
+  shape: { borderRadius: [0, 10, 15, 50] },
   palette: {
     type: 'dark',
     background: {
@@ -276,6 +291,7 @@ export const darkTheme = createMuiTheme({
     buttons: {
       wallet: Aqua,
       selected: Aqua,
+      navbar: darkColors.LightDark,
     },
     card: {
       footer: darkColors.Black,
@@ -286,7 +302,7 @@ export const darkTheme = createMuiTheme({
       main: darkColors.WhiteSmoke,
       light: darkColors.WhiteSmoke,
       dark: Aqua,
-      contrastText: White,
+      contrastText: darkColors.LightDark,
     },
     secondary: {
       main: darkColors.DarkGray,
@@ -319,7 +335,7 @@ export const darkTheme = createMuiTheme({
     500,
   ],
   typography: {
-    fontSize: [2, 4, 6, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
+    fontSize: [2, 4, 14, 16, 18, 20, 36, 66, '.85em', '1em', '1.5em', '2.5rem'],
     fontFamily: [
       ['Roobert', 'Segoe UI', 'Roboto ligth', 'Roboto', 'Arial'].join(','),
       [
@@ -447,7 +463,7 @@ export const Theme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
         padding: '10px 20px',
       },
@@ -585,6 +601,7 @@ export const Theme = createMuiTheme({
     buttons: {
       wallet: Green,
       selected: Black,
+      navbar: White,
     },
     card: {
       footer: Black,
