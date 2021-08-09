@@ -36,6 +36,7 @@ const ButtonConnectWallet = ({ pathname }) => {
       <Dialog
         onClose={handleCloseConnectWalletModal}
         aria-labelledby="customized-dialog-title"
+        className={classes.dialog}
         open={connectWallet !== null}
       >
         {connectWallet ? (

@@ -128,6 +128,9 @@ const useStyles = makeStyles(Theme => ({
   },
   navbarElement: {
     padding: Theme.spacing(0, 13),
+    '@media (max-width: 576px)': {
+      padding: 0,
+    },
   },
 }))
 

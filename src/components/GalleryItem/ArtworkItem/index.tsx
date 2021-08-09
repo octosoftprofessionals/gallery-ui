@@ -145,7 +145,8 @@ const ArtworkItem = ({
         </Box>
       </Link>
       <Link
-        to={profilePathFromAddress(creatorAddress)}
+        // to={profilePathFromAddress(creatorAddress)}
+        to={link}
         className={classes.link}
       >
         <div className={classes.infoCard}>

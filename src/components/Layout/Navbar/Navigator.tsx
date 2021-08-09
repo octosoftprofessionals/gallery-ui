@@ -12,6 +12,7 @@ const useStyles = makeStyles(Theme => ({
     display: ({ pathname }) => (pathname === '/bid' ? 'none' : 'flex'),
     justifyContent: 'space-between',
     height: 55,
+    minWidth: 600,
     boxShadow: boxShadow1,
     padding: '9px 7px 9px 6px',
     borderRadius: Theme.shape.borderRadius[2],
@@ -36,7 +37,6 @@ const useStyles = makeStyles(Theme => ({
   },
   btnNavbar: {
     padding: '5px 20px',
-    color: Theme.palette.primary.contrastText,
     '&:hover': {
       backgroundColor: Theme.palette.buttons.selected,
       borderRadius: Theme.shape.borderRadius[1],
