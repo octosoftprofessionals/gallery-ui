@@ -102,7 +102,7 @@ const ArtworkItem = ({
     const timeInterval = setInterval(() => {
       const delta = deltaTime(expiration)
       if (delta >= 0) {
-        setTimer(`Ending in ${timeFormat(delta)}`)
+        setTimer(`Ending in \n ${timeFormat(delta)}`)
       } else {
         clearInterval(timeInterval)
         setTimer('Auction ended')
