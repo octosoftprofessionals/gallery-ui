@@ -36,6 +36,7 @@ const useStyles = makeStyles(Theme => ({
   },
   btnNavbar: {
     padding: '5px 20px',
+    color: Theme.palette.primary.contrastText,
     '&:hover': {
       backgroundColor: Theme.palette.buttons.selected,
       borderRadius: Theme.shape.borderRadius[1],
