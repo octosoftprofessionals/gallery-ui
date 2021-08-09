@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Button } from '@material-ui/core'
+import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
 import TextField from '@material-ui/core/TextField'
 import DragDrop from './DragDrop'
 import { Alert, AlertTitle } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import InstagramIcon from '@material-ui/icons/Instagram'
 import LinkForm from './LinkForm'
 import { updateUser } from '../../services/users'
 import { useAccountStore } from '../../hooks/useAccountStore'
@@ -19,12 +14,17 @@ import { Users } from '../../types'
 // Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
+  '@global': {
+    '.MuiOutlinedInput-inputMultiline': {
+      padding: theme.spacing(2, 3),
+    },
+  },
   root: {
     margin: 0,
-    backgroundColor: 'Black',
   },
   Title: {
-    marginBottom: theme.spacing(14),
+    marginBottom: theme.spacing(13),
+    fontSize: 43,
     '@media (max-width: 576px)': {
       textAlign: 'center',
       fontSize: theme.typography.fontSize[11],
@@ -32,10 +32,9 @@ const useStyle = makeStyles(theme => ({
     },
   },
   formContainer: {
-    border: '1px solid grey',
     borderRadius: theme.shape.borderRadius[2],
-    maxWidth: '50%',
-    padding: theme.spacing(14),
+    maxWidth: '63%',
+    padding: theme.spacing(10, 15),
     backgroundColor: theme.palette.secondary.main,
     '@media (max-width: 576px)': {
       maxWidth: '100%',
@@ -56,8 +55,8 @@ const useStyle = makeStyles(theme => ({
   },
   formTitle: {
     paddingRight: theme.spacing(10),
-    textAlign: 'right',
-    fontSize: 32,
+    textAlign: 'left',
+    fontSize: 23,
     color: theme.palette.primary.dark,
     '@media (max-width: 576px)': {
       paddingRight: theme.spacing(0),
@@ -69,6 +68,20 @@ const useStyle = makeStyles(theme => ({
     marginTop: theme.spacing(10),
   },
   field: {
+    '@global': {
+      '.MuiInput-input': {
+        margin: '6px 0 7px',
+        padding: '0 5px',
+      },
+    },
+    '@media (max-width: 576px)': {
+      maxWidth: '100%',
+      padding: theme.spacing(6),
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  },
+  fieldInput: {
     '@global': {
       '.MuiInput-input': {
         margin: '6px 0 7px',
@@ -98,9 +111,11 @@ const useStyle = makeStyles(theme => ({
   suscribeBtn: {
     fontSize: theme.typography.fontSize[3],
     fontWeight: 800,
+    color: theme.palette.secondary.dark,
     padding: theme.spacing(7),
     marginTop: theme.spacing(12),
     borderRadius: theme.spacing(7),
+    textTransform: 'none',
     '@media (max-width: 576px)': {
       // margin: theme.spacing(3),
       margin: theme.spacing(3, 0),
@@ -128,17 +143,33 @@ const useStyle = makeStyles(theme => ({
     '@global': {
       '.MuiOutlinedInput-root': {
         borderRadius: 50,
-        padding: theme.spacing(2, 0),
+        padding: theme.spacing(1, 0),
+        border: `1px solid ${theme.palette.primary.dark}`,
       },
     },
   },
   inputBio: {
     marginTop: theme.spacing(3),
     '@global': {
-      '.MuiInputBase-input': {
-        borderRadius: 0,
+      '.MuiOutlinedInput-root': {
+        borderRadius: 16,
+        padding: theme.spacing(1, 0),
+        border: `1px solid ${theme.palette.primary.dark}`,
       },
     },
+  },
+  label: {
+    marginLeft: theme.spacing(4),
+    fontWeight: 400,
+    fontSize: theme.typography.fontSize[3],
+  },
+  titleNetwork: {
+    marginTop: theme.spacing(13),
+  },
+  alertSuccess: {
+    borderRadius: 6,
+    // backgroundColor: theme.palette.primary.light,
+    color: theme.palette.secondary.contrastText,
   },
 }))
 
@@ -147,8 +178,6 @@ type Props = {
 }
 
 const EditForm = ({ userAccount }: Props) => {
-  console.log(userAccount)
-
   const classes = useStyle()
   const [name, setName] = React.useState(userAccount.username)
   const [email, setEmail] = React.useState(userAccount.email)
@@ -168,6 +197,18 @@ const EditForm = ({ userAccount }: Props) => {
   })
   const [files, setFiles] = useState({ picture: '', cover: '' })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
+  const [openAlert, setOpenAlert] = useState({ open: false, error: false })
+
+  const handleClick = error => {
+    setOpenAlert({ error: error, open: true })
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpenAlert({ error: false, open: false })
+  }
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
@@ -198,8 +239,15 @@ const EditForm = ({ userAccount }: Props) => {
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       }
-      console.log('data::', data)
       updateUser(data)
+        .then(res => {
+          console.log('res:', res)
+          handleClick(false)
+        })
+        .catch(err => {
+          console.error('error:', err)
+          handleClick(true)
+        })
     } else {
       setError(true)
     }
@@ -218,58 +266,77 @@ const EditForm = ({ userAccount }: Props) => {
           xs={12}
           container
           direction="column"
-          justify="space-around"
+          // justify="space-around"
           alignItems="center"
         >
-          <Typography variant="h4" className={classes.Title}>
-            Edit Your Profile
-          </Typography>
           <Grid
             container
             direction="row"
             justify="space-around"
             className={classes.formContainer}
           >
-            <Grid item xs={12} sm={6}>
-              <Typography
-                variant="h1"
-                color="primary"
-                className={classes.formTitle}
-              >
-                Enter your details
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-start"
+              item
+              md={12}
+              id="edit-profile"
+            >
+              <Typography variant="h4" className={classes.Title}>
+                Edit Your Profile
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} className={classes.field}>
-              <TextField
-                variant="outlined"
-                color="primary"
-                label="Name"
-                fullWidth
-                className={classes.inputProfile}
-                onChange={handleChangeName}
-                value={name}
-              />
-              <Grid item className={classes.formInput}>
+            <Grid container item md={12} justify="space-between">
+              <Grid item justify="flex-start" xs={12} md={6}>
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  className={classes.formTitle}
+                >
+                  Enter your details:
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                container
+                direction="column"
+                className={classes.fieldInput}
+              >
+                <Typography className={classes.label}>Name</Typography>
                 <TextField
                   variant="outlined"
                   color="primary"
-                  label="Email"
                   fullWidth
                   className={classes.inputProfile}
-                  onChange={handleChangeUser}
-                  value={email}
+                  onChange={handleChangeName}
+                  value={name}
                 />
+                <Grid item className={classes.formInput}>
+                  <Typography className={classes.label}>
+                    E-Mail (Receive notifications)
+                  </Typography>
+                  <TextField
+                    variant="outlined"
+                    color="primary"
+                    fullWidth
+                    className={classes.inputProfile}
+                    onChange={handleChangeUser}
+                    value={email}
+                  />
+                </Grid>
+                <Collapse in={error}>
+                  <Alert
+                    variant="filled"
+                    severity="error"
+                    className={classes.alert}
+                  >
+                    <strong>Error:</strong> invalid entry
+                  </Alert>
+                </Collapse>
               </Grid>
-
-              <Collapse in={error}>
-                <Alert
-                  variant="filled"
-                  severity="error"
-                  className={classes.alert}
-                >
-                  <strong>Error:</strong> invalid entry
-                </Alert>
-              </Collapse>
             </Grid>
 
             <Grid
@@ -284,19 +351,18 @@ const EditForm = ({ userAccount }: Props) => {
                   color="primary"
                   className={classes.formTitle}
                 >
-                  Add a short bio
+                  Add a short bio:
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Add Bio"
                   name="Add Bio"
                   inputProps={{ maxLength: 200 }}
                   helperText={`${word.length}/200`}
                   multiline
                   className={classes.inputBio}
                   value={word}
-                  rows={6}
+                  rows={8}
                   onChange={event => setWord(event.target.value)}
                   variant="outlined"
                   fullWidth
@@ -309,18 +375,8 @@ const EditForm = ({ userAccount }: Props) => {
                   color="primary"
                   className={classes.formTitle}
                 >
-                  Upload a profile image
+                  Upload a profile image:
                 </Typography>
-                <Grid>
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    className={classes.formText}
-                  >
-                    Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max
-                    size.
-                  </Typography>
-                </Grid>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="user" files={files} />
@@ -331,18 +387,28 @@ const EditForm = ({ userAccount }: Props) => {
                   color="primary"
                   className={classes.formTitle}
                 >
-                  Upload a cover image
+                  Upload a cover image:
                 </Typography>
-                <Grid className={classes.formText}>
-                  <Typography variant="body2" color="primary">
-                    Recommended size: 1000x1000px. JPG, PNG or GIF. 10MB max
-                    size.
-                  </Typography>
-                </Grid>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="cover" files={files} />
               </Grid>
+            </Grid>
+            <Grid
+              container
+              justify="flex-start"
+              alignItems="center"
+              item
+              className={classes.titleNetwork}
+              md={12}
+            >
+              <Typography
+                variant="h1"
+                color="primary"
+                className={classes.formTitle}
+              >
+                Share your social networks:
+              </Typography>
             </Grid>
             <LinkForm
               socialNetwork={socialNetwork}
@@ -353,10 +419,27 @@ const EditForm = ({ userAccount }: Props) => {
               color="primary"
               className={classes.suscribeBtn}
               variant="outlined"
-              fullWidth
+              href="#edit-profile"
             >
               Save Changes
             </Button>
+            <Snackbar
+              open={openAlert.open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              {openAlert.error ? (
+                <Alert severity="error">This is an error message!</Alert>
+              ) : (
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  className={classes.alertSuccess}
+                >
+                  Your profile was succesfully updated.
+                </Alert>
+              )}
+            </Snackbar>
           </Grid>
         </Grid>
       </FormControl>
