@@ -134,7 +134,7 @@ export const darkTheme = createMuiTheme({
       },
       containedSecondary: {
         borderRadius: 10,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         '&:hover': {
           backgroundColor: Black,
           color: darkColors.WhiteSmoke,
@@ -143,7 +143,7 @@ export const darkTheme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
         padding: '10px 20px',
       },
@@ -278,7 +278,7 @@ export const darkTheme = createMuiTheme({
       root: { color: Nero },
     },
   },
-  shape: { borderRadius: [0, 10, 16, 50] },
+  shape: { borderRadius: [0, 10, 15, 50] },
   palette: {
     type: 'dark',
     background: {
@@ -291,6 +291,7 @@ export const darkTheme = createMuiTheme({
     buttons: {
       wallet: Aqua,
       selected: Aqua,
+      navbar: darkColors.LightDark,
     },
     card: {
       footer: darkColors.Black,
@@ -301,7 +302,7 @@ export const darkTheme = createMuiTheme({
       main: darkColors.WhiteSmoke,
       light: darkColors.WhiteSmoke,
       dark: Aqua,
-      contrastText: White,
+      contrastText: darkColors.LightDark,
     },
     secondary: {
       main: darkColors.DarkGray,
@@ -462,7 +463,7 @@ export const Theme = createMuiTheme({
       },
       text: {
         boxShadow: 'none',
-        borderRadius: 15,
+        borderRadius: 9,
         margin: '0 2px',
         padding: '10px 20px',
       },
@@ -600,6 +601,7 @@ export const Theme = createMuiTheme({
     buttons: {
       wallet: Green,
       selected: Black,
+      navbar: White,
     },
     card: {
       footer: Black,

@@ -17,6 +17,10 @@ import { MetamaskAccountType } from '../../../types'
 import { backgroundGradient } from '../../Styles/Colors'
 import { myProfilePathFromAddress } from '../../../config/routes'
 
+import { boxShadow } from '../../Styles/Colors'
+
+const { boxShadow1 } = boxShadow
+
 const useStyles = makeStyles(theme => ({
   paper: {
     width: `${theme.spacing(4)}vw`,
@@ -27,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
     boxShadow: '0px 3px 7px #212e36',
+    boxShadow: boxShadow1,
     padding: theme.spacing(3, 5),
     borderRadius: theme.spacing(5),
     zIndex: 2,
@@ -49,6 +54,10 @@ const useStyles = makeStyles(theme => ({
   },
   name: {
     marginLeft: theme.spacing(2),
+    fontWeight: 400,
+    paddingLeft: theme.spacing(2),
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
   },
   icon: {
     fontSize: theme.spacing(10),
@@ -59,7 +68,6 @@ const useStyles = makeStyles(theme => ({
     background: backgroundGradient.backgroundGradient1,
   },
   textKeyPublic: {
-    fontFamily: theme.typography.fontFamily[1],
     fontWeight: 400,
     paddingLeft: theme.spacing(2),
     textOverflow: 'ellipsis',
@@ -141,7 +149,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
           className={name ? classes.name : classes.textKeyPublic}
           variant="body1"
         >
-          {name ? `${name}` : `${account}`}
+          {name ? `@${name}` : `@${account}`}
         </Typography>
         <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>

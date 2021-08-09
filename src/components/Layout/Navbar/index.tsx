@@ -11,6 +11,9 @@ import {
   Hidden,
   IconButton,
 } from '@material-ui/core'
+import useQueryParams from '../../../hooks/useQueryParams'
+import { getUser } from '../../../services/users'
+import { useQuery } from 'react-query'
 
 import logoSrc from '../../../assets/logoNew.png'
 import LogoDarkSrc from '../../../assets/light-logo-SC.svg'
@@ -123,6 +126,9 @@ const useStyles = makeStyles(Theme => ({
     top: 110,
     left: 20,
   },
+  navbarElement: {
+    padding: Theme.spacing(0, 13),
+  },
 }))
 
 const index = ({ pathname, profileImageUrl, name }) => {
@@ -130,6 +136,11 @@ const index = ({ pathname, profileImageUrl, name }) => {
   const [showDrawer, setShowDrawer] = useState(false)
 
   const [account, setAccount] = useAccountStore()
+  const { address } = useQueryParams()
+
+  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
+    getUser({ public_address: address })
+  )
 
   const handleLogOut = async () => {
     setAccount(null)
@@ -145,27 +156,41 @@ const index = ({ pathname, profileImageUrl, name }) => {
             alignItems="center"
             className={classes.nav}
           >
-            <Grid item>
+            <Grid item md={4} className={classes.navbarElement}>
               <Link to="/" className={classes.link}>
                 <LogoDarkSrc className={classes.logoDark} />
                 <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
 
-            <Grid item>
+            <Grid item md={4}>
               <Navigator pathname={pathname} />
             </Grid>
 
             <Hidden smDown>
               {account ? (
-                <LoggedButton
-                  profileImageUrl={profileImageUrl}
-                  name={name}
-                  account={account}
-                  onLogOut={handleLogOut}
-                />
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  className={classes.navbarElement}
+                >
+                  <LoggedButton
+                    profileImageUrl={profileImageUrl}
+                    name={userAccount ? userAccount.username : name}
+                    account={account}
+                    onLogOut={handleLogOut}
+                  />
+                </Grid>
               ) : (
-                <ButtonConnectWallet pathname={pathname} />
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  className={classes.navbarElement}
+                >
+                  <ButtonConnectWallet pathname={pathname} />
+                </Grid>
               )}
             </Hidden>
             <Hidden mdUp>
