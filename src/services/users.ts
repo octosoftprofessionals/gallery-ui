@@ -9,7 +9,7 @@ export const getUser = async (queryParams = {}): Promise<Users> => {
 }
 
 export const updateUser = async (queryParams = {}) => {
-  const url = `/users`
+  const url = `/users/update`
   const res = await update(url, queryParams)
   const updatedUser = res.data ?? {}
   return updatedUser
