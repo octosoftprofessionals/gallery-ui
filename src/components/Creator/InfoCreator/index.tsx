@@ -211,15 +211,15 @@ const InfoCreator = ({
             </Grid>
           </Grid>
           <Grid item xs={2}>
-            {/*   {isMyAccount ? ( */}
-            <Button>
-              <Typography className={classes.btn}>Edit profile</Typography>
-            </Button>
-            {/*     ) : (
+            {isMyAccount ? (
+              <Button variant="outlined">
+                <Typography variant="button">Edit profile</Typography>
+              </Button>
+            ) : (
               <Button variant="outlined">
                 <Typography variant="button">Follow</Typography>
               </Button>
-            )} */}
+            )}
           </Grid>
           <Grid
             container
