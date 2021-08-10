@@ -139,3 +139,11 @@ export const linkStorage = () => {
     localStorage.removeItem('getSessionStorage', 'foobar')
   }
 }
+
+export const findeArtwork = (arry, assetId, status) => {
+  let res = {}
+  arry.forEach(
+    item => (res = item.find(artwork => artwork.assetId === assetId))
+  )
+  res.isFavorite = status
+}
