@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useInfiniteQuery } from 'react-query'
 
 import { allQuerysItems } from '../../services/gallery'
 
 import TabBar from '../TabBar'
 import GalleryArtworks from './GalleryArtworks'
+import { findeArtwork } from '../../Utils'
 
 const GridArtworks = () => {
   const [listedNextPage, setListedNextPage] = useState(0)
@@ -80,6 +81,18 @@ const GridArtworks = () => {
     setSoldNextPage(newPages)
     fetchNextPageSold({ pageParam: newPages })
   }
+
+  const handleFavorite = useCallback(
+    (assetId, status, title) => {
+      const titles = {
+        Live: listedItemsQuery.pages,
+        Reserve: reserveItemsQuery.pages,
+        Sold: soldItemsQuery.pages,
+      }
+      findeArtwork(titles[title], assetId, status)
+    },
+    [listedItemsQuery.pages, reserveItemsQuery.pages, soldItemsQuery.pages]
+  )
   return (
     <TabBar
       titles={['Live Auction', 'Reserve not met', 'Sold']}
@@ -90,6 +103,9 @@ const GridArtworks = () => {
           handleNext={getMorelisted}
           hasNextPage={hasNextPageLA}
           pages={listedItemsQuery.pages}
+          onFavorite={(assetId, status) =>
+            handleFavorite(assetId, status, 'Live')
+          }
         />,
         <GalleryArtworks
           isLoading={isLoadingReserve}
@@ -97,6 +113,9 @@ const GridArtworks = () => {
           handleNext={getMoreReserve}
           hasNextPage={hasNextPageReserve}
           pages={reserveItemsQuery.pages}
+          onFavorite={(assetId, status) =>
+            handleFavorite(assetId, status, 'Reserve')
+          }
         />,
         <GalleryArtworks
           isLoading={isLoadingSold}
@@ -104,6 +123,9 @@ const GridArtworks = () => {
           handleNext={getMoreSold}
           hasNextPage={hasNextPageSold}
           pages={soldItemsQuery.pages}
+          onFavorite={(assetId, status) =>
+            handleFavorite(assetId, status, 'Sold')
+          }
         />,
       ]}
     />

@@ -74,6 +74,7 @@ const useStyle = makeStyles(Theme => ({
 
 const ArtworkItem = ({
   galleryItem = {},
+  onFavorite,
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
@@ -110,12 +111,6 @@ const ArtworkItem = ({
     }, 1000)
   }, [])
 
-  useEffect(() => {
-    setInFavorite(isFavorite)
-  }, [isFavorite])
-
-  const [inFavorite, setInFavorite] = useState<boolean>(false)
-
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
@@ -126,7 +121,7 @@ const ArtworkItem = ({
       public_address: account as string,
       asset_id: assetId,
     })
-    setInFavorite(true)
+    onFavorite(assetId, true)
   }
   const handleSubmitUnFavorite = e => {
     e.preventDefault()
@@ -134,7 +129,7 @@ const ArtworkItem = ({
       public_address: account as string,
       asset_id: assetId,
     })
-    setInFavorite(false)
+    onFavorite(assetId, false)
   }
 
   const handleSubmitPlaylist = e => {
@@ -189,7 +184,7 @@ const ArtworkItem = ({
         handleSubmitUnPlaylist={handleSubmitUnPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
-        isFavorite={inFavorite}
+        isFavorite={isFavorite}
       />
     </Paper>
   )
