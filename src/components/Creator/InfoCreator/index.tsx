@@ -198,7 +198,7 @@ const InfoCreator = ({
                 Following:
               </Typography>
               <Typography variant="h6" color="primary">
-                {following ? following : '—'}
+                {following ? following : '0'}
               </Typography>
             </Grid>
             <Grid container justify="flex-start">
@@ -206,7 +206,7 @@ const InfoCreator = ({
                 Followers:
               </Typography>
               <Typography variant="h6" color="primary">
-                {followers ? followers : '—'}
+                {followers ? followers : '0'}
               </Typography>
             </Grid>
           </Grid>
