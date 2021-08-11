@@ -23,7 +23,6 @@ const useStyles = makeStyles(Theme => ({
     alignItems: 'center',
   },
   drawer: {
-    width: '400px',
     padding: Theme.spacing(4),
     backgroundColor: '#212e36',
     borderRadius: Theme.spacing(4),
@@ -56,19 +55,31 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const UserNetworks = ({ publicKey, web, ig, tw }) => {
+const UserNetworks = ({
+  publicKey,
+  web,
+  ig,
+  tw,
+  discord,
+  youtube,
+  facebook,
+  tiktok,
+  snapchat,
+}) => {
   const classes = useStyles()
 
   return (
     <Grid
       container
       direction="column"
-      xs={12}
       justify="flex-end"
       className={classes.drawer}
     >
       <Grid container direction="column">
-        <Link to={publicKey} className={classes.link}>
+        <Link
+          to={`https://etherscan.io/address/${publicKey}`}
+          className={classes.link}
+        >
           <ETH className={classes.icon2} />
 
           <Typography
@@ -80,7 +91,7 @@ const UserNetworks = ({ publicKey, web, ig, tw }) => {
             {truncateMiddleText(publicKey)}
           </Typography>
         </Link>
-        <Link to={'/artworks'} className={classes.link}>
+        <Link to={`https://twitter.com/${tw}`} className={classes.link}>
           <TwitterIcon className={classes.icon} />,
           <Typography
             variant="overline"
@@ -101,7 +112,7 @@ const UserNetworks = ({ publicKey, web, ig, tw }) => {
           </Typography>
         </Link>
 
-        <Link to={`https://www.instagram.com/${ig}`} className={classes.link}>
+        <Link to={web} className={classes.link}>
           <LanguageIcon className={classes.icon} />,
           <Typography
             variant="overline"

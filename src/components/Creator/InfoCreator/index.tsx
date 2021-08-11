@@ -104,7 +104,7 @@ const useStyle = makeStyles(Theme => ({
   networks: {
     '@media (max-width: 576px)': {
       marginTop: Theme.spacing(6),
-      width: '300px',
+      /* width: '300px', */
     },
   },
   bio: {
@@ -117,6 +117,24 @@ const useStyle = makeStyles(Theme => ({
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
+    },
+  },
+  buttonKeyPublic: {
+    width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
+    position: 'absolute',
+    left: ({ userIndex }) => (userIndex ? Theme.spacing(13) : 0),
+    backgroundColor: Theme.palette.secondary.main,
+    padding: Theme.spacing(0, 0, 0, 13),
+    boxShadow: boxShadow.boxShadow1,
+    '&:hover': {
+      backgroundColor: Theme.palette.secondary.main,
+      transform: 'none',
+      boxShadow: boxShadow.boxShadow1,
+    },
+    '@media (max-width: 576px)': {
+      width: '100%',
+      left: Theme.spacing(0),
+      padding: Theme.spacing(0, 0, 0, 15),
     },
   },
 }))
@@ -187,44 +205,69 @@ const InfoCreator = ({
           direction="row"
           className={classes.userProfile}
         >
-          <Grid item xs={3}>
+          <Grid item xs={3} direction="row">
             <Typography variant="h4" className={classes.userName}>
               {username ? `@${username}` : publicKey}
             </Typography>
           </Grid>
-          <Grid item xs={2}>
+          <Grid container item xs={2} direction="column">
             <Grid container justify="flex-start">
-              <Typography variant="overline" className={classes.textFollow}>
-                Following:
-              </Typography>
+              <Button onClick={() => setOpenFollowModal(true)}>
+                <Typography variant="overline" className={classes.textFollow}>
+                  Following
+                </Typography>
+              </Button>
               <Typography variant="h6" color="primary">
-                {following ? following : '0'}
+                {following ? following.length : '0'}
               </Typography>
-            </Grid>
-            <Grid container justify="flex-start">
-              <Typography variant="overline" className={classes.textFollowers}>
-                Followers:
-              </Typography>
+              <Button onClick={() => setOpenFollowModal(true)}>
+                <Typography
+                  variant="overline"
+                  className={classes.textFollowers}
+                >
+                  Followers
+                </Typography>
+              </Button>
               <Typography variant="h6" color="primary">
-                {followers ? followers : '0'}
+                {followers ? followers.length : '0'}
               </Typography>
+
+              <FollowersModal
+                openFollowModal={openFollowModal}
+                setOpenFollowModal={setOpenFollowModal}
+                followers={followers}
+                following={following}
+                publicKey={publicKey}
+              />
             </Grid>
           </Grid>
           <Grid item xs={2}>
             {isMyAccount ? (
-              <Button variant="outlined">
+              <Button variant="outlined" fullWidth href="/editProfile">
                 <Typography variant="button">Edit profile</Typography>
               </Button>
+            ) : isLoading ? (
+              <Spinner height="20vh" />
             ) : (
-              <Button variant="outlined">
-                <Typography variant="button">Follow</Typography>
+              <Button
+                variant="outlined"
+                fullWidth
+                onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
+              >
+                {isFollow ? (
+                  <Typography variant="button">Unfollow</Typography>
+                ) : (
+                  <Typography variant="button">Follow</Typography>
+                )}
               </Button>
             )}
           </Grid>
           <Grid
             container
             item
-            xs={4}
+            lg={4}
+            xl={4}
+            xs={11}
             className={classes.networks}
             justify="flex-end"
           >
@@ -241,7 +284,7 @@ const InfoCreator = ({
           </Typography>
         </Grid>
       </Grid>
-      {/*    {isMyAccount ? null : (
+      {isMyAccount ? null : (
         <>
           <Typography variant="button" color="primary">
             Followed by
@@ -260,8 +303,7 @@ const InfoCreator = ({
             />
           </Grid>
         </>
-      )} */}
-      {/* <Box height="24px" /> */}
+      )}
     </>
   )
 }
