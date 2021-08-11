@@ -17,12 +17,16 @@ export const get = async (url, queryParams = {}) => {
   return await httpWithCredentials.get(url, { params: queryParams })
 }
 
-export const post = async (url, queryParams = {}) => {
-  return await httpWithCredentials.post(url, { params: queryParams })
+export const post = async (url, queryParams = {}, config) => {
+  config
+    ? await httpWithCredentials.post(url, { params: queryParams }, config)
+    : await httpWithCredentials.post(url, { params: queryParams })
 }
 
-export const update = async (url, queryParams = {}) => {
-  return await httpWithCredentials.put(url, { params: queryParams })
+export const update = async (url, queryParams = {}, config) => {
+  config
+    ? await httpWithCredentials.put(url, { params: queryParams }, config)
+    : await httpWithCredentials.put(url, { params: queryParams })
 }
 
 export const destroy = async (url, queryParams = {}) => {

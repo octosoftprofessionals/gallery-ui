@@ -225,9 +225,9 @@ const EditForm = ({ userAccount }: Props) => {
       setError(false)
       let data = {
         username: name,
-        profile_img_url: '',
-        cover_img_url: '',
-        public_address: metamaskAccount,
+        profile_img_url: files.picture,
+        cover_img_url: files.cover,
+        public_address: metamaskAccount, //comentar para cuando se deploye a heroku
         email: email,
         bio: bio,
         website: socialNetwork.website,
@@ -239,9 +239,9 @@ const EditForm = ({ userAccount }: Props) => {
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       }
-      updateUser(data)
+      updateUser(metamaskAccount, data)
         .then(res => {
-          console.log('res:', res)
+          console.log('res API:', res)
           handleClick(false)
         })
         .catch(err => {
@@ -250,6 +250,7 @@ const EditForm = ({ userAccount }: Props) => {
         })
     } else {
       setError(true)
+      console.log('mail no ingresado')
     }
   }
 
