@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useInfiniteQuery } from 'react-query'
 
 import ArtworkGrid from '../components/ArtworkGrid'
@@ -8,6 +8,7 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
+import { findeArtwork } from '../Utils'
 import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
 import { GalleryItem } from '../types'
 
@@ -36,6 +37,12 @@ const Home = () => {
     }
   )
 
+  const getMoreLiveAuctions = () => {
+    const newPages = liveAuctions + 20
+    setLiveAuctions(newPages)
+    fetchNextPageLA({ pageParam: newPages })
+  }
+
   const {
     data: liveAcutionItems = [],
     isLoading: isLoadingLA,
@@ -60,11 +67,16 @@ const Home = () => {
     fetchNextPageFA({ pageParam: newPages })
   }
 
-  const getMoreLiveAuctions = () => {
-    const newPages = liveAuctions + 20
-    setLiveAuctions(newPages)
-    fetchNextPageLA({ pageParam: newPages })
-  }
+  const handleFavorite = useCallback(
+    (assetId, status, title) => {
+      const titles = {
+        All: allFeaturedItems.pages,
+        Live: liveAcutionItems.pages,
+      }
+      findeArtwork(titles[title], assetId, status)
+    },
+    [allFeaturedItems.pages, liveAcutionItems.pages]
+  )
 
   return (
     <Layout>
@@ -92,7 +104,13 @@ const Home = () => {
             pages={allFeaturedItems.pages}
             hasNextPage={hasNextPageFA}
             renderItem={item => (
-              <ArtworkItem key={item.assetId} galleryItem={item} />
+              <ArtworkItem
+                key={item.assetId}
+                galleryItem={item}
+                onFavorite={(assetId, status) =>
+                  handleFavorite(assetId, status, 'All')
+                }
+              />
             )}
           />
         )}
@@ -113,7 +131,13 @@ const Home = () => {
             pages={liveAcutionItems.pages}
             hasNextPage={hasNextPageLA}
             renderItem={item => (
-              <ArtworkItem key={item.assetId} galleryItem={item} />
+              <ArtworkItem
+                key={item.assetId}
+                galleryItem={item}
+                onFavorite={(assetId, status) =>
+                  handleFavorite(assetId, status, 'Live')
+                }
+              />
             )}
           />
         )}
