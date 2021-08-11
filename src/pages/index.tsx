@@ -91,8 +91,8 @@ const Home = () => {
             handleNext={getMoreFeaturedArtworks}
             pages={allFeaturedItems.pages}
             hasNextPage={hasNextPageFA}
-            renderItem={(items, index) => (
-              <ArtworkItem key={index} galleryItem={items} />
+            renderItem={item => (
+              <ArtworkItem key={item.assetId} galleryItem={item} />
             )}
           />
         )}
@@ -112,8 +112,8 @@ const Home = () => {
             handleNext={getMoreLiveAuctions}
             pages={liveAcutionItems.pages}
             hasNextPage={hasNextPageLA}
-            renderItem={(item, index) => (
-              <ArtworkItem key={index} galleryItem={item} />
+            renderItem={item => (
+              <ArtworkItem key={item.assetId} galleryItem={item} />
             )}
           />
         )}
