@@ -1,29 +1,13 @@
-import React, { useState } from 'react'
-import { useMutation } from 'react-query'
-import { createFollow } from '../../../services/follow'
-import useQueryParams from '../../../hooks/useQueryParams'
-// import axios from 'axios'
-import UserNetworks from './UserNetworks'
+import React from 'react'
+import { useQuery } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Typography,
-  Tooltip,
-} from '@material-ui/core'
-import { AvatarGroup } from '@material-ui/lab'
+import { Avatar, Grid } from '@material-ui/core'
 import { FileCopy } from '@material-ui/icons'
 import { Link } from 'gatsby'
-import Links from './Links'
-import ButtonsSocialMedia from './ButtonsSocialMedia'
-import { useQuery } from 'react-query'
 import GridCreator from './GridCreator'
+import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import InfoCreator from './InfoCreator'
 import Share from '../../components/Creator/InfoCreator/Share'
-import { boxShadow, colors } from '../../components/Styles/Colors'
-
 import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
@@ -164,13 +148,13 @@ const Creator = ({
             className={classes.info}
             isMyAccount={isMyAccount}
             username={user.username}
-            followers={followees ? followees.length : 0}
-            following={followers ? followers.length : 0}
+            publicKey={user.publicAddress}
+            followers={followees ? followees : 0}
+            following={followers ? followers : 0}
             followedes={followers ? followers : []}
             web={user.website}
             ig={user.instagram}
             tw={user.twitter}
-            publicKey={user.publicAddress}
             bio={user.bio}
           />
         </Grid>

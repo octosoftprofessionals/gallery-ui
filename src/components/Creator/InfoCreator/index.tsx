@@ -283,7 +283,7 @@ const InfoCreator = ({
             do not accept plastic bags, defend Argentinian humedales.
           </Typography>
         </Grid>
-      </Grid>
+        {/*  </Grid>
       {isMyAccount ? null : (
         <>
           <Typography variant="button" color="primary">
@@ -300,11 +300,11 @@ const InfoCreator = ({
               verified={true}
               imgUrl={followedes[3]}
               invited={''}
-            />
-          </Grid>
-        </>
-      )}
+            /> */}
+      </Grid>
     </>
+    /*       )}
+    </> */
   )
 }
 
