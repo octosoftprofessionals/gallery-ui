@@ -13,6 +13,8 @@ import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 // Hi there! verify profile is commented //
 
+import { useMutation, useQuery } from 'react-query'
+
 const useStyle = makeStyles(theme => ({
   '@global': {
     '.MuiOutlinedInput-inputMultiline': {
@@ -199,6 +201,8 @@ const EditForm = ({ userAccount }: Props) => {
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
+  const userMutation = useMutation(updateUser)
+
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
   }
@@ -239,15 +243,16 @@ const EditForm = ({ userAccount }: Props) => {
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       }
-      updateUser(data)
-        .then(res => {
-          console.log('res:', res)
-          handleClick(false)
-        })
-        .catch(err => {
-          console.error('error:', err)
-          handleClick(true)
-        })
+      userMutation.mutate(data)
+      // updateUser(data)
+      //   .then(res => {
+      //     console.log('res:', res)
+      //     handleClick(false)
+      //   })
+      //   .catch(err => {
+      //     console.error('error:', err)
+      //     handleClick(true)
+      //   })
     } else {
       setError(true)
     }

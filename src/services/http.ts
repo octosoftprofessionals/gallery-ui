@@ -13,6 +13,24 @@ export const httpWithCredentials = axiosRateLimit(
   }
 )
 
+export const httpWithCredentialsAndHeaders = axiosRateLimit(
+  axios.create({ withCredentials: true, baseURL: ROOT }),
+  {
+    maxRequests: 5,
+    perMilliseconds: 1000,
+  }
+)
+
+httpWithCredentialsAndHeaders.interceptors.request.use((config) => {
+  config.headers['Accept'] = 'application/json'
+  config.headers["Content-Type"] = "multipart/form-data"
+  return config;
+})
+
+export const postWithMultiPart = async (url, queryParams = {}) => {
+  return await httpWithCredentialsAndHeaders.post(url, (queryParams = {}))
+}
+
 export const get = async (url, queryParams = {}) => {
   return await httpWithCredentials.get(url, { params: queryParams })
 }
