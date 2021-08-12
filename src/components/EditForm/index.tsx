@@ -229,9 +229,9 @@ const EditForm = ({ userAccount }: Props) => {
       setError(false)
       let data = {
         username: name,
-        profile_img_url: '',
-        cover_img_url: '',
-        public_address: metamaskAccount,
+        profile_img_url: files.picture,
+        cover_img_url: files.cover,
+        public_address: metamaskAccount, //comentar para cuando se deploye a heroku
         email: email,
         bio: bio,
         website: socialNetwork.website,
@@ -243,7 +243,7 @@ const EditForm = ({ userAccount }: Props) => {
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       }
-      userMutation.mutate(data)
+      userMutation.mutate(data as any)
       // updateUser(data)
       //   .then(res => {
       //     console.log('res:', res)
