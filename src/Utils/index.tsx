@@ -143,7 +143,7 @@ export const linkStorage = () => {
 export const findeArtwork = (arry, assetId, status) => {
   let res = {}
   arry.forEach(
-    item => (res = item.find(artwork => artwork.assetId === assetId))
+    arry => (res = arry.find(artwork => artwork.assetId === assetId))
   )
   res.isFavorite = status
 }

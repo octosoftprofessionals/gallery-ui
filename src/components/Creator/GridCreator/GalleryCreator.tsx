@@ -26,7 +26,8 @@ const Gallery = ({
 }) => {
   const { data: galleryItems = [], isLoading } = useQuery(
     queryName,
-    queryFunction
+    queryFunction,
+    { refetchOnWindowFocus: false }
   )
   const classes = useStyle()
   const { data: ItemsToShow = [], favoriteArtworks = [] } = galleryItems
@@ -35,7 +36,7 @@ const Gallery = ({
     (assetId, status, title) => {
       const titles = {
         Items: ItemsToShow,
-        Favorites: favoriteArtworks,
+        Favorites: [favoriteArtworks],
       }
       findeArtwork(titles[title], assetId, status)
     },
