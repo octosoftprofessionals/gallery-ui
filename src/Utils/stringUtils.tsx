@@ -10,18 +10,10 @@ export function validateEmail(email: string) {
   return re.test(String(email).toLowerCase())
 }
 
-export function truncateMiddleText(text: string) {
+export function truncateMiddleText(text: string, length: number) {
   if (text.lenght < 20) {
     return text
   } else {
-    return `${text.slice(0, 8)}...${text.slice(-8)}`
-  }
-}
-
-export function truncateMiddleTextShort(text: string) {
-  if (text.lenght < 20) {
-    return text
-  } else {
-    return `${text.slice(0, 5)}...${text.slice(-5)}`
+    return `${text.slice(0, length)}...${text.slice(-length)}`
   }
 }

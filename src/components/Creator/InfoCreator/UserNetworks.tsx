@@ -27,6 +27,7 @@ const useStyles = makeStyles(Theme => ({
     backgroundColor: '#212e36',
     borderRadius: Theme.spacing(4),
     lineHeight: '40px',
+    maxHeigth: '433px',
     '@media (max-width: 576px)': {
       width: '100%',
     },
@@ -88,7 +89,7 @@ const UserNetworks = ({
             noWrap
             className={classes.text}
           >
-            {truncateMiddleText(publicKey)}
+            {truncateMiddleText(publicKey, 8)}
           </Typography>
         </Link>
         <Link to={`https://twitter.com/${tw}`} className={classes.link}>

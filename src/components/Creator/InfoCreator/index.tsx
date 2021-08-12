@@ -137,6 +137,10 @@ const useStyle = makeStyles(Theme => ({
       padding: Theme.spacing(0, 0, 0, 15),
     },
   },
+  btn: {
+    padding: 0,
+    margin: 0,
+  },
 }))
 
 const InfoCreator = ({
@@ -207,12 +211,21 @@ const InfoCreator = ({
         >
           <Grid item xs={3} direction="row">
             <Typography variant="h4" className={classes.userName}>
-              {username ? `@${username}` : publicKey}
+              {username ? `@${username}` : truncateMiddleText(publicKey, 5)}
             </Typography>
           </Grid>
-          <Grid container item xs={2} direction="column">
-            <Grid container justify="flex-start">
-              <Button onClick={() => setOpenFollowModal(true)}>
+          <Grid container item xs={2} direction="column" justify="flex-start">
+            <Grid
+              item
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
+            >
+              <Button
+                className={classes.btn}
+                onClick={() => setOpenFollowModal(true)}
+              >
                 <Typography variant="overline" className={classes.textFollow}>
                   Following
                 </Typography>
@@ -220,7 +233,18 @@ const InfoCreator = ({
               <Typography variant="h6" color="primary">
                 {following ? following.length : '0'}
               </Typography>
-              <Button onClick={() => setOpenFollowModal(true)}>
+            </Grid>
+            <Grid
+              item
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
+            >
+              <Button
+                className={classes.btn}
+                onClick={() => setOpenFollowModal(true)}
+              >
                 <Typography
                   variant="overline"
                   className={classes.textFollowers}
@@ -231,17 +255,16 @@ const InfoCreator = ({
               <Typography variant="h6" color="primary">
                 {followers ? followers.length : '0'}
               </Typography>
-
-              <FollowersModal
-                openFollowModal={openFollowModal}
-                setOpenFollowModal={setOpenFollowModal}
-                followers={followers}
-                following={following}
-                publicKey={publicKey}
-              />
             </Grid>
+            <FollowersModal
+              openFollowModal={openFollowModal}
+              setOpenFollowModal={setOpenFollowModal}
+              followers={followers}
+              following={following}
+              publicKey={publicKey}
+            />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item md={2} sm={9} xs={12}>
             {isMyAccount ? (
               <Button variant="outlined" fullWidth href="/editProfile">
                 <Typography variant="button">Edit profile</Typography>
@@ -265,8 +288,7 @@ const InfoCreator = ({
           <Grid
             container
             item
-            lg={4}
-            xl={4}
+            md={4}
             xs={11}
             className={classes.networks}
             justify="flex-end"
@@ -276,7 +298,7 @@ const InfoCreator = ({
         </Grid>
       </Grid>
       <Grid container item justify="flex-start" xs={12}>
-        <Grid container lg={7} xs={12}>
+        <Grid container sm={7} xs={12}>
           <Typography variant="body2" color="primary" className={classes.bio}>
             I'm and Frontend dev and a digital designer. Love coding and movies!
             Mother of two and environmental activist. Please recycle and reuse,

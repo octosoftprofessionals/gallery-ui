@@ -141,7 +141,8 @@ const Creator = ({
         <Grid
           container
           justify="space-around"
-          xs={8}
+          md={8}
+          xs={12}
           className={classes.profile}
         >
           <InfoCreator
@@ -158,7 +159,7 @@ const Creator = ({
             bio={user.bio}
           />
         </Grid>
-        <Grid item container justify="flex-start" xs={3}>
+        <Grid item container justify="flex-start" md={3} xs={12}>
           <div className={classes.share}>
             <Share
               linkTwitter={user.twitter}
