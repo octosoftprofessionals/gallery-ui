@@ -53,7 +53,7 @@ const InAuctions = ({ price, timer, children }) => {
             item
             xs={12}
             container
-            justify="center"
+            justify="flex-end"
             className={classes.timerAlign}
           >
             <Typography variant="caption" color="secondary">
