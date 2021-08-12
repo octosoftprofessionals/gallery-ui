@@ -1,13 +1,13 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid } from '@material-ui/core'
-
+import { FileCopy } from '@material-ui/icons'
+import { Link } from 'gatsby'
 import GridCreator from './GridCreator'
-import InfoCreator from './InfoCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
-import { boxShadow } from '../../components/Styles/Colors'
+import InfoCreator from './InfoCreator'
+import Share from '../../components/Creator/InfoCreator/Share'
 import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
@@ -16,72 +16,104 @@ import {
 import { Users } from '../../types'
 
 const useStyle = makeStyles(Theme => ({
-  root: { position: 'relative', paddingBottom: Theme.spacing(16) },
-  containerAvatar: {
-    position: 'absolute',
-    top: `-${Theme.spacing(3)}vw`,
-    left: Theme.spacing(9),
-    backgroundColor: Theme.palette.card.secondary,
-    padding: Theme.spacing(3),
-    borderRadius: `${Theme.shape.borderRadius[3]}%`,
+  root: {
+    padding: Theme.spacing(0, 5, 5, 16),
     '@media (max-width: 545px)': {
-      top: `-${Theme.typography.fontSize[5]}vw`,
-      padding: Theme.spacing(2),
+      width: '90%',
+      padding: Theme.spacing(0),
+      zIndex: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   },
   avatar: {
-    width: `${Theme.spacing(4)}vw`,
-    height: `${Theme.spacing(4)}vw`,
+    top: '-60px',
+    width: '150px',
+    height: '150px',
+    display: 'flex',
+    overflow: 'hidden',
+    position: 'relative',
+    alignItems: 'center',
+    userSelect: 'none',
+    borderRadius: '50%',
+    justifyContent: 'center',
+    marginRight: Theme.spacing(2),
+    border: '3px solid #232323',
     '@media (max-width: 545px)': {
-      width: `${Theme.spacing(5)}vh`,
-      height: `${Theme.spacing(5)}vh`,
+      width: '200px',
+      height: '200px',
+      right: 60,
+      /*       display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center', */
     },
-  },
-  boxIconButton: {
-    backgroundColor: Theme.palette.secondary.main,
-    borderRadius: `${Theme.shape.borderRadius[3]}%`,
-    boxShadow: boxShadow.boxShadow1,
-    '&:hover': {
-      transform: 'translateY(-2px)',
-      boxShadow: boxShadow.boxShadow4,
-    },
-  },
-  buttonReport: {
-    '&:hover': { backgroundColor: Theme.palette.secondary.main },
-  },
-  iconMore: {
-    fontSize: Theme.typography.fontSize[11],
-    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[5] },
-    fill: Theme.palette.primary.main,
   },
   icon: {
     fill: Theme.palette.primary.main,
     fontSize: Theme.typography.fontSize[10],
     '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[10] },
   },
-  buttonShare: {
-    padding: Theme.spacing(3, 9),
-    margin: 'auto',
-    boxShadow: boxShadow.boxShadow1,
-    backgroundColor: Theme.palette.secondary.main,
-    '&:hover': { backgroundColor: Theme.palette.secondary.main },
-    '@media (max-width: 545px)': { padding: 0 },
+  share: {
+    top: -20,
+    left: 30,
+    position: 'relative',
+    '@media (max-width: 545px)': {
+      top: -910,
+      right: 150,
+    },
   },
-  textShare: {
-    marginLeft: Theme.spacing(3),
-    fontSize: Theme.typography.fontSize[3],
+  profile: {
+    marginTop: Theme.spacing(10),
+    position: 'relative',
+    '@media (max-width: 545px)': {
+      padding: Theme.spacing(0),
+      marginTop: Theme.spacing(0),
+      marginLeft: Theme.spacing(10),
+      dispay: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      maxWidth: '90%',
+    },
   },
   info: {
-    '@media (max-width: 545px)': { justifyContenet: 'center' },
+    '@media (max-width: 545px)': {
+      dispay: 'flex',
+      /*    position: 'absolute',
+      top: '500px', */
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
+  tab: {
+    marginTop: Theme.spacing(16),
+    '@media (max-width: 545px)': {
+      marginTop: Theme.spacing(0),
+      /*   dispay: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center', */
+    },
   },
 }))
+
+const mock = {
+  coverImgUrl:
+    'https://f8n-production.imgix.net/creators/profile/y26ylgt72-rari-jpg-at7pyj.jpg',
+  profileImgUrl:
+    'https://f8n-production.imgix.net/creators/profile/czgizo65e-reylarsdam-gif-0oq2zd.gif',
+}
 
 const Creator = ({
   isMyAccount = false,
   user = undefined,
   setDisplayReportModal,
 }: Props) => {
-  const classes = useStyle()
+  const classes = useStyle({ imageUrl: mock.coverImgUrl })
 
   const {
     data: followeeItem = [],
@@ -101,42 +133,55 @@ const Creator = ({
   const { followers } = followeeItem
 
   return user ? (
-    <>
-      <Grid container justify="space-around" className={classes.root}>
-        <Grid item className={classes.containerAvatar}>
-          <Avatar src={user.profileImgUrl} className={classes.avatar} />
+    <Grid container xs={12} direction="column" justify="center">
+      <Grid container xs={12} className={classes.root}>
+        <Grid item xs={1}>
+          <Avatar src={mock.profileImgUrl} className={classes.avatar} />
         </Grid>
-
-        <CreatorkShare
-          linkTwitter={user.twitter}
-          setDisplayReportModal={setDisplayReportModal}
-          right="24px"
-        />
-      </Grid>
-      <Grid
-        container
-        justify="space-around"
-        wrap="wrap"
-        className={classes.info}
-      >
-        <Grid item xs={10} md={6}>
+        <Grid
+          container
+          justify="space-around"
+          md={8}
+          xs={12}
+          className={classes.profile}
+        >
           <InfoCreator
+            className={classes.info}
             isMyAccount={isMyAccount}
             username={user.username}
             publicKey={user.publicAddress}
             followers={followees ? followees : 0}
             following={followers ? followers : 0}
             followedes={followers ? followers : []}
+            web={user.website}
+            ig={user.instagram}
+            tw={user.twitter}
+            bio={user.bio}
           />
         </Grid>
-        <Grid item xs={10} sm={12}>
-          <GridCreator
-            isMyAccount={isMyAccount}
-            profileAddress={user.publicAddress}
-          />
+        <Grid item container justify="flex-start" md={3} xs={12}>
+          <div className={classes.share}>
+            <Share
+              linkTwitter={user.twitter}
+              setDisplayReportModal={setDisplayReportModal}
+              right="24px"
+            />
+          </div>
         </Grid>
       </Grid>
-    </>
+      <Grid
+        container
+        direction="row"
+        justify="flex-end"
+        xs={12}
+        className={classes.tab}
+      >
+        <GridCreator
+          isMyAccount={isMyAccount}
+          profileAddress={user.publicAddress}
+        />
+      </Grid>
+    </Grid>
   ) : null
 }
 
