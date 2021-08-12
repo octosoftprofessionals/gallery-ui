@@ -13,20 +13,34 @@ export const httpWithCredentials = axiosRateLimit(
   }
 )
 
+export const httpWithCredentialsAndHeaders = axiosRateLimit(
+  axios.create({ withCredentials: true, baseURL: ROOT }),
+  {
+    maxRequests: 5,
+    perMilliseconds: 1000,
+  }
+)
+
+httpWithCredentialsAndHeaders.interceptors.request.use(config => {
+  config.headers['Accept'] = 'application/json'
+  config.headers['Content-Type'] = 'multipart/form-data'
+  return config
+})
+
+export const postWithMultiPart = async (url, queryParams = {}) => {
+  return await httpWithCredentialsAndHeaders.post(url, (queryParams = {}))
+}
+
 export const get = async (url, queryParams = {}) => {
   return await httpWithCredentials.get(url, { params: queryParams })
 }
 
-export const post = async (url, queryParams = {}, config) => {
-  config
-    ? await httpWithCredentials.post(url, { params: queryParams }, config)
-    : await httpWithCredentials.post(url, { params: queryParams })
+export const post = async (url, queryParams = {}) => {
+  return await httpWithCredentials.post(url, { params: queryParams })
 }
 
-export const update = async (url, queryParams = {}, config) => {
-  config
-    ? await httpWithCredentials.put(url, { params: queryParams }, config)
-    : await httpWithCredentials.put(url, { params: queryParams })
+export const update = async (url, queryParams = {}) => {
+  return await httpWithCredentials.put(url, { params: queryParams })
 }
 
 export const destroy = async (url, queryParams = {}) => {

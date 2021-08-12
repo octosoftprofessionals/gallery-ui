@@ -1,4 +1,4 @@
-import { post, update, get } from './http'
+import { post, get, postWithMultiPart } from './http'
 import { Users } from '../types'
 
 export const getUser = async (queryParams = {}): Promise<Users> => {
@@ -8,17 +8,19 @@ export const getUser = async (queryParams = {}): Promise<Users> => {
   return user[0]
 }
 
-export const updateUser = async (metamaskAccount, queryParams = {}) => {
-  // const url = `/users/update/${metamaskAccount}` //para cuando se deploye a heroku
-  const url = '/users' //--> obsoleto
-  const config = {
-    headers: {
-      Accept: 'multipart/form-data',
-      'Content-Type': 'multipart/form-data',
-    },
-  }
-  // const res = (await post(url, queryParams, config)) as any  //-->  para cuando se deploye a heroku
-  const res = (await update(url, queryParams, config)) as any
+export const updateUserWithFiles = async (public_address, queryParams = {}) => {
+  const url = `/users/update/${public_address}`
+  const res = (await postWithMultiPart(url, queryParams)) as any
+  const updatedUser = res.data ?? {}
+  return updatedUser
+}
+
+export const updateUserWithoutFiles = async (
+  public_address,
+  queryParams = {}
+) => {
+  const url = `/users/update/${public_address}`
+  const res = (await post(url, queryParams)) as any
   const updatedUser = res.data ?? {}
   return updatedUser
 }
