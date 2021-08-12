@@ -201,7 +201,7 @@ const EditForm = ({ userAccount }: Props) => {
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-  const userMutation = useMutation(updateUser)
+  const userMutation = useMutation(() => updateUser(metamaskAccount))
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
