@@ -10,6 +10,7 @@ const GalleryArtworks = ({
   isFetching,
   handleNext,
   hasNextPage,
+  onFavorite,
   pages = [],
 }) => {
   return (
@@ -22,8 +23,12 @@ const GalleryArtworks = ({
           handleNext={handleNext}
           pages={pages}
           hasNextPage={hasNextPage}
-          renderItem={(items, index) => (
-            <ArtworkItem key={index} galleryItem={items} />
+          renderItem={item => (
+            <ArtworkItem
+              key={item.assetId}
+              galleryItem={item}
+              onFavorite={onFavorite}
+            />
           )}
         />
       )}
