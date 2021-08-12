@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
       transition: 'none',
       boxShadow: 'none',
     },
+    '@media (max-width: 1270px)': {
+      width: '100%',
+    },
   },
   menuList: {
     marginTop: -theme.spacing(2),
@@ -136,6 +139,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
+        fullWidth
       >
         {profileImageUrl ? (
           <Avatar alt={name} src={profileImageUrl} />

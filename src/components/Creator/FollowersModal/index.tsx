@@ -73,6 +73,8 @@ const FollowersModal = ({
     setValue(newValue)
   }
 
+  console.log('following', following)
+
   return (
     <div>
       <Modal
@@ -108,7 +110,7 @@ const FollowersModal = ({
                     <FollowItem
                       user={user}
                       handleClick={setOpenFollowModal}
-                      publicKey={publicKey}
+                      publicKey={user.publicAddress}
                     />
                   )
                 })

@@ -35,14 +35,16 @@ function FollowItem({ user, handleClick, publicKey }) {
   const classes = useStyles()
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
+  const [isFollow, setIsFollow] = useState('')
+  const [account, _] = useAccountStore()
+
   const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
     checkExistingFollow({
       follower_address: publicKey,
       followee_address: account as string,
     })
   )
-  const [isFollow, setIsFollow] = useState('')
-  const [account, _] = useAccountStore()
+  console.log(':>>', FollowQuery, account, publicKey, isLoading)
 
   useEffect(() => {
     const { follow } = FollowQuery

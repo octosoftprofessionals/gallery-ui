@@ -176,6 +176,8 @@ const index = ({ pathname, profileImageUrl, name }) => {
                   container
                   justify="flex-end"
                   md={4}
+                  sm={6}
+                  xs={12}
                   className={classes.navbarElement}
                 >
                   <LoggedButton
