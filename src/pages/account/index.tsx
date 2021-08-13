@@ -29,7 +29,10 @@ const AccountPage = () => {
       padding="0"
       marginTop="0"
       height
-      backgroundImage={userAccount?.coverImgUrl}
+      backgroundImage={
+        /* userAccount?.coverImgUrl */
+        'https://f8n-production.imgix.net/creators/profile/y26ylgt72-rari-jpg-at7pyj.jpg'
+      }
     >
       {isLoading ? (
         <Spinner height="50vh" />

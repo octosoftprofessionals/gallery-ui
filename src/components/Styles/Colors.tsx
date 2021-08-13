@@ -44,6 +44,8 @@ export const backgroundGradient = {
     'linear-gradient(267.54deg, rgb(255, 220, 36) 1.63%, rgb(255, 92, 0) 98.05%)',
   backgroundGradient4:
     'linear-gradient(267.56deg, rgb(5, 0, 255) 0%, rgb(143, 0, 255) 97.07%)',
+  backgroundGradient5:
+    'linear-gradient(180deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.10) 80%)',
 }
 
 export const boxShadow = {

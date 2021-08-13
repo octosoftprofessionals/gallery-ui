@@ -14,7 +14,7 @@ import {
 import useQueryParams from '../../../hooks/useQueryParams'
 import { getUser } from '../../../services/users'
 import { useQuery } from 'react-query'
-
+import { backgroundGradient } from '../../Styles/Colors'
 import logoSrc from '../../../assets/logoNew.png'
 import LogoDarkSrc from '../../../assets/light-logo-SC.svg'
 import LogoSCNFT from '../../../assets/dark-logo-SC.svg'
@@ -28,6 +28,7 @@ import Cookies from 'js-cookie'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 
 const { boxShadow1 } = boxShadow
+const { backgroundGradient5 } = backgroundGradient
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -132,6 +133,9 @@ const useStyles = makeStyles(Theme => ({
       padding: 0,
     },
   },
+  gradient: {
+    background: backgroundGradient5,
+  },
 }))
 
 const index = ({ pathname, profileImageUrl, name }) => {
@@ -151,7 +155,12 @@ const index = ({ pathname, profileImageUrl, name }) => {
 
   return (
     <>
-      <AppBar position="static" color="transparent" elevation={0}>
+      <AppBar
+        position="static"
+        color="transparent"
+        elevation={0}
+        className={classes.gradient}
+      >
         <Toolbar className={classes.root}>
           <Grid
             container

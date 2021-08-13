@@ -2,7 +2,6 @@ import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
-import ButtonPlaylist from './ButtonPlaylist'
 import { formatDecimal } from '../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
@@ -16,10 +15,8 @@ const useStyle = makeStyles(Theme => ({
   },
   conateinerTop: { padding: Theme.spacing(2, 6) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
-  timer: {
-    marginBottom: Theme.spacing(4),
-  },
   timerAlign: {
+    whiteSpace: 'pre-line',
     '@media (max-width: 576px)': {
       marginLeft: Theme.spacing(13),
     },
@@ -51,15 +48,15 @@ const InAuctions = ({ price, timer, children }) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          item
-          xs={5}
-          container
-          alignItems="flex-start"
-          className={classes.timer}
-        >
-          <Grid item xs={12} className={classes.timerAlign}>
-            <Typography variant="caption" color="textSecondary">
+        <Grid item xs={5} container alignItems="flex-start">
+          <Grid
+            item
+            xs={12}
+            container
+            justify="center"
+            className={classes.timerAlign}
+          >
+            <Typography variant="caption" color="secondary">
               {timer}
             </Typography>
           </Grid>

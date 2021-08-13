@@ -34,7 +34,7 @@ const useStyle = makeStyles(Theme => ({
       fontSize: Theme.typography.fontSize[4],
     },
   },
-  boxTimer: { display: ({ disableTime }) => (disableTime ? 'block' : 'none') },
+  boxTimer: { display: ({ disableTime }) => (disableTime ? 'flex' : 'none') },
 }))
 
 const HeroAuctionItem = ({
@@ -118,7 +118,7 @@ const HeroAuctionItem = ({
             className={classes.divider}
           />
         </Hidden>
-        <Grid item xs={12} lg={7}>
+        <Grid item xs={12} md={7}>
           <Grid item xs={12}>
             <Typography
               variant="button"
@@ -128,14 +128,7 @@ const HeroAuctionItem = ({
               {changeTitle}
             </Typography>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            container
-            direction="row"
-            justify="flex-start"
-            className={classes.boxTimer}
-          >
+          <Grid container direction="row" className={classes.boxTimer}>
             <Grid
               item
               xs={4}
