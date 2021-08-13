@@ -249,6 +249,7 @@ const EditForm = ({ userAccount }: Props) => {
         method: "post",
         url: `http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,
         data: bodyFormData,
+        withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(function (response) {
