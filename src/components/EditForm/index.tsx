@@ -12,6 +12,7 @@ import { updateUser } from '../../services/users'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 // Hi there! verify profile is commented //
+import axios from 'axios'
 
 import { useMutation, useQuery } from 'react-query'
 
@@ -243,6 +244,23 @@ const EditForm = ({ userAccount }: Props) => {
       bodyFormData.append('tiktok', socialNetwork.tiktok)
       bodyFormData.append('snapchat', socialNetwork.snapchat)
 
+      /* Ultimo intento! */
+      axios({
+        method: "post",
+        url: `http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(function (response) {
+        //handle success
+        console.log(response);
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+
+      /* 1er intento */
       // let data = {
       //   username: name,
       //   profile_img_url: files.picture,
@@ -259,7 +277,13 @@ const EditForm = ({ userAccount }: Props) => {
       //   tiktok: socialNetwork.tiktok,
       //   snapchat: socialNetwork.snapchat,
       // }
-      userMutation.mutate(bodyFormData as any)
+
+      /* 2do intento */
+      //userMutation.mutate(bodyFormData as any)
+
+      /* 1er intento */
+      //userMutation.mutate(data as any)
+
       // updateUser(data)
       //   .then(res => {
       //     console.log('res:', res)
