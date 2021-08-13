@@ -104,28 +104,24 @@ const FollowersModal = ({
           </AppBar>
           <TabPanel className={classes.panel} value="1">
             {following
-              ? following.map(user => {
-                  return (
-                    <FollowItem
-                      user={user}
-                      handleClick={setOpenFollowModal}
-                      publicKey={user.publicAddress}
-                    />
-                  )
-                })
+              ? following.map(user => (
+                  <FollowItem
+                    user={user}
+                    handleClick={setOpenFollowModal}
+                    publicKey={user.publicAddress}
+                  />
+                ))
               : null}
           </TabPanel>
           <TabPanel className={classes.panel} value="2">
             {followers
-              ? followers.map(user => {
-                  return (
-                    <FollowItem
-                      user={user}
-                      handleClick={setOpenFollowModal}
-                      publicKey={user.publicAddress}
-                    />
-                  )
-                })
+              ? followers.map(user => (
+                  <FollowItem
+                    user={user}
+                    handleClick={setOpenFollowModal}
+                    publicKey={user.publicAddress}
+                  />
+                ))
               : null}
           </TabPanel>
         </TabContext>

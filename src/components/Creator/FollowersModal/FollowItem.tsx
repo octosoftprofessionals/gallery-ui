@@ -39,22 +39,22 @@ function FollowItem({ user, handleClick, publicKey }) {
   const [isFollow, setIsFollow] = useState('')
   const [account, _] = useAccountStore()
 
-  const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
-    checkExistingFollow({
-      follower_address: publicKey,
-      followee_address: account as string,
-    })
+  const { data: FollowQuery = {}, isLoading } = useQuery(
+    'FollowQuery',
+    () =>
+      checkExistingFollow({
+        follower_address: publicKey,
+        followee_address: account as string,
+      }),
+    {
+      refetchOnWindowFocus: false,
+    }
   )
 
   useEffect(() => {
     const { follow } = FollowQuery
     setIsFollow(follow)
   }, [FollowQuery])
-
-  useEffect(() => {
-    const { follow } = FollowQuery
-    setIsFollow(follow)
-  }, [])
 
   const handleSubmitFollow = e => {
     e.preventDefault()
