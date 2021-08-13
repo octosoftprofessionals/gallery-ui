@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
+import Spinner from '../../Spinner'
 import {
   createFollow,
   unFollow,
@@ -35,14 +36,20 @@ function FollowItem({ user, handleClick, publicKey }) {
   const classes = useStyles()
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
-  const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
-    checkExistingFollow({
-      follower_address: publicKey,
-      followee_address: account as string,
-    })
-  )
   const [isFollow, setIsFollow] = useState('')
   const [account, _] = useAccountStore()
+
+  const { data: FollowQuery = {}, isLoading } = useQuery(
+    'FollowQuery',
+    () =>
+      checkExistingFollow({
+        follower_address: publicKey,
+        followee_address: account as string,
+      }),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
 
   useEffect(() => {
     const { follow } = FollowQuery
@@ -105,7 +112,9 @@ function FollowItem({ user, handleClick, publicKey }) {
               variant="outlined"
               className={classes.btnFollow}
             >
-              {isFollow ? (
+              {isLoading ? (
+                <Spinner height="50px" />
+              ) : isFollow ? (
                 <Typography variant="button" className={classes.btnText}>
                   Unfollow
                 </Typography>

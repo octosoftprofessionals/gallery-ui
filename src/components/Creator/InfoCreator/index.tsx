@@ -167,6 +167,7 @@ const InfoCreator = ({
       followee_address: account as string,
     })
   )
+  const [viewModal, setViewModal] = useState('')
 
   const [isFollow, setIsFollow] = useState('')
 
@@ -197,6 +198,11 @@ const InfoCreator = ({
     setIsCopy(true)
   }
 
+  const handleOpenModal = value => {
+    setViewModal(value)
+    setOpenFollowModal(true)
+  }
+
   const [openFollowModal, setOpenFollowModal] = useState(false)
 
   return (
@@ -224,7 +230,7 @@ const InfoCreator = ({
             >
               <Button
                 className={classes.btn}
-                onClick={() => setOpenFollowModal(true)}
+                onClick={() => handleOpenModal('1')}
               >
                 <Typography variant="overline" className={classes.textFollow}>
                   Following
@@ -243,7 +249,7 @@ const InfoCreator = ({
             >
               <Button
                 className={classes.btn}
-                onClick={() => setOpenFollowModal(true)}
+                onClick={() => handleOpenModal('2')}
               >
                 <Typography
                   variant="overline"
@@ -256,13 +262,16 @@ const InfoCreator = ({
                 {followers ? followers.length : '0'}
               </Typography>
             </Grid>
-            <FollowersModal
-              openFollowModal={openFollowModal}
-              setOpenFollowModal={setOpenFollowModal}
-              followers={followers}
-              following={following}
-              publicKey={publicKey}
-            />
+            {openFollowModal ? (
+              <FollowersModal
+                viewModal={viewModal}
+                openFollowModal={openFollowModal}
+                setOpenFollowModal={setOpenFollowModal}
+                followers={followers}
+                following={following}
+                publicKey={publicKey}
+              />
+            ) : null}
           </Grid>
           <Grid item md={2} sm={9} xs={12}>
             {isMyAccount ? (

@@ -4,8 +4,6 @@ import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 
-import { galleryItemQuery } from '../../services/gallery'
-
 import useQueryParams from '../../hooks/useQueryParams'
 import Spinner from '../../components/Spinner'
 import { getUser } from '../../services/users'
@@ -20,7 +18,6 @@ const linkShareTwitter = () => {
 
 const CreatorPage = () => {
   const { address } = useQueryParams()
-
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const { data: user, isLoading } = useQuery('creatorQuery', () =>
     getUser({ public_address: address })
@@ -31,7 +28,7 @@ const CreatorPage = () => {
       padding="0"
       marginTop="0"
       height
-      backgroundImage={isLoading ? null : user?.coverImgUrl}
+      backgroundImage={isLoading ? null : user.coverImgUrl}
     >
       {isLoading ? (
         <Spinner height="50vh" />

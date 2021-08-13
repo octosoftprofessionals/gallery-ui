@@ -8,9 +8,13 @@ import { Alert, AlertTitle } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
-import { updateUser } from '../../services/users'
+import {
+  updateUserWithFiles,
+  updateUserWithoutFiles,
+} from '../../services/users'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
+import { useMutation } from 'react-query'
 // Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
@@ -195,9 +199,26 @@ const EditForm = ({ userAccount }: Props) => {
     tiktok: userAccount.tiktok,
     snapchat: userAccount.snapchat,
   })
-  const [files, setFiles] = useState({ picture: '', cover: '' })
+  const [files, setFiles] = useState({ picture: null, cover: null })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
+
+  const userMutationWithFiles = useMutation(
+    () => updateUserWithFiles(metamaskAccount),
+    {
+      onError: error => {
+        console.log('error', error)
+        handleClick(true)
+      },
+      onSuccess: (data, variables, context) => {
+        console.log('res', data)
+        handleClick(false)
+      },
+    }
+  )
+  const userMutationWithoutFiles = useMutation(() =>
+    updateUserWithoutFiles(metamaskAccount)
+  )
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
@@ -225,9 +246,8 @@ const EditForm = ({ userAccount }: Props) => {
       setError(false)
       let data = {
         username: name,
-        profile_img_url: '',
-        cover_img_url: '',
-        public_address: metamaskAccount,
+        profile_img_url: files.picture,
+        cover_img_url: files.cover,
         email: email,
         bio: bio,
         website: socialNetwork.website,
@@ -238,18 +258,12 @@ const EditForm = ({ userAccount }: Props) => {
         facebook: socialNetwork.facebook,
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
-      }
-      updateUser(data)
-        .then(res => {
-          console.log('res:', res)
-          handleClick(false)
-        })
-        .catch(err => {
-          console.error('error:', err)
-          handleClick(true)
-        })
+      } as any
+
+      userMutationWithFiles.mutate(data)
     } else {
       setError(true)
+      console.log('mail no ingresado')
     }
   }
 
@@ -261,14 +275,7 @@ const EditForm = ({ userAccount }: Props) => {
       className={classes.root}
     >
       <FormControl>
-        <Grid
-          item
-          xs={12}
-          container
-          direction="column"
-          // justify="space-around"
-          alignItems="center"
-        >
+        <Grid item xs={12} container direction="column" alignItems="center">
           <Grid
             container
             direction="row"
@@ -429,7 +436,7 @@ const EditForm = ({ userAccount }: Props) => {
               onClose={handleClose}
             >
               {openAlert.error ? (
-                <Alert severity="error">This is an error message!</Alert>
+                <Alert severity="error">An error has occurred.</Alert>
               ) : (
                 <Alert
                   onClose={handleClose}
