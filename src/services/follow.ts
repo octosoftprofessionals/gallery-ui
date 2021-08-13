@@ -58,12 +58,8 @@ export const checkExistingFollow = async ({
   follower_address: string
   followee_address: string
 }) => {
-  console.log('follower_address:>>', follower_address)
-  console.log('followee_address:>>', followee_address)
   const url = `/follow/${follower_address}/${followee_address}`
-  console.log('url:>>', url)
   const res = await get(url)
-  console.log('res:>>', res)
   const checkedFollow = res.data ?? {}
   return checkedFollow
 }
