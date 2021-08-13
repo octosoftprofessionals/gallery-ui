@@ -254,10 +254,12 @@ const EditForm = ({ userAccount }: Props) => {
       })
       .then(function (response) {
         //handle success
+        handleClick(false)
         console.log(response);
       })
       .catch(function (response) {
         //handle error
+        handleClick(true)
         console.log(response);
       });
 
