@@ -6,8 +6,7 @@ const useStyles = makeStyles(Theme => ({
   root: {},
 }))
 
-const listToPlaylist = ['Playlist 1', 'Playlist 2', 'Playlist 3']
-const MenuPlaylist = ({ anchorEl, onClose, ...props }) => {
+const MenuPlaylist = ({ anchorEl, onClose, arrayPlaylist, ...props }) => {
   const classes = useStyles()
   return (
     <Menu
@@ -29,7 +28,7 @@ const MenuPlaylist = ({ anchorEl, onClose, ...props }) => {
         },
       }}
     >
-      {listToPlaylist.map(item => (
+      {arrayPlaylist.map(item => (
         <Grid item>
           <MenuItem onClick={onClose}>{item}</MenuItem>
           <Divider />

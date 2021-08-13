@@ -7,6 +7,7 @@ import {
   GradeSharp,
   SlideshowTwoTone,
 } from '@material-ui/icons/'
+import MenuListPlaylists from './ListPlaylists'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(0, 6) },
@@ -26,6 +27,14 @@ const ButtonPlaylist = ({
   inPlaylist,
 }) => {
   const classes = useStyle()
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
 
   return (
     <Grid
@@ -53,8 +62,10 @@ const ButtonPlaylist = ({
       </Button>
 
       <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
         className={classes.button}
-        onClick={inPlaylist ? handleSubmitUnPlaylist : handleSubmitPlaylist}
+        onClick={handleClick}
       >
         <Grid container direction="column" justify="center" alignItems="center">
           <Hidden only="xs">
@@ -69,6 +80,11 @@ const ButtonPlaylist = ({
           )}
         </Grid>
       </Button>
+      <MenuListPlaylists
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        arrayPlaylist={[]}
+      />
     </Grid>
   )
 }
