@@ -227,23 +227,39 @@ const EditForm = ({ userAccount }: Props) => {
   const handleSubmit = () => {
     if (validateEmail(email)) {
       setError(false)
-      let data = {
-        username: name,
-        profile_img_url: files.picture,
-        cover_img_url: files.cover,
-        public_address: metamaskAccount, //comentar para cuando se deploye a heroku
-        email: email,
-        bio: bio,
-        website: socialNetwork.website,
-        twitter: socialNetwork.twitter,
-        instagram: socialNetwork.instagram,
-        discordId: socialNetwork.discordId,
-        youtube: socialNetwork.youtube,
-        facebook: socialNetwork.facebook,
-        tiktok: socialNetwork.tiktok,
-        snapchat: socialNetwork.snapchat,
-      }
-      userMutation.mutate(data as any)
+      const bodyFormData = new FormData()
+      bodyFormData.append('username', name)
+      bodyFormData.append('profile_img_url', files.picture )
+      bodyFormData.append('cover_img_url', files.cover)
+      bodyFormData.append('public_address', metamaskAccount as string)
+      bodyFormData.append('email', email)
+      bodyFormData.append('bio', bio)
+      bodyFormData.append('website', socialNetwork.website)
+      bodyFormData.append('twitter', socialNetwork.twitter)
+      bodyFormData.append('instagram', socialNetwork.instagram)
+      bodyFormData.append('discordId', socialNetwork.discordId)
+      bodyFormData.append('youtube', socialNetwork.youtube)
+      bodyFormData.append('facebook', socialNetwork.facebook)
+      bodyFormData.append('tiktok', socialNetwork.tiktok)
+      bodyFormData.append('snapchat', socialNetwork.snapchat)
+
+      // let data = {
+      //   username: name,
+      //   profile_img_url: files.picture,
+      //   cover_img_url: files.cover,
+      //   public_address: metamaskAccount, //comentar para cuando se deploye a heroku
+      //   email: email,
+      //   bio: bio,
+      //   website: socialNetwork.website,
+      //   twitter: socialNetwork.twitter,
+      //   instagram: socialNetwork.instagram,
+      //   discordId: socialNetwork.discordId,
+      //   youtube: socialNetwork.youtube,
+      //   facebook: socialNetwork.facebook,
+      //   tiktok: socialNetwork.tiktok,
+      //   snapchat: socialNetwork.snapchat,
+      // }
+      userMutation.mutate(bodyFormData as any)
       // updateUser(data)
       //   .then(res => {
       //     console.log('res:', res)
