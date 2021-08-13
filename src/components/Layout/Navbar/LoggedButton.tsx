@@ -85,8 +85,7 @@ const menu = [
   },
   {
     name: `Playlist`,
-    // link: address => myProfilePathWithView(address, 2),
-    link: address => `/construction`,
+    link: address => myProfilePathWithView(address, 2),
   },
   {
     name: `Favorites`,

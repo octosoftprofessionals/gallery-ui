@@ -15,4 +15,4 @@ export const myProfilePathFromAddress = (address: string) =>
   `/account/?address=${address}`
 
 export const myProfilePathWithView = (address: string, view: number) =>
-  `/account/?address=${address}&view=${view}`
+  `/account/?address=${address}#${view}`
