@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
     borderRadius: `0 0 ${theme.spacing(5)}px ${theme.spacing(5)}px`,
+    marginTop: -theme.spacing(3),
+    marginLeft: theme.spacing(1),
   },
   button: {
     width: `${theme.spacing(4)}vw`,
@@ -41,6 +43,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.secondary.main,
       transition: 'none',
       boxShadow: 'none',
+      transform: 'none',
     },
     '@media (max-width: 1270px)': {
       width: '100%',
@@ -48,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuList: {
     marginTop: -theme.spacing(2),
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(0),
   },
   menuItem: {
     justifyContent: 'center',
@@ -65,7 +68,9 @@ const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: theme.spacing(10),
   },
-  popper: { zIndex: 4 },
+  popper: {
+    zIndex: 4,
+  },
   profileColor: {
     color: '#FFF',
     background: backgroundGradient.backgroundGradient1,
@@ -153,7 +158,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
           className={name ? classes.name : classes.textKeyPublic}
           variant="body1"
         >
-          {name ? `@${name}` : `@${account}`}
+          {name ? `@${name}` : `${account}`}
         </Typography>
         <ArrowDropDownRounded className={classes.icon} color="primary" />
       </Button>
@@ -162,7 +167,6 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
         className={classes.popper}
       >
         {({ TransitionProps, placement }) => (
@@ -173,7 +177,7 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
                 placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={0}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   className={classes.menuList}

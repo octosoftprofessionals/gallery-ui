@@ -139,16 +139,16 @@ const index = ({ pathname, profileImageUrl, name }) => {
   const [showDrawer, setShowDrawer] = useState(false)
 
   const [account, setAccount] = useAccountStore()
-  const { address } = useQueryParams()
 
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-    getUser({ public_address: address })
+    getUser({ public_address: account })
   )
 
   const handleLogOut = async () => {
     setAccount(null)
     Cookies.remove('jwt')
   }
+
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0}>
@@ -180,12 +180,14 @@ const index = ({ pathname, profileImageUrl, name }) => {
                   xs={12}
                   className={classes.navbarElement}
                 >
-                  <LoggedButton
-                    profileImageUrl={profileImageUrl}
-                    name={userAccount ? userAccount.username : name}
-                    account={account}
-                    onLogOut={handleLogOut}
-                  />
+                  {userAccount ? (
+                    <LoggedButton
+                      profileImageUrl={profileImageUrl}
+                      name={userAccount ? userAccount.username : ''}
+                      account={account}
+                      onLogOut={handleLogOut}
+                    />
+                  ) : null}
                 </Grid>
               ) : (
                 <Grid

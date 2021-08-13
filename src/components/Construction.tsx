@@ -10,7 +10,7 @@ const useStyles = makeStyles(Theme => ({
   root: {
     padding: 0,
     margin: 0,
-    backgroundColor: 'Black',
+    backgroundColor: Theme.palette.background.default,
   },
   img: {
     width: '100vw',

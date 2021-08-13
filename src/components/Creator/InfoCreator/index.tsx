@@ -117,6 +117,7 @@ const InfoCreator = ({
       followee_address: account as string,
     })
   )
+  const [viewModal, setViewModal] = useState('')
 
   const [isFollow, setIsFollow] = useState('')
 
@@ -145,6 +146,11 @@ const InfoCreator = ({
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
     setIsCopy(true)
+  }
+
+  const handleOpenModal = value => {
+    setViewModal(value)
+    setOpenFollowModal(true)
   }
 
   const [openFollowModal, setOpenFollowModal] = useState(false)
@@ -199,7 +205,7 @@ const InfoCreator = ({
           <Typography variant="h6" color="primary">
             {following ? following.length : '—'}
           </Typography>
-          <Button onClick={() => setOpenFollowModal(true)}>
+          <Button onClick={() => handleOpenModal('1')}>
             <Typography variant="overline" className={classes.textFollow}>
               Following
             </Typography>
@@ -209,19 +215,21 @@ const InfoCreator = ({
           <Typography variant="h6" color="primary">
             {followers ? followers.length : '—'}
           </Typography>
-          <Button onClick={() => setOpenFollowModal(true)}>
+          <Button onClick={() => handleOpenModal('2')}>
             <Typography variant="overline" className={classes.textFollowers}>
               Followers
             </Typography>
           </Button>
-
-          <FollowersModal
-            openFollowModal={openFollowModal}
-            setOpenFollowModal={setOpenFollowModal}
-            followers={followers}
-            following={following}
-            publicKey={publicKey}
-          />
+          {openFollowModal ? (
+            <FollowersModal
+              viewModal={viewModal}
+              openFollowModal={openFollowModal}
+              setOpenFollowModal={setOpenFollowModal}
+              followers={followers}
+              following={following}
+              publicKey={publicKey}
+            />
+          ) : null}
         </Grid>
         <Grid item xs={12} sm={5}>
           {isMyAccount ? (

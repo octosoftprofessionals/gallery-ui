@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '../../Modal'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Tab } from '@material-ui/core'
@@ -60,6 +60,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const FollowersModal = ({
+  viewModal,
   openFollowModal,
   setOpenFollowModal,
   followers,
@@ -67,13 +68,11 @@ const FollowersModal = ({
   publicKey,
 }) => {
   const classes = useStyles()
-  const [value, setValue] = useState('1')
+  const [value, setValue] = useState(viewModal)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-
-  console.log('following', following)
 
   return (
     <div>
@@ -123,7 +122,7 @@ const FollowersModal = ({
                     <FollowItem
                       user={user}
                       handleClick={setOpenFollowModal}
-                      publicKey={publicKey}
+                      publicKey={user.publicAddress}
                     />
                   )
                 })

@@ -203,8 +203,18 @@ const EditForm = ({ userAccount }: Props) => {
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-  const userMutationWithFiles = useMutation(() =>
-    updateUserWithFiles(metamaskAccount)
+  const userMutationWithFiles = useMutation(
+    () => updateUserWithFiles(metamaskAccount),
+    {
+      onError: error => {
+        console.log('error', error)
+        handleClick(true)
+      },
+      onSuccess: (data, variables, context) => {
+        console.log('res', data)
+        handleClick(false)
+      },
+    }
   )
   const userMutationWithoutFiles = useMutation(() =>
     updateUserWithoutFiles(metamaskAccount)
@@ -249,9 +259,8 @@ const EditForm = ({ userAccount }: Props) => {
         tiktok: socialNetwork.tiktok,
         snapchat: socialNetwork.snapchat,
       } as any
-      data.profile_img_url || data.cover_img_url
-        ? userMutationWithFiles.mutate(data)
-        : userMutationWithoutFiles.mutate(data)
+
+      userMutationWithFiles.mutate(data)
     } else {
       setError(true)
       console.log('mail no ingresado')
@@ -427,7 +436,7 @@ const EditForm = ({ userAccount }: Props) => {
               onClose={handleClose}
             >
               {openAlert.error ? (
-                <Alert severity="error">This is an error message!</Alert>
+                <Alert severity="error">An error has occurred.</Alert>
               ) : (
                 <Alert
                   onClose={handleClose}
