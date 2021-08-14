@@ -17,9 +17,8 @@ const linkShareTwitter = () => {
 }
 
 const AccountPage = () => {
-  const [displayReportModal, setDisplayReportModal] = useState(false)
   const { address } = useQueryParams()
-
+  const [displayReportModal, setDisplayReportModal] = useState(false)
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )
@@ -29,7 +28,11 @@ const AccountPage = () => {
       padding="0"
       marginTop="0"
       height
-      backgroundImage={userAccount?.coverImgUrl}
+      backgroundImage={
+        isLoading
+          ? 'https://f8n-production.imgix.net/creators/profile/y26ylgt72-rari-jpg-at7pyj.jpg'
+          : userAccount.coverImgUrl
+      }
     >
       {isLoading ? (
         <Spinner height="50vh" />

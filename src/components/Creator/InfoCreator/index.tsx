@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
-
-import { makeStyles } from '@material-ui/core/styles'
 import {
   Avatar,
   Box,
@@ -12,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { AvatarGroup } from '@material-ui/lab'
 import { FileCopy } from '@material-ui/icons'
-
+import { makeStyles } from '@material-ui/core/styles'
 import Spinner from '../../Spinner'
 import {
   createFollow,
@@ -24,10 +22,16 @@ import { boxShadow, colors } from '../../Styles/Colors'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 import FollowersModal from '../FollowersModal'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
+import UserNetworks from './UserNetworks'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
-  containerButton: { position: 'relative', marginBottom: Theme.spacing(10) },
+  containerButton: {
+    position: 'relative',
+    marginBottom: Theme.spacing(10),
+    '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(0),
+    },
+  },
   button: {
     padding: 0,
     boxShadow: boxShadow.boxShadow1,
@@ -37,20 +41,83 @@ const useStyle = makeStyles(Theme => ({
       transform: 'none',
       boxShadow: 'none',
     },
-    zIndex: 30,
+    '@media (max-width: 576px)': {
+      width: '200px',
+    },
   },
   textButton: {
-    fontFamily: Theme.typography.fontFamily[1],
-    fontWeight: 400,
-    padding: Theme.spacing(1, 5),
+    width: '150px',
+    '@media (max-width: 576px)': {
+      padding: Theme.spacing(0),
+      width: '200px',
+    },
   },
-  textKeyPublic: {
-    fontFamily: Theme.typography.fontFamily[1],
-    fontWeight: 400,
-    padding: Theme.spacing(1, 5),
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    width: '60%',
+  userName: {
+    fontSize: '26px',
+    marginLeft: Theme.spacing(13),
+    '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(0),
+      textAlign: 'center',
+    },
+  },
+  textFollow: {
+    cursor: 'pointer',
+    fontSize: Theme.typography.fontSize[3],
+    opacity: '0.5',
+    paddingRight: Theme.spacing(2),
+    '&:hover': { color: Theme.palette.primary.main },
+  },
+  textFollowers: {
+    cursor: 'pointer',
+    fontSize: Theme.typography.fontSize[3],
+    opacity: '0.5',
+    paddingRight: Theme.spacing(2),
+    '&:hover': { color: Theme.palette.primary.main },
+    '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(0),
+      display: 'flex',
+      flexDirection: 'row',
+      /*      justifyContent: 'center',
+      alignItems: 'center', */
+    },
+  },
+  userProfile: {
+    width: '100%',
+
+    '@media (max-width: 576px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
+  btn: {
+    padding: Theme.spacing(2),
+    textAlign: 'center',
+    width: '100px',
+    height: '40px',
+    fontSize: '14px',
+    textDecoration: 'none',
+    backgroundColor: Theme.palette.secondary.main,
+    borderRadius: Theme.spacing(6),
+  },
+  networks: {
+    '@media (max-width: 576px)': {
+      marginTop: Theme.spacing(6),
+      /* width: '300px', */
+    },
+  },
+  bio: {
+    /*     marginLeft: Theme.spacing(16), */
+    '@media (max-width: 576px)': {
+      marginTop: Theme.spacing(12),
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
   },
   buttonKeyPublic: {
     width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
@@ -70,40 +137,23 @@ const useStyle = makeStyles(Theme => ({
       padding: Theme.spacing(0, 0, 0, 15),
     },
   },
-  userName: { fontSize: Theme.typography.fontSize[6], width: 'fit-content' },
-  textFollow: {
-    cursor: 'pointer',
-    fontSize: Theme.typography.fontSize[4],
-    '&:hover': { color: Theme.palette.primary.main },
+  btn: {
+    padding: 0,
+    margin: 0,
   },
-  textFollowers: {
-    cursor: 'pointer',
-    fontSize: Theme.typography.fontSize[4],
-    '&:hover': { color: Theme.palette.primary.main },
-    '@media (max-width: 576px)': {
-      marginLeft: Theme.spacing(8),
-    },
-  },
-  divider: {
-    backgroundColor: Theme.palette.primary.main,
-    opacity: Theme.palette.action.disabledOpacity[1],
-    margin: Theme.spacing(5, 0, 5),
-  },
-  textDate: { textTransform: 'capitalize' },
-  iconCopy: { color: colors.IslamicGreen },
 }))
 
 const InfoCreator = ({
   isMyAccount = false,
   username,
   publicKey,
-  // name,
   followers,
   following,
   followedes,
-  // links,
-  // bio,
-  // createdAt,
+  web,
+  ig,
+  tw,
+  bio,
   userIndex = null,
 }) => {
   const classes = useStyle({ userIndex, isMyAccount })
@@ -117,6 +167,7 @@ const InfoCreator = ({
       followee_address: account as string,
     })
   )
+  const [viewModal, setViewModal] = useState('')
 
   const [isFollow, setIsFollow] = useState('')
 
@@ -147,105 +198,124 @@ const InfoCreator = ({
     setIsCopy(true)
   }
 
+  const handleOpenModal = value => {
+    setViewModal(value)
+    setOpenFollowModal(true)
+  }
+
   const [openFollowModal, setOpenFollowModal] = useState(false)
 
   return (
-    <Grid item xs={12} container direction="column" justify="space-around">
-      <Grid item className={classes.containerButton}>
-        {userIndex ? (
-          <Button variant="contained" className={classes.button}>
-            <Typography
-              variant="caption"
-              color="secondary"
-              className={classes.textButton}
-            >{`#${userIndex}`}</Typography>
-          </Button>
-        ) : null}
-        <Button
-          onClick={getPublicKey}
-          variant="contained"
-          color="primary"
-          endIcon={
-            <Tooltip
-              title={isCopy ? 'Address has copied' : 'Copy Address'}
-              placement="top"
-            >
-              <FileCopy className={isCopy ? classes.iconCopy : null} />
-            </Tooltip>
-          }
-          className={classes.buttonKeyPublic}
+    <>
+      <Grid container direction="column">
+        <Grid
+          item
+          container
+          justify="space-around"
+          direction="row"
+          className={classes.userProfile}
         >
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.textKeyPublic}
-          >
-            {`${publicKey}`}
-          </Typography>
-        </Button>
-      </Grid>
-      {username ? (
-        <Typography variant="subtitle2" className={classes.userName}>
-          {`@${username}`}
-        </Typography>
-      ) : (
-        <Typography variant="subtitle2" className={classes.userName}>
-          {truncateMiddleText(publicKey)}
-        </Typography>
-      )}
-
-      <Grid item container direction="row">
-        <Grid item xs={3} container direction="column">
-          <Typography variant="h6" color="primary">
-            {following ? following.length : '—'}
-          </Typography>
-          <Button onClick={() => setOpenFollowModal(true)}>
-            <Typography variant="overline" className={classes.textFollow}>
-              Following
+          <Grid item xs={3} direction="row">
+            <Typography variant="h4" className={classes.userName}>
+              {username ? `@${username}` : truncateMiddleText(publicKey, 5)}
             </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={3} container direction="column">
-          <Typography variant="h6" color="primary">
-            {followers ? followers.length : '—'}
-          </Typography>
-          <Button onClick={() => setOpenFollowModal(true)}>
-            <Typography variant="overline" className={classes.textFollowers}>
-              Followers
-            </Typography>
-          </Button>
-
-          <FollowersModal
-            openFollowModal={openFollowModal}
-            setOpenFollowModal={setOpenFollowModal}
-            followers={followers}
-            following={following}
-            publicKey={publicKey}
-          />
-        </Grid>
-        <Grid item xs={12} sm={5}>
-          {isMyAccount ? (
-            <Button variant="outlined" fullWidth href="/editProfile">
-              <Typography variant="button">Edit profile</Typography>
-            </Button>
-          ) : isLoading ? (
-            <Spinner height="20vh" />
-          ) : (
-            <Button
-              variant="outlined"
-              fullWidth
-              onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
+          </Grid>
+          <Grid container item xs={2} direction="column" justify="flex-start">
+            <Grid
+              item
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
             >
-              {isFollow ? (
-                <Typography variant="button">Unfollow</Typography>
-              ) : (
-                <Typography variant="button">Follow</Typography>
-              )}
-            </Button>
-          )}
+              <Button
+                className={classes.btn}
+                onClick={() => handleOpenModal('1')}
+              >
+                <Typography variant="overline" className={classes.textFollow}>
+                  Following
+                </Typography>
+              </Button>
+              <Typography variant="h6" color="primary">
+                {following ? following.length : '0'}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
+            >
+              <Button
+                className={classes.btn}
+                onClick={() => handleOpenModal('2')}
+              >
+                <Typography
+                  variant="overline"
+                  className={classes.textFollowers}
+                >
+                  Followers
+                </Typography>
+              </Button>
+              <Typography variant="h6" color="primary">
+                {followers ? followers.length : '0'}
+              </Typography>
+            </Grid>
+            {openFollowModal ? (
+              <FollowersModal
+                viewModal={viewModal}
+                openFollowModal={openFollowModal}
+                setOpenFollowModal={setOpenFollowModal}
+                followers={followers}
+                following={following}
+                publicKey={publicKey}
+              />
+            ) : null}
+          </Grid>
+          <Grid item md={2} sm={9} xs={12}>
+            {isMyAccount ? (
+              <Button variant="outlined" fullWidth href="/editProfile">
+                <Typography variant="button">Edit profile</Typography>
+              </Button>
+            ) : isLoading ? (
+              <Spinner height="20vh" />
+            ) : (
+              <Button
+                variant="outlined"
+                fullWidth
+                onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
+              >
+                {isFollow ? (
+                  <Typography variant="button">Unfollow</Typography>
+                ) : (
+                  <Typography variant="button">Follow</Typography>
+                )}
+              </Button>
+            )}
+          </Grid>
+          <Grid
+            container
+            item
+            md={4}
+            xs={11}
+            className={classes.networks}
+            justify="flex-end"
+          >
+            <UserNetworks publicKey={publicKey} web={web} ig={ig} tw={tw} />
+          </Grid>
         </Grid>
       </Grid>
-      {/* {isMyAccount ? null : (
+      <Grid container item justify="flex-start" xs={12}>
+        <Grid container sm={7} xs={12}>
+          <Typography variant="body2" color="primary" className={classes.bio}>
+            I'm and Frontend dev and a digital designer. Love coding and movies!
+            Mother of two and environmental activist. Please recycle and reuse,
+            do not accept plastic bags, defend Argentinian humedales.
+          </Typography>
+        </Grid>
+        {/*  </Grid>
+      {isMyAccount ? null : (
         <>
           <Typography variant="button" color="primary">
             Followed by
@@ -258,49 +328,14 @@ const InfoCreator = ({
 
           <Grid item xs={12} sm={7}>
             <ButtonsSocialMedia
-              // links={links}
               verified={true}
               imgUrl={followedes[3]}
               invited={''}
-            />
-          </Grid>
-        </>
-      )} */}
-
-      {/* <Grid item xs={12} sm={11}>
-        <Typography variant="caption" color="primary">
-          Bio
-        </Typography>
-        <Divider className={classes.divider} />
-        <Typography variant="body2" color="primary" paragraph>
-          {bio !== undefined && bio !== ' ' ? bio : '—'}
-        </Typography>
-      </Grid> */}
-      {/* <Grid item xs={12} sm={11}>
-        <Typography variant="caption" color="primary">
-          Links
-        </Typography>
-        <Divider className={classes.divider} />
-        {links ? <Links links={links} /> : '—'}
-      </Grid> */}
-      {/* <Grid item xs={12} sm={11}>
-        <Divider className={classes.divider} />
-        <Grid container justify="space-between">
-          <Typography variant="caption" color="primary">
-            Joined
-          </Typography>
-          <Typography
-            variant="body2"
-            color="primary"
-            className={classes.textDate}
-          >
-            {createdAt ? `${month} ${year}` : '—'}
-          </Typography>
-        </Grid>
-        <Divider className={classes.divider} />
-      </Grid> */}
-      <Box height="24px" />
-    </Grid>
+            /> */}
+      </Grid>
+    </>
+    /*       )}
+    </> */
   )
 }
 

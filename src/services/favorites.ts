@@ -25,10 +25,13 @@ export const getAllFavoritesArtworksFromOneUserByAddress = async (
   return userFavoritesArtworks
 }
 
-export const deleteOneFavoriteArtworkFromOneUser = async (
-  asset_id: number,
+export const deleteOneFavoriteArtworkFromOneUser = async ({
+  public_address,
+  asset_id,
+}: {
   public_address: string
-) => {
+  asset_id: number
+}) => {
   const url = `${ROOT}/favorites/${asset_id}/${public_address}`
   const res = await destroy(url)
   const deletedFavorite = res.data ?? {}

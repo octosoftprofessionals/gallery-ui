@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider, Button } from '@material-ui/core'
+import useQueryParams, { useQueryHash } from '../hooks/useQueryParams'
+import { myProfilePathWithView } from '../config/routes'
 
 const useStyle = makeStyles(Theme => ({
   head: {
@@ -47,10 +48,30 @@ const TabBar = ({
   ...props
 }) => {
   const classes = useStyle()
-  const [selected, setSelected] = useState(0)
+  const { address } = useQueryParams()
+  const hash = useQueryHash() || '0'
+  const [selected, setSelected] = useState(parseInt(hash))
+
+  useEffect(() => {
+    setSelected(parseInt(hash))
+  }, [hash])
+
   const handleSelected = selection => {
     setSelected(selection)
+    window.location.href = myProfilePathWithView(address, selection)
   }
+
+  const selectedIn = (playlist, index) => {
+    if (playlist) {
+      if (selected === index) {
+        return [classes.button, classes.selectButtonPlaylist]
+      }
+    } else if (selected === index) {
+      return [classes.button, classes.selectButton]
+    }
+    return classes.button
+  }
+
   return (
     <Grid
       item
@@ -67,20 +88,13 @@ const TabBar = ({
         justify="space-between"
       >
         {titles.map((title, index) => (
-          <Grid item sm={inSize} className={classes.boxButton}>
+          <Grid key={title} item sm={inSize} className={classes.boxButton}>
             <Button
               {...props}
+              id={`${index}`}
               variant="text"
               color="primary"
-              className={
-                playlist
-                  ? selected === index
-                    ? [classes.button, classes.selectButtonPlaylist]
-                    : classes.button
-                  : selected === index
-                  ? [classes.button, classes.selectButton]
-                  : classes.button
-              }
+              className={selectedIn(playlist, index)}
               onClick={() => handleSelected(index)}
             >
               <Typography variant="caption" color="primary">

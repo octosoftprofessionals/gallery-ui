@@ -8,13 +8,12 @@ import { Alert, AlertTitle } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
-import { updateUser } from '../../services/users'
+import axios from 'axios'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
+import { useMutation } from 'react-query'
 // Hi there! verify profile is commented //
-import axios from 'axios'
 
-import { useMutation, useQuery } from 'react-query'
 
 const useStyle = makeStyles(theme => ({
   '@global': {
@@ -198,11 +197,10 @@ const EditForm = ({ userAccount }: Props) => {
     tiktok: userAccount.tiktok,
     snapchat: userAccount.snapchat,
   })
-  const [files, setFiles] = useState({ picture: '', cover: '' })
+  const [files, setFiles] = useState({ picture: null, cover: null })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-  const userMutation = useMutation(() => updateUser(metamaskAccount))
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
@@ -253,51 +251,17 @@ const EditForm = ({ userAccount }: Props) => {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(function (response) {
-        //handle success
         handleClick(false)
         console.log(response);
       })
       .catch(function (response) {
-        //handle error
         handleClick(true)
         console.log(response);
       });
 
-      /* 1er intento */
-      // let data = {
-      //   username: name,
-      //   profile_img_url: files.picture,
-      //   cover_img_url: files.cover,
-      //   public_address: metamaskAccount, //comentar para cuando se deploye a heroku
-      //   email: email,
-      //   bio: bio,
-      //   website: socialNetwork.website,
-      //   twitter: socialNetwork.twitter,
-      //   instagram: socialNetwork.instagram,
-      //   discordId: socialNetwork.discordId,
-      //   youtube: socialNetwork.youtube,
-      //   facebook: socialNetwork.facebook,
-      //   tiktok: socialNetwork.tiktok,
-      //   snapchat: socialNetwork.snapchat,
-      // }
-
-      /* 2do intento */
-      //userMutation.mutate(bodyFormData as any)
-
-      /* 1er intento */
-      //userMutation.mutate(data as any)
-
-      // updateUser(data)
-      //   .then(res => {
-      //     console.log('res:', res)
-      //     handleClick(false)
-      //   })
-      //   .catch(err => {
-      //     console.error('error:', err)
-      //     handleClick(true)
-      //   })
     } else {
       setError(true)
+      console.log('mail no ingresado')
     }
   }
 
@@ -309,14 +273,7 @@ const EditForm = ({ userAccount }: Props) => {
       className={classes.root}
     >
       <FormControl>
-        <Grid
-          item
-          xs={12}
-          container
-          direction="column"
-          // justify="space-around"
-          alignItems="center"
-        >
+        <Grid item xs={12} container direction="column" alignItems="center">
           <Grid
             container
             direction="row"
@@ -477,7 +434,7 @@ const EditForm = ({ userAccount }: Props) => {
               onClose={handleClose}
             >
               {openAlert.error ? (
-                <Alert severity="error">This is an error message!</Alert>
+                <Alert severity="error">An error has occurred.</Alert>
               ) : (
                 <Alert
                   onClose={handleClose}

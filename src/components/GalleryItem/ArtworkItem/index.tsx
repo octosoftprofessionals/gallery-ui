@@ -6,7 +6,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
 import { GalleryItem } from '../../../services/gallery'
-import { createAssociationFavoritesArtworks } from '../../../services/favorites'
+import {
+  createAssociationFavoritesArtworks,
+  deleteOneFavoriteArtworkFromOneUser,
+} from '../../../services/favorites'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
@@ -71,6 +74,7 @@ const useStyle = makeStyles(Theme => ({
 
 const ArtworkItem = ({
   galleryItem = {},
+  onFavorite,
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
@@ -88,6 +92,7 @@ const ArtworkItem = ({
     status,
     priceEth,
     expiration,
+    isFavorite,
   } = galleryItem
 
   const [timer, setTimer] = useState('')
@@ -98,7 +103,7 @@ const ArtworkItem = ({
     const timeInterval = setInterval(() => {
       const delta = deltaTime(expiration)
       if (delta >= 0) {
-        setTimer(`Ending in ${timeFormat(delta)}`)
+        setTimer(`Ending in \n ${timeFormat(delta)}`)
       } else {
         clearInterval(timeInterval)
         setTimer('Auction ended')
@@ -108,6 +113,7 @@ const ArtworkItem = ({
 
   const link = artworkPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
+  const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
   const handleSubmitFavorite = e => {
     e.preventDefault()
@@ -115,11 +121,24 @@ const ArtworkItem = ({
       public_address: account as string,
       asset_id: assetId,
     })
+    onFavorite(assetId, true)
+  }
+  const handleSubmitUnFavorite = e => {
+    e.preventDefault()
+    unFavoritesMutation.mutate({
+      public_address: account as string,
+      asset_id: assetId,
+    })
+    onFavorite(assetId, false)
   }
 
   const handleSubmitPlaylist = e => {
     e.preventDefault()
   }
+  const handleSubmitUnPlaylist = e => {
+    e.preventDefault()
+  }
+
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={link} className={classes.link} {...rootProps}>
@@ -162,7 +181,10 @@ const ArtworkItem = ({
         price={priceEth}
         timer={timer}
         handleSubmitPlaylist={handleSubmitPlaylist}
+        handleSubmitUnPlaylist={handleSubmitUnPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
+        handleSubmitUnFavorite={handleSubmitUnFavorite}
+        isFavorite={isFavorite}
       />
     </Paper>
   )
