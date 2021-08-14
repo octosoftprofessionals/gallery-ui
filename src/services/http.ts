@@ -21,10 +21,10 @@ export const httpWithCredentialsAndHeaders = axiosRateLimit(
   }
 )
 
-httpWithCredentialsAndHeaders.interceptors.request.use(config => {
+httpWithCredentialsAndHeaders.interceptors.request.use((config) => {
   config.headers['Accept'] = 'application/json'
-  config.headers['Content-Type'] = 'multipart/form-data'
-  return config
+  config.headers["Content-Type"] = "multipart/form-data"
+  return config;
 })
 
 export const postWithMultiPart = async (url, queryParams = {}) => {

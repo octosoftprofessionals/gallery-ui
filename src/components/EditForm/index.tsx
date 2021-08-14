@@ -8,14 +8,12 @@ import { Alert, AlertTitle } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
-import {
-  updateUserWithFiles,
-  updateUserWithoutFiles,
-} from '../../services/users'
+import axios from 'axios'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 import { useMutation } from 'react-query'
 // Hi there! verify profile is commented //
+
 
 const useStyle = makeStyles(theme => ({
   '@global': {
@@ -203,22 +201,6 @@ const EditForm = ({ userAccount }: Props) => {
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-  const userMutationWithFiles = useMutation(
-    () => updateUserWithFiles(metamaskAccount),
-    {
-      onError: error => {
-        console.log('error', error)
-        handleClick(true)
-      },
-      onSuccess: (data, variables, context) => {
-        console.log('res', data)
-        handleClick(false)
-      },
-    }
-  )
-  const userMutationWithoutFiles = useMutation(() =>
-    updateUserWithoutFiles(metamaskAccount)
-  )
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
@@ -244,23 +226,39 @@ const EditForm = ({ userAccount }: Props) => {
   const handleSubmit = () => {
     if (validateEmail(email)) {
       setError(false)
-      let data = {
-        username: name,
-        profile_img_url: files.picture,
-        cover_img_url: files.cover,
-        email: email,
-        bio: bio,
-        website: socialNetwork.website,
-        twitter: socialNetwork.twitter,
-        instagram: socialNetwork.instagram,
-        discordId: socialNetwork.discordId,
-        youtube: socialNetwork.youtube,
-        facebook: socialNetwork.facebook,
-        tiktok: socialNetwork.tiktok,
-        snapchat: socialNetwork.snapchat,
-      } as any
+      const bodyFormData = new FormData()
+      bodyFormData.append('username', name)
+      bodyFormData.append('profile_img_url', files.picture )
+      bodyFormData.append('cover_img_url', files.cover)
+      bodyFormData.append('public_address', metamaskAccount as string)
+      bodyFormData.append('email', email)
+      bodyFormData.append('bio', bio)
+      bodyFormData.append('website', socialNetwork.website)
+      bodyFormData.append('twitter', socialNetwork.twitter)
+      bodyFormData.append('instagram', socialNetwork.instagram)
+      bodyFormData.append('discordId', socialNetwork.discordId)
+      bodyFormData.append('youtube', socialNetwork.youtube)
+      bodyFormData.append('facebook', socialNetwork.facebook)
+      bodyFormData.append('tiktok', socialNetwork.tiktok)
+      bodyFormData.append('snapchat', socialNetwork.snapchat)
 
-      userMutationWithFiles.mutate(data)
+      /* Ultimo intento! */
+      axios({
+        method: "post",
+        url: `http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,
+        data: bodyFormData,
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(function (response) {
+        handleClick(false)
+        console.log(response);
+      })
+      .catch(function (response) {
+        handleClick(true)
+        console.log(response);
+      });
+
     } else {
       setError(true)
       console.log('mail no ingresado')
