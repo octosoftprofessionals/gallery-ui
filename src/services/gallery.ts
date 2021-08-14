@@ -26,7 +26,7 @@ export const allQuerysItems = async ({
 }) => {
   const url = `/gallery/gallery-items?${query}&offset=${offset}&limit=20`
   const res = await get(url)
-  return res.data.data ?? []
+  return res.data ?? []
 }
 
 export const galleryItemQuery = async (

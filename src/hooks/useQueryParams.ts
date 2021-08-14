@@ -8,4 +8,11 @@ const useQueryParams = (): queryString.ParsedQuery => {
   return queryParams
 }
 
+export const useQueryHash = (): string => {
+  const location =
+    typeof window !== 'undefined' ? window?.location : { hash: '' }
+  const queryHash = location?.hash.substring(1)
+  return queryHash
+}
+
 export default useQueryParams

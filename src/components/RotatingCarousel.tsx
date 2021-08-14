@@ -98,8 +98,12 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
       interval={interval}
     >
       {artworksCarousel
-        ? artworksCarousel.map((artwork, i) => (
-            <HeroAuction galleryItem={artwork} isLoading={false} key={i} />
+        ? artworksCarousel.map(artwork => (
+            <HeroAuction
+              galleryItem={artwork}
+              isLoading={false}
+              key={artwork.assetId}
+            />
           ))
         : null}
     </Carousel>
