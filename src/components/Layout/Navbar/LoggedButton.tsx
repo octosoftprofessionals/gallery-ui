@@ -15,7 +15,10 @@ import { ArrowDropDownRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { MetamaskAccountType } from '../../../types'
 import { backgroundGradient } from '../../Styles/Colors'
-import { myProfilePathFromAddress } from '../../../config/routes'
+import {
+  myProfilePathFromAddress,
+  myProfilePathWithView,
+} from '../../../config/routes'
 
 import { boxShadow } from '../../Styles/Colors'
 
@@ -90,11 +93,11 @@ const menu = [
   },
   {
     name: `Playlist`,
-    link: address => `/construction`,
+    link: address => myProfilePathWithView(address, 2),
   },
   {
     name: `Favorites`,
-    link: address => `/construction`,
+    link: address => myProfilePathWithView(address, 3),
   },
   {
     name: `Bids`,
