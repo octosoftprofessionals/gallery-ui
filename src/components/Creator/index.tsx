@@ -157,6 +157,11 @@ const Creator = ({
             ig={user.instagram}
             tw={user.twitter}
             bio={user.bio}
+            discord={user.discordId}
+            youtube={user.youtube}
+            facebook={user.facebook}
+            tiktok={user.tiktok}
+            snapchat={user.snapchat}
           />
         </Grid>
         <Grid item container justify="flex-start" md={3} xs={12}>

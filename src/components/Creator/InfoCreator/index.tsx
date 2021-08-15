@@ -154,6 +154,11 @@ const InfoCreator = ({
   ig,
   tw,
   bio,
+  discord,
+  youtube,
+  facebook,
+  tiktok,
+  snapchat,
   userIndex = null,
 }) => {
   const classes = useStyle({ userIndex, isMyAccount })
@@ -302,7 +307,17 @@ const InfoCreator = ({
             className={classes.networks}
             justify="flex-end"
           >
-            <UserNetworks publicKey={publicKey} web={web} ig={ig} tw={tw} />
+            <UserNetworks
+              publicKey={publicKey}
+              web={web}
+              ig={ig}
+              tw={tw}
+              discord={discord}
+              youtube={youtube}
+              facebook={facebook}
+              tiktok={tiktok}
+              snapchat={snapchat}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -314,28 +329,8 @@ const InfoCreator = ({
             do not accept plastic bags, defend Argentinian humedales.
           </Typography>
         </Grid>
-        {/*  </Grid>
-      {isMyAccount ? null : (
-        <>
-          <Typography variant="button" color="primary">
-            Followed by
-          </Typography>
-          <AvatarGroup spacing="small">
-            {followedes.map((item, i) => (
-              <Avatar key={i} src={item} />
-            ))}
-          </AvatarGroup>
-
-          <Grid item xs={12} sm={7}>
-            <ButtonsSocialMedia
-              verified={true}
-              imgUrl={followedes[3]}
-              invited={''}
-            /> */}
       </Grid>
     </>
-    /*       )}
-    </> */
   )
 }
 
