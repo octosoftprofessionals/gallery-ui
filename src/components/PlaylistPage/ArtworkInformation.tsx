@@ -1,0 +1,91 @@
+import React from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+import { Button, Grid, Typography, Paper } from '@material-ui/core'
+
+const useStyles = makeStyles(Theme => ({
+  img: {
+    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    paddingBottom: '100%',
+    width: '100%',
+  },
+  link: { textDecoration: 'none' },
+  containerVideo: { position: 'relative', paddingBottom: '100%' },
+  inVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    boxSizing: 'border-box',
+    display: 'flex',
+  },
+  video: {
+    display: 'block',
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+}))
+
+const ArtworkInformation = ({ videoUrl, imageUrl }) => {
+  const classes = useStyles({ imageUrl })
+
+  return (
+    <Paper>
+      <Grid container alignContent="center" justify="center">
+        <Grid container justify="center">
+          <Grid item xs={6}>
+            {videoUrl != null ? (
+              <div className={classes.containerVideo}>
+                <div className={classes.inVideo}>
+                  <video
+                    poster={imageUrl}
+                    src={'' ?? videoUrl}
+                    autoPlay={true}
+                    loop={true}
+                    className={classes.video}
+                    muted={true}
+                  >
+                    <img src={imageUrl} />
+                  </video>
+                </div>
+              </div>
+            ) : (
+              <div className={classes.img} />
+            )}
+          </Grid>
+        </Grid>
+
+        <Grid item xs={12} container justify="center">
+          <Typography>Title</Typography>
+        </Grid>
+        <Grid item xs={5} container alignItems="flex-start" direction="column">
+          <Grid container direction="row" justify="space-between">
+            <Typography>Artist:</Typography>
+            <Typography variant="caption">@GraviTea</Typography>
+          </Grid>
+          <Grid container direction="row" justify="space-between">
+            <Typography>Current Owner:</Typography>
+            <Typography variant="caption">@Roger</Typography>
+          </Grid>
+          <Grid container direction="row" justify="space-between">
+            <Typography>Last Price:</Typography>
+            <Typography variant="caption">2.0 ETH</Typography>
+          </Grid>
+        </Grid>
+        <Grid item xs={9} container justify="flex-end">
+          <Button variant="outlined">
+            <Typography variant="caption">More</Typography>
+          </Button>
+        </Grid>
+      </Grid>
+    </Paper>
+  )
+}
+
+export default ArtworkInformation
