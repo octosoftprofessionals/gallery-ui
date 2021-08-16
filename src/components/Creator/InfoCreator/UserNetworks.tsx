@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import InstagramIcon from '@material-ui/icons/Instagram'
-import LanguageIcon from '@material-ui/icons/Language'
+import { IconButton, Grid, Typography, Tooltip } from '@material-ui/core'
+import { FileCopy } from '@material-ui/icons'
 import ETH from '../../../assets/eth.svg'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
+import { boxShadow, colors } from '../../Styles/Colors'
+import LanguageIcon from '@material-ui/icons/Language'
+import TwitterIcon from '@material-ui/icons/Twitter'
+import InstagramIcon from '@material-ui/icons/Instagram'
+import DiscordIcon from '../../../assets/discord.svg'
+import YouTubeIcon from '@material-ui/icons/YouTube'
+import FacebookIcon from '@material-ui/icons/Facebook'
+import TickTockIcon from '../../../assets/tiktok.svg'
+import SnapchatIcon from '../../../assets/snapchat.svg'
 
 const useStyles = makeStyles(Theme => ({
   buttonMenu: {
@@ -18,16 +25,23 @@ const useStyles = makeStyles(Theme => ({
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   drawer: {
     padding: Theme.spacing(4),
     backgroundColor: '#212e36',
     borderRadius: Theme.spacing(4),
     lineHeight: '40px',
-    maxHeigth: '433px',
+    heigth: '200px',
+    'scrollBar::-webkit-scrollbar': {
+      width: '0.4em',
+    },
+    'scrollBar::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)',
+    },
+    'scrollBar::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.1)',
+      outline: '1px solid slategrey',
+    },
     '@media (max-width: 576px)': {
       width: '100%',
     },
@@ -36,7 +50,8 @@ const useStyles = makeStyles(Theme => ({
     width: '20px',
     heigth: '20px',
     fill: Theme.palette.primary.main,
-
+    marginBottom: '-4px',
+    marginRight: Theme.spacing(6),
     '&:hover': {
       color: Theme.palette.primary.main,
     },
@@ -45,14 +60,44 @@ const useStyles = makeStyles(Theme => ({
     width: '15px',
     heigth: '15px',
     fill: Theme.palette.primary.main,
-
     '&:hover': {
       color: Theme.palette.primary.main,
     },
   },
   text: {
-    marginLeft: Theme.spacing(4),
     fontSize: Theme.spacing(4),
+  },
+  buttonKeyPublic: {
+    /*     width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
+    position: 'absolute',
+    left: ({ userIndex }) => (userIndex ? Theme.spacing(13) : 0), */
+    backgroundColor: Theme.palette.secondary.main,
+    /*     padding: Theme.spacing(0, 0, 0, 13), */
+    /*     boxShadow: boxShadow.boxShadow1, */
+    '&:hover': {
+      backgroundColor: Theme.palette.secondary.main,
+      transform: 'none',
+      boxShadow: boxShadow.boxShadow1,
+    },
+    '@media (max-width: 576px)': {
+      left: Theme.spacing(0),
+    },
+  },
+  iconCopy: {
+    fill: colors.IslamicGreen,
+  },
+  web: {
+    display: ({ web }) => (web ? 'block' : 'none'),
+  },
+  ig: { display: ({ ig }) => (ig ? 'block' : 'none') },
+  Tw: { display: ({ tw }) => (tw ? 'block' : 'none') },
+  discord: { display: ({ discord }) => (discord ? 'block' : 'none') },
+  youtube: { display: ({ youtube }) => (youtube ? 'block' : 'none') },
+  facebook: { display: ({ facebook }) => (facebook ? 'block' : 'none') },
+  tiktok: { display: ({ tiktok }) => (tiktok ? 'block' : 'none') },
+  snapchat: { display: ({ snapchat }) => (snapchat ? 'block' : 'none') },
+  prueba: {
+    display: 'none',
   },
 }))
 
@@ -67,7 +112,21 @@ const UserNetworks = ({
   tiktok,
   snapchat,
 }) => {
-  const classes = useStyles()
+  const classes = useStyles({
+    web,
+    ig,
+    tw,
+    discord,
+    youtube,
+    facebook,
+    tiktok,
+    snapchat,
+  })
+  const [isCopy, setIsCopy] = useState(false)
+  const getPublicKey = () => {
+    navigator.clipboard.writeText(publicKey)
+    setIsCopy(true)
+  }
 
   return (
     <Grid
@@ -77,52 +136,161 @@ const UserNetworks = ({
       className={classes.drawer}
     >
       <Grid container direction="column">
-        <Link
-          to={`https://etherscan.io/address/${publicKey}`}
-          className={classes.link}
+        <Grid
+          container
+          direction="row"
+          item
+          justify="flex-start"
+          alignItems="center"
+          alignContent="center"
         >
-          <ETH className={classes.icon2} />
+          <Link
+            to={`https://etherscan.io/address/${publicKey}`}
+            className={classes.link}
+          >
+            <Grid container alignItems="center">
+              <ETH className={classes.icon} />
 
-          <Typography
-            variant="overline"
-            color="secondary"
-            noWrap
-            className={classes.text}
+              <Typography
+                variant="overline"
+                color="secondary"
+                noWrap
+                className={classes.text}
+              >
+                {truncateMiddleText(publicKey, 8)}
+              </Typography>
+            </Grid>
+          </Link>
+          <IconButton
+            onClick={getPublicKey}
+            className={classes.buttonKeyPublic}
           >
-            {truncateMiddleText(publicKey, 8)}
-          </Typography>
-        </Link>
-        <Link to={`https://twitter.com/${tw}`} className={classes.link}>
-          <TwitterIcon className={classes.icon} />,
-          <Typography
-            variant="overline"
-            color="secondary"
-            className={classes.text}
+            <Tooltip
+              title={isCopy ? 'Copied successfully' : 'Copy Address'}
+              placement="top"
+            >
+              <FileCopy className={isCopy ? classes.iconCopy : null} />
+            </Tooltip>
+          </IconButton>
+        </Grid>
+        <Grid container direction="column">
+          <Grid className={classes.Tw}>
+            <Link to={`https://twitter.com/${tw}`}>
+              <TwitterIcon className={classes.icon} />
+              <Typography
+                variant="overline"
+                color="secondary"
+                className={classes.text}
+              >
+                {console.log(
+                  'DATA:',
+                  web,
+                  ig,
+                  tw,
+                  discord,
+                  youtube,
+                  facebook,
+                  tiktok,
+                  snapchat
+                )}
+                {tw}
+              </Typography>
+            </Link>
+          </Grid>
+        </Grid>
+        <Grid className={classes.ig}>
+          <Link to={`https://www.instagram.com/${ig}`} className={classes.link}>
+            <InstagramIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={classes.text}
+            >
+              {ig}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.web}>
+          <Link to={web} className={classes.link}>
+            <LanguageIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={web ? classes.link : classes.web}
+            >
+              {web}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.discord}>
+          <Link to={`https://discord.com/`} className={classes.link}>
+            <DiscordIcon className={classes.icon2} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={discord ? classes.link : classes.discord}
+            >
+              {discord}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.tiktok}>
+          <Link to={`https:tiktok.com/${tiktok}`} className={classes.link}>
+            <TickTockIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={tiktok ? classes.link : classes.tiktok}
+            >
+              {tiktok}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.youtube}>
+          <Link
+            to={`https://www.youtube.com/channel/${youtube}`}
+            className={classes.link}
           >
-            {tw}
-          </Typography>
-        </Link>
-        <Link to={`https://www.instagram.com/${ig}`} className={classes.link}>
-          <InstagramIcon className={classes.icon} />,
-          <Typography
-            variant="overline"
-            color="secondary"
-            className={classes.text}
+            <YouTubeIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={youtube ? classes.link : classes.youtube}
+            >
+              {youtube}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.facebook}>
+          <Link
+            to={`https://www.facebook.com/${facebook}`}
+            className={classes.link}
           >
-            {ig}
-          </Typography>
-        </Link>
-
-        <Link to={web} className={classes.link}>
-          <LanguageIcon className={classes.icon} />,
-          <Typography
-            variant="overline"
-            color="secondary"
-            className={classes.text}
+            <FacebookIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={facebook ? classes.link : classes.facebook}
+            >
+              {facebook}
+            </Typography>
+          </Link>
+        </Grid>
+        <Grid className={classes.snapchat}>
+          <Link
+            to={`https://www.snapchat.com/add/${snapchat}`}
+            className={classes.link}
           >
-            {web}
-          </Typography>
-        </Link>
+            <SnapchatIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="secondary"
+              className={snapchat ? classes.link : classes.snapchat}
+            >
+              {snapchat}
+            </Typography>
+          </Link>
+        </Grid>
       </Grid>
     </Grid>
   )
