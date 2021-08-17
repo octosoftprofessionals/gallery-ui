@@ -45,6 +45,7 @@ const TabBar = ({
   justify,
   inSize,
   playlist,
+  isMyAccount,
   ...props
 }) => {
   const classes = useStyle()
@@ -58,7 +59,9 @@ const TabBar = ({
 
   const handleSelected = selection => {
     setSelected(selection)
-    window.location.href = myProfilePathWithView(address, selection)
+    if (isMyAccount) {
+      window.location.href = myProfilePathWithView(address, selection)
+    }
   }
 
   const selectedIn = (playlist, index) => {

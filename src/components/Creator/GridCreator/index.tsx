@@ -20,6 +20,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
     playlist
     inSize={3}
     titles={['Created', 'Collected', 'Playlist', 'Favorites']}
+    isMyAccount={isMyAccount}
     components={[
       <GalleryCreator
         emptyMessageProps={{
