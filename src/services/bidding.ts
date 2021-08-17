@@ -3,18 +3,21 @@ import { OpenSeaPort, Network } from 'opensea-js'
 import { OrderSide, Order } from 'opensea-js/lib/types'
 import BigNumber from 'bignumber.js'
 
-const provider = new Web3.providers.HttpProvider(
-  'https://ropsten.infura.io/v3/655cfb5bb2bb42b2bc96f812738a29f8'
-)
+const MAINNET_INFURA_URL =
+  'https://mainnet.infura.io/v3/655cfb5bb2bb42b2bc96f812738a29f8'
+// const ROPSTEN_INFURA_URL =
+//   'https://ropsten.infura.io/v3/655cfb5bb2bb42b2bc96f812738a29f8'
+
+const provider = new Web3.providers.HttpProvider(MAINNET_INFURA_URL)
 
 const seaport = new OpenSeaPort(provider, {
   networkName: Network.Main,
 })
 
 const MAINNET_WETH_TOKEN_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
-const ROPSTEN_WETH_TOKEN_ADDRESS = '0xc778417e063141139fce010982780140aa0cd5ab'
+// const ROPSTEN_WETH_TOKEN_ADDRESS = '0xc778417e063141139fce010982780140aa0cd5ab'
 
-const WETH_TOKEN_ADDRESS = ROPSTEN_WETH_TOKEN_ADDRESS
+const WETH_TOKEN_ADDRESS = MAINNET_WETH_TOKEN_ADDRESS
 
 export const getBalanceWETH = async (
   accountAddress: string | null | undefined

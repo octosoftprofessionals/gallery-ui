@@ -3,12 +3,13 @@ import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import BigNumber from 'bignumber.js'
 
-import EthSvg from '../../assets/eth.svg'
 import { useMetamaskAccount } from '../../atom'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { createBuyOrder, getBalanceWETH } from '../../services/bidding'
 import { colors } from '../Styles/Colors'
 import { formatDecimal, formatUsd, formatEthersFromBigNumber } from '../../Utils'
+import { quoteUsdFromEthUsd } from '../../Utils/quoteEthUsd'
+import EthSvg from '../../assets/eth.svg'
 import BidMessages from './BidMessages'
 
 const useStyle = makeStyles(Theme => ({
@@ -73,14 +74,28 @@ const useStyle = makeStyles(Theme => ({
   textEth: { color: Theme.palette.primary.light },
 }))
 
-const isValidBidAmount = (currentMaxBid: BigNumber, accountBalance: BigNumber, bidAmount: number) => {
+const isValidBidAmountEth = (currentMaxBid: BigNumber, accountBalance: BigNumber, bidAmountEth: number) => {
   console.log('currentMaxBid:', currentMaxBid)
   console.log('accountBalance:', accountBalance)
-  console.log('bidAmount:', bidAmount)
-  return currentMaxBid.lt(bidAmount) && new BigNumber(bidAmount).lte(accountBalance)
+  console.log('bidAmountEth:', bidAmountEth)
+  return currentMaxBid.lt(bidAmountEth) && new BigNumber(bidAmountEth).lte(accountBalance)
 }
 
-const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentMaxBid }) => {
+const isAmountQuotable = (amount: number): boolean => amount != null && amount > 0
+
+const Bids = ({
+  assetContractAddress,
+  assetTokenId,
+  priceEth,
+  priceUsd,
+  currentMaxBid,
+}: {
+  assetContractAddress: string,
+  assetTokenId: string,
+  priceEth: string,
+  priceUsd: string,
+  currentMaxBid: string,
+}) => {
   const classes = useStyle()
 
   const accountAddress = useMetamaskAccount()
@@ -88,7 +103,12 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
   //getting metamask account from the storage
   const metamaskStorage = useAccountStore()
 
-  const [bidAmount, setBidAmount] = useState<number | null>(null)
+  const [bidAmountEth, setBidAmountEth] = useState<number | null>(null)
+  // console.log('bidAmountEth:', bidAmountEth)
+  // console.log('bidAmountEth == null:', bidAmountEth == null)
+  // console.log('bidAmountEth === 0:', bidAmountEth === 0)
+  const bidAmountUsd = !isAmountQuotable(bidAmountEth) ? 0 : quoteUsdFromEthUsd(priceEth, priceUsd, new BigNumber(bidAmountEth))
+
   const [valueCurrentMaxBid, setValueCurrentMaxBid] = useState<BigNumber>(
     new BigNumber(currentMaxBid)
   )
@@ -103,8 +123,8 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
   console.log('accountBalanceWETH:', accountBalanceWETH.toString())
 
   const isAccountBalanceZero = accountBalanceWETH.eq(0)
-  const isBiddingDisabled = bidAmount == null || !isValidBidAmount(valueCurrentMaxBid, accountBalanceWETH, bidAmount)
-  const isBidAmountError = bidAmount != null && !isValidBidAmount(valueCurrentMaxBid, accountBalanceWETH, bidAmount)
+  const isBiddingDisabled = bidAmountEth == null || !isValidBidAmountEth(valueCurrentMaxBid, accountBalanceWETH, bidAmountEth)
+  const isBidAmountEthError = bidAmountEth != null && !isValidBidAmountEth(valueCurrentMaxBid, accountBalanceWETH, bidAmountEth)
 
   useEffect(() => {
     (async () => {
@@ -119,7 +139,7 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
     console.log('accountAddress:', accountAddress)
     console.log('assetContractAddress:', assetContractAddress)
     console.log('assetTokenId:', assetTokenId)
-    console.log('bidAmount:', bidAmount)
+    console.log('bidAmountEth:', bidAmountEth)
 
     console.log('accountBalanceWETH.toString():', accountBalanceWETH.toString())
 
@@ -127,7 +147,7 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
 
     console.log('latestAccountBalanceWETH.toString():', latestAccountBalanceWETH.toString())
 
-    if (!isValidBidAmount(valueCurrentMaxBid, latestAccountBalanceWETH, bidAmount)) {
+    if (!isValidBidAmountEth(valueCurrentMaxBid, latestAccountBalanceWETH, bidAmountEth)) {
       setAccountBalanceWETH(latestAccountBalanceWETH)
       return
     }
@@ -137,7 +157,7 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
       assetContractAddress,
       assetTokenId,
       // TODO: schema? i.e. ERC721 vs. ERC1155
-      amountEth: bidAmount,
+      amountEth: bidAmountEth,
     })
 
     console.log('BID RESULT:', result)
@@ -156,7 +176,7 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
     setMessageState('ok')
     setSeverity(null)
     setMessage(null)
-    setValueCurrentMaxBid(new BigNumber(bidAmount))
+    setValueCurrentMaxBid(new BigNumber(bidAmountEth))
   }
 
   return (
@@ -172,14 +192,21 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
           Place a bid
         </Typography>
       </Grid>
+
       <Grid item xs={12} container direction="column">
         <Typography variant="caption" className={classes.text}>
-          You must bid at least
+          You must bid more than
         </Typography>
         <Typography variant="caption" color="primary">{`${formatDecimal(
           priceEth
         )} ETH`}</Typography>
       </Grid>
+      <Grid item xs={12} sm={6}>
+        <Typography variant="caption">
+          {formatUsd(priceUsd)}
+        </Typography>
+      </Grid>
+
       <Grid item xs={12} container alignItems="flex-start">
         <Grid
           item
@@ -193,20 +220,20 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
             placeholder="0"
             inputProps={{
               min: 0,
-              step: 0.01,
+              step: 0.001,
             }}
-            value={bidAmount}
+            value={bidAmountEth}
             className={
-              isBidAmountError
+              isBidAmountEthError
                 ? [classes.input, classes.colorInput].join(' ')
                 : classes.input
             }
-            error={isBidAmountError}
+            error={isBidAmountEthError}
             onChange={e => {
               try {
                 const { value } = e.target
                 console.log('value:', value)
-                setBidAmount(value)
+                setBidAmountEth(value)
               } catch (e) {
                 return
               }
@@ -219,8 +246,11 @@ const Bids = ({ assetContractAddress, assetTokenId, priceEth, priceUsd, currentM
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
+        <Typography variant="caption">
+          {formatUsd(bidAmountUsd)}
+        </Typography>
       </Grid>
+
       <div className={classes.boxBalance}>
         <Grid container direction="row" justify="space-between">
           <Typography variant="caption" className={classes.textBalance}>
