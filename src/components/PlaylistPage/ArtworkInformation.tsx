@@ -3,6 +3,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, Paper } from '@material-ui/core'
 
+import CardArtwork from './CardArtwork'
+
 const useStyles = makeStyles(Theme => ({
   img: {
     backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
@@ -39,26 +41,7 @@ const ArtworkInformation = ({ videoUrl, imageUrl }) => {
     <Paper>
       <Grid container alignContent="center" justify="center">
         <Grid container justify="center">
-          <Grid item xs={6}>
-            {videoUrl != null ? (
-              <div className={classes.containerVideo}>
-                <div className={classes.inVideo}>
-                  <video
-                    poster={imageUrl}
-                    src={'' ?? videoUrl}
-                    autoPlay={true}
-                    loop={true}
-                    className={classes.video}
-                    muted={true}
-                  >
-                    <img src={imageUrl} />
-                  </video>
-                </div>
-              </div>
-            ) : (
-              <div className={classes.img} />
-            )}
-          </Grid>
+          <CardArtwork imageUrl={imageUrl} videoUrl={videoUrl} />
         </Grid>
 
         <Grid item xs={12} container justify="center">
