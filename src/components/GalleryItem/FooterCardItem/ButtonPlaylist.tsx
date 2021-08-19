@@ -51,7 +51,7 @@ const ButtonPlaylist = ({
         <Grid container direction="column" justify="center" alignItems="center">
           <Hidden only="xs">
             <Typography variant="overline" color="textSecondary">
-              Add to Favorites
+              {inFavorite ? 'Remove Favorites' : 'Add to Favorites'}
             </Typography>
           </Hidden>
           {inFavorite ? (
