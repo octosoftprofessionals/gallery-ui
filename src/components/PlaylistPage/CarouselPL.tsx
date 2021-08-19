@@ -7,6 +7,7 @@ import { Grid } from '@material-ui/core'
 import CardArtwork from './CardArtwork'
 
 const useStyles = makeStyles(Theme => ({
+  root: { marginBottom: Theme.spacing(6) },
   carousel: {
     height: 'auto',
     minHeight: '100%',
@@ -14,12 +15,6 @@ const useStyles = makeStyles(Theme => ({
     padding: '0px auto',
     overflowY: 'visible',
     width: '100%',
-    '@media (max-width: 1400px)': {
-      paddingTop: Theme.spacing(13),
-    },
-    '@media (max-width: 768px)': {
-      paddingTop: Theme.spacing(13),
-    },
     '@media (max-width: 375px)': {
       paddingTop: 0,
       marginTop: 0,
@@ -27,25 +22,17 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const CarouselPL = ({ artworks, ...props }) => {
+const CarouselPL = ({ artworks, setIndex, ...props }) => {
   const classes = useStyles()
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className={classes.root}>
       <Carousel
+        next={next => setIndex(next)}
+        prev={prev => setIndex(prev)}
+        indicators={false}
         className={classes.carousel}
+        animation="fade"
         navButtonsAlwaysVisible
-        animation="slide"
-        indicatorIconButtonProps={{
-          style: {
-            color: 'gray', // 3
-          },
-        }}
-        activeIndicatorIconButtonProps={{
-          style: {
-            color: 'whitesmoke', // 2
-            backgroundColor: 'black',
-          },
-        }}
       >
         {artworks.map(({ imageUrl, videoUrl, id }) => (
           <CardArtwork

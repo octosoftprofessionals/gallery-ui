@@ -34,14 +34,17 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const ArtworkInformation = ({ videoUrl, imageUrl }) => {
-  const classes = useStyles({ imageUrl })
-
+const ArtworkInformation = ({ arryArtwork, index }) => {
+  const classes = useStyles({ imageUrl: arryArtwork[index].imageUrl })
   return (
     <Paper>
       <Grid container alignContent="center" justify="center">
         <Grid container justify="center">
-          <CardArtwork imageUrl={imageUrl} videoUrl={videoUrl} />
+          <CardArtwork
+            imageUrl={arryArtwork[index].imageUrl}
+            videoUrl={arryArtwork[index].imageUrl}
+            key={index}
+          />
         </Grid>
 
         <Grid item xs={12} container justify="center">
