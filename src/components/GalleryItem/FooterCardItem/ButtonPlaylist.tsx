@@ -25,6 +25,7 @@ const ButtonPlaylist = ({
   handleSubmitUnPlaylist,
   inFavorite,
   inPlaylist,
+  account,
 }) => {
   const classes = useStyle()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -84,6 +85,7 @@ const ButtonPlaylist = ({
         anchorEl={anchorEl}
         onClose={handleClose}
         arrayPlaylist={[]}
+        account={account}
       />
     </Grid>
   )

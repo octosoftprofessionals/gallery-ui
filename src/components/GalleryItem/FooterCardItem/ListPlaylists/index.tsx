@@ -1,13 +1,26 @@
 import React from 'react'
+
+import { Link } from 'gatsby'
+
 import { makeStyles } from '@material-ui/core/styles'
-import { Divider, Grid, Menu, MenuItem } from '@material-ui/core'
+import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
+
+import { myProfilePathWithView } from '../../../../config/routes'
 
 const useStyles = makeStyles(Theme => ({
   root: {},
+  link: { textDecoration: 'none' },
 }))
 
-const MenuPlaylist = ({ anchorEl, onClose, arrayPlaylist, ...props }) => {
+const MenuPlaylist = ({
+  anchorEl,
+  onClose,
+  arrayPlaylist,
+  account,
+  ...props
+}) => {
   const classes = useStyles()
+
   return (
     <Menu
       id="simple-menu"
@@ -29,14 +42,18 @@ const MenuPlaylist = ({ anchorEl, onClose, arrayPlaylist, ...props }) => {
       }}
     >
       {arrayPlaylist.map(item => (
-        <Grid item>
+        <>
           <MenuItem onClick={onClose}>{item}</MenuItem>
           <Divider />
-        </Grid>
+        </>
       ))}
-      <Grid item>
-        <MenuItem onClick={onClose}>New Playlist</MenuItem>
-      </Grid>
+      <Link to={myProfilePathWithView(account, 2)} className={classes.link}>
+        <MenuItem onClick={onClose}>
+          <Typography variant="button" color="primary">
+            New Playlist
+          </Typography>
+        </MenuItem>
+      </Link>
     </Menu>
   )
 }
