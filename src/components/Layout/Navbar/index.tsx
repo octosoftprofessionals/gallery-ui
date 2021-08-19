@@ -175,7 +175,7 @@ const index = ({ pathname, profileImageUrl }) => {
               </Link>
             </Grid>
 
-            <Grid item md={4}>
+            <Grid item md={4} container justify="center">
               <Navigator pathname={pathname} />
             </Grid>
 
