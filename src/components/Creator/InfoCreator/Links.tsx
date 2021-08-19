@@ -80,139 +80,127 @@ const Links = ({ links }) => {
   })
   return (
     <>
-      {links ? (
-        <Grid container direction="column" alignItems="flex-start">
-          <Grid item xs={1} className={classes.instagram}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={
-                  <Instagram fontSize="small" className={classes.icon} />
-                }
-              >
-                <Typography variant="caption" color="primary">
-                  {instagram.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.facebook}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={
-                  <Facebook fontSize="small" className={classes.icon} />
-                }
-              >
-                <Typography variant="caption" color="primary">
-                  {facebook.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.twitter}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={
-                  <Twitter fontSize="small" className={classes.icon} />
-                }
-              >
-                <Typography variant="caption" color="primary">
-                  {twitter.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.youtube}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={
-                  <YouTube fontSize="small" className={classes.icon} />
-                }
-              >
-                <Typography variant="caption" color="primary">
-                  {youtube.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.tiktok}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={<Tiktok className={classes.icon} />}
-              >
-                <Typography variant="caption" color="primary">
-                  {tiktok.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.twitch}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={<Twitch className={classes.icon} />}
-              >
-                <Typography variant="caption" color="primary">
-                  {twitch.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.discord}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={<Discord className={classes.icon} />}
-              >
-                <Typography variant="caption" color="primary">
-                  {discord.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.snapchat}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={<Snapchat className={classes.icon} />}
-              >
-                <Typography variant="caption" color="primary">
-                  {snapchat.platform}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={1} className={classes.web}>
-            <Link to={'/'} className={classes.link}>
-              <Button
-                variant="text"
-                color="primary"
-                startIcon={
-                  <Language fontSize="small" className={classes.icon} />
-                }
-              >
-                <Typography variant="caption" color="primary">
-                  {website.handle}
-                </Typography>
-              </Button>
-            </Link>
-          </Grid>
+      <Grid container direction="column" alignItems="flex-start">
+        <Grid item xs={1} className={classes.instagram}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={
+                <Instagram fontSize="small" className={classes.icon} />
+              }
+            >
+              <Typography variant="caption" color="primary">
+                {instagram.platform}
+              </Typography>
+            </Button>
+          </Link>
         </Grid>
-      ) : (
-        ''
-      )}
+        <Grid item xs={1} className={classes.facebook}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Facebook fontSize="small" className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {facebook.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.twitter}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Twitter fontSize="small" className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {twitter.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.youtube}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<YouTube fontSize="small" className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {youtube.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.tiktok}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Tiktok className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {tiktok.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.twitch}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Twitch className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {twitch.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.discord}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Discord className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {discord.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.snapchat}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Snapchat className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {snapchat.platform}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={1} className={classes.web}>
+          <Link to={'/'} className={classes.link}>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<Language fontSize="small" className={classes.icon} />}
+            >
+              <Typography variant="caption" color="primary">
+                {website.handle}
+              </Typography>
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
     </>
   )
 }

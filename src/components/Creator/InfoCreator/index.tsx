@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
-import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Typography,
-  Tooltip,
-} from '@material-ui/core'
-import { AvatarGroup } from '@material-ui/lab'
-import { FileCopy } from '@material-ui/icons'
+import { Button, Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Spinner from '../../Spinner'
 import {
@@ -18,7 +9,7 @@ import {
   checkExistingFollow,
 } from '../../../services/follow'
 import { useAccountStore } from '../../../hooks/useAccountStore'
-import { boxShadow, colors } from '../../Styles/Colors'
+import { boxShadow } from '../../Styles/Colors'
 import ButtonsSocialMedia from './ButtonsSocialMedia'
 import FollowersModal from '../FollowersModal'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
@@ -77,8 +68,6 @@ const useStyle = makeStyles(Theme => ({
       marginLeft: Theme.spacing(0),
       display: 'flex',
       flexDirection: 'row',
-      /*      justifyContent: 'center',
-      alignItems: 'center', */
     },
   },
   userProfile: {
@@ -104,11 +93,9 @@ const useStyle = makeStyles(Theme => ({
   networks: {
     '@media (max-width: 576px)': {
       marginTop: Theme.spacing(6),
-      /* width: '300px', */
     },
   },
   bio: {
-    /*     marginLeft: Theme.spacing(16), */
     '@media (max-width: 576px)': {
       marginTop: Theme.spacing(12),
       width: '100%',
@@ -208,7 +195,7 @@ const InfoCreator = ({
     setOpenFollowModal(true)
   }
 
-  const [openFollowModal, setOpenFollowModal] = useState(false)
+  const [openFollowModal, setOpenFollowModal] = useState<boolean>(false)
 
   return (
     <>
@@ -299,14 +286,7 @@ const InfoCreator = ({
               </Button>
             )}
           </Grid>
-          <Grid
-            container
-            item
-            md={4}
-            xs={11}
-            className={classes.networks}
-            justify="flex-end"
-          >
+          <Grid item md={4} xs={11} className={classes.networks}>
             <UserNetworks
               publicKey={publicKey}
               web={web}
@@ -324,9 +304,7 @@ const InfoCreator = ({
       <Grid container item justify="flex-start" xs={12}>
         <Grid container sm={7} xs={12}>
           <Typography variant="body2" color="primary" className={classes.bio}>
-            I'm and Frontend dev and a digital designer. Love coding and movies!
-            Mother of two and environmental activist. Please recycle and reuse,
-            do not accept plastic bags, defend Argentinian humedales.
+            {bio}
           </Typography>
         </Grid>
       </Grid>

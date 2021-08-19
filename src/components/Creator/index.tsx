@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid } from '@material-ui/core'
-import { FileCopy } from '@material-ui/icons'
-import { Link } from 'gatsby'
+
+import { Users } from '../../types'
+
 import GridCreator from './GridCreator'
 import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import InfoCreator from './InfoCreator'
@@ -12,8 +14,6 @@ import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
 } from '../../services/follow'
-
-import { Users } from '../../types'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -45,10 +45,6 @@ const useStyle = makeStyles(Theme => ({
       width: '200px',
       height: '200px',
       right: 60,
-      /*       display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center', */
     },
   },
   icon: {
@@ -82,38 +78,27 @@ const useStyle = makeStyles(Theme => ({
   info: {
     '@media (max-width: 545px)': {
       dispay: 'flex',
-      /*    position: 'absolute',
-      top: '500px', */
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
     },
   },
   tab: {
+    minHeight: `${Theme.spacing(6)}vh`,
     marginTop: Theme.spacing(16),
     '@media (max-width: 545px)': {
       marginTop: Theme.spacing(0),
-      /*   dispay: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center', */
     },
   },
 }))
-
-const mock = {
-  coverImgUrl:
-    'https://f8n-production.imgix.net/creators/profile/y26ylgt72-rari-jpg-at7pyj.jpg',
-  profileImgUrl:
-    'https://f8n-production.imgix.net/creators/profile/czgizo65e-reylarsdam-gif-0oq2zd.gif',
-}
 
 const Creator = ({
   isMyAccount = false,
   user = undefined,
   setDisplayReportModal,
+  setCoverImgUrl,
 }: Props) => {
-  const classes = useStyle({ imageUrl: mock.coverImgUrl })
+  const classes = useStyle()
 
   const {
     data: followeeItem = [],
@@ -132,19 +117,17 @@ const Creator = ({
   const { followees } = followersItem
   const { followers } = followeeItem
 
-  return user ? (
+  useEffect(() => {
+    setCoverImgUrl(user.coverImgUrl)
+  })
+
+  return (
     <Grid container xs={12} direction="column" justify="center">
       <Grid container xs={12} className={classes.root}>
         <Grid item xs={1}>
-          <Avatar src={mock.profileImgUrl} className={classes.avatar} />
+          <Avatar src={user.profileImgUrl} className={classes.avatar} />
         </Grid>
-        <Grid
-          container
-          justify="space-around"
-          md={8}
-          xs={12}
-          className={classes.profile}
-        >
+        <Grid md={8} xs={12} className={classes.profile}>
           <InfoCreator
             className={classes.info}
             isMyAccount={isMyAccount}
@@ -174,26 +157,21 @@ const Creator = ({
           </div>
         </Grid>
       </Grid>
-      <Grid
-        container
-        direction="row"
-        justify="flex-end"
-        xs={12}
-        className={classes.tab}
-      >
+      <Grid container className={classes.tab}>
         <GridCreator
           isMyAccount={isMyAccount}
           profileAddress={user.publicAddress}
         />
       </Grid>
     </Grid>
-  ) : null
+  )
 }
 
 type Props = {
   isMyAccount: boolean
   user?: Users
   setDisplayReportModal: Function
+  setCoverImgUrl: Function
 }
 
 export default Creator
