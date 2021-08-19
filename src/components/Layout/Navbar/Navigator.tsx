@@ -59,7 +59,9 @@ const Navigator = ({ pathname }) => {
               pathname === '/exhibition' ? classes.selected : classes.btnNavbar
             }
           >
-            <Typography className={classes.btn}>Exhibition</Typography>
+            <Typography variant="button" className={classes.btn}>
+              Exhibition
+            </Typography>
           </Button>
         </Link>
         <Link to="/artworks" className={classes.link}>
