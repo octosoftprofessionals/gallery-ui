@@ -17,9 +17,7 @@ const useStyle = makeStyles(Theme => ({
       borderRadius: 50,
     },
   },
-  root: {
-    padding: Theme.spacing(0, 4),
-  },
+  root: { paddingBottom: 20 },
   searchInput: {
     boxShadow: boxShadow.boxShadow1,
     borderRadius: Theme.shape.borderRadius[3],
@@ -44,9 +42,10 @@ const SearchCreator = ({ searchBar, setSearchBar, status }) => {
   return (
     <Grid
       item
-      xs={12}
+      xs={4}
       container
       justify="space-around"
+      alignContent="flex-end"
       className={classes.root}
     >
       <TextField

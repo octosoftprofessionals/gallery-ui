@@ -52,7 +52,12 @@ const CreatorItem = ({
 }: {
   galleryItem: GalleryItem | undefined
 }) => {
-  const { creatorUsername, creatorImageUrl, creatorAddress } = galleryItem
+  const {
+    creatorUsername,
+    creatorImageUrl,
+    creatorAddress,
+    description,
+  } = galleryItem
   const classes = useStyle({ imgUrl: creatorImageUrl })
   const linkCreator = profilePathFromAddress(creatorAddress)
 
@@ -82,7 +87,7 @@ const CreatorItem = ({
           <div className={classes.conatainerBio}>
             <div className={classes.descriptionBio}>
               <Typography variant="body2" color="primary">
-                {''}
+                {description}
               </Typography>
             </div>
           </div>

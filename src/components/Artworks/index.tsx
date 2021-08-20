@@ -96,6 +96,7 @@ const GridArtworks = () => {
   return (
     <TabBar
       titles={['Live Auction', 'Reserve not met', 'Sold']}
+      justify="center"
       components={[
         <GalleryArtworks
           isLoading={isLoadingLA}

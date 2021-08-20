@@ -26,7 +26,15 @@ const Gallery = ({
 
   return (
     <>
-      <Grid container direction="row" justify="space-around" wrap="wrap">
+      <Grid
+        item
+        lg={10}
+        container
+        direction="row"
+        justify="space-around"
+        alignContent="center"
+        wrap="wrap"
+      >
         {pages.map(items => {
           return items.map((artwork, index) => (
             <Grid

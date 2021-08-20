@@ -14,7 +14,7 @@ const GalleryArtworks = ({
   pages = [],
 }) => {
   return (
-    <Grid container direction="row" justify="space-between" wrap="wrap">
+    <Grid container direction="row" justify="center" wrap="wrap">
       {isLoading ? (
         <Spinner height="50vh" />
       ) : (

@@ -37,6 +37,13 @@ const useStyles = makeStyles(Theme => ({
   nav: {
     display: 'flex',
     justifyContent: 'space-around',
+    '@media (max-width: 575px)': {
+      justifyContent: 'space-between',
+      flexWrap: 'inherit',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: Theme.spacing(0, 6),
+    },
   },
   img: {
     background: `url(${logoSrc})`,
