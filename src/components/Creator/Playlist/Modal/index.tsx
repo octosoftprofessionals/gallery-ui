@@ -25,7 +25,7 @@ const useStyles = makeStyles(Theme => ({
   },
   titleModal: { textTransform: 'initial' },
   icon: {
-    fontSize: Theme.spacing(13),
+    fontSize: Theme.spacing(10),
     color: Theme.palette.primary.main,
     '@media (max-width: 576px)': {
       fontSize: Theme.spacing(10),
@@ -72,6 +72,8 @@ const PlaylistModal = ({ onClose, open, setOpen }) => {
   const handleNext = () => {
     setTitle('')
     setDescription('')
+    setOpen(true)
+    onClose()
   }
   return (
     <Dialog
@@ -81,21 +83,19 @@ const PlaylistModal = ({ onClose, open, setOpen }) => {
       open={open}
       aria-labelledby="simple-dialog-title"
     >
-      <DialogActions>
-        <IconButton onClick={handleClose}>
-          <Close className={classes.icon} />
-        </IconButton>
-      </DialogActions>
-      <Grid container justify="center">
-        <DialogTitle>
+      <Grid container justify="space-between" alignItems="center">
+        <Grid item xs={10} container justify="center">
           <Typography
-            variant="h4"
+            variant="h5"
             color="primary"
             className={classes.titleModal}
           >
             Creat a new playlist
           </Typography>
-        </DialogTitle>
+        </Grid>
+        <IconButton onClick={handleClose}>
+          <Close className={classes.icon} />
+        </IconButton>
       </Grid>
       <Grid item xs={12} sm={10} className={classes.conteinerForm}>
         <Grid item xs={12} sm={8}>

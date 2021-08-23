@@ -19,7 +19,9 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
     light
     playlist
     inSize={3}
+    isMyAccount={isMyAccount}
     titles={['Created', 'Collected', 'Playlist', 'Favorites']}
+    isMyAccount={isMyAccount}
     components={[
       <GalleryCreator
         emptyMessageProps={{

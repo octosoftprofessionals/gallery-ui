@@ -76,16 +76,14 @@ const Layout = ({
   return (
     <ThemeProvider theme={themeSelected}>
       <CssBaseline>
+        <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
+          <Navbar
+            pathname={pathname}
+            publicKey={publicKey}
+            profileImageUrl={profileImageUrl}
+          />
+        </BackgroundNavBar>
         <LayoutContainer padding={padding}>
-          <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
-            <Navbar
-              pathname={pathname}
-              cois={cois}
-              publicKey={publicKey}
-              profileImageUrl={profileImageUrl}
-              name={name}
-            />
-          </BackgroundNavBar>
           <StyledMain marginTop={marginTop}>{children}</StyledMain>
         </LayoutContainer>
         <ButtonDM theme={theme} setTheme={setTheme} />

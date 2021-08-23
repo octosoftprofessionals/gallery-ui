@@ -37,6 +37,13 @@ const useStyles = makeStyles(Theme => ({
   nav: {
     display: 'flex',
     justifyContent: 'space-around',
+    '@media (max-width: 575px)': {
+      justifyContent: 'space-between',
+      flexWrap: 'inherit',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: Theme.spacing(0, 6),
+    },
   },
   img: {
     background: `url(${logoSrc})`,
@@ -138,7 +145,7 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const index = ({ pathname, profileImageUrl, name }) => {
+const index = ({ pathname, profileImageUrl }) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
@@ -175,7 +182,7 @@ const index = ({ pathname, profileImageUrl, name }) => {
               </Link>
             </Grid>
 
-            <Grid item md={4}>
+            <Grid item md={4} container justify="center">
               <Navigator pathname={pathname} />
             </Grid>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 
 import { galleryItemQuery } from '../../services/gallery'
 import SearchCreator from './SearchCreator'
@@ -11,7 +11,8 @@ import CreatorItem from '../GalleryItem/CreatorItem'
 import Spinner from '../Spinner'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
+  title: { fontSize: 56 },
+  header: { borderBottom: '1px solid #FFFF' },
 }))
 
 const Creators = ({ creatorsQuery = [], status }) => {
@@ -45,12 +46,43 @@ const Creators = ({ creatorsQuery = [], status }) => {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={12}>
-        <SearchCreator
-          searchBar={search}
-          setSearchBar={setSearch}
-          status={status}
-        />
+      <Grid
+        item
+        xs={12}
+        container
+        justify="center"
+        alignContent="center"
+        className={classes.header}
+      >
+        <Grid
+          item
+          xs={9}
+          container
+          justify="space-between"
+          alignContent="center"
+        >
+          <Grid
+            item
+            xs={5}
+            container
+            justify="space-around"
+            alignContent="flex-end"
+          >
+            <Typography
+              variant="caption"
+              color="primary"
+              className={classes.title}
+            >
+              Meet our creators
+            </Typography>
+          </Grid>
+
+          <SearchCreator
+            searchBar={search}
+            setSearchBar={setSearch}
+            status={status}
+          />
+        </Grid>
       </Grid>
       {isLoading ? (
         <Spinner height="50vh" />

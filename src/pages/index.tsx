@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { useInfiniteQuery } from 'react-query'
-
+import { Grid } from '@material-ui/core'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
 import ArtworkItem from '../components/GalleryItem/ArtworkItem'
@@ -98,21 +98,23 @@ const Home = () => {
         {isLoadingFA ? (
           <Spinner height="50vh" />
         ) : (
-          <Gallery
-            isLoading={isFetchingFA}
-            handleNext={getMoreFeaturedArtworks}
-            pages={allFeaturedItems.pages}
-            hasNextPage={hasNextPageFA}
-            renderItem={item => (
-              <ArtworkItem
-                key={item.assetId}
-                galleryItem={item}
-                onFavorite={(assetId, status) =>
-                  handleFavorite(assetId, status, 'All')
-                }
-              />
-            )}
-          />
+          <Grid item container justify="center">
+            <Gallery
+              isLoading={isFetchingFA}
+              handleNext={getMoreFeaturedArtworks}
+              pages={allFeaturedItems.pages}
+              hasNextPage={hasNextPageFA}
+              renderItem={item => (
+                <ArtworkItem
+                  key={item.assetId}
+                  galleryItem={item}
+                  onFavorite={(assetId, status) =>
+                    handleFavorite(assetId, status, 'All')
+                  }
+                />
+              )}
+            />
+          </Grid>
         )}
       </ArtworkGrid>
 

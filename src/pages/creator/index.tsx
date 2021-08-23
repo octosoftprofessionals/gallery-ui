@@ -22,13 +22,14 @@ const CreatorPage = () => {
   const { data: user, isLoading } = useQuery('creatorQuery', () =>
     getUser({ public_address: address })
   )
+  const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState('')
 
   return (
     <Layout
       padding="0"
       marginTop="0"
       height
-      backgroundImage={isLoading ? null : user.coverImgUrl}
+      backgroundImage={coverCreatorImgUrl}
     >
       {isLoading ? (
         <Spinner height="50vh" />
@@ -37,6 +38,7 @@ const CreatorPage = () => {
           isMyAccount={false}
           user={user}
           setDisplayReportModal={setDisplayReportModal}
+          setCoverImgUrl={setCoverCreatorImgUrl}
         />
       )}
     </Layout>

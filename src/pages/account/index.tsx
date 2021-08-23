@@ -22,17 +22,14 @@ const AccountPage = () => {
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )
+  const [coverProfileImgUrl, setCoverProfileImgUrl] = useState('')
 
   return (
     <Layout
       padding="0"
       marginTop="0"
       height
-      backgroundImage={
-        isLoading
-          ? 'https://f8n-production.imgix.net/creators/profile/y26ylgt72-rari-jpg-at7pyj.jpg'
-          : userAccount.coverImgUrl
-      }
+      backgroundImage={coverProfileImgUrl}
     >
       {isLoading ? (
         <Spinner height="50vh" />
@@ -41,6 +38,7 @@ const AccountPage = () => {
           isMyAccount={true}
           user={userAccount}
           setDisplayReportModal={setDisplayReportModal}
+          setCoverImgUrl={setCoverProfileImgUrl}
         />
       )}
     </Layout>

@@ -96,6 +96,17 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
       animation="slide"
       timeout={timeout}
       interval={interval}
+      indicatorIconButtonProps={{
+        style: {
+          color: 'gray', // 3
+        },
+      }}
+      activeIndicatorIconButtonProps={{
+        style: {
+          color: 'whitesmoke', // 2
+          backgroundColor: 'black',
+        },
+      }}
     >
       {artworksCarousel
         ? artworksCarousel.map(artwork => (

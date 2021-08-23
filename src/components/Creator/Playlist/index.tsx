@@ -6,6 +6,7 @@ import { colors } from '../../Styles/Colors'
 
 import PlaylistItem from './PlaylistItem'
 import ModalPlaylist from './Modal'
+import ModalArtworksSelected from './Modal/ArtworksSelected'
 import EmptyAccount from '../GridCreator/EmptyAccount'
 
 const useStyles = makeStyles(Theme => ({
@@ -33,15 +34,21 @@ const Playlist = ({
   emptyMessageProps: Record<string, any>
 }) => {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
+  const [openNext, setOpenNext] = useState(false)
+  const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
+
+  const handleOpenAddPlaylist = () => {
+    setOpenAddPlaylist(true)
   }
-  const handleClose = () => {
-    setOpen(false)
+  const handleCloseAddPlaylist = () => {
+    setOpenAddPlaylist(false)
   }
 
-  if (renderItem.length === 0) {
+  const handleCloseNext = () => {
+    setOpenNext(false)
+  }
+
+  if (renderItem.length <= 0 && !isMyAccount) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
@@ -62,7 +69,11 @@ const Playlist = ({
         ))}
         <Grid item xs={12} sm={5} container>
           {isMyAccount ? (
-            <Button className={classes.button} fullWidth onClick={handleOpen}>
+            <Button
+              className={classes.button}
+              fullWidth
+              onClick={handleOpenAddPlaylist}
+            >
               <Grid container alignItems="center" direction="column">
                 <Add className={classes.icon} />
                 <Typography variant="caption" className={classes.textButton}>
@@ -73,7 +84,12 @@ const Playlist = ({
           ) : null}
         </Grid>
       </Grid>
-      <ModalPlaylist onClose={handleClose} open={open} setOpen={setOpen} />
+      <ModalPlaylist
+        onClose={handleCloseAddPlaylist}
+        open={openAddPlaylist}
+        setOpen={setOpenNext}
+      />
+      <ModalArtworksSelected onClose={handleCloseNext} open={openNext} />
     </>
   )
 }

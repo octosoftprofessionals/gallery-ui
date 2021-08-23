@@ -8,10 +8,7 @@ import { Alert, AlertTitle } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
-import {
-  updateUserWithFiles,
-  updateUserWithoutFiles,
-} from '../../services/users'
+import axios from 'axios'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 import { useMutation } from 'react-query'
@@ -199,26 +196,10 @@ const EditForm = ({ userAccount }: Props) => {
     tiktok: userAccount.tiktok,
     snapchat: userAccount.snapchat,
   })
-  const [files, setFiles] = useState({ picture: null, cover: null })
+  const [files, setFiles] = useState({ picture: [], cover: [] })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-  const userMutationWithFiles = useMutation(
-    () => updateUserWithFiles(metamaskAccount),
-    {
-      onError: error => {
-        console.log('error', error)
-        handleClick(true)
-      },
-      onSuccess: (data, variables, context) => {
-        console.log('res', data)
-        handleClick(false)
-      },
-    }
-  )
-  const userMutationWithoutFiles = useMutation(() =>
-    updateUserWithoutFiles(metamaskAccount)
-  )
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
@@ -243,28 +224,46 @@ const EditForm = ({ userAccount }: Props) => {
 
   const handleSubmit = () => {
     if (validateEmail(email)) {
+      
       setError(false)
-      let data = {
-        username: name,
-        profile_img_url: files.picture,
-        cover_img_url: files.cover,
-        email: email,
-        bio: bio,
-        website: socialNetwork.website,
-        twitter: socialNetwork.twitter,
-        instagram: socialNetwork.instagram,
-        discordId: socialNetwork.discordId,
-        youtube: socialNetwork.youtube,
-        facebook: socialNetwork.facebook,
-        tiktok: socialNetwork.tiktok,
-        snapchat: socialNetwork.snapchat,
-      } as any
+      const formData = new FormData()
+      formData.append('username', name)
+      formData.append('profile_img_url', files.picture[0])
+      formData.append('cover_img_url', files.cover[0])
+      formData.append('public_address', metamaskAccount as string)
+      formData.append('email', email)
+      formData.append('bio', bio)
+      formData.append('website', socialNetwork.website)
+      formData.append('twitter', socialNetwork.twitter)
+      formData.append('instagram', socialNetwork.instagram)
+      formData.append('discordId', socialNetwork.discordId)
+      formData.append('youtube', socialNetwork.youtube)
+      formData.append('facebook', socialNetwork.facebook)
+      formData.append('tiktok', socialNetwork.tiktok)
+      formData.append('snapchat', socialNetwork.snapchat)
 
-      userMutationWithFiles.mutate(data)
+      /* Ultimo intento! */
+      try {
+        const res = axios.post(`http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,formData, {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+      })
+      handleClick(false)
+        console.log(res);
+      } catch(e) {
+        handleClick(true)
+        console.log(e);
+      }
     } else {
       setError(true)
       console.log('mail no ingresado')
     }
+  }
+
+  const [testFile, setTestFile] = useState(null)
+  const onChangeTestFile = (e) => {
+    setTestFile(e.target.files[0])
   }
 
   return (
