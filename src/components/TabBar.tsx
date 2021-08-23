@@ -7,10 +7,16 @@ import { myProfilePathWithView } from '../config/routes'
 const useStyle = makeStyles(Theme => ({
   head: {
     marginTop: 20,
+    '@media (max-width: 1024px)': {
+      marginTop: 3,
+      flexDirection: 'column',
+    },
   },
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
-    marginBlockStart: `-0.1em`,
+    width: '100%',
+    background: '#FFFF',
+    height: 2,
   },
   dividerPlaylist: {
     display: 'none',
@@ -32,7 +38,38 @@ const useStyle = makeStyles(Theme => ({
       },
     },
   },
-  selectButton: { borderBottom: '2px solid' },
+  textBtn: {
+    fontSize: 34,
+    '@media (max-width: 375px)': {
+      fontSize: 19,
+    },
+    '@media (max-width: 1024px)': {
+      fontSize: 16,
+    },
+  },
+  selectButton: {
+    background:
+      'transparent linear-gradient(0deg, #0CFFD624 0%, #94F0FF00 100%) 0% 0% no-repeat padding-box',
+    borderRadius: 0,
+  },
+  buttonPrimary: {
+    padding: Theme.spacing(2, 6),
+    margin: 0,
+    transform: 'none',
+    '@media (max-width: 300px)': {
+      borderRadius: 0,
+    },
+    '&:hover': {
+      background:
+        'transparent linear-gradient(0deg, #0CFFD624 0%, #94F0FF00 100%) 0% 0% no-repeat padding-box',
+      transform: 'none',
+      borderRadius: 0,
+      padding: Theme.spacing(2, 6),
+      '@media (max-width: 300px)': {
+        borderRadius: 0,
+      },
+    },
+  },
   selectButtonPlaylist: {
     backgroundColor: Theme.palette.secondary.light,
   },
@@ -70,9 +107,9 @@ const TabBar = ({
         return [classes.button, classes.selectButtonPlaylist]
       }
     } else if (selected === index) {
-      return [classes.button, classes.selectButton]
+      return [classes.buttonPrimary, classes.selectButton]
     }
-    return classes.button
+    return playlist ? classes.button : classes.buttonPrimary
   }
 
   return (
@@ -100,7 +137,11 @@ const TabBar = ({
               className={selectedIn(playlist, index)}
               onClick={() => handleSelected(index)}
             >
-              <Typography variant="caption" color="primary">
+              <Typography
+                variant="caption"
+                color="primary"
+                className={playlist ? '' : classes.textBtn}
+              >
                 {title}
               </Typography>
             </Button>
