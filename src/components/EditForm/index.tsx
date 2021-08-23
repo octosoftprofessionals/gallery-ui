@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import DragDrop from './DragDrop'
-import { Alert, AlertTitle } from '@material-ui/lab'
+import { Alert } from '@material-ui/lab'
 import { validateEmail } from '../../Utils/stringUtils'
 import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
-import axios from 'axios'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { useMutation } from 'react-query'
+import { updateUser } from '../../services/users'
+
 // Hi there! verify profile is commented //
 
 const useStyle = makeStyles(theme => ({
@@ -200,7 +200,6 @@ const EditForm = ({ userAccount }: Props) => {
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
-
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
   }
@@ -222,9 +221,8 @@ const EditForm = ({ userAccount }: Props) => {
     setBio(event.target.value)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateEmail(email)) {
-      
       setError(false)
       const formData = new FormData()
       formData.append('username', name)
@@ -244,16 +242,12 @@ const EditForm = ({ userAccount }: Props) => {
 
       /* Ultimo intento! */
       try {
-        const res = axios.post(`http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,formData, {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-      })
-      handleClick(false)
-        console.log(res);
-      } catch(e) {
+        const res = await updateUser(metamaskAccount, formData)
+        handleClick(false)
+        console.log(res)
+      } catch (e) {
         handleClick(true)
-        console.log(e);
+        console.log(e)
       }
     } else {
       setError(true)
@@ -262,7 +256,11 @@ const EditForm = ({ userAccount }: Props) => {
   }
 
   const [testFile, setTestFile] = useState(null)
-  const onChangeTestFile = (e) => {
+  const onChangeTestFile = e => {
+    console.log('recieved event:', e)
+
+    console.log('event.target.files[0]:', e.target.files[0])
+
     setTestFile(e.target.files[0])
   }
 
@@ -383,6 +381,8 @@ const EditForm = ({ userAccount }: Props) => {
                 >
                   Upload a profile image:
                 </Typography>
+
+                <input type="file" onChange={onChangeTestFile} />
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="user" files={files} />

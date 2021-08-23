@@ -91,18 +91,18 @@ const menu = [
     name: 'My Profile',
     link: address => myProfilePathFromAddress(address),
   },
-  {
-    name: `Playlist`,
-    link: address => myProfilePathWithView(address, 2),
-  },
-  {
-    name: `Favorites`,
-    link: address => myProfilePathWithView(address, 3),
-  },
-  {
-    name: `Bids`,
-    link: address => `/construction`,
-  },
+  // {
+  //   name: `Playlist`,
+  //   link: address => myProfilePathWithView(address, 2),
+  // },
+  // {
+  //   name: `Favorites`,
+  //   link: address => myProfilePathWithView(address, 3),
+  // },
+  // {
+  //   name: `Bids`,
+  //   link: address => `/construction`,
+  // },
   {
     name: `Settings`,
     link: address => `/editProfile`,
