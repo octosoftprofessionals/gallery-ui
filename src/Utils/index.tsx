@@ -18,12 +18,16 @@ export const timeFormat = (delta: number) => {
   let _minute = _second * 60
   let _hour = _minute * 60
   let _day = _hour * 24
+  let _month = _day * 30
 
+  let day = Math.floor((delta % _month) / _day)
   let hour = Math.floor((delta % _day) / _hour)
   let min = Math.floor((delta % _hour) / _minute)
   let sec = Math.floor((delta % _minute) / _second)
 
-  if (hour > 0) {
+  if (day > 0) {
+    timeString += `${day}d ${hour}h ${min}m`
+  } else if (day === 0 && hour > 0) {
     timeString += `${hour}h ${min}m ${sec}s`
   } else if (hour === 0 && min > 0) {
     timeString += `${min}m ${sec}s`
