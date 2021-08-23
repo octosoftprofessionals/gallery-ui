@@ -182,17 +182,6 @@ const UserNetworks = ({
                 color="secondary"
                 className={classes.text}
               >
-                {console.log(
-                  'DATA:',
-                  web,
-                  ig,
-                  tw,
-                  discord,
-                  youtube,
-                  facebook,
-                  tiktok,
-                  snapchat
-                )}
                 {tw}
               </Typography>
             </Link>
