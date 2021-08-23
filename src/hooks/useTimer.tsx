@@ -42,7 +42,7 @@ const useTimer = ({ expiration }: { expiration: Date }) => {
       }
     }, 1000)
   }, [])
-  console.log('timer :>> ', timer)
+
   return {
     timer,
     changeTitle,
