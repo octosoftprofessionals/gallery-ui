@@ -2,7 +2,7 @@ import auctionsMockup from './mockups/auctions'
 import accountInfo from './mockups/account'
 import { paginatedQuery } from '../Utils'
 import { getAssetsByCollectionSlug } from './opensea'
-import { ArtworksProps, CreatorProps, GalleryItem } from '../types'
+import { ArtworksProps, CreatorProps } from '../types'
 
 export async function getCreators(): Promise<{ creators: CreatorProps[] }> {
   return new Promise(resolve => {
@@ -16,13 +16,6 @@ export async function getCreators(): Promise<{ creators: CreatorProps[] }> {
 
 export async function getArtworkAuctions() {
   return await getAssetsByCollectionSlug('superchiefgallery-nifty')
-  // return new Promise(resolve => {
-  //   setTimeout(function () {
-  //     resolve({
-  //       artworks: auctionsMockup,
-  //     })
-  //   }, 250)
-  // })
 }
 
 export async function getArtworkAuctionsPaginated() {
@@ -74,7 +67,6 @@ export async function getCreator({
                 artwork.creator.username.toLowerCase() ===
                 creatorId.toLowerCase()
             )
-            // auctionsMockup.findIndex(auctions => auctions.id === id)
           ]?.creator,
       })
     }, 250)
