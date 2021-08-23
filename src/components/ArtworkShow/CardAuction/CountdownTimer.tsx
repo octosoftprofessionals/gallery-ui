@@ -25,9 +25,9 @@ const CountdownTimer = ({
   disableTime,
   disableInfo,
 }: {
-  timer: string[]
+  timer: any
   changeTitle: string
-  infoAution: string
+  infoAution?: string
   disableDays: boolean
   disableHours: boolean
   disableTime: boolean
@@ -49,7 +49,7 @@ const CountdownTimer = ({
       <Grid
         container
         direction="row"
-        justify={disableDays ? 'space-between' : 'flex-start'}
+        justify={disableHours ? 'space-between' : 'flex-start'}
         style={{ display: disableTime ? 'flex' : 'none' }}
       >
         <Grid item xs={3} style={{ display: disableDays ? 'block' : 'none' }}>
