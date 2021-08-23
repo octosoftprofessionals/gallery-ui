@@ -14,7 +14,6 @@ import { Users } from '../../types'
 import { useMutation } from 'react-query'
 // Hi there! verify profile is commented //
 
-
 const useStyle = makeStyles(theme => ({
   '@global': {
     '.MuiOutlinedInput-inputMultiline': {
@@ -197,7 +196,7 @@ const EditForm = ({ userAccount }: Props) => {
     tiktok: userAccount.tiktok,
     snapchat: userAccount.snapchat,
   })
-  const [files, setFiles] = useState({ picture: null, cover: null })
+  const [files, setFiles] = useState({ picture: [], cover: [] })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
 
@@ -225,44 +224,46 @@ const EditForm = ({ userAccount }: Props) => {
 
   const handleSubmit = () => {
     if (validateEmail(email)) {
+      
       setError(false)
-      const bodyFormData = new FormData()
-      bodyFormData.append('username', name)
-      bodyFormData.append('profile_img_url', files.picture )
-      bodyFormData.append('cover_img_url', files.cover)
-      bodyFormData.append('public_address', metamaskAccount as string)
-      bodyFormData.append('email', email)
-      bodyFormData.append('bio', bio)
-      bodyFormData.append('website', socialNetwork.website)
-      bodyFormData.append('twitter', socialNetwork.twitter)
-      bodyFormData.append('instagram', socialNetwork.instagram)
-      bodyFormData.append('discordId', socialNetwork.discordId)
-      bodyFormData.append('youtube', socialNetwork.youtube)
-      bodyFormData.append('facebook', socialNetwork.facebook)
-      bodyFormData.append('tiktok', socialNetwork.tiktok)
-      bodyFormData.append('snapchat', socialNetwork.snapchat)
+      const formData = new FormData()
+      formData.append('username', name)
+      formData.append('profile_img_url', files.picture[0])
+      formData.append('cover_img_url', files.cover[0])
+      formData.append('public_address', metamaskAccount as string)
+      formData.append('email', email)
+      formData.append('bio', bio)
+      formData.append('website', socialNetwork.website)
+      formData.append('twitter', socialNetwork.twitter)
+      formData.append('instagram', socialNetwork.instagram)
+      formData.append('discordId', socialNetwork.discordId)
+      formData.append('youtube', socialNetwork.youtube)
+      formData.append('facebook', socialNetwork.facebook)
+      formData.append('tiktok', socialNetwork.tiktok)
+      formData.append('snapchat', socialNetwork.snapchat)
 
       /* Ultimo intento! */
-      axios({
-        method: "post",
-        url: `http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,
-        data: bodyFormData,
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
+      try {
+        const res = axios.post(`http://localhost:3000/v1/users/update/${(metamaskAccount as string)}`,formData, {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
       })
-      .then(function (response) {
-        handleClick(false)
-        console.log(response);
-      })
-      .catch(function (response) {
+      handleClick(false)
+        console.log(res);
+      } catch(e) {
         handleClick(true)
-        console.log(response);
-      });
-
+        console.log(e);
+      }
     } else {
       setError(true)
       console.log('mail no ingresado')
     }
+  }
+
+  const [testFile, setTestFile] = useState(null)
+  const onChangeTestFile = (e) => {
+    setTestFile(e.target.files[0])
   }
 
   return (
