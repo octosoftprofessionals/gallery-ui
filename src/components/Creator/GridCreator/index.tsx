@@ -21,7 +21,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
     inSize={3}
     isMyAccount={isMyAccount}
     titles={['Created', 'Collected', 'Playlist', 'Favorites']}
-    isMyAccount={isMyAccount}
     components={[
       <GalleryCreator
         emptyMessageProps={{
