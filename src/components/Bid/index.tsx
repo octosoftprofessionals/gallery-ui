@@ -8,6 +8,9 @@ import Bids from './Bids'
 const Bid = ({ galleryItem }) => {
   const { priceEth } = galleryItem ?? {}
 
+  console.log('galleryItem:');
+  console.log(galleryItem);
+
   return (
     <Grid container justify="center">
       <Grid
