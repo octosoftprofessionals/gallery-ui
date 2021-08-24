@@ -41,6 +41,7 @@ const Playlist = ({
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [newPlaylistId, setNewPlaylistId] = useState('')
   const createPlaylistMutation = useMutation(createPlaylist)
+  let arrPlaylist = []
 
   const handleOpenAddPlaylist = () => {
     setOpenAddPlaylist(true)
@@ -58,13 +59,13 @@ const Playlist = ({
     descriptionPlaylist: string
   ) => {
     // createPlaylistMutation.mutate({ titlePlaylist, descriptionPlaylist })
-    // const { data: PlaylistId } = createPlaylistMutation.data
+    // const { id: PlaylistId } = createPlaylistMutation.data
     // setNewPlaylistId(PlaylistId)
     console.log(
       'next_Click :>> ',
       titlePlaylist,
       descriptionPlaylist,
-      newPlaylistId
+      arrPlaylist
     )
   }
 
@@ -76,6 +77,49 @@ const Playlist = ({
     )
   }
 
+  const imgUrls = [
+    'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
+    'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
+    'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
+    'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
+    'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
+    'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
+  ]
+  const randImgUrl = () => {
+    return imgUrls[Math.floor(Math.random() * imgUrls.length)]
+  }
+  const randIDs = () => {
+    return 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function (c) {
+      var r = (Math.random() * 16) | 0,
+        v = c == 'x' ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
+  }
+  function fillartworkCardAddPlayList(size) {
+    const artworkCardAddPlayList = []
+    for (let i = 0; i < size; i++) {
+      artworkCardAddPlayList.push({
+        id: `${randIDs()}`,
+        ImageUrl: randImgUrl(),
+        videoUrl: null,
+        inPlaylist: false,
+        assetTokenId: `${i}`,
+      })
+    }
+    return artworkCardAddPlayList
+  }
+
+  const modifyPlaylist = addIdArtwork => {
+    if (arrPlaylist.includes(addIdArtwork)) {
+      arrPlaylist.splice(arrPlaylist.indexOf(addIdArtwork), 1)
+      return arrPlaylist
+    } else {
+      arrPlaylist.push(addIdArtwork)
+      return arrPlaylist
+    }
+  }
+
+  const Items = fillartworkCardAddPlayList(7)
   return (
     <>
       <Grid container justify="center" direction="row" wrap="wrap">
@@ -111,7 +155,12 @@ const Playlist = ({
         setOpen={setOpenNext}
         handlePlaylist={handleCreatePlaylist}
       />
-      <ModalArtworksSelected onClose={handleCloseNext} open={openNext} />
+      <ModalArtworksSelected
+        onClose={handleCloseNext}
+        open={openNext}
+        onModifyPlaylist={modifyPlaylist}
+        Items={Items}
+      />
     </>
   )
 }

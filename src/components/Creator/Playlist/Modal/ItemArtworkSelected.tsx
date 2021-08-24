@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Grid, Checkbox } from '@material-ui/core'
+import { Grid, Checkbox } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(Theme => ({
@@ -8,7 +8,7 @@ const useStyle = makeStyles(Theme => ({
     transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
   },
   img: {
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -36,13 +36,27 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ItemArtworkSelected = ({ videoUrl, imageUrl, onCheck = false }) => {
-  const classes = useStyle({ imageUrl })
+const ItemArtworkSelected = ({
+  videoUrl,
+  imageUrl,
+  onCheck = false,
+  onModifyPlaylist,
+  assetTokenId,
+}: {
+  videoUrl: string
+  imageUrl: string
+  onCheck?: boolean
+  onModifyPlaylist: Function
+  assetTokenId: string
+}) => {
   const [checked, setChecked] = useState(onCheck)
+
   const handleChange = event => {
     setChecked(event.target.checked)
+    onModifyPlaylist(assetTokenId)
   }
-  console.log('videoUrl, imageUrl :>> ', videoUrl, imageUrl)
+  const classes = useStyle({ imageUrl })
+
   return (
     <Grid item xs={12} container justify="center" alignItems="center">
       {videoUrl != null && videoUrl.length > 0 ? (

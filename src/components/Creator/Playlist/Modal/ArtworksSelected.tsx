@@ -32,44 +32,13 @@ const useStyles = makeStyles(Theme => ({
   conteinerCard: { padding: Theme.spacing(6) },
 }))
 
-const imgUrls = [
-  'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
-  'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
-  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
-  'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-  'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
-  'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
-]
-const randImgUrl = () => {
-  return imgUrls[Math.floor(Math.random() * imgUrls.length)]
-}
-const randIDs = () => {
-  return 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
-}
-function fillartworkCardAddPlayList(size) {
-  const artworkCardAddPlayList = []
-  for (let i = 0; i < size; i++) {
-    artworkCardAddPlayList.push({
-      id: `${randIDs()}`,
-      ImageUrl: randImgUrl(),
-      inPlaylist: false,
-    })
-  }
-  return artworkCardAddPlayList
-}
-const ArtworksSelected = ({ onClose, open }) => {
-  const [title, setTitle] = useState('')
+const ArtworksSelected = ({ onClose, open, onModifyPlaylist, Items }) => {
   const classes = useStyles()
 
   const handleClose = () => {
     onClose()
   }
 
-  const Items = fillartworkCardAddPlayList(7)
   return (
     <Dialog
       fullWidth
@@ -85,7 +54,7 @@ const ArtworksSelected = ({ onClose, open }) => {
             color="primary"
             className={classes.titleModal}
           >
-            Creat a new playlist
+            Create a new playlist
           </Typography>
         </Grid>
         <IconButton onClick={handleClose}>
@@ -93,13 +62,15 @@ const ArtworksSelected = ({ onClose, open }) => {
         </IconButton>
       </Grid>
       <Grid item xs={12} container justify="space-around">
-        {Items.map(({ ImageUrl, inPlaylist, id }) => (
+        {Items.map(({ ImageUrl, inPlaylist, id, assetTokenId }) => (
           <Grid item xs={12} sm={3} md={4} className={classes.conteinerCard}>
             <ItemArtworkSelected
               key={id}
               imageUrl={ImageUrl}
               videoUrl={null}
               onCheck={inPlaylist}
+              onModifyPlaylist={e => onModifyPlaylist(e)}
+              assetTokenId={`${assetTokenId}`}
             />
           </Grid>
         ))}
