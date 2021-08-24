@@ -119,6 +119,9 @@ const Creator = ({
 
   useEffect(() => {
     setCoverImgUrl(user.coverImgUrl)
+    // if (isMyAccount) {
+    //   window.history.replaceState({}, '', `@${user.username}`)
+    // }
   })
 
   return (

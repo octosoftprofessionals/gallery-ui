@@ -198,7 +198,7 @@ const index = ({ pathname, profileImageUrl }) => {
                 >
                   {userAccount ? (
                     <LoggedButton
-                      profileImageUrl={profileImageUrl}
+                      profileImageUrl={userAccount.profileImgUrl}
                       name={userAccount ? userAccount.username : ''}
                       account={account}
                       onLogOut={handleLogOut}

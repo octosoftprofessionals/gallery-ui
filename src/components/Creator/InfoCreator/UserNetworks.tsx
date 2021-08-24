@@ -25,6 +25,7 @@ const useStyles = makeStyles(Theme => ({
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
+    textTransform: 'lowercase',
   },
   drawer: {
     padding: Theme.spacing(4),
@@ -87,15 +88,30 @@ const useStyles = makeStyles(Theme => ({
     fill: colors.IslamicGreen,
   },
   web: {
-    display: ({ web }) => (web ? 'block' : 'none'),
+    display: ({ web }) => (web !== null && web !== '' ? 'block' : 'none'),
   },
-  ig: { display: ({ ig }) => (ig ? 'block' : 'none') },
-  Tw: { display: ({ tw }) => (tw ? 'block' : 'none') },
-  discord: { display: ({ discord }) => (discord ? 'block' : 'none') },
-  youtube: { display: ({ youtube }) => (youtube ? 'block' : 'none') },
-  facebook: { display: ({ facebook }) => (facebook ? 'block' : 'none') },
-  tiktok: { display: ({ tiktok }) => (tiktok ? 'block' : 'none') },
-  snapchat: { display: ({ snapchat }) => (snapchat ? 'block' : 'none') },
+  ig: { display: ({ ig }) => (ig !== null && ig !== '' ? 'block' : 'none') },
+  Tw: { display: ({ tw }) => (tw !== null && tw !== '' ? 'block' : 'none') },
+  discord: {
+    display: ({ discord }) =>
+      discord !== null && discord !== '' ? 'block' : 'none',
+  },
+  youtube: {
+    display: ({ youtube }) =>
+      youtube !== null && youtube !== '' ? 'block' : 'none',
+  },
+  facebook: {
+    display: ({ facebook }) =>
+      facebook !== null && facebook !== '' ? 'block' : 'none',
+  },
+  tiktok: {
+    display: ({ tiktok }) =>
+      tiktok !== null && tiktok !== '' ? 'block' : 'none',
+  },
+  snapchat: {
+    display: ({ snapchat }) =>
+      snapchat !== null && snapchat !== '' ? 'block' : 'none',
+  },
   prueba: {
     display: 'none',
   },
@@ -155,7 +171,7 @@ const UserNetworks = ({
                 variant="overline"
                 color="secondary"
                 noWrap
-                className={classes.text}
+                className={classes.link}
               >
                 {truncateMiddleText(publicKey, 8)}
               </Typography>
@@ -175,12 +191,12 @@ const UserNetworks = ({
         </Grid>
         <Grid container direction="column">
           <Grid className={classes.Tw}>
-            <Link to={`https://twitter.com/${tw}`}>
+            <Link to={`https://twitter.com/${tw}`} className={classes.link}>
               <TwitterIcon className={classes.icon} />
               <Typography
                 variant="overline"
                 color="secondary"
-                className={classes.text}
+                className={classes.link}
               >
                 {tw}
               </Typography>
@@ -193,7 +209,7 @@ const UserNetworks = ({
             <Typography
               variant="overline"
               color="secondary"
-              className={classes.text}
+              className={classes.link}
             >
               {ig}
             </Typography>
@@ -224,7 +240,7 @@ const UserNetworks = ({
           </Link>
         </Grid>
         <Grid className={classes.tiktok}>
-          <Link to={`https:tiktok.com/${tiktok}`} className={classes.link}>
+          <Link to={`https://tiktok.com/@${tiktok}`} className={classes.link}>
             <TickTockIcon className={classes.icon} />
             <Typography
               variant="overline"
