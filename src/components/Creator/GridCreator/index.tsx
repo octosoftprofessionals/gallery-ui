@@ -8,7 +8,7 @@ import {
 } from '../../../services/gallery'
 
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
-
+import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => (
@@ -53,7 +53,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
 
       <Playlist
         isMyAccount={isMyAccount}
-        renderItem={[]}
+        profileAddress={profileAddress}
         emptyMessageProps={{
           primaryText: isMyAccount
             ? 'Your playlist are empty.'
@@ -63,6 +63,8 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
             : null,
           showExploreButton: true,
         }}
+        queryName="PlaylistQuery"
+        queryFunction={async () => await getPlaylists(profileAddress)}
       />,
 
       <GalleryCreator
