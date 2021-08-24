@@ -123,41 +123,49 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
     {
       key: 'website',
       name: 'Website',
+      value: socialNetwork.website,
       icon: <LanguageIcon className={classes.icon} />,
     },
     {
       key: 'twitter',
       name: 'Twitter',
+      value: socialNetwork.twitter,
       icon: <TwitterIcon className={classes.icon} />,
     },
     {
       key: 'instagram',
       name: 'Instagram',
+      value: socialNetwork.instagram,
       icon: <InstagramIcon className={classes.icon} />,
     },
     {
       key: 'discord',
       name: 'Discord',
+      value: socialNetwork.discord,
       icon: <DiscordIcon className={classes.icon2} />,
     },
     {
       key: 'youtube',
       name: 'YouTube',
+      value: socialNetwork.youtube,
       icon: <YouTubeIcon className={classes.icon} />,
     },
     {
       key: 'facebook',
       name: 'Facebook',
+      value: socialNetwork.facebook,
       icon: <FacebookIcon className={classes.icon} />,
     },
     {
       key: 'tiktok',
       name: 'TikTok',
+      value: socialNetwork.tiktok,
       icon: <TickTockIcon className={classes.icon2} />,
     },
     {
       key: 'snapchat',
       name: 'Snapchat',
+      value: socialNetwork.snapchat,
       icon: <SnapchatIcon className={classes.icon2} />,
     },
   ]
@@ -211,7 +219,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
-                  value={socialNetwork.web}
+                  value={network.value}
                 />
               </Grid>
               <Grid item xs={2}>
@@ -228,7 +236,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
-                  value={socialNetwork.web}
+                  value={network.value}
                 />
               </Grid>
             </Grid>
@@ -251,7 +259,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                 }
                 className={classes.inputProfile}
                 onChange={e => handleChange(network.key, e.currentTarget.value)}
-                value={socialNetwork.web}
+                value={`${network.value}`}
               />
             </Grid>
           )}

@@ -239,7 +239,6 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('facebook', socialNetwork.facebook)
       formData.append('tiktok', socialNetwork.tiktok)
       formData.append('snapchat', socialNetwork.snapchat)
-
       /* Ultimo intento! */
       try {
         const res = await updateUser(metamaskAccount, formData)
