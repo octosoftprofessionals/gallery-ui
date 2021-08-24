@@ -45,12 +45,12 @@ export const timerArray = (delta: number) => {
   let _day = _hour * 24
   let _month = _day * 30
 
-  let Day = Math.floor((delta % _month) / _day)
+  let Days = Math.floor((delta % _month) / _day)
   let Hours = Math.floor((delta % _day) / _hour)
   let Minutes = Math.floor((delta % _hour) / _minute)
   let Seconds = Math.floor((delta % _minute) / _second)
 
-  return { Day, Hours, Minutes, Seconds }
+  return { Days, Hours, Minutes, Seconds }
 }
 
 export const isTypeVideo = (typeVide: String) => {

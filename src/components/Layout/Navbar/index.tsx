@@ -159,6 +159,9 @@ const index = ({ pathname, profileImageUrl }) => {
     setAccount(null)
     Cookies.remove('jwt')
   }
+  console.log('LOADING', isLoading)
+  // console.log('PEPE', userAccount.username)
+  // console.log('PEPE', userAccount)
 
   return (
     <>
