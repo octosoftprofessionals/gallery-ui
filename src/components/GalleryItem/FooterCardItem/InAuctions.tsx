@@ -17,6 +17,7 @@ const useStyle = makeStyles(Theme => ({
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
   timerAlign: {
     whiteSpace: 'pre-line',
+    textAlign: 'end',
     '@media (max-width: 576px)': {
       marginLeft: Theme.spacing(13),
     },
