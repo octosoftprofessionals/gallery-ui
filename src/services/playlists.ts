@@ -7,11 +7,13 @@ export const createPlaylist = async ({ user_address } : { user_address: string }
   return newPlaylist
 }
 
-export const getPlaylists = async ( queryParams = {} ) => {
-    const url = '/playlist'
-    const res = await get(url, queryParams)
+export const getPlaylists = async (
+  queryParams = {}
+): Promise<ArrayPlaylist> => {
+  const url = `/playlist?user_address=${queryParams}`
+  const res = await get(url)
     const playlists = res.data ?? []
-    return playlists
+  return playlists.data
 }
 
 export const getOnePlaylistByIdWithRelatedArtworks = async ({
@@ -61,17 +63,24 @@ export const addArtworkToNewPlaylist = async () => {
   return addedArtworkToNewPlaylist
 }
 
-export const addArtworkToExistingPlaylist = async ({ playlist_id } : { playlist_id }) => {
+export const addArtworkToExistingPlaylist = async ({
+  playlist_id,
+}: {
+  playlist_id: number
+}) => {
     const url = `/playlist/addArtwork/${playlist_id}`
     const res = await post(url)
     const addedArtworkToExistingPlaylist = res.data ?? {}
     return addedArtworkToExistingPlaylist
 }
 
-export const deleteArtworkFromPlaylist = async (
-    {playlist_id, artwork_id} :
-    {playlist_id: number, artwork_id: number}
-) => {
+export const deleteArtworkFromPlaylist = async ({
+  playlist_id,
+  artwork_id,
+}: {
+  playlist_id: number
+  artwork_id: number
+}) => {
   const url = `/playlist/${playlist_id}/${artwork_id}/assets`
   const res = await destroy(url)
   const deletedArtwork = res.data ?? {}
