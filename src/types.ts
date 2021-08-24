@@ -363,3 +363,16 @@ export type Artworks = {
   is_featured: boolean
   expiration: string
 }
+
+export type PlaylistItem = {
+  id: number
+  title: string
+  description: string
+  userId: number
+  userAddress: string
+  priority: number
+}
+
+export type ArrayPlaylist = {
+  data: PlaylistItem[]
+}
