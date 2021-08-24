@@ -5,11 +5,9 @@ export const getUser = async (queryParams: any = {}): Promise<Users> => {
   const url = `/users`
   const res = await get(url, queryParams)
   const users = res.data ?? {}
-  console.log('queryParams', queryParams)
   let user = []
   if (users.length > 0 && queryParams.public_address !== null) {
     user = users.find(user => user.publicAddress === queryParams.public_address)
-    console.log('entro al if', user)
     return user
   } else {
     return {}

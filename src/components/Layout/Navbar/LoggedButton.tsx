@@ -138,8 +138,6 @@ const LoggedButton = ({ profileImageUrl, name, account, onLogOut }: Props) => {
     prevOpen.current = open
   }, [open])
 
-  console.log('account', account, name)
-
   return (
     <>
       <Button
