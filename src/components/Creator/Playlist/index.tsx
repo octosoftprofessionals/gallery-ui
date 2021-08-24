@@ -29,13 +29,25 @@ const useStyles = makeStyles(Theme => ({
 
 const Playlist = ({
   isMyAccount,
-  renderItem,
   emptyMessageProps,
+  profileAddress,
+  queryName,
+  queryFunction,
 }: {
   isMyAccount: boolean
-  renderItem: any[]
   emptyMessageProps: Record<string, any>
+  profileAddress: string
+  queryName: string
+  queryFunction: () => Promise<ArrayPlaylist[]>
 }) => {
+  const { data: PlaylistQuery = [], isLoading } = useQuery(
+    queryName,
+    queryFunction,
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
+
   const classes = useStyles()
   const [openNext, setOpenNext] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
@@ -69,44 +81,12 @@ const Playlist = ({
     )
   }
 
-  if (renderItem.length <= 0 && !isMyAccount) {
+  if (PlaylistQuery.length <= 0 && !isMyAccount) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
       </Box>
     )
-  }
-
-  const imgUrls = [
-    'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
-    'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
-    'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
-    'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-    'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
-    'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
-  ]
-  const randImgUrl = () => {
-    return imgUrls[Math.floor(Math.random() * imgUrls.length)]
-  }
-  const randIDs = () => {
-    return 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function (c) {
-      var r = (Math.random() * 16) | 0,
-        v = c == 'x' ? r : (r & 0x3) | 0x8
-      return v.toString(16)
-    })
-  }
-  function fillartworkCardAddPlayList(size) {
-    const artworkCardAddPlayList = []
-    for (let i = 0; i < size; i++) {
-      artworkCardAddPlayList.push({
-        id: `${randIDs()}`,
-        ImageUrl: randImgUrl(),
-        videoUrl: null,
-        inPlaylist: false,
-        assetTokenId: `${i}`,
-      })
-    }
-    return artworkCardAddPlayList
   }
 
   const modifyPlaylist = addIdArtwork => {
@@ -119,19 +99,25 @@ const Playlist = ({
     }
   }
 
-  const Items = fillartworkCardAddPlayList(7)
   return (
     <>
       <Grid container justify="center" direction="row" wrap="wrap">
-        {renderItem.map((item, index) => (
-          <Grid item xs={12} sm={5} container justify="center" key={index}>
+        {isLoading ? (
+          <Spinner height="50vh" />
+        ) : (
+          PlaylistQuery.map(({ id, title }) => (
+            <Grid item xs={12} sm={5} container justify="center" key={id}>
             <PlaylistItem
-              imageUrl={item.imageUrl}
-              titlePlaylist={item.titlePlaylist}
-              link
+                key={id}
+                imageUrl={
+                  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg'
+                }
+                titlePlaylist={title}
+                link={myPlaylistsId(id)}
             />
           </Grid>
-        ))}
+          ))
+        )}
         <Grid item xs={12} sm={5} container>
           {isMyAccount ? (
             <Button
@@ -159,7 +145,6 @@ const Playlist = ({
         onClose={handleCloseNext}
         open={openNext}
         onModifyPlaylist={modifyPlaylist}
-        Items={Items}
       />
     </>
   )

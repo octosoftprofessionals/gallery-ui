@@ -6,7 +6,7 @@ import { boxShadow } from '../../Styles/Colors'
 
 const useStyles = makeStyles(Theme => ({
   img: {
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',

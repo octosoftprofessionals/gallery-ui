@@ -1,3 +1,4 @@
+import { ArrayPlaylist } from '../types'
 import { get, post, update, destroy } from './http'
 
 export const createPlaylist = async ({ user_address } : { user_address: string }) => {
@@ -30,8 +31,8 @@ export const getOnePlaylistByIdWithRelatedArtworks = async ({
 export const deleteOnePlaylistByIdWithAssociatedArtworks = async ({
   playlist_id,
 }: {
-  playlist_id
-: number }) => {
+  playlist_id: number
+}) => {
     const url = `/playlist/${playlist_id}`
     const res = await destroy(url)
     const deletedPlaylist = res.data ?? {}
