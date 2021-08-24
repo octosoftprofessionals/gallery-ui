@@ -16,3 +16,5 @@ export const myProfilePathFromAddress = (address: string) =>
 
 export const myProfilePathWithView = (address: string, view: number) =>
   `/account/?address=${address}#${view}`
+
+export const myPlaylistsId = (id: number) => `/playList/?id=${id}`
