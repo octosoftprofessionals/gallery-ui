@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { useMutation } from 'react-query'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Paper, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
@@ -14,13 +16,13 @@ const useStyles = makeStyles(Theme => ({
   containerDescription: { padding: Theme.spacing(9) },
 }))
 
-const index = ({ Itemss, title, description }) => {
+const index = ({ relatedArtworks, title, description }) => {
   const classes = useStyles()
   const [imgIndex, setImgIndex] = useState(0)
 
   return (
     <Grid item xs={12} container alignItems="center" justify="center">
-      <CarouselPL artworks={Itemss} xs={4} setIndex={setImgIndex} />
+      <CarouselPL artworks={relatedArtworks} xs={4} setIndex={setImgIndex} />
       <Grid
         item
         xs={12}
@@ -62,7 +64,10 @@ const index = ({ Itemss, title, description }) => {
           </Grid>
           <Grid item xs={4}>
             <Typography variant="h5">Artwork Information</Typography>
-            <ArtworkInformation arryArtwork={Itemss} index={imgIndex} />
+            <ArtworkInformation
+              arryArtwork={relatedArtworks}
+              index={imgIndex}
+            />
           </Grid>
         </Grid>
       </Grid>

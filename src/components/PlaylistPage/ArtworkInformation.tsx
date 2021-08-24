@@ -4,10 +4,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, Paper } from '@material-ui/core'
 
 import CardArtwork from './CardArtwork'
+import { formatDecimal } from '../../Utils'
 
 const useStyles = makeStyles(Theme => ({
   img: {
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -35,20 +36,22 @@ const useStyles = makeStyles(Theme => ({
 }))
 
 const ArtworkInformation = ({ arryArtwork, index }) => {
-  const classes = useStyles({ imageUrl: arryArtwork[index].imageUrl })
+  const { imagePreviewUrl, videoUrl, title, priceEth } = arryArtwork[index]
+  const classes = useStyles({ imageUrl: imagePreviewUrl })
+  console.log('object :>> ', arryArtwork[index])
   return (
     <Paper>
       <Grid container alignContent="center" justify="center">
         <Grid container justify="center">
           <CardArtwork
-            imageUrl={arryArtwork[index].imageUrl}
-            videoUrl={arryArtwork[index].imageUrl}
+            imageUrl={imagePreviewUrl}
+            videoUrl={videoUrl}
             key={index}
           />
         </Grid>
 
         <Grid item xs={12} container justify="center">
-          <Typography>Title</Typography>
+          <Typography>{title}</Typography>
         </Grid>
         <Grid item xs={5} container alignItems="flex-start" direction="column">
           <Grid container direction="row" justify="space-between">
@@ -61,7 +64,9 @@ const ArtworkInformation = ({ arryArtwork, index }) => {
           </Grid>
           <Grid container direction="row" justify="space-between">
             <Typography>Last Price:</Typography>
-            <Typography variant="caption">2.0 ETH</Typography>
+            <Typography variant="caption">
+              {isNaN(priceEth) ? '—' : `${formatDecimal(priceEth)} ETH`}
+            </Typography>
           </Grid>
         </Grid>
         <Grid item xs={9} container justify="flex-end">
