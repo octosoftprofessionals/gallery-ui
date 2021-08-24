@@ -91,9 +91,11 @@ const HeroAuctionItem = ({
             color="primary"
             className={classes.price}
           >
-            {`${formatDecimal(priceEth)} ETH`}
+            {isNaN(priceEth) ? '—' : `${formatDecimal(priceEth)} ETH`}
           </Typography>
-          <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
+          <Typography variant="caption">
+            {isNaN(priceUsd) ? '—' : `${formatUsd(priceUsd)}`}
+          </Typography>
         </Grid>
         <Hidden mdDown>
           <Divider
