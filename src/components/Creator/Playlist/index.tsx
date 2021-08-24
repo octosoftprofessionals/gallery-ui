@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useMutation } from 'react-query'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box, Button, Typography } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
@@ -8,6 +10,7 @@ import PlaylistItem from './PlaylistItem'
 import ModalPlaylist from './Modal'
 import ModalArtworksSelected from './Modal/ArtworksSelected'
 import EmptyAccount from '../GridCreator/EmptyAccount'
+import { createPlaylist } from '../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
   button: {
@@ -36,6 +39,8 @@ const Playlist = ({
   const classes = useStyles()
   const [openNext, setOpenNext] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
+  const [newPlaylistId, setNewPlaylistId] = useState('')
+  const createPlaylistMutation = useMutation(createPlaylist)
 
   const handleOpenAddPlaylist = () => {
     setOpenAddPlaylist(true)
@@ -46,6 +51,21 @@ const Playlist = ({
 
   const handleCloseNext = () => {
     setOpenNext(false)
+  }
+
+  const handleCreatePlaylist = async (
+    titlePlaylist: string,
+    descriptionPlaylist: string
+  ) => {
+    // createPlaylistMutation.mutate({ titlePlaylist, descriptionPlaylist })
+    // const { data: PlaylistId } = createPlaylistMutation.data
+    // setNewPlaylistId(PlaylistId)
+    console.log(
+      'next_Click :>> ',
+      titlePlaylist,
+      descriptionPlaylist,
+      newPlaylistId
+    )
   }
 
   if (renderItem.length <= 0 && !isMyAccount) {
@@ -64,6 +84,7 @@ const Playlist = ({
             <PlaylistItem
               imageUrl={item.imageUrl}
               titlePlaylist={item.titlePlaylist}
+              link
             />
           </Grid>
         ))}
@@ -88,6 +109,7 @@ const Playlist = ({
         onClose={handleCloseAddPlaylist}
         open={openAddPlaylist}
         setOpen={setOpenNext}
+        handlePlaylist={handleCreatePlaylist}
       />
       <ModalArtworksSelected onClose={handleCloseNext} open={openNext} />
     </>

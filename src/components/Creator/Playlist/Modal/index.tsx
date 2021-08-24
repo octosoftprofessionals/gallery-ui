@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import {
   Dialog,
-  DialogActions,
-  DialogTitle,
   Grid,
   IconButton,
   Typography,
@@ -62,19 +60,25 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const PlaylistModal = ({ onClose, open, setOpen }) => {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+const PlaylistModal = ({ onClose, open, setOpen, handlePlaylist }) => {
+  const [title, setTitle] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
   const classes = useStyles()
   const handleClose = () => {
     onClose()
-  }
-  const handleNext = () => {
     setTitle('')
     setDescription('')
-    setOpen(true)
-    onClose()
   }
+
+  const handleNext = (e, title, description): any => {
+    e.preventDefault()
+    handlePlaylist(title, description)
+    setTitle('')
+    setDescription('')
+    onClose()
+    setOpen(true)
+  }
+
   return (
     <Dialog
       fullWidth
@@ -83,71 +87,82 @@ const PlaylistModal = ({ onClose, open, setOpen }) => {
       open={open}
       aria-labelledby="simple-dialog-title"
     >
-      <Grid container justify="space-between" alignItems="center">
-        <Grid item xs={10} container justify="center">
-          <Typography
-            variant="h5"
-            color="primary"
-            className={classes.titleModal}
-          >
-            Creat a new playlist
-          </Typography>
-        </Grid>
-        <IconButton onClick={handleClose}>
-          <Close className={classes.icon} />
-        </IconButton>
-      </Grid>
-      <Grid item xs={12} sm={10} className={classes.conteinerForm}>
-        <Grid item xs={12} sm={8}>
-          <InputLabel>
+      <form onSubmit={e => handleNext(e, title, description)}>
+        <Grid container justify="space-between" alignItems="center">
+          <Grid item xs={10} container justify="center">
             <Typography
-              variant="body2"
+              variant="h5"
               color="primary"
-              className={classes.label}
+              className={classes.titleModal}
             >
-              Title:
+              Create a new playlist
             </Typography>
-          </InputLabel>
-          <TextField
-            variant="outlined"
-            placeholder="Add title here..."
-            fullWidth
-            required
-            multiline
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            className={classes.input}
-          />
+          </Grid>
+          <IconButton onClick={handleClose}>
+            <Close className={classes.icon} />
+          </IconButton>
         </Grid>
-        <Grid item xs={12}>
-          <InputLabel>
-            <Typography
-              variant="body2"
-              color="primary"
-              className={classes.label}
-            >
-              Description:
+        <Grid item xs={12} sm={10} className={classes.conteinerForm}>
+          <Grid item xs={12} sm={8}>
+            <InputLabel>
+              <Typography
+                variant="body2"
+                color="primary"
+                className={classes.label}
+              >
+                Title:
+              </Typography>
+            </InputLabel>
+            <TextField
+              id="title"
+              variant="outlined"
+              placeholder="Add title here..."
+              fullWidth
+              multiline
+              required
+              autoFocus
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              className={classes.input}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputLabel>
+              <Typography
+                variant="body2"
+                color="primary"
+                className={classes.label}
+              >
+                Description:
+              </Typography>
+            </InputLabel>
+            <TextField
+              id="description"
+              variant="outlined"
+              fullWidth
+              required
+              placeholder=" Write a short description for your playlist..."
+              multiline
+              rows={6}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              className={[classes.inputMulti, classes.input]}
+            />
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          container
+          justify="flex-end"
+          className={classes.conteinerBtn}
+        >
+          <Button variant="text" className={classes.btn} type="submit">
+            <Typography variant="caption" className={classes.textBtn}>
+              Next
             </Typography>
-          </InputLabel>
-          <TextField
-            variant="outlined"
-            fullWidth
-            placeholder=" Write a short description for your playlist..."
-            multiline
-            rows={6}
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            className={[classes.inputMulti, classes.input]}
-          />
+          </Button>
         </Grid>
-      </Grid>
-      <Grid item container justify="flex-end" className={classes.conteinerBtn}>
-        <Button variant="text" className={classes.btn} onClick={handleNext}>
-          <Typography variant="caption" className={classes.textBtn}>
-            Next
-          </Typography>
-        </Button>
-      </Grid>
+      </form>
     </Dialog>
   )
 }
