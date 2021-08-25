@@ -262,6 +262,7 @@ export const darkTheme = createMuiTheme({
       input: {
         padding: '12px 20px',
         color: darkColors.WhiteSmoke,
+        background: 'none',
       },
       root: {
         // border: `1px solid ${darkColors.Aqua}`,
@@ -306,7 +307,7 @@ export const darkTheme = createMuiTheme({
     },
     secondary: {
       main: darkColors.DarkGray,
-      light: darkColors.DarkGray,
+      light: darkColors.LightGray,
       dark: Black,
       contrastText: darkColors.White,
     },
@@ -571,7 +572,7 @@ export const Theme = createMuiTheme({
     },
     MuiOutlinedInput: {
       input: {
-        background: White,
+        background: 'none',
         padding: '12px 20px',
         color: Nero,
       },

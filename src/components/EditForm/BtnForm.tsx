@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     padding: theme.spacing(10),
     borderRadius: theme.spacing(6),
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: theme.palette.secondary.light,
     fontFamily: theme.typography.fontFamily[3],
     flexDirection: 'row',
     alignItems: 'center',
@@ -219,6 +219,11 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
+                  placeholder={
+                    network.value !== undefined && network.value !== null
+                      ? network.value
+                      : 'Discord user'
+                  }
                   value={network.value}
                 />
               </Grid>
@@ -236,6 +241,11 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
+                  placeholder={
+                    network.value !== undefined && network.value !== null
+                      ? network.value
+                      : 'Code'
+                  }
                   value={network.value}
                 />
               </Grid>
@@ -246,6 +256,15 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                 variant="outlined"
                 color="primary"
                 fullWidth
+                placeholder={
+                  network.value !== undefined &&
+                  network.value !== '' &&
+                  network.value !== null
+                    ? network.value
+                    : network.name === 'Website'
+                    ? `${network.name}`
+                    : `${network.name} username`
+                }
                 InputProps={
                   network.key === 'tiktok' || network.key === 'snapchat'
                     ? {
