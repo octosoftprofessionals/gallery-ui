@@ -270,6 +270,7 @@ const EditForm = ({ userAccount }: Props) => {
       alignItems="center"
       className={classes.root}
     >
+      {console.log(`userAccount`, userAccount)}
       <FormControl>
         <Grid item xs={12} container direction="column" alignItems="center">
           <Grid
@@ -361,12 +362,12 @@ const EditForm = ({ userAccount }: Props) => {
                 <TextField
                   name="Add Bio"
                   inputProps={{ maxLength: 200 }}
-                  helperText={`${word.length}/200`}
+                  helperText={`${bio.length}/200`}
                   multiline
                   className={classes.inputBio}
-                  value={word}
+                  value={bio}
                   rows={8}
-                  onChange={event => setWord(event.target.value)}
+                  onChange={event => setBio(event.target.value)}
                   variant="outlined"
                   fullWidth
                 />
