@@ -8,6 +8,7 @@ import { boxShadow } from '../../Styles/Colors'
 import { deleteOnePlaylistByIdWithAssociatedArtworks } from '../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
+  root: { position: 'relative', width: '90%' },
   img: {
     backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
@@ -26,7 +27,6 @@ const useStyles = makeStyles(Theme => ({
       height: '20vh',
       overflow: 'hidden',
     },
-    position: 'relative',
   },
   link: {
     textDecoration: 'none',
@@ -36,7 +36,11 @@ const useStyles = makeStyles(Theme => ({
   icon: {
     fontSize: Theme.typography.fontSize[4],
   },
-  containerIcon: { position: 'absolute', bottom: 0, right: 0 },
+  containerIcon: {
+    position: 'absolute',
+    bottom: Theme.spacing(4),
+    right: Theme.spacing(0),
+  },
 }))
 
 const PlaylistItem = ({
@@ -57,12 +61,14 @@ const PlaylistItem = ({
     })
   }
   return (
-    <Grid item container className={classes.containerImg}>
+    <div className={classes.root}>
       <Link to={link} className={classes.link}>
-        <Grid item xs={12} className={classes.img} />
-        <Typography variant="subtitle1" color="primary">
-          {titlePlaylist}
-        </Typography>
+        <Grid item container className={classes.containerImg}>
+          <Grid item xs={12} className={classes.img} />
+          <Typography variant="subtitle1" color="primary">
+            {titlePlaylist}
+          </Typography>
+        </Grid>
       </Link>
       <IconButton
         aria-label="delete"
@@ -71,7 +77,7 @@ const PlaylistItem = ({
       >
         <DeleteOutline className={classes.icon} />
       </IconButton>
-    </Grid>
+    </div>
   )
 }
 
