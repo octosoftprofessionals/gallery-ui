@@ -42,6 +42,7 @@ const Home = () => {
     setLiveAuctions(newPages)
     fetchNextPageLA({ pageParam: newPages })
   }
+  console.log('allFeaturedItems:', allFeaturedItems)
 
   const {
     data: liveAcutionItems = [],
@@ -85,7 +86,7 @@ const Home = () => {
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={allFeaturedItems.pages[0].slice(0, 2)}
+          artworksCarousel={allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)}
           timeout={1000}
           interval={7000}
         />

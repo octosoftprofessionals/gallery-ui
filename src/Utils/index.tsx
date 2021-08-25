@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js'
+import { ethers } from 'ethers'
 import { DateTime } from 'luxon'
 
 export const deltaTime = (expiration: string | DateTime | Date) => {
@@ -95,7 +97,8 @@ export const formatDecimal = (numberish, decimals = 3) => {
 const formatNumberWithCommas = x => {
   const [integral = '0', fractional = '0'] = x.toString().split('.')
   const integral_with_commas = integral.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
-  return [integral_with_commas, fractional].join('.')
+  const padded_fractional = fractional.length === 1 ? `0${fractional}` : fractional
+  return [integral_with_commas, padded_fractional].join('.')
 }
 export const formatUsd = numberish => {
   if (numberish == null) {
@@ -153,3 +156,7 @@ export const findeArtwork = (arry, assetId, status) => {
   )
   res.isFavorite = status
 }
+
+export const isError = (e: any): boolean => e && e.stack && e.message && typeof e.stack === 'string' && typeof e.message === 'string'
+
+export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) => formatDecimal(ethers.utils.formatUnits(bn.toString()))

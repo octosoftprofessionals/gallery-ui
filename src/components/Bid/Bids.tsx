@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography, Button, OutlinedInput } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import BidMessages from './BidMessages'
-import EthSvg from '../../assets/eth.svg'
-import { formatDecimal, formatUsd, minValueToBid } from '../../Utils'
+import BigNumber from 'bignumber.js'
+
+import { useMetamaskAccount } from '../../atom'
+import { useAccountStore } from '../../hooks/useAccountStore'
+import { createBuyOrder, getBalanceWETH } from '../../services/bidding'
 import { colors } from '../Styles/Colors'
+import { formatDecimal, formatUsd, formatEthersFromBigNumber } from '../../Utils'
+import { quoteUsdFromEthUsd } from '../../Utils/quoteEthUsd'
+import EthSvg from '../../assets/eth.svg'
+import BidMessages from './BidMessages'
 
 const useStyle = makeStyles(Theme => ({
   '@global': {
@@ -30,7 +36,7 @@ const useStyle = makeStyles(Theme => ({
   },
   colorInput: {
     '@global': {
-      '.MuiOutlinedInput-input': { color: 'red' },
+      '.MuiOutlinedInput-input': { color: Theme.palette.error.main },
     },
   },
   boxBalance: {
@@ -68,25 +74,109 @@ const useStyle = makeStyles(Theme => ({
   textEth: { color: Theme.palette.primary.light },
 }))
 
-const messages = ['ok', 'outbid', 'error', 'noBid']
-
-const messagesRand = () => {
-  return messages[Math.floor(Math.random() * messages.length)]
+const isValidBidAmountEth = (currentMaxBid: BigNumber, accountBalance: BigNumber, bidAmountEth: number) => {
+  console.log('currentMaxBid:', currentMaxBid)
+  console.log('accountBalance:', accountBalance)
+  console.log('bidAmountEth:', bidAmountEth)
+  return currentMaxBid.lt(bidAmountEth) && new BigNumber(bidAmountEth).lte(accountBalance)
 }
 
-const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
-  const classes = useStyle()
-  const [bidAmounts, setBidAmounts] = useState<number>(0)
-  const [valueCurrentMaxBid, setValueCurrentMaxBid] = useState<number>(
-    currentMaxBid
-  )
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState()
+const isAmountQuotable = (amount: number): boolean => amount != null && amount > 0
 
-  const handleClick = () => {
+const Bids = ({
+  assetContractAddress,
+  assetTokenId,
+  priceEth,
+  priceUsd,
+  currentMaxBid,
+}: {
+  assetContractAddress: string,
+  assetTokenId: string,
+  priceEth: string,
+  priceUsd: string,
+  currentMaxBid: string,
+}) => {
+  const classes = useStyle()
+
+  const accountAddress = useMetamaskAccount()
+
+  //getting metamask account from the storage
+  const metamaskStorage = useAccountStore()
+
+  const [bidAmountEth, setBidAmountEth] = useState<number | null>(null)
+  // console.log('bidAmountEth:', bidAmountEth)
+  // console.log('bidAmountEth == null:', bidAmountEth == null)
+  // console.log('bidAmountEth === 0:', bidAmountEth === 0)
+  const bidAmountUsd = !isAmountQuotable(bidAmountEth) ? 0 : quoteUsdFromEthUsd(priceEth, priceUsd, new BigNumber(bidAmountEth))
+
+  const [valueCurrentMaxBid, setValueCurrentMaxBid] = useState<BigNumber>(
+    new BigNumber(currentMaxBid)
+  )
+  const [accountBalanceWETH, setAccountBalanceWETH] = useState<BigNumber>(new BigNumber(0))
+  const [open, setOpen] = useState(false)
+  const [messageState, setMessageState] = useState<string | null>(null)
+  const [severity, setSeverity] = useState<string | null>(null)
+  const [message, setMessage] = useState<string | null>(null)
+
+  console.log('METAMASK accountAddress:', accountAddress)
+  console.log('METAMASK metamaskStorage:', JSON.stringify(metamaskStorage))
+  console.log('accountBalanceWETH:', accountBalanceWETH.toString())
+
+  const isAccountBalanceZero = accountBalanceWETH.eq(0)
+  const isBiddingDisabled = bidAmountEth == null || !isValidBidAmountEth(valueCurrentMaxBid, accountBalanceWETH, bidAmountEth)
+  const isBidAmountEthError = bidAmountEth != null && !isValidBidAmountEth(valueCurrentMaxBid, accountBalanceWETH, bidAmountEth)
+
+  useEffect(() => {
+    (async () => {
+      console.log('accountAddress:', accountAddress)
+      const balanceWETH = await getBalanceWETH(accountAddress)
+      console.log('balanceWETH.toString():', balanceWETH.toString())
+      setAccountBalanceWETH(balanceWETH)
+    })()
+  }, [accountAddress])
+
+  const handleClick = async () => {
+    console.log('accountAddress:', accountAddress)
+    console.log('assetContractAddress:', assetContractAddress)
+    console.log('assetTokenId:', assetTokenId)
+    console.log('bidAmountEth:', bidAmountEth)
+
+    console.log('accountBalanceWETH.toString():', accountBalanceWETH.toString())
+
+    const latestAccountBalanceWETH = await getBalanceWETH(accountAddress)
+
+    console.log('latestAccountBalanceWETH.toString():', latestAccountBalanceWETH.toString())
+
+    if (!isValidBidAmountEth(valueCurrentMaxBid, latestAccountBalanceWETH, bidAmountEth)) {
+      setAccountBalanceWETH(latestAccountBalanceWETH)
+      return
+    }
+
+    const result = await createBuyOrder({
+      accountAddress,
+      assetContractAddress,
+      assetTokenId,
+      // TODO: schema? i.e. ERC721 vs. ERC1155
+      amountEth: bidAmountEth,
+    })
+
+    console.log('BID RESULT:', result)
+    console.log('BID RESULT:', JSON.stringify(result))
+
     setOpen(true)
-    setMessage(() => messagesRand())
-    setValueCurrentMaxBid(+bidAmounts)
+
+    console.log('result instanceof Error:', result instanceof Error)
+    if (result instanceof Error) {
+      console.log('result.message:', result.message)
+      setSeverity('error')
+      setMessage(result.message)
+      return
+    }
+
+    setMessageState('ok')
+    setSeverity(null)
+    setMessage(null)
+    setValueCurrentMaxBid(new BigNumber(bidAmountEth))
   }
 
   return (
@@ -102,14 +192,21 @@ const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
           Place a bid
         </Typography>
       </Grid>
+
       <Grid item xs={12} container direction="column">
         <Typography variant="caption" className={classes.text}>
-          You must bid at least
+          You must bid more than
         </Typography>
         <Typography variant="caption" color="primary">{`${formatDecimal(
           priceEth
         )} ETH`}</Typography>
       </Grid>
+      <Grid item xs={12} sm={6}>
+        <Typography variant="caption">
+          {formatUsd(priceUsd)}
+        </Typography>
+      </Grid>
+
       <Grid item xs={12} container alignItems="flex-start">
         <Grid
           item
@@ -121,13 +218,26 @@ const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
           <OutlinedInput
             type="number"
             placeholder="0"
-            value={bidAmounts}
+            inputProps={{
+              min: 0,
+              step: 0.001,
+            }}
+            value={bidAmountEth}
             className={
-              minValueToBid(bidAmounts, valueCurrentMaxBid)
-                ? [classes.input, classes.colorInput]
+              isBidAmountEthError
+                ? [classes.input, classes.colorInput].join(' ')
                 : classes.input
             }
-            onChange={e => setBidAmounts(e.target.value)}
+            error={isBidAmountEthError}
+            onChange={e => {
+              try {
+                const { value } = e.target
+                console.log('value:', value)
+                setBidAmountEth(value)
+              } catch (e) {
+                return
+              }
+            }}
           />
           <Typography variant="h4" className={classes.textEth}>
             ETH
@@ -136,8 +246,11 @@ const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
         </Grid>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
+        <Typography variant="caption">
+          {formatUsd(bidAmountUsd)}
+        </Typography>
       </Grid>
+
       <div className={classes.boxBalance}>
         <Grid container direction="row" justify="space-between">
           <Typography variant="caption" className={classes.textBalance}>
@@ -145,16 +258,26 @@ const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
           </Typography>
           <Typography
             variant="caption"
-            className={[classes.textBalance, classes.valueBalance]}
+            className={[classes.textBalance, classes.valueBalance].join(' ')}
           >
-            {`${balance} ETH`}
+            {`${accountBalanceWETH.eq(0) ? '0' : formatEthersFromBigNumber(accountBalanceWETH)} ETH`}
           </Typography>
         </Grid>
       </div>
-      <Grid item xs={12} sm={9}>
-        <Typography variant="body2" color="primary">
-          Once a bid is placed, it cannot be withdrawn.
-        </Typography>
+      <Grid item xs={12} sm={12}>
+        {accountAddress == null ? (
+          <Typography variant="body2" color="error">
+            You must connect a wallet before bidding.
+          </Typography>
+        ) : isAccountBalanceZero ? (
+          <Typography variant="body2" color="error">
+            Unable to determine your balance of WETH (wrapped Ether). Perhaps you need to wrap some ETH?
+          </Typography>
+        ) : (
+          <Typography variant="body2" color="primary">
+            Once a bid is placed, it cannot be withdrawn.
+          </Typography>
+        )}
       </Grid>
       <Grid item xs={12} sm={9}>
         <Typography variant="caption" className={classes.text}>
@@ -167,13 +290,13 @@ const Bids = ({ priceEth, priceUsd, balance, currentMaxBid }) => {
           color="primary"
           className={classes.buttonBid}
           onClick={handleClick}
-          disabled={minValueToBid(bidAmounts, valueCurrentMaxBid)}
+          disabled={isBiddingDisabled}
         >
           <Typography variant="button" color="primary" className={classes.text}>
             Place a Bid
           </Typography>
         </Button>
-        <BidMessages setOpen={setOpen} open={open} state={message} />
+        <BidMessages setOpen={setOpen} open={open} state={messageState} severity={severity} message={message} />
       </Grid>
     </Grid>
   )

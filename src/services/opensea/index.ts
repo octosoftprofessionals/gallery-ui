@@ -1,3 +1,5 @@
+import { ArtworksProps, EventType } from '../../types'
+import config from '../../config'
 import { getAsset, getAssets, getEvents, getCollections } from './core'
 import {
   getMetadataForAsset,
@@ -5,7 +7,6 @@ import {
   getExpandedAsset,
   getExpandedAssets,
 } from './asset'
-import { ArtworksProps, EventType } from '../../types'
 
 // Core
 
@@ -23,7 +24,7 @@ export {
 // Other Non-Core
 
 export const getAssetsByCollectionSlug = async (
-  collectionSlug = 'superchief-gallery-nifty',
+  collectionSlug = config.OPENSEA_GALLERY_SLUG,
   { sort_by = 'listing_date', order_direction = 'desc', limit = 9 } = {}
 ): Promise<ArtworksProps[]> => {
   const assets = await getAssets({
@@ -36,7 +37,7 @@ export const getAssetsByCollectionSlug = async (
 }
 
 export const getEventsByCollectionSlug = async (
-  collectionSlug = 'superchief-gallery-nifty'
+  collectionSlug = config.OPENSEA_GALLERY_SLUG
   // {  } = {}
 ): Promise<EventType[]> => {
   // asset_contract_address, token_id, account_address, event_type
