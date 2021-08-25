@@ -33,6 +33,7 @@ export const darkColors = {
   WhiteSmoke: '#FFFFFFD9',
   Aqua: '#00FFFF',
   LightDark: '#2E2E2ED9',
+  LightGray: '#FFFFFF1A',
 }
 
 export const backgroundGradient = {
@@ -45,7 +46,7 @@ export const backgroundGradient = {
   backgroundGradient4:
     'linear-gradient(267.56deg, rgb(5, 0, 255) 0%, rgb(143, 0, 255) 97.07%)',
   backgroundGradient5:
-    'linear-gradient(180deg, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.10) 80%)',
+    'linear-gradient(180deg, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0) 90%)',
 }
 
 export const boxShadow = {

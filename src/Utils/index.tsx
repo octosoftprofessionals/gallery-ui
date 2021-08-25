@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js'
+import { ethers } from 'ethers'
 import { DateTime } from 'luxon'
 
 export const deltaTime = (expiration: string | DateTime | Date) => {
@@ -18,12 +20,16 @@ export const timeFormat = (delta: number) => {
   let _minute = _second * 60
   let _hour = _minute * 60
   let _day = _hour * 24
+  let _month = _day * 30
 
+  let day = Math.floor((delta % _month) / _day)
   let hour = Math.floor((delta % _day) / _hour)
   let min = Math.floor((delta % _hour) / _minute)
   let sec = Math.floor((delta % _minute) / _second)
 
-  if (hour > 0) {
+  if (day > 0) {
+    timeString += `${day}d ${hour}h ${min}m`
+  } else if (day === 0 && hour > 0) {
     timeString += `${hour}h ${min}m ${sec}s`
   } else if (hour === 0 && min > 0) {
     timeString += `${min}m ${sec}s`
@@ -39,12 +45,14 @@ export const timerArray = (delta: number) => {
   let _minute = _second * 60
   let _hour = _minute * 60
   let _day = _hour * 24
+  let _month = _day * 30
 
+  let Days = Math.floor((delta % _month) / _day)
   let Hours = Math.floor((delta % _day) / _hour)
   let Minutes = Math.floor((delta % _hour) / _minute)
   let Seconds = Math.floor((delta % _minute) / _second)
 
-  return { Hours, Minutes, Seconds }
+  return { Days, Hours, Minutes, Seconds }
 }
 
 export const isTypeVideo = (typeVide: String) => {
@@ -89,7 +97,8 @@ export const formatDecimal = (numberish, decimals = 3) => {
 const formatNumberWithCommas = x => {
   const [integral = '0', fractional = '0'] = x.toString().split('.')
   const integral_with_commas = integral.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
-  return [integral_with_commas, fractional].join('.')
+  const padded_fractional = fractional.length === 1 ? `0${fractional}` : fractional
+  return [integral_with_commas, padded_fractional].join('.')
 }
 export const formatUsd = numberish => {
   if (numberish == null) {
@@ -147,3 +156,7 @@ export const findeArtwork = (arry, assetId, status) => {
   )
   res.isFavorite = status
 }
+
+export const isError = (e: any): boolean => e && e.stack && e.message && typeof e.stack === 'string' && typeof e.message === 'string'
+
+export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) => formatDecimal(ethers.utils.formatUnits(bn.toString()))

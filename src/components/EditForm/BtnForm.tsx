@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     padding: theme.spacing(10),
     borderRadius: theme.spacing(6),
-    backgroundColor: '#FFFFFF1A',
+    backgroundColor: theme.palette.secondary.light,
     fontFamily: theme.typography.fontFamily[3],
     flexDirection: 'row',
     alignItems: 'center',
@@ -123,41 +123,49 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
     {
       key: 'website',
       name: 'Website',
+      value: socialNetwork.website,
       icon: <LanguageIcon className={classes.icon} />,
     },
     {
       key: 'twitter',
       name: 'Twitter',
+      value: socialNetwork.twitter,
       icon: <TwitterIcon className={classes.icon} />,
     },
     {
       key: 'instagram',
       name: 'Instagram',
+      value: socialNetwork.instagram,
       icon: <InstagramIcon className={classes.icon} />,
     },
     {
       key: 'discord',
       name: 'Discord',
+      value: socialNetwork.discord,
       icon: <DiscordIcon className={classes.icon2} />,
     },
     {
       key: 'youtube',
       name: 'YouTube',
+      value: socialNetwork.youtube,
       icon: <YouTubeIcon className={classes.icon} />,
     },
     {
       key: 'facebook',
       name: 'Facebook',
+      value: socialNetwork.facebook,
       icon: <FacebookIcon className={classes.icon} />,
     },
     {
       key: 'tiktok',
       name: 'TikTok',
+      value: socialNetwork.tiktok,
       icon: <TickTockIcon className={classes.icon2} />,
     },
     {
       key: 'snapchat',
       name: 'Snapchat',
+      value: socialNetwork.snapchat,
       icon: <SnapchatIcon className={classes.icon2} />,
     },
   ]
@@ -211,7 +219,12 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
-                  value={socialNetwork.web}
+                  placeholder={
+                    network.value !== undefined && network.value !== null
+                      ? network.value
+                      : 'Discord user'
+                  }
+                  value={network.value}
                 />
               </Grid>
               <Grid item xs={2}>
@@ -228,7 +241,12 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                   onChange={e =>
                     handleChange(network.key, e.currentTarget.value)
                   }
-                  value={socialNetwork.web}
+                  placeholder={
+                    network.value !== undefined && network.value !== null
+                      ? network.value
+                      : 'Code'
+                  }
+                  value={network.value}
                 />
               </Grid>
             </Grid>
@@ -238,6 +256,15 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                 variant="outlined"
                 color="primary"
                 fullWidth
+                placeholder={
+                  network.value !== undefined &&
+                  network.value !== '' &&
+                  network.value !== null
+                    ? network.value
+                    : network.name === 'Website'
+                    ? `${network.name}`
+                    : `${network.name} username`
+                }
                 InputProps={
                   network.key === 'tiktok' || network.key === 'snapchat'
                     ? {
@@ -251,7 +278,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
                 }
                 className={classes.inputProfile}
                 onChange={e => handleChange(network.key, e.currentTarget.value)}
-                value={socialNetwork.web}
+                value={`${network.value}`}
               />
             </Grid>
           )}

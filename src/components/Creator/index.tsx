@@ -119,6 +119,9 @@ const Creator = ({
 
   useEffect(() => {
     setCoverImgUrl(user.coverImgUrl)
+    // if (isMyAccount) {
+    //   window.history.replaceState({}, '', `@${user.username}`)
+    // }
   })
 
   return (
@@ -146,6 +149,7 @@ const Creator = ({
             tiktok={user.tiktok}
             snapchat={user.snapchat}
           />
+          {console.log(`user`, user)}
         </Grid>
         <Grid item container justify="flex-start" md={3} xs={12}>
           <div className={classes.share}>

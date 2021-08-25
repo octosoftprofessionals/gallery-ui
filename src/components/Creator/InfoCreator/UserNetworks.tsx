@@ -25,10 +25,11 @@ const useStyles = makeStyles(Theme => ({
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
+    textTransform: 'lowercase',
   },
   drawer: {
     padding: Theme.spacing(4),
-    backgroundColor: '#212e36',
+    backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(4),
     lineHeight: '40px',
     heigth: '200px',
@@ -68,12 +69,8 @@ const useStyles = makeStyles(Theme => ({
     fontSize: Theme.spacing(4),
   },
   buttonKeyPublic: {
-    /*     width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
-    position: 'absolute',
-    left: ({ userIndex }) => (userIndex ? Theme.spacing(13) : 0), */
-    backgroundColor: Theme.palette.secondary.main,
-    /*     padding: Theme.spacing(0, 0, 0, 13), */
-    /*     boxShadow: boxShadow.boxShadow1, */
+    marginLeft: Theme.spacing(4),
+    backgroundColor: 'none',
     '&:hover': {
       backgroundColor: Theme.palette.secondary.main,
       transform: 'none',
@@ -87,15 +84,30 @@ const useStyles = makeStyles(Theme => ({
     fill: colors.IslamicGreen,
   },
   web: {
-    display: ({ web }) => (web ? 'block' : 'none'),
+    display: ({ web }) => (web !== null && web !== '' ? 'block' : 'none'),
   },
-  ig: { display: ({ ig }) => (ig ? 'block' : 'none') },
-  Tw: { display: ({ tw }) => (tw ? 'block' : 'none') },
-  discord: { display: ({ discord }) => (discord ? 'block' : 'none') },
-  youtube: { display: ({ youtube }) => (youtube ? 'block' : 'none') },
-  facebook: { display: ({ facebook }) => (facebook ? 'block' : 'none') },
-  tiktok: { display: ({ tiktok }) => (tiktok ? 'block' : 'none') },
-  snapchat: { display: ({ snapchat }) => (snapchat ? 'block' : 'none') },
+  ig: { display: ({ ig }) => (ig !== null && ig !== '' ? 'block' : 'none') },
+  Tw: { display: ({ tw }) => (tw !== null && tw !== '' ? 'block' : 'none') },
+  discord: {
+    display: ({ discord }) =>
+      discord !== null && discord !== '' ? 'block' : 'none',
+  },
+  youtube: {
+    display: ({ youtube }) =>
+      youtube !== null && youtube !== '' ? 'block' : 'none',
+  },
+  facebook: {
+    display: ({ facebook }) =>
+      facebook !== null && facebook !== '' ? 'block' : 'none',
+  },
+  tiktok: {
+    display: ({ tiktok }) =>
+      tiktok !== null && tiktok !== '' ? 'block' : 'none',
+  },
+  snapchat: {
+    display: ({ snapchat }) =>
+      snapchat !== null && snapchat !== '' ? 'block' : 'none',
+  },
   prueba: {
     display: 'none',
   },
@@ -123,9 +135,13 @@ const UserNetworks = ({
     snapchat,
   })
   const [isCopy, setIsCopy] = useState(false)
+
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
     setIsCopy(true)
+    setTimeout(() => {
+      setIsCopy(false)
+    }, 3000)
   }
 
   return (
@@ -153,9 +169,9 @@ const UserNetworks = ({
 
               <Typography
                 variant="overline"
-                color="secondary"
+                color="primary"
                 noWrap
-                className={classes.text}
+                className={classes.link}
               >
                 {truncateMiddleText(publicKey, 8)}
               </Typography>
@@ -175,24 +191,13 @@ const UserNetworks = ({
         </Grid>
         <Grid container direction="column">
           <Grid className={classes.Tw}>
-            <Link to={`https://twitter.com/${tw}`}>
+            <Link to={`https://twitter.com/${tw}`} className={classes.link}>
               <TwitterIcon className={classes.icon} />
               <Typography
                 variant="overline"
-                color="secondary"
-                className={classes.text}
+                color="primary"
+                className={classes.link}
               >
-                {console.log(
-                  'DATA:',
-                  web,
-                  ig,
-                  tw,
-                  discord,
-                  youtube,
-                  facebook,
-                  tiktok,
-                  snapchat
-                )}
                 {tw}
               </Typography>
             </Link>
@@ -203,19 +208,19 @@ const UserNetworks = ({
             <InstagramIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
-              className={classes.text}
+              color="primary"
+              className={classes.link}
             >
               {ig}
             </Typography>
           </Link>
         </Grid>
         <Grid className={classes.web}>
-          <Link to={web} className={classes.link}>
+          <Link to={`https://${web}`} className={classes.link}>
             <LanguageIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={web ? classes.link : classes.web}
             >
               {web}
@@ -227,7 +232,7 @@ const UserNetworks = ({
             <DiscordIcon className={classes.icon2} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={discord ? classes.link : classes.discord}
             >
               {discord}
@@ -235,11 +240,11 @@ const UserNetworks = ({
           </Link>
         </Grid>
         <Grid className={classes.tiktok}>
-          <Link to={`https:tiktok.com/${tiktok}`} className={classes.link}>
+          <Link to={`https://tiktok.com/@${tiktok}`} className={classes.link}>
             <TickTockIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={tiktok ? classes.link : classes.tiktok}
             >
               {tiktok}
@@ -254,7 +259,7 @@ const UserNetworks = ({
             <YouTubeIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={youtube ? classes.link : classes.youtube}
             >
               {youtube}
@@ -269,7 +274,7 @@ const UserNetworks = ({
             <FacebookIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={facebook ? classes.link : classes.facebook}
             >
               {facebook}
@@ -284,7 +289,7 @@ const UserNetworks = ({
             <SnapchatIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={snapchat ? classes.link : classes.snapchat}
             >
               {snapchat}

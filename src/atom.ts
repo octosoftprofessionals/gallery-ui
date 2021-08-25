@@ -5,9 +5,9 @@ import {
   useSetRecoilState,
 } from 'recoil'
 
-import { MetamaskAccountType } from './types'
+// import { MetamaskAccountType } from './types'
 
-export const metamaskAccount = atom<MetamaskAccountType>({
+export const metamaskAccount = atom<string>({
   key: 'account',
   default: null,
 })

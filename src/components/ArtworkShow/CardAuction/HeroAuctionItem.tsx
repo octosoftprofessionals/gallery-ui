@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
-import {
-  Button,
-  Divider,
-  Grid,
-  Hidden,
-  Typography,
-  withWidth,
-} from '@material-ui/core'
+import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { formatDecimal, deltaTime, formatUsd, timerArray } from '../../../Utils'
+import { formatDecimal, formatUsd } from '../../../Utils'
+import useTimer from '../../../hooks/useTimer'
+import CountdownTimer from './CountdownTimer'
+import Spinner from '../../Spinner'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -20,6 +16,7 @@ const useStyle = makeStyles(Theme => ({
   titlePrice: { fontSize: Theme.typography.fontSize[3] },
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
+    backgroundColor: Theme.palette.primary.main,
   },
   texTimer: {
     fontSize: Theme.typography.fontSize[3],
@@ -34,7 +31,10 @@ const useStyle = makeStyles(Theme => ({
       fontSize: Theme.typography.fontSize[4],
     },
   },
-  boxTimer: { display: ({ disableTime }) => (disableTime ? 'flex' : 'none') },
+  boxTimer: {
+    display: ({ disableTime }: { disableTime: boolean }) =>
+      disableTime ? 'flex' : 'none',
+  },
 }))
 
 const HeroAuctionItem = ({
@@ -46,37 +46,21 @@ const HeroAuctionItem = ({
   linkButtonArtWork,
   isLoading,
 }) => {
-  const [timer, setTimer] = useState(0)
-  const [disableInfo, setDisableInfo] = useState(false)
-  const [disableHours, setDisableHours] = useState(true)
-  const [disableTime, setDisableTime] = useState(false)
-  const [changeTitle, setChangeTitle] = useState('')
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      const delta = deltaTime(expiration)
-      if (delta >= 0) {
-        setTimer(timerArray(delta))
-        setDisableTime(true)
-        setChangeTitle('Auction ending in')
-      } else {
-        clearInterval(timeInterval)
-        setDisableTime(false)
-        setTimer(0)
-        setChangeTitle('This auction is ending soon!')
-      }
-
-      let { Hours, Minutes } = timerArray(delta)
-      if (Hours <= 0) {
-        setDisableHours(false)
-      }
-      if (Hours <= 0 && Minutes <= 15) {
-        setDisableInfo(true)
-        setChangeTitle('This auction is ending soon!')
-      }
-    }, 1000)
-  }, [])
-  let { Hours, Minutes, Seconds } = timer
-
+  const {
+    timer,
+    changeTitle,
+    disableInfo,
+    disableDays,
+    disableHours,
+    disableTime,
+  }: {
+    timer: string[]
+    changeTitle: string
+    disableInfo: boolean
+    disableDays: boolean
+    disableHours: boolean
+    disableTime: boolean
+  } = useTimer({ expiration })
   const classes = useStyle({ disableTime })
   return (
     <Grid container direction="column">
@@ -94,7 +78,7 @@ const HeroAuctionItem = ({
         justify="space-between"
         className={classes.root}
       >
-        <Grid item xs={12} lg={4} container direction="column">
+        <Grid item xs={12} md={3} container direction="column">
           <Typography
             variant="button"
             color="primary"
@@ -107,9 +91,11 @@ const HeroAuctionItem = ({
             color="primary"
             className={classes.price}
           >
-            {`${formatDecimal(priceEth)} ETH`}
+            {isNaN(priceEth) ? '—' : `${formatDecimal(priceEth)} ETH`}
           </Typography>
-          <Typography variant="caption">{formatUsd(priceUsd)}</Typography>
+          <Typography variant="caption">
+            {isNaN(priceUsd) ? '—' : `${formatUsd(priceUsd)}`}
+          </Typography>
         </Grid>
         <Hidden mdDown>
           <Divider
@@ -118,76 +104,19 @@ const HeroAuctionItem = ({
             className={classes.divider}
           />
         </Hidden>
-        <Grid item xs={12} md={7}>
-          <Grid item xs={12}>
-            <Typography
-              variant="button"
-              color="primary"
-              className={classes.titlePrice}
-            >
-              {changeTitle}
-            </Typography>
-          </Grid>
-          <Grid container direction="row" className={classes.boxTimer}>
-            <Grid
-              item
-              xs={4}
-              sm={3}
-              style={{ display: disableHours ? 'block' : 'none' }}
-            >
-              <Grid container direction="column" alignItems="flex-start">
-                <Typography
-                  variant="h5"
-                  color="primary"
-                  className={classes.numberTimer}
-                >
-                  {Hours}
-                </Typography>
-                <Typography variant="caption" className={classes.texTimer}>
-                  Hours
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid
-              item
-              xs={4}
-              sm={3}
-              container
-              direction="column"
-              alignItems="flex-start"
-            >
-              <Typography
-                variant="h5"
-                color="primary"
-                className={classes.numberTimer}
-              >
-                {Minutes}
-              </Typography>
-              <Typography variant="caption" className={classes.texTimer}>
-                Minutes
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={4}
-              sm={3}
-              container
-              direction="column"
-              alignItems="flex-start"
-            >
-              <Typography
-                variant="h5"
-                color="primary"
-                className={classes.numberTimer}
-              >
-                {Seconds}
-              </Typography>
-              <Typography variant="caption" className={classes.texTimer}>
-                Seconds
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
+
+        {isLoading ? (
+          <Spinner height="30vh" />
+        ) : (
+          <CountdownTimer
+            timer={timer}
+            changeTitle={changeTitle}
+            disableDays={disableDays}
+            disableHours={disableHours}
+            disableTime={disableTime}
+            disableInfo={disableInfo}
+          />
+        )}
       </Grid>
       <Grid
         item
@@ -220,4 +149,4 @@ const HeroAuctionItem = ({
   )
 }
 
-export default withWidth()(HeroAuctionItem)
+export default HeroAuctionItem

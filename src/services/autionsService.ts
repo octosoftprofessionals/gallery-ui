@@ -1,8 +1,9 @@
+import { paginatedQuery } from '../Utils'
+import { ArtworksProps, CreatorProps } from '../types'
+import config from '../config'
 import auctionsMockup from './mockups/auctions'
 import accountInfo from './mockups/account'
-import { paginatedQuery } from '../Utils'
 import { getAssetsByCollectionSlug } from './opensea'
-import { ArtworksProps, CreatorProps } from '../types'
 
 export async function getCreators(): Promise<{ creators: CreatorProps[] }> {
   return new Promise(resolve => {
@@ -15,7 +16,7 @@ export async function getCreators(): Promise<{ creators: CreatorProps[] }> {
 }
 
 export async function getArtworkAuctions() {
-  return await getAssetsByCollectionSlug('superchiefgallery-nifty')
+  return await getAssetsByCollectionSlug(config.OPENSEA_GALLERY_SLUG)
 }
 
 export async function getArtworkAuctionsPaginated() {
