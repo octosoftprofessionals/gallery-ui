@@ -69,13 +69,10 @@ export const addArtworkToNewPlaylist = async () => {
 
 export const addArtworkToExistingPlaylist = async (
   playlist_id: number,
-  queryParams: any
+  queryParams: any = {}
 ) => {
-  console.log('queryParams :>> ', queryParams)
   const url = `/playlist/addArtwork/${playlist_id}`
-  console.log('url :>> ', url)
-  const res = await post(url)
-  console.log('res :>> ', res)
+  const res = await post(url, queryParams)
   const addedArtworkToExistingPlaylist = res.data ?? {}
   return addedArtworkToExistingPlaylist
 }

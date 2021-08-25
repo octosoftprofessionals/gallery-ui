@@ -8,6 +8,8 @@ import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
 import { myProfilePathWithView } from '../../../../config/routes'
 import { ArrayPlaylist } from '../../../../types'
 
+import { addArtworkToExistingPlaylist } from '../../../../services/playlists'
+
 const useStyles = makeStyles(Theme => ({
   root: {},
   link: { textDecoration: 'none' },
@@ -28,6 +30,13 @@ const MenuPlaylist = ({
   artworkId: number
 }) => {
   const classes = useStyles()
+
+  const handleAddArtwork = async (id: number) => {
+    const res = await addArtworkToExistingPlaylist(id, {
+      artwork_id: artworkId,
+    })
+    onClose()
+  }
 
   return (
     <Menu
@@ -53,7 +62,7 @@ const MenuPlaylist = ({
         <>
           <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
             <Typography variant="button" color="primary">
-            {title}
+              {title}
             </Typography>
           </MenuItem>
           <Divider />
