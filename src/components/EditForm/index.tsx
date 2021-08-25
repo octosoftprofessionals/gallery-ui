@@ -112,7 +112,7 @@ const useStyle = makeStyles(theme => ({
   suscribeBtn: {
     fontSize: theme.typography.fontSize[3],
     fontWeight: 800,
-    color: theme.palette.secondary.dark,
+    color: '#010101',
     padding: theme.spacing(7),
     marginTop: theme.spacing(12),
     borderRadius: theme.spacing(7),
