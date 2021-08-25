@@ -382,7 +382,7 @@ const EditForm = ({ userAccount }: Props) => {
                   Upload a profile image:
                 </Typography>
 
-                <input type="file" onChange={onChangeTestFile} />
+                {/*   <input type="file" onChange={onChangeTestFile} /> */}
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="user" files={files} />
