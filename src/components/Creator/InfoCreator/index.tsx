@@ -72,8 +72,7 @@ const useStyle = makeStyles(Theme => ({
   },
   userProfile: {
     width: '100%',
-
-    '@media (max-width: 576px)': {
+    '@media (max-width: 300px)': {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -96,7 +95,9 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   bio: {
+    marginLeft: Theme.spacing(15),
     '@media (max-width: 576px)': {
+      marginLeft: Theme.spacing(0),
       marginTop: Theme.spacing(12),
       width: '100%',
       display: 'flex',
@@ -104,6 +105,14 @@ const useStyle = makeStyles(Theme => ({
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
+    },
+  },
+  infoBio: {
+    '@media (max-width: 300px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   },
   buttonKeyPublic: {
@@ -199,20 +208,29 @@ const InfoCreator = ({
 
   return (
     <>
-      <Grid container direction="column">
+      <Grid container direction="row">
         <Grid
           item
           container
           justify="space-around"
           direction="row"
           className={classes.userProfile}
+          sm={8}
+          xs={12}
         >
-          <Grid item xs={3} direction="row">
+          <Grid item xs={3} direction="row" className={classes.infoBio}>
             <Typography variant="h4" className={classes.userName}>
               {username ? `@${username}` : truncateMiddleText(publicKey, 5)}
             </Typography>
           </Grid>
-          <Grid container item xs={2} direction="column" justify="flex-start">
+          <Grid
+            container
+            item
+            xs={2}
+            direction="column"
+            justify="flex-start"
+            className={classes.infoBio}
+          >
             <Grid
               item
               container
@@ -265,7 +283,7 @@ const InfoCreator = ({
               />
             ) : null}
           </Grid>
-          <Grid item md={2} sm={9} xs={12}>
+          <Grid item md={3} sm={9} xs={12}>
             {isMyAccount ? (
               <Button variant="outlined" fullWidth href="/editProfile">
                 <Typography variant="button">Edit profile</Typography>
@@ -286,26 +304,30 @@ const InfoCreator = ({
               </Button>
             )}
           </Grid>
-          <Grid item md={4} xs={11} className={classes.networks}>
-            <UserNetworks
-              publicKey={publicKey}
-              web={web}
-              ig={ig}
-              tw={tw}
-              discord={discord}
-              youtube={youtube}
-              facebook={facebook}
-              tiktok={tiktok}
-              snapchat={snapchat}
-            />
+          <Grid container item justify="flex-start" xs={12}>
+            <Grid container sm={7} xs={12}>
+              <Typography
+                variant="body2"
+                color="primary"
+                className={classes.bio}
+              >
+                {bio}
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid container item justify="flex-start" xs={12}>
-        <Grid container sm={7} xs={12}>
-          <Typography variant="body2" color="primary" className={classes.bio}>
-            {bio}
-          </Typography>
+        <Grid item md={4} xs={12} className={classes.networks}>
+          <UserNetworks
+            publicKey={publicKey}
+            web={web}
+            ig={ig}
+            tw={tw}
+            discord={discord}
+            youtube={youtube}
+            facebook={facebook}
+            tiktok={tiktok}
+            snapchat={snapchat}
+          />
         </Grid>
       </Grid>
     </>
