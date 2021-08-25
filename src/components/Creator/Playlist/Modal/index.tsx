@@ -70,7 +70,7 @@ const PlaylistModal = ({ onClose, open, setOpen, handlePlaylist }) => {
     setDescription('')
   }
 
-  const handleNext = (e, title, description): any => {
+  const handleNext = e => {
     e.preventDefault()
     handlePlaylist(title, description)
     setTitle('')
@@ -87,7 +87,7 @@ const PlaylistModal = ({ onClose, open, setOpen, handlePlaylist }) => {
       open={open}
       aria-labelledby="simple-dialog-title"
     >
-      <form onSubmit={e => handleNext(e, title, description)}>
+      <form onSubmit={handleNext}>
         <Grid container justify="space-between" alignItems="center">
           <Grid item xs={10} container justify="center">
             <Typography

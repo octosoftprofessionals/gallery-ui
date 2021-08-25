@@ -28,6 +28,7 @@ const ButtonPlaylist = ({
   inPlaylist,
   account,
   playlists,
+  artworkId,
 }: {
   handleSubmitFavorite: Function
   handleSubmitUnFavorite: Function
@@ -36,7 +37,8 @@ const ButtonPlaylist = ({
   inFavorite?: boolean
   inPlaylist?: boolean
   account: string
-  playlists: ArrayPlaylist
+  playlists: ArrayPlaylist[]
+  artworkId: number
 }) => {
   const classes = useStyle()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -97,6 +99,7 @@ const ButtonPlaylist = ({
         onClose={handleClose}
         arrayPlaylist={playlists}
         account={account}
+        artworkId={artworkId}
       />
     </Grid>
   )

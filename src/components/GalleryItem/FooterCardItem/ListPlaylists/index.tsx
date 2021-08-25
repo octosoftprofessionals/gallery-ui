@@ -18,12 +18,14 @@ const MenuPlaylist = ({
   onClose,
   arrayPlaylist,
   account,
+  artworkId,
   ...props
 }: {
   anchorEl: any
   onClose: any
-  arrayPlaylist: ArrayPlaylist
+  arrayPlaylist: ArrayPlaylist[]
   account: string
+  artworkId: number
 }) => {
   const classes = useStyles()
 
@@ -49,14 +51,16 @@ const MenuPlaylist = ({
     >
       {arrayPlaylist.map(({ id, title }) => (
         <>
-          <MenuItem key={id} onClick={onClose}>
+          <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
+            <Typography variant="button" color="primary">
             {title}
+            </Typography>
           </MenuItem>
           <Divider />
         </>
       ))}
       <Link to={myProfilePathWithView(account, 2)} className={classes.link}>
-        <MenuItem onClick={onClose}>
+        <MenuItem>
           <Typography variant="button" color="primary">
             New Playlist
           </Typography>

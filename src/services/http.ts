@@ -36,7 +36,7 @@ export const get = async (url, queryParams = {}) => {
 }
 
 export const post = async (url, queryParams = {}) => {
-  return await httpWithCredentials.post(url, { params: queryParams })
+  return await httpWithCredentials.post(url, queryParams)
 }
 
 export const update = async (url, queryParams = {}) => {
@@ -44,5 +44,5 @@ export const update = async (url, queryParams = {}) => {
 }
 
 export const destroy = async (url, queryParams = {}) => {
-  return await httpWithCredentials.delete(url, { params: queryParams })
+  return await httpWithCredentials.delete(url, queryParams)
 }

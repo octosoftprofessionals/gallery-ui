@@ -17,6 +17,7 @@ const FooterCardItem = ({
   isFavorite,
   account,
   playlists,
+  artworkId,
 }: {
   statesArt: string
   price?: string
@@ -27,7 +28,8 @@ const FooterCardItem = ({
   handleSubmitUnPlaylist: Function
   isFavorite?: boolean
   account: any
-  playlists: ArrayPlaylist
+  playlists: ArrayPlaylist[]
+  artworkId: number
 }) => {
   return (
     <>
@@ -42,6 +44,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </InAuctions>
@@ -56,6 +59,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </Reserve>
@@ -70,6 +74,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </Sold>

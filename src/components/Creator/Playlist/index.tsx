@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useMutation } from 'react-query'
+import { useQuery } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box, Button, Typography } from '@material-ui/core'
@@ -10,7 +10,10 @@ import PlaylistItem from './PlaylistItem'
 import ModalPlaylist from './Modal'
 import ModalArtworksSelected from './Modal/ArtworksSelected'
 import EmptyAccount from '../GridCreator/EmptyAccount'
+import Spinner from '../../Spinner'
 import { createPlaylist } from '../../../services/playlists'
+import { ArrayPlaylist } from '../../../types'
+import { myPlaylistsId } from '../../../config/routes'
 
 const useStyles = makeStyles(Theme => ({
   button: {
@@ -38,21 +41,18 @@ const Playlist = ({
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName: string
-  queryFunction: () => Promise<ArrayPlaylist[]>
+  queryFunction: Promise<ArrayPlaylist[]>
 }) => {
   const { data: PlaylistQuery = [], isLoading } = useQuery(
     queryName,
-    queryFunction,
-    {
-      refetchOnWindowFocus: false,
-    }
+    queryFunction
   )
 
   const classes = useStyles()
   const [openNext, setOpenNext] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [newPlaylistId, setNewPlaylistId] = useState('')
-  const createPlaylistMutation = useMutation(createPlaylist)
+
   let arrPlaylist = []
 
   const handleOpenAddPlaylist = () => {
@@ -70,15 +70,10 @@ const Playlist = ({
     titlePlaylist: string,
     descriptionPlaylist: string
   ) => {
-    // createPlaylistMutation.mutate({ titlePlaylist, descriptionPlaylist })
-    // const { id: PlaylistId } = createPlaylistMutation.data
-    // setNewPlaylistId(PlaylistId)
-    console.log(
-      'next_Click :>> ',
-      titlePlaylist,
-      descriptionPlaylist,
-      arrPlaylist
-    )
+    const res = await createPlaylist(profileAddress, {
+      title: titlePlaylist,
+      description: descriptionPlaylist,
+    })
   }
 
   if (PlaylistQuery.length <= 0 && !isMyAccount) {
@@ -107,15 +102,16 @@ const Playlist = ({
         ) : (
           PlaylistQuery.map(({ id, title }) => (
             <Grid item xs={12} sm={5} container justify="center" key={id}>
-            <PlaylistItem
+              <PlaylistItem
                 key={id}
                 imageUrl={
                   'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg'
                 }
                 titlePlaylist={title}
                 link={myPlaylistsId(id)}
-            />
-          </Grid>
+                id={id}
+              />
+            </Grid>
           ))
         )}
         <Grid item xs={12} sm={5} container>

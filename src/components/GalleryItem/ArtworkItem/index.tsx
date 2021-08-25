@@ -80,9 +80,10 @@ const ArtworkItem = ({
 }: {
   galleryItem: GalleryItem | undefined
   onFavorite: Function
-  playlists: ArrayPlaylist | undefined
+  playlists: ArrayPlaylist[] | undefined
 }) => {
   const {
+    id,
     assetId,
     title,
     imageUrl,
@@ -189,6 +190,7 @@ const ArtworkItem = ({
         isFavorite={isFavorite}
         account={account}
         playlists={playlists}
+        artworkId={id}
       />
     </Paper>
   )

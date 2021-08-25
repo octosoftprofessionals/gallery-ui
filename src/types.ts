@@ -131,6 +131,7 @@ export enum GalleryItemStatus {
 }
 
 export type GalleryItem = {
+  id: number
   // identifiers
   // contract & token reference metadata
   assetId: string
