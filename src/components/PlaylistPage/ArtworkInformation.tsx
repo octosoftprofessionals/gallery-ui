@@ -38,7 +38,7 @@ const useStyles = makeStyles(Theme => ({
 const ArtworkInformation = ({ arryArtwork, index }) => {
   const { imagePreviewUrl, videoUrl, title, priceEth } = arryArtwork[index]
   const classes = useStyles({ imageUrl: imagePreviewUrl })
-  console.log('object :>> ', arryArtwork[index])
+
   return (
     <Paper>
       <Grid container alignContent="center" justify="center">
