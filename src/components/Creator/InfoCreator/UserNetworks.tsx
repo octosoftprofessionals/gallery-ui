@@ -29,7 +29,7 @@ const useStyles = makeStyles(Theme => ({
   },
   drawer: {
     padding: Theme.spacing(4),
-    backgroundColor: '#212e36',
+    backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(4),
     lineHeight: '40px',
     heigth: '200px',
@@ -69,12 +69,8 @@ const useStyles = makeStyles(Theme => ({
     fontSize: Theme.spacing(4),
   },
   buttonKeyPublic: {
-    /*     width: ({ isMyAccount }) => (isMyAccount ? '30%' : '50%'),
-    position: 'absolute',
-    left: ({ userIndex }) => (userIndex ? Theme.spacing(13) : 0), */
-    backgroundColor: Theme.palette.secondary.main,
-    /*     padding: Theme.spacing(0, 0, 0, 13), */
-    /*     boxShadow: boxShadow.boxShadow1, */
+    marginLeft: Theme.spacing(4),
+    backgroundColor: 'none',
     '&:hover': {
       backgroundColor: Theme.palette.secondary.main,
       transform: 'none',
@@ -139,9 +135,13 @@ const UserNetworks = ({
     snapchat,
   })
   const [isCopy, setIsCopy] = useState(false)
+
   const getPublicKey = () => {
     navigator.clipboard.writeText(publicKey)
     setIsCopy(true)
+    setTimeout(() => {
+      setIsCopy(false)
+    }, 3000)
   }
 
   return (
@@ -169,7 +169,7 @@ const UserNetworks = ({
 
               <Typography
                 variant="overline"
-                color="secondary"
+                color="primary"
                 noWrap
                 className={classes.link}
               >
@@ -195,7 +195,7 @@ const UserNetworks = ({
               <TwitterIcon className={classes.icon} />
               <Typography
                 variant="overline"
-                color="secondary"
+                color="primary"
                 className={classes.link}
               >
                 {tw}
@@ -208,7 +208,7 @@ const UserNetworks = ({
             <InstagramIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={classes.link}
             >
               {ig}
@@ -216,11 +216,11 @@ const UserNetworks = ({
           </Link>
         </Grid>
         <Grid className={classes.web}>
-          <Link to={web} className={classes.link}>
+          <Link to={`https://${web}`} className={classes.link}>
             <LanguageIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={web ? classes.link : classes.web}
             >
               {web}
@@ -232,7 +232,7 @@ const UserNetworks = ({
             <DiscordIcon className={classes.icon2} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={discord ? classes.link : classes.discord}
             >
               {discord}
@@ -244,7 +244,7 @@ const UserNetworks = ({
             <TickTockIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={tiktok ? classes.link : classes.tiktok}
             >
               {tiktok}
@@ -259,7 +259,7 @@ const UserNetworks = ({
             <YouTubeIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={youtube ? classes.link : classes.youtube}
             >
               {youtube}
@@ -274,7 +274,7 @@ const UserNetworks = ({
             <FacebookIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={facebook ? classes.link : classes.facebook}
             >
               {facebook}
@@ -289,7 +289,7 @@ const UserNetworks = ({
             <SnapchatIcon className={classes.icon} />
             <Typography
               variant="overline"
-              color="secondary"
+              color="primary"
               className={snapchat ? classes.link : classes.snapchat}
             >
               {snapchat}
