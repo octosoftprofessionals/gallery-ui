@@ -10,6 +10,7 @@ import {
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
 import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
+import { useQueryHash } from '../../../hooks/useQueryParams'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => (
   <TabBar
@@ -19,6 +20,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
     light
     playlist
     inSize={3}
+    initialTab={parseInt(useQueryHash() || '0')}
     isMyAccount={isMyAccount}
     titles={['Created', 'Collected', 'Playlist', 'Favorites']}
     components={[

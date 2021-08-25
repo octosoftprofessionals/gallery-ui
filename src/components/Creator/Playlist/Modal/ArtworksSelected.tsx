@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
+
 import { Dialog, Grid, IconButton, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from '@material-ui/icons'
 
 import ItemArtworkSelected from './ItemArtworkSelected'
+import TabBar from '../../../TabBar'
+
+import {
+  getProfileCreatedItemsByAddress,
+  getProfileOwnedItemsByAddress,
+} from '../../../../services/gallery'
+import { getPlaylists } from '../../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
   titleModal: { textTransform: 'initial' },
@@ -32,7 +40,17 @@ const useStyles = makeStyles(Theme => ({
   conteinerCard: { padding: Theme.spacing(6) },
 }))
 
-const ArtworksSelected = ({ onClose, open, onModifyPlaylist, Items }) => {
+const ArtworksSelected = ({
+  onClose,
+  open,
+  onModifyPlaylist,
+  profileAddress,
+}: {
+  onClose: Funtion
+  open: boolean
+  onModifyPlaylist: Funtion
+  profileAddress
+}) => {
   const classes = useStyles()
 
   const handleClose = () => {
@@ -62,18 +80,49 @@ const ArtworksSelected = ({ onClose, open, onModifyPlaylist, Items }) => {
         </IconButton>
       </Grid>
       <Grid item xs={12} container justify="space-around">
-        {Items.map(({ ImageUrl, inPlaylist, id, assetTokenId }) => (
-          <Grid item xs={12} sm={3} md={4} className={classes.conteinerCard}>
+        <TabBar
+          justify="center"
+          sm={9}
+          fullWidth
+          light
+          playlist
+          inSize={3}
+          titles={['Created', 'Collected', 'Favorites']}
+          components={[
             <ItemArtworkSelected
-              key={id}
-              imageUrl={ImageUrl}
-              videoUrl={null}
-              onCheck={inPlaylist}
+              emptyMessageProps={{
+                primaryText: 'Nothing to see here.',
+                showExploreButton: false,
+              }}
+              queryName="CreatedItemsQuery"
+              queryFunction={async () =>
+                await getProfileCreatedItemsByAddress(profileAddress)
+              }
               onModifyPlaylist={e => onModifyPlaylist(e)}
-              assetTokenId={`${assetTokenId}`}
-            />
-          </Grid>
-        ))}
+            />,
+
+            <ItemArtworkSelected
+              emptyMessageProps={{
+                primaryText: 'Your collection is empty.',
+                showExploreButton: false,
+              }}
+              queryName="OwnedItemsQuery"
+              queryFunction={async () =>
+                await getProfileOwnedItemsByAddress(profileAddress)
+              }
+              onModifyPlaylist={e => onModifyPlaylist(e)}
+            />,
+            <ItemArtworkSelected
+              emptyMessageProps={{
+                primaryText: 'Your collection is empty.',
+                showExploreButton: false,
+              }}
+              queryName="PlaylistQuery"
+              queryFunction={async () => await getPlaylists(profileAddress)}
+              onModifyPlaylist={e => onModifyPlaylist(e)}
+            />,
+          ]}
+        />
       </Grid>
       <Grid item container justify="flex-end" className={classes.conteinerBtn}>
         <Button variant="text" className={classes.btn} onClick={onClose}>

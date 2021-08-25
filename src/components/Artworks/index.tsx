@@ -6,6 +6,7 @@ import { allQuerysItems } from '../../services/gallery'
 import TabBar from '../TabBar'
 import GalleryArtworks from './GalleryArtworks'
 import { findeArtwork } from '../../Utils'
+import { useQueryHash } from '../../hooks/useQueryParams'
 
 const GridArtworks = () => {
   const [listedNextPage, setListedNextPage] = useState(0)
@@ -97,6 +98,7 @@ const GridArtworks = () => {
     <TabBar
       titles={['Live Auction', 'Reserve not met', 'Sold']}
       justify="center"
+      initialTab={parseInt(useQueryHash() || '0')}
       components={[
         <GalleryArtworks
           isLoading={isLoadingLA}
