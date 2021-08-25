@@ -5,7 +5,7 @@ import { useMutation } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
-import { GalleryItem } from '../../../services/gallery'
+import { GalleryItem, ArrayPlaylist } from '../../../types'
 import {
   createAssociationFavoritesArtworks,
   deleteOneFavoriteArtworkFromOneUser,
@@ -75,9 +75,12 @@ const useStyle = makeStyles(Theme => ({
 const ArtworkItem = ({
   galleryItem = {},
   onFavorite,
+  playlists = [],
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
+  onFavorite: Function
+  playlists: ArrayPlaylist | undefined
 }) => {
   const {
     assetId,
@@ -176,7 +179,6 @@ const ArtworkItem = ({
         </div>
       </Link>
       <FooterCardItem
-        account={account}
         statesArt={status}
         price={priceEth}
         timer={timer}
@@ -185,6 +187,8 @@ const ArtworkItem = ({
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
         isFavorite={isFavorite}
+        account={account}
+        playlists={playlists}
       />
     </Paper>
   )

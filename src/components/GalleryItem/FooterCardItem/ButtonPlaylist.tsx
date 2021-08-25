@@ -8,6 +8,7 @@ import {
   SlideshowTwoTone,
 } from '@material-ui/icons/'
 import MenuListPlaylists from './ListPlaylists'
+import { ArrayPlaylist } from '../../../types'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(0, 6) },
@@ -26,6 +27,16 @@ const ButtonPlaylist = ({
   inFavorite,
   inPlaylist,
   account,
+  playlists,
+}: {
+  handleSubmitFavorite: Function
+  handleSubmitUnFavorite: Function
+  handleSubmitPlaylist: Function
+  handleSubmitUnPlaylist: Function
+  inFavorite?: boolean
+  inPlaylist?: boolean
+  account: string
+  playlists: ArrayPlaylist
 }) => {
   const classes = useStyle()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -84,7 +95,7 @@ const ButtonPlaylist = ({
       <MenuListPlaylists
         anchorEl={anchorEl}
         onClose={handleClose}
-        arrayPlaylist={[]}
+        arrayPlaylist={playlists}
         account={account}
       />
     </Grid>

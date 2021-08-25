@@ -178,6 +178,7 @@ export type GalleryItem = {
   expiration: string // iso8601
   // - highest bid
   // - all bids
+  isFavorite: boolean
 }
 
 export enum HistoryItemEventType {

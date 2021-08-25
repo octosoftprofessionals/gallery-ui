@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
 
 import { myProfilePathWithView } from '../../../../config/routes'
+import { ArrayPlaylist } from '../../../../types'
 
 const useStyles = makeStyles(Theme => ({
   root: {},
@@ -18,6 +19,11 @@ const MenuPlaylist = ({
   arrayPlaylist,
   account,
   ...props
+}: {
+  anchorEl: any
+  onClose: any
+  arrayPlaylist: ArrayPlaylist
+  account: string
 }) => {
   const classes = useStyles()
 
@@ -41,9 +47,11 @@ const MenuPlaylist = ({
         },
       }}
     >
-      {arrayPlaylist.map(item => (
+      {arrayPlaylist.map(({ id, title }) => (
         <>
-          <MenuItem onClick={onClose}>{item}</MenuItem>
+          <MenuItem key={id} onClick={onClose}>
+            {title}
+          </MenuItem>
           <Divider />
         </>
       ))}

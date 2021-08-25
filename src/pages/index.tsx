@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery, useQuery } from 'react-query'
 import { Grid } from '@material-ui/core'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
@@ -10,11 +10,14 @@ import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
 import { findeArtwork } from '../Utils'
 import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
+import { getPlaylists } from '../services/playlists'
 import { GalleryItem } from '../types'
+import { useAccountStore } from '../hooks/useAccountStore'
 
 const Home = () => {
   const [featuredArtworks, setFeaturedArtworks] = useState(0)
   const [liveAuctions, setLiveAuctions] = useState(0)
+  const metamaskStorage = useAccountStore()
   type featureItemsQueryProps = {
     data: GalleryItem[]
     status: 'idle' | 'error' | 'loading' | 'success'
@@ -68,6 +71,13 @@ const Home = () => {
     fetchNextPageFA({ pageParam: newPages })
   }
 
+  const {
+    data: PlaylistQuery = [],
+    isLoading: isLoadingPlaylistQuery,
+  } = useQuery('PlaylistQuery', () => getPlaylists(metamaskStorage[0]), {
+    refetchOnWindowFocus: false,
+  })
+
   const handleFavorite = useCallback(
     (assetId, status, title) => {
       const titles = {
@@ -112,6 +122,7 @@ const Home = () => {
                   onFavorite={(assetId, status) =>
                     handleFavorite(assetId, status, 'All')
                   }
+                  playlists={PlaylistQuery}
                 />
               )}
             />
@@ -140,6 +151,7 @@ const Home = () => {
                 onFavorite={(assetId, status) =>
                   handleFavorite(assetId, status, 'Live')
                 }
+                playlists={PlaylistQuery}
               />
             )}
           />
