@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import { useMutation } from 'react-query'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Paper, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
@@ -12,13 +10,27 @@ import CarouselPL from './CarouselPL'
 import ArtworkInformation from './ArtworkInformation'
 import CreatorInfo from '../GalleryItem/ArtworkItem/CreatorInfo'
 
+import { Users } from '../../types'
+import { truncateMiddleText } from '../../Utils/stringUtils'
+
 const useStyles = makeStyles(Theme => ({
   containerDescription: { padding: Theme.spacing(9) },
 }))
 
-const index = ({ relatedArtworks, title, description }) => {
+const index = ({
+  userAccount,
+  relatedArtworks,
+  title,
+  description,
+}: {
+  userAccount: Users
+  relatedArtworks: any[]
+  title: string
+  description: string
+}) => {
   const classes = useStyles()
   const [imgIndex, setImgIndex] = useState(0)
+  const { username, profileImgUrl, publicAddress } = userAccount
 
   return (
     <Grid item xs={12} container alignItems="center" justify="center">
@@ -35,10 +47,10 @@ const index = ({ relatedArtworks, title, description }) => {
           <Grid item xs={5} container direction="column">
             <Typography variant="h4">{title}</Typography>
             <CreatorInfo
-              username="RogerBC"
-              imageUrl={
-                'https://f8n-production.imgix.net/creators/profile/c8gley51s-nyan-cat-large-gif-gif-mbf1sa.gif'
+              username={
+                username ? username : truncateMiddleText(publicAddress, 8)
               }
+              profileImageUrl={profileImgUrl}
             />
           </Grid>
           <Grid item xs={4}>
