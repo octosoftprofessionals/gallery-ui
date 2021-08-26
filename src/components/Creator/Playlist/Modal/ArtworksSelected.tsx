@@ -12,6 +12,7 @@ import {
   getProfileOwnedItemsByAddress,
 } from '../../../../services/gallery'
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../../services/favorites'
+import { GalleryItem } from '../../../../types'
 
 const useStyles = makeStyles(Theme => ({
   titleModal: { textTransform: 'initial' },
@@ -48,6 +49,8 @@ const ArtworksSelected = ({
   onPlublish,
   artworksSelected,
   isDisabled = false,
+  isEdit = false,
+  editRelatedArtworks,
 }: {
   onClose: any
   open: boolean
@@ -56,6 +59,8 @@ const ArtworksSelected = ({
   onPlublish: any
   artworksSelected: number[]
   isDisabled: boolean
+  isEdit?: boolean
+  editRelatedArtworks?: GalleryItem[]
 }) => {
   const classes = useStyles()
 
@@ -93,48 +98,106 @@ const ArtworksSelected = ({
           light
           playlist
           inSize={3}
-          titles={['Created', 'Collected', 'Favorites']}
-          components={[
-            <GridArtworkSelected
-              emptyMessageProps={{
-                primaryText: 'Nothing to see here.',
-                showExploreButton: false,
-              }}
-              queryName="CreatedItemsQuery"
-              queryFunction={async () =>
-                await getProfileCreatedItemsByAddress(profileAddress)
-              }
-              onModifyPlaylist={onModifyPlaylist}
-              artworksSelected={artworksSelected}
-            />,
+          titles={
+            isEdit
+              ? ['Edit', 'Created', 'Collected', 'Favorites']
+              : ['Created', 'Collected', 'Favorites']
+          }
+          components={
+            isEdit
+              ? [
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="Edit"
+                    renderItem={editRelatedArtworks}
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="CreatedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileCreatedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
 
-            <GridArtworkSelected
-              emptyMessageProps={{
-                primaryText: 'Your collection is empty.',
-                showExploreButton: false,
-              }}
-              queryName="OwnedItemsQuery"
-              queryFunction={async () =>
-                await getProfileOwnedItemsByAddress(profileAddress)
-              }
-              onModifyPlaylist={onModifyPlaylist}
-              artworksSelected={artworksSelected}
-            />,
-            <GridArtworkSelected
-              emptyMessageProps={{
-                primaryText: 'Your favorites is empty.',
-                showExploreButton: false,
-              }}
-              queryName="PlaylistModalQuery"
-              queryFunction={async () =>
-                await getAllFavoritesArtworksFromOneUserByAddress(
-                  profileAddress
-                )
-              }
-              onModifyPlaylist={onModifyPlaylist}
-              artworksSelected={artworksSelected}
-            />,
-          ]}
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your collection is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="OwnedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileOwnedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your favorites is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="PlaylistModalQuery"
+                    queryFunction={async () =>
+                      await getAllFavoritesArtworksFromOneUserByAddress(
+                        profileAddress
+                      )
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                ]
+              : [
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="CreatedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileCreatedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your collection is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="OwnedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileOwnedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your favorites is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="PlaylistModalQuery"
+                    queryFunction={async () =>
+                      await getAllFavoritesArtworksFromOneUserByAddress(
+                        profileAddress
+                      )
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                ]
+          }
         />
       </Grid>
       <Grid item container justify="flex-end" className={classes.conteinerBtn}>

@@ -18,16 +18,17 @@ const playListPage = () => {
     () => getUser({ public_address: account })
   )
 
-  const {
-    data: PlaylistItem = {},
-    isLoading: isLoadingPlaylist,
-  } = useQuery('PlaylistItem', () =>
-    getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
+  const { data: PlaylistItem = {}, isLoading: isLoadingPlaylist } = useQuery(
+    'PlaylistItem',
+    () => getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) }),
+    {
+      refetchInterval: 2000,
+    }
   )
 
   return (
     <Layout>
-      {isLoadingPlaylist ? (
+      {isLoadingPlaylist || isLoadingUser ? (
         <Spinner height="50vh" />
       ) : (
         <PlaylistPage

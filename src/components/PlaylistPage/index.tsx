@@ -50,6 +50,9 @@ const index = ({
     setOpenEditArtworksSelected,
   ] = useState<boolean>(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState<number[]>([])
+  const [editRelatedArtworks, setEditRelatedArtworks] = useState<GalleryItem[]>(
+    []
+  )
   const [titlePlaylist, setTitlePlaylist] = useState<string>(title)
   const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>(
     description
@@ -58,6 +61,7 @@ const index = ({
   const getArtworksId = () => {
     const artworksRelated = relatedArtworks.map(({ id }) => id)
     setAddArtworksPlaylist(artworksRelated)
+    setEditRelatedArtworks(relatedArtworks)
   }
 
   const handleOpenEditPlaylist = () => {
@@ -105,62 +109,71 @@ const index = ({
 
   return (
     <>
-      <Grid item xs={12} container alignItems="center" justify="center">
-        <CarouselPL artworks={relatedArtworks} xs={4} setIndex={setImgIndex} />
-        <Grid
-          item
-          xs={12}
-          container
-          direction="row"
-          justify="space-around"
-          alignItems="center"
-        >
-          <Grid container justify="space-around">
-            <Grid item xs={5} container direction="column">
-              <Typography variant="h4">{title}</Typography>
-              {isLoading ? (
-                <Spinner height="15hv" />
-              ) : (
-                <CreatorInfo
-                  username={
-                    username ? username : truncateMiddleText(publicAddress, 8)
-                  }
-                  profileImageUrl={profileImgUrl}
+      {isLoading ? (
+        <Spinner height="50vh" />
+      ) : (
+        <Grid item xs={12} container alignItems="center" justify="center">
+          <CarouselPL
+            artworks={relatedArtworks}
+            xs={4}
+            setIndex={setImgIndex}
+          />
+          <Grid
+            item
+            xs={12}
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid container justify="space-around">
+              <Grid item xs={5} container direction="column">
+                <Typography variant="h4">{title}</Typography>
+                {isLoading ? (
+                  <Spinner height="15hv" />
+                ) : (
+                  <CreatorInfo
+                    username={
+                      username ? username : truncateMiddleText(publicAddress, 8)
+                    }
+                    profileImageUrl={profileImgUrl}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={4}>
+                <Button variant="outlined" onClick={handleOpenEditPlaylist}>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="flex-start"
+                    alignItems="center"
+                  >
+                    <EditIcon className={classes.icon} />
+                    <Typography variant="caption">
+                      Edit your playlist
+                    </Typography>
+                  </Grid>
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container justify="space-around" direction="row">
+              <Grid item xs={5}>
+                <Typography variant="h5"> Description</Typography>
+                <Paper className={classes.containerDescription}>
+                  {description}
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h5">Artwork Information</Typography>
+                <ArtworkInformation
+                  arryArtwork={relatedArtworks}
+                  index={imgIndex}
                 />
-              )}
-            </Grid>
-            <Grid item xs={4}>
-              <Button variant="outlined" onClick={handleOpenEditPlaylist}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <EditIcon className={classes.icon} />
-                  <Typography variant="caption">Edit your playlist</Typography>
-                </Grid>
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid container justify="space-around" direction="row">
-            <Grid item xs={5}>
-              <Typography variant="h5"> Description</Typography>
-              <Paper className={classes.containerDescription}>
-                {description}
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography variant="h5">Artwork Information</Typography>
-              <ArtworkInformation
-                arryArtwork={relatedArtworks}
-                index={imgIndex}
-              />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-
+      )}
       <ModalEditPlaylist
         onClose={handleCloseEditPlaylist}
         open={openEditPlaylist}
@@ -176,8 +189,10 @@ const index = ({
         onModifyPlaylist={modifyPlaylist}
         profileAddress={publicAddress}
         onPlublish={handleEditPlaylist}
+        editRelatedArtworks={editRelatedArtworks}
         artworksSelected={addArtworksPlaylist}
         isDisabled={addArtworksPlaylist.length === 0}
+        isEdit={true}
       />
     </>
   )

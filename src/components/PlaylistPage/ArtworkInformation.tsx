@@ -52,9 +52,7 @@ const ArtworkInformation = ({ arryArtwork, index }) => {
 
         <Grid item xs={12} container justify="center">
           <Typography>{title}</Typography>
-          <Typography>{`[${index + 1} - ${
-            arryArtwork.length + 1
-          }]`}</Typography>
+          <Typography>{`[${index + 1} - ${arryArtwork.length}]`}</Typography>
         </Grid>
         <Grid item xs={5} container alignItems="flex-start" direction="column">
           <Grid container direction="row" justify="space-between">
