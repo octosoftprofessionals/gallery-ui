@@ -4,14 +4,14 @@ import { Dialog, Grid, IconButton, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from '@material-ui/icons'
 
-import ItemArtworkSelected from './ItemArtworkSelected'
+import GridArtworkSelected from './GridArtworkSelected'
 import TabBar from '../../../TabBar'
 
 import {
   getProfileCreatedItemsByAddress,
   getProfileOwnedItemsByAddress,
 } from '../../../../services/gallery'
-import { getPlaylists } from '../../../../services/playlists'
+import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../../services/favorites'
 
 const useStyles = makeStyles(Theme => ({
   titleModal: { textTransform: 'initial' },
@@ -46,10 +46,10 @@ const ArtworksSelected = ({
   onModifyPlaylist,
   profileAddress,
 }: {
-  onClose: Funtion
+  onClose: any
   open: boolean
-  onModifyPlaylist: Funtion
-  profileAddress
+  onModifyPlaylist: any
+  profileAddress: string
 }) => {
   const classes = useStyles()
 
@@ -89,7 +89,7 @@ const ArtworksSelected = ({
           inSize={3}
           titles={['Created', 'Collected', 'Favorites']}
           components={[
-            <ItemArtworkSelected
+            <GridArtworkSelected
               emptyMessageProps={{
                 primaryText: 'Nothing to see here.',
                 showExploreButton: false,
@@ -101,7 +101,7 @@ const ArtworksSelected = ({
               onModifyPlaylist={e => onModifyPlaylist(e)}
             />,
 
-            <ItemArtworkSelected
+            <GridArtworkSelected
               emptyMessageProps={{
                 primaryText: 'Your collection is empty.',
                 showExploreButton: false,
@@ -112,13 +112,17 @@ const ArtworksSelected = ({
               }
               onModifyPlaylist={e => onModifyPlaylist(e)}
             />,
-            <ItemArtworkSelected
+            <GridArtworkSelected
               emptyMessageProps={{
-                primaryText: 'Your collection is empty.',
+                primaryText: 'Your favorites is empty.',
                 showExploreButton: false,
               }}
-              queryName="PlaylistQuery"
-              queryFunction={async () => await getPlaylists(profileAddress)}
+              queryName="PlaylistModalQuery"
+              queryFunction={async () =>
+                await getAllFavoritesArtworksFromOneUserByAddress(
+                  profileAddress
+                )
+              }
               onModifyPlaylist={e => onModifyPlaylist(e)}
             />,
           ]}

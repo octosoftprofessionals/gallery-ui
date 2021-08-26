@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
+
 import { Grid, Checkbox } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
+import { GalleryItem } from '../../../../types'
 
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
     transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
+    marginTop: Theme.spacing(4),
   },
   img: {
     backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    paddingBottom: '100%',
     width: '100%',
     borderRadius: Theme.spacing(4),
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
-  containerVideo: { position: 'relative', height: 450, width: 245 },
+  containerVideo: { position: 'relative', height: 355, width: 210 },
   inVideo: {
     position: 'absolute',
     top: 0,
@@ -34,31 +42,34 @@ const useStyle = makeStyles(Theme => ({
     position: 'absolute',
     borderRadius: Theme.spacing(4),
   },
+  checkbox: { marginTop: Theme.spacing(2) },
 }))
 
-const ItemArtworkSelected = ({
-  videoUrl,
-  imageUrl,
-  onCheck = false,
+const ItemsToSelect = ({
+  galleryItem,
   onModifyPlaylist,
-  assetTokenId,
+  onCheck,
 }: {
-  videoUrl: string
-  imageUrl: string
+  galleryItem: GalleryItem
+  onModifyPlaylist: any
   onCheck?: boolean
-  onModifyPlaylist: Function
-  assetTokenId: string
 }) => {
   const [checked, setChecked] = useState(onCheck)
-
+  const { imageUrl, videoUrl, id } = galleryItem
+  const classes = useStyle({ imageUrl })
   const handleChange = event => {
     setChecked(event.target.checked)
-    onModifyPlaylist(assetTokenId)
+    onModifyPlaylist(id)
   }
-  const classes = useStyle({ imageUrl })
 
   return (
-    <Grid item xs={12} container justify="center" alignItems="center">
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      direction="column"
+      className={classes.root}
+    >
       {videoUrl != null && videoUrl.length > 0 ? (
         <div className={classes.containerVideo}>
           <div className={classes.inVideo}>
@@ -75,11 +86,18 @@ const ItemArtworkSelected = ({
           </div>
         </div>
       ) : (
-        <div className={classes.img} />
+        <div className={classes.containerVideo}>
+          <div className={classes.img} />
+        </div>
       )}
-      <Checkbox checked={checked} color="primary" onChange={handleChange} />
+      <Checkbox
+        checked={checked}
+        color="primary"
+        onChange={handleChange}
+        className={classes.checkbox}
+      />
     </Grid>
   )
 }
 
-export default ItemArtworkSelected
+export default ItemsToSelect

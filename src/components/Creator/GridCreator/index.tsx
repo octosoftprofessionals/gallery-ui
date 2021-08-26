@@ -36,7 +36,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           await getProfileCreatedItemsByAddress(profileAddress)
         }
       />,
-
       <GalleryCreator
         emptyMessageProps={{
           primaryText: isMyAccount
@@ -52,7 +51,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           await getProfileOwnedItemsByAddress(profileAddress)
         }
       />,
-
       <Playlist
         isMyAccount={isMyAccount}
         profileAddress={profileAddress}
@@ -68,7 +66,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
         queryName="PlaylistQuery"
         queryFunction={async () => await getPlaylists(profileAddress)}
       />,
-
       <GalleryCreator
         emptyMessageProps={{
           primaryText: isMyAccount

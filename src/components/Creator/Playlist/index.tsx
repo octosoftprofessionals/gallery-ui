@@ -41,15 +41,15 @@ const Playlist = ({
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName: string
-  queryFunction: Promise<ArrayPlaylist[]>
+  queryFunction: () => Promise<ArrayPlaylist[]>
 }) => {
-  const { data: PlaylistQuery = [], isLoading } = useQuery(
+  const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
     queryFunction
   )
 
   const classes = useStyles()
-  const [openNext, setOpenNext] = useState(false)
+  const [openNext, setOpenNext] = useState(true)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [newPlaylistId, setNewPlaylistId] = useState('')
 
@@ -76,7 +76,7 @@ const Playlist = ({
     })
   }
 
-  if (PlaylistQuery.length <= 0 && !isMyAccount) {
+  if (playListQuery.length <= 0 && !isMyAccount) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
@@ -100,7 +100,7 @@ const Playlist = ({
         {isLoading ? (
           <Spinner height="50vh" />
         ) : (
-          PlaylistQuery.map(({ id, title }) => (
+          playListQuery.map(({ id, title }) => (
             <Grid item xs={12} sm={5} container justify="center" key={id}>
               <PlaylistItem
                 key={id}
@@ -141,6 +141,7 @@ const Playlist = ({
         onClose={handleCloseNext}
         open={openNext}
         onModifyPlaylist={modifyPlaylist}
+        profileAddress={profileAddress}
       />
     </>
   )
