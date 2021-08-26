@@ -42,20 +42,19 @@ export const deleteOnePlaylistByIdWithAssociatedArtworks = async ({
   return deletedPlaylist
 }
 
-export const updateOnePlaylistById = async ({
-  playlist_id,
-}: {
-  playlist_id: number
-}) => {
+export const updateOnePlaylistById = async (
+  playlist_id: number,
+  queryParams: any = {}
+) => {
   const url = `/playlist/${playlist_id}`
-  const res = await update(url)
+  const res = await update(url, queryParams)
   const updatedPlaylist = res.data ?? {}
   return updatedPlaylist
 }
 
-export const updateArtworksPriorities = async () => {
+export const updateArtworksPriorities = async (queryParams: any = {}) => {
   const url = '/playlist'
-  const res = await update(url)
+  const res = await update(url, queryParams)
   const updatedArtworkPriorities = res.data ?? {}
   return updatedArtworkPriorities
 }

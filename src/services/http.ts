@@ -40,7 +40,7 @@ export const post = async (url, queryParams = {}) => {
 }
 
 export const update = async (url, queryParams = {}) => {
-  return await httpWithCredentials.put(url, { params: queryParams })
+  return await httpWithCredentials.put(url, queryParams)
 }
 
 export const destroy = async (url, queryParams = {}) => {

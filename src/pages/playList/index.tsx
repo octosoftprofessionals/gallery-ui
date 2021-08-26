@@ -15,19 +15,16 @@ const playListPage = () => {
   const [account, _] = useAccountStore()
   const { data: userAccount, isLoading: isLoadingUser } = useQuery(
     'userQuery',
-    () => getUser({ public_address: account }),
-    {
-      refetchOnWindowFocus: false,
-    }
+    () => getUser({ public_address: account })
   )
 
-  const { data: PlaylistItem = {}, isLoading: isLoadingPlaylist } = useQuery(
-    'PlaylistItem',
-    () => getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) }),
-    {
-      refetchOnWindowFocus: false,
-    }
+  const {
+    data: PlaylistItem = {},
+    isLoading: isLoadingPlaylist,
+  } = useQuery('PlaylistItem', () =>
+    getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
   )
+
   return (
     <Layout>
       {isLoadingPlaylist ? (
@@ -38,6 +35,8 @@ const playListPage = () => {
           title={PlaylistItem.queryPlaylist.title}
           description={PlaylistItem.queryPlaylist.description}
           userAccount={userAccount}
+          isLoading={isLoadingUser}
+          playlistId={Number(id)}
         />
       )}
     </Layout>

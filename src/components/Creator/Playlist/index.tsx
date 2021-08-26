@@ -47,7 +47,7 @@ const Playlist = ({
   profileAddress: string
   queryName: string
   queryFunction: () => Promise<ArrayPlaylist>
-  refetchOnWindow: boolean
+  refetchOnWindow?: boolean
   refetchIntervalMS?: number
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
