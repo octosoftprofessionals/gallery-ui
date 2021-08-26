@@ -11,7 +11,10 @@ import ModalPlaylist from './Modal'
 import ModalArtworksSelected from './Modal/ArtworksSelected'
 import EmptyAccount from '../GridCreator/EmptyAccount'
 import Spinner from '../../Spinner'
-import { createPlaylist } from '../../../services/playlists'
+import {
+  createPlaylist,
+  addArtworkToNewPlaylist,
+} from '../../../services/playlists'
 import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
 
@@ -36,44 +39,45 @@ const Playlist = ({
   profileAddress,
   queryName,
   queryFunction,
+  refetchOnWindow = false,
+  refetchIntervalMS = 1000,
 }: {
   isMyAccount: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName: string
-  queryFunction: () => Promise<ArrayPlaylist[]>
+  queryFunction: () => Promise<ArrayPlaylist>
+  refetchOnWindow: boolean
+  refetchIntervalMS?: number
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
-    queryFunction
+    queryFunction,
+    {
+      refetchOnWindowFocus: refetchOnWindow,
+      refetchInterval: refetchIntervalMS,
+    }
   )
 
   const classes = useStyles()
-  const [openNext, setOpenNext] = useState(true)
+  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
-  const [newPlaylistId, setNewPlaylistId] = useState('')
+  const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
+  const [titlePlaylist, setTitlePlaylist] = useState<string>('')
+  const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>('')
 
-  let arrPlaylist = []
-
-  const handleOpenAddPlaylist = () => {
-    setOpenAddPlaylist(true)
+  const handleOpenCreatePlaylist = () => {
+    setOpenCreatePlaylist(true)
+  }
+  const handleCloseCreatePlaylist = () => {
+    setTitlePlaylist('')
+    setDescriptionPlaylist('')
+    setOpenCreatePlaylist(false)
   }
   const handleCloseAddPlaylist = () => {
+    setTitlePlaylist('')
+    setDescriptionPlaylist('')
     setOpenAddPlaylist(false)
-  }
-
-  const handleCloseNext = () => {
-    setOpenNext(false)
-  }
-
-  const handleCreatePlaylist = async (
-    titlePlaylist: string,
-    descriptionPlaylist: string
-  ) => {
-    const res = await createPlaylist(profileAddress, {
-      title: titlePlaylist,
-      description: descriptionPlaylist,
-    })
   }
 
   if (playListQuery.length <= 0 && !isMyAccount) {
@@ -84,14 +88,38 @@ const Playlist = ({
     )
   }
 
-  const modifyPlaylist = addIdArtwork => {
-    if (arrPlaylist.includes(addIdArtwork)) {
-      arrPlaylist.splice(arrPlaylist.indexOf(addIdArtwork), 1)
-      return arrPlaylist
+  const modifyPlaylist = (addIdArtwork: number) => {
+    if (addArtworksPlaylist.includes(addIdArtwork)) {
+      const index = addArtworksPlaylist.indexOf(addIdArtwork)
+      const aux = addArtworksPlaylist
+        .slice(0, index)
+        .concat(addArtworksPlaylist.slice(index + 1))
+      return setAddArtworksPlaylist(aux)
     } else {
-      arrPlaylist.push(addIdArtwork)
-      return arrPlaylist
+      return setAddArtworksPlaylist([...addArtworksPlaylist, addIdArtwork])
     }
+  }
+
+  const handlePublishPlaylist = async () => {
+    if (addArtworksPlaylist.length != 0) {
+      const artworksRelated = addArtworksPlaylist.map((artworkId, index) => ({
+        artwork_id: artworkId,
+        priority: index + 1,
+      }))
+
+      const resCreatePlaylist = await createPlaylist(profileAddress, {
+        title: titlePlaylist,
+        description: descriptionPlaylist,
+      })
+      const { id } = resCreatePlaylist.data
+
+      const resAddArtworkToNewPlaylist = await addArtworkToNewPlaylist({
+        playlist_id: id,
+        artworks_related: artworksRelated,
+      })
+    }
+    setAddArtworksPlaylist([])
+    handleCloseAddPlaylist()
   }
 
   return (
@@ -119,7 +147,7 @@ const Playlist = ({
             <Button
               className={classes.button}
               fullWidth
-              onClick={handleOpenAddPlaylist}
+              onClick={handleOpenCreatePlaylist}
             >
               <Grid container alignItems="center" direction="column">
                 <Add className={classes.icon} />
@@ -132,16 +160,22 @@ const Playlist = ({
         </Grid>
       </Grid>
       <ModalPlaylist
-        onClose={handleCloseAddPlaylist}
-        open={openAddPlaylist}
-        setOpen={setOpenNext}
-        handlePlaylist={handleCreatePlaylist}
+        onClose={handleCloseCreatePlaylist}
+        open={openCreatePlaylist}
+        setOpen={setOpenAddPlaylist}
+        setTitle={setTitlePlaylist}
+        title={titlePlaylist}
+        setDescription={setDescriptionPlaylist}
+        description={descriptionPlaylist}
       />
       <ModalArtworksSelected
-        onClose={handleCloseNext}
-        open={openNext}
+        onClose={handleCloseAddPlaylist}
+        open={openAddPlaylist}
         onModifyPlaylist={modifyPlaylist}
         profileAddress={profileAddress}
+        onPlublish={handlePublishPlaylist}
+        artworksSelected={addArtworksPlaylist}
+        isDisabled={addArtworksPlaylist.length === 0}
       />
     </>
   )

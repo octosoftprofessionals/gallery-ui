@@ -60,9 +60,9 @@ export const updateArtworksPriorities = async () => {
   return updatedArtworkPriorities
 }
 
-export const addArtworkToNewPlaylist = async () => {
-  const url = `/playlist/addArtwork/${id}`
-  const res = await post(url)
+export const addArtworkToNewPlaylist = async (queryParams: any = {}) => {
+  const url = `/playlist/`
+  const res = await post(url, queryParams)
   const addedArtworkToNewPlaylist = res.data ?? {}
   return addedArtworkToNewPlaylist
 }

@@ -18,11 +18,13 @@ const ItemArtworkSelected = ({
   queryName,
   queryFunction,
   emptyMessageProps,
+  artworksSelected,
 }: {
-  onModifyPlaylist: Function
+  onModifyPlaylist: any
   queryName: string
   queryFunction: () => Promise<GalleryItem[]>
   emptyMessageProps: Record<string, any>
+  artworksSelected: number[]
 }) => {
   const { data: galleryItems = [], isLoading } = useQuery(
     queryName,
@@ -51,16 +53,20 @@ const ItemArtworkSelected = ({
           {ItemsToShow.map(galleryItem => (
             <Grid item xs={12} sm={6} md={4} className={classes.containerItem}>
               <ItemsToSelect
+                key={galleryItem.id}
                 galleryItem={galleryItem}
                 onModifyPlaylist={onModifyPlaylist}
+                artworksSelected={artworksSelected}
               />
             </Grid>
           ))}
           {favoriteArtworks.map(galleryItem => (
             <Grid item xs={12} sm={6} md={4} className={classes.containerItem}>
               <ItemsToSelect
+                key={galleryItem.id}
                 galleryItem={galleryItem}
                 onModifyPlaylist={onModifyPlaylist}
+                artworksSelected={artworksSelected}
               />
             </Grid>
           ))}

@@ -45,11 +45,17 @@ const ArtworksSelected = ({
   open,
   onModifyPlaylist,
   profileAddress,
+  onPlublish,
+  artworksSelected,
+  isDisabled = false,
 }: {
   onClose: any
   open: boolean
   onModifyPlaylist: any
   profileAddress: string
+  onPlublish: any
+  artworksSelected: number[]
+  isDisabled: boolean
 }) => {
   const classes = useStyles()
 
@@ -98,7 +104,8 @@ const ArtworksSelected = ({
               queryFunction={async () =>
                 await getProfileCreatedItemsByAddress(profileAddress)
               }
-              onModifyPlaylist={e => onModifyPlaylist(e)}
+              onModifyPlaylist={onModifyPlaylist}
+              artworksSelected={artworksSelected}
             />,
 
             <GridArtworkSelected
@@ -110,7 +117,8 @@ const ArtworksSelected = ({
               queryFunction={async () =>
                 await getProfileOwnedItemsByAddress(profileAddress)
               }
-              onModifyPlaylist={e => onModifyPlaylist(e)}
+              onModifyPlaylist={onModifyPlaylist}
+              artworksSelected={artworksSelected}
             />,
             <GridArtworkSelected
               emptyMessageProps={{
@@ -123,14 +131,24 @@ const ArtworksSelected = ({
                   profileAddress
                 )
               }
-              onModifyPlaylist={e => onModifyPlaylist(e)}
+              onModifyPlaylist={onModifyPlaylist}
+              artworksSelected={artworksSelected}
             />,
           ]}
         />
       </Grid>
       <Grid item container justify="flex-end" className={classes.conteinerBtn}>
-        <Button variant="text" className={classes.btn} onClick={onClose}>
-          <Typography variant="caption" className={classes.textBtn}>
+        <Button
+          variant="text"
+          disabled={isDisabled}
+          className={classes.btn}
+          onClick={onPlublish}
+        >
+          <Typography
+            variant="caption"
+            color="primary"
+            className={classes.textBtn}
+          >
             Published
           </Typography>
         </Button>

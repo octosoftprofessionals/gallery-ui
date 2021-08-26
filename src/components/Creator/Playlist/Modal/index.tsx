@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Dialog,
   Grid,
@@ -60,21 +60,22 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const PlaylistModal = ({ onClose, open, setOpen, handlePlaylist }) => {
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
+const PlaylistModal = ({
+  onClose,
+  open,
+  setOpen,
+  setTitle,
+  setDescription,
+  title,
+  description,
+}) => {
   const classes = useStyles()
   const handleClose = () => {
     onClose()
-    setTitle('')
-    setDescription('')
   }
 
   const handleNext = e => {
     e.preventDefault()
-    handlePlaylist(title, description)
-    setTitle('')
-    setDescription('')
     onClose()
     setOpen(true)
   }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { Grid, Checkbox } from '@material-ui/core'
+import { Badge, Grid, Checkbox } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { GalleryItem } from '../../../../types'
@@ -48,15 +48,19 @@ const useStyle = makeStyles(Theme => ({
 const ItemsToSelect = ({
   galleryItem,
   onModifyPlaylist,
-  onCheck,
+  artworksSelected,
 }: {
   galleryItem: GalleryItem
   onModifyPlaylist: any
-  onCheck?: boolean
+  artworksSelected: number[]
 }) => {
-  const [checked, setChecked] = useState(onCheck)
   const { imageUrl, videoUrl, id } = galleryItem
   const classes = useStyle({ imageUrl })
+
+  const index = artworksSelected.indexOf(galleryItem.id) + 1
+  const isCheck = artworksSelected.includes(galleryItem.id)
+  const [checked, setChecked] = useState(isCheck)
+
   const handleChange = event => {
     setChecked(event.target.checked)
     onModifyPlaylist(id)
@@ -70,26 +74,28 @@ const ItemsToSelect = ({
       direction="column"
       className={classes.root}
     >
-      {videoUrl != null && videoUrl.length > 0 ? (
-        <div className={classes.containerVideo}>
-          <div className={classes.inVideo}>
-            <video
-              poster={imageUrl}
-              src={'' ?? videoUrl}
-              autoPlay={true}
-              loop={true}
-              className={classes.video}
-              muted={true}
-            >
-              <img src={imageUrl} />
-            </video>
+      <Badge key={id} badgeContent={index} color="primary">
+        {videoUrl != null && videoUrl.length > 0 ? (
+          <div className={classes.containerVideo}>
+            <div className={classes.inVideo}>
+              <video
+                poster={imageUrl}
+                src={'' ?? videoUrl}
+                autoPlay={true}
+                loop={true}
+                className={classes.video}
+                muted={true}
+              >
+                <img src={imageUrl} />
+              </video>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className={classes.containerVideo}>
-          <div className={classes.img} />
-        </div>
-      )}
+        ) : (
+          <div className={classes.containerVideo}>
+            <div className={classes.img} />
+          </div>
+        )}
+      </Badge>
       <Checkbox
         checked={checked}
         color="primary"
