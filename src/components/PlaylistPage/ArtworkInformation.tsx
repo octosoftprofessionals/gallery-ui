@@ -1,43 +1,12 @@
 import React from 'react'
 
-import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, Paper } from '@material-ui/core'
 
 import CardArtwork from './CardArtwork'
 import { formatDecimal } from '../../Utils'
 
-const useStyles = makeStyles(Theme => ({
-  img: {
-    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    paddingBottom: '100%',
-    width: '100%',
-  },
-  link: { textDecoration: 'none' },
-  containerVideo: { position: 'relative', paddingBottom: '100%' },
-  inVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    boxSizing: 'border-box',
-    display: 'flex',
-  },
-  video: {
-    display: 'block',
-    objectFit: 'cover',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-}))
-
 const ArtworkInformation = ({ arryArtwork, index }) => {
   const { imagePreviewUrl, videoUrl, title, priceEth } = arryArtwork[index]
-  const classes = useStyles({ imageUrl: imagePreviewUrl })
 
   return (
     <Paper>
