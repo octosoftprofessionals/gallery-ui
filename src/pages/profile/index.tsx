@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import AccountPage from '../account'
 import { getUser } from '../../services/users'
 import { useMetamaskAccount } from '../../hooks/useAccountStore'
+import NotFound from '../404'
 
 const ProfilePage = () => {
   const address = useMetamaskAccount()
@@ -10,6 +11,9 @@ const ProfilePage = () => {
     getUser({ public_address: address })
   )
 
+  if (!address) {
+    return <NotFound />
+  }
   return <AccountPage isLoading={isLoading} userAccount={userAccount} />
 }
 

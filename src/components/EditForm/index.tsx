@@ -172,6 +172,16 @@ const useStyle = makeStyles(theme => ({
     // backgroundColor: theme.palette.primary.light,
     color: theme.palette.secondary.contrastText,
   },
+  extraText: {
+    marginTop: theme.spacing(5),
+    paddingRight: theme.spacing(16),
+    textAlign: 'left',
+    '@media (max-width: 576px)': {
+      paddingRight: theme.spacing(0),
+      marginTop: theme.spacing(0),
+      textAlign: 'center',
+    },
+  },
 }))
 
 type Props = {
@@ -381,8 +391,14 @@ const EditForm = ({ userAccount }: Props) => {
                 >
                   Upload a profile image:
                 </Typography>
-
-                {/*   <input type="file" onChange={onChangeTestFile} /> */}
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  className={classes.extraText}
+                >
+                  Recommended size: <br /> 1000x1000px. JPG, PNG or GIF. 10MB
+                  max size.
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="user" files={files} />
@@ -394,6 +410,14 @@ const EditForm = ({ userAccount }: Props) => {
                   className={classes.formTitle}
                 >
                   Upload a cover image:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  className={classes.extraText}
+                >
+                  Recommended size:
+                  <br /> 1500x500px. JPG, PNG or GIF. 10MB max size.
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
