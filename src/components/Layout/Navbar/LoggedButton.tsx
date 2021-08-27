@@ -41,8 +41,8 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
       transition: 'none',
-      boxShadow: 'none',
       transform: 'none',
+      border: 'none',
     },
     '@media (max-width: 1270px)': {
       width: '100%',
