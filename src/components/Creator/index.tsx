@@ -97,21 +97,18 @@ const Creator = ({
   user = undefined,
   setDisplayReportModal,
   setCoverImgUrl,
+  linkTwitter,
 }: Props) => {
   const classes = useStyle()
 
-  const {
-    data: followeeItem = [],
-    isLoading: isLoadingFollowees,
-  } = useQuery('followeeQuery', () =>
-    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+  const { data: followeeItem = [], isLoading: isLoadingFollowees } = useQuery(
+    'followeeQuery',
+    () => getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
-  const {
-    data: followersItem = [],
-    isLoading: isLoadingFollowers,
-  } = useQuery('followersQuery', () =>
-    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+  const { data: followersItem = [], isLoading: isLoadingFollowers } = useQuery(
+    'followersQuery',
+    () => getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem
@@ -123,6 +120,8 @@ const Creator = ({
     //   window.history.replaceState({}, '', `@${user.username}`)
     // }
   })
+
+  !isMyAccount ? console.log(linkTwitter) : null
 
   return (
     <Grid container xs={12} direction="column" justify="center">
@@ -154,7 +153,8 @@ const Creator = ({
         <Grid item container justify="flex-start" md={3} xs={12}>
           <div className={classes.share}>
             <Share
-              linkTwitter={user.twitter}
+              isMyAccount={isMyAccount}
+              linkTwitter={linkTwitter}
               setDisplayReportModal={setDisplayReportModal}
               right="24px"
             />
@@ -176,6 +176,7 @@ type Props = {
   user?: Users
   setDisplayReportModal: Function
   setCoverImgUrl: Function
+  linkTwitter?: any
 }
 
 export default Creator

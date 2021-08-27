@@ -30,6 +30,7 @@ const AccountPage = ({ isLoading, userAccount }) => {
           user={userAccount}
           setDisplayReportModal={setDisplayReportModal}
           setCoverImgUrl={setCoverProfileImgUrl}
+          linkTwitter={linkShareTwitter()}
         />
       )}
     </Layout>
