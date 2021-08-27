@@ -40,7 +40,7 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: '50%',
     justifyContent: 'center',
     marginRight: Theme.spacing(2),
-    border: '3px solid #232323',
+    border: `3px solid ${Theme.palette.background.default}`,
     '@media (max-width: 545px)': {
       width: '200px',
       height: '200px',
