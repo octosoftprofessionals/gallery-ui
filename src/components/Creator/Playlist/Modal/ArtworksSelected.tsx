@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
+
 import { Dialog, Grid, IconButton, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from '@material-ui/icons'
 
-import ItemArtworkSelected from './ItemArtworkSelected'
+import GridArtworkSelected from './GridArtworkSelected'
+import TabBar from '../../../TabBar'
+
+import {
+  getProfileCreatedItemsByAddress,
+  getProfileOwnedItemsByAddress,
+} from '../../../../services/gallery'
+import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../../services/favorites'
+import { GalleryItem } from '../../../../types'
 
 const useStyles = makeStyles(Theme => ({
   titleModal: { textTransform: 'initial' },
@@ -32,44 +41,33 @@ const useStyles = makeStyles(Theme => ({
   conteinerCard: { padding: Theme.spacing(6) },
 }))
 
-const imgUrls = [
-  'https://f8n-ipfs-production.imgix.net/Qme7ShWfH2GHnbKHo9Vb41PxMwLunLxgKGebF94RzjGhCs/nft.png',
-  'https://cdn.cultofmac.com/wp-content/uploads/2011/10/youngstevejobs.jpg',
-  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg',
-  'https://f8n-ipfs-production.imgix.net/QmeFJYbYeN6cfojypwzyAUYNyDFxFUD5tvjTG23LEF6xNY/nft.jpg',
-  'https://f8n-ipfs-production.imgix.net/Qme6A7qARnvZsn5RNSuJS8MyZjzzev4afcr6JVJxjciUvB/nft.png',
-  'https://image.mux.com/OqOt4fV1UKU02PntGC022luD9O7J01JZ701etlf022JIhd6A/thumbnail.jpg',
-]
-const randImgUrl = () => {
-  return imgUrls[Math.floor(Math.random() * imgUrls.length)]
-}
-const randIDs = () => {
-  return 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
-}
-function fillartworkCardAddPlayList(size) {
-  const artworkCardAddPlayList = []
-  for (let i = 0; i < size; i++) {
-    artworkCardAddPlayList.push({
-      id: `${randIDs()}`,
-      ImageUrl: randImgUrl(),
-      inPlaylist: false,
-    })
-  }
-  return artworkCardAddPlayList
-}
-const ArtworksSelected = ({ onClose, open }) => {
-  const [title, setTitle] = useState('')
+const ArtworksSelected = ({
+  onClose,
+  open,
+  onModifyPlaylist,
+  profileAddress,
+  onPlublish,
+  artworksSelected,
+  isDisabled = false,
+  isEdit = false,
+  editRelatedArtworks,
+}: {
+  onClose: any
+  open: boolean
+  onModifyPlaylist: any
+  profileAddress: string
+  onPlublish: any
+  artworksSelected: number[]
+  isDisabled: boolean
+  isEdit?: boolean
+  editRelatedArtworks?: GalleryItem[]
+}) => {
   const classes = useStyles()
 
   const handleClose = () => {
     onClose()
   }
 
-  const Items = fillartworkCardAddPlayList(7)
   return (
     <Dialog
       fullWidth
@@ -85,7 +83,7 @@ const ArtworksSelected = ({ onClose, open }) => {
             color="primary"
             className={classes.titleModal}
           >
-            Creat a new playlist
+            Create a new playlist
           </Typography>
         </Grid>
         <IconButton onClick={handleClose}>
@@ -93,20 +91,127 @@ const ArtworksSelected = ({ onClose, open }) => {
         </IconButton>
       </Grid>
       <Grid item xs={12} container justify="space-around">
-        {Items.map(({ ImageUrl, inPlaylist, id }) => (
-          <Grid item xs={12} sm={3} md={4} className={classes.conteinerCard}>
-            <ItemArtworkSelected
-              key={id}
-              imageUrl={ImageUrl}
-              videoUrl={null}
-              onCheck={inPlaylist}
-            />
-          </Grid>
-        ))}
+        <TabBar
+          justify="center"
+          sm={9}
+          fullWidth
+          light
+          playlist
+          inSize={3}
+          titles={
+            isEdit
+              ? ['Edit', 'Created', 'Collected', 'Favorites']
+              : ['Created', 'Collected', 'Favorites']
+          }
+          components={
+            isEdit
+              ? [
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="Edit"
+                    renderItem={editRelatedArtworks}
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="CreatedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileCreatedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your collection is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="OwnedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileOwnedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your favorites is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="PlaylistModalQuery"
+                    queryFunction={async () =>
+                      await getAllFavoritesArtworksFromOneUserByAddress(
+                        profileAddress
+                      )
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                ]
+              : [
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Nothing to see here.',
+                      showExploreButton: false,
+                    }}
+                    queryName="CreatedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileCreatedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your collection is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="OwnedItemsQuery"
+                    queryFunction={async () =>
+                      await getProfileOwnedItemsByAddress(profileAddress)
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                  <GridArtworkSelected
+                    emptyMessageProps={{
+                      primaryText: 'Your favorites is empty.',
+                      showExploreButton: false,
+                    }}
+                    queryName="PlaylistModalQuery"
+                    queryFunction={async () =>
+                      await getAllFavoritesArtworksFromOneUserByAddress(
+                        profileAddress
+                      )
+                    }
+                    onModifyPlaylist={onModifyPlaylist}
+                    artworksSelected={artworksSelected}
+                  />,
+                ]
+          }
+        />
       </Grid>
       <Grid item container justify="flex-end" className={classes.conteinerBtn}>
-        <Button variant="text" className={classes.btn} onClick={onClose}>
-          <Typography variant="caption" className={classes.textBtn}>
+        <Button
+          variant="text"
+          disabled={isDisabled}
+          className={classes.btn}
+          onClick={onPlublish}
+        >
+          <Typography
+            variant="caption"
+            color="primary"
+            className={classes.textBtn}
+          >
             Published
           </Typography>
         </Button>

@@ -4,6 +4,7 @@ import InAuctions from './InAuctions'
 import Reserve from './Reserve'
 import Sold from './Sold'
 import ButtonPlaylist from './ButtonPlaylist'
+import { ArrayPlaylist } from '../../../types'
 
 const FooterCardItem = ({
   statesArt,
@@ -15,6 +16,20 @@ const FooterCardItem = ({
   handleSubmitUnPlaylist,
   isFavorite,
   account,
+  playlists,
+  artworkId,
+}: {
+  statesArt: string
+  price?: string
+  timer?: string
+  handleSubmitPlaylist: Function
+  handleSubmitFavorite: Function
+  handleSubmitUnFavorite: Function
+  handleSubmitUnPlaylist: Function
+  isFavorite?: boolean
+  account: any
+  playlists: ArrayPlaylist[]
+  artworkId: number
 }) => {
   return (
     <>
@@ -28,6 +43,8 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </InAuctions>
@@ -41,6 +58,8 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </Reserve>
@@ -54,6 +73,8 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </Sold>
