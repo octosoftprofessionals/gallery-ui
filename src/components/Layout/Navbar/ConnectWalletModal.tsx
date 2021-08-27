@@ -17,6 +17,7 @@ const useStyle = makeStyles(Theme => ({
   button: {
     borderRadius: Theme.shape.borderRadius[1],
     marginTop: Theme.spacing(3),
+    '&:hover': { transform: 'none', translate: 'none', border: 'none' },
   },
   title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
   conteiner: {
