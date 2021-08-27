@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import Account from '../../components/Creator'
-
 import Spinner from '../../components/Spinner'
-
-import useQueryParams from '../../hooks/useQueryParams'
-import { getUser } from '../../services/users'
 
 const linkShareTwitter = () => {
   const SITE_URL = typeof window !== 'undefined' ? window.location.href : ''
@@ -16,12 +11,8 @@ const linkShareTwitter = () => {
   return `https://twitter.com/share?${searchParams.toString()}`
 }
 
-const AccountPage = () => {
-  const { address } = useQueryParams()
+const AccountPage = ({ isLoading, userAccount }) => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
-  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-    getUser({ public_address: address })
-  )
   const [coverProfileImgUrl, setCoverProfileImgUrl] = useState('')
 
   return (

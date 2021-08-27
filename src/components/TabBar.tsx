@@ -97,7 +97,7 @@ const TabBar = ({
   const handleSelected = selection => {
     setSelected(selection)
     if (isMyAccount) {
-      window.location.href = myProfilePathWithView(address, selection)
+      window.location.href = myProfilePathWithView(selection)
     }
   }
 
