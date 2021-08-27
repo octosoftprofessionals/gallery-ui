@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import Navigator from './Navigator'
@@ -24,7 +25,6 @@ import NavBarBid from './NavBarBid'
 import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 import Cookies from 'js-cookie'
-
 import { useAccountStore } from '../../../hooks/useAccountStore'
 
 const { boxShadow1 } = boxShadow
@@ -158,6 +158,7 @@ const index = ({ pathname, profileImageUrl }) => {
   const handleLogOut = async () => {
     setAccount(null)
     Cookies.remove('jwt')
+    navigate(`/`)
   }
 
   return (

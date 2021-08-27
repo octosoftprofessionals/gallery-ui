@@ -211,10 +211,6 @@ const EditForm = ({ userAccount }: Props) => {
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
   const [disabled, setDisabled] = useState(true)
 
-  // useEffect(() => {
-  //   setDisabled(false)
-  // }, [socialNetwork, name, email, files, bio])
-
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
   }
@@ -283,9 +279,6 @@ const EditForm = ({ userAccount }: Props) => {
 
     setTestFile(e.target.files[0])
   }
-  // useEffect(() => {
-  //   setDisabled(true)
-  // }, [])
 
   return (
     <Grid
