@@ -40,7 +40,6 @@ const Playlist = ({
   queryName,
   queryFunction,
   refetchOnWindow = false,
-  refetchIntervalMS = 1000,
 }: {
   isMyAccount: boolean
   emptyMessageProps: Record<string, any>
@@ -48,14 +47,12 @@ const Playlist = ({
   queryName: string
   queryFunction: () => Promise<ArrayPlaylist>
   refetchOnWindow?: boolean
-  refetchIntervalMS?: number
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
     queryFunction,
     {
       refetchOnWindowFocus: refetchOnWindow,
-      refetchInterval: refetchIntervalMS,
     }
   )
 
@@ -68,15 +65,14 @@ const Playlist = ({
 
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
-  }
-  const handleCloseCreatePlaylist = () => {
+    setAddArtworksPlaylist([])
     setTitlePlaylist('')
     setDescriptionPlaylist('')
+  }
+  const handleCloseCreatePlaylist = () => {
     setOpenCreatePlaylist(false)
   }
   const handleCloseAddPlaylist = () => {
-    setTitlePlaylist('')
-    setDescriptionPlaylist('')
     setOpenAddPlaylist(false)
   }
 
@@ -107,16 +103,21 @@ const Playlist = ({
         priority: index + 1,
       }))
 
-      const resCreatePlaylist = await createPlaylist(profileAddress, {
-        title: titlePlaylist,
-        description: descriptionPlaylist,
-      })
-      const { id } = resCreatePlaylist.data
+      try {
+        const resCreatePlaylist = await createPlaylist(profileAddress, {
+          title: titlePlaylist,
+          description: descriptionPlaylist,
+        })
 
-      const resAddArtworkToNewPlaylist = await addArtworkToNewPlaylist({
-        playlist_id: id,
-        artworks_related: artworksRelated,
-      })
+        const { id } = resCreatePlaylist.data
+
+        const resAddArtworkToNewPlaylist = await addArtworkToNewPlaylist({
+          playlist_id: id,
+          artworks_related: artworksRelated,
+        })
+      } catch (error) {
+        console.log('error :>> ', error)
+      }
     }
     setAddArtworksPlaylist([])
     handleCloseAddPlaylist()
