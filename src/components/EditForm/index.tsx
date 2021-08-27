@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
@@ -209,6 +209,11 @@ const EditForm = ({ userAccount }: Props) => {
   const [files, setFiles] = useState({ picture: [], cover: [] })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
+  const [disabled, setDisabled] = useState(true)
+
+  // useEffect(() => {
+  //   setDisabled(false)
+  // }, [socialNetwork, name, email, files, bio])
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
@@ -223,12 +228,15 @@ const EditForm = ({ userAccount }: Props) => {
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
+    setDisabled(false)
   }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
+    setDisabled(false)
   }
   const handleChangeBio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBio(event.target.value)
+    setDisabled(false)
   }
 
   const handleSubmit = async () => {
@@ -253,14 +261,17 @@ const EditForm = ({ userAccount }: Props) => {
       try {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
+        setDisabled(true)
         console.log(res)
       } catch (e) {
         handleClick(true)
         console.log(e)
       }
-    } else {
+    } else if (!validateEmail(email)) {
       setError(true)
       console.log('mail no ingresado')
+    } else {
+      handleClick(true)
     }
   }
 
@@ -272,6 +283,9 @@ const EditForm = ({ userAccount }: Props) => {
 
     setTestFile(e.target.files[0])
   }
+  // useEffect(() => {
+  //   setDisabled(true)
+  // }, [])
 
   return (
     <Grid
@@ -443,11 +457,13 @@ const EditForm = ({ userAccount }: Props) => {
             <LinkForm
               socialNetwork={socialNetwork}
               setSocialNetwork={setSocialNetwork}
+              setDisabled={setDisabled}
             />
             <Button
               onClick={handleSubmit}
               color="primary"
               className={classes.suscribeBtn}
+              disabled={disabled ? true : false}
               variant="outlined"
               href="#edit-profile"
             >
