@@ -19,8 +19,12 @@ const useStyle = makeStyles(Theme => ({
     marginTop: Theme.spacing(3),
   },
   title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
-  conteiner: { marginBottom: Theme.spacing(4) },
-  text: { fontSize: Theme.spacing(4) },
+  conteiner: {
+    marginBottom: Theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  text: { fontSize: Theme.spacing(4), textAlign: 'center' },
   link: { textDecoration: 'none' },
   textCaption: {
     cursor: 'pointer',
