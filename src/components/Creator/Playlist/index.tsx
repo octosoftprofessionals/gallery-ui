@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box, Button, Typography } from '@material-ui/core'
@@ -14,6 +14,7 @@ import Spinner from '../../Spinner'
 import {
   createPlaylist,
   addArtworkToNewPlaylist,
+  deleteOnePlaylistByIdWithAssociatedArtworks,
 } from '../../../services/playlists'
 import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
@@ -39,23 +40,18 @@ const Playlist = ({
   profileAddress,
   queryName,
   queryFunction,
-  refetchOnWindow = false,
 }: {
   isMyAccount: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName: string
   queryFunction: () => Promise<ArrayPlaylist>
-  refetchOnWindow?: boolean
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
-    queryFunction,
-    {
-      refetchOnWindowFocus: refetchOnWindow,
-    }
+    queryFunction
   )
-
+  const queryClient = useQueryClient()
   const classes = useStyles()
   const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
@@ -116,11 +112,44 @@ const Playlist = ({
           artworks_related: artworksRelated,
         })
       } catch (error) {
-        console.log('error :>> ', error)
+        console.log('errorCreatePlaylist :>> ', error)
       }
     }
+    try {
+      const status = queryClient.getQueryData(queryName)
+      console.log('status :>> ', status)
+      const result = await queryFunction()
+      queryClient.setQueryData(queryName, result)
+    } catch (error) {
+      console.log('errorUpDate :>> ', error)
+    }
     setAddArtworksPlaylist([])
+    setTitlePlaylist('')
+    setDescriptionPlaylist('')
     handleCloseAddPlaylist()
+  }
+
+  const handlerDeletedPlaylist = async (id: number) => {
+    const state = queryClient.getQueryState(queryName)
+    console.log('state :>> ', state)
+    try {
+      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
+        {
+          playlist_id: id,
+        }
+      )
+    } catch (error) {
+      console.log('errorResDeletePlaylist :>> ', error)
+    }
+
+    try {
+      const status = queryClient.getQueryData(queryName)
+      console.log('status :>> ', status)
+      const result = await queryFunction()
+      queryClient.setQueryData(queryName, result)
+    } catch (error) {
+      console.log('errorUpDate :>> ', error)
+    }
   }
 
   return (
@@ -139,6 +168,7 @@ const Playlist = ({
                 titlePlaylist={title}
                 link={myPlaylistsId(id)}
                 id={id}
+                onDelete={handlerDeletedPlaylist}
               />
             </Grid>
           ))

@@ -5,7 +5,6 @@ import { Grid, Typography, IconButton } from '@material-ui/core'
 import { DeleteOutline } from '@material-ui/icons'
 
 import { boxShadow } from '../../Styles/Colors'
-import { deleteOnePlaylistByIdWithAssociatedArtworks } from '../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
   root: { position: 'relative', width: '90%' },
@@ -48,18 +47,16 @@ const PlaylistItem = ({
   titlePlaylist,
   id,
   link,
+  onDelete,
 }: {
   imageUrl: string
   titlePlaylist: string
   id: number
   link: string
+  onDelete: funtion
 }) => {
   const classes = useStyles({ imageUrl })
-  const handlerDeletedPlaylist = async () => {
-    const res = await deleteOnePlaylistByIdWithAssociatedArtworks({
-      playlist_id: id,
-    })
-  }
+
   return (
     <div className={classes.root}>
       <Link to={link} className={classes.link}>
@@ -72,7 +69,7 @@ const PlaylistItem = ({
       </Link>
       <IconButton
         aria-label="delete"
-        onClick={handlerDeletedPlaylist}
+        onClick={() => onDelete(id)}
         className={classes.containerIcon}
       >
         <DeleteOutline className={classes.icon} />
