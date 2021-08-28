@@ -44,20 +44,33 @@ const Playlist = ({
   isMyAccount: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
-  queryName: string
-  queryFunction: () => Promise<ArrayPlaylist>
+  queryName?: string
+  queryFunction?: () => Promise<ArrayPlaylist>
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
-    queryFunction
+    queryFunction,
+    { refetchOnWindowFocus: true }
   )
   const queryClient = useQueryClient()
+
   const classes = useStyles()
   const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
   const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>('')
+
+  const nullData = [
+    {
+      description: '',
+      id: 0,
+      priority: 1,
+      title: '',
+      userAddress: '',
+      userId: 0,
+    },
+  ]
 
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
@@ -116,13 +129,12 @@ const Playlist = ({
       }
     }
     try {
-      const status = queryClient.getQueryData(queryName)
-      console.log('status :>> ', status)
       const result = await queryFunction()
       queryClient.setQueryData(queryName, result)
     } catch (error) {
       console.log('errorUpDate :>> ', error)
     }
+
     setAddArtworksPlaylist([])
     setTitlePlaylist('')
     setDescriptionPlaylist('')
@@ -130,8 +142,6 @@ const Playlist = ({
   }
 
   const handlerDeletedPlaylist = async (id: number) => {
-    const state = queryClient.getQueryState(queryName)
-    console.log('state :>> ', state)
     try {
       const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
         {
@@ -143,8 +153,6 @@ const Playlist = ({
     }
 
     try {
-      const status = queryClient.getQueryData(queryName)
-      console.log('status :>> ', status)
       const result = await queryFunction()
       queryClient.setQueryData(queryName, result)
     } catch (error) {
