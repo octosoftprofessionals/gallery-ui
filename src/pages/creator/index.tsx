@@ -39,6 +39,7 @@ const CreatorPage = () => {
           user={user}
           setDisplayReportModal={setDisplayReportModal}
           setCoverImgUrl={setCoverCreatorImgUrl}
+          linkTwitter={linkShareTwitter()}
         />
       )}
     </Layout>

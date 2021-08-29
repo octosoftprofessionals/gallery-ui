@@ -17,10 +17,15 @@ const useStyle = makeStyles(Theme => ({
   button: {
     borderRadius: Theme.shape.borderRadius[1],
     marginTop: Theme.spacing(3),
+    '&:hover': { transform: 'none', translate: 'none', border: 'none' },
   },
   title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
-  conteiner: { marginBottom: Theme.spacing(4) },
-  text: { fontSize: Theme.spacing(4) },
+  conteiner: {
+    marginBottom: Theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  text: { fontSize: Theme.spacing(4), textAlign: 'center' },
   link: { textDecoration: 'none' },
   textCaption: {
     cursor: 'pointer',

@@ -8,7 +8,7 @@ const ROOT = config.API_URL || 'http://localhost:3000/v1'
 export const httpWithCredentials = axiosRateLimit(
   axios.create({ withCredentials: true, baseURL: ROOT }),
   {
-    maxRequests: 5,
+    maxRequests: 25,
     perMilliseconds: 1000,
   }
 )
@@ -22,7 +22,7 @@ export const httpWithCredentialsAndHeaders = axiosRateLimit(
     },
   }),
   {
-    maxRequests: 5,
+    maxRequests: 25,
     perMilliseconds: 1000,
   }
 )
