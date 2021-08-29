@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery, useQuery } from 'react-query'
 import { Grid } from '@material-ui/core'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
@@ -10,11 +10,14 @@ import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
 import { findeArtwork } from '../Utils'
 import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
+import { getPlaylists } from '../services/playlists'
 import { GalleryItem } from '../types'
+import { useAccountStore } from '../hooks/useAccountStore'
 
 const Home = () => {
   const [featuredArtworks, setFeaturedArtworks] = useState(0)
   const [liveAuctions, setLiveAuctions] = useState(0)
+  const metamaskStorage = useAccountStore()
   type featureItemsQueryProps = {
     data: GalleryItem[]
     status: 'idle' | 'error' | 'loading' | 'success'
@@ -52,7 +55,7 @@ const Home = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=aution' }) =>
+    ({ pageParam = 0, querys = 'status=on_auction' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -67,6 +70,13 @@ const Home = () => {
     setFeaturedArtworks(newPages)
     fetchNextPageFA({ pageParam: newPages })
   }
+
+  const {
+    data: PlaylistQuery = [],
+    isLoading: isLoadingPlaylistQuery,
+  } = useQuery('PlaylistQuery', () => getPlaylists(metamaskStorage[0]), {
+    refetchOnWindowFocus: false,
+  })
 
   const handleFavorite = useCallback(
     (assetId, status, title) => {
@@ -86,7 +96,9 @@ const Home = () => {
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)}
+          artworksCarousel={
+            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)
+          }
           timeout={1000}
           interval={7000}
         />
@@ -112,6 +124,7 @@ const Home = () => {
                   onFavorite={(assetId, status) =>
                     handleFavorite(assetId, status, 'All')
                   }
+                  playlists={PlaylistQuery}
                 />
               )}
             />
@@ -128,21 +141,24 @@ const Home = () => {
         {isLoadingLA ? (
           <Spinner height="50vh" />
         ) : (
-          <Gallery
-            isLoading={isFetchingLA}
-            handleNext={getMoreLiveAuctions}
-            pages={liveAcutionItems.pages}
-            hasNextPage={hasNextPageLA}
-            renderItem={item => (
-              <ArtworkItem
-                key={item.assetId}
-                galleryItem={item}
-                onFavorite={(assetId, status) =>
-                  handleFavorite(assetId, status, 'Live')
-                }
-              />
-            )}
-          />
+          <Grid item container justify="center">
+            <Gallery
+              isLoading={isFetchingLA}
+              handleNext={getMoreLiveAuctions}
+              pages={liveAcutionItems.pages}
+              hasNextPage={hasNextPageLA}
+              renderItem={item => (
+                <ArtworkItem
+                  key={item.assetId}
+                  galleryItem={item}
+                  onFavorite={(assetId, status) =>
+                    handleFavorite(assetId, status, 'Live')
+                  }
+                  playlists={PlaylistQuery}
+                />
+              )}
+            />
+          </Grid>
         )}
       </ArtworkGrid>
     </Layout>

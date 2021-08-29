@@ -5,7 +5,7 @@ import { useMutation } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
-import { GalleryItem } from '../../../services/gallery'
+import { GalleryItem, ArrayPlaylist } from '../../../types'
 import {
   createAssociationFavoritesArtworks,
   deleteOneFavoriteArtworkFromOneUser,
@@ -23,7 +23,7 @@ const useStyle = makeStyles(Theme => ({
     transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
   },
   img: {
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -75,11 +75,15 @@ const useStyle = makeStyles(Theme => ({
 const ArtworkItem = ({
   galleryItem = {},
   onFavorite,
+  playlists = [],
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
+  onFavorite: Function
+  playlists: ArrayPlaylist[] | undefined
 }) => {
   const {
+    id,
     assetId,
     title,
     imageUrl,
@@ -176,7 +180,6 @@ const ArtworkItem = ({
         </div>
       </Link>
       <FooterCardItem
-        account={account}
         statesArt={status}
         price={priceEth}
         timer={timer}
@@ -185,6 +188,9 @@ const ArtworkItem = ({
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
         isFavorite={isFavorite}
+        account={account}
+        playlists={playlists}
+        artworkId={id}
       />
     </Paper>
   )
