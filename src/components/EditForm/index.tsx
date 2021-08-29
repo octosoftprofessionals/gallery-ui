@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
@@ -172,6 +172,16 @@ const useStyle = makeStyles(theme => ({
     // backgroundColor: theme.palette.primary.light,
     color: theme.palette.secondary.contrastText,
   },
+  extraText: {
+    marginTop: theme.spacing(5),
+    paddingRight: theme.spacing(16),
+    textAlign: 'left',
+    '@media (max-width: 576px)': {
+      paddingRight: theme.spacing(0),
+      marginTop: theme.spacing(0),
+      textAlign: 'center',
+    },
+  },
 }))
 
 type Props = {
@@ -199,10 +209,15 @@ const EditForm = ({ userAccount }: Props) => {
   const [files, setFiles] = useState({ picture: [], cover: [] })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
+  const [disabled, setDisabled] = useState(true)
 
   const handleClick = error => {
     setOpenAlert({ error: error, open: true })
   }
+
+  useEffect(() => {
+    setDisabled(false)
+  }, [files])
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -213,12 +228,15 @@ const EditForm = ({ userAccount }: Props) => {
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
+    setDisabled(false)
   }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
+    setDisabled(false)
   }
   const handleChangeBio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBio(event.target.value)
+    setDisabled(false)
   }
 
   const handleSubmit = async () => {
@@ -243,14 +261,17 @@ const EditForm = ({ userAccount }: Props) => {
       try {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
+        setDisabled(true)
         console.log(res)
       } catch (e) {
         handleClick(true)
         console.log(e)
       }
-    } else {
+    } else if (!validateEmail(email)) {
       setError(true)
       console.log('mail no ingresado')
+    } else {
+      handleClick(true)
     }
   }
 
@@ -381,8 +402,14 @@ const EditForm = ({ userAccount }: Props) => {
                 >
                   Upload a profile image:
                 </Typography>
-
-                {/*   <input type="file" onChange={onChangeTestFile} /> */}
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  className={classes.extraText}
+                >
+                  Recommended size: <br /> 1000x1000px. JPG, PNG or GIF. 10MB
+                  max size.
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
                 <DragDrop setFiles={setFiles} typeFile="user" files={files} />
@@ -394,6 +421,14 @@ const EditForm = ({ userAccount }: Props) => {
                   className={classes.formTitle}
                 >
                   Upload a cover image:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  className={classes.extraText}
+                >
+                  Recommended size:
+                  <br /> 1500x500px. JPG, PNG or GIF. 10MB max size.
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.form}>
@@ -419,11 +454,13 @@ const EditForm = ({ userAccount }: Props) => {
             <LinkForm
               socialNetwork={socialNetwork}
               setSocialNetwork={setSocialNetwork}
+              setDisabled={setDisabled}
             />
             <Button
               onClick={handleSubmit}
               color="primary"
               className={classes.suscribeBtn}
+              disabled={disabled ? true : false}
               variant="outlined"
               href="#edit-profile"
             >

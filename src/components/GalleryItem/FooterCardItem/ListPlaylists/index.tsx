@@ -68,8 +68,8 @@ const MenuPlaylist = ({
           <Divider />
         </>
       ))}
-      <Link to={myProfilePathWithView(account, 2)} className={classes.link}>
-        <MenuItem>
+      <Link to={myProfilePathWithView(2)} className={classes.link}>
+        <MenuItem onClick={onClose}>
           <Typography variant="button" color="primary">
             New Playlist
           </Typography>

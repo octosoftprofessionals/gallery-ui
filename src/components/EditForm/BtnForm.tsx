@@ -112,11 +112,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const LinkButton = ({ socialNetwork, setSocialNetwork }) => {
+const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
   const classes = useStyles()
 
   const handleChange = (key: string, value: string) => {
     setSocialNetwork({ ...socialNetwork, [key]: value })
+    setDisabled(false)
   }
 
   const networks = [

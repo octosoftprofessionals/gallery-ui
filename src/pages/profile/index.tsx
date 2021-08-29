@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import Layout from '../../components/Layout'
-import EditForm from '../../components/EditForm'
+import { AccountComponent } from '../../components/AccountComponent'
 import { getUser } from '../../services/users'
 import { useMetamaskAccount } from '../../hooks/useAccountStore'
 import NotFound from '../404'
 
-const editProfile = () => {
+const ProfilePage = () => {
   const address = useMetamaskAccount()
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
@@ -15,12 +14,7 @@ const editProfile = () => {
   if (!address) {
     return <NotFound />
   }
-
-  return (
-    <Layout>
-      {userAccount ? <EditForm userAccount={userAccount} /> : null}
-    </Layout>
-  )
+  return <AccountComponent isLoading={isLoading} userAccount={userAccount} />
 }
 
-export default editProfile
+export default ProfilePage
