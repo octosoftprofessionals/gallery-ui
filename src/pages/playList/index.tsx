@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 import Layout from '../../components/Layout'
 import PlaylistPage from '../../components/PlaylistPage'
@@ -13,18 +13,28 @@ import { useAccountStore } from '../../hooks/useAccountStore'
 const playListPage = () => {
   const { id } = useQueryParams()
   const [account, _] = useAccountStore()
+  const queryClient = useQueryClient()
   const { data: userAccount, isLoading: isLoadingUser } = useQuery(
     'userQuery',
-    () => getUser({ public_address: account })
-  )
-
-  const { data: PlaylistItem = {}, isLoading: isLoadingPlaylist } = useQuery(
-    'PlaylistItem',
-    () => getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) }),
+    () => getUser({ public_address: account }),
     {
-      refetchInterval: 2000,
+      refetchOnWindowFocus: false,
     }
   )
+
+  const {
+    data: PlaylistItem = {},
+    isLoading: isLoadingPlaylist,
+  } = useQuery('PlaylistItem', () =>
+    getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
+  )
+
+  const upDate = async (): Promise<any> => {
+    const result = await getOnePlaylistByIdWithRelatedArtworks({
+      playlist_id: Number(id),
+    })
+    queryClient.setQueryData('PlaylistItem', result)
+  }
 
   return (
     <Layout>
@@ -36,8 +46,9 @@ const playListPage = () => {
           title={PlaylistItem.queryPlaylist.title}
           description={PlaylistItem.queryPlaylist.description}
           userAccount={userAccount}
-          isLoading={isLoadingUser}
+          isLoading={{ Playlist: isLoadingPlaylist, User: isLoadingUser }}
           playlistId={Number(id)}
+          onUpDate={upDate}
         />
       )}
     </Layout>
