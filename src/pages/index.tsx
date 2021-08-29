@@ -55,7 +55,7 @@ const Home = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=aution' }) =>
+    ({ pageParam = 0, querys = 'status=on_auction' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -96,7 +96,9 @@ const Home = () => {
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)}
+          artworksCarousel={
+            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)
+          }
           timeout={1000}
           interval={7000}
         />
@@ -139,22 +141,24 @@ const Home = () => {
         {isLoadingLA ? (
           <Spinner height="50vh" />
         ) : (
-          <Gallery
-            isLoading={isFetchingLA}
-            handleNext={getMoreLiveAuctions}
-            pages={liveAcutionItems.pages}
-            hasNextPage={hasNextPageLA}
-            renderItem={item => (
-              <ArtworkItem
-                key={item.assetId}
-                galleryItem={item}
-                onFavorite={(assetId, status) =>
-                  handleFavorite(assetId, status, 'Live')
-                }
-                playlists={PlaylistQuery}
-              />
-            )}
-          />
+          <Grid item container justify="center">
+            <Gallery
+              isLoading={isFetchingLA}
+              handleNext={getMoreLiveAuctions}
+              pages={liveAcutionItems.pages}
+              hasNextPage={hasNextPageLA}
+              renderItem={item => (
+                <ArtworkItem
+                  key={item.assetId}
+                  galleryItem={item}
+                  onFavorite={(assetId, status) =>
+                    handleFavorite(assetId, status, 'Live')
+                  }
+                  playlists={PlaylistQuery}
+                />
+              )}
+            />
+          </Grid>
         )}
       </ArtworkGrid>
     </Layout>
