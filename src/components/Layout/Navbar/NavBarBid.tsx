@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { accountPathFrom } from '../../../config/routes'
 
 import logoSrc from '../../../assets/logoNew.png'
 import { boxShadow, backgroundGradient } from '../../Styles/Colors'
@@ -51,7 +50,6 @@ const useStyles = makeStyles(Theme => ({
 
 const index = ({ cois, publicKey, profileImageUrl, name }) => {
   const classes = useStyles({ logoSrc })
-  const accountLink = accountPathFrom(publicKey)
   return (
     <Grid
       item

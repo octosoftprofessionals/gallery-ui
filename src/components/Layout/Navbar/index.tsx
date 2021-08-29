@@ -55,7 +55,7 @@ const useStyles = makeStyles(Theme => ({
   },
   container: {
     display: ({ pathname }) =>
-      pathname === '/bid' || pathname === '/account' ? 'none' : 'block',
+      pathname === '/bid' || pathname === '/profile' ? 'none' : 'block',
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
