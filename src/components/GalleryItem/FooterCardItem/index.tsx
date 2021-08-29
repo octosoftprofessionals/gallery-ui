@@ -33,7 +33,7 @@ const FooterCardItem = ({
 }) => {
   return (
     <>
-      {statesArt === 'listed' ? (
+      {statesArt === 'on_auction' ? (
         <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
@@ -48,7 +48,7 @@ const FooterCardItem = ({
             />
           ) : null}
         </InAuctions>
-      ) : statesArt === 'reserve' ? (
+      ) : statesArt === 'buy_now' ? (
         <Reserve price={price}>
           {account ? (
             <ButtonPlaylist
@@ -63,8 +63,8 @@ const FooterCardItem = ({
             />
           ) : null}
         </Reserve>
-      ) : statesArt === 'sold' ? (
-        <Sold price={price}>
+      ) : statesArt === 'none' ? (
+        <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -77,7 +77,7 @@ const FooterCardItem = ({
               artworkId={artworkId}
             />
           ) : null}
-        </Sold>
+        </InAuctions>
       ) : (
         ''
       )}
