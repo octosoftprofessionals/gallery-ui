@@ -83,16 +83,20 @@ const TabBar = ({
   inSize,
   playlist,
   isMyAccount,
+  initialTab = 0,
   ...props
+}: {
+  titles: string[]
+  components: any[]
+  justify: string
+  inSize: any
+  playlist?: boolean
+  isMyAccount?: boolean
+  initialTab?: number
 }) => {
   const classes = useStyle()
   const { address } = useQueryParams()
-  const hash = useQueryHash() || '0'
-  const [selected, setSelected] = useState(parseInt(hash))
-
-  useEffect(() => {
-    setSelected(parseInt(hash))
-  }, [hash])
+  const [selected, setSelected] = useState(initialTab)
 
   const handleSelected = selection => {
     setSelected(selection)

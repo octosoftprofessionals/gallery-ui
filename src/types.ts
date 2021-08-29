@@ -131,6 +131,7 @@ export enum GalleryItemStatus {
 }
 
 export type GalleryItem = {
+  id: number
   // identifiers
   // contract & token reference metadata
   assetId: string
@@ -143,12 +144,15 @@ export type GalleryItem = {
 
   // media
   imageUrl: string
+  imagePreviewUrl?: string
   videoUrl?: string
+  imageOriginalUrl?: string
 
   // creator
   creatorUsername: string
   creatorImageUrl: string
   creatorAddress: string
+  creatorDescription?: string
 
   // owner
   ownerUsername: string
@@ -178,6 +182,7 @@ export type GalleryItem = {
   expiration: string // iso8601
   // - highest bid
   // - all bids
+  isFavorite: boolean
 }
 
 export enum HistoryItemEventType {
@@ -362,4 +367,17 @@ export type Artworks = {
   minted_by_superchief: string
   is_featured: boolean
   expiration: string
+}
+
+export type PlaylistItem = {
+  id: number
+  title: string
+  description: string
+  userId: number
+  userAddress: string
+  priority: number
+}
+
+export type ArrayPlaylist = {
+  data: PlaylistItem[]
 }

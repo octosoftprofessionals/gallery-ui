@@ -8,7 +8,8 @@ import useTimer from '../../../hooks/useTimer'
 const useStyle = makeStyles(Theme => ({
   title: { fontSize: Theme.typography.fontSize[3] },
   infoAution: {
-    display: ({ disableInfo }) => (disableInfo ? 'block' : 'none'),
+    display: ({ disableInfo }: { disableInfo: boolean }) =>
+      disableInfo ? 'block' : 'none',
   },
   texTimer: {
     fontSize: Theme.typography.fontSize[3],

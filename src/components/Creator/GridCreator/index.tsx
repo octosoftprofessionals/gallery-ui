@@ -8,8 +8,9 @@ import {
 } from '../../../services/gallery'
 
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
-
+import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
+import { useQueryHash } from '../../../hooks/useQueryParams'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => (
   <TabBar
@@ -19,9 +20,9 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
     light
     playlist
     inSize={3}
+    initialTab={parseInt(useQueryHash() || '0')}
     isMyAccount={isMyAccount}
     titles={['Created', 'Collected', 'Playlist', 'Favorites']}
-    isMyAccount={isMyAccount}
     components={[
       <GalleryCreator
         emptyMessageProps={{
@@ -35,7 +36,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           await getProfileCreatedItemsByAddress(profileAddress)
         }
       />,
-
       <GalleryCreator
         emptyMessageProps={{
           primaryText: isMyAccount
@@ -51,10 +51,9 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
           await getProfileOwnedItemsByAddress(profileAddress)
         }
       />,
-
       <Playlist
         isMyAccount={isMyAccount}
-        renderItem={[]}
+        profileAddress={profileAddress}
         emptyMessageProps={{
           primaryText: isMyAccount
             ? 'Your playlist are empty.'
@@ -64,8 +63,9 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => (
             : null,
           showExploreButton: true,
         }}
+        queryName="PlaylistQuery"
+        queryFunction={async () => await getPlaylists(profileAddress)}
       />,
-
       <GalleryCreator
         emptyMessageProps={{
           primaryText: isMyAccount

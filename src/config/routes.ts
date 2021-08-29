@@ -14,4 +14,7 @@ export const accountPathFrom = (tokenId: string) =>
 export const myProfilePathFromAddress = (address: string) =>
   `/account/?address=${address}`
 
+
 export const myProfilePathWithView = (view: number) => `/profile/#${view}`
+
+export const myPlaylistsId = (id: number) => `/playList/?id=${id}`

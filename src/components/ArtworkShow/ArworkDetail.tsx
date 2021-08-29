@@ -12,11 +12,8 @@ import HistoryItem from './HistoryItem'
 
 import ArtworkShare from './ArtworkShare'
 import CreatorButton from '../CreatorButton'
-import {
-  biddingPathFrom,
-  profilePathFromAddress,
-  artworkLinks,
-} from '../../config/routes'
+import { biddingPathFrom, profilePathFromAddress } from '../../config/routes'
+import { GalleryItem } from '../../types'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -46,7 +43,15 @@ const useStyle = makeStyles(Theme => ({
   titleArtwork: { marginTop: Theme.spacing(9) },
 }))
 
-const ArtworkDetail = ({ galleryItem, linkTwitter, setDisplayReportModal }) => {
+const ArtworkDetail = ({
+  galleryItem,
+  linkTwitter,
+  setDisplayReportModal,
+}: {
+  galleryItem: GalleryItem
+  linkTwitter: string
+  setDisplayReportModal: any
+}) => {
   const classes = useStyle()
 
   const {
@@ -54,7 +59,6 @@ const ArtworkDetail = ({ galleryItem, linkTwitter, setDisplayReportModal }) => {
     assetTokenId,
     title,
     description,
-    number,
     imageUrl,
     videoUrl,
     priceEth,
@@ -164,7 +168,7 @@ const ArtworkDetail = ({ galleryItem, linkTwitter, setDisplayReportModal }) => {
             Edition of
           </Typography>
           <Typography variant="h4" color="initial">
-            {number ? number : '1'}
+            {/* {number ? number : '1'} */}
           </Typography>
           <ArtworkView artworkLinks={linksArtworkView} />
         </Grid>

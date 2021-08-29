@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
 
 import { myProfilePathWithView } from '../../../../config/routes'
+import { ArrayPlaylist } from '../../../../types'
+
+import { addArtworkToExistingPlaylist } from '../../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
   root: {},
@@ -17,9 +20,23 @@ const MenuPlaylist = ({
   onClose,
   arrayPlaylist,
   account,
+  artworkId,
   ...props
+}: {
+  anchorEl: any
+  onClose: any
+  arrayPlaylist: ArrayPlaylist[]
+  account: string
+  artworkId: number
 }) => {
   const classes = useStyles()
+
+  const handleAddArtwork = async (id: number) => {
+    const res = await addArtworkToExistingPlaylist(id, {
+      artwork_id: artworkId,
+    })
+    onClose()
+  }
 
   return (
     <Menu
@@ -41,13 +58,17 @@ const MenuPlaylist = ({
         },
       }}
     >
-      {arrayPlaylist.map(item => (
+      {arrayPlaylist.map(({ id, title }) => (
         <>
-          <MenuItem onClick={onClose}>{item}</MenuItem>
+          <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
+            <Typography variant="button" color="primary">
+              {title}
+            </Typography>
+          </MenuItem>
           <Divider />
         </>
       ))}
-      <Link to={myProfilePathWithView(2)} className={classes.link}>
+      <Link to={myProfilePathWithView(account, 2)} className={classes.link}>
         <MenuItem onClick={onClose}>
           <Typography variant="button" color="primary">
             New Playlist

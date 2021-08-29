@@ -4,6 +4,7 @@ import InAuctions from './InAuctions'
 import Reserve from './Reserve'
 import Sold from './Sold'
 import ButtonPlaylist from './ButtonPlaylist'
+import { ArrayPlaylist } from '../../../types'
 
 const FooterCardItem = ({
   statesArt,
@@ -15,10 +16,24 @@ const FooterCardItem = ({
   handleSubmitUnPlaylist,
   isFavorite,
   account,
+  playlists,
+  artworkId,
+}: {
+  statesArt: string
+  price?: string
+  timer?: string
+  handleSubmitPlaylist: Function
+  handleSubmitFavorite: Function
+  handleSubmitUnFavorite: Function
+  handleSubmitUnPlaylist: Function
+  isFavorite?: boolean
+  account: any
+  playlists: ArrayPlaylist[]
+  artworkId: number
 }) => {
   return (
     <>
-      {statesArt === 'listed' ? (
+      {statesArt === 'on_auction' ? (
         <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
@@ -28,10 +43,12 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </InAuctions>
-      ) : statesArt === 'reserve' ? (
+      ) : statesArt === 'buy_now' ? (
         <Reserve price={price}>
           {account ? (
             <ButtonPlaylist
@@ -41,11 +58,13 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
         </Reserve>
-      ) : statesArt === 'sold' ? (
-        <Sold price={price}>
+      ) : statesArt === 'none' ? (
+        <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -54,9 +73,11 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
+              playlists={playlists}
+              artworkId={artworkId}
             />
           ) : null}
-        </Sold>
+        </InAuctions>
       ) : (
         ''
       )}
