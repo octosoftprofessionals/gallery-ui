@@ -100,18 +100,14 @@ const Creator = ({
 }: Props) => {
   const classes = useStyle()
 
-  const {
-    data: followeeItem = [],
-    isLoading: isLoadingFollowees,
-  } = useQuery('followeeQuery', () =>
-    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+  const { data: followeeItem = [], isLoading: isLoadingFollowees } = useQuery(
+    'followeeQuery',
+    () => getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
-  const {
-    data: followersItem = [],
-    isLoading: isLoadingFollowers,
-  } = useQuery('followersQuery', () =>
-    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+  const { data: followersItem = [], isLoading: isLoadingFollowers } = useQuery(
+    'followersQuery',
+    () => getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem
@@ -143,13 +139,13 @@ const Creator = ({
             ig={user.instagram}
             tw={user.twitter}
             bio={user.bio}
-            discord={user.discordId}
+            discord={user.discord}
+            discordId={user.discordId}
             youtube={user.youtube}
             facebook={user.facebook}
             tiktok={user.tiktok}
             snapchat={user.snapchat}
           />
-          {console.log(`user`, user)}
         </Grid>
         <Grid item container justify="flex-start" md={3} xs={12}>
           <div className={classes.share}>

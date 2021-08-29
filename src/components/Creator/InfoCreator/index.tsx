@@ -151,6 +151,7 @@ const InfoCreator = ({
   tw,
   bio,
   discord,
+  discordId,
   youtube,
   facebook,
   tiktok,
@@ -171,7 +172,6 @@ const InfoCreator = ({
   const [viewModal, setViewModal] = useState('')
 
   const [isFollow, setIsFollow] = useState('')
-
   useEffect(() => {
     const { follow } = FollowQuery
     setIsFollow(follow)
@@ -323,6 +323,7 @@ const InfoCreator = ({
             ig={ig}
             tw={tw}
             discord={discord}
+            discordId={discordId}
             youtube={youtube}
             facebook={facebook}
             tiktok={tiktok}

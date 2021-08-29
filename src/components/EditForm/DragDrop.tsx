@@ -19,7 +19,7 @@ const useStyles = makeStyles(Theme => ({
     minHeight: 90,
   },
   dropzoneParagraph: {
-    fontSize: Theme.typography.fontSize[2],
+    fontSize: 14,
     fontWeight: 400,
   },
 }))

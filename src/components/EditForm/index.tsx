@@ -1,5 +1,12 @@
-import React, { useState } from 'react'
-import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import {
+  Grid,
+  Typography,
+  Button,
+  Snackbar,
+  InputAdornment,
+} from '@material-ui/core'
+import { AlternateEmail } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
@@ -163,6 +170,11 @@ const useStyle = makeStyles(theme => ({
     marginLeft: theme.spacing(4),
     fontWeight: 400,
     fontSize: theme.typography.fontSize[3],
+    color: theme.palette.primary.main,
+    '&:hover': {
+      cursor: 'default',
+      color: theme.palette.primary.main,
+    },
   },
   titleNetwork: {
     marginTop: theme.spacing(13),
@@ -171,6 +183,11 @@ const useStyle = makeStyles(theme => ({
     borderRadius: 6,
     // backgroundColor: theme.palette.primary.light,
     color: theme.palette.secondary.contrastText,
+  },
+  iconMail: {
+    color: theme.palette.primary.dark,
+    marginLeft: theme.spacing(2),
+    fontSize: theme.spacing(9),
   },
 }))
 
@@ -190,6 +207,7 @@ const EditForm = ({ userAccount }: Props) => {
     website: userAccount.website,
     twitter: userAccount.twitter,
     instagram: userAccount.instagram,
+    discord: '',
     discordId: userAccount.discordId,
     youtube: userAccount.youtube,
     facebook: userAccount.facebook,
@@ -221,6 +239,11 @@ const EditForm = ({ userAccount }: Props) => {
     setBio(event.target.value)
   }
 
+  useEffect(() => {
+    console.log('DISCORD', userAccount)
+    console.log('DISCORD', userAccount.discordId)
+  }, [])
+
   const handleSubmit = async () => {
     if (validateEmail(email)) {
       setError(false)
@@ -234,12 +257,13 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('website', socialNetwork.website)
       formData.append('twitter', socialNetwork.twitter)
       formData.append('instagram', socialNetwork.instagram)
-      formData.append('discordId', socialNetwork.discordId)
+      formData.append('discordId', 'pepe')
       formData.append('youtube', socialNetwork.youtube)
       formData.append('facebook', socialNetwork.facebook)
       formData.append('tiktok', socialNetwork.tiktok)
       formData.append('snapchat', socialNetwork.snapchat)
       /* Ultimo intento! */
+      console.log('onPress', socialNetwork.discordId)
       try {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
@@ -254,15 +278,6 @@ const EditForm = ({ userAccount }: Props) => {
     }
   }
 
-  const [testFile, setTestFile] = useState(null)
-  const onChangeTestFile = e => {
-    console.log('recieved event:', e)
-
-    console.log('event.target.files[0]:', e.target.files[0])
-
-    setTestFile(e.target.files[0])
-  }
-
   return (
     <Grid
       container
@@ -270,7 +285,6 @@ const EditForm = ({ userAccount }: Props) => {
       alignItems="center"
       className={classes.root}
     >
-      {console.log(`userAccount`, userAccount)}
       <FormControl>
         <Grid item xs={12} container direction="column" alignItems="center">
           <Grid
@@ -287,7 +301,11 @@ const EditForm = ({ userAccount }: Props) => {
               md={12}
               id="edit-profile"
             >
-              <Typography variant="h4" className={classes.Title}>
+              <Typography
+                variant="h4"
+                color="primary"
+                className={classes.Title}
+              >
                 Edit Your Profile
               </Typography>
             </Grid>
@@ -309,11 +327,18 @@ const EditForm = ({ userAccount }: Props) => {
                 direction="column"
                 className={classes.fieldInput}
               >
-                <Typography className={classes.label}>Name</Typography>
+                <Typography className={classes.label}>Username</Typography>
                 <TextField
                   variant="outlined"
                   color="primary"
                   fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AlternateEmail className={classes.iconMail} />
+                      </InputAdornment>
+                    ),
+                  }}
                   className={classes.inputProfile}
                   onChange={handleChangeName}
                   value={name}
@@ -425,7 +450,7 @@ const EditForm = ({ userAccount }: Props) => {
               color="primary"
               className={classes.suscribeBtn}
               variant="outlined"
-              href="#edit-profile"
+              href="#header"
             >
               Save Changes
             </Button>

@@ -119,6 +119,7 @@ const UserNetworks = ({
   ig,
   tw,
   discord,
+  discordId,
   youtube,
   facebook,
   tiktok,
@@ -129,6 +130,7 @@ const UserNetworks = ({
     ig,
     tw,
     discord,
+    discordId,
     youtube,
     facebook,
     tiktok,
@@ -189,6 +191,18 @@ const UserNetworks = ({
             </Tooltip>
           </IconButton>
         </Grid>
+        <Grid className={classes.web}>
+          <Link to={`https://${web}`} className={classes.link}>
+            <LanguageIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="primary"
+              className={web ? classes.link : classes.web}
+            >
+              {web}
+            </Typography>
+          </Link>
+        </Grid>
         <Grid container direction="column">
           <Grid className={classes.Tw}>
             <Link to={`https://twitter.com/${tw}`} className={classes.link}>
@@ -215,18 +229,6 @@ const UserNetworks = ({
             </Typography>
           </Link>
         </Grid>
-        <Grid className={classes.web}>
-          <Link to={`https://${web}`} className={classes.link}>
-            <LanguageIcon className={classes.icon} />
-            <Typography
-              variant="overline"
-              color="primary"
-              className={web ? classes.link : classes.web}
-            >
-              {web}
-            </Typography>
-          </Link>
-        </Grid>
         <Grid className={classes.discord}>
           <Link to={`https://discord.com/`} className={classes.link}>
             <DiscordIcon className={classes.icon2} />
@@ -235,19 +237,7 @@ const UserNetworks = ({
               color="primary"
               className={discord ? classes.link : classes.discord}
             >
-              {discord}
-            </Typography>
-          </Link>
-        </Grid>
-        <Grid className={classes.tiktok}>
-          <Link to={`https://tiktok.com/@${tiktok}`} className={classes.link}>
-            <TickTockIcon className={classes.icon} />
-            <Typography
-              variant="overline"
-              color="primary"
-              className={tiktok ? classes.link : classes.tiktok}
-            >
-              {tiktok}
+              {`${discord}#${discordId}`}
             </Typography>
           </Link>
         </Grid>
@@ -281,6 +271,20 @@ const UserNetworks = ({
             </Typography>
           </Link>
         </Grid>
+
+        <Grid className={classes.tiktok}>
+          <Link to={`https://tiktok.com/@${tiktok}`} className={classes.link}>
+            <TickTockIcon className={classes.icon} />
+            <Typography
+              variant="overline"
+              color="primary"
+              className={tiktok ? classes.link : classes.tiktok}
+            >
+              {tiktok}
+            </Typography>
+          </Link>
+        </Grid>
+
         <Grid className={classes.snapchat}>
           <Link
             to={`https://www.snapchat.com/add/${snapchat}`}
