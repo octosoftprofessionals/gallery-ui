@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { AccountComponent } from '../account'
+import { AccountComponent } from '../../components/AccountComponent'
 import { getUser } from '../../services/users'
 import { useMetamaskAccount } from '../../hooks/useAccountStore'
 import NotFound from '../404'
