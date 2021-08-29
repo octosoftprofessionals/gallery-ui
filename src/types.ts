@@ -144,6 +144,7 @@ export type GalleryItem = {
 
   // media
   imageUrl: string
+  imagePreviewUrl?: string
   videoUrl?: string
   imageOriginalUrl?: string
 
