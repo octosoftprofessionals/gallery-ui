@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import AccountPage from '../account'
+import { AccountComponent } from '../account'
 import { getUser } from '../../services/users'
 import { useMetamaskAccount } from '../../hooks/useAccountStore'
 import NotFound from '../404'
@@ -14,7 +14,7 @@ const ProfilePage = () => {
   if (!address) {
     return <NotFound />
   }
-  return <AccountPage isLoading={isLoading} userAccount={userAccount} />
+  return <AccountComponent isLoading={isLoading} userAccount={userAccount} />
 }
 
 export default ProfilePage

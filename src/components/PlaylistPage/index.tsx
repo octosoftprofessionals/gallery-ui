@@ -43,7 +43,7 @@ const index = ({
   onUpDate: funtion<any>
 }) => {
   const classes = useStyles()
-  const { username, profileImgUrl, publicAddress } = userAccount
+  const { username, profileImgUrl, publicAddress } = userAccount ?? {}
 
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [openEditPlaylist, setOpenEditPlaylist] = useState<boolean>(false)

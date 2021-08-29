@@ -101,14 +101,18 @@ const Creator = ({
 }: Props) => {
   const classes = useStyle()
 
-  const { data: followeeItem = [], isLoading: isLoadingFollowees } = useQuery(
-    'followeeQuery',
-    () => getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+  const {
+    data: followeeItem = [],
+    isLoading: isLoadingFollowees,
+  } = useQuery('followeeQuery', () =>
+    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
-  const { data: followersItem = [], isLoading: isLoadingFollowers } = useQuery(
-    'followersQuery',
-    () => getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+  const {
+    data: followersItem = [],
+    isLoading: isLoadingFollowers,
+  } = useQuery('followersQuery', () =>
+    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem
@@ -127,7 +131,7 @@ const Creator = ({
     <Grid container xs={12} direction="column" justify="center">
       <Grid container xs={12} className={classes.root}>
         <Grid item xs={1}>
-          <Avatar src={user.profileImgUrl} className={classes.avatar} />
+          <Avatar src={user?.profileImgUrl} className={classes.avatar} />
         </Grid>
         <Grid md={8} xs={12} className={classes.profile}>
           <InfoCreator
