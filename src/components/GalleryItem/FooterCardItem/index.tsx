@@ -3,6 +3,7 @@ import React from 'react'
 import InAuctions from './InAuctions'
 import BuyNow from './BuyNow'
 import ButtonPlaylist from './ButtonPlaylist'
+import Offer from './Offer'
 import { ArrayPlaylist } from '../../../types'
 
 const FooterCardItem = ({
@@ -63,7 +64,7 @@ const FooterCardItem = ({
           ) : null}
         </BuyNow>
       ) : statesArt === 'none' ? (
-        <InAuctions price={price} timer={timer}>
+        <Offer>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -76,7 +77,7 @@ const FooterCardItem = ({
               artworkId={artworkId}
             />
           ) : null}
-        </InAuctions>
+        </Offer>
       ) : (
         ''
       )}

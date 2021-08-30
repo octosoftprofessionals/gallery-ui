@@ -22,7 +22,7 @@ const BuyNow = ({ price, children }) => {
   return (
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.conateinerTop}>
-        <Typography variant="caption" color="primary">
+        <Typography variant="caption" color="secondary">
           {isNaN(price)
             ? 'Buy this now for — ETH'
             : `Buy this now for ${formatDecimal(price)} ETH`}

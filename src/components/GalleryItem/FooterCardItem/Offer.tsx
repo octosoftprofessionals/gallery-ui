@@ -14,15 +14,34 @@ const useStyle = makeStyles(Theme => ({
   },
   conateinerTop: { padding: Theme.spacing(0, 6, 2) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
+  btn: {
+    padding: Theme.spacing(2),
+    margin: Theme.spacing(4, 0, 0),
+    '&:hover': {
+      transform: 'none',
+      translate: 'none',
+    },
+  },
+  btnText: {
+    color: Theme.palette.card.footer,
+    fontSize: Theme.typography.fontSize[10],
+  },
 }))
 
-const Sold = ({ price, children }) => {
+const Offer = ({ children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.conateinerTop}>
-        <Button variant="outlined" color="primary">
-          <Typography variant="caption" color="primary"></Typography>
+        <Button
+          variant="outlined"
+          color="primary"
+          fullWidth
+          className={classes.btn}
+        >
+          <Typography variant="button" className={classes.btnText}>
+            Offer
+          </Typography>
         </Button>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>
@@ -32,4 +51,4 @@ const Sold = ({ price, children }) => {
   )
 }
 
-export default Sold
+export default Offer
