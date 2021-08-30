@@ -28,7 +28,10 @@ const useStyle = makeStyles(Theme => ({
     margin: Theme.spacing(3, 0, 9),
   },
 
-  desciptionText: { margin: Theme.spacing(0, 0, 5) },
+  desciptionText: {
+    margin: Theme.spacing(0, 0, 5),
+    lineBreak: "auto",
+    whiteSpace: "pre-line" },
   name: { margin: Theme.spacing(0, 0, 5) },
   title: { margin: 0 },
   creator: { fontSize: Theme.typography.fontSize[8] },
