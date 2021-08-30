@@ -53,7 +53,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
     disableTime,
   } = useTimer({ expiration })
 
-  const classes = useStyle({ disableInfo })
+  const classes = useStyle()
   return (
     <Grid item>
       <Paper elevation={2}>
@@ -78,10 +78,10 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
                 color="primary"
                 className={classes.price}
               >
-                {`${formatDecimal(priceEth)} ETH`}
+                {isNaN(priceEth) ? `- ETH` : `${formatDecimal(priceEth)} ETH`}
               </Typography>
               <Typography variant="button" color="inherit">
-                {formatUsd(priceUsd)}
+                {isNaN(priceUsd) ? `$ -` : formatUsd(priceUsd)}
               </Typography>
             </Grid>
             <Hidden mdDown>

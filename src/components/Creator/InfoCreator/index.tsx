@@ -96,6 +96,8 @@ const useStyle = makeStyles(Theme => ({
   },
   bio: {
     marginLeft: Theme.spacing(15),
+    width: '600px',
+    overflow: 'hidden',
     '@media (max-width: 576px)': {
       marginLeft: Theme.spacing(0),
       marginTop: Theme.spacing(12),
@@ -106,6 +108,9 @@ const useStyle = makeStyles(Theme => ({
       alignItems: 'center',
       textAlign: 'center',
     },
+  },
+  bioContainer: {
+    // maxWidth: 300,
   },
   infoBio: {
     '@media (max-width: 300px)': {
@@ -304,16 +309,18 @@ const InfoCreator = ({
               </Button>
             )}
           </Grid>
-          <Grid container item justify="flex-start" xs={12}>
-            <Grid container sm={7} xs={12}>
-              <Typography
-                variant="body2"
-                color="primary"
-                className={classes.bio}
-              >
-                {bio}
-              </Typography>
-            </Grid>
+          <Grid
+            container
+            item
+            justify="flex-start"
+            xs={12}
+            className={classes.bioContainer}
+          >
+            {/* <Grid container sm={7} xs={12}> */}
+            <Typography variant="body2" color="primary" className={classes.bio}>
+              {bio}
+            </Typography>
+            {/* </Grid> */}
           </Grid>
         </Grid>
         <Grid item md={4} xs={12} className={classes.networks}>

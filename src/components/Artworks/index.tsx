@@ -21,7 +21,7 @@ const GridArtworks = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=aution' }) =>
+    ({ pageParam = 0, querys = 'status=on_auction' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -43,8 +43,8 @@ const GridArtworks = () => {
     fetchNextPage: fetchNextPageReserve,
     hasNextPage: hasNextPageReserve,
   } = useInfiniteQuery(
-    'reserveItemsQuery',
-    ({ pageParam = 0, querys = 'status=reserve' }) =>
+    'buyNowItemsQuery',
+    ({ pageParam = 0, querys = 'status=buy_now' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -67,7 +67,7 @@ const GridArtworks = () => {
     hasNextPage: hasNextPageSold,
   } = useInfiniteQuery(
     'soldItemsQuery',
-    ({ pageParam = 0, querys = 'status=sold' }) =>
+    ({ pageParam = 0, querys = 'status=none' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -96,7 +96,7 @@ const GridArtworks = () => {
   )
   return (
     <TabBar
-      titles={['Live Auction', 'Reserve not met', 'Sold']}
+      titles={['Live Auction', 'Buy Now', 'Offer']}
       justify="center"
       initialTab={parseInt(useQueryHash() || '0')}
       components={[

@@ -83,6 +83,9 @@ const useStyles = makeStyles(Theme => ({
   iconCopy: {
     fill: colors.IslamicGreen,
   },
+  tootipTitle: {
+    fontFamily: 'Bai Jamjuree',
+  },
   web: {
     display: ({ web }) => (web !== null && web !== '' ? 'block' : 'none'),
   },
@@ -186,6 +189,7 @@ const UserNetworks = ({
             className={classes.buttonKeyPublic}
           >
             <Tooltip
+              classes={{ tooltip: classes.tootipTitle }}
               title={isCopy ? 'Copied successfully' : 'Copy Address'}
               placement="top"
             >

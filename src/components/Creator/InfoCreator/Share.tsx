@@ -75,7 +75,12 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const Share = ({ linkTwitter, setDisplayReportModal, right }) => {
+const Share = ({
+  linkTwitter,
+  setDisplayReportModal,
+  right,
+  isMyAccount = false,
+}) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import Navigator from './Navigator'
@@ -24,7 +25,6 @@ import NavBarBid from './NavBarBid'
 import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 import Cookies from 'js-cookie'
-
 import { useAccountStore } from '../../../hooks/useAccountStore'
 
 const { boxShadow1 } = boxShadow
@@ -55,7 +55,7 @@ const useStyles = makeStyles(Theme => ({
   },
   container: {
     display: ({ pathname }) =>
-      pathname === '/bid' || pathname === '/account' ? 'none' : 'block',
+      pathname === '/bid' || pathname === '/profile' ? 'none' : 'block',
     boxShadow: boxShadow1,
     padding: Theme.spacing(2),
     borderRadius: Theme.shape.borderRadius[1],
@@ -158,6 +158,7 @@ const index = ({ pathname, profileImageUrl }) => {
   const handleLogOut = async () => {
     setAccount(null)
     Cookies.remove('jwt')
+    navigate(`/`)
   }
 
   return (
@@ -198,7 +199,7 @@ const index = ({ pathname, profileImageUrl }) => {
                 >
                   {userAccount ? (
                     <LoggedButton
-                      profileImageUrl={userAccount.profileImgUrl}
+                      profileImageUrl={userAccount?.profileImgUrl}
                       name={userAccount ? userAccount.username : ''}
                       account={account}
                       onLogOut={handleLogOut}

@@ -30,18 +30,20 @@ const index = ({
   relatedArtworks,
   title,
   description,
-  isLoading = true,
+  isLoading,
   playlistId,
+  onUpDate,
 }: {
   userAccount: Users
   relatedArtworks: GalleryItem[]
   title: string
   description: string
-  isLoading: boolean
+  isLoading: any
   playlistId: number
+  onUpDate: funtion<any>
 }) => {
   const classes = useStyles()
-  const { username, profileImgUrl, publicAddress } = userAccount
+  const { username, profileImgUrl, publicAddress } = userAccount ?? {}
 
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [openEditPlaylist, setOpenEditPlaylist] = useState<boolean>(false)
@@ -104,12 +106,13 @@ const index = ({
         artworks_related: artworksRelated,
       })
     }
+    onUpDate()
     handleCloseEditArtworksSelected()
   }
 
   return (
     <>
-      {isLoading ? (
+      {isLoading.Playlist ? (
         <Spinner height="50vh" />
       ) : (
         <Grid item xs={12} container alignItems="center" justify="center">
@@ -129,7 +132,7 @@ const index = ({
             <Grid container justify="space-around">
               <Grid item xs={5} container direction="column">
                 <Typography variant="h4">{title}</Typography>
-                {isLoading ? (
+                {isLoading.User ? (
                   <Spinner height="15hv" />
                 ) : (
                   <CreatorInfo
@@ -165,10 +168,14 @@ const index = ({
               </Grid>
               <Grid item xs={4}>
                 <Typography variant="h5">Artwork Information</Typography>
-                <ArtworkInformation
-                  arryArtwork={relatedArtworks}
-                  index={imgIndex}
-                />
+                {isLoading.Playlist ? (
+                  <Spinner height="50vh" />
+                ) : (
+                  <ArtworkInformation
+                    arryArtwork={relatedArtworks}
+                    index={imgIndex}
+                  />
+                )}
               </Grid>
             </Grid>
           </Grid>

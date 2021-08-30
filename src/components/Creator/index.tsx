@@ -40,7 +40,7 @@ const useStyle = makeStyles(Theme => ({
     borderRadius: '50%',
     justifyContent: 'center',
     marginRight: Theme.spacing(2),
-    border: '3px solid #232323',
+    border: `3px solid ${Theme.palette.background.default}`,
     '@media (max-width: 545px)': {
       width: '200px',
       height: '200px',
@@ -97,6 +97,7 @@ const Creator = ({
   user = undefined,
   setDisplayReportModal,
   setCoverImgUrl,
+  linkTwitter,
 }: Props) => {
   const classes = useStyle()
 
@@ -120,11 +121,13 @@ const Creator = ({
     // }
   })
 
+  !isMyAccount ? console.log(linkTwitter) : null
+
   return (
     <Grid container xs={12} direction="column" justify="center">
       <Grid container xs={12} className={classes.root}>
         <Grid item xs={1}>
-          <Avatar src={user.profileImgUrl} className={classes.avatar} />
+          <Avatar src={user?.profileImgUrl} className={classes.avatar} />
         </Grid>
         <Grid md={8} xs={12} className={classes.profile}>
           <InfoCreator
@@ -150,7 +153,8 @@ const Creator = ({
         <Grid item container justify="flex-start" md={3} xs={12}>
           <div className={classes.share}>
             <Share
-              linkTwitter={user.twitter}
+              isMyAccount={isMyAccount}
+              linkTwitter={linkTwitter}
               setDisplayReportModal={setDisplayReportModal}
               right="24px"
             />
@@ -172,6 +176,7 @@ type Props = {
   user?: Users
   setDisplayReportModal: Function
   setCoverImgUrl: Function
+  linkTwitter?: any
 }
 
 export default Creator

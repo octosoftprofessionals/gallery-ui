@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box, Button, Typography } from '@material-ui/core'
@@ -14,6 +14,7 @@ import Spinner from '../../Spinner'
 import {
   createPlaylist,
   addArtworkToNewPlaylist,
+  deleteOnePlaylistByIdWithAssociatedArtworks,
 } from '../../../services/playlists'
 import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
@@ -39,25 +40,19 @@ const Playlist = ({
   profileAddress,
   queryName,
   queryFunction,
-  refetchOnWindow = false,
-  refetchIntervalMS = 1000,
 }: {
   isMyAccount: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
-  queryName: string
-  queryFunction: () => Promise<ArrayPlaylist>
-  refetchOnWindow?: boolean
-  refetchIntervalMS?: number
+  queryName?: string
+  queryFunction?: () => Promise<ArrayPlaylist>
 }) => {
   const { data: playListQuery = [], isLoading } = useQuery(
     queryName,
     queryFunction,
-    {
-      refetchOnWindowFocus: refetchOnWindow,
-      refetchInterval: refetchIntervalMS,
-    }
+    { refetchOnWindowFocus: true }
   )
+  const queryClient = useQueryClient()
 
   const classes = useStyles()
   const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
@@ -66,17 +61,27 @@ const Playlist = ({
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
   const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>('')
 
+  const nullData = [
+    {
+      description: '',
+      id: 0,
+      priority: 1,
+      title: '',
+      userAddress: '',
+      userId: 0,
+    },
+  ]
+
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
-  }
-  const handleCloseCreatePlaylist = () => {
+    setAddArtworksPlaylist([])
     setTitlePlaylist('')
     setDescriptionPlaylist('')
+  }
+  const handleCloseCreatePlaylist = () => {
     setOpenCreatePlaylist(false)
   }
   const handleCloseAddPlaylist = () => {
-    setTitlePlaylist('')
-    setDescriptionPlaylist('')
     setOpenAddPlaylist(false)
   }
 
@@ -107,19 +112,52 @@ const Playlist = ({
         priority: index + 1,
       }))
 
-      const resCreatePlaylist = await createPlaylist(profileAddress, {
-        title: titlePlaylist,
-        description: descriptionPlaylist,
-      })
-      const { id } = resCreatePlaylist.data
+      try {
+        const resCreatePlaylist = await createPlaylist(profileAddress, {
+          title: titlePlaylist,
+          description: descriptionPlaylist,
+        })
 
-      const resAddArtworkToNewPlaylist = await addArtworkToNewPlaylist({
-        playlist_id: id,
-        artworks_related: artworksRelated,
-      })
+        const { id } = resCreatePlaylist.data
+
+        const resAddArtworkToNewPlaylist = await addArtworkToNewPlaylist({
+          playlist_id: id,
+          artworks_related: artworksRelated,
+        })
+      } catch (error) {
+        console.log('errorCreatePlaylist :>> ', error)
+      }
     }
+    try {
+      const result = await queryFunction()
+      queryClient.setQueryData(queryName, result)
+    } catch (error) {
+      console.log('errorUpDate :>> ', error)
+    }
+
     setAddArtworksPlaylist([])
+    setTitlePlaylist('')
+    setDescriptionPlaylist('')
     handleCloseAddPlaylist()
+  }
+
+  const handlerDeletedPlaylist = async (id: number) => {
+    try {
+      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
+        {
+          playlist_id: id,
+        }
+      )
+    } catch (error) {
+      console.log('errorResDeletePlaylist :>> ', error)
+    }
+
+    try {
+      const result = await queryFunction()
+      queryClient.setQueryData(queryName, result)
+    } catch (error) {
+      console.log('errorUpDate :>> ', error)
+    }
   }
 
   return (
@@ -138,6 +176,7 @@ const Playlist = ({
                 titlePlaylist={title}
                 link={myPlaylistsId(id)}
                 id={id}
+                onDelete={handlerDeletedPlaylist}
               />
             </Grid>
           ))

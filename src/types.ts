@@ -144,12 +144,15 @@ export type GalleryItem = {
 
   // media
   imageUrl: string
+  imagePreviewUrl?: string
   videoUrl?: string
+  imageOriginalUrl?: string
 
   // creator
   creatorUsername: string
   creatorImageUrl: string
   creatorAddress: string
+  creatorDescription?: string
 
   // owner
   ownerUsername: string
