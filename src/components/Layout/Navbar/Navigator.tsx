@@ -101,8 +101,7 @@ const Navigator = ({ pathname }) => {
             </Typography>
           </Button>
         </Link>
-        <Link to="/construction" className={classes.link}>
-          {/* to="/collabs" */}
+        <Link to="/platformcollaborations" className={classes.link}>
           <Button
             variant="text"
             color="primary"
