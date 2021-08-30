@@ -1,12 +1,15 @@
 import React from 'react'
 import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import PartnershipItem from '../../components/PartnershipItem/index'
+import PartnershipItem from './PartnershipItem/index'
 import GalleryItem from '../GalleryItem'
 import ArtworkItem from '../GalleryItem/ArtworkItem'
 
 const useStyle = makeStyles(Theme => ({
-  containerItem: { padding: Theme.spacing(4) },
+  containerItem: {
+    padding: Theme.spacing(4),
+    borderRadius: Theme.spacing(0, 0, 11, 11),
+  },
 }))
 
 const PartnershipArtworks = ({ isLoading, data = [] }) => {
@@ -26,22 +29,18 @@ const PartnershipArtworks = ({ isLoading, data = [] }) => {
 
   return (
     <Grid container direction="row" justify="space-between" wrap="wrap">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        data.map((galleryItem, index) => (
-          <Grid
-            item
-            key={index}
-            xs={12}
-            sm={6}
-            md={3}
-            className={classes.containerItem}
-          >
-            <PartnershipItem galleryItem={galleryItem} />
-          </Grid>
-        ))
-      )}
+      {data.map((galleryItem, index) => (
+        <Grid
+          item
+          key={index}
+          xs={12}
+          sm={6}
+          md={3}
+          className={classes.containerItem}
+        >
+          <PartnershipItem galleryItem={galleryItem} />
+        </Grid>
+      ))}
     </Grid>
   )
 }
