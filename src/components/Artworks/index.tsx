@@ -96,7 +96,7 @@ const GridArtworks = () => {
   )
   return (
     <TabBar
-      titles={['Live Auction', 'Buy Now', 'Offer']}
+      titles={['Auction', 'Buy Now', 'Offer']}
       justify="center"
       initialTab={parseInt(useQueryHash() || '0')}
       components={[
@@ -117,7 +117,7 @@ const GridArtworks = () => {
           hasNextPage={hasNextPageReserve}
           pages={reserveItemsQuery.pages}
           onFavorite={(assetId, status) =>
-            handleFavorite(assetId, status, 'Reserve')
+            handleFavorite(assetId, status, 'BuyNow')
           }
         />,
         <GalleryArtworks
@@ -127,7 +127,7 @@ const GridArtworks = () => {
           hasNextPage={hasNextPageSold}
           pages={soldItemsQuery.pages}
           onFavorite={(assetId, status) =>
-            handleFavorite(assetId, status, 'Sold')
+            handleFavorite(assetId, status, 'Other')
           }
         />,
       ]}

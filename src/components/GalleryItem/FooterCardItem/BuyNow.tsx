@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
+import { formatDecimal } from '../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   footerCard: {
@@ -9,21 +10,23 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     bottom: 0,
     position: 'absolute',
-    backgroundColor: Theme.palette.secondary.light,
+    backgroundColor: Theme.palette.card.footer,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
-  conateinerTop: { padding: Theme.spacing(0, 6, 2) },
+  conateinerTop: { padding: Theme.spacing(2, 6) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
 }))
 
-const Sold = ({ price, children }) => {
+const BuyNow = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.conateinerTop}>
-        <Button variant="outlined" color="primary">
-          <Typography variant="caption" color="primary"></Typography>
-        </Button>
+        <Typography variant="caption" color="primary">
+          {isNaN(price)
+            ? 'Buy this now for — ETH'
+            : `Buy this now for ${formatDecimal(price)} ETH`}
+        </Typography>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>
         {children}
@@ -32,4 +35,4 @@ const Sold = ({ price, children }) => {
   )
 }
 
-export default Sold
+export default BuyNow

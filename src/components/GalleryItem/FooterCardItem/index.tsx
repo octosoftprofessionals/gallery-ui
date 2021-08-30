@@ -1,8 +1,7 @@
 import React from 'react'
 
 import InAuctions from './InAuctions'
-import Reserve from './Reserve'
-import Sold from './Sold'
+import BuyNow from './BuyNow'
 import ButtonPlaylist from './ButtonPlaylist'
 import { ArrayPlaylist } from '../../../types'
 
@@ -49,7 +48,7 @@ const FooterCardItem = ({
           ) : null}
         </InAuctions>
       ) : statesArt === 'buy_now' ? (
-        <Reserve price={price}>
+        <BuyNow price={price}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -62,7 +61,7 @@ const FooterCardItem = ({
               artworkId={artworkId}
             />
           ) : null}
-        </Reserve>
+        </BuyNow>
       ) : statesArt === 'none' ? (
         <InAuctions price={price} timer={timer}>
           {account ? (
