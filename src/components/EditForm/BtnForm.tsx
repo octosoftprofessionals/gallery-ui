@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid, Typography, TextField, InputAdornment } from '@material-ui/core'
 import { AlternateEmail } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     fontSize: theme.spacing(10),
+    color: theme.palette.primary.main,
     '&:hover': {
       color: theme.palette.primary.main,
     },
@@ -143,6 +144,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
       key: 'discord',
       name: 'Discord',
       value: socialNetwork.discord,
+      code: { key: 'discordId', value: socialNetwork.discordId },
       icon: <DiscordIcon className={classes.icon2} />,
     },
     {
@@ -240,14 +242,15 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
                   className={classes.inputProfileDiscord}
                   fullWidth
                   onChange={e =>
-                    handleChange(network.key, e.currentTarget.value)
+                    handleChange(network.code.key, e.currentTarget.value)
                   }
                   placeholder={
-                    network.value !== undefined && network.value !== null
-                      ? network.value
+                    network.code.value !== undefined &&
+                    network.code.value !== null
+                      ? network.code.value
                       : 'Code'
                   }
-                  value={network.value}
+                  value={network.code.value}
                 />
               </Grid>
             </Grid>
@@ -267,7 +270,10 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
                     : `${network.name} username`
                 }
                 InputProps={
-                  network.key === 'tiktok' || network.key === 'snapchat'
+                  network.key === 'tiktok' ||
+                  network.key === 'snapchat' ||
+                  network.key === 'twitter' ||
+                  network.key === 'instagram'
                     ? {
                         startAdornment: (
                           <InputAdornment position="start">

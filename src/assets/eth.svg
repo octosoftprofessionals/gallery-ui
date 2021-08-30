@@ -8,7 +8,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    viewBox="0 0 16.882036 26.925138"
-   fill="none"
+   
    width="16.882036"
    height="26.925138"
    version="1.1"
@@ -50,15 +50,14 @@
      inkscape:current-layer="svg62" />
   <a
      id="a2927"
-     style="fill:#ffffff"
+     
      inkscape:export-xdpi="96"
      inkscape:export-ydpi="96"
      transform="translate(-0.707015,0.3528437)">
     <path
        d="M 17.589052,14.856295 9.1475467,18.136818 0.707015,14.856295 9.1475467,-0.3528437 Z"
-       fill="#ffffff"
        id="path58"
-       style="opacity:0.745272;fill:#ffffff;fill-opacity:1;stroke-width:0.995838" />
+       style="opacity:0.745272;fill-opacity:1;stroke-width:0.995838" />
   </a>
   <path
      d="m 16.882037,17.209139 -8.4410185,9.716 L 0,17.209139 l 8.4410185,3.075 z"
