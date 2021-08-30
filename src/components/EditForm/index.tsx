@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-<<<<<<< HEAD
 import {
   Grid,
   Typography,
@@ -8,9 +7,6 @@ import {
   InputAdornment,
 } from '@material-ui/core'
 import { AlternateEmail } from '@material-ui/icons'
-=======
-import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
->>>>>>> develop
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
@@ -192,6 +188,7 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.primary.dark,
     marginLeft: theme.spacing(2),
     fontSize: theme.spacing(9),
+  },
   extraText: {
     marginTop: theme.spacing(5),
     paddingRight: theme.spacing(16),
