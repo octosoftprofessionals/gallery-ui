@@ -90,7 +90,9 @@ const useStyles = makeStyles(Theme => ({
   Tw: { display: ({ tw }) => (tw !== null && tw !== '' ? 'block' : 'none') },
   discord: {
     display: ({ discord }) =>
-      discord !== null && discord !== '' ? 'block' : 'none',
+      discord !== null && discord !== '' && discord !== undefined
+        ? 'block'
+        : 'none',
   },
   youtube: {
     display: ({ youtube }) =>
