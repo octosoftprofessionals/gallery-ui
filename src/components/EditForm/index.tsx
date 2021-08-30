@@ -257,11 +257,6 @@ const EditForm = ({ userAccount }: Props) => {
     setDisabled(false)
   }
 
-  useEffect(() => {
-    console.log('DISCORD', userAccount)
-    console.log('DISCORD', userAccount.discordId)
-  }, [])
-
   const handleSubmit = async () => {
     if (validateEmail(email)) {
       setError(false)
@@ -275,13 +270,12 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('website', socialNetwork.website)
       formData.append('twitter', socialNetwork.twitter)
       formData.append('instagram', socialNetwork.instagram)
-      formData.append('discordId', 'pepe')
+      formData.append('discordId', socialNetwork.discordId)
       formData.append('youtube', socialNetwork.youtube)
       formData.append('facebook', socialNetwork.facebook)
       formData.append('tiktok', socialNetwork.tiktok)
       formData.append('snapchat', socialNetwork.snapchat)
       /* Ultimo intento! */
-      console.log('onPress', socialNetwork.discordId)
       try {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)

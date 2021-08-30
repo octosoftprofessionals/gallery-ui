@@ -117,7 +117,6 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
   const classes = useStyles()
 
   const handleChange = (key: string, value: string) => {
-    console.log(key, value)
     setSocialNetwork({ ...socialNetwork, [key]: value })
     setDisabled(false)
   }
@@ -173,10 +172,6 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
       icon: <SnapchatIcon className={classes.icon2} />,
     },
   ]
-
-  useEffect(() => {
-    console.log(':>>>', socialNetwork)
-  }, [])
 
   return (
     <Grid
