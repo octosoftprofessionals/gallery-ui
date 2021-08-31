@@ -16,6 +16,7 @@ const FooterCardItem = ({
   isFavorite,
   account,
   artworkId,
+  linkOffer,
 }: {
   statesArt: string
   price?: string
@@ -27,6 +28,7 @@ const FooterCardItem = ({
   isFavorite?: boolean
   account: any
   artworkId: number
+  linkOffer?: string
 }) => {
   return (
     <>
@@ -59,7 +61,7 @@ const FooterCardItem = ({
           ) : null}
         </BuyNow>
       ) : statesArt === 'none' ? (
-        <Offer>
+        <Offer link={linkOffer}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}

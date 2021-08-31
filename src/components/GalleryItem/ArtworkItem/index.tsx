@@ -5,13 +5,17 @@ import { useMutation } from 'react-query'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Paper, Typography } from '@material-ui/core'
 
-import { GalleryItem, ArrayPlaylist } from '../../../types'
+import { GalleryItem } from '../../../types'
 import {
   createAssociationFavoritesArtworks,
   deleteOneFavoriteArtworkFromOneUser,
 } from '../../../services/favorites'
 import { useAccountStore } from '../../../hooks/useAccountStore'
-import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
+import {
+  artworkPathFrom,
+  profilePathFromAddress,
+  biddingPathFrom,
+} from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
 
@@ -113,7 +117,9 @@ const ArtworkItem = ({
     }, 1000)
   }, [])
 
-  const link = artworkPathFrom(assetContractAddress, assetTokenId)
+  const linkArtworkShow = artworkPathFrom(assetContractAddress, assetTokenId)
+  const linkProfileCreator = profilePathFromAddress(creatorAddress)
+  const linkOffer = biddingPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
@@ -143,7 +149,7 @@ const ArtworkItem = ({
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
-      <Link to={link} className={classes.link} {...rootProps}>
+      <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
         <Box>
           {videoUrl != null && videoUrl.length > 0 ? (
             <div className={classes.containerVideo}>
@@ -165,11 +171,7 @@ const ArtworkItem = ({
           )}
         </Box>
       </Link>
-      <Link
-        // to={profilePathFromAddress(creatorAddress)}
-        to={link}
-        className={classes.link}
-      >
+      <Link to={linkProfileCreator} className={classes.link}>
         <div className={classes.infoCard}>
           <Typography variant="h6" color="primary" className={classes.line}>
             {title}
@@ -188,6 +190,7 @@ const ArtworkItem = ({
         isFavorite={isFavorite}
         account={account}
         artworkId={id}
+        linkOffer={linkOffer}
       />
     </Paper>
   )

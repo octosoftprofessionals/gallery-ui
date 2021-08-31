@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Link } from 'gatsby'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography } from '@material-ui/core'
 
@@ -26,23 +28,32 @@ const useStyle = makeStyles(Theme => ({
     color: Theme.palette.card.footer,
     fontSize: Theme.typography.fontSize[10],
   },
+  link: { textDecoration: 'none', display: 'contents' },
 }))
 
-const Offer = ({ children }) => {
+const Offer = ({
+  link,
+  children,
+}: {
+  link: string
+  children: React.ReactNode
+}) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.conateinerTop}>
-        <Button
-          variant="outlined"
-          color="primary"
-          fullWidth
-          className={classes.btn}
-        >
-          <Typography variant="button" className={classes.btnText}>
-            Offer
-          </Typography>
-        </Button>
+        <Link to={link} className={classes.link}>
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
+            className={classes.btn}
+          >
+            <Typography variant="button" className={classes.btnText}>
+              Offer
+            </Typography>
+          </Button>
+        </Link>
       </Grid>
       <Grid item xs={12} className={classes.conateinerButtom}>
         {children}
