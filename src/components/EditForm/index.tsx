@@ -207,23 +207,23 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = React.useState(userAccount.name)
-  const [username, setUserName] = React.useState(userAccount.username)
-  const [email, setEmail] = React.useState(userAccount.email)
-  const [bio, setBio] = React.useState(userAccount.bio ? userAccount.bio: '')
+  const [name, setName] = React.useState(userAccount.name ?? '')
+  const [username, setUserName] = React.useState(userAccount.username ?? '')
+  const [email, setEmail] = React.useState(userAccount.email ?? '')
+  const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
   const [socialNetwork, setSocialNetwork] = useState({
-    website: userAccount.website,
-    twitter: userAccount.twitter,
-    instagram: userAccount.instagram,
+    website: userAccount.website ?? '',
+    twitter: userAccount.twitter ?? '',
+    instagram: userAccount.instagram ?? '',
     discord: '',
-    discordId: userAccount.discordId,
-    youtube: userAccount.youtube,
-    facebook: userAccount.facebook,
-    tiktok: userAccount.tiktok,
-    snapchat: userAccount.snapchat,
+    discordId: userAccount.discordId ?? '',
+    youtube: userAccount.youtube ?? '',
+    facebook: userAccount.facebook ?? '',
+    tiktok: userAccount.tiktok ?? '',
+    snapchat: userAccount.snapchat ?? '',
   })
   const [files, setFiles] = useState({ picture: [], cover: [] })
   const [metamaskAccount, setMetamaskAccount] = useAccountStore()
