@@ -75,12 +75,10 @@ const useStyle = makeStyles(Theme => ({
 const ArtworkItem = ({
   galleryItem = {},
   onFavorite,
-  playlists = [],
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
   onFavorite: Function
-  playlists: ArrayPlaylist[] | undefined
 }) => {
   const {
     id,
@@ -189,7 +187,6 @@ const ArtworkItem = ({
         handleSubmitUnFavorite={handleSubmitUnFavorite}
         isFavorite={isFavorite}
         account={account}
-        playlists={playlists}
         artworkId={id}
       />
     </Paper>

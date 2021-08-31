@@ -95,7 +95,6 @@ const TabBar = ({
   initialTab?: number
 }) => {
   const classes = useStyle()
-  const { address } = useQueryParams()
   const [selected, setSelected] = useState(initialTab)
 
   const handleSelected = selection => {

@@ -1,14 +1,18 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
 
-import { myProfilePathWithView } from '../../../../config/routes'
-import { ArrayPlaylist } from '../../../../types'
+import Spinner from '../../../Spinner'
+import { myProfilePathWithViewPlaylistOpen } from '../../../../config/routes'
 
-import { addArtworkToExistingPlaylist } from '../../../../services/playlists'
+import {
+  addArtworkToExistingPlaylist,
+  getPlaylists,
+} from '../../../../services/playlists'
 
 const useStyles = makeStyles(Theme => ({
   root: {},
@@ -18,18 +22,24 @@ const useStyles = makeStyles(Theme => ({
 const MenuPlaylist = ({
   anchorEl,
   onClose,
-  arrayPlaylist,
   account,
   artworkId,
   ...props
 }: {
   anchorEl: any
   onClose: any
-  arrayPlaylist: ArrayPlaylist[]
   account: string
   artworkId: number
 }) => {
   const classes = useStyles()
+
+  const { data: PlaylistQuery = [], isLoading } = useQuery(
+    'PlaylistQuery',
+    () => getPlaylists(account),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
 
   const handleAddArtwork = async (id: number) => {
     const res = await addArtworkToExistingPlaylist(id, {
@@ -58,17 +68,21 @@ const MenuPlaylist = ({
         },
       }}
     >
-      {arrayPlaylist.map(({ id, title }) => (
-        <>
-          <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
-            <Typography variant="button" color="primary">
-              {title}
-            </Typography>
-          </MenuItem>
-          <Divider />
-        </>
-      ))}
-      <Link to={myProfilePathWithView(2)} className={classes.link}>
+      {isLoading ? (
+        <Spinner height="55%" />
+      ) : (
+        PlaylistQuery.map(({ id, title }) => (
+          <>
+            <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
+              <Typography variant="button" color="primary">
+                {title}
+              </Typography>
+            </MenuItem>
+            <Divider />
+          </>
+        ))
+      )}
+      <Link to={myProfilePathWithViewPlaylistOpen(2)} className={classes.link}>
         <MenuItem onClick={onClose}>
           <Typography variant="button" color="primary">
             New Playlist

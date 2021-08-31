@@ -34,7 +34,7 @@ const useStyles = makeStyles(Theme => ({
     padding: Theme.spacing(2, 9),
     borderRadius: Theme.shape.borderRadius[1],
   },
-  textBtn: { color: Theme.palette.secondary.light },
+  textBtn: { color: Theme.palette.secondary.contrastText },
   input: {
     margin: Theme.spacing(4, 0),
   },
