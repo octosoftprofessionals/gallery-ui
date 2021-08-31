@@ -209,7 +209,7 @@ const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
   const [name, setName] = React.useState(userAccount.username)
   const [email, setEmail] = React.useState(userAccount.email)
-  const [bio, setBio] = React.useState(userAccount.bio)
+  const [bio, setBio] = React.useState(userAccount.bio ? userAccount.bio: '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
