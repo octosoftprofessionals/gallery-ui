@@ -207,7 +207,8 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = React.useState(userAccount.username)
+  const [name, setName] = React.useState(userAccount.name)
+  const [username, setUserName] = React.useState(userAccount.username)
   const [email, setEmail] = React.useState(userAccount.email)
   const [bio, setBio] = React.useState(userAccount.bio ? userAccount.bio: '')
   const [word, setWord] = useState('')
@@ -248,6 +249,10 @@ const EditForm = ({ userAccount }: Props) => {
     setName(event.target.value)
     setDisabled(false)
   }
+  const handleChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value)
+    setDisabled(false)
+  }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
     setDisabled(false)
@@ -261,7 +266,8 @@ const EditForm = ({ userAccount }: Props) => {
     if (validateEmail(email)) {
       setError(false)
       const formData = new FormData()
-      formData.append('username', name)
+      formData.append('name', name)
+      formData.append('username', username)
       formData.append('profile_img_url', files.picture[0])
       formData.append('cover_img_url', files.cover[0])
       formData.append('public_address', metamaskAccount as string)
@@ -342,6 +348,16 @@ const EditForm = ({ userAccount }: Props) => {
                 direction="column"
                 className={classes.fieldInput}
               >
+                <Typography className={classes.label}>Name</Typography>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  className={classes.inputProfile}
+                  onChange={handleChangeName}
+                  value={name}
+                />
+
                 <Typography className={classes.label}>Username</Typography>
                 <TextField
                   variant="outlined"
@@ -355,8 +371,8 @@ const EditForm = ({ userAccount }: Props) => {
                     ),
                   }}
                   className={classes.inputProfile}
-                  onChange={handleChangeName}
-                  value={name}
+                  onChange={handleChangeUserName}
+                  value={username}
                 />
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
@@ -366,6 +382,7 @@ const EditForm = ({ userAccount }: Props) => {
                     variant="outlined"
                     color="primary"
                     fullWidth
+                    placeholder="Enter your email"
                     className={classes.inputProfile}
                     onChange={handleChangeUser}
                     value={email}
