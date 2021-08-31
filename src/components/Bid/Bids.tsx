@@ -70,8 +70,10 @@ const useStyle = makeStyles(Theme => ({
   boxButtonBid: {
     padding: 0,
   },
-  icon: { marginLeft: Theme.spacing(3) },
-  textEth: { color: Theme.palette.primary.light },
+  icon: {
+    fill: Theme.palette.buttons.wallet, marginLeft: Theme.spacing(5)
+  },
+  textEth: { color: Theme.palette.primary.light, fontSize: Theme.typography.fontSize[6] },
 }))
 
 const isValidBidAmountEth = (currentMaxBid: BigNumber, accountBalance: BigNumber, bidAmountEth: number) => {
@@ -197,7 +199,8 @@ const Bids = ({
         <Typography variant="caption" className={classes.text}>
           You must bid more than
         </Typography>
-        <Typography variant="caption" color="primary">{`${formatDecimal(
+        <Typography variant="caption" color="primary">
+          {`${formatDecimal(
           priceEth
         )} ETH`}</Typography>
       </Grid>
