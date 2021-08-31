@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     width: `${theme.spacing(4)}vw`,
     backgroundColor: theme.palette.secondary.main,
     boxShadow: '0px 3px 7px #212e36',
-    boxShadow: boxShadow1,
     padding: theme.spacing(3, 5),
     borderRadius: theme.spacing(5),
     zIndex: 2,
