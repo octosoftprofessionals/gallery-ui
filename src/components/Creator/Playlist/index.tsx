@@ -36,12 +36,14 @@ const useStyles = makeStyles(Theme => ({
 
 const Playlist = ({
   isMyAccount,
+  openModal = false,
   emptyMessageProps,
   profileAddress,
   queryName,
   queryFunction,
 }: {
   isMyAccount: boolean
+  openModal?: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName?: string
@@ -55,7 +57,7 @@ const Playlist = ({
   const queryClient = useQueryClient()
 
   const classes = useStyles()
-  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
+  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(openModal)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')

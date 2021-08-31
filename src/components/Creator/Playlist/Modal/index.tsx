@@ -21,7 +21,7 @@ const useStyles = makeStyles(Theme => ({
       padding: Theme.spacing(3),
     },
   },
-  titleModal: { textTransform: 'initial' },
+  titleModal: { textTransform: 'initial', marginLeft: Theme.spacing(14) },
   icon: {
     fontSize: Theme.spacing(10),
     color: Theme.palette.primary.main,
@@ -34,7 +34,7 @@ const useStyles = makeStyles(Theme => ({
     padding: Theme.spacing(2, 9),
     borderRadius: Theme.shape.borderRadius[1],
   },
-  textBtn: { color: Theme.palette.secondary.light },
+  textBtn: { color: Theme.palette.secondary.contrastText },
   input: {
     margin: Theme.spacing(4, 0),
   },
@@ -51,6 +51,10 @@ const useStyles = makeStyles(Theme => ({
     '& .MuiOutlinedInput': {
       root: { borderRadius: 10 },
     },
+  },
+  conteinerGrid: {
+    textAlign: 'center',
+    padding: Theme.spacing(6)
   },
   conteinerForm: {
     marginLeft: Theme.spacing(6),
@@ -90,7 +94,7 @@ const PlaylistModal = ({
     >
       <form onSubmit={handleNext}>
         <Grid container justify="space-between" alignItems="center">
-          <Grid item xs={10} container justify="center">
+          <Grid className={classes.conteinerGrid} item xs={10} container justify="center">
             <Typography
               variant="h5"
               color="primary"
@@ -111,7 +115,7 @@ const PlaylistModal = ({
                 color="primary"
                 className={classes.label}
               >
-                Title:
+                Title
               </Typography>
             </InputLabel>
             <TextField
@@ -134,7 +138,7 @@ const PlaylistModal = ({
                 color="primary"
                 className={classes.label}
               >
-                Description:
+                Description
               </Typography>
             </InputLabel>
             <TextField
@@ -142,7 +146,7 @@ const PlaylistModal = ({
               variant="outlined"
               fullWidth
               required
-              placeholder=" Write a short description for your playlist..."
+              placeholder="Write a short description for your playlist..."
               multiline
               rows={6}
               value={description}

@@ -33,24 +33,34 @@ const GridPartnershipArtworks = () => {
 
   const classes = useStyle()
 
+  const data = [
+    {
+      title: 'Makers Place',
+      subtitle: 'VR Graffiti Sessions Vol. 1',
+      link: 'https://makersplace.com/superchiefgallerynft/drops/vr-graffiti-sessions/',
+    },
+  ]
+
   return (
     <Grid container justify="center">
-      <h1 className={classes.title}>Platform Collaborations</h1>
+      <Typography variant="h4" color="primary" className={classes.title}>
+        Platform Collaborations
+      </Typography>
       <Grid container justify="left">
-        <Typography
+        {/* <Typography
           variant="caption"
           color="primary"
           className={classes.subtitle}
         >
           SuperChief x KnownOrigin
-        </Typography>
+        </Typography> */}
       </Grid>
 
       <hr className={classes.divider}></hr>
       <Grid container item xs={12} className={classes.containerItem}>
-        <PartnershipArtworks isLoading={isLoading} data={listedItems} />
+        <PartnershipArtworks isLoading={isLoading} data={data} />
       </Grid>
-      <Grid container justify="left">
+      {/* <Grid container justify="left">
         <Typography
           variant="caption"
           color="primary"
@@ -68,7 +78,7 @@ const GridPartnershipArtworks = () => {
         className={classes.containerItem}
       >
         <PartnershipArtworks isLoading={isLoading} data={listedItems} />
-      </Grid>
+      </Grid> */}
     </Grid>
   )
 }

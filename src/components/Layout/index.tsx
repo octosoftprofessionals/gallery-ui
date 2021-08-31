@@ -76,7 +76,11 @@ const Layout = ({
   return (
     <ThemeProvider theme={themeSelected}>
       <CssBaseline>
-        <BackgroundNavBar backgroundImage={backgroundImage} height={height}>
+        <BackgroundNavBar
+          id="header"
+          backgroundImage={backgroundImage}
+          height={height}
+        >
           <Navbar
             pathname={pathname}
             publicKey={publicKey}

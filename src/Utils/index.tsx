@@ -87,8 +87,8 @@ export const paginatedQuery = (Query: Array[]) => {
 }
 
 export const formatDecimal = (numberish, decimals = 3) => {
-  if (numberish == null) {
-    return '-'
+  if (numberish === "NaN") {
+    return '—'
   }
   const [integral = '0', fractional = '0'] = String(numberish).split('.')
   return `${integral}.${fractional.slice(0, decimals)}`
@@ -101,8 +101,8 @@ const formatNumberWithCommas = x => {
   return [integral_with_commas, padded_fractional].join('.')
 }
 export const formatUsd = numberish => {
-  if (numberish == null) {
-    return '-'
+  if (numberish == 'NaN') {
+    return '—'
   }
   return `$${formatNumberWithCommas(formatDecimal(numberish, 2))}`
 }

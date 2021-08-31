@@ -14,25 +14,27 @@ const GalleryArtworks = ({
   pages = [],
 }) => {
   return (
-    <Grid container direction="row" justify="center" wrap="wrap">
+    <>
       {isLoading ? (
         <Spinner height="50vh" />
       ) : (
-        <GalleryPagenation
-          isLoading={isFetching}
-          handleNext={handleNext}
-          pages={pages}
-          hasNextPage={hasNextPage}
-          renderItem={item => (
-            <ArtworkItem
-              key={item.assetId}
-              galleryItem={item}
-              onFavorite={onFavorite}
-            />
-          )}
-        />
+        <Grid item container justify="center">
+          <GalleryPagenation
+            isLoading={isFetching}
+            handleNext={handleNext}
+            pages={pages}
+            hasNextPage={hasNextPage}
+            renderItem={item => (
+              <ArtworkItem
+                key={item.assetId}
+                galleryItem={item}
+                onFavorite={onFavorite}
+              />
+            )}
+          />
+        </Grid>
       )}
-    </Grid>
+    </>
   )
 }
 

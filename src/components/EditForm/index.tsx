@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Button, Snackbar } from '@material-ui/core'
+import {
+  Grid,
+  Typography,
+  Button,
+  Snackbar,
+  InputAdornment,
+} from '@material-ui/core'
+import { AlternateEmail } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
@@ -163,6 +170,11 @@ const useStyle = makeStyles(theme => ({
     marginLeft: theme.spacing(4),
     fontWeight: 400,
     fontSize: theme.typography.fontSize[3],
+    color: theme.palette.primary.main,
+    '&:hover': {
+      cursor: 'default',
+      color: theme.palette.primary.main,
+    },
   },
   titleNetwork: {
     marginTop: theme.spacing(13),
@@ -171,6 +183,11 @@ const useStyle = makeStyles(theme => ({
     borderRadius: 6,
     // backgroundColor: theme.palette.primary.light,
     color: theme.palette.secondary.contrastText,
+  },
+  iconMail: {
+    color: theme.palette.primary.dark,
+    marginLeft: theme.spacing(2),
+    fontSize: theme.spacing(9),
   },
   extraText: {
     marginTop: theme.spacing(5),
@@ -190,9 +207,10 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = React.useState(userAccount.username)
+  const [name, setName] = React.useState(userAccount.name)
+  const [username, setUserName] = React.useState(userAccount.username)
   const [email, setEmail] = React.useState(userAccount.email)
-  const [bio, setBio] = React.useState(userAccount.bio)
+  const [bio, setBio] = React.useState(userAccount.bio ? userAccount.bio: '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
@@ -200,6 +218,7 @@ const EditForm = ({ userAccount }: Props) => {
     website: userAccount.website,
     twitter: userAccount.twitter,
     instagram: userAccount.instagram,
+    discord: '',
     discordId: userAccount.discordId,
     youtube: userAccount.youtube,
     facebook: userAccount.facebook,
@@ -230,6 +249,10 @@ const EditForm = ({ userAccount }: Props) => {
     setName(event.target.value)
     setDisabled(false)
   }
+  const handleChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value)
+    setDisabled(false)
+  }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
     setDisabled(false)
@@ -243,7 +266,8 @@ const EditForm = ({ userAccount }: Props) => {
     if (validateEmail(email)) {
       setError(false)
       const formData = new FormData()
-      formData.append('username', name)
+      formData.append('name', name)
+      formData.append('username', username)
       formData.append('profile_img_url', files.picture[0])
       formData.append('cover_img_url', files.cover[0])
       formData.append('public_address', metamaskAccount as string)
@@ -275,15 +299,6 @@ const EditForm = ({ userAccount }: Props) => {
     }
   }
 
-  const [testFile, setTestFile] = useState(null)
-  const onChangeTestFile = e => {
-    console.log('recieved event:', e)
-
-    console.log('event.target.files[0]:', e.target.files[0])
-
-    setTestFile(e.target.files[0])
-  }
-
   return (
     <Grid
       container
@@ -291,7 +306,6 @@ const EditForm = ({ userAccount }: Props) => {
       alignItems="center"
       className={classes.root}
     >
-      {console.log(`userAccount`, userAccount)}
       <FormControl>
         <Grid item xs={12} container direction="column" alignItems="center">
           <Grid
@@ -308,7 +322,11 @@ const EditForm = ({ userAccount }: Props) => {
               md={12}
               id="edit-profile"
             >
-              <Typography variant="h4" className={classes.Title}>
+              <Typography
+                variant="h4"
+                color="primary"
+                className={classes.Title}
+              >
                 Edit Your Profile
               </Typography>
             </Grid>
@@ -339,6 +357,23 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeName}
                   value={name}
                 />
+
+                <Typography className={classes.label}>Username</Typography>
+                <TextField
+                  variant="outlined"
+                  color="primary"
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AlternateEmail className={classes.iconMail} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  className={classes.inputProfile}
+                  onChange={handleChangeUserName}
+                  value={username}
+                />
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
                     E-Mail (Receive notifications)
@@ -347,6 +382,7 @@ const EditForm = ({ userAccount }: Props) => {
                     variant="outlined"
                     color="primary"
                     fullWidth
+                    placeholder="Enter your email"
                     className={classes.inputProfile}
                     onChange={handleChangeUser}
                     value={email}
@@ -462,7 +498,7 @@ const EditForm = ({ userAccount }: Props) => {
               className={classes.suscribeBtn}
               disabled={disabled ? true : false}
               variant="outlined"
-              href="#edit-profile"
+              href="#header"
             >
               Save Changes
             </Button>

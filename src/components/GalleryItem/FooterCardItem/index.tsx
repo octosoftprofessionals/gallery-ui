@@ -1,10 +1,9 @@
 import React from 'react'
 
 import InAuctions from './InAuctions'
-import Reserve from './Reserve'
-import Sold from './Sold'
+import BuyNow from './BuyNow'
 import ButtonPlaylist from './ButtonPlaylist'
-import { ArrayPlaylist } from '../../../types'
+import Offer from './Offer'
 
 const FooterCardItem = ({
   statesArt,
@@ -16,8 +15,8 @@ const FooterCardItem = ({
   handleSubmitUnPlaylist,
   isFavorite,
   account,
-  playlists,
   artworkId,
+  linkOffer,
 }: {
   statesArt: string
   price?: string
@@ -28,8 +27,8 @@ const FooterCardItem = ({
   handleSubmitUnPlaylist: Function
   isFavorite?: boolean
   account: any
-  playlists: ArrayPlaylist[]
   artworkId: number
+  linkOffer?: string
 }) => {
   return (
     <>
@@ -43,13 +42,12 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
-              playlists={playlists}
               artworkId={artworkId}
             />
           ) : null}
         </InAuctions>
       ) : statesArt === 'buy_now' ? (
-        <Reserve price={price}>
+        <BuyNow price={price}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -58,13 +56,12 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
-              playlists={playlists}
               artworkId={artworkId}
             />
           ) : null}
-        </Reserve>
+        </BuyNow>
       ) : statesArt === 'none' ? (
-        <InAuctions price={price} timer={timer}>
+        <Offer link={linkOffer}>
           {account ? (
             <ButtonPlaylist
               handleSubmitPlaylist={handleSubmitPlaylist}
@@ -73,11 +70,10 @@ const FooterCardItem = ({
               handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
-              playlists={playlists}
               artworkId={artworkId}
             />
           ) : null}
-        </InAuctions>
+        </Offer>
       ) : (
         ''
       )}

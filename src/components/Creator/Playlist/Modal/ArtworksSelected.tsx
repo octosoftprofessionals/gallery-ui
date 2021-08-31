@@ -15,7 +15,7 @@ import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../../service
 import { GalleryItem } from '../../../../types'
 
 const useStyles = makeStyles(Theme => ({
-  titleModal: { textTransform: 'initial' },
+  titleModal: { textTransform: 'initial', marginLeft: Theme.spacing(16) },
   icon: {
     fontSize: Theme.spacing(10),
     color: Theme.palette.primary.main,
@@ -28,9 +28,13 @@ const useStyles = makeStyles(Theme => ({
     padding: Theme.spacing(2, 9),
     borderRadius: Theme.shape.borderRadius[1],
   },
-  textBtn: { color: Theme.palette.secondary.light },
+  textBtn: { color: Theme.palette.secondary.contrastText },
   input: {
     margin: Theme.spacing(4, 0),
+  },
+  conteinerGrid: {
+    textAlign: 'center',
+    padding: Theme.spacing(6)
   },
   conteinerBtn: {
     padding: Theme.spacing(10),
@@ -77,13 +81,13 @@ const ArtworksSelected = ({
       aria-labelledby="simple-dialog-title"
     >
       <Grid container justify="space-between" alignItems="center">
-        <Grid item xs={10} container justify="center">
+        <Grid item xs={10} container className={classes.conteinerGrid} justify="center">
           <Typography
             variant="h5"
             color="primary"
             className={classes.titleModal}
           >
-            Create a new playlist
+            Add artworks to your Playlist
           </Typography>
         </Grid>
         <IconButton onClick={handleClose}>
@@ -207,11 +211,7 @@ const ArtworksSelected = ({
           className={classes.btn}
           onClick={onPlublish}
         >
-          <Typography
-            variant="caption"
-            color="primary"
-            className={classes.textBtn}
-          >
+          <Typography variant="caption" className={classes.textBtn}>
             Published
           </Typography>
         </Button>
