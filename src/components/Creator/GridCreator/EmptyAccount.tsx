@@ -10,6 +10,7 @@ const useStyle = makeStyles(Theme => ({
     color: Theme.palette.primary.main,
     '&:hover': { color: Theme.palette.primary.main },
     '@media (max-width: 545px)': { textAlign: 'center' },
+    cursor: 'default'
   },
   textSecondary: {
     fontSize: Theme.typography.fontSize[4],
@@ -17,6 +18,8 @@ const useStyle = makeStyles(Theme => ({
     color: Theme.palette.primary.main,
     width: Theme.spacing(18),
     textAlign: 'center',
+    '&:hover': { color: Theme.palette.primary.main },
+    cursor: 'default'
   },
 }))
 
