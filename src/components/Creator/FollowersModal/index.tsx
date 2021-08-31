@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     '.MuiDialog-paper': {
       minWidth: '700px !important',
       maxHeight: '500px !important',
-      minHeight: '300px !important',
+      minHeight: '250px !important',
       overflowX: 'hidden',
       '@media (max-width: 576px)': {
         minWidth: '320px !important',
