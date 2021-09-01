@@ -3,8 +3,8 @@ import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ArtworkItem from '../GalleryItem/ArtworkItem'
-
-import { getArtworkByExhibitionId } from '../../services/exhibition'
+// import Artworks from '../../types'
+import { getOneExhibitionByIdWithArtworks } from '../../services/exhibition'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
@@ -18,13 +18,15 @@ const GalleryExhibition = ({ exhibitionId }) => {
   useEffect(() => {
     async function fetch() {
       setIsLoading(true)
-      const data  = await getArtworkByExhibitionId({ exhibitionId })
-      setArtworks(data)
+      const {artworks}  = await getOneExhibitionByIdWithArtworks( exhibitionId )
+      setArtworks(artworks)
       setIsLoading(false)
     }
 
     fetch()
   }, [exhibitionId])
+
+  console.log("artworks in GalleryExhibition", artworks)
 
   const Loading = () => (
     <Box

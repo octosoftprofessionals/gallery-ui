@@ -71,12 +71,17 @@ const Exhibition = () => {
   const exhibitionQueryParam = useQueryParams()?.exhibitionid
   const queryParamInNumberOrUndefined = exhibitionQueryParam?exhibitionQueryParam*1:undefined
   const [exhibitionid, setExhibitionid] = useState(queryParamInNumberOrUndefined)
+  const [exhibitionTitle, setExibitionTitle] = useState("")
 
 
   return (
     <Grid container justify="center">
       <Typography className={classes.title} variant="h5" color="primary">
-        Superchief Collections, Curated by our staff
+      {!exhibitionTitle ?
+        "Superchief Collections, Curated by our staff"
+        :
+        exhibitionTitle
+      }
       </Typography>
       <Grid item container justify="space-between">
         <Grid item xs={12} sm={3} className={classes.containerCollection}>
@@ -94,6 +99,7 @@ const Exhibition = () => {
                     className={[classes.img, classes.button]}
                     onClick={() => {
                       setExhibitionid(id);
+                      setExibitionTitle(title)
                     }}
                   >
                     <Typography
