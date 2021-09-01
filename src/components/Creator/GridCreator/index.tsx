@@ -14,7 +14,7 @@ import useQueryParams, { useQueryHash } from '../../../hooks/useQueryParams'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => {
   const { open } = useQueryParams()
-  console.log('open :>> ', Boolean(open))
+
   return (
     <TabBar
       justify="center"

@@ -100,7 +100,7 @@ const TabBar = ({
   const handleSelected = selection => {
     setSelected(selection)
     if (isMyAccount) {
-      window.location.href = myProfilePathWithView(selection)
+      window.history.replaceState(null, null, myProfilePathWithView(selection))
     }
   }
 
