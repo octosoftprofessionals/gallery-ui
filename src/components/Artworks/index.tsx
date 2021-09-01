@@ -87,8 +87,8 @@ const GridArtworks = () => {
     (assetId, status, title) => {
       const titles = {
         Live: listedItemsQuery.pages,
-        Reserve: reserveItemsQuery.pages,
-        Sold: soldItemsQuery.pages,
+        BuyNow: reserveItemsQuery.pages,
+        Other: soldItemsQuery.pages,
       }
       findeArtwork(titles[title], assetId, status)
     },
