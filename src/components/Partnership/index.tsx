@@ -46,7 +46,7 @@ const GridPartnershipArtworks = () => {
       <Typography variant="h4" color="primary" className={classes.title}>
         Platform Collaborations
       </Typography>
-      <Grid container justify="left">
+      <Grid container justify="center" alignItems="center">
         {/* <Typography
           variant="caption"
           color="primary"
@@ -57,7 +57,14 @@ const GridPartnershipArtworks = () => {
       </Grid>
 
       <hr className={classes.divider}></hr>
-      <Grid container item xs={12} className={classes.containerItem}>
+      <Grid
+        container
+        item
+        xs={12}
+        md={11}
+        className={classes.containerItem}
+        justify="center"
+      >
         <PartnershipArtworks isLoading={isLoading} data={data} />
       </Grid>
       {/* <Grid container justify="left">

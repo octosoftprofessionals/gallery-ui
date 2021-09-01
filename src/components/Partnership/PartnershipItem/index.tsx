@@ -54,10 +54,10 @@ const PartnershipItem = ({ galleryItem }: { galleryItem: any }) => {
         <CardImage imageUrl={SuperchiefLogo} />
 
         <div className={classes.infoCard}>
-          <Typography variant="h5" color="primary">
+          <Typography variant="h5" color="primary" align="center">
             {title}
           </Typography>
-          <Typography variant="h6" color="primary">
+          <Typography variant="body1" color="primary" align="center">
             {subtitle}
           </Typography>
         </div>
