@@ -97,6 +97,9 @@ const useStyles = makeStyles(Theme => ({
         ? 'block'
         : 'none',
   },
+  discordMargin:{
+    marginLeft: Theme.spacing(7),
+  },
   youtube: {
     display: ({ youtube }) =>
       youtube !== null && youtube !== '' ? 'block' : 'none',
@@ -241,9 +244,9 @@ const UserNetworks = ({
             <Typography
               variant="overline"
               color="primary"
-              className={discord ? classes.link : classes.discord}
+              className={[discord ? classes.link : classes.discord, classes.discordMargin]}
             >
-              {`${discord}#${discordId}`}
+              {` ${discord} #${discordId}`}
             </Typography>
           </Link>
         </Grid>
