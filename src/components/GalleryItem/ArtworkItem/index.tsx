@@ -140,13 +140,6 @@ const ArtworkItem = ({
     onFavorite(assetId, false)
   }
 
-  const handleSubmitPlaylist = e => {
-    e.preventDefault()
-  }
-  const handleSubmitUnPlaylist = e => {
-    e.preventDefault()
-  }
-
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
@@ -183,8 +176,6 @@ const ArtworkItem = ({
         statesArt={status}
         price={priceEth}
         timer={timer}
-        handleSubmitPlaylist={handleSubmitPlaylist}
-        handleSubmitUnPlaylist={handleSubmitUnPlaylist}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
         isFavorite={isFavorite}
