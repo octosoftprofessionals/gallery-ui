@@ -87,7 +87,7 @@ export const paginatedQuery = (Query: Array[]) => {
 }
 
 export const formatDecimal = (numberish, decimals = 3) => {
-  if (numberish === "NaN") {
+  if (numberish === 'NaN') {
     return '—'
   }
   const [integral = '0', fractional = '0'] = String(numberish).split('.')
@@ -97,7 +97,8 @@ export const formatDecimal = (numberish, decimals = 3) => {
 const formatNumberWithCommas = x => {
   const [integral = '0', fractional = '0'] = x.toString().split('.')
   const integral_with_commas = integral.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
-  const padded_fractional = fractional.length === 1 ? `0${fractional}` : fractional
+  const padded_fractional =
+    fractional.length === 1 ? `0${fractional}` : fractional
   return [integral_with_commas, padded_fractional].join('.')
 }
 export const formatUsd = numberish => {
@@ -150,19 +151,21 @@ export const linkStorage = () => {
 }
 
 export const findeArtwork = (arry, assetId, status) => {
-  let res = {}
-  arry.forEach(
-    arry => (res = arry.find(artwork => artwork.assetId === assetId))
-  )
-  res.isFavorite = status
+  arry.forEach(arry => {
+    const res = arry.find(artwork => artwork.assetId === assetId)
+    if (res) {
+      res.isFavorite = status
+    }
+  })
 }
 
 export const findeArtworkFavorites = (arry, assetId, status) => {
-  let res = {}
   arry.forEach(({ favoriteArtworks }) => {
-    res = favoriteArtworks.find(artwork => artwork.assetId === assetId)
+    const res = favoriteArtworks.find(artwork => artwork.assetId === assetId)
+    if (res) {
+      res.isFavorite = status
+    }
   })
-  res.isFavorite = status
 }
 
 export const isError = (e: any): boolean =>
@@ -172,4 +175,5 @@ export const isError = (e: any): boolean =>
   typeof e.stack === 'string' &&
   typeof e.message === 'string'
 
-export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) => formatDecimal(ethers.utils.formatUnits(bn.toString()))
+export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) =>
+  formatDecimal(ethers.utils.formatUnits(bn.toString()))
