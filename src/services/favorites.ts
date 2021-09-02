@@ -17,9 +17,10 @@ export const createAssociationFavoritesArtworks = async ({
 }
 
 export const getAllFavoritesArtworksFromOneUserByAddress = async (
-  public_address: string
+  public_address: string,
+  offset: number
 ) => {
-  const url = `${ROOT}/favorites/${public_address}`
+  const url = `${ROOT}/favorites/${public_address}?offset=${offset}&limit=20`
   const res = await get(url)
   const userFavoritesArtworks = res.data ?? {}
   return userFavoritesArtworks
