@@ -21,8 +21,6 @@ const useStyle = makeStyles(Theme => ({
 const ButtonPlaylist = ({
   handleSubmitFavorite,
   handleSubmitUnFavorite,
-  handleSubmitPlaylist,
-  handleSubmitUnPlaylist,
   inFavorite,
   inPlaylist,
   account,
@@ -30,8 +28,6 @@ const ButtonPlaylist = ({
 }: {
   handleSubmitFavorite: Function
   handleSubmitUnFavorite: Function
-  handleSubmitPlaylist: Function
-  handleSubmitUnPlaylist: Function
   inFavorite?: boolean
   inPlaylist?: boolean
   account: string
