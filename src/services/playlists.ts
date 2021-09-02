@@ -17,7 +17,7 @@ export const getPlaylists = async (
   const url = `/playlist?user_address=${queryParams}`
   const res = await get(url)
   const playlists = res.data ?? []
-  return playlists.data
+  return playlists
 }
 
 export const getOnePlaylistByIdWithRelatedArtworks = async ({

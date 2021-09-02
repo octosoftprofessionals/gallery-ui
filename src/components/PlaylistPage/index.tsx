@@ -21,8 +21,49 @@ import { Users, GalleryItem } from '../../types'
 import { truncateMiddleText } from '../../Utils/stringUtils'
 
 const useStyles = makeStyles(Theme => ({
-  containerDescription: { padding: Theme.spacing(9) },
-  icon: { fontSize: Theme.typography.fontSize[4] },
+  containerDescription: {
+    padding: Theme.spacing(9),
+    marginTop: Theme.spacing(9),
+    backgroundColor: Theme.palette.background.paper,
+    '&:hover': {
+      borderShadow: 'none',
+      transform: 'none',
+      translate: 'none',
+      border: 'none',
+    },
+  },
+  icon: {
+    fontSize: Theme.spacing(11),
+    color: Theme.palette.primary.contrastText,
+    '&:hover': {
+      color: Theme.palette.primary.main,
+    },
+  },
+  user: {
+    paddingLeft: Theme.spacing(12),
+    '@media (max-width: 576px)': { paddingLeft: 0 },
+  },
+  descContainer: {
+    paddingLeft: Theme.spacing(12),
+    '@media (max-width: 576px)': {
+      paddingLeft: 0,
+      paddingBottom: Theme.spacing(12),
+    },
+  },
+  mainContainer: { paddingTop: Theme.spacing(12) },
+  editButton: {
+    fontSize: Theme.typography.fontSize[3],
+    borderRadius: Theme.spacing(7),
+    textTransform: 'none',
+    backgroundColor: Theme.palette.buttons.selected,
+    '@media (max-width: 576px)': {
+      margin: Theme.spacing(3, 0),
+      padding: Theme.spacing(3),
+    },
+  },
+  textBtn: {
+    color: Theme.palette.primary.contrastText,
+  },
 }))
 
 const index = ({
@@ -40,25 +81,22 @@ const index = ({
   description: string
   isLoading: any
   playlistId: number
-  onUpDate: funtion<any>
+  onUpDate: Function<any>
 }) => {
   const classes = useStyles()
   const { username, profileImgUrl, publicAddress } = userAccount ?? {}
 
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [openEditPlaylist, setOpenEditPlaylist] = useState<boolean>(false)
-  const [
-    openEditArtworksSelected,
-    setOpenEditArtworksSelected,
-  ] = useState<boolean>(false)
+  const [openEditArtworksSelected, setOpenEditArtworksSelected] =
+    useState<boolean>(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState<number[]>([])
   const [editRelatedArtworks, setEditRelatedArtworks] = useState<GalleryItem[]>(
     []
   )
   const [titlePlaylist, setTitlePlaylist] = useState<string>(title)
-  const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>(
-    description
-  )
+  const [descriptionPlaylist, setDescriptionPlaylist] =
+    useState<string>(description)
 
   const getArtworksId = () => {
     const artworksRelated = relatedArtworks.map(({ id }) => id)
@@ -129,22 +167,39 @@ const index = ({
             justify="space-around"
             alignItems="center"
           >
-            <Grid container justify="space-around">
+            <Grid container item xs={12} md={9} justify="space-between">
               <Grid item xs={5} container direction="column">
-                <Typography variant="h4">{title}</Typography>
+                <Typography variant="h4" color="primary">
+                  {title}
+                </Typography>
                 {isLoading.User ? (
                   <Spinner height="15hv" />
                 ) : (
-                  <CreatorInfo
-                    username={
-                      username ? username : truncateMiddleText(publicAddress, 8)
-                    }
-                    profileImageUrl={profileImgUrl}
-                  />
+                  <Grid className={classes.user}>
+                    <CreatorInfo
+                      username={
+                        username
+                          ? username
+                          : truncateMiddleText(publicAddress, 8)
+                      }
+                      imageUrl={profileImgUrl}
+                    />
+                  </Grid>
                 )}
               </Grid>
-              <Grid item xs={4}>
-                <Button variant="outlined" onClick={handleOpenEditPlaylist}>
+              <Grid
+                item
+                container
+                justify="flex-end"
+                alignContent="flex-start"
+                xs={12}
+                md={5}
+              >
+                <Button
+                  variant="outlined"
+                  className={classes.editButton}
+                  onClick={handleOpenEditPlaylist}
+                >
                   <Grid
                     container
                     direction="column"
@@ -152,22 +207,36 @@ const index = ({
                     alignItems="center"
                   >
                     <EditIcon className={classes.icon} />
-                    <Typography variant="caption">
+                    <Typography variant="button" className={classes.textBtn}>
                       Edit your playlist
                     </Typography>
                   </Grid>
                 </Button>
               </Grid>
             </Grid>
-            <Grid container justify="space-around" direction="row">
-              <Grid item xs={5}>
-                <Typography variant="h5"> Description</Typography>
+            <Grid
+              className={classes.mainContainer}
+              item
+              xs={12}
+              md={9}
+              container
+              justify="space-between"
+              direction="row"
+            >
+              <Grid item xs={12} md={5} className={classes.descContainer}>
+                <Typography variant="h5" color="primary">
+                  Description
+                </Typography>
                 <Paper className={classes.containerDescription}>
-                  {description}
+                  <Typography variant="body2" color="primary">
+                    {description}
+                  </Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h5">Artwork Information</Typography>
+              <Grid item xs={12} md={5}>
+                <Typography color="primary" variant="h5">
+                  Artwork Information
+                </Typography>
                 {isLoading.Playlist ? (
                   <Spinner height="50vh" />
                 ) : (

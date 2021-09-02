@@ -3,11 +3,20 @@ import Carousel from 'react-material-ui-carousel'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
+import {
+  RadioButtonUnchecked,
+  ChevronLeft,
+  ChevronRight,
+} from '@material-ui/icons'
 
 import CardArtwork from './CardArtwork'
 
 const useStyles = makeStyles(Theme => ({
-  root: { marginBottom: Theme.spacing(6) },
+  root: {
+    marginBottom: Theme.spacing(6),
+    backgroundColor: Theme.palette.background.paper,
+    padding: Theme.spacing(10, 5),
+  },
   carousel: {
     height: 'auto',
     minHeight: '100%',
@@ -20,6 +29,57 @@ const useStyles = makeStyles(Theme => ({
       marginTop: 0,
     },
   },
+  '@global': {
+    '.bottom': {
+      backgroundColor: 'transparent !important',
+      color: Theme.palette.secondary.contrastText,
+    },
+  },
+  arrowLeft: {
+    position: 'absolute',
+    top: 'auto',
+    left: 'auto',
+    fontSize: Theme.typography.fontSize[7],
+    color: Theme.palette.primary.dark,
+    '&:hover': {
+      '@media (max-width: 576px)': {
+        opacity: 1,
+      },
+    },
+    '@media (max-width: 576px)': {
+      fontSize: Theme.typography.fontSize[5],
+      opacity: 0,
+    },
+  },
+  arrowRigt: {
+    position: 'absolute',
+    top: 'auto',
+    right: 'auto',
+    fontSize: Theme.typography.fontSize[7],
+    color: Theme.palette.primary.dark,
+    '&:hover': {
+      '@media (max-width: 576px)': {
+        opacity: 1,
+      },
+    },
+    '@media (max-width: 576px)': {
+      fontSize: Theme.typography.fontSize[5],
+      opacity: 0,
+    },
+  },
+  circle: {
+    fontSize: Theme.typography.fontSize[7],
+    color: Theme.palette.primary.dark,
+    '&:hover': {
+      '@media (max-width: 576px)': {
+        opacity: 1,
+      },
+    },
+    '@media (max-width: 576px)': {
+      fontSize: Theme.typography.fontSize[5],
+      opacity: 0,
+    },
+  },
 }))
 
 const CarouselPL = ({ artworks, setIndex, ...props }) => {
@@ -30,9 +90,18 @@ const CarouselPL = ({ artworks, setIndex, ...props }) => {
         next={next => setIndex(next)}
         prev={prev => setIndex(prev)}
         indicators={false}
+        navButtonsProps={{ className: 'bottom' }}
         className={classes.carousel}
         animation="fade"
         navButtonsAlwaysVisible
+        PrevIcon={[
+          <ChevronLeft className={classes.arrowLeft} />,
+          <RadioButtonUnchecked className={classes.circle} />,
+        ]}
+        NextIcon={[
+          <ChevronRight className={classes.arrowRigt} />,
+          <RadioButtonUnchecked className={classes.circle} />,
+        ]}
       >
         {artworks.map(({ imageUrl, videoUrl, id }) => (
           <CardArtwork
