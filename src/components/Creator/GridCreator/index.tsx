@@ -2,12 +2,12 @@ import React from 'react'
 
 import TabBar from '../../TabBar'
 import Playlist from './../Playlist'
+import Favorite from './../Favorite'
 import {
   getProfileCreatedItemsByAddress,
   getProfileOwnedItemsByAddress,
 } from '../../../services/gallery'
 
-import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
 import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
 import useQueryParams, { useQueryHash } from '../../../hooks/useQueryParams'
@@ -70,7 +70,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => {
           openModal={Boolean(open)}
           queryFunction={async () => await getPlaylists(profileAddress)}
         />,
-        <GalleryCreator
+        <Favorite
           emptyMessageProps={{
             primaryText: isMyAccount
               ? 'Your favorites are empty.'
@@ -81,9 +81,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => {
             showExploreButton: true,
           }}
           queryName="FavoriteItemsQuery"
-          queryFunction={async () =>
-            await getAllFavoritesArtworksFromOneUserByAddress(profileAddress)
-          }
+          profileAddress={profileAddress}
         />,
       ]}
     />

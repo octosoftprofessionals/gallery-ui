@@ -44,8 +44,9 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   userName: {
-    fontSize: '26px',
-    marginLeft: Theme.spacing(13),
+    fontSize: '20px',
+    textAlign: 'left',
+    textTransform: 'lowercase',
     '@media (max-width: 576px)': {
       marginLeft: Theme.spacing(0),
       textAlign: 'center',
@@ -95,7 +96,8 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   bio: {
-    marginLeft: Theme.spacing(15),
+    marginLeft: Theme.spacing(10),
+    marginTop: Theme.spacing(3),
     width: '600px',
     overflow: 'hidden',
     '@media (max-width: 576px)': {
@@ -146,6 +148,7 @@ const useStyle = makeStyles(Theme => ({
 
 const InfoCreator = ({
   isMyAccount = false,
+  name,
   username,
   publicKey,
   followers,
@@ -223,15 +226,29 @@ const InfoCreator = ({
           sm={8}
           xs={12}
         >
-          <Grid item xs={3} direction="row" className={classes.infoBio}>
-            <Typography variant="h4" className={classes.userName}>
+          <Grid
+            item
+            md={4}
+            xs={12}
+            direction="column"
+            className={classes.infoBio}
+          >
+            <Typography variant="h6" color="primary">
+              {name}
+            </Typography>
+            <Typography
+              variant="h6"
+              color="primary"
+              className={classes.userName}
+            >
               {username ? `@${username}` : truncateMiddleText(publicKey, 5)}
             </Typography>
           </Grid>
           <Grid
             container
             item
-            xs={2}
+            md={2}
+            xs={4}
             direction="column"
             justify="flex-start"
             className={classes.infoBio}
@@ -247,11 +264,15 @@ const InfoCreator = ({
                 className={classes.btn}
                 onClick={() => handleOpenModal('1')}
               >
-                <Typography variant="overline" className={classes.textFollow}>
+                <Typography
+                  color="primary"
+                  variant="overline"
+                  className={classes.textFollow}
+                >
                   Following
                 </Typography>
               </Button>
-              <Typography variant="h6" color="primary">
+              <Typography color="primary" variant="h6">
                 {following ? following.length : '0'}
               </Typography>
             </Grid>
@@ -269,6 +290,7 @@ const InfoCreator = ({
                 <Typography
                   variant="overline"
                   className={classes.textFollowers}
+                  color="primary"
                 >
                   Followers
                 </Typography>

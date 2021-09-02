@@ -9,10 +9,8 @@ const FooterCardItem = ({
   statesArt,
   price,
   timer,
-  handleSubmitPlaylist,
   handleSubmitFavorite,
   handleSubmitUnFavorite,
-  handleSubmitUnPlaylist,
   isFavorite,
   account,
   artworkId,
@@ -21,10 +19,8 @@ const FooterCardItem = ({
   statesArt: string
   price?: string
   timer?: string
-  handleSubmitPlaylist: Function
   handleSubmitFavorite: Function
   handleSubmitUnFavorite: Function
-  handleSubmitUnPlaylist: Function
   isFavorite?: boolean
   account: any
   artworkId: number
@@ -36,10 +32,8 @@ const FooterCardItem = ({
         <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
-              handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
-              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}
@@ -50,10 +44,8 @@ const FooterCardItem = ({
         <BuyNow price={price}>
           {account ? (
             <ButtonPlaylist
-              handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
-              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}
@@ -64,10 +56,8 @@ const FooterCardItem = ({
         <Offer link={linkOffer}>
           {account ? (
             <ButtonPlaylist
-              handleSubmitPlaylist={handleSubmitPlaylist}
               handleSubmitFavorite={handleSubmitFavorite}
               handleSubmitUnFavorite={handleSubmitUnFavorite}
-              handleSubmitUnPlaylist={handleSubmitUnPlaylist}
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}

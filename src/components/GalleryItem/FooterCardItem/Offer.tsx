@@ -50,7 +50,7 @@ const Offer = ({
             className={classes.btn}
           >
             <Typography variant="button" className={classes.btnText}>
-              Offer
+              Make an offer
             </Typography>
           </Button>
         </Link>
