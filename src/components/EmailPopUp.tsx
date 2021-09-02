@@ -114,7 +114,7 @@ const useStyle = makeStyles(Theme => ({
     fontWeight: 200,
     fontSize: Theme.typography.fontSize[3],
     marginBottom: 40,
-    textAlign: 'center',
+    textAlign: 'justify',
     marginRight: 50,
     marginLeft: 50,
     '@media (max-width: 576px)': {
@@ -140,6 +140,12 @@ const useStyle = makeStyles(Theme => ({
     color: colors.Aqua,
     '@media (max-width: 576px)': {
       fontSize: Theme.spacing(12),
+    },
+  },
+  textButton: {
+    color: Theme.palette.secondary.main,
+    '&:hover': {
+      color: '#FFFFFF',
     },
   },
 }))
@@ -221,12 +227,12 @@ const EmailPopUp = () => {
             Join Our Mailing List!
           </Typography>
           <DialogContent>
-            <div className={classes.text}>
+            <Typography variant="body1" className={classes.text}>
               To subscribe to this website, please enter your email address
               here. We will send updates occasionally. We will send updates
               occasionally. To subscribe to this website, please enter your
               email address here.
-            </div>
+            </Typography>
             <div className={classes.dialogCont}>
               <Input
                 placeholder="email"
@@ -260,7 +266,9 @@ const EmailPopUp = () => {
               variant="text"
               type="submit"
             >
-              Sure!
+              <Typography variant="button" className={classes.textButton}>
+                Sure!
+              </Typography>
             </Button>
           </DialogActions>
         </div>
