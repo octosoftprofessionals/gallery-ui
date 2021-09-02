@@ -133,6 +133,7 @@ const Creator = ({
           <InfoCreator
             className={classes.info}
             isMyAccount={isMyAccount}
+            name={user?.name}
             username={user.username}
             publicKey={user.publicAddress}
             followers={followees ? followees : 0}

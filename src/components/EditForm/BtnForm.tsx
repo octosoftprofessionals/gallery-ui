@@ -223,7 +223,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
                     handleChange(network.key, e.currentTarget.value)
                   }
                   placeholder={
-                    network.value !== undefined && network.value !== null
+                    network.value !== undefined && network.value == null
                       ? network.value
                       : 'Discord user'
                   }
@@ -246,7 +246,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
                   }
                   placeholder={
                     network.code.value !== undefined &&
-                    network.code.value !== null
+                    network.code.value == null
                       ? network.code.value
                       : 'Code'
                   }

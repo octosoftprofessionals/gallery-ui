@@ -164,7 +164,7 @@ const ArtworkItem = ({
           )}
         </Box>
       </Link>
-      <Link to={linkProfileCreator} className={classes.link}>
+      <Link to={linkArtworkShow} className={classes.link}>
         <div className={classes.infoCard}>
           <Typography variant="h6" color="primary" className={classes.line}>
             {title}
