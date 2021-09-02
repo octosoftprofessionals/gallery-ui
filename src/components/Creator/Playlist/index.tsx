@@ -20,6 +20,10 @@ import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
 
 const useStyles = makeStyles(Theme => ({
+  root: {
+    display: ({ isdelete }: { isdelete: boolean }) =>
+      isdelete ? 'none' : 'flex',
+  },
   button: {
     margin: Theme.spacing(3, 9),
     backgroundColor: 'transparent',
@@ -36,12 +40,14 @@ const useStyles = makeStyles(Theme => ({
 
 const Playlist = ({
   isMyAccount,
+  openModal = false,
   emptyMessageProps,
   profileAddress,
   queryName,
   queryFunction,
 }: {
   isMyAccount: boolean
+  openModal?: boolean
   emptyMessageProps: Record<string, any>
   profileAddress: string
   queryName?: string
@@ -53,9 +59,9 @@ const Playlist = ({
     { refetchOnWindowFocus: true }
   )
   const queryClient = useQueryClient()
-
-  const classes = useStyles()
-  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false)
+  const [isdelete, setIsDelete] = useState<boolean>(false)
+  const classes = useStyles({ isdelete })
+  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(openModal)
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
@@ -71,12 +77,13 @@ const Playlist = ({
       userId: 0,
     },
   ]
-
+  console.log('playListQuery :>> ', playListQuery)
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
     setAddArtworksPlaylist([])
     setTitlePlaylist('')
     setDescriptionPlaylist('')
+    setIsDelete(false)
   }
   const handleCloseCreatePlaylist = () => {
     setOpenCreatePlaylist(false)
@@ -158,6 +165,7 @@ const Playlist = ({
     } catch (error) {
       console.log('errorUpDate :>> ', error)
     }
+    setIsDelete(true)
   }
 
   return (
@@ -167,7 +175,15 @@ const Playlist = ({
           <Spinner height="50vh" />
         ) : (
           playListQuery.map(({ id, title }) => (
-            <Grid item xs={12} sm={5} container justify="center" key={id}>
+            <Grid
+              item
+              xs={12}
+              sm={5}
+              container
+              justify="center"
+              key={id}
+              className={classes.root}
+            >
               <PlaylistItem
                 key={id}
                 imageUrl={

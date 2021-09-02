@@ -10,7 +10,7 @@ import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
 import { findeArtwork } from '../Utils'
 import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
-import { getPlaylists } from '../services/playlists'
+
 import { GalleryItem } from '../types'
 import { useAccountStore } from '../hooks/useAccountStore'
 
@@ -45,7 +45,6 @@ const Home = () => {
     setLiveAuctions(newPages)
     fetchNextPageLA({ pageParam: newPages })
   }
-  console.log('allFeaturedItems:', allFeaturedItems)
 
   const {
     data: liveAcutionItems = [],
@@ -70,13 +69,6 @@ const Home = () => {
     setFeaturedArtworks(newPages)
     fetchNextPageFA({ pageParam: newPages })
   }
-
-  const {
-    data: PlaylistQuery = [],
-    isLoading: isLoadingPlaylistQuery,
-  } = useQuery('PlaylistQuery', () => getPlaylists(metamaskStorage[0]), {
-    refetchOnWindowFocus: false,
-  })
 
   const handleFavorite = useCallback(
     (assetId, status, title) => {
@@ -124,7 +116,6 @@ const Home = () => {
                   onFavorite={(assetId, status) =>
                     handleFavorite(assetId, status, 'All')
                   }
-                  playlists={PlaylistQuery}
                 />
               )}
             />
@@ -154,7 +145,6 @@ const Home = () => {
                   onFavorite={(assetId, status) =>
                     handleFavorite(assetId, status, 'Live')
                   }
-                  playlists={PlaylistQuery}
                 />
               )}
             />

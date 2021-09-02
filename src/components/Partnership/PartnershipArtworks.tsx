@@ -28,18 +28,20 @@ const PartnershipArtworks = ({ isLoading, data = [] }) => {
   )
 
   return (
-    <Grid container direction="row" justify="space-between" wrap="wrap">
+    <Grid container justify="center" md={11}>
       {data.map((galleryItem, index) => (
-        <Grid
-          item
-          key={index}
-          xs={12}
-          sm={6}
-          md={3}
-          className={classes.containerItem}
-        >
-          <PartnershipItem galleryItem={galleryItem} />
-        </Grid>
+        <>
+          <Grid
+            item
+            key={index}
+            xs={12}
+            sm={6}
+            md={3}
+            className={classes.containerItem}
+          >
+            <PartnershipItem galleryItem={galleryItem} />
+          </Grid>
+        </>
       ))}
     </Grid>
   )

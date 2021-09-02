@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider, Button } from '@material-ui/core'
 import useQueryParams, { useQueryHash } from '../hooks/useQueryParams'
@@ -95,13 +95,12 @@ const TabBar = ({
   initialTab?: number
 }) => {
   const classes = useStyle()
-  const { address } = useQueryParams()
   const [selected, setSelected] = useState(initialTab)
 
   const handleSelected = selection => {
     setSelected(selection)
     if (isMyAccount) {
-      window.location.href = myProfilePathWithView(selection)
+      window.history.replaceState(null, null, myProfilePathWithView(selection))
     }
   }
 

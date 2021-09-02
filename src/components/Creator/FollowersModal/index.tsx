@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   panel: {
-    paddingTop: theme.spacing(15),
+    paddingTop: theme.spacing(17),
   },
   title: {
     textTransform: 'none',

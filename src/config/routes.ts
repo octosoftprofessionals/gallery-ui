@@ -9,5 +9,7 @@ export const profilePathFromUsername = (username: string) =>
   `/creator/?id=${username}`
 
 export const myProfilePathWithView = (view: number) => `/profile/#${view}`
+export const myProfilePathWithViewPlaylistOpen = (view: number) =>
+  `/profile/?open=true&#${view}`
 
 export const myPlaylistsId = (id: number) => `/playList/?id=${id}`

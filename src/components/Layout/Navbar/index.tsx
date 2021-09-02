@@ -145,7 +145,13 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const index = ({ pathname, profileImageUrl }) => {
+const index = ({
+  pathname,
+  profileImageUrl,
+}: {
+  pathname: string
+  profileImageUrl: string
+}) => {
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
@@ -200,7 +206,7 @@ const index = ({ pathname, profileImageUrl }) => {
                   {userAccount ? (
                     <LoggedButton
                       profileImageUrl={userAccount?.profileImgUrl}
-                      name={userAccount ? userAccount.username : ''}
+                      name={userAccount.username ?? ''}
                       account={account}
                       onLogOut={handleLogOut}
                     />
@@ -248,9 +254,13 @@ const index = ({ pathname, profileImageUrl }) => {
       </AppBar>
 
       <MenuDrawer
+        account={account}
+        pathname={pathname}
         showDrawer={showDrawer}
         setShowDrawer={setShowDrawer}
         LogoDarkSrc={LogoDarkSrc}
+        handleLogOut={handleLogOut}
+        userAccount={userAccount}
       />
     </>
   )

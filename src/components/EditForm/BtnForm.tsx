@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Grid, Typography, TextField, InputAdornment } from '@material-ui/core'
 import { AlternateEmail } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -125,7 +125,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
     {
       key: 'website',
       name: 'Website',
-      value: socialNetwork.website,
+      value: socialNetwork.website.toLowerCase(),
       icon: <LanguageIcon className={classes.icon} />,
     },
     {
