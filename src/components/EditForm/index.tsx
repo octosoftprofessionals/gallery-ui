@@ -413,7 +413,7 @@ const EditForm = ({ userAccount }: Props) => {
                   color="primary"
                   className={classes.formTitle}
                 >
-                  Add a short bio:
+                  Enter a short bio:
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>

@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Truncate from 'react-truncate'
 import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Grid, Paper, Typography } from '@material-ui/core'
+import { Avatar, Grid, Paper, Typography, Divider } from '@material-ui/core'
 import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils/index'
-import { GalleryItem } from '../../../services/gallery'
-import { Box } from '@material-ui/core'
-import { artworkPathFrom, profilePathFromAddress } from '../../../config/routes'
 import CardImage from '../CardImage'
 import SuperchiefLogo from '../../../assets/logo-collabs.jpeg'
+import { darkColors } from '../../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -22,6 +20,9 @@ const useStyle = makeStyles(Theme => ({
     flexDirection: 'column',
     backgroundColor: Theme.palette.card.footer,
     gridGap: Theme.spacing(9),
+  },
+  titleCard: {
+    color: darkColors.WhiteSmoke,
   },
   containerAvatar: { marginBottom: Theme.spacing(3) },
   link: { textDecoration: 'none' },
@@ -54,10 +55,21 @@ const PartnershipItem = ({ galleryItem }: { galleryItem: any }) => {
         <CardImage imageUrl={SuperchiefLogo} />
 
         <div className={classes.infoCard}>
-          <Typography variant="h5" color="primary" align="center">
+          <Typography
+            variant="h5"
+            className={classes.titleCard}
+            color="primary"
+            align="center"
+          >
             {title}
           </Typography>
-          <Typography variant="body1" color="primary" align="center">
+          <Divider light />
+          <Typography
+            variant="body1"
+            className={classes.titleCard}
+            color="primary"
+            align="center"
+          >
             {subtitle}
           </Typography>
         </div>
