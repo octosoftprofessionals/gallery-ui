@@ -19,13 +19,23 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const CreatorInfo = ({ username, imageUrl }) => {
+const CreatorInfo = ({
+  username,
+  imageUrl,
+}: {
+  username: string
+  imageUrl?: string
+}) => {
   const classes = useStyle()
   return (
     <div className={classes.containerAvatar}>
       <Grid container direction="row" alignItems="center">
         <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
-        <Typography variant="body1" className={classes.username}>
+        <Typography
+          variant="body1"
+          color="primary"
+          className={classes.username}
+        >
           {`@${username}`}
         </Typography>
       </Grid>

@@ -77,7 +77,6 @@ const Playlist = ({
       userId: 0,
     },
   ]
-  console.log('playListQuery :>> ', playListQuery)
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
     setAddArtworksPlaylist([])
@@ -150,11 +149,10 @@ const Playlist = ({
 
   const handlerDeletedPlaylist = async (id: number) => {
     try {
-      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
-        {
+      const resDeletePlaylist =
+        await deleteOnePlaylistByIdWithAssociatedArtworks({
           playlist_id: id,
-        }
-      )
+        })
     } catch (error) {
       console.log('errorResDeletePlaylist :>> ', error)
     }
@@ -174,7 +172,7 @@ const Playlist = ({
         {isLoading ? (
           <Spinner height="50vh" />
         ) : (
-          playListQuery.map(({ id, title }) => (
+          playListQuery.map(({ id, title, imagePreviewUrl }) => (
             <Grid
               item
               xs={12}
@@ -186,9 +184,7 @@ const Playlist = ({
             >
               <PlaylistItem
                 key={id}
-                imageUrl={
-                  'https://f8n-ipfs-production.imgix.net/QmTf4rxGkyryv6Vnm9mFJxWTEXcqjmtgxQXz7m5cqmLFsv/nft.jpg'
-                }
+                imageUrl={imagePreviewUrl}
                 titlePlaylist={title}
                 link={myPlaylistsId(id)}
                 id={id}
