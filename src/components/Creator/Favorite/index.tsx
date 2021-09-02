@@ -42,8 +42,8 @@ const Favorite = ({
       getAllFavoritesArtworksFromOneUserByAddress(profileAddress, pageParam),
     {
       refetchOnWindowFocus: false,
-      getNextPageParam: lastPage => {
-        return lastPage.length >= 20
+      getNextPageParam: ({ favoriteArtworks }) => {
+        return favoriteArtworks.length >= 20
       },
     }
   )
@@ -61,12 +61,17 @@ const Favorite = ({
     [favoritesPagesItems.pages]
   )
 
-  if (!isLoadingQueryInfinite && favoritesPagesItems.pages.length === 0) {
-    return (
-      <Box style={{ padding: 48 }}>
-        <EmptyAccount {...emptyMessageProps} />
-      </Box>
-    )
+  if (!isLoadingQueryInfinite) {
+    const [page] = favoritesPagesItems.pages
+    const { favoriteArtworks } = page
+
+    if (favoriteArtworks.length === 0) {
+      return (
+        <Box style={{ padding: 48 }}>
+          <EmptyAccount {...emptyMessageProps} />
+        </Box>
+      )
+    }
   }
 
   return isLoadingQueryInfinite ? (
