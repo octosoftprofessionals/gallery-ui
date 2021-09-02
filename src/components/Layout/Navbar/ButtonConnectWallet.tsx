@@ -9,6 +9,12 @@ const useStyle = makeStyles(Theme => ({
   btnGreen: {
     background: Theme.palette.buttons.wallet,
   },
+  textBtn: {
+    color: Theme.palette.secondary.main,
+    '&:hover': {
+      color: '#FFFFFF',
+    },
+  },
 }))
 
 const ButtonConnectWallet = ({ pathname }) => {
@@ -30,7 +36,13 @@ const ButtonConnectWallet = ({ pathname }) => {
           color={pathname === '/creator' ? 'secondary' : ''}
           onClick={() => setConnectWallet(true)}
         >
-          <Typography variant="button">Connect Wallet</Typography>
+          <Typography
+            color="secondary"
+            variant="button"
+            className={classes.textBtn}
+          >
+            Connect Wallet
+          </Typography>
         </Button>
       </Grid>
       <Dialog

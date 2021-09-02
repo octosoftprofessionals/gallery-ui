@@ -276,6 +276,7 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('website', socialNetwork.website)
       formData.append('twitter', socialNetwork.twitter)
       formData.append('instagram', socialNetwork.instagram)
+      formData.append('discord', socialNetwork.discord)
       formData.append('discordId', socialNetwork.discordId)
       formData.append('youtube', socialNetwork.youtube)
       formData.append('facebook', socialNetwork.facebook)

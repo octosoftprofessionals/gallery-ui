@@ -95,6 +95,7 @@ function FollowItem({ user, handleClick, publicKey }) {
           <Avatar
             alt={user.username}
             className={[classes.profileColor, classes.avatar]}
+            src={user.profileImgUrl}
           >
             {' '}
           </Avatar>
