@@ -14,14 +14,13 @@ export const createExhibition = async (
 export const getAllExhibitions = async (): Promise<Exhibition[]> => {
   const url = '/exhibition'
   const res = await get(url)
-  const allExhibitions = res.data.exhibitions ?? []
+  const allExhibitions = res.data.exhibitions ?? {}
   return allExhibitions
 }
 
-export const getOneExhibition = async ({
-  exhibitionid,
-}): Promise<Exhibition> => {
-  const url = `/exhibition/${exhibitionid}`
+export const getOneExhibitionByIdWithArtworks = async (
+  exhibition_id: number): Promise<Exhibition> => {
+  const url = `/exhibition/${exhibition_id}`
   const res = await get(url)
   const exhibition = res.data ?? res ?? {}
   return exhibition

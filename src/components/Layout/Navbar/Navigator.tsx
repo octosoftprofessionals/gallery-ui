@@ -50,8 +50,7 @@ const Navigator = ({ pathname }) => {
   return (
     <Hidden mdDown>
       <div className={classes.container}>
-        <Link to="/construction" className={classes.link}>
-          {/*  to="/exhibition" */}
+        <Link to="/exhibition" className={classes.link}>
           <Button
             variant="text"
             color="primary"
