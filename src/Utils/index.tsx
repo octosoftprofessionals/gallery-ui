@@ -157,6 +157,19 @@ export const findeArtwork = (arry, assetId, status) => {
   res.isFavorite = status
 }
 
-export const isError = (e: any): boolean => e && e.stack && e.message && typeof e.stack === 'string' && typeof e.message === 'string'
+export const findeArtworkFavorites = (arry, assetId, status) => {
+  let res = {}
+  arry.forEach(({ favoriteArtworks }) => {
+    res = favoriteArtworks.find(artwork => artwork.assetId === assetId)
+  })
+  res.isFavorite = status
+}
+
+export const isError = (e: any): boolean =>
+  e &&
+  e.stack &&
+  e.message &&
+  typeof e.stack === 'string' &&
+  typeof e.message === 'string'
 
 export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) => formatDecimal(ethers.utils.formatUnits(bn.toString()))
