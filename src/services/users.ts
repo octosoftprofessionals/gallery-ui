@@ -14,6 +14,15 @@ export const getUser = async (queryParams: any = {}): Promise<Users> => {
   }
 }
 
+export const getUsers = async (queryParams: any = {}): Promise<Users> => {
+  const url = `/users`
+  const res = await get(url, queryParams)
+  const users = res.data ?? {}
+  const usernameList: Array<string> = []
+  users.forEach(user => usernameList.push(user.username))
+  return usernameList
+}
+
 export const updateUser = async (public_address, queryParams = {}) => {
   const url = `/users/update/${public_address}`
   const res = await postWithMultiPart(url, queryParams)

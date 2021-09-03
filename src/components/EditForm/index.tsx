@@ -17,7 +17,7 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser } from '../../services/users'
+import { updateUser, getUsers } from '../../services/users'
 
 // Hi there! verify profile is commented //
 
@@ -116,6 +116,12 @@ const useStyle = makeStyles(theme => ({
   alert: {
     borderRadius: 10,
   },
+  alertUserName: {
+    borderRadius: 10,
+    padding: theme.spacing(1, 5),
+    opacity: 0.7,
+    marginTop: theme.spacing(2),
+  },
   suscribeBtn: {
     fontSize: theme.typography.fontSize[3],
     fontWeight: 800,
@@ -207,10 +213,12 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = React.useState(userAccount.name ?? '')
-  const [username, setUserName] = React.useState(userAccount.username ?? '')
-  const [email, setEmail] = React.useState(userAccount.email ?? '')
-  const [bio, setBio] = React.useState(userAccount.bio ?? '')
+  const [name, setName] = useState(userAccount.name ?? '')
+  const [usernameList, setUsernameList] = useState([])
+  const [usernameCheck, setUsernameCheck] = useState(true)
+  const [username, setUserName] = useState(userAccount.username ?? '')
+  const [email, setEmail] = useState(userAccount.email ?? '')
+  const [bio, setBio] = useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
@@ -251,6 +259,7 @@ const EditForm = ({ userAccount }: Props) => {
   }
   const handleChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
+    setUsernameCheck(false)
     setDisabled(false)
   }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -262,8 +271,27 @@ const EditForm = ({ userAccount }: Props) => {
     setDisabled(false)
   }
 
+  const getUsernameList = async () => {
+    try {
+      const usernameList = await getUsers()
+      setUsernameList(usernameList)
+    } catch (error) {
+      console.error('Error getting username list', error)
+    }
+  }
+
+  const checkAvailability = () => {
+    if (username.length === 0) return false
+    const RESP = !usernameList.includes(username)
+    return RESP
+  }
+
+  useEffect(() => {
+    getUsernameList()
+  }, [])
+
   const handleSubmit = async () => {
-    if (validateEmail(email)) {
+    if (validateEmail(email) && checkAvailability()) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -287,6 +315,7 @@ const EditForm = ({ userAccount }: Props) => {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
         setDisabled(true)
+        window.location.reload() //reload page to see the new username account
         console.log(res)
       } catch (e) {
         handleClick(true)
@@ -375,9 +404,37 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
+                {checkAvailability() ? (
+                  <Alert
+                    variant="filled"
+                    severity="success"
+                    icon={false}
+                    className={classes.alertUserName}
+                  >
+                    {`Username ${username} is available`}
+                  </Alert>
+                ) : usernameCheck ? (
+                  <Alert
+                    variant="filled"
+                    severity="success"
+                    icon={false}
+                    className={classes.alertUserName}
+                  >
+                    {`Username ${username} is available`}
+                  </Alert>
+                ) : (
+                  <Alert
+                    variant="filled"
+                    severity="error"
+                    icon={false}
+                    className={classes.alertUserName}
+                  >
+                    {`Username ${username} is already taken`}
+                  </Alert>
+                )}
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
-                    E-Mail (Receive notifications)
+                    * E-Mail (Receive notifications)
                   </Typography>
                   <TextField
                     variant="outlined"
@@ -395,7 +452,7 @@ const EditForm = ({ userAccount }: Props) => {
                     severity="error"
                     className={classes.alert}
                   >
-                    <strong>Error:</strong> invalid entry
+                    <strong>Error:</strong> Email is required.
                   </Alert>
                 </Collapse>
               </Grid>
