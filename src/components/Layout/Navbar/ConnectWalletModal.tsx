@@ -84,6 +84,7 @@ const ConnectWalletModal = ({
 
         setMetamaskAccount(accounts[0])
         handleCloseConnectWalletModal()
+        window.location.reload()
       } catch (e) {
         console.log(e)
       }
