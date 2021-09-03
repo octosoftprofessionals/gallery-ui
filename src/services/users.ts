@@ -29,3 +29,10 @@ export const updateUser = async (public_address, queryParams = {}) => {
   const updatedUser = res.data ?? {}
   return updatedUser
 }
+
+export const mailAvailability = async (email: string) => {
+  const url = `/users/${email}`
+  const res = await get(url)
+  const mailAvailability = res.data ?? {}
+  return mailAvailability
+}
