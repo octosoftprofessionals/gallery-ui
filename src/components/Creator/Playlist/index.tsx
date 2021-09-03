@@ -148,11 +148,13 @@ const Playlist = ({
   }
 
   const handlerDeletedPlaylist = async (id: number) => {
+    setIsDelete(true)
     try {
-      const resDeletePlaylist =
-        await deleteOnePlaylistByIdWithAssociatedArtworks({
+      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
+        {
           playlist_id: id,
-        })
+        }
+      )
     } catch (error) {
       console.log('errorResDeletePlaylist :>> ', error)
     }
@@ -163,9 +165,8 @@ const Playlist = ({
     } catch (error) {
       console.log('errorUpDate :>> ', error)
     }
-    setIsDelete(true)
   }
-
+  console.log('playListQuery :>> ', playListQuery)
   return (
     <>
       <Grid container justify="center" direction="row" wrap="wrap">
@@ -173,15 +174,7 @@ const Playlist = ({
           <Spinner height="50vh" />
         ) : (
           playListQuery.map(({ id, title, imagePreviewUrl }) => (
-            <Grid
-              item
-              xs={12}
-              sm={5}
-              container
-              justify="center"
-              key={id}
-              className={classes.root}
-            >
+            <Grid item xs={12} sm={5} container justify="center" key={id}>
               <PlaylistItem
                 key={id}
                 imageUrl={imagePreviewUrl}
@@ -189,6 +182,7 @@ const Playlist = ({
                 link={myPlaylistsId(id)}
                 id={id}
                 onDelete={handlerDeletedPlaylist}
+                style={{ display: `${isdelete ? 'none' : 'flex'}` }}
               />
             </Grid>
           ))
