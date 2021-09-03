@@ -17,7 +17,8 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser, getUsers } from '../../services/users'
+import { updateUser, mailAvailability } from '../../services/users'
+import EmailValidator from './EmailValidator'
 
 // Hi there! verify profile is commented //
 
@@ -213,12 +214,14 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = useState(userAccount.name ?? '')
-  const [usernameList, setUsernameList] = useState([])
-  const [usernameCheck, setUsernameCheck] = useState(true)
-  const [username, setUserName] = useState(userAccount.username ?? '')
-  const [email, setEmail] = useState(userAccount.email ?? '')
-  const [bio, setBio] = useState(userAccount.bio ?? '')
+  const [name, setName] = React.useState(userAccount.name ?? '')
+  const [username, setUserName] = React.useState(userAccount.username ?? '')
+  const [email, setEmail] = React.useState(userAccount.email ?? '')
+  console.log(`mail :>`, email)
+  const [mailAvailable, setMailAvailabie] = useState(null)
+  console.log(`mailAvailable :>`, mailAvailable)
+
+  const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
@@ -328,6 +331,23 @@ const EditForm = ({ userAccount }: Props) => {
       handleClick(true)
     }
   }
+
+  useEffect(() => {
+    const validationExistingEmailAccount = async() => {
+      const checkEmail = async() => {
+        if(validateEmail(email)){
+          const res = await mailAvailability(email)
+          console.log(`res :>`, res)
+          return res
+        }
+      }
+      const mailStatus = await checkEmail()
+      console.log(`mailStatus :>`, mailStatus)
+      setMailAvailabie(mailStatus)
+      setError(true)
+    }
+    validationExistingEmailAccount()
+  }, [email])
 
   return (
     <Grid
@@ -446,15 +466,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <Collapse in={error}>
-                  <Alert
-                    variant="filled"
-                    severity="error"
-                    className={classes.alert}
-                  >
-                    <strong>Error:</strong> Email is required.
-                  </Alert>
-                </Collapse>
+                <EmailValidator email={email} mailAvailable={mailAvailable} error={error} classes={classes}/>
               </Grid>
             </Grid>
 
