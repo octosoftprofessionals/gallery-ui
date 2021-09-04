@@ -6,7 +6,7 @@ import {validateEmail} from '../../Utils/stringUtils'
 import { getUser } from '../../services/users'
 
 const EmailValidator = ({ checkAvailability, account, email, userEmailList, error, setError, classes, savedEmail, setSavedEmail }) => {
-    
+
 
     // Could be a custom hook
     const checkEmailServerSituation = async() => {
@@ -25,7 +25,7 @@ const EmailValidator = ({ checkAvailability, account, email, userEmailList, erro
     }
     checkEmailServerSituation()
 
-    if(email.length === 0) setError(true)
+    if(email.length === 0 || !validateEmail(email) || checkAvailability(userEmailList, email) === false) setError(true)
     return (
         <Collapse in={error}>
                   {email.length === 0 ?
