@@ -18,7 +18,7 @@ import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
-import EmailValidator from './EmailValidator'
+import InputValidator from './InputValidator'
 
 // Hi there! verify profile is commented //
 
@@ -277,24 +277,24 @@ const EditForm = ({ userAccount }: Props) => {
     setDisabled(false)
   }
 
-  const getUsernameList = async () => {
+  const getUserDataList = async (dataField, setter) => {
     try {
-      const usernameList = await getUsersDataField("username")
-      console.log(`usernameList ||`, usernameList)
-      setUsernameList(usernameList)
+      const dataList = await getUsersDataField(dataField)
+      console.log(`dataList ||`, dataList)
+      setter(dataList)
     } catch (error) {
       console.error('Error getting username list', error)
     }
   }
 
-  const getUserEmailList = async() => {
-    try{
-      const usersEmailList = await getUsersDataField("email")
-      setUserEmailList(usersEmailList)
-    }catch(error){
-      console.error("Error getting user email list", error)
-    }
-  }
+  // const getUserEmailList = async() => {
+  //   try{
+  //     const usersEmailList = await getUsersDataField("email")
+  //     setUserEmailList(usersEmailList)
+  //   }catch(error){
+  //     console.error("Error getting user email list", error)
+  //   }
+  // }
 
   const checkAvailability = (dataList, dataField) => {
     if (username.length === 0) return false
@@ -303,8 +303,8 @@ const EditForm = ({ userAccount }: Props) => {
   }
 
   useEffect(() => {
-    getUsernameList()
-    getUserEmailList()
+    getUserDataList("username", setUsernameList)
+    getUserDataList("email", setUserEmailList)
   }, [])
 
   const handleSubmit = async () => {
@@ -464,7 +464,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <EmailValidator savedEmail={savedEmail} setSavedEmail={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} email={email} userEmailList={userEmailList} error={error} setError={setError} classes={classes}/>
+                <InputValidator savedEmail={savedEmail} setSavedEmail={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} email={email} userEmailList={userEmailList} error={error} setError={setError} classes={classes}/>
               </Grid>
             </Grid>
 

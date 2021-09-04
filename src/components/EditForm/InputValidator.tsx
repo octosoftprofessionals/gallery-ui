@@ -5,7 +5,7 @@ import { Collapse } from '@material-ui/core'
 import {validateEmail} from '../../Utils/stringUtils'
 import { getUser } from '../../services/users'
 
-const EmailValidator = ({ checkAvailability, account, email, userEmailList, error, setError, classes, savedEmail, setSavedEmail }) => {
+const InputValidator = ({ checkAvailability, account, email, userEmailList, error, setError, classes, savedEmail, setSavedEmail }) => {
 
 
     // Could be a custom hook
@@ -79,4 +79,4 @@ const EmailValidator = ({ checkAvailability, account, email, userEmailList, erro
      );
 }
 
-export default EmailValidator;
+export default InputValidator;
