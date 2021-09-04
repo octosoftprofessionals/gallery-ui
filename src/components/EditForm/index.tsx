@@ -17,7 +17,7 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser, mailAvailability } from '../../services/users'
+import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
 import EmailValidator from './EmailValidator'
 
 // Hi there! verify profile is commented //
@@ -217,9 +217,12 @@ const EditForm = ({ userAccount }: Props) => {
   const [name, setName] = React.useState(userAccount.name ?? '')
   const [username, setUserName] = React.useState(userAccount.username ?? '')
   const [email, setEmail] = React.useState(userAccount.email ?? '')
-  console.log(`mail :>`, email)
-  const [mailAvailable, setMailAvailabie] = useState(null)
-  console.log(`mailAvailable :>`, mailAvailable)
+
+  const [usernameList, setUsernameList] = useState([])
+  const [usernameCheck, setUsernameCheck] = useState(true)
+
+  const [userEmailList, setUserEmailList] = useState([])
+  const [savedEmail, setSavedEmail] = useState("")
 
   const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
@@ -276,25 +279,35 @@ const EditForm = ({ userAccount }: Props) => {
 
   const getUsernameList = async () => {
     try {
-      const usernameList = await getUsers()
+      const usernameList = await getUsersDataField("name")
       setUsernameList(usernameList)
     } catch (error) {
       console.error('Error getting username list', error)
     }
   }
 
-  const checkAvailability = () => {
+  const getUserEmailList = async() => {
+    try{
+      const usersEmailList = await getUsersDataField("email")
+      setUserEmailList(usersEmailList)
+    }catch(error){
+      console.error("Error getting user email list", error)
+    }
+  }
+
+  const checkAvailability = (dataList, dataField) => {
     if (username.length === 0) return false
-    const RESP = !usernameList.includes(username)
+    const RESP = !dataList.includes(dataField)
     return RESP
   }
 
   useEffect(() => {
     getUsernameList()
+    getUserEmailList()
   }, [])
 
   const handleSubmit = async () => {
-    if (validateEmail(email) && checkAvailability()) {
+    if (validateEmail(email) && checkAvailability(usernameList, username) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -332,22 +345,6 @@ const EditForm = ({ userAccount }: Props) => {
     }
   }
 
-  useEffect(() => {
-    const validationExistingEmailAccount = async() => {
-      const checkEmail = async() => {
-        if(validateEmail(email)){
-          const res = await mailAvailability(email)
-          console.log(`res :>`, res)
-          return res
-        }
-      }
-      const mailStatus = await checkEmail()
-      console.log(`mailStatus :>`, mailStatus)
-      setMailAvailabie(mailStatus)
-      setError(true)
-    }
-    validationExistingEmailAccount()
-  }, [email])
 
   return (
     <Grid
@@ -424,7 +421,7 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
-                {checkAvailability() ? (
+                {checkAvailability(usernameList, username) ? (
                   <Alert
                     variant="filled"
                     severity="success"
@@ -466,7 +463,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <EmailValidator email={email} mailAvailable={mailAvailable} error={error} classes={classes}/>
+                <EmailValidator savedEmail={savedEmail} setSavedEmail={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} email={email} userEmailList={userEmailList} error={error} setError={setError} classes={classes}/>
               </Grid>
             </Grid>
 

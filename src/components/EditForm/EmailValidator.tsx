@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {useQuery} from 'react-query'
 import { Alert } from '@material-ui/lab'
 import { Collapse } from '@material-ui/core'
+import {validateEmail} from '../../Utils/stringUtils'
+import { getUser } from '../../services/users'
 
-const EmailValidator = ({ email, mailAvailable, error, classes }) => {
+const EmailValidator = ({ checkAvailability, account, email, userEmailList, error, setError, classes, savedEmail, setSavedEmail }) => {
+    
+
+    // Could be a custom hook
+    const checkEmailServerSituation = async() => {
+      const { data: userData, isLoading } = await useQuery(
+        'userEmailValidator',
+        () => getUser({ public_address: account }),
+        {
+          refetchOnWindowFocus: false,
+        }
+      )
+      if(!isLoading){
+        const {email} = userData
+        console.log(`email :>>>`, email)
+        email ? setSavedEmail(email) : setSavedEmail("No existing previous email")
+      }
+    }
+    checkEmailServerSituation()
+
+    if(email.length === 0) setError(true)
     return (
         <Collapse in={error}>
                   {email.length === 0 ?
@@ -12,9 +35,9 @@ const EmailValidator = ({ email, mailAvailable, error, classes }) => {
                     icon={false}
                     className={classes.alert}
                   >
-                    <strong>This field is mandatory</strong>
+                    <strong>This field can't be empty</strong>
                   </Alert>
-                  : (mailAvailable === undefined) ?
+                  : (!validateEmail(email)) ?
                     <Alert
                       variant="filled"
                       severity="info"
@@ -23,7 +46,17 @@ const EmailValidator = ({ email, mailAvailable, error, classes }) => {
                     >
                        <strong>Verifing email...</strong>
                     </Alert>
-                  : (mailAvailable.availability === false) ?
+                  :(savedEmail === email) ?
+                    <Alert
+                      variant="filled"
+                      severity="success"
+                      icon={false}
+                      className={classes.alert}
+                    >
+                       <strong>Your email is same as saved!</strong>
+                    </Alert>
+                    :
+                    (checkAvailability(userEmailList, email) === false) ?
                     <Alert
                       variant="filled"
                       severity="error"

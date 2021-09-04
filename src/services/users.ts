@@ -14,25 +14,26 @@ export const getUser = async (queryParams: any = {}): Promise<Users> => {
   }
 }
 
-export const getUsers = async (queryParams: any = {}): Promise<Users> => {
+export const getUsersDataField = async (dataField, queryParams: any = {}): Promise<Users> => {
   const url = `/users`
   const res = await get(url, queryParams)
   const users = res.data ?? {}
-  const usernameList: Array<string> = []
-  users.forEach(user => usernameList.push(user.username))
-  return usernameList
+  const userDataFieldList: Array<string> = []
+  users.forEach((user) => {
+    for(let prop in user){
+      if(prop == dataField){
+        console.log("dataField", dataField)
+        userDataFieldList.push(user[prop])
+      }
+    }
+  })
+  return userDataFieldList
 }
+
 
 export const updateUser = async (public_address, queryParams = {}) => {
   const url = `/users/update/${public_address}`
   const res = await postWithMultiPart(url, queryParams)
   const updatedUser = res.data ?? {}
   return updatedUser
-}
-
-export const mailAvailability = async (email: string) => {
-  const url = `/users/${email}`
-  const res = await get(url)
-  const mailAvailability = res.data ?? {}
-  return mailAvailability
 }
