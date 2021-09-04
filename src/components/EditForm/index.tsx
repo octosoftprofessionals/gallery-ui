@@ -220,6 +220,7 @@ const EditForm = ({ userAccount }: Props) => {
 
   const [usernameList, setUsernameList] = useState([])
   const [usernameCheck, setUsernameCheck] = useState(true)
+  const [savedUsername, setSavedUsername] = useState("")
 
   const [userEmailList, setUserEmailList] = useState([])
   const [savedEmail, setSavedEmail] = useState("")
@@ -280,24 +281,14 @@ const EditForm = ({ userAccount }: Props) => {
   const getUserDataList = async (dataField, setter) => {
     try {
       const dataList = await getUsersDataField(dataField)
-      console.log(`dataList ||`, dataList)
       setter(dataList)
     } catch (error) {
       console.error('Error getting username list', error)
     }
   }
 
-  // const getUserEmailList = async() => {
-  //   try{
-  //     const usersEmailList = await getUsersDataField("email")
-  //     setUserEmailList(usersEmailList)
-  //   }catch(error){
-  //     console.error("Error getting user email list", error)
-  //   }
-  // }
-
   const checkAvailability = (dataList, dataField) => {
-    if (username.length === 0) return false
+    if (dataList.length === 0) return false
     const RESP = !dataList.includes(dataField)
     return RESP
   }
@@ -308,7 +299,7 @@ const EditForm = ({ userAccount }: Props) => {
   }, [])
 
   const handleSubmit = async () => {
-    if (validateEmail(email) && checkAvailability(usernameList, username) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
+    if (validateEmail(email) && ( (!checkAvailability(usernameList, username)) && savedUsername === username ||  checkAvailability(usernameList, username)) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -405,7 +396,6 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeName}
                   value={name}
                 />
-
                 <Typography className={classes.label}>Username</Typography>
                 <TextField
                   variant="outlined"
@@ -422,34 +412,7 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
-                {checkAvailability(usernameList, username) ? (
-                  <Alert
-                    variant="filled"
-                    severity="success"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is available`}
-                  </Alert>
-                ) : usernameCheck ? (
-                  <Alert
-                    variant="filled"
-                    severity="success"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is available`}
-                  </Alert>
-                ) : (
-                  <Alert
-                    variant="filled"
-                    severity="error"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is already taken`}
-                  </Alert>
-                )}
+                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError} classes={classes} />
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
                     * E-Mail (Receive notifications)
@@ -464,7 +427,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <InputValidator savedEmail={savedEmail} setSavedEmail={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} email={email} userEmailList={userEmailList} error={error} setError={setError} classes={classes}/>
+                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} classes={classes}/>
               </Grid>
             </Grid>
 
