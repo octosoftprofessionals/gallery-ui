@@ -17,19 +17,13 @@ const linkShareTwitter = () => {
   return `https://twitter.com/share?${searchParams.toString()}`
 }
 
-// ArtworkCreator Param:
-const creatorDescription =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-
-//const linkProfile = `http://localhost:8000/${artist}` // creatorButtom param
-
 const ShowArtwork = () => {
   const { contractAddress, tokenId } = useQueryParams()
   const { data: galleryItem, isLoading } = useQuery('artworkQuery', () =>
     galleryItemQuery(contractAddress, tokenId)
   )
 
-  const [displayReportModal, setDisplayReportModal] = useState(false)
+  const [displayReportModal, setDisplayReportModal] = useState<boolean>(false)
 
   return (
     <Layout padding="0" marginBottom="0" marginTop="24px">

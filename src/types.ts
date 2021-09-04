@@ -382,3 +382,9 @@ export type PlaylistItem = {
 export type ArrayPlaylist = {
   data: PlaylistItem[]
 }
+
+export type ArtworkLinks = {
+  link: string
+  text: string
+  icon: string
+}

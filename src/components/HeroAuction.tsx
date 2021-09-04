@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 
-import HeroAuctionItem from '../components/ArtworkShow/CardAuction/HeroAuctionItem'
+import HeroAuctionItem from '../components/ArtworkShow/ArtworkDetail/CardAuction/HeroAuctionItem'
 import { boxShadow } from '../components/Styles/Colors'
 
 import {
