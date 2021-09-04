@@ -18,7 +18,7 @@ import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
 import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
-import InputValidator from './InputValidator'
+import InputValidator from './InputValidator/InputValidator'
 
 // Hi there! verify profile is commented //
 
@@ -424,7 +424,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} classes={classes}/>
+                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} />
               </Grid>
             </Grid>
 
