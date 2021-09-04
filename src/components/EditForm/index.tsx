@@ -114,11 +114,8 @@ const useStyle = makeStyles(theme => ({
       textAlign: 'center',
     },
   },
-  alert: {
-    borderRadius: 10,
-  },
   alertUserName: {
-    borderRadius: 10,
+    borderRadius: theme.shape.borderRadius[1],
     padding: theme.spacing(1, 5),
     opacity: 0.7,
     marginTop: theme.spacing(2),
@@ -157,7 +154,7 @@ const useStyle = makeStyles(theme => ({
   inputProfile: {
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 50,
+        borderRadius: theme.shape.borderRadius[3],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
@@ -167,7 +164,7 @@ const useStyle = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 16,
+        borderRadius: theme.shape.borderRadius[2],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
