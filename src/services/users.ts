@@ -22,7 +22,6 @@ export const getUsersDataField = async (dataField, queryParams: any = {}): Promi
   users.forEach((user) => {
     for(let prop in user){
       if(prop == dataField){
-        console.log("dataField", dataField)
         userDataFieldList.push(user[prop])
       }
     }
