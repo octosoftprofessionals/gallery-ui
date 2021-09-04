@@ -409,7 +409,7 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
-                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError} classes={classes} />
+                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError}/>
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
                     * E-Mail (Receive notifications)
