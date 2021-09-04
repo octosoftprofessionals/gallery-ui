@@ -279,7 +279,8 @@ const EditForm = ({ userAccount }: Props) => {
 
   const getUsernameList = async () => {
     try {
-      const usernameList = await getUsersDataField("name")
+      const usernameList = await getUsersDataField("username")
+      console.log(`usernameList ||`, usernameList)
       setUsernameList(usernameList)
     } catch (error) {
       console.error('Error getting username list', error)
