@@ -17,7 +17,8 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser, getUsers } from '../../services/users'
+import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
+import InputValidator from './InputValidator/InputValidator'
 
 // Hi there! verify profile is commented //
 
@@ -113,11 +114,8 @@ const useStyle = makeStyles(theme => ({
       textAlign: 'center',
     },
   },
-  alert: {
-    borderRadius: 10,
-  },
   alertUserName: {
-    borderRadius: 10,
+    borderRadius: theme.shape.borderRadius[1],
     padding: theme.spacing(1, 5),
     opacity: 0.7,
     marginTop: theme.spacing(2),
@@ -156,7 +154,7 @@ const useStyle = makeStyles(theme => ({
   inputProfile: {
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 50,
+        borderRadius: theme.shape.borderRadius[3],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
@@ -166,7 +164,7 @@ const useStyle = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 16,
+        borderRadius: theme.shape.borderRadius[2],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
@@ -213,12 +211,18 @@ type Props = {
 
 const EditForm = ({ userAccount }: Props) => {
   const classes = useStyle()
-  const [name, setName] = useState(userAccount.name ?? '')
+  const [name, setName] = React.useState(userAccount.name ?? '')
+  const [username, setUserName] = React.useState(userAccount.username ?? '')
+  const [email, setEmail] = React.useState(userAccount.email ?? '')
+
   const [usernameList, setUsernameList] = useState([])
   const [usernameCheck, setUsernameCheck] = useState(true)
-  const [username, setUserName] = useState(userAccount.username ?? '')
-  const [email, setEmail] = useState(userAccount.email ?? '')
-  const [bio, setBio] = useState(userAccount.bio ?? '')
+  const [savedUsername, setSavedUsername] = useState("")
+
+  const [userEmailList, setUserEmailList] = useState([])
+  const [savedEmail, setSavedEmail] = useState("")
+
+  const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
   const [open, setOpen] = useState(true)
@@ -271,27 +275,28 @@ const EditForm = ({ userAccount }: Props) => {
     setDisabled(false)
   }
 
-  const getUsernameList = async () => {
+  const getUserDataList = async (dataField, setter) => {
     try {
-      const usernameList = await getUsers()
-      setUsernameList(usernameList)
+      const dataList = await getUsersDataField(dataField)
+      setter(dataList)
     } catch (error) {
       console.error('Error getting username list', error)
     }
   }
 
-  const checkAvailability = () => {
-    if (username.length === 0) return false
-    const RESP = !usernameList.includes(username)
+  const checkAvailability = (dataList, dataField) => {
+    if (dataList.length === 0) return false
+    const RESP = !dataList.includes(dataField)
     return RESP
   }
 
   useEffect(() => {
-    getUsernameList()
+    getUserDataList("username", setUsernameList)
+    getUserDataList("email", setUserEmailList)
   }, [])
 
   const handleSubmit = async () => {
-    if (validateEmail(email) && checkAvailability()) {
+    if (validateEmail(email) && ( (!checkAvailability(usernameList, username)) && savedUsername === username ||  checkAvailability(usernameList, username)) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -328,6 +333,7 @@ const EditForm = ({ userAccount }: Props) => {
       handleClick(true)
     }
   }
+
 
   return (
     <Grid
@@ -387,7 +393,6 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeName}
                   value={name}
                 />
-
                 <Typography className={classes.label}>Username</Typography>
                 <TextField
                   variant="outlined"
@@ -404,34 +409,7 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
-                {checkAvailability() ? (
-                  <Alert
-                    variant="filled"
-                    severity="success"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is available`}
-                  </Alert>
-                ) : usernameCheck ? (
-                  <Alert
-                    variant="filled"
-                    severity="success"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is available`}
-                  </Alert>
-                ) : (
-                  <Alert
-                    variant="filled"
-                    severity="error"
-                    icon={false}
-                    className={classes.alertUserName}
-                  >
-                    {`Username ${username} is already taken`}
-                  </Alert>
-                )}
+                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError}/>
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
                     * E-Mail (Receive notifications)
@@ -446,15 +424,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <Collapse in={error}>
-                  <Alert
-                    variant="filled"
-                    severity="error"
-                    className={classes.alert}
-                  >
-                    <strong>Error:</strong> Email is required.
-                  </Alert>
-                </Collapse>
+                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} />
               </Grid>
             </Grid>
 
