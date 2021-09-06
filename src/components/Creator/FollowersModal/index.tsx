@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
   },
   tab: {
-    backgroundColor: '#202324',
+    backgroundColor: theme.palette.card.header,
     opacity: 1,
     boxShadow: 'none',
     position: 'absolute',
