@@ -56,14 +56,15 @@ const useStyle = makeStyles(Theme => ({
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[3],
     opacity: '0.5',
-    paddingRight: Theme.spacing(2),
+    textAlign: 'center',
+    padding: Theme.spacing(0, 3),
     '&:hover': { color: Theme.palette.primary.main },
   },
   textFollowers: {
     cursor: 'pointer',
     fontSize: Theme.typography.fontSize[3],
     opacity: '0.5',
-    paddingRight: Theme.spacing(2),
+    padding: Theme.spacing(0, 3),
     '&:hover': { color: Theme.palette.primary.main },
     '@media (max-width: 576px)': {
       marginLeft: Theme.spacing(0),
@@ -82,7 +83,8 @@ const useStyle = makeStyles(Theme => ({
   },
   btn: {
     padding: Theme.spacing(2),
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
     width: '100px',
     height: '40px',
     fontSize: '14px',

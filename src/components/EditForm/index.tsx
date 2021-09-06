@@ -17,7 +17,8 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser } from '../../services/users'
+import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
+import InputValidator from './InputValidator/InputValidator'
 
 // Hi there! verify profile is commented //
 
@@ -113,8 +114,11 @@ const useStyle = makeStyles(theme => ({
       textAlign: 'center',
     },
   },
-  alert: {
-    borderRadius: 10,
+  alertUserName: {
+    borderRadius: theme.shape.borderRadius[1],
+    padding: theme.spacing(1, 5),
+    opacity: 0.7,
+    marginTop: theme.spacing(2),
   },
   suscribeBtn: {
     fontSize: theme.typography.fontSize[3],
@@ -150,7 +154,7 @@ const useStyle = makeStyles(theme => ({
   inputProfile: {
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 50,
+        borderRadius: theme.shape.borderRadius[3],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
@@ -160,7 +164,7 @@ const useStyle = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     '@global': {
       '.MuiOutlinedInput-root': {
-        borderRadius: 16,
+        borderRadius: theme.shape.borderRadius[2],
         padding: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.primary.dark}`,
       },
@@ -210,6 +214,14 @@ const EditForm = ({ userAccount }: Props) => {
   const [name, setName] = React.useState(userAccount.name ?? '')
   const [username, setUserName] = React.useState(userAccount.username ?? '')
   const [email, setEmail] = React.useState(userAccount.email ?? '')
+
+  const [usernameList, setUsernameList] = useState([])
+  const [usernameCheck, setUsernameCheck] = useState(true)
+  const [savedUsername, setSavedUsername] = useState("")
+
+  const [userEmailList, setUserEmailList] = useState([])
+  const [savedEmail, setSavedEmail] = useState("")
+
   const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
   const [error, setError] = useState<boolean>(false)
@@ -251,6 +263,7 @@ const EditForm = ({ userAccount }: Props) => {
   }
   const handleChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
+    setUsernameCheck(false)
     setDisabled(false)
   }
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -262,8 +275,28 @@ const EditForm = ({ userAccount }: Props) => {
     setDisabled(false)
   }
 
+  const getUserDataList = async (dataField, setter) => {
+    try {
+      const dataList = await getUsersDataField(dataField)
+      setter(dataList)
+    } catch (error) {
+      console.error('Error getting username list', error)
+    }
+  }
+
+  const checkAvailability = (dataList, dataField) => {
+    if (dataList.length === 0) return false
+    const RESP = !dataList.includes(dataField)
+    return RESP
+  }
+
+  useEffect(() => {
+    getUserDataList("username", setUsernameList)
+    getUserDataList("email", setUserEmailList)
+  }, [])
+
   const handleSubmit = async () => {
-    if (validateEmail(email)) {
+    if (validateEmail(email) && ( (!checkAvailability(usernameList, username)) && savedUsername === username ||  checkAvailability(usernameList, username)) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -287,6 +320,7 @@ const EditForm = ({ userAccount }: Props) => {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
         setDisabled(true)
+        window.location.reload() //reload page to see the new username account
         console.log(res)
       } catch (e) {
         handleClick(true)
@@ -299,6 +333,7 @@ const EditForm = ({ userAccount }: Props) => {
       handleClick(true)
     }
   }
+
 
   return (
     <Grid
@@ -358,7 +393,6 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeName}
                   value={name}
                 />
-
                 <Typography className={classes.label}>Username</Typography>
                 <TextField
                   variant="outlined"
@@ -375,9 +409,10 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
+                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError}/>
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
-                    E-Mail (Receive notifications)
+                    * E-Mail (Receive notifications)
                   </Typography>
                   <TextField
                     variant="outlined"
@@ -389,15 +424,7 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <Collapse in={error}>
-                  <Alert
-                    variant="filled"
-                    severity="error"
-                    className={classes.alert}
-                  >
-                    <strong>Error:</strong> invalid entry
-                  </Alert>
-                </Collapse>
+                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} />
               </Grid>
             </Grid>
 
