@@ -333,6 +333,7 @@ export type Users = {
   website?: string
   twitter?: string
   instagram?: string
+  discord?: string
   discordId?: string
   youtube?: string
   facebook?: string
