@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { Link } from 'gatsby'
+
 import {
   Button,
   Divider,
@@ -11,9 +13,10 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { formatUsd, formatDecimal } from '../../../Utils'
+import { formatUsd, formatDecimal } from '../../../../Utils'
+import useTimer from '../../../../hooks/useTimer'
+
 import CountdownTimer from './CountdownTimer'
-import useTimer from '../../../hooks/useTimer'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(11) },
@@ -108,7 +111,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
             <Grid item xs={12}>
               <Link to={link} className={classes.link}>
                 <Button
-                  variant={variantButton}
+                  variant={`${variantButton}`}
                   fullWidth
                   className={classes.button}
                 >

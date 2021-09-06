@@ -3,7 +3,7 @@ import React from 'react'
 import { Grid, Paper, Avatar, Typography, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import OpenInNewOutlinedIcon from '@material-ui/icons/OpenInNewOutlined'
-import { formatDecimal, formatUsd } from '../../Utils'
+import { formatDecimal, formatUsd } from '../../../../Utils'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(5, 11, 5, 11) },

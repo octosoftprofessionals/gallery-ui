@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import {
   Grid,
   Typography,
@@ -8,12 +9,11 @@ import {
   Popover,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import TwShareButton from '../../components/TwShareButton'
-import CopyLinkButton from '../CopyLinkButton'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import ReportButton from '../ReportButton'
-import { boxShadow } from '../Styles/Colors'
+import { ArrowUpward, MoreHoriz } from '@material-ui/icons'
+import TwShareButton from '../../../TwShareButton'
+import CopyLinkButton from '../../../CopyLinkButton'
+import ReportButton from '../../../ReportButton'
+import { boxShadow } from '../../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -36,7 +36,7 @@ const useStyle = makeStyles(Theme => ({
   container: {
     position: 'absolute',
     top: '-28px',
-    right: ({ right }) => (right ? right : 'auto'),
+    right: ({ right }: { right: string }) => (right ? right : 'auto'),
   },
   button: {
     backgroundColor: Theme.palette.secondary.main,
@@ -112,9 +112,6 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorElReport, setAnchorElReport] = useState(null)
 
-  // const [openShare, setOpenShare] = useState(false)
-  // const [openReport, setOpenReport] = useState(false)
-
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
   }
@@ -186,10 +183,10 @@ const ArtworkShare = ({ linkTwitter, setDisplayReportModal, right }) => {
       }
       <Grid item direction="row" justify="center">
         <Button onClick={handleClickReport} className={classes.buttonReport}>
-          <MoreHorizIcon className={classes.icon} />
+          <MoreHoriz className={classes.icon} />
         </Button>
         <Button onClick={handleClick} className={classes.button}>
-          <ArrowUpwardIcon className={classes.icon} />
+          <ArrowUpward className={classes.icon} />
           <Hidden xsDown>
             <Typography className={classes.text}>Share</Typography>
           </Hidden>

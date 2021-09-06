@@ -1,12 +1,16 @@
 import React from 'react'
+
 import { Link } from 'gatsby'
+
 import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { formatDecimal, formatUsd } from '../../../Utils'
-import useTimer from '../../../hooks/useTimer'
+import { formatDecimal, formatUsd } from '../../../../Utils'
+import useTimer from '../../../../hooks/useTimer'
+
+import Spinner from '../../../Spinner'
+
 import CountdownTimer from './CountdownTimer'
-import Spinner from '../../Spinner'
 
 const useStyle = makeStyles(Theme => ({
   root: {
