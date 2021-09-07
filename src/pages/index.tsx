@@ -89,7 +89,7 @@ const Home = () => {
       ) : (
         <RotatingCarousel
           artworksCarousel={
-            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 2)
+            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 4)
           }
           timeout={1000}
           interval={7000}

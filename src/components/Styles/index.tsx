@@ -146,7 +146,7 @@ export const darkTheme = createMuiTheme({
         '&:hover': { color: darkColors.Aqua },
       },
       colorSecondary: {
-        color: darkColors.WhiteSmoke,
+        '&:hover': { color: DimGray },
       },
       overline: {
         color: darkColors.WhiteSmoke,
@@ -299,25 +299,7 @@ export const darkTheme = createMuiTheme({
     text: { primary: darkColors.WhiteSmoke, secondary: darkColors.WhiteSmoke },
   },
   spacing: [
-    0,
-    2,
-    8,
-    12,
-    14,
-    16,
-    18,
-    20,
-    22,
-    24,
-    30,
-    32,
-    36,
-    48,
-    66,
-    78,
-    96,
-    100,
-    312,
+    0, 2, 8, 12, 14, 16, 18, 20, 22, 24, 30, 32, 36, 48, 66, 78, 96, 100, 312,
     500,
   ],
   typography: {
@@ -457,6 +439,10 @@ export const Theme = createMuiTheme({
     MuiTypography: {
       colorInherit: {
         color: DimGray,
+      },
+      colorSecondary: {
+        color: darkColors.DarkGray,
+        '&:hover': { color: darkColors.WhiteSmoke },
       },
       overline: {
         color: DarkGray,
