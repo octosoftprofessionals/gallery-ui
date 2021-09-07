@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import HeroAuction from '../components/HeroAuction'
+import { Grid } from '@material-ui/core'
 
 import {
   RadioButtonUnchecked,
@@ -20,8 +21,10 @@ const useStyle = makeStyles(Theme => ({
     height: 'auto',
     minHeight: '100%',
     margin: '0px auto',
-    padding: '0px auto',
+    paddingTop: 40,
+    paddingBottom: 40,
     overflowY: 'visible',
+    backgroundColor: Theme.palette.background.paper,
     width: '100%',
     '@media (max-width: 1400px)': {
       paddingTop: Theme.spacing(13),

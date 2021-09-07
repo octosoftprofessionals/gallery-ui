@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 
 import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
+import CreatorButton from '../../../CreatorButton'
 import { formatDecimal, formatUsd } from '../../../../Utils'
 import useTimer from '../../../../hooks/useTimer'
 
@@ -13,8 +13,15 @@ import Spinner from '../../../Spinner'
 import CountdownTimer from './CountdownTimer'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.MuiTypography-colorSecondary': { color: Theme.palette.primary.main },
+  },
   root: {
-    padding: Theme.spacing(11, 0),
+    padding: Theme.spacing(5, 0, 5, 0),
+  },
+  container: {
+    flexWrap: 'nowrap',
+    paddingBottom: 5,
   },
   price: { fontSize: Theme.typography.fontSize[6] },
   titlePrice: { fontSize: Theme.typography.fontSize[3] },
@@ -27,10 +34,19 @@ const useStyle = makeStyles(Theme => ({
     marginTop: Theme.spacing(2),
   },
   button: { borderRadius: Theme.shape.borderRadius[2] },
+  buttonView: {
+    backgroundColor: 'transparent',
+    borderRadius: Theme.shape.borderRadius[2],
+    border: `${Theme.palette.primary.dark} solid 1px`,
+    '&:hover': {
+      border: `${Theme.palette.primary.dark} solid 1px`,
+    },
+  },
   textButton: { fontSize: Theme.typography.fontSize[3] },
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
   title: {
+    paddingTop: 20,
     '@media (max-width: 768px)': {
       fontSize: Theme.typography.fontSize[4],
     },
@@ -49,6 +65,7 @@ const HeroAuctionItem = ({
   linkButtonBid,
   linkButtonArtWork,
   isLoading,
+  userInfo,
 }) => {
   const {
     timer,
@@ -67,7 +84,15 @@ const HeroAuctionItem = ({
   } = useTimer({ expiration })
   const classes = useStyle({ disableTime })
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" className={classes.container}>
+      <Grid item xs={12}>
+        <CreatorButton
+          username={userInfo.username}
+          imageUrl={userInfo.imageUrl}
+          profileUrl={userInfo.profileUrl}
+          top="0px"
+        />
+      </Grid>
       <Grid item xs={12}>
         <Typography variant="h4" color="primary" className={classes.title}>
           {title}
@@ -132,7 +157,7 @@ const HeroAuctionItem = ({
       >
         <Grid item xs={12} md={6}>
           <Link to={linkButtonBid} className={classes.link}>
-            <Button variant="contained" fullWidth className={classes.button}>
+            <Button variant="outlined" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
                 Place a bid
               </Typography>
@@ -141,8 +166,16 @@ const HeroAuctionItem = ({
         </Grid>
         <Grid item xs={12} md={5}>
           <Link to={linkButtonArtWork} className={classes.link}>
-            <Button variant="outlined" fullWidth className={classes.button}>
-              <Typography variant="button" className={classes.textButton}>
+            <Button
+              variant="contained"
+              fullWidth
+              className={classes.buttonView}
+            >
+              <Typography
+                variant="button"
+                color="secondary"
+                className={classes.textButton}
+              >
                 View artwork
               </Typography>
             </Button>
