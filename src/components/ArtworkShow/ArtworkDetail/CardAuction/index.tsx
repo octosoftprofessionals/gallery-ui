@@ -2,7 +2,6 @@ import React from 'react'
 
 import BidArt from './BidArt'
 import BuyNow from './BuyNow'
-import OffertArt from './OffertArt'
 
 const CardAuction = ({
   status,
@@ -27,14 +26,7 @@ const CardAuction = ({
     <BidArt
       priceEth={priceEth}
       priceUsd={priceUsd}
-      ownerAddress={ownerAddress}
-      ownerImageUrl={ownerImageUrl}
-      ownerUsername={ownerUsername}
-    />
-  ) : status === 'none' ? (
-    <OffertArt
-      priceEth={priceEth}
-      priceUsd={priceUsd}
+      link={biddingLink}
       ownerAddress={ownerAddress}
       ownerImageUrl={ownerImageUrl}
       ownerUsername={ownerUsername}

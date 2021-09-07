@@ -87,6 +87,7 @@ const alertBuyNow = [
 const BidArt = ({
   priceEth,
   priceUsd,
+  link,
   ownerAddress,
   ownerImageUrl,
   ownerUsername,
