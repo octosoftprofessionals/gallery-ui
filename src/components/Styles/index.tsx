@@ -146,7 +146,6 @@ export const darkTheme = createMuiTheme({
         '&:hover': { color: darkColors.Aqua },
       },
       colorSecondary: {
-        color: darkColors.WhiteSmoke,
         '&:hover': { color: DimGray },
       },
       overline: {

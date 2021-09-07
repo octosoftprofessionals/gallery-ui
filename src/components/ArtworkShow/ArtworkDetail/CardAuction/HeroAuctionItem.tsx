@@ -13,6 +13,9 @@ import Spinner from '../../../Spinner'
 import CountdownTimer from './CountdownTimer'
 
 const useStyle = makeStyles(Theme => ({
+  '@global': {
+    '.MuiTypography-colorSecondary': { color: Theme.palette.primary.main },
+  },
   root: {
     padding: Theme.spacing(5, 0, 5, 0),
   },

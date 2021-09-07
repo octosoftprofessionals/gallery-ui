@@ -159,7 +159,7 @@ const ConnectWalletModal = ({
               endIcon
               onClick={handleConnection}
             >
-              <Typography variant="caption" color="secondary">
+              <Typography variant="caption" color="primary">
                 Metamask
               </Typography>
             </Button>
