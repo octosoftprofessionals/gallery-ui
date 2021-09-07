@@ -4,30 +4,57 @@ import {
   Button,
   Divider,
   Grid,
-  InputAdornment,
   OutlinedInput,
   Typography,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import BidItem from './BidItem'
+import OffertItem from './OffertItem'
 import { colors } from '../../../../Styles/Colors'
 
 const Styles = makeStyles(Theme => ({
   divider: {
     backgroundColor: Theme.palette.primary.main,
   },
-  button: {
+  btnMakeOffer: {
     height: 58,
     borderRadius: Theme.shape.borderRadius[2],
     backgroundColor: Theme.palette.secondary.dark,
     border:
       Theme.palette.type === 'light'
-        ? '2px solid #010101'
+        ? `3px solid ${Theme.palette.secondary.contrastText}`
         : '2px solid #00FFFF',
   },
-  textButton: {
+  btnCounteroffert: {
+    height: 58,
+    borderRadius: Theme.shape.borderRadius[2],
+    backgroundColor:
+      Theme.palette.type === 'light'
+        ? Theme.palette.secondary.contrastText
+        : Theme.palette.secondary.main,
+    border:
+      Theme.palette.type === 'light'
+        ? `3px solid ${Theme.palette.secondary.contrastText}`
+        : `2px solid ${Theme.palette.secondary.light}`,
+  },
+  btnMakeCounteroffert: {
+    height: 58,
+    borderRadius: Theme.shape.borderRadius[2],
+    backgroundColor:
+      Theme.palette.type === 'light'
+        ? Theme.palette.secondary.contrastText
+        : Theme.palette.secondary.main,
+    border:
+      Theme.palette.type === 'light'
+        ? `3px solid ${Theme.palette.secondary.contrastText}`
+        : `2px solid ${Theme.palette.secondary.light}`,
+  },
+  txtBtnMakeOffer: {
     fontSize: Theme.typography.fontSize[3],
     color: Theme.palette.primary.dark,
+  },
+  txtBtnCounteroffert: {
+    fontSize: Theme.typography.fontSize[3],
+    color: Theme.palette.primary.light,
   },
   link: { textDecoration: 'none' },
   conateinerTop: {
@@ -39,13 +66,18 @@ const Styles = makeStyles(Theme => ({
     cursor: 'default',
     '&:hover': { color: Theme.palette.secondary.contrastText },
   },
-  box: { padding: Theme.spacing(11) },
+  box: {
+    padding: Theme.spacing(11),
+  },
   '@global': {
     '.MuiOutlinedInput-input': {
       color: colors.DimGray,
     },
     '.MuiOutlinedInput-notchedOutline': {
-      border: '2px solid #fff',
+      border:
+        Theme.palette.type === 'light'
+          ? `3px solid ${Theme.palette.secondary.contrastText}`
+          : `2px solid ${Theme.palette.secondary.contrastText}`,
     },
   },
   input: {
@@ -63,28 +95,32 @@ const Styles = makeStyles(Theme => ({
     lineHeight: '1.5',
   },
 }))
-const title = { Right: 'Current Bid', Left: 'Current Owner' }
+const title = { Right: 'Best offer', Left: 'Current Owner' }
 
-const alertBuyNow = [
+const alertOffert = [
   {
-    text: 'You currently have no bids',
+    text: 'You can make an offer to the owner of this artwork',
     color: '#FFFFFF1A',
   },
   {
-    text: 'Bid placed successfully',
+    text: 'Your current offert is pending review by the owner, placed wait.',
+    color: '#FFFFFF1A',
+  },
+  {
+    text: 'Your offer was accepted, this item will be in your collection soom.',
     color: '#44B700',
   },
   {
-    text: 'Your bid is too low!',
+    text: 'Your offer was rejected. Make a counteroffert!',
     color: '#812727',
   },
   {
-    text: 'You have been outbid!',
+    text: 'The owner of this artwork has changed. Make a new offer.',
     color: '#C48F25',
   },
 ]
 
-const BidArt = ({
+const OffertArt = ({
   priceEth,
   priceUsd,
   ownerAddress,
@@ -92,10 +128,18 @@ const BidArt = ({
   ownerUsername,
 }) => {
   const [valueBid, setValueBid] = useState('')
-  const classes = Styles({ color: alertBuyNow[3].color })
+  const [isOwner, setIsOwner] = useState<boolean>(false)
+  const [isPendingOffert, setIsPendingOffert] = useState<boolean>(false)
+  const [textBtn, setTextBtn] = useState<string>('Make Offer')
+  const classes = Styles({ color: alertOffert[4].color })
+
+  const handleOffert = () => {
+    setTextBtn('Counteroffert')
+    setIsPendingOffert(!isPendingOffert)
+  }
 
   return (
-    <BidItem
+    <OffertItem
       title={title}
       priceEth={priceEth}
       priceUsd={priceUsd}
@@ -105,13 +149,13 @@ const BidArt = ({
     >
       <div className={classes.conateinerTop}>
         <Typography variant="body1" className={classes.text}>
-          {alertBuyNow[3].text}
+          {alertOffert[4].text}
         </Typography>
       </div>
       <Grid
         item
         xs={12}
-        container
+        style={{ display: isOwner ? 'none' : 'flex' }}
         justify="space-around"
         alignItems="center"
         className={classes.box}
@@ -142,15 +186,29 @@ const BidArt = ({
           />
         </Grid>
         <Grid item xs={4}>
-          <Button variant="text" fullWidth className={classes.button}>
-            <Typography variant="caption" className={classes.textButton}>
-              Place a bid
+          <Button
+            variant="text"
+            fullWidth
+            className={
+              isPendingOffert ? classes.btnCounteroffert : classes.btnMakeOffer
+            }
+            onClick={handleOffert}
+          >
+            <Typography
+              variant="caption"
+              className={
+                isPendingOffert
+                  ? classes.txtBtnCounteroffert
+                  : classes.txtBtnMakeOffer
+              }
+            >
+              {textBtn}
             </Typography>
           </Button>
         </Grid>
       </Grid>
-    </BidItem>
+    </OffertItem>
   )
 }
 
-export default BidArt
+export default OffertArt
