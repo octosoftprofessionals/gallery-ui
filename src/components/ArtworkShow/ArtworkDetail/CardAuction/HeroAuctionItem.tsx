@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 
 import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
+import CreatorButton from '../../../CreatorButton'
 import { formatDecimal, formatUsd } from '../../../../Utils'
 import useTimer from '../../../../hooks/useTimer'
 
@@ -14,7 +14,11 @@ import CountdownTimer from './CountdownTimer'
 
 const useStyle = makeStyles(Theme => ({
   root: {
-    padding: Theme.spacing(11, 0),
+    padding: Theme.spacing(5, 0, 5, 0),
+  },
+  container: {
+    flexWrap: 'nowrap',
+    paddingBottom: 5,
   },
   price: { fontSize: Theme.typography.fontSize[6] },
   titlePrice: { fontSize: Theme.typography.fontSize[3] },
@@ -31,6 +35,7 @@ const useStyle = makeStyles(Theme => ({
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
   title: {
+    paddingTop: 20,
     '@media (max-width: 768px)': {
       fontSize: Theme.typography.fontSize[4],
     },
@@ -67,7 +72,17 @@ const HeroAuctionItem = ({
   } = useTimer({ expiration })
   const classes = useStyle({ disableTime })
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" className={classes.container}>
+      <Grid item xs={12}>
+        <CreatorButton
+          username={'agusruidiazgd'}
+          imageUrl={
+            'https://pbs.twimg.com/profile_images/1361386309915455488/NxJf4GxN_400x400.jpg'
+          }
+          profileUrl={'/profile'}
+          top="0px"
+        />
+      </Grid>
       <Grid item xs={12}>
         <Typography variant="h4" color="primary" className={classes.title}>
           {title}

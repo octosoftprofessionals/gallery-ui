@@ -78,7 +78,7 @@ const HeroAuction = ({
           <Grid
             item
             xs={12}
-            md={11}
+            md={9}
             container
             justify="space-around"
             alignItems="center"
@@ -107,13 +107,6 @@ const HeroAuction = ({
               justify="space-around"
               className={classes.containerInfo}
             >
-              <CreatorButton
-                username={creatorUsername}
-                imageUrl={creatorImageUrl}
-                profileUrl={creatorPath}
-                top="-70px"
-              />
-
               <HeroAuctionItem
                 title={title}
                 priceEth={priceEth}
