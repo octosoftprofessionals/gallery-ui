@@ -35,19 +35,20 @@ const useStyle = makeStyles(Theme => ({
     justifyContent: 'center',
     textAlign: 'center',
     marginBottom: Theme.spacing(7),
-    '&hover': {
+    '&:hover': {
       color: colors.White,
     },
     '@media (max-width: 576px)': {
       fontSize: Theme.typography.fontSize[6],
     },
+    cursor: 'default',
   },
   input: {
     borderColor: 'trasnparent',
     background: 'trasnparent',
   },
   box: {
-    backgroundColor: Theme.palette.background.paper,
+    backgroundColor: Theme.palette.secondary.main,
     maxWidth: 800,
     borderRadius: Theme.shape.borderRadius[3],
     padding: Theme.spacing(7),
@@ -122,6 +123,10 @@ const useStyle = makeStyles(Theme => ({
       marginLeft: 5,
       marginBottom: Theme.spacing(7),
     },
+    '&:hover': {
+      color: colors.White,
+    },
+    cursor: 'default',
   },
   title: {
     color: colors.White,
@@ -223,7 +228,7 @@ const EmailPopUp = () => {
               <CloseIcon className={classes.icon} />
             </IconButton>
           </DialogActions>
-          <Typography className={classes.mainTitle}>
+          <Typography color="primary" className={classes.mainTitle}>
             Join Our Mailing List!
           </Typography>
           <DialogContent>

@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
   },
   tab: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.card.header,
+    opacity: 1,
     boxShadow: 'none',
     position: 'absolute',
     top: 0,
@@ -82,7 +83,7 @@ const FollowersModal = ({
         setOpen={setOpenFollowModal}
       >
         <TabContext value={value}>
-          <AppBar position="static" className={classes.tab}>
+          <AppBar position="fixed" className={classes.tab}>
             <TabList
               className={classes.tabs}
               TabIndicatorProps={{ children: <span /> }}

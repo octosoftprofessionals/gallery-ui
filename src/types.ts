@@ -333,6 +333,7 @@ export type Users = {
   website?: string
   twitter?: string
   instagram?: string
+  discord?: string
   discordId?: string
   youtube?: string
   facebook?: string
@@ -381,4 +382,10 @@ export type PlaylistItem = {
 
 export type ArrayPlaylist = {
   data: PlaylistItem[]
+}
+
+export type ArtworkLinks = {
+  link: string
+  text: string
+  icon: string
 }

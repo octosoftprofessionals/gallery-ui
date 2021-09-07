@@ -34,6 +34,7 @@ export const darkColors = {
   Aqua: '#00FFFF',
   LightDark: '#2E2E2ED9',
   LightGray: '#FFFFFF1A',
+  TransparentGray: '#202324',
 }
 
 export const backgroundGradient = {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import LinkButton from '../LinkButton'
+import LinkButton from '../../LinkButton'
 
 const useStyles = makeStyles(theme => ({
   root: {

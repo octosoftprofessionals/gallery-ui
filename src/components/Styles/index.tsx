@@ -282,6 +282,7 @@ export const darkTheme = createMuiTheme({
       footer: darkColors.Black,
       main: darkColors.DarkGray,
       secondary: Black,
+      header: darkColors.TransparentGray,
     },
     primary: {
       main: darkColors.WhiteSmoke,
@@ -298,7 +299,25 @@ export const darkTheme = createMuiTheme({
     text: { primary: darkColors.WhiteSmoke, secondary: darkColors.WhiteSmoke },
   },
   spacing: [
-    0, 2, 8, 12, 14, 16, 18, 20, 22, 24, 30, 32, 36, 48, 66, 78, 96, 100, 312,
+    0,
+    2,
+    8,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    30,
+    32,
+    36,
+    48,
+    66,
+    78,
+    96,
+    100,
+    312,
     500,
   ],
   typography: {
@@ -573,6 +592,7 @@ export const Theme = createMuiTheme({
     card: {
       footer: Black,
       secondary: White,
+      header: colors.LigthGrey,
     },
     primary: {
       main: Black,

@@ -230,7 +230,7 @@ const EditForm = ({ userAccount }: Props) => {
     website: userAccount.website ?? '',
     twitter: userAccount.twitter ?? '',
     instagram: userAccount.instagram ?? '',
-    discord: '',
+    discord: userAccount.discord ?? '',
     discordId: userAccount.discordId ?? '',
     youtube: userAccount.youtube ?? '',
     facebook: userAccount.facebook ?? '',
