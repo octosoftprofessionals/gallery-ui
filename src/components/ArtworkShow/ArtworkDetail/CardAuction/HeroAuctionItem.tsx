@@ -31,6 +31,14 @@ const useStyle = makeStyles(Theme => ({
     marginTop: Theme.spacing(2),
   },
   button: { borderRadius: Theme.shape.borderRadius[2] },
+  buttonView: {
+    backgroundColor: 'transparent',
+    borderRadius: Theme.shape.borderRadius[2],
+    border: `${Theme.palette.primary.dark} solid 1px`,
+    '&:hover': {
+      border: `${Theme.palette.primary.dark} solid 1px`,
+    },
+  },
   textButton: { fontSize: Theme.typography.fontSize[3] },
   numberTimer: { fontSize: Theme.typography.fontSize[6] },
   link: { textDecoration: 'none' },
@@ -54,6 +62,7 @@ const HeroAuctionItem = ({
   linkButtonBid,
   linkButtonArtWork,
   isLoading,
+  userInfo,
 }) => {
   const {
     timer,
@@ -75,11 +84,9 @@ const HeroAuctionItem = ({
     <Grid container direction="column" className={classes.container}>
       <Grid item xs={12}>
         <CreatorButton
-          username={'agusruidiazgd'}
-          imageUrl={
-            'https://pbs.twimg.com/profile_images/1361386309915455488/NxJf4GxN_400x400.jpg'
-          }
-          profileUrl={'/profile'}
+          username={userInfo.username}
+          imageUrl={userInfo.imageUrl}
+          profileUrl={userInfo.profileUrl}
           top="0px"
         />
       </Grid>
@@ -147,7 +154,7 @@ const HeroAuctionItem = ({
       >
         <Grid item xs={12} md={6}>
           <Link to={linkButtonBid} className={classes.link}>
-            <Button variant="contained" fullWidth className={classes.button}>
+            <Button variant="outlined" fullWidth className={classes.button}>
               <Typography variant="button" className={classes.textButton}>
                 Place a bid
               </Typography>
@@ -156,8 +163,16 @@ const HeroAuctionItem = ({
         </Grid>
         <Grid item xs={12} md={5}>
           <Link to={linkButtonArtWork} className={classes.link}>
-            <Button variant="outlined" fullWidth className={classes.button}>
-              <Typography variant="button" className={classes.textButton}>
+            <Button
+              variant="contained"
+              fullWidth
+              className={classes.buttonView}
+            >
+              <Typography
+                variant="button"
+                color="secondary"
+                className={classes.textButton}
+              >
                 View artwork
               </Typography>
             </Button>

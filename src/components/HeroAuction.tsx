@@ -115,6 +115,11 @@ const HeroAuction = ({
                 linkButtonArtWork={artworkPath}
                 linkButtonBid={biddingPath}
                 isLoading={isLoading}
+                userInfo={{
+                  username: creatorUsername,
+                  imageUrl: imageUrl,
+                  profileUrl: creatorPath,
+                }}
               />
             </Grid>
           </Grid>
