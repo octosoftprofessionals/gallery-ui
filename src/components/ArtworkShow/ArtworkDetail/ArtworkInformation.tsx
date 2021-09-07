@@ -38,7 +38,6 @@ const useStyle = makeStyles(Theme => ({
   history: {
     marginTop: Theme.spacing(3),
   },
-  titleArtwork: { marginTop: Theme.spacing(9) },
 }))
 
 const ArtworkInformation = ({
@@ -54,7 +53,7 @@ const ArtworkInformation = ({
 
   return (
     <Grid container direction="column">
-      <Typography className={classes.titleArtwork} color="primary" variant="h4">
+      <Typography color="primary" variant="h4">
         {title}
       </Typography>
       <Typography color="primary" variant="body1" className={classes.text}>
