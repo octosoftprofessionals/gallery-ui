@@ -10,7 +10,7 @@ import ArtworkShare from './ArtworkShare'
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
-    paddingBottom: Theme.spacing(8),
+    paddingBottom: Theme.spacing(13),
   },
 }))
 
