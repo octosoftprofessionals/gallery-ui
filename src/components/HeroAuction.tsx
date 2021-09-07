@@ -117,7 +117,7 @@ const HeroAuction = ({
                 isLoading={isLoading}
                 userInfo={{
                   username: creatorUsername,
-                  imageUrl: imageUrl,
+                  imageUrl: creatorImageUrl,
                   profileUrl: creatorPath,
                 }}
               />

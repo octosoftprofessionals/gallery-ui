@@ -30,8 +30,9 @@ const Home = () => {
     fetchNextPage: fetchNextPageFA,
     hasNextPage: hasNextPageFA,
   } = useInfiniteQuery(
-    'featuredArtworksItemsItems',
-    ({ pageParam = 0 }) => featuredInfinitItemsQuery({ offset: pageParam }),
+    'featuredArtworksItems',
+    ({ pageParam = 0, querys = 'owner_username=SUPERCHIEF' }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
       getNextPageParam: lastPage => {
