@@ -85,14 +85,13 @@ const HeroAuctionItem = ({
   const classes = useStyle({ disableTime })
   return (
     <Grid container direction="column" className={classes.container}>
-      <Grid item xs={12}>
-        <CreatorButton
-          username={userInfo.username}
-          imageUrl={userInfo.imageUrl}
-          profileUrl={userInfo.profileUrl}
-          top="0px"
-        />
-      </Grid>
+      <CreatorButton
+        username={userInfo.username}
+        imageUrl={userInfo.imageUrl}
+        profileUrl={userInfo.profileUrl}
+        top="-32px"
+      />
+
       <Grid item xs={12}>
         <Typography variant="h4" color="primary" className={classes.title}>
           {title}

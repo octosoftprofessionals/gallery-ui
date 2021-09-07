@@ -11,7 +11,6 @@ import {
   biddingPathFrom,
 } from '../config/routes'
 
-import CreatorButton from './CreatorButton'
 import { GalleryItem } from '../types'
 
 const useStyle = makeStyles(Theme => ({

@@ -76,7 +76,7 @@ const LinkButton = ({ link, text, icon }) => {
           component={Link}
         >
           <Paper elevation={1} className={classes.paper}>
-            <Grid item xs={8} container className={classes.grid}>
+            <Grid item xs={9} container className={classes.grid}>
               {icon === 'iconEtherscan' ? (
                 <EtherScanIcon className={classes.iconSVG} />
               ) : icon === 'iconView' ? (

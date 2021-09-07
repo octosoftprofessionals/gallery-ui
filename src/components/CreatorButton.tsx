@@ -14,7 +14,7 @@ const useStyle = makeStyles(Theme => ({
     boxShadow: '0px 10px 20px rgb(0 0 0 / 5%)',
     transition: 'all 300ms cubic-bezier(0.23, 1, 0.32, 1)',
     willChange: ' transform',
-    // position: 'absolute',
+    position: ({ position }) => position || 'absolute',
     top: ({ top }) => top || '-28px',
     '&:hover': {
       boxShadow: '0px 10px 20px rgb(0 0 0 / 10%)',
