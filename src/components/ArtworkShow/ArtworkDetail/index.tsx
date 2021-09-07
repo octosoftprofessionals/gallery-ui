@@ -66,6 +66,9 @@ const ArtworkDetail = ({
     creatorImageUrl,
     creatorAddress,
     creatorDescription,
+    ownerAddress,
+    ownerImageUrl,
+    ownerUsername,
     status,
     expiration,
     historyItems,
@@ -119,11 +122,14 @@ const ArtworkDetail = ({
         </Grid>
         <Grid item xs={12} md={6} container direction="column">
           <CardAuction
-            auctionState={true}
+            status={status}
             priceEth={priceEth}
             priceUsd={priceUsd}
             expiration={expiration}
             biddingLink={biddingLink}
+            ownerAddress={ownerAddress}
+            ownerImageUrl={ownerImageUrl}
+            ownerUsername={ownerUsername}
           />
           <History data={historyItems} />
         </Grid>

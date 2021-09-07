@@ -1,14 +1,27 @@
 import React from 'react'
 
-import AuctionItem from './AuctionItem'
-import SoldItem from './SoldItem'
+import BuyNow from './BuyNow'
 
-const CardAuction = ({ auctionState, priceEth, priceUsd, expiration, biddingLink }) => {
-  return auctionState ? (
-    <AuctionItem priceEth={priceEth} priceUsd={priceUsd} expiration={expiration} link={biddingLink} />
-  ) : (
-    <SoldItem />
-  )
+const CardAuction = ({
+  status,
+  priceEth,
+  priceUsd,
+  expiration,
+  biddingLink,
+  ownerAddress,
+  ownerImageUrl,
+  ownerUsername,
+}) => {
+  return status === 'buy_now' ? (
+    <BuyNow
+      priceEth={priceEth}
+      priceUsd={priceUsd}
+      link={biddingLink}
+      ownerAddress={ownerAddress}
+      ownerImageUrl={ownerImageUrl}
+      ownerUsername={ownerUsername}
+    />
+  ) : null
 }
 
 export default CardAuction
