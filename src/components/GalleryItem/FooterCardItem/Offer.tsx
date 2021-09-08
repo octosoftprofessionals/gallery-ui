@@ -35,7 +35,7 @@ const useStyle = makeStyles(Theme => ({
     },
     fontSize: Theme.typography.fontSize[10],
     margin: "5px",
-    height: "2rem",
+    height: "100%",
   },
   link: { textDecoration: 'none', display: 'contents' },
 }))
