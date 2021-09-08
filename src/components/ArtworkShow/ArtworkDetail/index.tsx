@@ -66,12 +66,15 @@ const ArtworkDetail = ({
     creatorImageUrl,
     creatorAddress,
     creatorDescription,
+    ownerAddress,
+    ownerImageUrl,
+    ownerUsername,
     status,
     expiration,
     historyItems,
     imageOriginalUrl,
   } = galleryItem
-
+  console.log('galleryItem :>> ', galleryItem)
   const creatorProfileLink = profilePathFromAddress(creatorAddress)
   const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
 
@@ -119,7 +122,10 @@ const ArtworkDetail = ({
         </Grid>
         <Grid item xs={12} md={6} container direction="column">
           <CardAuction
-            auctionState={true}
+            ownerAddress={ownerAddress}
+            ownerImageUrl={ownerImageUrl}
+            ownerUsername={ownerUsername}
+            status={status}
             priceEth={priceEth}
             priceUsd={priceUsd}
             expiration={expiration}
