@@ -17,16 +17,25 @@ const useStyle = makeStyles(Theme => ({
   conateinerTop: { padding: Theme.spacing(0, 6, 2) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
   btn: {
-    padding: Theme.spacing(2),
+    position: 'relative',
+    height: Theme.spacing(2),
     margin: Theme.spacing(4, 0, 0),
-    '&:hover': {
-      transform: 'none',
-      translate: 'none',
-    },
+    padding: "34px 24px 11px 24px",
   },
   btnText: {
-    color: Theme.palette.card.footer,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    color: Theme.palette.text.primary,
+    '&:hover': {
+      transform: 'none',
+      color: Theme.palette.text.secondary,
+    },
     fontSize: Theme.typography.fontSize[10],
+    margin: "5px",
+    height: "2rem",
   },
   link: { textDecoration: 'none', display: 'contents' },
 }))

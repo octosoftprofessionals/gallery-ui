@@ -16,18 +16,26 @@ const useStyle = makeStyles(Theme => ({
   conateinerTop: { padding: Theme.spacing(2, 6) },
   conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
   btn: {
-    padding: Theme.spacing(2),
+    position: 'relative',
+    height: Theme.spacing(2),
     margin: Theme.spacing(4, 0, 0),
-    '&:hover': {
-      transform: 'none',
-      translate: 'none',
-    },
+    padding: '34px 24px 11px 24px',
   },
   text: {
+    height: "100%",
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    color: Theme.palette.text.primary,
     '&:hover': {
-      color: Theme.palette.primary.light
-    }
-  }
+      transform: 'none',
+      color: Theme.palette.text.secondary,
+    },
+    fontSize: Theme.typography.fontSize[10],
+    margin: '5px',
+  },
 }))
 
 const BuyNow = ({ price, children }) => {
@@ -45,7 +53,7 @@ const BuyNow = ({ price, children }) => {
           <Typography variant="caption" color="secondary" className={classes.text}>
             {isNaN(price)
               ? 'Buy this now for — ETH'
-              : `Buy this now for ${formatDecimal(price)} ETH`}
+              : `Buy this now for ${(parseFloat(formatDecimal(price)).toFixed(2))} ETH`}
           </Typography>
         </Button>
       </Grid>
