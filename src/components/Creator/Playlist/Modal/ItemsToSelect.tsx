@@ -10,6 +10,7 @@ const useStyle = makeStyles(Theme => ({
     position: 'relative',
     transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
     marginTop: Theme.spacing(4),
+    padding: Theme.spacing(4),
   },
   img: {
     backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,

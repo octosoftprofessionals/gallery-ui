@@ -4,15 +4,17 @@ import { Dialog, Grid, IconButton, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Close } from '@material-ui/icons'
 
-import GridArtworkSelected from './GridArtworkSelected'
-import TabBar from '../../../TabBar'
-
 import {
   getProfileCreatedItemsByAddress,
   getProfileOwnedItemsByAddress,
 } from '../../../../services/gallery'
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../../services/favorites'
 import { GalleryItem } from '../../../../types'
+
+import TabBar from '../../../TabBar'
+
+import GridArtworkSelected from './GridArtworkSelected'
+import GridArtworkSelectedPagination from './GridArtworkSelectedPagination'
 
 const useStyles = makeStyles(Theme => ({
   titleModal: { textTransform: 'initial', marginLeft: Theme.spacing(16) },
@@ -34,7 +36,7 @@ const useStyles = makeStyles(Theme => ({
   },
   conteinerGrid: {
     textAlign: 'center',
-    padding: Theme.spacing(6)
+    padding: Theme.spacing(6),
   },
   conteinerBtn: {
     padding: Theme.spacing(10),
@@ -81,7 +83,13 @@ const ArtworksSelected = ({
       aria-labelledby="simple-dialog-title"
     >
       <Grid container justify="space-between" alignItems="center">
-        <Grid item xs={10} container className={classes.conteinerGrid} justify="center">
+        <Grid
+          item
+          xs={10}
+          container
+          className={classes.conteinerGrid}
+          justify="center"
+        >
           <Typography
             variant="h5"
             color="primary"
@@ -145,17 +153,19 @@ const ArtworksSelected = ({
                     onModifyPlaylist={onModifyPlaylist}
                     artworksSelected={artworksSelected}
                   />,
-                  <GridArtworkSelected
+                  <GridArtworkSelectedPagination
                     emptyMessageProps={{
                       primaryText: 'Your favorites is empty.',
                       showExploreButton: false,
                     }}
                     queryName="PlaylistModalQuery"
-                    queryFunction={async () =>
-                      await getAllFavoritesArtworksFromOneUserByAddress(
-                        profileAddress
+                    queryFunction={(argprofileAddress, pageParam) =>
+                      getAllFavoritesArtworksFromOneUserByAddress(
+                        argprofileAddress,
+                        pageParam
                       )
                     }
+                    profileAddress={profileAddress}
                     onModifyPlaylist={onModifyPlaylist}
                     artworksSelected={artworksSelected}
                   />,
@@ -186,17 +196,19 @@ const ArtworksSelected = ({
                     onModifyPlaylist={onModifyPlaylist}
                     artworksSelected={artworksSelected}
                   />,
-                  <GridArtworkSelected
+                  <GridArtworkSelectedPagination
                     emptyMessageProps={{
                       primaryText: 'Your favorites is empty.',
                       showExploreButton: false,
                     }}
                     queryName="PlaylistModalQuery"
-                    queryFunction={async () =>
-                      await getAllFavoritesArtworksFromOneUserByAddress(
-                        profileAddress
+                    queryFunction={(argprofileAddress, pageParam) =>
+                      getAllFavoritesArtworksFromOneUserByAddress(
+                        argprofileAddress,
+                        pageParam
                       )
                     }
+                    profileAddress={profileAddress}
                     onModifyPlaylist={onModifyPlaylist}
                     artworksSelected={artworksSelected}
                   />,
