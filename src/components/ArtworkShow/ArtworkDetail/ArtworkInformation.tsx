@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { ArrowDownward } from '@material-ui/icons'
 
-import { biddingPathFrom, profilePathFromAddress } from '../../../config/routes'
 import { ArtworkLinks } from '../../../types'
 
 import ArtworkView from './ArtworkLinks'
@@ -38,6 +37,11 @@ const useStyle = makeStyles(Theme => ({
   history: {
     marginTop: Theme.spacing(3),
   },
+  link: {
+    textDecoration: 'none',
+    width: 'fit-content',
+    '&:hover': { textDecoration: 'none' },
+  },
 }))
 
 const ArtworkInformation = ({
@@ -56,19 +60,27 @@ const ArtworkInformation = ({
       <Typography color="primary" variant="h4">
         {title}
       </Typography>
-      <Typography color="primary" variant="body1" className={classes.text}>
-        <ArrowDownward className={classes.icon} /> Artwork information
-      </Typography>
-      <Typography variant="subtitle1" color="primary" className={classes.title}>
-        Description
-      </Typography>
-      <Typography
-        variant="body2"
-        color="primary"
-        className={classes.desciptionText}
-      >
-        {description.length !== 0 && description !== ' ' ? description : '—'}
-      </Typography>
+      <Link href="#desciption" className={classes.link}>
+        <Typography color="primary" variant="body1" className={classes.text}>
+          <ArrowDownward className={classes.icon} /> Artwork information
+        </Typography>
+      </Link>
+      <div id="desciption">
+        <Typography
+          variant="subtitle1"
+          color="primary"
+          className={classes.title}
+        >
+          Description
+        </Typography>
+        <Typography
+          variant="body2"
+          color="primary"
+          className={classes.desciptionText}
+        >
+          {description.length !== 0 && description !== ' ' ? description : '—'}
+        </Typography>
+      </div>
 
       <Typography variant="subtitle1" color="primary" className={classes.title}>
         Edition of

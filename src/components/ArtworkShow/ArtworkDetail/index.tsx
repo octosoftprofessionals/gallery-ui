@@ -74,7 +74,7 @@ const ArtworkDetail = ({
     historyItems,
     imageOriginalUrl,
   } = galleryItem
-  console.log('galleryItem :>> ', galleryItem)
+
   const creatorProfileLink = profilePathFromAddress(creatorAddress)
   const biddingLink = biddingPathFrom(assetContractAddress, assetTokenId)
 
