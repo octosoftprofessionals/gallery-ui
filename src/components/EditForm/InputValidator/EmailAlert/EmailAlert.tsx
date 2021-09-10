@@ -35,11 +35,11 @@ const EmailAlert = ({
       ) : !validateEmail(value) ? (
         <Alert
           variant="filled"
-          severity="info"
+          severity="error"
           icon={false}
           className={classes.alert}
         >
-          <strong>Verifing {type}...</strong>
+          <strong>Invalid {type.toLowerCase()} format.</strong>
         </Alert>
       ) : savedDataField === value ? (
         <Alert
