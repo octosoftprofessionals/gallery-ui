@@ -296,7 +296,7 @@ export const darkTheme = createMuiTheme({
       dark: Black,
       contrastText: darkColors.White,
     },
-    text: { primary: darkColors.WhiteSmoke, secondary: darkColors.WhiteSmoke },
+    text: { primary: darkColors.Black, secondary: darkColors.WhiteSmoke },
   },
   spacing: [
     0, 2, 8, 12, 14, 16, 18, 20, 22, 24, 30, 32, 36, 48, 66, 78, 96, 100, 312,
@@ -576,7 +576,7 @@ export const Theme = createMuiTheme({
       navbar: White,
     },
     card: {
-      footer: Black,
+      footer: WhiteSmoke,
       secondary: White,
       header: colors.LigthGrey,
     },
@@ -592,7 +592,7 @@ export const Theme = createMuiTheme({
       dark: WhiteSmoke,
       contrastText: Black,
     },
-    text: { primary: Gray, secondary: VeryLightGrey },
+    text: { primary: WhiteSmoke, secondary: Black },
   },
   spacing: [
     0, 2, 8, 12, 14, 16, 18, 20, 22, 24, 30, 32, 36, 48, 66, 78, 96, 100, 312,
