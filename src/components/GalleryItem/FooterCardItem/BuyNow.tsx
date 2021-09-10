@@ -58,9 +58,7 @@ const BuyNow = ({ price, children }) => {
           >
             {isNaN(price)
               ? 'Buy this now for — ETH'
-              : `Buy this now for ${parseFloat(formatDecimal(price)).toFixed(
-                  2
-                )} ETH`}
+              : `Buy this now for ${formatDecimal(price)} ETH`}
           </Typography>
         </Button>
       </Grid>

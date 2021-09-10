@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography } from '@material-ui/core'
+import { colors } from '../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   footerCard: {
@@ -20,7 +21,7 @@ const useStyle = makeStyles(Theme => ({
     position: 'relative',
     height: Theme.spacing(2),
     margin: Theme.spacing(4, 0, 0),
-    padding: "34px 24px 11px 24px",
+    padding: '34px 24px 11px 24px',
   },
   btnText: {
     position: 'absolute',
@@ -28,14 +29,14 @@ const useStyle = makeStyles(Theme => ({
     left: 0,
     right: 0,
     bottom: 0,
-    color: Theme.palette.text.primary,
+    color: colors.Black,
     '&:hover': {
       transform: 'none',
       color: Theme.palette.text.secondary,
     },
     fontSize: Theme.typography.fontSize[10],
-    margin: "5px",
-    height: "100%",
+    margin: '5px',
+    height: '100%',
   },
   link: { textDecoration: 'none', display: 'contents' },
 }))
