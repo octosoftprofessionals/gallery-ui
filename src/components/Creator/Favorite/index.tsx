@@ -5,15 +5,13 @@ import { Box, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ArtworkItem from '../../../components/GalleryItem/ArtworkItem'
-
-import { GalleryItem } from '../../../types'
 import { findeArtworkFavorites } from '../../../Utils'
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
 
 import Spinner from '../../Spinner'
+import EmptyAccount from './../GridCreator/EmptyAccount'
 
 import GalleryGridFavorite from './GalleryGrid'
-import EmptyAccount from './../GridCreator/EmptyAccount'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
@@ -85,6 +83,8 @@ const Favorite = ({
             handleNext={getMoreArtworks}
             pages={favoritesPagesItems.pages}
             hasNextPage={hasNextPageFavorites}
+            md={4}
+            lg={3}
             renderItem={item => (
               <ArtworkItem
                 key={item.assetId}

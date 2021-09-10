@@ -34,16 +34,11 @@ const ItemArtworkSelected = ({
     { refetchOnWindowFocus: false }
   )
 
-  const { data: ItemsToShow = [], favoriteArtworks = [] } = galleryItems
+  const { data: ItemsToShow = [] } = galleryItems
 
   const classes = useStyle()
 
-  if (
-    !isLoading &&
-    ItemsToShow.length === 0 &&
-    favoriteArtworks.length === 0 &&
-    renderItem.length === 0
-  ) {
+  if (!isLoading && ItemsToShow.length === 0 && renderItem.length === 0) {
     return (
       <Box style={{ padding: 24 }}>
         <EmptyAccount {...emptyMessageProps} />
@@ -69,16 +64,6 @@ const ItemArtworkSelected = ({
       ) : (
         <Grid container justify="center" wrap="wrap">
           {ItemsToShow.map(galleryItem => (
-            <Grid item xs={12} sm={6} md={4} className={classes.containerItem}>
-              <ItemsToSelect
-                key={galleryItem.id}
-                galleryItem={galleryItem}
-                onModifyPlaylist={onModifyPlaylist}
-                artworksSelected={artworksSelected}
-              />
-            </Grid>
-          ))}
-          {favoriteArtworks.map(galleryItem => (
             <Grid item xs={12} sm={6} md={4} className={classes.containerItem}>
               <ItemsToSelect
                 key={galleryItem.id}
