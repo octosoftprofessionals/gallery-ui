@@ -19,7 +19,7 @@ import BidMessages from './BidMessages'
 const useStyle = makeStyles(Theme => ({
   '@global': {
     '.MuiOutlinedInput-input': {
-      color: darkColors.LightGray,
+      color: Theme.palette.secondary.contrastText,
     },
   },
   root: {
@@ -54,7 +54,7 @@ const useStyle = makeStyles(Theme => ({
     cursor: 'default',
   },
   valueBalance: {
-    color: colors.Black,
+    color: darkColors.Black,
   },
   buttonBid: {
     backgroundColor: Theme.palette.primary.dark,
