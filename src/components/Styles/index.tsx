@@ -592,7 +592,7 @@ export const Theme = createMuiTheme({
       dark: WhiteSmoke,
       contrastText: Black,
     },
-    text: { primary: Black, secondary: Black },
+    text: { primary: WhiteSmoke, secondary: Black },
   },
   spacing: [
     0, 2, 8, 12, 14, 16, 18, 20, 22, 24, 30, 32, 36, 48, 66, 78, 96, 100, 312,

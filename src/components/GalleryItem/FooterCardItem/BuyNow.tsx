@@ -3,6 +3,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Button } from '@material-ui/core'
 import { formatDecimal } from '../../../Utils'
+import { colors } from '../../Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({
   footerCard: {
@@ -22,13 +23,13 @@ const useStyle = makeStyles(Theme => ({
     padding: '34px 24px 11px 24px',
   },
   text: {
-    height: "100%",
+    height: '100%',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    color: Theme.palette.text.primary,
+    color: colors.Black,
     '&:hover': {
       transform: 'none',
       color: Theme.palette.text.secondary,
@@ -50,10 +51,16 @@ const BuyNow = ({ price, children }) => {
           fullWidth
           className={classes.btn}
         >
-          <Typography variant="caption" color="secondary" className={classes.text}>
+          <Typography
+            variant="caption"
+            color="secondary"
+            className={classes.text}
+          >
             {isNaN(price)
               ? 'Buy this now for — ETH'
-              : `Buy this now for ${(parseFloat(formatDecimal(price)).toFixed(2))} ETH`}
+              : `Buy this now for ${parseFloat(formatDecimal(price)).toFixed(
+                  2
+                )} ETH`}
           </Typography>
         </Button>
       </Grid>
