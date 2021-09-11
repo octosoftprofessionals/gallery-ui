@@ -91,7 +91,7 @@ export const formatDecimal = (numberish, decimals = 3) => {
     return '—'
   }
   const [integral = '0', fractional = '0'] = String(numberish).split('.')
-  return `${integral}.${fractional.slice(0, decimals)}`
+  return parseFloat(`${integral}.${fractional.slice(0, decimals)}`).toFixed(2)
 }
 
 const formatNumberWithCommas = x => {

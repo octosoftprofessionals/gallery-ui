@@ -67,16 +67,6 @@ const Playlist = ({
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
   const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>('')
 
-  const nullData = [
-    {
-      description: '',
-      id: 0,
-      priority: 1,
-      title: '',
-      userAddress: '',
-      userId: 0,
-    },
-  ]
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
     setAddArtworksPlaylist([])
@@ -166,7 +156,7 @@ const Playlist = ({
       console.log('errorUpDate :>> ', error)
     }
   }
-  console.log('playListQuery :>> ', playListQuery)
+
   return (
     <>
       <Grid container justify="center" direction="row" wrap="wrap">

@@ -22,6 +22,7 @@ const GalleryGridFavorite = ({
   handleNext,
   hasNextPage,
   isLoading,
+  ...prop
 }) => {
   const classes = useStyle({ hasNextPage })
 
@@ -36,20 +37,19 @@ const GalleryGridFavorite = ({
         alignContent="center"
         wrap="wrap"
       >
-        {pages.map(({ favoriteArtworks = [] }) => {
-          return favoriteArtworks.map((artwork, index) => (
+        {pages.map(({ favoriteArtworks = [] }) =>
+          favoriteArtworks.map((artwork, index) => (
             <Grid
               item
               xs={12}
               sm={6}
-              md={4}
-              lg={3}
+              {...prop}
               className={classes.containerItem}
             >
               {renderItem(artwork, index)}
             </Grid>
           ))
-        })}
+        )}
       </Grid>
       {isLoading ? (
         <Spinner height="50vh" />
