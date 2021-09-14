@@ -78,7 +78,9 @@ const ArtworkInformation = ({
           color="primary"
           className={classes.desciptionText}
         >
-          {description.length !== 0 && description !== ' ' ? description : '—'}
+          {description && description.length !== 0 && description !== ' '
+            ? description
+            : '—'}
         </Typography>
       </div>
 
