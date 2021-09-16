@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import OffertItem from './OffertItem'
+import OtherOffersItem from './OtherOffersItem'
 import { colors } from '../../../../Styles/Colors'
 
 const Styles = makeStyles(Theme => ({
@@ -95,7 +96,10 @@ const Styles = makeStyles(Theme => ({
     lineHeight: '1.5',
   },
 }))
-const title = { Right: 'Best offer', Left: 'Current Owner' }
+const title = [
+  { Right: 'Best offer', Left: 'Current Owner' },
+  { Right: 'Last Price', Left: 'Current Owner' },
+]
 
 const alertOffert = [
   {
@@ -104,6 +108,10 @@ const alertOffert = [
   },
   {
     text: 'Your current offert is pending review by the owner, placed wait.',
+    color: '#FFFFFF1A',
+  },
+  {
+    text: 'You recieved offers for this artwork.',
     color: '#FFFFFF1A',
   },
   {
@@ -131,7 +139,7 @@ const OffertArt = ({
   const [isOwner, setIsOwner] = useState<boolean>(false)
   const [isPendingOffert, setIsPendingOffert] = useState<boolean>(false)
   const [textBtn, setTextBtn] = useState<string>('Make Offer')
-  const classes = Styles({ color: alertOffert[4].color })
+  const classes = Styles({ color: alertOffert[2].color })
 
   const handleOffert = () => {
     setTextBtn('Counteroffert')
@@ -149,7 +157,7 @@ const OffertArt = ({
     >
       <div className={classes.conateinerTop}>
         <Typography variant="body1" className={classes.text}>
-          {alertOffert[4].text}
+          {alertOffert[2].text}
         </Typography>
       </div>
       <Grid
