@@ -1,62 +1,13 @@
 import React, { useState } from 'react'
 
-import {
-  Button,
-  Divider,
-  Grid,
-  OutlinedInput,
-  Typography,
-} from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
 import OffertItem from './OffertItem'
 import OtherOffersItem from './OtherOffersItem'
-import { colors } from '../../../../Styles/Colors'
+import ItemToOffer from './ItemToOffer'
 
 const Styles = makeStyles(Theme => ({
-  divider: {
-    backgroundColor: Theme.palette.primary.main,
-  },
-  btnMakeOffer: {
-    height: 58,
-    borderRadius: Theme.shape.borderRadius[2],
-    backgroundColor: Theme.palette.secondary.dark,
-    border:
-      Theme.palette.type === 'light'
-        ? `3px solid ${Theme.palette.secondary.contrastText}`
-        : '2px solid #00FFFF',
-  },
-  btnCounteroffert: {
-    height: 58,
-    borderRadius: Theme.shape.borderRadius[2],
-    backgroundColor:
-      Theme.palette.type === 'light'
-        ? Theme.palette.secondary.contrastText
-        : Theme.palette.secondary.main,
-    border:
-      Theme.palette.type === 'light'
-        ? `3px solid ${Theme.palette.secondary.contrastText}`
-        : `2px solid ${Theme.palette.secondary.light}`,
-  },
-  btnMakeCounteroffert: {
-    height: 58,
-    borderRadius: Theme.shape.borderRadius[2],
-    backgroundColor:
-      Theme.palette.type === 'light'
-        ? Theme.palette.secondary.contrastText
-        : Theme.palette.secondary.main,
-    border:
-      Theme.palette.type === 'light'
-        ? `3px solid ${Theme.palette.secondary.contrastText}`
-        : `2px solid ${Theme.palette.secondary.light}`,
-  },
-  txtBtnMakeOffer: {
-    fontSize: Theme.typography.fontSize[3],
-    color: Theme.palette.primary.dark,
-  },
-  txtBtnCounteroffert: {
-    fontSize: Theme.typography.fontSize[3],
-    color: Theme.palette.primary.light,
-  },
   link: { textDecoration: 'none' },
   conateinerTop: {
     backgroundColor: ({ color }: { color: string }) =>
@@ -67,33 +18,9 @@ const Styles = makeStyles(Theme => ({
     cursor: 'default',
     '&:hover': { color: Theme.palette.secondary.contrastText },
   },
-  box: {
-    padding: Theme.spacing(11),
-  },
-  '@global': {
-    '.MuiOutlinedInput-input': {
-      color: colors.DimGray,
-    },
-    '.MuiOutlinedInput-notchedOutline': {
-      border:
-        Theme.palette.type === 'light'
-          ? `3px solid ${Theme.palette.secondary.contrastText}`
-          : `2px solid ${Theme.palette.secondary.contrastText}`,
-    },
-  },
-  input: {
-    borderRadius: Theme.shape.borderRadius[2],
-    fontFamily: Theme.typography.fontFamily[1],
-    fontSize: Theme.typography.fontSize[10],
-  },
-  colorInput: {
-    '@global': {
-      '.MuiOutlinedInput-input': { color: Theme.palette.error.main },
-    },
-  },
-  eth: {
-    fontSize: Theme.typography.fontSize[9],
-    lineHeight: '1.5',
+  boxOffers: {
+    maxHeight: `${Theme.spacing(12)}vh`,
+    overflow: 'auto',
   },
 }))
 const title = [
@@ -137,18 +64,14 @@ const OffertArt = ({
 }) => {
   const [valueBid, setValueBid] = useState('')
   const [isOwner, setIsOwner] = useState<boolean>(false)
+  const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(true)
   const [isPendingOffert, setIsPendingOffert] = useState<boolean>(false)
-  const [textBtn, setTextBtn] = useState<string>('Make Offer')
-  const classes = Styles({ color: alertOffert[2].color })
 
-  const handleOffert = () => {
-    setTextBtn('Counteroffert')
-    setIsPendingOffert(!isPendingOffert)
-  }
+  const classes = Styles({ color: alertOffert[2].color })
 
   return (
     <OffertItem
-      title={title}
+      title={title[1]}
       priceEth={priceEth}
       priceUsd={priceUsd}
       ownerAddress={ownerAddress}
@@ -160,61 +83,19 @@ const OffertArt = ({
           {alertOffert[2].text}
         </Typography>
       </div>
-      <Grid
-        item
-        xs={12}
-        style={{ display: isOwner ? 'none' : 'flex' }}
-        justify="space-around"
-        alignItems="center"
-        className={classes.box}
-      >
-        <Grid item xs={5}>
-          <OutlinedInput
-            color="primary"
-            type="number"
-            placeholder={'0.00'}
-            fullWidth
-            value={valueBid}
-            onChange={e => setValueBid(e.target.value)}
-            className={classes.input}
-            endAdornment={
-              <Grid item xs={6} container justify="space-around">
-                <Grid item xs={1}>
-                  <Divider orientation="vertical" className={classes.divider} />
-                </Grid>
-                <Typography
-                  variant="button"
-                  color="primary"
-                  className={classes.eth}
-                >
-                  ETH
-                </Typography>
-              </Grid>
-            }
-          />
+      {isOwnerOffers ? (
+        <Grid item className={classes.boxOffers}>
+          <OtherOffersItem />
         </Grid>
-        <Grid item xs={4}>
-          <Button
-            variant="text"
-            fullWidth
-            className={
-              isPendingOffert ? classes.btnCounteroffert : classes.btnMakeOffer
-            }
-            onClick={handleOffert}
-          >
-            <Typography
-              variant="caption"
-              className={
-                isPendingOffert
-                  ? classes.txtBtnCounteroffert
-                  : classes.txtBtnMakeOffer
-              }
-            >
-              {textBtn}
-            </Typography>
-          </Button>
-        </Grid>
-      </Grid>
+      ) : (
+        <ItemToOffer
+          isOwner={isOwner}
+          valueBid={valueBid}
+          setValueBid={setValueBid}
+          isPendingOffert={isPendingOffert}
+          setIsPendingOffert={setIsPendingOffert}
+        />
+      )}
     </OffertItem>
   )
 }

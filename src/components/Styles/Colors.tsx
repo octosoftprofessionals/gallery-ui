@@ -35,6 +35,7 @@ export const darkColors = {
   LightDark: '#2E2E2ED9',
   LightGray: '#FFFFFF1A',
   TransparentGray: '#202324',
+  RadicalRed: '#FF2E75',
 }
 
 export const backgroundGradient = {
