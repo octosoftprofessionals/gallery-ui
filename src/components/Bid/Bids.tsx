@@ -104,12 +104,14 @@ const isAmountQuotable = (amount: number): boolean =>
 const Bids = ({
   assetContractAddress,
   assetTokenId,
+  schemaName,
   priceEth,
   priceUsd,
   currentMaxBid,
 }: {
   assetContractAddress: string
   assetTokenId: string
+  schemaName: string
   priceEth: string
   priceUsd: string
   currentMaxBid: string
@@ -165,6 +167,7 @@ const Bids = ({
     console.log('accountAddress:', accountAddress)
     console.log('assetContractAddress:', assetContractAddress)
     console.log('assetTokenId:', assetTokenId)
+    console.log('schemaName:', schemaName)
     console.log('bidAmountEth:', bidAmountEth)
 
     console.log('accountBalanceWETH.toString():', accountBalanceWETH.toString())
@@ -191,7 +194,7 @@ const Bids = ({
       accountAddress,
       assetContractAddress,
       assetTokenId,
-      // TODO: schema? i.e. ERC721 vs. ERC1155
+      schemaName,
       amountEth: bidAmountEth,
     })
 

@@ -1,4 +1,4 @@
-// import Web3 from 'web3'
+import Web3 from 'web3'
 import { OpenSeaPort, Network } from 'opensea-js'
 import { OrderSide, Order, WyvernSchemaName } from 'opensea-js/lib/types'
 import BigNumber from 'bignumber.js'
@@ -10,7 +10,10 @@ const MAINNET_INFURA_URL =
 // const ROPSTEN_INFURA_URL =
 //   'https://ropsten.infura.io/v3/655cfb5bb2bb42b2bc96f812738a29f8'
 
-// const httpProvider = new Web3.providers.HttpProvider(MAINNET_INFURA_URL)
+const httpProvider =
+  typeof web3 !== 'undefined' && window !== 'undefined'
+    ? window.web3.currentProvider
+    : new Web3.providers.HttpProvider(MAINNET_INFURA_URL)
 
 const getSeaport = async () => {
   // const windowEthereum = window.ethereum
@@ -26,7 +29,7 @@ const getSeaport = async () => {
   // console.log('detectedProvider')
   // console.log(detectedProvider)
 
-  const seaport = new OpenSeaPort(window.ethereum, {
+  const seaport = new OpenSeaPort(httpProvider, {
     networkName: Network.Main,
   })
 
@@ -52,17 +55,28 @@ export const createBuyOrder = async ({
   accountAddress,
   assetContractAddress,
   assetTokenId,
-  schemaName = null,
+  schemaName = WyvernSchemaName.ERC1155,
   amountEth,
 }): Promise<Order | Error> => {
   try {
     const seaport = await getSeaport()
+    console.log('About to create buy order', {
+      accountAddress,
+      asset: {
+        tokenAddress: assetContractAddress,
+        tokenId: assetTokenId,
+        schemaName,
+      },
+      // Value of the offer, in units of the payment token (or wrapped ETH if none is specified):
+      startAmount: amountEth,
+      paymentTokenAddress: WETH_TOKEN_ADDRESS,
+    })
     const buyOrder = await seaport.createBuyOrder({
       accountAddress,
       asset: {
         tokenAddress: assetContractAddress,
         tokenId: assetTokenId,
-        schemaName: WyvernSchemaName.ERC1155, // WyvernSchemaName. If omitted, defaults to 'ERC721'. Other options include 'ERC20' and 'ERC1155'
+        schemaName,
       },
       // Value of the offer, in units of the payment token (or wrapped ETH if none is specified):
       startAmount: amountEth,

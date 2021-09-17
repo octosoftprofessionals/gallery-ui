@@ -84,7 +84,6 @@ const ConnectWalletModal = ({
 
         setMetamaskAccount(accounts[0])
         handleCloseConnectWalletModal()
-        window.location.reload()
       } catch (e) {
         console.log(e)
       }
@@ -156,7 +155,7 @@ const ConnectWalletModal = ({
                 background: `${backgroundGradient.backgroundGradient3}`,
               }}
               className={classes.button}
-              endIcon
+              endIcon={null}
               onClick={handleConnection}
             >
               <Typography variant="caption" color="primary">
