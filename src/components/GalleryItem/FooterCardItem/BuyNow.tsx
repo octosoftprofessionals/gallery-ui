@@ -57,8 +57,8 @@ const BuyNow = ({ price, children }) => {
             className={classes.text}
           >
             {isNaN(price)
-              ? 'Buy this now for — ETH'
-              : `Buy this now for ${formatDecimal(price)} ETH`}
+              ? 'Buy Now — ETH'
+              : `Buy Now ${formatDecimal(price)} ETH`}
           </Typography>
         </Button>
       </Grid>
