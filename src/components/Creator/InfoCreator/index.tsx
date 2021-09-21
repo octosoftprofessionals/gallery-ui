@@ -44,7 +44,7 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   userName: {
-    fontSize: '20px',
+    fontSize: 20,
     textAlign: 'left',
     textTransform: 'lowercase',
     '@media (max-width: 576px)': {
@@ -87,7 +87,7 @@ const useStyle = makeStyles(Theme => ({
     justifyContent: 'center',
     width: '100px',
     height: '40px',
-    fontSize: '14px',
+    fontSize: 14,
     textDecoration: 'none',
     backgroundColor: Theme.palette.secondary.main,
     borderRadius: Theme.spacing(6),

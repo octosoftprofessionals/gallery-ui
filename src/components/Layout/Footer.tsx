@@ -71,7 +71,7 @@ const Footer = ({ pathname }) => {
   const twitter = 'https://twitter.com/SuperchiefNFT'
   const discord = 'https://discord.gg/mAauHRz5aH'
   const termsOfService = '/termsOfService'
-  const privacy = '/privacyPolicity'
+  const privacy = '/privacyPolicy'
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} container justify="space-between" alignItems="center">
@@ -93,8 +93,10 @@ const Footer = ({ pathname }) => {
           alignItems="center"
         >
           <Hidden xsDown>
-            <LogoSCNFT className={classes.logo} />
-            <LogoDarkSrc className={classes.logoDark} />
+            <Link to="/" target="_blank" className={classes.link}>
+              <LogoSCNFT className={classes.logo} />
+              <LogoDarkSrc className={classes.logoDark} />
+            </Link>
           </Hidden>
           <Link to={instagram} target="_blank" className={classes.link}>
             <Typography variant="overline">Instagram</Typography>
@@ -105,9 +107,6 @@ const Footer = ({ pathname }) => {
           <Link to="/construction" target="_blank" className={classes.link}>
             <Typography variant="overline">Discord</Typography>
           </Link>
-          {/* <Link to={blog} className={classes.link}>
-              <Typography variant="overline">Blog</Typography>
-            </Link> */}
         </Grid>
 
         <Grid

@@ -183,6 +183,8 @@ export type GalleryItem = {
   // - highest bid
   // - all bids
   isFavorite: boolean
+
+  schemaName: string // 'ERC721' | 'ERC1155'
 }
 
 export enum HistoryItemEventType {

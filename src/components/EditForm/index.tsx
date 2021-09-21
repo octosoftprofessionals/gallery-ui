@@ -17,7 +17,10 @@ import { Collapse } from '@material-ui/core'
 import LinkForm from './LinkForm'
 import { useAccountStore } from '../../hooks/useAccountStore'
 import { Users } from '../../types'
-import { updateUser, /* mailAvailability,*/ getUsersDataField } from '../../services/users'
+import {
+  updateUser,
+  /* mailAvailability,*/ getUsersDataField,
+} from '../../services/users'
 import InputValidator from './InputValidator/InputValidator'
 
 // Hi there! verify profile is commented //
@@ -217,10 +220,10 @@ const EditForm = ({ userAccount }: Props) => {
 
   const [usernameList, setUsernameList] = useState([])
   const [usernameCheck, setUsernameCheck] = useState(true)
-  const [savedUsername, setSavedUsername] = useState("")
+  const [savedUsername, setSavedUsername] = useState('')
 
   const [userEmailList, setUserEmailList] = useState([])
-  const [savedEmail, setSavedEmail] = useState("")
+  const [savedEmail, setSavedEmail] = useState('')
 
   const [bio, setBio] = React.useState(userAccount.bio ?? '')
   const [word, setWord] = useState('')
@@ -291,12 +294,19 @@ const EditForm = ({ userAccount }: Props) => {
   }
 
   useEffect(() => {
-    getUserDataList("username", setUsernameList)
-    getUserDataList("email", setUserEmailList)
+    getUserDataList('username', setUsernameList)
+    getUserDataList('email', setUserEmailList)
   }, [])
 
   const handleSubmit = async () => {
-    if (validateEmail(email) && ( (!checkAvailability(usernameList, username)) && savedUsername === username ||  checkAvailability(usernameList, username)) && ( (!checkAvailability(userEmailList, email) && savedEmail == email) || checkAvailability(userEmailList, email))) {
+    if (
+      validateEmail(email) &&
+      ((!checkAvailability(usernameList, username) &&
+        savedUsername === username) ||
+        checkAvailability(usernameList, username)) &&
+      ((!checkAvailability(userEmailList, email) && savedEmail == email) ||
+        checkAvailability(userEmailList, email))
+    ) {
       setError(false)
       const formData = new FormData()
       formData.append('name', name)
@@ -320,7 +330,6 @@ const EditForm = ({ userAccount }: Props) => {
         const res = await updateUser(metamaskAccount, formData)
         handleClick(false)
         setDisabled(true)
-        window.location.reload() //reload page to see the new username account
         console.log(res)
       } catch (e) {
         handleClick(true)
@@ -333,7 +342,6 @@ const EditForm = ({ userAccount }: Props) => {
       handleClick(true)
     }
   }
-
 
   return (
     <Grid
@@ -409,7 +417,17 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeUserName}
                   value={username}
                 />
-                <InputValidator type="Username" savedDataField={savedUsername} savedSetter={setSavedUsername} checkAvailability={checkAvailability} account={metamaskAccount} value={username} userDataList={usernameList} error={error} setError={setError}/>
+                <InputValidator
+                  type="Username"
+                  savedDataField={savedUsername}
+                  savedSetter={setSavedUsername}
+                  checkAvailability={checkAvailability}
+                  account={metamaskAccount}
+                  value={username}
+                  userDataList={usernameList}
+                  error={error}
+                  setError={setError}
+                />
                 <Grid item className={classes.formInput}>
                   <Typography className={classes.label}>
                     * E-Mail (Receive notifications)
@@ -424,7 +442,17 @@ const EditForm = ({ userAccount }: Props) => {
                     value={email}
                   />
                 </Grid>
-                <InputValidator type="Email" savedDataField={savedEmail} savedSetter={setSavedEmail} checkAvailability={checkAvailability} account={metamaskAccount} value={email} userDataList={userEmailList} error={error} setError={setError} />
+                <InputValidator
+                  type="Email"
+                  savedDataField={savedEmail}
+                  savedSetter={setSavedEmail}
+                  checkAvailability={checkAvailability}
+                  account={metamaskAccount}
+                  value={email}
+                  userDataList={userEmailList}
+                  error={error}
+                  setError={setError}
+                />
               </Grid>
             </Grid>
 

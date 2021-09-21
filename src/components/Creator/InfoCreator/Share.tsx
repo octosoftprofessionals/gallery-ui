@@ -179,9 +179,11 @@ const Share = ({
         </Popover>
       }
       <Grid item direction="row" justify="center">
-        <Button onClick={handleClickReport} className={classes.buttonReport}>
-          <MoreHorizIcon className={classes.icon} />
-        </Button>
+        {!isMyAccount ? (
+          <Button onClick={handleClickReport} className={classes.buttonReport}>
+            <MoreHorizIcon className={classes.icon} />
+          </Button>
+        ) : null}
         <Button onClick={handleClick} className={classes.button}>
           <ArrowUpwardIcon className={classes.icon} />
           <Hidden xsDown>
