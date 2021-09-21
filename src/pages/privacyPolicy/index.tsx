@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../../components/Layout'
-import PolicityPage from '../../components/PolicityPage'
+import PolicyPage from '../../components/PolicyPage'
 
 const PrivacyPilicity = () => {
   return (
     <Layout padding="0 24px" marginTop="12px">
-      <PolicityPage />
+      <PolicyPage />
     </Layout>
   )
 }
