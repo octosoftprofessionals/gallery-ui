@@ -7,7 +7,7 @@ import { Avatar, Grid } from '@material-ui/core'
 import { Users } from '../../types'
 
 import GridCreator from './GridCreator'
-import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
+// import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import InfoCreator from './InfoCreator'
 import Share from '../../components/Creator/InfoCreator/Share'
 import {
@@ -101,14 +101,18 @@ const Creator = ({
 }: Props) => {
   const classes = useStyle()
 
-  const { data: followeeItem = [], isLoading: isLoadingFollowees } = useQuery(
-    'followeeQuery',
-    () => getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+  const {
+    data: followeeItem = [],
+    isLoading: isLoadingFollowees,
+  } = useQuery('followeeQuery', () =>
+    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
-  const { data: followersItem = [], isLoading: isLoadingFollowers } = useQuery(
-    'followersQuery',
-    () => getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+  const {
+    data: followersItem = [],
+    isLoading: isLoadingFollowers,
+  } = useQuery('followersQuery', () =>
+    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem

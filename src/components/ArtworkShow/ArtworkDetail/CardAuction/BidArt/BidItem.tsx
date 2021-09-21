@@ -6,8 +6,8 @@ import { Divider, Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { formatUsd, formatDecimal } from '../../../../../Utils'
-import OwnerButton from '../../../../CreatorButton'
 import { profilePathFromAddress } from '../../../../../config/routes'
+import OwnerButton from '../../../../CreatorButton'
 
 const Styles = makeStyles(Theme => ({
   root: {

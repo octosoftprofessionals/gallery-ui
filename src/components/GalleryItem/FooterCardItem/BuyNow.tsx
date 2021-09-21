@@ -11,7 +11,7 @@ const useStyle = makeStyles(Theme => ({
     right: 0,
     bottom: 0,
     position: 'absolute',
-    backgroundColor: Theme.palette.card.footer,
+    backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
   conateinerTop: { padding: Theme.spacing(2, 6) },
@@ -57,8 +57,8 @@ const BuyNow = ({ price, children }) => {
             className={classes.text}
           >
             {isNaN(price)
-              ? 'Buy this now for — ETH'
-              : `Buy this now for ${formatDecimal(price)} ETH`}
+              ? 'Buy Now — ETH'
+              : `Buy Now ${formatDecimal(price)} ETH`}
           </Typography>
         </Button>
       </Grid>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { Button, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -35,15 +36,17 @@ const useStyle = makeStyles(Theme => ({
 const CreatorButton = ({ username, imageUrl, profileUrl, ...otherProps }) => {
   const classes = useStyle({ ...otherProps })
   return (
-    <Button href={profileUrl} className={classes.root}>
-      <ImgConteiner className="creator-button-img-cont">
-        <ImgUser src={imageUrl} alt={username} />
-      </ImgConteiner>
-      <Typography
-        className={classes.user}
-        color="inherit"
-      >{`@${username}`}</Typography>
-    </Button>
+    <Link to={profileUrl}>
+      <Button className={classes.root}>
+        <ImgConteiner className="creator-button-img-cont">
+          <ImgUser src={imageUrl} alt={username} />
+        </ImgConteiner>
+        <Typography
+          className={classes.user}
+          color="inherit"
+        >{`@${username}`}</Typography>
+      </Button>
+    </Link>
   )
 }
 
