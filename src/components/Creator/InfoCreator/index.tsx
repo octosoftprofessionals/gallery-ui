@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
+
 import { Button, Grid, Typography } from '@material-ui/core'
+import Slide from '@material-ui/core/Slide'
 import { makeStyles } from '@material-ui/core/styles'
-import Spinner from '../../Spinner'
+
 import {
   createFollow,
   unFollow,
   checkExistingFollow,
 } from '../../../services/follow'
-import { useAccountStore } from '../../../hooks/useAccountStore'
-import { boxShadow } from '../../Styles/Colors'
-import ButtonsSocialMedia from './ButtonsSocialMedia'
-import FollowersModal from '../FollowersModal'
+import MessageSnackBar from '../../MessageSnackBar'
+import { useMetamaskAccount } from '../../../hooks/useAccountStore'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
+import { useSetModalShow } from '../../../atom'
+import { TransitionProps } from '../../../types'
+
+import Spinner from '../../Spinner'
+import { boxShadow } from '../../Styles/Colors'
+
+import FollowersModal from '../FollowersModal'
+
 import UserNetworks from './UserNetworks'
 
 const useStyle = makeStyles(Theme => ({
@@ -82,15 +90,18 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   btn: {
-    padding: Theme.spacing(2),
+    padding: 0,
     display: 'flex',
     justifyContent: 'center',
     width: '100px',
     height: '40px',
     fontSize: 14,
     textDecoration: 'none',
-    backgroundColor: Theme.palette.secondary.main,
     borderRadius: Theme.spacing(6),
+    cursor: 'pointer',
+  },
+  btnNot: {
+    cursor: 'not-allowed',
   },
   networks: {
     '@media (max-width: 576px)': {
@@ -112,9 +123,6 @@ const useStyle = makeStyles(Theme => ({
       alignItems: 'center',
       textAlign: 'center',
     },
-  },
-  bioContainer: {
-    // maxWidth: 300,
   },
   infoBio: {
     '@media (max-width: 300px)': {
@@ -142,10 +150,6 @@ const useStyle = makeStyles(Theme => ({
       padding: Theme.spacing(0, 0, 0, 15),
     },
   },
-  btn: {
-    padding: 0,
-    margin: 0,
-  },
 }))
 
 const InfoCreator = ({
@@ -169,44 +173,40 @@ const InfoCreator = ({
   userIndex = null,
 }) => {
   const classes = useStyle({ userIndex, isMyAccount })
-  const [isCopy, setIsCopy] = useState(false)
-  const [account, _] = useAccountStore()
+
+  const [viewModal, setViewModal] = useState<boolean>(false)
+  const [isFollow, setIsFollow] = useState<boolean>(false)
+  const [openFollowModal, setOpenFollowModal] = useState<boolean>(false)
+
+  const address = useMetamaskAccount()
+
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
-  const { data: FollowQuery = {}, isLoading } = useQuery('FollowQuery', () =>
-    checkExistingFollow({
-      follower_address: publicKey,
-      followee_address: account as string,
-    })
+  const { data: FollowQuery = {}, isLoading } = useQuery(
+    'FollowQuery',
+    () =>
+      checkExistingFollow({
+        follower_address: publicKey,
+        followee_address: address as string,
+      }),
+    {
+      refetchOnWindowFocus: false,
+    }
   )
-  const [viewModal, setViewModal] = useState('')
 
-  const [isFollow, setIsFollow] = useState('')
   useEffect(() => {
     const { follow } = FollowQuery
     setIsFollow(follow)
   }, [FollowQuery, following, followers])
+  const setConnectWallet = useSetModalShow()
 
-  const handleSubmitFollow = e => {
-    e.preventDefault()
-    followMutation.mutate({
-      follower_address: publicKey,
-      followee_address: account as string,
-    })
-    setIsFollow(true)
-  }
   const handleSubmitUnfollow = e => {
     e.preventDefault()
     unFollowMutation.mutate({
       follower_address: publicKey,
-      followee_address: account as string,
+      followee_address: address as string,
     })
     setIsFollow(false)
-  }
-
-  const getPublicKey = () => {
-    navigator.clipboard.writeText(publicKey)
-    setIsCopy(true)
   }
 
   const handleOpenModal = value => {
@@ -214,7 +214,39 @@ const InfoCreator = ({
     setOpenFollowModal(true)
   }
 
-  const [openFollowModal, setOpenFollowModal] = useState<boolean>(false)
+  const [openMessage, setOpenMessage] = useState<boolean>(false)
+
+  function TransitionUp(props: TransitionProps) {
+    return <Slide {...props} direction="up" />
+  }
+
+  const [transition, setTransition] = useState<
+    React.ComponentType<TransitionProps> | undefined
+  >(undefined)
+  const handleTransition = (
+    Transition: React.ComponentType<TransitionProps>
+  ) => () => {
+    setTransition(() => Transition)
+    setOpenMessage(true)
+  }
+
+  const handleClose = () => {
+    setOpenMessage(false)
+  }
+
+  const handleSubmitFollow = e => {
+    e.preventDefault()
+
+    if (address != null) {
+      followMutation.mutate({
+        follower_address: publicKey,
+        followee_address: address as string,
+      })
+      setIsFollow(true)
+    } else {
+      setConnectWallet(true)
+    }
+  }
 
   return (
     <>
@@ -318,12 +350,19 @@ const InfoCreator = ({
                 <Typography variant="button">Edit profile</Typography>
               </Button>
             ) : isLoading ? (
-              <Spinner height="20vh" />
+              <Spinner height="10vh" />
             ) : (
               <Button
                 variant="outlined"
                 fullWidth
-                onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
+                onClick={
+                  publicKey != address
+                    ? isFollow
+                      ? handleSubmitUnfollow
+                      : handleSubmitFollow
+                    : handleTransition(TransitionUp)
+                }
+                className={publicKey === address ? classes.btnNot : null}
               >
                 {isFollow ? (
                   <Typography variant="button">Unfollow</Typography>
@@ -332,19 +371,18 @@ const InfoCreator = ({
                 )}
               </Button>
             )}
+            <MessageSnackBar
+              transition={transition}
+              open={openMessage}
+              close={handleClose}
+              key={'message-snackbar'}
+              message={"You can't follow yourself"}
+            />
           </Grid>
-          <Grid
-            container
-            item
-            justify="flex-start"
-            xs={12}
-            className={classes.bioContainer}
-          >
-            {/* <Grid container sm={7} xs={12}> */}
+          <Grid container item justify="flex-start" xs={12}>
             <Typography variant="body2" color="primary" className={classes.bio}>
               {bio}
             </Typography>
-            {/* </Grid> */}
           </Grid>
         </Grid>
         <Grid item md={4} xs={12} className={classes.networks}>
