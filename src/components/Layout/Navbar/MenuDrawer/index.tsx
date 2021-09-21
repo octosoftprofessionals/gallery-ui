@@ -109,7 +109,7 @@ const MenuDrawer = ({
   const instagram = 'https://www.instagram.com/superchiefgallerynft/'
   const twitter = 'https://twitter.com/SuperchiefNFT'
   const termsOfService = '/termsOfService'
-  const privacy = '/privacyPolicity'
+  const privacy = '/privacyPolicy'
 
   return (
     <Hidden mdUp>
