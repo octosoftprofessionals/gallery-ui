@@ -96,20 +96,10 @@ const GridArtworks = () => {
   )
   return (
     <TabBar
-      titles={['Auction', 'Buy Now', 'Offer']}
+      titles={['Buy Now', 'Auction', 'Offer']}
       justify="center"
       initialTab={parseInt(useQueryHash() || '0')}
       components={[
-        <GalleryArtworks
-          isLoading={isLoadingLA}
-          isFetching={isFetchingLA}
-          handleNext={getMorelisted}
-          hasNextPage={hasNextPageLA}
-          pages={listedItemsQuery.pages}
-          onFavorite={(assetId, status) =>
-            handleFavorite(assetId, status, 'Live')
-          }
-        />,
         <GalleryArtworks
           isLoading={isLoadingReserve}
           isFetching={isFetchingReserve}
@@ -118,6 +108,16 @@ const GridArtworks = () => {
           pages={reserveItemsQuery.pages}
           onFavorite={(assetId, status) =>
             handleFavorite(assetId, status, 'BuyNow')
+          }
+        />,
+        <GalleryArtworks
+          isLoading={isLoadingLA}
+          isFetching={isFetchingLA}
+          handleNext={getMorelisted}
+          hasNextPage={hasNextPageLA}
+          pages={listedItemsQuery.pages}
+          onFavorite={(assetId, status) =>
+            handleFavorite(assetId, status, 'Live')
           }
         />,
         <GalleryArtworks

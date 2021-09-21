@@ -86,12 +86,20 @@ export const paginatedQuery = (Query: Array[]) => {
   return pages
 }
 
-export const formatDecimal = (numberish, decimals = 3) => {
+export const formatDecimal = (numberish, decimals = 2) => {
   if (numberish === 'NaN') {
     return '—'
   }
-  const [integral = '0', fractional = '0'] = String(numberish).split('.')
-  return parseFloat(`${integral}.${fractional.slice(0, decimals)}`).toFixed(2)
+  let [integral, fractional] = String(numberish).split('.')
+  integral.length === 1 && (integral = '0' + integral)
+  if (fractional === undefined) {
+    fractional = '00'
+  } else if (fractional.length === 1) {
+    fractional = fractional + '0'
+  } else {
+    fractional.length > decimals && (fractional = fractional.slice(0, 2))
+  }
+  return `${integral}.${fractional}`
 }
 
 const formatNumberWithCommas = x => {
