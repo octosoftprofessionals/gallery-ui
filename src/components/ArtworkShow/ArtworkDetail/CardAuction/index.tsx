@@ -23,7 +23,7 @@ const CardAuction = ({
       ownerImageUrl={ownerImageUrl}
       ownerUsername={ownerUsername}
     />
-  ) : status === 'bid' ? (
+  ) : status === 'none' ? (
     <BidArt
       priceEth={priceEth}
       priceUsd={priceUsd}
