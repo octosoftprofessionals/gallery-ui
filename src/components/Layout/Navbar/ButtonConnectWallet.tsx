@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import ConnectWalletModal from './ConnectWalletModal'
 import MetaMaskRedirectModal from './MetaMaskRedirectModal'
 
+import { useSetModalShow, useModalShow } from '../../../atom'
+
 const useStyle = makeStyles(Theme => ({
   btnGreen: {
     background: Theme.palette.buttons.wallet,
@@ -19,7 +21,8 @@ const useStyle = makeStyles(Theme => ({
 
 const ButtonConnectWallet = ({ pathname }) => {
   const classes = useStyle()
-  const [connectWallet, setConnectWallet] = useState(null)
+  const setConnectWallet = useSetModalShow()
+  const connectWallet = useModalShow()
   const [redirectModal, setRedirectModal] = useState(null)
   const handleCloseConnectWalletModal = () => {
     setConnectWallet(null)
@@ -33,7 +36,6 @@ const ButtonConnectWallet = ({ pathname }) => {
         <Button
           variant="contained"
           className={classes.btnGreen}
-          color={pathname === '/creator' ? 'secondary' : ''}
           onClick={() => setConnectWallet(true)}
         >
           <Typography
@@ -48,7 +50,6 @@ const ButtonConnectWallet = ({ pathname }) => {
       <Dialog
         onClose={handleCloseConnectWalletModal}
         aria-labelledby="customized-dialog-title"
-        className={classes.dialog}
         open={connectWallet !== null}
       >
         {connectWallet ? (

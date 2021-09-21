@@ -391,3 +391,5 @@ export type ArtworkLinks = {
   text: string
   icon: string
 }
+
+export type TransitionProps = Omit<SlideProps, 'direction'>
