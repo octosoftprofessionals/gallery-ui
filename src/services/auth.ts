@@ -1,9 +1,9 @@
 import { ethers } from 'ethers'
 import { get, post } from './http'
+import provider from './provider'
 
 export const login = async () => {
   try {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const public_address = (await signer.getAddress()).toLocaleLowerCase()
 
