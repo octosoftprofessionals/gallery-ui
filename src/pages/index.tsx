@@ -83,7 +83,7 @@ const Home = () => {
   )
 
   return (
-    <Layout>
+    <Layout padding="0">
       <EmailPopUp />
       {isLoadingFA ? (
         <Spinner height="50vh" />
@@ -125,7 +125,7 @@ const Home = () => {
       </ArtworkGrid>
 
       <ArtworkGrid
-        title="Live auctions"
+        title="Live auctions 🔴"
         titleButton="live auctions"
         link="/artworks"
         icon
