@@ -64,14 +64,14 @@ const OffertArt = ({
 }) => {
   const [valueBid, setValueBid] = useState('')
   const [isOwner, setIsOwner] = useState<boolean>(false)
-  const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(true)
+  const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(false)
   const [isPendingOffert, setIsPendingOffert] = useState<boolean>(false)
 
-  const classes = Styles({ color: alertOffert[2].color })
+  const classes = Styles({ color: alertOffert[0].color })
 
   return (
     <OffertItem
-      title={title[1]}
+      title={title[0]}
       priceEth={priceEth}
       priceUsd={priceUsd}
       ownerAddress={ownerAddress}
@@ -80,7 +80,7 @@ const OffertArt = ({
     >
       <div className={classes.conateinerTop}>
         <Typography variant="body1" className={classes.text}>
-          {alertOffert[2].text}
+          {alertOffert[0].text}
         </Typography>
       </div>
       {isOwnerOffers ? (
