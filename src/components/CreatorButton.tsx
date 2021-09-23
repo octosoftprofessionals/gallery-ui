@@ -31,12 +31,13 @@ const useStyle = makeStyles(Theme => ({
   user: {
     fontFamily: Theme.typography.fontFamily[20],
   },
+  link: { textDecoration: 'none' },
 }))
 
 const CreatorButton = ({ username, imageUrl, profileUrl, ...otherProps }) => {
   const classes = useStyle({ ...otherProps })
   return (
-    <Link to={profileUrl}>
+    <Link to={profileUrl} className={classes.link}>
       <Button className={classes.root}>
         <ImgConteiner className="creator-button-img-cont">
           <ImgUser src={imageUrl} alt={username} />
