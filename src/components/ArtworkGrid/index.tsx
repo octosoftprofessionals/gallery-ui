@@ -21,14 +21,20 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
   text: {
     fontSize: ({ fontSize }) => fontSize,
-    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[9] },
+    '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[10] },
+    // marginLeft: '10.5rem',
   },
   textButton: {
     display: ({ displayTextButton }) => displayTextButton,
     '@media (max-width: 545px)': { fontSize: Theme.typography.fontSize[8] },
+    // marginRight: '10.5rem',
   },
   divider: {
     backgroundColor: Theme.palette.primary.main,
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'space-around',
   },
 }))
 
@@ -52,9 +58,9 @@ const ArtworkGrid = ({
         direction="row"
         justify="space-between"
         alignItems="center"
-        className={classes.head}
+        className={[classes.head, classes.container]}
       >
-        <Grid item xs={6} container alignItems="center">
+        <Grid item xs={6} container>
           <FiberManualRecordIcon className={classes.iconDot} />
           <Typography variant="h5" color="primary" className={classes.text}>
             {title}
