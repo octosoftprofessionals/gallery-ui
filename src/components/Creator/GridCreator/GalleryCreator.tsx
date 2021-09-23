@@ -39,7 +39,7 @@ const Gallery = ({
     [ItemsToShow]
   )
 
-  if (!isLoading && ItemsToShow.length === 0) {
+  if (ItemsToShow.length === 0) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />

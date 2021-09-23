@@ -1,16 +1,18 @@
 import React from 'react'
+import { Link } from 'gatsby'
+
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Button, Grid, Typography } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 
 const useStyle = makeStyles(Theme => ({
-  root: {},
   text: {
     fontSize: Theme.typography.fontSize[6],
     fontFamily: Theme.typography.fontFamily[2],
     color: Theme.palette.primary.main,
     '&:hover': { color: Theme.palette.primary.main },
     '@media (max-width: 545px)': { textAlign: 'center' },
-    cursor: 'default'
+    cursor: 'default',
+    marginBottom: Theme.spacing(6),
   },
   textSecondary: {
     fontSize: Theme.typography.fontSize[4],
@@ -19,14 +21,20 @@ const useStyle = makeStyles(Theme => ({
     width: Theme.spacing(18),
     textAlign: 'center',
     '&:hover': { color: Theme.palette.primary.main },
-    cursor: 'default'
+    cursor: 'default',
+    marginBottom: Theme.spacing(6),
   },
+  link: { textDecoration: 'none' },
 }))
 
 const EmptyAccount = ({
   primaryText = 'Nothing to see here.',
   secondaryText = null,
   showExploreButton = false,
+}: {
+  primaryText?: string
+  secondaryText?: string
+  showExploreButton?: boolean
 }) => {
   const classes = useStyle()
   return (
@@ -40,12 +48,11 @@ const EmptyAccount = ({
         </Typography>
       ) : null}
       {showExploreButton ? (
-        <>
-          <Box height={16} />
-          <Button variant="outlined" disableElevation href="/">
+        <Link to="/" className={classes.link}>
+          <Button variant="outlined">
             <Typography variant="button">Explore</Typography>
           </Button>
-        </>
+        </Link>
       ) : null}
     </Grid>
   )
