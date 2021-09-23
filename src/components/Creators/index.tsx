@@ -77,11 +77,11 @@ const Creators = ({ creatorsQuery = [], status }) => {
             </Typography>
           </Grid>
 
-          <SearchCreator
+          {/* <SearchCreator
             searchBar={search}
             setSearchBar={setSearch}
             status={status}
-          />
+          /> */}
         </Grid>
       </Grid>
       {isLoading ? (
