@@ -109,6 +109,10 @@ const GridArtworks = () => {
           onFavorite={(assetId, status) =>
             handleFavorite(assetId, status, 'BuyNow')
           }
+          emptyMessageProps={{
+            primaryText: `Buy now, it's empty.`,
+            showExploreButton: true,
+          }}
         />,
         <GalleryArtworks
           isLoading={isLoadingLA}
@@ -119,6 +123,10 @@ const GridArtworks = () => {
           onFavorite={(assetId, status) =>
             handleFavorite(assetId, status, 'Live')
           }
+          emptyMessageProps={{
+            primaryText: `Auction, it's empty.`,
+            showExploreButton: true,
+          }}
         />,
         <GalleryArtworks
           isLoading={isLoadingSold}
@@ -129,6 +137,10 @@ const GridArtworks = () => {
           onFavorite={(assetId, status) =>
             handleFavorite(assetId, status, 'Other')
           }
+          emptyMessageProps={{
+            primaryText: `Offer, it's empty.`,
+            showExploreButton: true,
+          }}
         />,
       ]}
     />

@@ -186,9 +186,7 @@ export const darkTheme = createMuiTheme({
       subtitle2: {
         width: 'fit-content',
         boxSizing: 'border-box',
-        WebkitTextFillColor: 'transparent',
-        background: backgroundGradient.backgroundGradient1,
-        WebkitBackgroundClip: 'text',
+        color: Aqua,
         margin: 0,
         fontSize: 16,
         fontWeight: 600,
@@ -500,9 +498,7 @@ export const Theme = createMuiTheme({
       subtitle2: {
         width: 'fit-content',
         boxSizing: 'border-box',
-        WebkitTextFillColor: 'transparent',
-        background: backgroundGradient.backgroundGradient1,
-        WebkitBackgroundClip: 'text',
+        color: Aqua,
         margin: 0,
         fontSize: 16,
         fontWeight: 600,
