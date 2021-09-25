@@ -46,15 +46,7 @@ const GridPartnershipArtworks = () => {
       <Typography variant="h4" color="primary" className={classes.title}>
         Platform Collaborations
       </Typography>
-      <Grid container justify="center" alignItems="center">
-        {/* <Typography
-          variant="caption"
-          color="primary"
-          className={classes.subtitle}
-        >
-          SuperChief x KnownOrigin
-        </Typography> */}
-      </Grid>
+      <Grid container justify="center" alignItems="center"></Grid>
 
       <hr className={classes.divider}></hr>
       <Grid
