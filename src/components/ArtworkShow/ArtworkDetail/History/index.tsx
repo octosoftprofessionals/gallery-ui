@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import HistoryItem from './HistoryItem'
@@ -17,11 +17,11 @@ const History = ({ data = [] }) => {
       <Typography variant="h6" color="primary">
         History
       </Typography>
-      <div>
+      <Grid container>
         {data.map(historyItem => (
-          <HistoryItem {...historyItem} />
+          <HistoryItem {...historyItem} key={historyItem.transactionHash} />
         ))}
-      </div>
+      </Grid>
     </div>
   )
 }
