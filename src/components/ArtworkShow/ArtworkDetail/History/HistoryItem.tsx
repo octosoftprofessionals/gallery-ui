@@ -54,25 +54,25 @@ const useStyle = makeStyles(Theme => ({
   },
   containerHistory: { margin: Theme.spacing(3, 0, 0, 0) },
 }))
-const ethereumIoLinkTx = (txHash: string) => {
-  if (txHash) {
-    return `https://etherscan.io/tx/${txHash}`
+const ethereumIoLinkTx = (transactionHash: string) => {
+  if (transactionHash) {
+    return `https://etherscan.io/tx/${transactionHash}`
   }
   return '#'
 }
 
 const HistoryItem = ({
-  eventFromUsername,
-  eventFromAddress,
-  eventFromImageUrl,
-  eventToUsername,
-  eventToImageUrl,
+  transactionFromAccountUser,
+  transactionFromAccountAddress,
+  transactionFromAccountProfileImgUrl,
+  transactionToAccountUser,
+  transactionToAccountProfileImgUrl,
   eventType,
-  amountEth,
-  amountUsd,
-  timestamp = new Date(),
-  txHash,
-}) => {
+  paymentTokenEthPrice,
+  paymentTokenUsdPrice,
+  createdDate,
+  transactionHash,
+}: Props) => {
   const classes = useStyle()
 
   return (
@@ -94,8 +94,8 @@ const HistoryItem = ({
           >
             <Avatar
               className={classes.avatar}
-              alt={eventFromUsername}
-              src={eventFromImageUrl}
+              alt={transactionFromAccountUser}
+              src={transactionFromAccountProfileImgUrl}
             />
             <Grid direction="column" alignContent="flex-start" justify="center">
               <div className={classes.action}>
@@ -108,18 +108,18 @@ const HistoryItem = ({
                   underline="none"
                   variant="body2"
                   href="#"
-                >{`@${eventFromUsername}`}</Link>
+                >{`@${transactionFromAccountUser}`}</Link>
               </div>
               <Typography variant="subtitle1" className={classes.date}>
-                {timestamp}
+                {createdDate}
               </Typography>
             </Grid>
           </Grid>
           <Grid className={classes.action} direction="row" alignItems="center">
-            {amountEth != null &&
-            amountUsd != null &&
-            amountEth != 'NaN' &&
-            amountUsd != 'NaN' ? (
+            {paymentTokenEthPrice != null &&
+            paymentTokenUsdPrice != null &&
+            paymentTokenEthPrice != 'NaN' &&
+            paymentTokenUsdPrice != 'NaN' ? (
               <Grid
                 container
                 direction="column"
@@ -127,15 +127,18 @@ const HistoryItem = ({
                 justify="center"
               >
                 <Typography className={classes.actionText}>{`${formatDecimal(
-                  amountEth
+                  paymentTokenEthPrice
                 )} ETH`}</Typography>
                 <Typography className={classes.price}>{`${formatUsd(
-                  amountUsd
+                  paymentTokenUsdPrice
                 )} `}</Typography>
               </Grid>
             ) : null}
 
-            <Link href={ethereumIoLinkTx(txHash)} className={classes.link}>
+            <Link
+              href={ethereumIoLinkTx(transactionHash)}
+              className={classes.link}
+            >
               <OpenInNewOutlinedIcon className={classes.icon} />
             </Link>
           </Grid>
@@ -143,6 +146,30 @@ const HistoryItem = ({
       </Paper>
     </Grid>
   )
+}
+
+type Props = {
+  id: number
+  assetId: number
+  assetToken_id: string
+  assetContractAddress: string
+  bidAmount: string
+  duration: string
+  createdDate: string
+  endingPrice: string
+  eventType: string
+  startingPrice: string
+  transactionFromAccountAddress: string
+  transactionFromAccountUser: string
+  transactionFromAccountProfileImgUrl: string
+  transactionToAccountAddress: string
+  transactionToAccountUser: string
+  transactionToAccountProfileImgUrl: string
+  transactioncreatedDate: string
+  transactionHash: string
+  paymentTokenDecimals: number
+  paymentTokenEthPrice: string
+  paymentTokenUsdPrice: string
 }
 
 export default HistoryItem
