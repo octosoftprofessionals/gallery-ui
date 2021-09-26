@@ -19,7 +19,7 @@ const History = ({ data = [] }) => {
       </Typography>
       <Grid container>
         {data.map(historyItem => (
-          <HistoryItem {...historyItem} key={historyItem.transactionHash} />
+          <HistoryItem {...historyItem} key={historyItem.id} />
         ))}
       </Grid>
     </div>
