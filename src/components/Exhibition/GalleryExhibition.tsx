@@ -18,15 +18,13 @@ const GalleryExhibition = ({ exhibitionId }) => {
   useEffect(() => {
     async function fetch() {
       setIsLoading(true)
-      const {artworks}  = await getOneExhibitionByIdWithArtworks( exhibitionId )
+      const { artworks } = await getOneExhibitionByIdWithArtworks(exhibitionId)
       setArtworks(artworks)
       setIsLoading(false)
     }
 
     fetch()
   }, [exhibitionId])
-
-  console.log("artworks in GalleryExhibition", artworks)
 
   const Loading = () => (
     <Box
@@ -52,6 +50,7 @@ const GalleryExhibition = ({ exhibitionId }) => {
             xs={12}
             sm={6}
             md={4}
+            lg={3}
             className={classes.containerItem}
           >
             <ArtworkItem galleryItem={galleryItem} />
