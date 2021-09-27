@@ -1,4 +1,3 @@
-import { ethers } from 'ethers'
 import { get, post } from './http'
 import provider from './provider'
 
