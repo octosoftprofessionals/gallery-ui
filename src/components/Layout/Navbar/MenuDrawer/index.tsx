@@ -13,6 +13,7 @@ import {
 
 import LoggedButton from '../LoggedButton'
 import ButtonUser from './ButtonUser'
+import LogoSCNFT from '../../../../assets/dark-logo-SC.svg'
 
 import ButtonConnectWallet from '../ButtonConnectWallet'
 
@@ -55,19 +56,23 @@ const useStyles = makeStyles(Theme => ({
   },
   drawer: {
     width: `${Theme.spacing(17)}vw`,
-    padding: Theme.spacing(0, 7),
-    display: 'flex',
-    wrap: 'wrap',
-    flexDirection: 'column',
-    top: 0,
-    left: 0,
+    padding: Theme.spacing(2, 7),
   },
   offIcon: { fontSize: Theme.typography.fontSize[11] },
   containerImg: { marginBottom: Theme.spacing(7) },
   menuIcon: { fontSize: Theme.typography.fontSize[10] },
-  drawerFooter: { marginTop: `${Theme.spacing(3)}vh` },
+  drawerFooter: { marginTop: `${Theme.spacing(1)}vh` },
   logoDark: {
     display: Theme.palette.type === 'dark' ? 'block' : 'none',
+    width: 150,
+    height: 150,
+    '@media (max-width: 576px)': {
+      width: Theme.spacing(17),
+      height: Theme.spacing(17),
+    },
+  },
+  logo: {
+    display: Theme.palette.type === 'dark' ? 'none' : 'block',
     width: 150,
     height: 150,
     '@media (max-width: 576px)': {
@@ -85,6 +90,7 @@ const useStyles = makeStyles(Theme => ({
   contButton: {
     margin: Theme.spacing(6),
   },
+  contButtonWallet: { marginTop: `${Theme.spacing(10)}vh` },
 }))
 
 const MenuDrawer = ({
@@ -119,7 +125,12 @@ const MenuDrawer = ({
         onOpen={() => setShowDrawer(true)}
         onClose={() => setShowDrawer(false)}
       >
-        <Grid container direction="column" className={classes.drawer}>
+        <Grid
+          container
+          justifyContent="space-between"
+          direction="column"
+          className={classes.drawer}
+        >
           <Grid
             item
             xs={12}
@@ -130,6 +141,7 @@ const MenuDrawer = ({
             <Grid item xs={6}>
               <Link to="/" className={classes.link}>
                 <LogoDarkSrc className={classes.logoDark} />
+                <LogoSCNFT className={classes.logo} />
               </Link>
             </Grid>
             <Grid item xs={2}>
@@ -143,7 +155,7 @@ const MenuDrawer = ({
               {account ? (
                 <Grid
                   item
-                  xs={6}
+                  xs={8}
                   container
                   justify="flex-end"
                   className={classes.contButton}
@@ -156,16 +168,7 @@ const MenuDrawer = ({
                     />
                   ) : null}
                 </Grid>
-              ) : (
-                <Grid
-                  container
-                  justify="flex-end"
-                  xs={6}
-                  className={classes.contButton}
-                >
-                  <ButtonConnectWallet pathname={pathname} />
-                </Grid>
-              )}
+              ) : null}
             </Grid>
             <Grid container direction="column">
               <Link to={'/exhibition'} className={classes.link}>
@@ -203,7 +206,16 @@ const MenuDrawer = ({
                         </Typography>
                       </Grid>
                     </Button>
-                  ) : null}
+                  ) : (
+                    <Grid
+                      container
+                      justify="flex-start"
+                      xs={12}
+                      className={classes.contButtonWallet}
+                    >
+                      <ButtonConnectWallet pathname={pathname} />
+                    </Grid>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
