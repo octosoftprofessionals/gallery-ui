@@ -235,13 +235,7 @@ const index = ({
               >
                 <IconButton
                   color="inherit"
-                  className={
-                    pathname === '/creator/'
-                      ? classes.buttonCreatorMenu
-                      : pathname === '/artwork/'
-                      ? classes.buttonCreatorMenu
-                      : classes.buttonMenu
-                  }
+                  className={classes.buttonCreatorMenu}
                   aria-label="open drawer"
                   onClick={() => setShowDrawer(true)}
                   edge="end"
