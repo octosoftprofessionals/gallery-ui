@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
-
+import { Link } from 'gatsby'
 import { Button, Grid, Typography } from '@material-ui/core'
 import Slide from '@material-ui/core/Slide'
 import { makeStyles } from '@material-ui/core/styles'
@@ -150,6 +150,9 @@ const useStyle = makeStyles(Theme => ({
       padding: Theme.spacing(0, 0, 0, 15),
     },
   },
+  link: {
+    textDecoration: 'none',
+  },
 }))
 
 const InfoCreator = ({
@@ -223,12 +226,11 @@ const InfoCreator = ({
   const [transition, setTransition] = useState<
     React.ComponentType<TransitionProps> | undefined
   >(undefined)
-  const handleTransition = (
-    Transition: React.ComponentType<TransitionProps>
-  ) => () => {
-    setTransition(() => Transition)
-    setOpenMessage(true)
-  }
+  const handleTransition =
+    (Transition: React.ComponentType<TransitionProps>) => () => {
+      setTransition(() => Transition)
+      setOpenMessage(true)
+    }
 
   const handleClose = () => {
     setOpenMessage(false)
@@ -346,9 +348,11 @@ const InfoCreator = ({
           </Grid>
           <Grid item md={3} sm={9} xs={12}>
             {isMyAccount ? (
-              <Button variant="outlined" fullWidth href="/editProfile">
-                <Typography variant="button">Edit profile</Typography>
-              </Button>
+              <Link className={classes.link} to={'/editProfile'}>
+                <Button variant="outlined" fullWidth>
+                  <Typography variant="button">Edit profile</Typography>
+                </Button>
+              </Link>
             ) : isLoading ? (
               <Spinner height="10vh" />
             ) : (
