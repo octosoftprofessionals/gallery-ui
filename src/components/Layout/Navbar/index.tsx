@@ -66,8 +66,11 @@ const useStyles = makeStyles(Theme => ({
     color: Theme.palette.primary.contrastText,
     '&:hover': { backgroundColor: Theme.palette.buttons.selected },
   },
-  boxIconButton: { position: 'relative' },
+  boxIconButton: {
+    position: 'relative',
+  },
   buttonMenu: {
+    backgroundColor: Theme.palette.background.paper,
     boxShadow: boxShadow1,
     fontSize: `${Theme.typography.fontSize[0]}rem`,
     '@media (max-width: 576px)': {
@@ -99,7 +102,10 @@ const useStyles = makeStyles(Theme => ({
   },
   offIcon: { fontSize: Theme.typography.fontSize[11] },
   containerImg: { marginBottom: Theme.spacing(7) },
-  menuIcon: { fontSize: Theme.typography.fontSize[10] },
+  menuIcon: {
+    fontSize: Theme.typography.fontSize[10],
+    color: Theme.palette.primary.main,
+  },
   imgMenu: {
     marginLeft: Theme.spacing(3),
     marginTop: Theme.spacing(7),
