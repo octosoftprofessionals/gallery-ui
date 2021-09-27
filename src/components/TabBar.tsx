@@ -155,7 +155,9 @@ const TabBar = ({
         {...props}
         className={playlist ? classes.dividerPlaylist : classes.divider}
       />
-      {components[selected]}
+      <Grid container justify="center">
+        {components[selected]}
+      </Grid>
     </Grid>
   )
 }
