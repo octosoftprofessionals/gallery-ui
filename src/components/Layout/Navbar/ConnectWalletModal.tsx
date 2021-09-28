@@ -77,10 +77,10 @@ const ConnectWalletModal = ({
               },
             ],
           })) ?? []
-
+        console.log(`accounts :>`, accounts)
         const account = await login()
         // TODO: save account instead of metamaskone
-        console.log('Logged in with account: ', account)
+        console.log('Logged in with account :> ', account)
 
         setMetamaskAccount(accounts[0])
         handleCloseConnectWalletModal()
