@@ -6,6 +6,9 @@ const MAINNET_INFURA_URL =
 // const ROPSTEN_INFURA_URL =
 //   'https://ropsten.infura.io/v3/655cfb5bb2bb42b2bc96f812738a29f8'
 
-const httpProvider = new ethers.providers.Web3Provider(window.ethereum)
+const httpProvider =
+  window !== 'undefined'
+    ? new ethers.providers.Web3Provider(window.ethereum)
+    : null
 
 export default httpProvider
