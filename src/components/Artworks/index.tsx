@@ -124,7 +124,8 @@ const GridArtworks = () => {
             handleFavorite(assetId, status, 'Live')
           }
           emptyMessageProps={{
-            primaryText: `Auction, it's empty.`,
+            primaryText: `There's no auctions at this time.
+           Check back later!`,
             showExploreButton: true,
           }}
         />,
