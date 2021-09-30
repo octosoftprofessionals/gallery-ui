@@ -58,7 +58,6 @@ const HeroInfo = ({
     >
       <HeroAuctionItem
         title={title}
-        status={status}
         priceEth={priceEth}
         priceUsd={priceUsd}
         expiration={expiration}

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import CreatorButton from '../../../CreatorButton'
 import { userInfo } from '../../../../types'
 
+import AuctionArtwork from './AuctionArtwork'
 import ButtonViewArtwork from './ButtonViewArtwork'
 
 const useStyle = makeStyles(Theme => ({
@@ -22,7 +23,6 @@ const useStyle = makeStyles(Theme => ({
 
 const HeroAuctionItem = ({
   title,
-  status,
   priceEth,
   priceUsd,
   expiration,
@@ -32,7 +32,6 @@ const HeroAuctionItem = ({
   userInfo,
 }: {
   title: string
-  status: string
   priceEth?: string
   priceUsd?: string
   expiration?: string
@@ -55,7 +54,16 @@ const HeroAuctionItem = ({
           {title}
         </Typography>
       </Grid>
-      <ButtonViewArtwork />
+      <AuctionArtwork
+        isLoading={isLoading}
+        priceEth={priceEth}
+        priceUsd={priceUsd}
+        expiration={expiration}
+      />
+      <ButtonViewArtwork
+        linkButtonArtWork={linkButtonArtWork}
+        linkButtonBid={linkButtonBid}
+      />
     </Grid>
   )
 }

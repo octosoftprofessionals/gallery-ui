@@ -2,19 +2,17 @@ import React from 'react'
 import { Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { formatDecimal, formatUsd } from '../../../../../Utils'
 import useTimer from '../../../../../hooks/useTimer'
 
 import Spinner from '../../../../Spinner'
 
 import CountdownTimer from './CountdownTimer'
+import Price from './Price'
 
 const useStyle = makeStyles(Theme => ({
   root: {
     padding: Theme.spacing(5, 0, 5, 0),
   },
-  price: { fontSize: Theme.typography.fontSize[6] },
-  titlePrice: { fontSize: Theme.typography.fontSize[3] },
   divider: {
     opacity: Theme.palette.action.disabledOpacity[1],
     backgroundColor: Theme.palette.primary.main,
@@ -63,37 +61,18 @@ const AuctionArtwork = ({ isLoading, priceEth, priceUsd, expiration }) => {
       justify="space-between"
       className={classes.root}
     >
-      <Grid item xs={12} md={3} container direction="column">
-        <Typography
-          variant="button"
-          color="primary"
-          className={classes.titlePrice}
-        >
-          Current Bid
-        </Typography>
-        <Typography variant="button" color="primary" className={classes.price}>
-          {isNaN(priceEth) ? '—' : `${formatDecimal(priceEth)} ETH`}
-        </Typography>
-        <Typography variant="caption">
-          {isNaN(priceUsd) ? '—' : `${formatUsd(priceUsd)}`}
-        </Typography>
-      </Grid>
+      <Price priceEth={priceEth} priceUsd={priceUsd} />
       <Hidden mdDown>
         <Divider orientation="vertical" flexItem className={classes.divider} />
       </Hidden>
-
-      {isLoading ? (
-        <Spinner height="30vh" />
-      ) : (
-        <CountdownTimer
-          timer={timer}
-          changeTitle={changeTitle}
-          disableDays={disableDays}
-          disableHours={disableHours}
-          disableTime={disableTime}
-          disableInfo={disableInfo}
-        />
-      )}
+      <CountdownTimer
+        timer={timer}
+        changeTitle={changeTitle}
+        disableDays={disableDays}
+        disableHours={disableHours}
+        disableTime={disableTime}
+        disableInfo={disableInfo}
+      />
     </Grid>
   )
 }
