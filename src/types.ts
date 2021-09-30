@@ -393,3 +393,9 @@ export type ArtworkLinks = {
 }
 
 export type TransitionProps = Omit<SlideProps, 'direction'>
+
+export type userInfo = {
+  username: string
+  imageUrl: string
+  profileUrl: string
+}
