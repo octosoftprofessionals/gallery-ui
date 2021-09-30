@@ -4,13 +4,13 @@ import { Link } from 'gatsby'
 
 import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import CreatorButton from '../../../CreatorButton'
-import { formatDecimal, formatUsd } from '../../../../Utils'
-import useTimer from '../../../../hooks/useTimer'
+import CreatorButton from '../../../../CreatorButton'
+import { formatDecimal, formatUsd } from '../../../../../Utils'
+import useTimer from '../../../../../hooks/useTimer'
 
-import Spinner from '../../../Spinner'
+import Spinner from '../../../../Spinner'
 
-import CountdownTimer from './CountdownTimer'
+import CountdownTimer from '../CountdownTimer'
 
 const useStyle = makeStyles(Theme => ({
   '@global': {
@@ -59,6 +59,7 @@ const useStyle = makeStyles(Theme => ({
 
 const HeroAuctionItem = ({
   title,
+  status,
   priceEth,
   priceUsd,
   expiration,

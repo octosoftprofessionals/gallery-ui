@@ -69,7 +69,7 @@ const HeroAuction = ({
   const artworkPath = artworkPathFrom(assetContractAddress, assetTokenId)
   const biddingPath = biddingPathFrom(assetContractAddress, assetTokenId)
   const creatorPath = profilePathFromAddress(creatorAddress)
-
+  console.log('galleryItem :>> ', galleryItem)
   return (
     <div className={classes.root}>
       {galleryItem ? (
@@ -108,6 +108,7 @@ const HeroAuction = ({
             >
               <HeroAuctionItem
                 title={title}
+                status={status}
                 priceEth={priceEth}
                 priceUsd={priceUsd}
                 expiration={expiration}
