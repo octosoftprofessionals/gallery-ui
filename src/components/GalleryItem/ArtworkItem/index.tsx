@@ -149,7 +149,7 @@ const ArtworkItem = ({
               <div className={classes.inVideo}>
                 <video
                   poster={imageUrl}
-                  src={'' ?? videoUrl}
+                  src={videoUrl}
                   autoPlay={true}
                   loop={true}
                   className={classes.video}
