@@ -71,14 +71,14 @@ const ItemToOffer = ({
   isOwner,
   valueBid,
   setValueBid,
-  isPendingOffert,
-  setIsPendingOffert,
+  isPendingOffer,
+  setIsPendingOffer,
 }) => {
   const classes = Styles()
   const [textBtn, setTextBtn] = useState<string>('Make Offer')
-  const handleOffert = () => {
-    setTextBtn('Counteroffert')
-    setIsPendingOffert(!isPendingOffert)
+  const handleOffer = () => {
+    setTextBtn('Counteroffer')
+    setIsPendingOffer(!isPendingOffer)
   }
   return (
     <Grid
@@ -119,15 +119,15 @@ const ItemToOffer = ({
           variant="text"
           fullWidth
           className={
-            isPendingOffert ? classes.btnCounteroffert : classes.btnMakeOffer
+            isPendingOffer ? classes.btnCounteroffer : classes.btnMakeOffer
           }
-          onClick={handleOffert}
+          onClick={handleOffer}
         >
           <Typography
             variant="caption"
             className={
-              isPendingOffert
-                ? classes.txtBtnCounteroffert
+              isPendingOffer
+                ? classes.txtBtnCounteroffer
                 : classes.txtBtnMakeOffer
             }
           >
