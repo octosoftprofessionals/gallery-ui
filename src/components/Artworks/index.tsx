@@ -5,7 +5,7 @@ import { allQuerysItems } from '../../services/gallery'
 
 import TabBar from '../TabBar'
 import GalleryArtworks from './GalleryArtworks'
-import { findeArtwork } from '../../Utils'
+import { findArtwork, STATUS_VALUES } from '../../Utils'
 import { useQueryHash } from '../../hooks/useQueryParams'
 
 const GridArtworks = () => {
@@ -21,7 +21,7 @@ const GridArtworks = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=on_auction' }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.onAuction}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -44,7 +44,7 @@ const GridArtworks = () => {
     hasNextPage: hasNextPageReserve,
   } = useInfiniteQuery(
     'buyNowItemsQuery',
-    ({ pageParam = 0, querys = 'status=buy_now' }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -67,7 +67,7 @@ const GridArtworks = () => {
     hasNextPage: hasNextPageSold,
   } = useInfiniteQuery(
     'soldItemsQuery',
-    ({ pageParam = 0, querys = 'status=none' }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.none}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -90,7 +90,7 @@ const GridArtworks = () => {
         BuyNow: reserveItemsQuery.pages,
         Other: soldItemsQuery.pages,
       }
-      findeArtwork(titles[title], assetId, status)
+      findArtwork(titles[title], assetId, status)
     },
     [listedItemsQuery.pages, reserveItemsQuery.pages, soldItemsQuery.pages]
   )

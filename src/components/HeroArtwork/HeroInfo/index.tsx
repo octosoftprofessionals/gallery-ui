@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 
 import { GalleryItem } from '../../../types'
+import { STATUS_VALUES } from '../../../Utils'
 
 import {
   artworkPathFrom,
@@ -50,7 +51,21 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
       justify="space-around"
       className={classes.containerInfo}
     >
-      {status === 'none' ? (
+      {status === STATUS_VALUES.onAuction ? (
+        <HeroOfferItem
+          title={title}
+          priceEth={priceEth}
+          priceUsd={priceUsd}
+          expiration={expiration}
+          linkButtonArtWork={artworkPath}
+          linkButton={biddingPath}
+          userInfo={{
+            username: creatorUsername,
+            imageUrl: creatorImageUrl,
+            profileUrl: creatorPath,
+          }}
+        />
+      ) : status === STATUS_VALUES.none ? (
         <HeroOfferItem
           title={title}
           priceEth={priceEth}

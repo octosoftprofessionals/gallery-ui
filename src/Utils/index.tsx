@@ -185,3 +185,9 @@ export const isError = (e: any): boolean =>
 
 export const formatEthersFromBigNumber = (bn: BigNumber = new BigNumber(0)) =>
   formatDecimal(ethers.utils.formatUnits(bn.toString()))
+
+export const STATUS_VALUES = {
+  onAuction: 'on_auction',
+  buyNow: 'buy_now',
+  none: 'none',
+}

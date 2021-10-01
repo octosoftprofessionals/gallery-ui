@@ -8,7 +8,7 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-import { findArtwork } from '../Utils'
+import { findArtwork, STATUS_VALUES } from '../Utils'
 import { allQuerysItems } from '../services/gallery'
 
 const Home = () => {
@@ -47,7 +47,7 @@ const Home = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=buy_now' }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
