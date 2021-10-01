@@ -13,22 +13,23 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.primary.main,
   },
 }))
-const AuctionArtwork = ({ priceEth, priceUsd }) => {
+const AuctionArtwork = ({
+  priceEth,
+  priceUsd,
+}: {
+  priceEth: string
+  priceUsd: string
+}) => {
   const classes = useStyle()
   return (
     <Grid
       item
-      xs={11}
       container
-      direction="row"
       alignContent="center"
       justify="center"
       className={classes.root}
     >
       <Price priceEth={priceEth} priceUsd={priceUsd} />
-      <Hidden mdDown>
-        <Divider orientation="vertical" flexItem className={classes.divider} />
-      </Hidden>
     </Grid>
   )
 }

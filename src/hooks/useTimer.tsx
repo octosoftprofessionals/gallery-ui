@@ -6,7 +6,7 @@ const useTimer = ({ expiration }: { expiration: Date }) => {
   const [changeTitle, setChangeTitle] = useState<string>('Auction ending in')
   const [variantButton, setVariantButton] = useState<string>('contained')
   const [textButton, setTextButton] = useState<string>('Place a bid')
-  const [infoAution, setInfoAution] = useState<string>(
+  const [infoAuction, setInfoAuction] = useState<string>(
     'Any bids placed in the last 15 minutes will extend the auction for another 15 minutes.'
   )
   const [disableInfo, setDisableInfo] = useState<boolean>(false)
@@ -23,7 +23,7 @@ const useTimer = ({ expiration }: { expiration: Date }) => {
         setDisableTime(false)
         setVariantButton('outlined')
         setTextButton('I understand, let me bid anyway')
-        setInfoAution(
+        setInfoAuction(
           'If you were to place a bid at this time there is a high chance that it would result in an error.'
         )
         setTimer(0)
@@ -48,7 +48,7 @@ const useTimer = ({ expiration }: { expiration: Date }) => {
     changeTitle,
     variantButton,
     textButton,
-    infoAution,
+    infoAuction,
     disableDays,
     disableHours,
     disableInfo,

@@ -15,40 +15,23 @@ const useStyle = makeStyles(Theme => ({
       marginTop: '0px',
     },
   },
-  containerInfo: {
-    position: 'relative',
-    '@media (max-width: 576px)': {
-      marginTop: '15vh',
-    },
-  },
 }))
 
-const HeroAuction = ({ galleryItem = {} }: { galleryItem: GalleryItem }) => {
+const HeroArtwork = ({ galleryItem }: { galleryItem: GalleryItem }) => {
   const { imageUrl, videoUrl } = galleryItem
 
   const classes = useStyle()
 
-  console.log('galleryItem :>> ', galleryItem)
   return (
     <div className={classes.root}>
-      {galleryItem ? (
-        <Grid container justify="center" alignItems="center">
-          <Grid
-            item
-            xs={12}
-            md={9}
-            container
-            justify="space-around"
-            alignItems="center"
-          >
-            <HeroDisplay imageUrl={imageUrl} videoUrl={videoUrl} />
-
-            <HeroInfo galleryItem={galleryItem} />
-          </Grid>
+      <Grid container justify="center">
+        <Grid item xs={12} md={9} container justify="space-around">
+          <HeroDisplay imageUrl={imageUrl} videoUrl={videoUrl} />
+          <HeroInfo galleryItem={galleryItem} />
         </Grid>
-      ) : null}
+      </Grid>
     </div>
   )
 }
 
-export default HeroAuction
+export default HeroArtwork

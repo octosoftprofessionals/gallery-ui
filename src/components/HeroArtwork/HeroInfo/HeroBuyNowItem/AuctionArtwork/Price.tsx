@@ -18,13 +18,13 @@ const Price = ({
   const classes = useStyle()
 
   return (
-    <Grid item xs={12} md={3} container direction="column">
+    <Grid item xs={6} container direction="column">
       <Typography
         variant="button"
         color="primary"
         className={classes.titlePrice}
       >
-        Current Bid
+        Current Price
       </Typography>
       <Typography variant="button" color="primary" className={classes.price}>
         {isNaN(parseInt(priceEth)) ? '—' : `${formatDecimal(priceEth)} ETH`}

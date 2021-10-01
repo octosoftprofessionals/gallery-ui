@@ -25,7 +25,11 @@ const HeroOfferItem = ({
 }) => {
   return (
     <TopHero userInfo={userInfo} title={title}>
-      <AuctionArtwork priceEth={priceEth} priceUsd={priceUsd} />
+      <AuctionArtwork
+        priceEth={priceEth}
+        priceUsd={priceUsd}
+        expiration={expiration}
+      />
       <ButtonsArtwork
         textButton={'Make an offer'}
         linkButtonArtWork={linkButtonArtWork}

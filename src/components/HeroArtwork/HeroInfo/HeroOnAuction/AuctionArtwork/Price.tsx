@@ -9,8 +9,8 @@ const useStyle = makeStyles(Theme => ({
 
 import { formatDecimal, formatUsd } from '../../../../../Utils'
 const Price = ({
-  priceEth = 'NaN',
-  priceUsd = 'NaN',
+  priceEth,
+  priceUsd,
 }: {
   priceEth: string
   priceUsd: string
@@ -27,10 +27,10 @@ const Price = ({
         Current Bid
       </Typography>
       <Typography variant="button" color="primary" className={classes.price}>
-        {isNaN(parseInt(priceEth)) ? '—' : `${formatDecimal(priceEth)} ETH`}
+        {isNaN(priceEth) ? '—' : `${formatDecimal(priceEth)} ETH`}
       </Typography>
       <Typography variant="caption">
-        {isNaN(parseInt(priceUsd)) ? '—' : `${formatUsd(priceUsd)}`}
+        {isNaN(priceUsd) ? '—' : `${formatUsd(priceUsd)}`}
       </Typography>
     </Grid>
   )

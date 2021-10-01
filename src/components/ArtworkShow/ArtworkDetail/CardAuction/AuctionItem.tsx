@@ -9,14 +9,13 @@ import {
   Hidden,
   Paper,
   Typography,
-  withWidth,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { formatUsd, formatDecimal } from '../../../../Utils'
 import useTimer from '../../../../hooks/useTimer'
 
-import CountdownTimer from './CountdownTimer'
+import CountdownTimer from '../../../CountdownTimer'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(11) },
@@ -43,13 +42,23 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
 }))
 
-const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
+const AuctionItem = ({
+  priceEth = 'NaN',
+  priceUsd = 'NaN',
+  expiration,
+  link,
+}: {
+  priceEth: string
+  priceUsd: string
+  expiration: Date
+  link: string
+}) => {
   const {
     timer,
     changeTitle,
     variantButton,
     textButton,
-    infoAution,
+    infoAuction,
     disableInfo,
     disableDays,
     disableHours,
@@ -81,10 +90,12 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
                 color="primary"
                 className={classes.price}
               >
-                {isNaN(priceEth) ? `- ETH` : `${formatDecimal(priceEth)} ETH`}
+                {isNaN(parseInt(priceEth))
+                  ? `- ETH`
+                  : `${formatDecimal(priceEth)} ETH`}
               </Typography>
               <Typography variant="button" color="inherit">
-                {isNaN(priceUsd) ? `$ -` : formatUsd(priceUsd)}
+                {isNaN(parseInt(priceUsd)) ? `$ -` : formatUsd(priceUsd)}
               </Typography>
             </Grid>
             <Hidden mdDown>
@@ -97,7 +108,7 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
             <CountdownTimer
               timer={timer}
               changeTitle={changeTitle}
-              infoAution={infoAution}
+              infoAuction={infoAuction}
               disableDays={disableDays}
               disableHours={disableHours}
               disableTime={disableTime}
@@ -128,4 +139,4 @@ const AuctionItem = ({ priceEth, priceUsd, expiration, link }) => {
   )
 }
 
-export default withWidth()(AuctionItem)
+export default AuctionItem

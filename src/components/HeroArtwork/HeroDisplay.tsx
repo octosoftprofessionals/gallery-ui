@@ -10,6 +10,9 @@ const useStyle = makeStyles(Theme => ({
     position: 'relative',
     paddingBottom: '100%',
     filter: boxShadow.boxShadow3,
+    '@media (max-width: 768px)': {
+      paddingBottom: '60%',
+    },
   },
   video: {
     position: 'absolute',
@@ -31,7 +34,7 @@ const HeroDisplay = ({
 }) => {
   const classes = useStyle()
   return (
-    <Grid item sm={5} md={5}>
+    <Grid item xs={12} sm={5} md={5}>
       <div className={classes.containerAsset}>
         <video
           poster={imagePreviewUrl ?? imageUrl}

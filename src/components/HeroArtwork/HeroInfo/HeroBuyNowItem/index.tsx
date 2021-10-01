@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { userInfo } from '../../../../types'
+import { formatDecimal } from '../../../../Utils'
 
 import ButtonsArtwork from '../ButtonsArtwork'
 import TopHero from '../TopHero'
 import AuctionArtwork from './AuctionArtwork'
 
-const HeroOfferItem = ({
+const HeroBuyNowItem = ({
   title,
-  priceEth,
-  priceUsd,
-  expiration,
+  priceEth = 'NaN',
+  priceUsd = 'NaN',
   linkButton,
   linkButtonArtWork,
   userInfo,
@@ -18,7 +18,6 @@ const HeroOfferItem = ({
   title: string
   priceEth?: string
   priceUsd?: string
-  expiration?: string
   linkButton?: string
   linkButtonArtWork?: string
   userInfo: userInfo
@@ -27,7 +26,11 @@ const HeroOfferItem = ({
     <TopHero userInfo={userInfo} title={title}>
       <AuctionArtwork priceEth={priceEth} priceUsd={priceUsd} />
       <ButtonsArtwork
-        textButton={'Make an offer'}
+        textButton={
+          isNaN(parseInt(priceEth))
+            ? 'Buy Now — ETH'
+            : `Buy Now ${formatDecimal(priceEth)} ETH`
+        }
         linkButtonArtWork={linkButtonArtWork}
         linkButton={linkButton}
       />
@@ -35,4 +38,4 @@ const HeroOfferItem = ({
   )
 }
 
-export default HeroOfferItem
+export default HeroBuyNowItem
