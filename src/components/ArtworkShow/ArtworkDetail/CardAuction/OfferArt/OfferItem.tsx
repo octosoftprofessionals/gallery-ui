@@ -27,7 +27,7 @@ const Styles = makeStyles(Theme => ({
   },
 }))
 
-const BidItem = ({
+const OfferItem = ({
   title,
   priceEth,
   priceUsd,
@@ -98,4 +98,4 @@ const BidItem = ({
   )
 }
 
-export default BidItem
+export default OfferItem

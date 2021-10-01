@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import OffertItem from './OffertItem'
+import OfferItem from './OfferItem'
 import OtherOffersItem from './OtherOffersItem'
 import ItemToOffer from './ItemToOffer'
 
 const Styles = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
-  conateinerTop: {
+  containerTop: {
     backgroundColor: ({ color }: { color: string }) =>
       color || Theme.palette.secondary.light,
     padding: Theme.spacing(2, 0, 2, 11),
@@ -28,25 +28,25 @@ const title = [
   { Right: 'Last Price', Left: 'Current Owner' },
 ]
 
-const alertOffert = [
+const alertOffer = [
   {
     text: 'You can make an offer to the owner of this artwork',
     color: '#FFFFFF1A',
   },
   {
-    text: 'Your current offert is pending review by the owner, placed wait.',
+    text: 'Your current offer is pending review by the owner, placed wait.',
     color: '#FFFFFF1A',
   },
   {
-    text: 'You recieved offers for this artwork.',
+    text: 'You received offers for this artwork.',
     color: '#FFFFFF1A',
   },
   {
-    text: 'Your offer was accepted, this item will be in your collection soom.',
+    text: 'Your offer was accepted, this item will be in your collection soon.',
     color: '#44B700',
   },
   {
-    text: 'Your offer was rejected. Make a counteroffert!',
+    text: 'Your offer was rejected. Make a counteroffer!',
     color: '#812727',
   },
   {
@@ -55,7 +55,7 @@ const alertOffert = [
   },
 ]
 
-const OffertArt = ({
+const OffersArt = ({
   priceEth,
   priceUsd,
   ownerAddress,
@@ -65,12 +65,12 @@ const OffertArt = ({
   const [valueBid, setValueBid] = useState('')
   const [isOwner, setIsOwner] = useState<boolean>(false)
   const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(false)
-  const [isPendingOffert, setIsPendingOffert] = useState<boolean>(false)
+  const [isPendingOffer, setIsPendingOffer] = useState<boolean>(false)
 
-  const classes = Styles({ color: alertOffert[0].color })
+  const classes = Styles({ color: alertOffer[0].color })
 
   return (
-    <OffertItem
+    <OfferItem
       title={title[0]}
       priceEth={priceEth}
       priceUsd={priceUsd}
@@ -78,9 +78,9 @@ const OffertArt = ({
       ownerImageUrl={ownerImageUrl}
       ownerUsername={ownerUsername}
     >
-      <div className={classes.conateinerTop}>
+      <div className={classes.containerTop}>
         <Typography variant="body1" className={classes.text}>
-          {alertOffert[0].text}
+          {alertOffer[0].text}
         </Typography>
       </div>
       {isOwnerOffers ? (
@@ -92,12 +92,12 @@ const OffertArt = ({
           isOwner={isOwner}
           valueBid={valueBid}
           setValueBid={setValueBid}
-          isPendingOffert={isPendingOffert}
-          setIsPendingOffert={setIsPendingOffert}
+          isPendingOffer={isPendingOffer}
+          setIsPendingOffer={setIsPendingOffer}
         />
       )}
-    </OffertItem>
+    </OfferItem>
   )
 }
 
-export default OffertArt
+export default OffersArt

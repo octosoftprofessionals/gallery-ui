@@ -2,7 +2,7 @@ import React from 'react'
 
 import BidArt from './BidArt'
 import BuyNow from './BuyNow'
-import OffertArt from './OffertArt'
+import OfferArt from './OfferArt'
 
 const CardAuction = ({
   status,
@@ -33,7 +33,7 @@ const CardAuction = ({
       ownerUsername={ownerUsername}
     />
   ) : status === 'none' ? (
-    <OffertArt
+    <OfferArt
       priceEth={priceEth}
       priceUsd={priceUsd}
       ownerAddress={ownerAddress}
