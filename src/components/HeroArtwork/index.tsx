@@ -23,13 +23,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const HeroAuction = ({
-  galleryItem = {},
-  isLoading,
-}: {
-  galleryItem: GalleryItem
-  isLoading: boolean
-}) => {
+const HeroAuction = ({ galleryItem = {} }: { galleryItem: GalleryItem }) => {
   const { imageUrl, videoUrl } = galleryItem
 
   const classes = useStyle()
@@ -49,7 +43,7 @@ const HeroAuction = ({
           >
             <HeroDisplay imageUrl={imageUrl} videoUrl={videoUrl} />
 
-            <HeroInfo galleryItem={galleryItem} isLoading={isLoading} />
+            <HeroInfo galleryItem={galleryItem} />
           </Grid>
         </Grid>
       ) : null}

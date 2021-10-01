@@ -158,7 +158,7 @@ export const linkStorage = () => {
   }
 }
 
-export const findeArtwork = (arry, assetId, status) => {
+export const findArtwork = (arry, assetId, status) => {
   arry.forEach(arry => {
     const res = arry.find(artwork => artwork.assetId === assetId)
     if (res) {
@@ -167,7 +167,7 @@ export const findeArtwork = (arry, assetId, status) => {
   })
 }
 
-export const findeArtworkFavorites = (arry, assetId, status) => {
+export const findArtworkFavorites = (arry, assetId, status) => {
   arry.forEach(({ favoriteArtworks }) => {
     const res = favoriteArtworks.find(artwork => artwork.assetId === assetId)
     if (res) {

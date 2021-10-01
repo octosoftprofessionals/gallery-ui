@@ -33,7 +33,7 @@ const useStyle = makeStyles(Theme => ({
       disableTime ? 'flex' : 'none',
   },
 }))
-const AuctionArtwork = ({ isLoading, priceEth, priceUsd, expiration }) => {
+const AuctionArtwork = ({ priceEth, priceUsd, expiration }) => {
   const {
     timer,
     changeTitle,

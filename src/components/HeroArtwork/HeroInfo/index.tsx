@@ -11,7 +11,7 @@ import {
   biddingPathFrom,
 } from '../../../config/routes'
 
-import HeroAuctionItem from './HeroAuctionItem'
+import HeroOfferItem from './HeroOfferItem'
 
 const useStyle = makeStyles(Theme => ({
   containerInfo: {
@@ -22,13 +22,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const HeroInfo = ({
-  galleryItem,
-  isLoading,
-}: {
-  galleryItem: GalleryItem
-  isLoading: boolean
-}) => {
+const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
   const {
     assetContractAddress,
     assetTokenId,
@@ -56,20 +50,21 @@ const HeroInfo = ({
       justify="space-around"
       className={classes.containerInfo}
     >
-      <HeroAuctionItem
-        title={title}
-        priceEth={priceEth}
-        priceUsd={priceUsd}
-        expiration={expiration}
-        linkButtonArtWork={artworkPath}
-        linkButtonBid={biddingPath}
-        isLoading={isLoading}
-        userInfo={{
-          username: creatorUsername,
-          imageUrl: creatorImageUrl,
-          profileUrl: creatorPath,
-        }}
-      />
+      {status === 'none' ? (
+        <HeroOfferItem
+          title={title}
+          priceEth={priceEth}
+          priceUsd={priceUsd}
+          expiration={expiration}
+          linkButtonArtWork={artworkPath}
+          linkButtonBid={biddingPath}
+          userInfo={{
+            username: creatorUsername,
+            imageUrl: creatorImageUrl,
+            profileUrl: creatorPath,
+          }}
+        />
+      ) : null}
     </Grid>
   )
 }

@@ -28,7 +28,6 @@ const HeroAuctionItem = ({
   expiration,
   linkButtonBid,
   linkButtonArtWork,
-  isLoading,
   userInfo,
 }: {
   title: string
@@ -37,7 +36,6 @@ const HeroAuctionItem = ({
   expiration?: string
   linkButtonBid?: string
   linkButtonArtWork?: string
-  isLoading?: boolean
   userInfo: userInfo
 }) => {
   const classes = useStyle()
@@ -55,7 +53,6 @@ const HeroAuctionItem = ({
         </Typography>
       </Grid>
       <AuctionArtwork
-        isLoading={isLoading}
         priceEth={priceEth}
         priceUsd={priceUsd}
         expiration={expiration}
