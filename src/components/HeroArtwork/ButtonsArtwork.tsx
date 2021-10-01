@@ -18,21 +18,23 @@ const useStyle = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
 }))
 
-const ButtonViewArtwork = ({
+const ButtonsArtwork = ({
   linkButtonArtWork,
-  linkButtonBid,
+  linkButton,
+  textButton,
 }: {
   linkButtonArtWork?: string
-  linkButtonBid?: string
+  linkButton?: string
+  textButton: string
 }) => {
   const classes = useStyle()
   return (
     <Grid item sm={10} container justify="flex-start">
       <Grid item xs={12} md={5}>
-        <Link to={linkButtonBid} className={classes.link}>
+        <Link to={linkButton} className={classes.link}>
           <Button variant="outlined" fullWidth className={classes.button}>
             <Typography variant="button" className={classes.textButton}>
-              Place a bid
+              {textButton}
             </Typography>
           </Button>
         </Link>
@@ -50,4 +52,4 @@ const ButtonViewArtwork = ({
   )
 }
 
-export default ButtonViewArtwork
+export default ButtonsArtwork

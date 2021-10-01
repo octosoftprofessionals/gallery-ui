@@ -6,7 +6,7 @@ import CreatorButton from '../../../CreatorButton'
 import { userInfo } from '../../../../types'
 
 import AuctionArtwork from './AuctionArtwork'
-import ButtonViewArtwork from './ButtonViewArtwork'
+import ButtonsArtwork from '../../ButtonsArtwork'
 
 const useStyle = makeStyles(Theme => ({
   container: {
@@ -26,7 +26,7 @@ const HeroAuctionItem = ({
   priceEth,
   priceUsd,
   expiration,
-  linkButtonBid,
+  linkButton,
   linkButtonArtWork,
   userInfo,
 }: {
@@ -34,7 +34,7 @@ const HeroAuctionItem = ({
   priceEth?: string
   priceUsd?: string
   expiration?: string
-  linkButtonBid?: string
+  linkButton?: string
   linkButtonArtWork?: string
   userInfo: userInfo
 }) => {
@@ -57,9 +57,10 @@ const HeroAuctionItem = ({
         priceUsd={priceUsd}
         expiration={expiration}
       />
-      <ButtonViewArtwork
+      <ButtonsArtwork
+        textButton={'Make an offer'}
         linkButtonArtWork={linkButtonArtWork}
-        linkButtonBid={linkButtonBid}
+        linkButton={linkButton}
       />
     </Grid>
   )

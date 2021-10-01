@@ -57,7 +57,7 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
           priceUsd={priceUsd}
           expiration={expiration}
           linkButtonArtWork={artworkPath}
-          linkButtonBid={biddingPath}
+          linkButton={biddingPath}
           userInfo={{
             username: creatorUsername,
             imageUrl: creatorImageUrl,
