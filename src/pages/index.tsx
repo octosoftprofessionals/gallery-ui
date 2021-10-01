@@ -47,7 +47,7 @@ const Home = () => {
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.onAuction}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -77,14 +77,13 @@ const Home = () => {
   return (
     <Layout padding="0">
       <EmailPopUp />
-      {isLoadingFA ? (
+      {isLoadingLA ? (
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          // artworksCarousel={
-          //   allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 4)
-          // }
-          artworksCarousel={liveAuctionItems.pages[0].slice(0, 1)}
+          artworksCarousel={
+            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 4)
+          }
           timeout={1000}
           interval={7000}
         />
@@ -117,7 +116,7 @@ const Home = () => {
         )}
       </ArtworkGrid>
 
-      <ArtworkGrid
+      {/* <ArtworkGrid
         title="Live auctions 🔴"
         titleButton="live auctions"
         link="/artworks"
@@ -144,7 +143,7 @@ const Home = () => {
             />
           </Grid>
         )}
-      </ArtworkGrid>
+      </ArtworkGrid> */}
     </Layout>
   )
 }

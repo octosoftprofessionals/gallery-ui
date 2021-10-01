@@ -16,19 +16,8 @@ const useStyle = makeStyles(Theme => ({
 const AuctionArtwork = ({ priceEth, priceUsd }) => {
   const classes = useStyle()
   return (
-    <Grid
-      item
-      xs={11}
-      container
-      direction="row"
-      alignContent="center"
-      justify="center"
-      className={classes.root}
-    >
+    <Grid item xs={11} container justify="center" className={classes.root}>
       <Price priceEth={priceEth} priceUsd={priceUsd} />
-      <Hidden mdDown>
-        <Divider orientation="vertical" flexItem className={classes.divider} />
-      </Hidden>
     </Grid>
   )
 }
