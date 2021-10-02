@@ -224,7 +224,7 @@ const ArtworksSelected = ({
           onClick={onPlublish}
         >
           <Typography variant="caption" className={classes.textBtn}>
-            Published
+            Publish
           </Typography>
         </Button>
       </Grid>
