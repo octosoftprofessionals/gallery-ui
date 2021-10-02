@@ -68,11 +68,3 @@ const ImgConteiner = styled.div`
     height: 34px;
   }
 `
-
-const LinkUser = styled.a`
-  font-family: Avenir, Avenir Next, Helvetica Neue, 'Bai Jamjuree Bold';
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-`

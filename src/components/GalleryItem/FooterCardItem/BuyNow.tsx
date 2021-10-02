@@ -14,8 +14,8 @@ const useStyle = makeStyles(Theme => ({
     backgroundColor: Theme.palette.secondary.light,
     borderRadius: Theme.spacing(0, 0, 4, 4),
   },
-  conateinerTop: { padding: Theme.spacing(2, 6) },
-  conateinerButtom: { padding: Theme.spacing(0, 0, 2) },
+  containerTop: { padding: Theme.spacing(2, 6) },
+  containerButton: { padding: Theme.spacing(0, 0, 2) },
   btn: {
     position: 'relative',
     height: Theme.spacing(2),
@@ -43,7 +43,7 @@ const BuyNow = ({ price, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
-      <Grid item container justify="center" className={classes.conateinerTop}>
+      <Grid item container justify="center" className={classes.containerTop}>
         {/* Link to "Buy now" page or Event that handles the purchase in future */}
         <Button
           variant="outlined"
@@ -62,7 +62,7 @@ const BuyNow = ({ price, children }) => {
           </Typography>
         </Button>
       </Grid>
-      <Grid item xs={12} className={classes.conateinerButtom}>
+      <Grid item xs={12} className={classes.containerButton}>
         {children}
       </Grid>
     </Grid>

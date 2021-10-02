@@ -3,11 +3,9 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography } from '@material-ui/core'
 
-import useTimer from '../../../hooks/useTimer'
-
 const useStyle = makeStyles(Theme => ({
   title: { fontSize: Theme.typography.fontSize[3] },
-  infoAution: {
+  infoAuction: {
     display: ({ disableInfo }: { disableInfo: boolean }) =>
       disableInfo ? 'block' : 'none',
   },
@@ -20,7 +18,7 @@ const useStyle = makeStyles(Theme => ({
 const CountdownTimer = ({
   timer,
   changeTitle,
-  infoAution,
+  infoAuction,
   disableDays,
   disableHours,
   disableTime,
@@ -28,7 +26,7 @@ const CountdownTimer = ({
 }: {
   timer: any
   changeTitle: string
-  infoAution?: string
+  infoAuction?: string
   disableDays: boolean
   disableHours: boolean
   disableTime: boolean
@@ -113,9 +111,9 @@ const CountdownTimer = ({
       <Typography
         variant="body2"
         color="primary"
-        className={classes.infoAution}
+        className={classes.infoAuction}
       >
-        {infoAution}
+        {infoAuction}
       </Typography>
     </Grid>
   )

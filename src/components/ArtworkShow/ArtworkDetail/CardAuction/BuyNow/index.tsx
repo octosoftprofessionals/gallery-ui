@@ -23,7 +23,7 @@ const Styles = makeStyles(Theme => ({
     color: Theme.palette.primary.contrastText,
   },
   link: { textDecoration: 'none' },
-  conateinerTop: {
+  containerTop: {
     backgroundColor: Theme.palette.secondary.light,
     padding: Theme.spacing(2, 0, 2, 11),
   },
@@ -38,7 +38,7 @@ const Styles = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
   },
 }))
-const title = { Right: 'Current Preice', Left: 'Current Owner' }
+const title = { Right: 'Current Price', Left: 'Current Owner' }
 
 const BidArt = ({
   priceEth,
@@ -59,7 +59,7 @@ const BidArt = ({
       ownerImageUrl={ownerImageUrl}
       ownerUsername={ownerUsername}
     >
-      <div className={classes.conateinerTop}>
+      <div className={classes.containerTop}>
         <Typography variant="body1" className={classes.text}>
           {'You can buy this artwork.'}
         </Typography>

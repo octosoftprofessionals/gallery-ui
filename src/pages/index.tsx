@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { useInfiniteQuery, useQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
 import { Grid } from '@material-ui/core'
 import ArtworkGrid from '../components/ArtworkGrid'
 import Gallery from '../components/Gallery'
@@ -8,20 +8,12 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-import { findeArtwork } from '../Utils'
-import { featuredInfinitItemsQuery, allQuerysItems } from '../services/gallery'
-
-import { GalleryItem } from '../types'
-import { useAccountStore } from '../hooks/useAccountStore'
+import { findArtwork, STATUS_VALUES } from '../Utils'
+import { allQuerysItems } from '../services/gallery'
 
 const Home = () => {
   const [featuredArtworks, setFeaturedArtworks] = useState(0)
   const [liveAuctions, setLiveAuctions] = useState(0)
-  const metamaskStorage = useAccountStore()
-  type featureItemsQueryProps = {
-    data: GalleryItem[]
-    status: 'idle' | 'error' | 'loading' | 'success'
-  }
 
   const {
     data: allFeaturedItems = [],
@@ -48,14 +40,14 @@ const Home = () => {
   }
 
   const {
-    data: liveAcutionItems = [],
+    data: liveAuctionItems = [],
     isLoading: isLoadingLA,
     isFetching: isFetchingLA,
     fetchNextPage: fetchNextPageLA,
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
     'liveAcutions',
-    ({ pageParam = 0, querys = 'status=on_auction' }) =>
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.onAuction}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,
@@ -75,17 +67,17 @@ const Home = () => {
     (assetId, status, title) => {
       const titles = {
         All: allFeaturedItems.pages,
-        Live: liveAcutionItems.pages,
+        Live: liveAuctionItems.pages,
       }
-      findeArtwork(titles[title], assetId, status)
+      findArtwork(titles[title], assetId, status)
     },
-    [allFeaturedItems.pages, liveAcutionItems.pages]
+    [allFeaturedItems.pages, liveAuctionItems.pages]
   )
 
   return (
     <Layout padding="0">
       <EmailPopUp />
-      {isLoadingFA ? (
+      {isLoadingLA ? (
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
@@ -124,7 +116,7 @@ const Home = () => {
         )}
       </ArtworkGrid>
 
-      <ArtworkGrid
+      {/* <ArtworkGrid
         title="Live auctions 🔴"
         titleButton="live auctions"
         link="/artworks"
@@ -137,7 +129,7 @@ const Home = () => {
             <Gallery
               isLoading={isFetchingLA}
               handleNext={getMoreLiveAuctions}
-              pages={liveAcutionItems.pages}
+              pages={liveAuctionItems.pages}
               hasNextPage={hasNextPageLA}
               renderItem={item => (
                 <ArtworkItem
@@ -151,7 +143,7 @@ const Home = () => {
             />
           </Grid>
         )}
-      </ArtworkGrid>
+      </ArtworkGrid> */}
     </Layout>
   )
 }
