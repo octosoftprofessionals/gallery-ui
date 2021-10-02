@@ -1,7 +1,5 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
-import HeroAuction from '../components/HeroAuction'
-import { Grid } from '@material-ui/core'
 
 import {
   RadioButtonUnchecked,
@@ -9,6 +7,9 @@ import {
   ChevronRight,
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+
+import HeroArtwork from '../components/HeroArtwork'
+import { GalleryItem } from '../types'
 
 const useStyle = makeStyles(Theme => ({
   '@global': {
@@ -52,7 +53,7 @@ const useStyle = makeStyles(Theme => ({
       opacity: 0,
     },
   },
-  arrowRigt: {
+  arrowRight: {
     position: 'absolute',
     top: 'auto',
     right: 'auto',
@@ -81,7 +82,15 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
+const RotatingCarousel = ({
+  artworksCarousel = [],
+  interval,
+  timeout,
+}: {
+  artworksCarousel: GalleryItem[]
+  interval: number
+  timeout: number
+}) => {
   const classes = useStyle()
   return (
     <Carousel
@@ -91,7 +100,7 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
         <RadioButtonUnchecked className={classes.circle} />,
       ]}
       NextIcon={[
-        <ChevronRight className={classes.arrowRigt} />,
+        <ChevronRight className={classes.arrowRight} />,
         <RadioButtonUnchecked className={classes.circle} />,
       ]}
       navButtonsProps={{ className: 'bottom' }}
@@ -101,25 +110,19 @@ const RotatingCarousel = ({ artworksCarousel, interval, timeout }) => {
       interval={interval}
       indicatorIconButtonProps={{
         style: {
-          color: 'gray', // 3
+          color: 'gray',
         },
       }}
       activeIndicatorIconButtonProps={{
         style: {
-          color: 'whitesmoke', // 2
+          color: 'whitesmoke',
           backgroundColor: 'black',
         },
       }}
     >
-      {artworksCarousel
-        ? artworksCarousel.map(artwork => (
-            <HeroAuction
-              galleryItem={artwork}
-              isLoading={false}
-              key={artwork.assetId}
-            />
-          ))
-        : null}
+      {artworksCarousel.map(artwork => (
+        <HeroArtwork galleryItem={artwork} key={artwork.assetId} />
+      ))}
     </Carousel>
   )
 }

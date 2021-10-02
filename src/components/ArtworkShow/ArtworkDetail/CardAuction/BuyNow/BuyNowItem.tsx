@@ -42,7 +42,7 @@ const BidItem = ({
   ownerAddress: string
   ownerImageUrl: string
   ownerUsername: string
-  children: ReactChild | ReactChildren
+  children: React.ReactNode
 }) => {
   const classes = Styles()
   const ownerProfileLink = profilePathFromAddress(ownerAddress)

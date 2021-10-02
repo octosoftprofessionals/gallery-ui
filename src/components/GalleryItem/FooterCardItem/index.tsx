@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { STATUS_VALUES } from '../../../Utils'
+
 import InAuctions from './InAuctions'
 import BuyNow from './BuyNow'
 import ButtonPlaylist from './ButtonPlaylist'
@@ -28,7 +30,7 @@ const FooterCardItem = ({
 }) => {
   return (
     <>
-      {statesArt === 'on_auction' ? (
+      {statesArt === STATUS_VALUES.onAuction ? (
         <InAuctions price={price} timer={timer}>
           {account ? (
             <ButtonPlaylist
@@ -40,7 +42,7 @@ const FooterCardItem = ({
             />
           ) : null}
         </InAuctions>
-      ) : statesArt === 'buy_now' ? (
+      ) : statesArt === STATUS_VALUES.buyNow ? (
         <BuyNow price={price}>
           {account ? (
             <ButtonPlaylist
@@ -52,7 +54,7 @@ const FooterCardItem = ({
             />
           ) : null}
         </BuyNow>
-      ) : statesArt === 'none' ? (
+      ) : statesArt === STATUS_VALUES.none ? (
         <Offer link={linkOffer}>
           {account ? (
             <ButtonPlaylist
@@ -64,9 +66,7 @@ const FooterCardItem = ({
             />
           ) : null}
         </Offer>
-      ) : (
-        ''
-      )}
+      ) : null}
     </>
   )
 }
