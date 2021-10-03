@@ -57,6 +57,18 @@ const Home = () => {
     }
   )
 
+  const { data: buyNowItems = [] } = useInfiniteQuery(
+    'buyNowItemsQuery',
+    ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
+      allQuerysItems({ query: querys, offset: pageParam }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        return lastPage.length >= 20
+      },
+    }
+  )
+
   const getMoreFeaturedArtworks = () => {
     const newPages = featuredArtworks + 20
     setFeaturedArtworks(newPages)
@@ -82,7 +94,9 @@ const Home = () => {
       ) : (
         <RotatingCarousel
           artworksCarousel={
-            allFeaturedItems?.pages && allFeaturedItems?.pages[0].slice(0, 4)
+            liveAuctionItems?.pages
+              ? liveAuctionItems?.pages[0].slice(0, 4)
+              : buyNowItems.pages && buyNowItems.pages[0].slice(0, 4)
           }
           timeout={1000}
           interval={7000}
