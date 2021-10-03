@@ -57,17 +57,41 @@ const Home = () => {
     }
   )
 
-  const { data: buyNowItems = [] } = useInfiniteQuery(
-    'buyNowItemsQuery',
-    ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
-      allQuerysItems({ query: querys, offset: pageParam }),
-    {
-      refetchOnWindowFocus: false,
-      getNextPageParam: lastPage => {
-        return lastPage.length >= 20
-      },
+  const { data: buyNowItems = [], isLoading: isLoadingbuyNow } =
+    useInfiniteQuery(
+      'buyNowItemsQuery',
+      ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
+        allQuerysItems({ query: querys, offset: pageParam }),
+      {
+        refetchOnWindowFocus: false,
+        getNextPageParam: lastPage => {
+          return lastPage.length >= 20
+        },
+      }
+    )
+
+  const carouselArtworks = []
+
+  const getCarouselArtworks = () => {
+    if (liveAuctionItems?.pages && liveAuctionItems?.pages[0].length > 4) {
+      liveAuctionItems?.pages[0].forEach((artwork: any) => {
+        carouselArtworks.push(artwork)
+      })
+    } else if (
+      liveAuctionItems?.pages &&
+      liveAuctionItems?.pages[0].length < 4 &&
+      buyNowItems.pages &&
+      buyNowItems.pages[0].length > 0
+    ) {
+      liveAuctionItems?.pages[0].forEach((artwork: any) => {
+        carouselArtworks.push(artwork)
+      })
+      let emptyPosition = 4 - carouselArtworks.length
+      buyNowItems.pages[0].slice(0, emptyPosition).forEach((artwork: any) => {
+        carouselArtworks.push(artwork)
+      })
     }
-  )
+  }
 
   const getMoreFeaturedArtworks = () => {
     const newPages = featuredArtworks + 20
@@ -86,18 +110,16 @@ const Home = () => {
     [allFeaturedItems.pages, liveAuctionItems.pages]
   )
 
+  getCarouselArtworks()
+
   return (
     <Layout padding="0">
       <EmailPopUp />
-      {isLoadingLA ? (
+      {isLoadingLA || isLoadingbuyNow ? (
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={
-            liveAuctionItems?.pages
-              ? liveAuctionItems?.pages[0].slice(0, 4)
-              : buyNowItems.pages && buyNowItems.pages[0].slice(0, 4)
-          }
+          artworksCarousel={carouselArtworks.length > 0 && carouselArtworks}
           timeout={1000}
           interval={7000}
         />
