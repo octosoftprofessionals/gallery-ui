@@ -53,6 +53,7 @@ const GridArtworks = () => {
       },
     }
   )
+
   const getMoreReserve = () => {
     const newPages = reserveNextPage + 20
     setReserveNextPage(newPages)

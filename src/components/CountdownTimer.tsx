@@ -54,7 +54,7 @@ const CountdownTimer = ({
         <Grid item xs={3} style={{ display: disableDays ? 'block' : 'none' }}>
           <Grid container direction="column" alignItems="flex-start">
             <Typography variant="h5" color="primary">
-              {Day}
+              {Day ? Day : '0'}
             </Typography>
             <Typography
               variant="caption"
