@@ -5,7 +5,7 @@ import { Box, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ArtworkItem from '../../../components/GalleryItem/ArtworkItem'
-import { findeArtworkFavorites } from '../../../Utils'
+import { findArtworkFavorites } from '../../../Utils'
 import { getAllFavoritesArtworksFromOneUserByAddress } from '../../../services/favorites'
 
 import Spinner from '../../Spinner'
@@ -54,7 +54,7 @@ const Favorite = ({
 
   const handleFavorite = useCallback(
     (assetId, status) => {
-      findeArtworkFavorites(favoritesPagesItems.pages, assetId, status)
+      findArtworkFavorites(favoritesPagesItems.pages, assetId, status)
     },
     [favoritesPagesItems.pages]
   )
