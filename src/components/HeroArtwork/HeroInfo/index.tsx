@@ -68,7 +68,7 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
           priceUsd={priceUsd}
           expiration={expiration}
           linkButtonArtWork={artworkPath}
-          linkButton={biddingPath}
+          linkButton={artworkPath}
           userInfo={userInfo}
         />
       ) : status === STATUS_VALUES.buyNow ? (
@@ -77,7 +77,7 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
           priceEth={priceEth}
           priceUsd={priceUsd}
           linkButtonArtWork={artworkPath}
-          linkButton={biddingPath}
+          linkButton={artworkPath}
           userInfo={userInfo}
         />
       ) : status === STATUS_VALUES.none ? (
@@ -86,7 +86,7 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
           priceEth={priceEth}
           priceUsd={priceUsd}
           linkButtonArtWork={artworkPath}
-          linkButton={biddingPath}
+          linkButton={artworkPath}
           userInfo={userInfo}
         />
       ) : null}
