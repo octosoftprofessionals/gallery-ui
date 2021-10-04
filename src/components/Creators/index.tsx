@@ -12,7 +12,10 @@ import Spinner from '../Spinner'
 
 const useStyle = makeStyles(Theme => ({
   title: { fontSize: 56 },
-  header: { borderBottom: '1px solid #FFFF' },
+  header: {
+    borderBottom:
+      Theme.palette.type === 'dark' ? '1px solid #FFFF' : '1px solid #000',
+  },
 }))
 
 const Creators = ({ creatorsQuery = [], status }) => {
@@ -42,6 +45,7 @@ const Creators = ({ creatorsQuery = [], status }) => {
   //     setFilteredCreators(creatorsQuery)
   //   }
   // }, [search, creatorsQuery])
+
   const classes = useStyle()
 
   return (
@@ -54,13 +58,7 @@ const Creators = ({ creatorsQuery = [], status }) => {
         alignContent="center"
         className={classes.header}
       >
-        <Grid
-          item
-          xs={9}
-          container
-          justify="space-between"
-          alignContent="center"
-        >
+        <Grid item xs={9} container justify="center" alignContent="center">
           <Grid
             item
             xs={5}

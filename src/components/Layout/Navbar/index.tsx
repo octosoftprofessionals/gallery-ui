@@ -67,7 +67,9 @@ const useStyles = makeStyles(Theme => ({
     '&:hover': { backgroundColor: Theme.palette.buttons.selected },
   },
   boxIconButton: {
-    position: 'relative',
+    '@media (max-width: 576px)': {
+      padding: Theme.spacing(0, 5, 0, 0),
+    },
   },
   buttonMenu: {
     backgroundColor: Theme.palette.background.paper,
@@ -104,7 +106,7 @@ const useStyles = makeStyles(Theme => ({
   containerImg: { marginBottom: Theme.spacing(7) },
   menuIcon: {
     fontSize: Theme.typography.fontSize[10],
-    color: Theme.palette.primary.main,
+    color: Theme.palette.type === 'dark' ? Theme.palette.primary.light : '#FFF',
   },
   imgMenu: {
     marginLeft: Theme.spacing(3),
@@ -143,7 +145,7 @@ const useStyles = makeStyles(Theme => ({
   navbarElement: {
     padding: Theme.spacing(0, 13),
     '@media (max-width: 576px)': {
-      padding: 0,
+      padding: Theme.spacing(0),
     },
   },
   gradient: {

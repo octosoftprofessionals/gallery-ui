@@ -68,7 +68,7 @@ const CountdownTimer = ({
         <Grid item xs={3} style={{ display: disableHours ? 'block' : 'none' }}>
           <Grid container direction="column" alignItems="flex-start">
             <Typography variant="h5" color="primary">
-              {Hours}
+              {Hours ? Hours : '0'}
             </Typography>
             <Typography
               variant="caption"
@@ -82,7 +82,7 @@ const CountdownTimer = ({
         <Grid item xs={3}>
           <Grid container direction="column" alignItems="flex-start">
             <Typography variant="h5" color="primary">
-              {Minutes}
+              {Minutes ? Minutes : '0'}
             </Typography>
             <Typography
               variant="caption"
@@ -96,7 +96,7 @@ const CountdownTimer = ({
         <Grid item xs={3}>
           <Grid container direction="column" alignItems="flex-start">
             <Typography variant="h5" color="primary">
-              {Seconds}
+              {Seconds ? Seconds : '0'}
             </Typography>
             <Typography
               variant="caption"
