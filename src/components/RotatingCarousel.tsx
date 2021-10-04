@@ -92,6 +92,7 @@ const RotatingCarousel = ({
   timeout: number
 }) => {
   const classes = useStyle()
+
   return (
     <Carousel
       className={classes.carousel}
