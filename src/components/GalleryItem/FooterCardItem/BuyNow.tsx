@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Button } from '@material-ui/core'
 import { formatDecimal } from '../../../Utils'
@@ -37,30 +37,33 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
     margin: '5px',
   },
+  link: { textDecoration: 'none', display: 'contents' },
 }))
 
-const BuyNow = ({ price, children }) => {
+const BuyNow = ({ price, link, children }) => {
   const classes = useStyle()
   return (
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.containerTop}>
         {/* Link to "Buy now" page or Event that handles the purchase in future */}
-        <Button
-          variant="outlined"
-          color="primary"
-          fullWidth
-          className={classes.btn}
-        >
-          <Typography
-            variant="caption"
-            color="secondary"
-            className={classes.text}
+        <Link to={link} className={classes.link}>
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
+            className={classes.btn}
           >
-            {isNaN(price)
-              ? 'Buy Now — ETH'
-              : `Buy Now ${formatDecimal(price)} ETH`}
-          </Typography>
-        </Button>
+            <Typography
+              variant="caption"
+              color="secondary"
+              className={classes.text}
+            >
+              {isNaN(price)
+                ? 'Buy Now — ETH'
+                : `Buy Now ${formatDecimal(price)} ETH`}
+            </Typography>
+          </Button>
+        </Link>
       </Grid>
       <Grid item xs={12} className={classes.containerButton}>
         {children}
