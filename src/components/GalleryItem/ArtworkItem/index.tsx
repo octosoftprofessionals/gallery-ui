@@ -119,7 +119,7 @@ const ArtworkItem = ({
 
   const linkArtworkShow = artworkPathFrom(assetContractAddress, assetTokenId)
   const linkProfileCreator = profilePathFromAddress(creatorAddress)
-  const linkOffer = biddingPathFrom(assetContractAddress, assetTokenId)
+  const linkOffer = artworkPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
