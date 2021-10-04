@@ -82,7 +82,7 @@ const ArtworkItem = ({
   ...rootProps
 }: {
   galleryItem: GalleryItem | undefined
-  onFavorite: Function
+  onFavorite?: Function
 }) => {
   const {
     id,

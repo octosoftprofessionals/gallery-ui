@@ -15,3 +15,11 @@ export const modalShow = atom<any>({
 
 export const useSetModalShow = () => useSetRecoilState(modalShow)
 export const useModalShow = () => useRecoilValue(modalShow)
+
+export const exhibitionQuery = atom<any>({
+  key: 'exhibitionQuery',
+  default: null,
+})
+
+export const useSetExhibitionQuery = () => useSetRecoilState(exhibitionQuery)
+export const useExhibitionQuery = () => useRecoilValue(exhibitionQuery)
