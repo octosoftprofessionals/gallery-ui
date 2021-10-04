@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(5),
     zIndex: 2,
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
       transition: 'none',
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
       border: 'none',
     },
     '@media (max-width: 1270px)': {
-      width: '100%',
+      width: '70%',
     },
   },
   name: {
@@ -58,7 +58,7 @@ const ButtonUser = ({
 }) => {
   const classes = useStyles()
   return (
-    <Button className={classes.button} variant="contained" disabled fullWidth>
+    <Button className={classes.button} variant="contained" disabled>
       {profileImageUrl ? (
         <Avatar alt={name} src={profileImageUrl} />
       ) : (
