@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Box, CircularProgress, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import Spinner from '../../components/Spinner'
 
 import ArtworkItem from '../GalleryItem/ArtworkItem'
-// import Artworks from '../../types'
 import { getOneExhibitionByIdWithArtworks } from '../../services/exhibition'
 
 const useStyle = makeStyles(Theme => ({
@@ -26,22 +26,10 @@ const GalleryExhibition = ({ exhibitionId }) => {
     fetch()
   }, [exhibitionId])
 
-  const Loading = () => (
-    <Box
-      width="100%"
-      height="60vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Box>
-  )
-
   return (
     <Grid container direction="row" justify="space-between" wrap="wrap">
       {isLoading ? (
-        <Loading />
+        <Spinner height="60vh" />
       ) : (
         artworks.map((galleryItem, index) => (
           <Grid

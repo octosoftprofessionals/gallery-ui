@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Box, CircularProgress, Grid } from '@material-ui/core'
+import React from 'react'
+import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-
-import ArtworkItem from '../GalleryItem/ArtworkItem'
-// import Artworks from '../../types'
+import Spinner from '../../components/Spinner'
 import ExhibitionTitle from './ExhibitionTitle'
-import { getOneExhibitionByIdWithArtworks } from '../../services/exhibition'
 
 const useStyle = makeStyles(Theme => ({
   containerItem: { padding: Theme.spacing(4) },
@@ -19,19 +16,6 @@ const GallerySections = ({
   setExhibitionid,
 }) => {
   const classes = useStyle()
-  const [artworks, setArtworks] = useState([])
-
-  const Loading = () => (
-    <Box
-      width="100%"
-      height="60vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Box>
-  )
 
   const selectHandler = (title: string, id: number) => {
     setExibitionTitle(title)
@@ -42,20 +26,20 @@ const GallerySections = ({
   return (
     <Grid container direction="row" justify="space-between" wrap="wrap">
       {isLoading ? (
-        <Loading />
+        <Spinner height="60vh" />
       ) : (
-        exhibitions.map((elem, index) => {
+        exhibitions.map(({ node }) => {
           return (
             <Grid
               item
-              key={index}
+              key={`${node.title}-${node.idExhibition}`}
               xs={12}
               sm={6}
               md={3}
               className={classes.containerItem}
-              onClick={() => selectHandler(elem.title, elem.id)}
+              onClick={() => selectHandler(node.title, node.idExhibition)}
             >
-              <ExhibitionTitle exhibition={elem} />
+              <ExhibitionTitle exhibition={node} />
             </Grid>
           )
         })

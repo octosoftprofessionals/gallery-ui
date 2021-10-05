@@ -27,7 +27,7 @@ const useStyles = makeStyles(Theme => ({
   button: {
     width: `${Theme.spacing(4)}vw`,
     backgroundColor: Theme.palette.secondary.main,
-    boxShadow: '0px 3px 7px #212e36',
+    boxShadow: boxShadow1,
     padding: Theme.spacing(3, 5),
     borderRadius: Theme.spacing(5),
     zIndex: 2,
@@ -92,7 +92,11 @@ const useStyles = makeStyles(Theme => ({
   },
   contButton: {
     margin: Theme.spacing(6, 0),
+<<<<<<< HEAD
     // marginLeft: -40,
+=======
+    marginLeft: -40,
+>>>>>>> develop
     width: '100%',
   },
   contButtonWallet: { marginTop: 40 },
@@ -160,9 +164,9 @@ const MenuDrawer = ({
               {account ? (
                 <Grid
                   item
-                  xs={8}
+                  xs={12}
                   container
-                  justify="flex-end"
+                  justify="center"
                   className={classes.contButton}
                 >
                   {userAccount ? (
@@ -177,22 +181,22 @@ const MenuDrawer = ({
             </Grid>
             <Grid container direction="column" alignItems="center">
               <Link to={'/exhibition'} className={classes.link}>
-                <Typography variant="h4" color="secondary">
+                <Typography variant="h4" color="primary">
                   Exhibition
                 </Typography>
               </Link>
               <Link to={'/artworks'} className={classes.link}>
-                <Typography variant="h4" color="secondary">
+                <Typography variant="h4" color="primary">
                   Artworks
                 </Typography>
               </Link>
               <Link to="/creators" className={classes.link}>
-                <Typography variant="h4" color="secondary">
+                <Typography variant="h4" color="primary">
                   Creators
                 </Typography>
               </Link>
               <Link to={'/collabs'} className={classes.link}>
-                <Typography variant="h4" color="secondary">
+                <Typography variant="h4" color="primary">
                   Collabs
                 </Typography>
               </Link>
@@ -206,7 +210,7 @@ const MenuDrawer = ({
                       fullWidth
                     >
                       <Grid container justify="center">
-                        <Typography variant="button" color="secondary">
+                        <Typography variant="button" color="primary">
                           Log Out
                         </Typography>
                       </Grid>

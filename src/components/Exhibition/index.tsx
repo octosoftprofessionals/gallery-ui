@@ -10,14 +10,10 @@ import GalleryExhibition from './GalleryExhibition'
 import GallerySections from './GallerySections'
 import useQueryParams from '../../hooks/useQueryParams'
 
+import { useExhibitionQuery } from '../../atom'
+
 const useStyles = makeStyles(theme => ({
   root: {},
-  // title: {
-  //   padding: theme.spacing(11, 0),
-  //   '@media (max-width: 576px)': {
-  //     textAlign: 'center',
-  //   },
-  // },
   title: { padding: theme.spacing(10) },
   divider: {
     width: '95%',
@@ -62,15 +58,21 @@ const imgUrls = [
   'https://i.pinimg.com/originals/7f/08/52/7f0852baa4ec65a696b2a54c833215d4.jpg',
 ]
 
-const Exhibition = () => {
+export const Exhibition = props => {
   const classes = useStyles({ imageUrl: imgUrls })
   const [showTitles, setShowTitles] = useState(true)
   const { titleId } = useQueryParams()
-  const [exhibitionTitle, setExibitionTitle] = useState('')
+  const [exhibitionTitle, setExibitionTitle] = useState<string>(
+    'Superchief Collections, Curated by our staff'
+  )
+
+  const exhibitions = useExhibitionQuery()
 
   useEffect(() => {
-    // setExhibitionid(titleId)
-    titleId === undefined && setShowTitles(true)
+    if (titleId === undefined) {
+      setShowTitles(true)
+      setExibitionTitle('Superchief Collections, Curated by our staff')
+    }
   }, [titleId])
 
   const {
@@ -79,20 +81,12 @@ const Exhibition = () => {
     status: statusGetAllExhibitions,
   } = useQuery('getAllExhibitions', getAllExhibitions)
 
-  const exhibitionQueryParam: number = useQueryParams()?.exhibitionid
-  const queryParamInNumberOrUndefined = exhibitionQueryParam
-    ? exhibitionQueryParam * 1
-    : undefined
-  const [exhibitionid, setExhibitionid] = useState(
-    queryParamInNumberOrUndefined
-  )
+  const [exhibitionid, setExhibitionid] = useState<number>(Number(titleId))
 
   return (
     <Grid container justifyContent="center">
       <Typography variant="h4" color="primary" className={classes.title}>
-        {!exhibitionTitle
-          ? 'Superchief Collections, Curated by our staff'
-          : exhibitionTitle}
+        {exhibitionTitle}
       </Typography>
       <Divider light className={classes.divider} />
       <Grid item container justifyContent="center">
@@ -106,7 +100,7 @@ const Exhibition = () => {
             justifyContent="center"
           >
             <GallerySections
-              exhibitions={allExhibitions}
+              exhibitions={exhibitions}
               isLoading={isLoading}
               setShowTitles={setShowTitles}
               setExibitionTitle={setExibitionTitle}
@@ -114,7 +108,6 @@ const Exhibition = () => {
             />
           </Grid>
         ) : (
-          !isLoading &&
           !!allExhibitions.length && (
             <Grid item xs={12} sm={9} md={10}>
               <GalleryExhibition
@@ -127,5 +120,3 @@ const Exhibition = () => {
     </Grid>
   )
 }
-
-export default Exhibition
