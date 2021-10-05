@@ -37,12 +37,6 @@ const useStyles = makeStyles(theme => ({
     alignSelf: 'left',
     color: theme.palette.primary.contrastText,
   },
-  img: {
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-  },
   paper: {
     padding: theme.spacing(3, 5),
   },
@@ -54,12 +48,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const imgUrls = [
-  'https://i.pinimg.com/originals/7f/08/52/7f0852baa4ec65a696b2a54c833215d4.jpg',
-]
-
 export const Exhibition = props => {
-  const classes = useStyles({ imageUrl: imgUrls })
+  const classes = useStyles()
   const [showTitles, setShowTitles] = useState(true)
   const { titleId } = useQueryParams()
   const [exhibitionTitle, setExibitionTitle] = useState<string>(

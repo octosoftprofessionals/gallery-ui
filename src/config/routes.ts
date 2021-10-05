@@ -15,3 +15,6 @@ export const myProfilePathWithViewPlaylistOpen = (view: number) =>
 export const myPlaylistsId = (id: number) => `/playList/?id=${id}`
 
 export const exhibitionSelected = (id: number) => `/exhibition/?titleId=${id}`
+
+export const linkOpensea = (contractAddress: string, tokenId: string) =>
+  `https://opensea.io/assets/${contractAddress}/${tokenId}`
