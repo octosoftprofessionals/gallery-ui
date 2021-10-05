@@ -17,6 +17,7 @@ const FooterCardItem = ({
   account,
   artworkId,
   linkOffer,
+  linkBuyNow,
 }: {
   statesArt: string
   price?: string
@@ -27,6 +28,7 @@ const FooterCardItem = ({
   account: any
   artworkId: number
   linkOffer?: string
+  linkBuyNow?: string
 }) => {
   return (
     <>
@@ -43,7 +45,7 @@ const FooterCardItem = ({
           ) : null}
         </InAuctions>
       ) : statesArt === STATUS_VALUES.buyNow ? (
-        <BuyNow price={price}>
+        <BuyNow price={price} link={linkBuyNow}>
           {account ? (
             <ButtonPlaylist
               handleSubmitFavorite={handleSubmitFavorite}
