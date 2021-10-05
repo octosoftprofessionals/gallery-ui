@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Button, Hidden, Popover } from '@material-ui/core'
+
+import { Grid, Typography, Button, Hidden } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import TwShareButton from '../../../components/TwShareButton'
-import CopyLinkButton from '../../CopyLinkButton'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import ReportButton from '../../ReportButton'
-import { boxShadow } from '../../Styles/Colors'
+import { MoreHoriz, ArrowUpward } from '@material-ui/icons'
+
+import { profilePathFromAddress } from '../../../../config/routes'
+
+import { boxShadow } from '../../../Styles/Colors'
+
+import PopoverTwitter from './PopoverTwitter'
+import PopoverReport from './PopoverReport'
 
 const useStyle = makeStyles(Theme => ({
   root: {
@@ -21,11 +24,6 @@ const useStyle = makeStyles(Theme => ({
     padding: Theme.spacing(2),
     width: 130,
     borderRadius: Theme.spacing(2),
-  },
-  container: {
-    /*     position: 'absolute',
-    top: '-28px',
-    right: ({ right }) => (right ? right : 'auto'), */
   },
   button: {
     backgroundColor: Theme.palette.secondary.main,
@@ -80,6 +78,13 @@ const Share = ({
   setDisplayReportModal,
   right,
   isMyAccount = false,
+  publicKey,
+}: {
+  linkTwitter: string
+  setDisplayReportModal: React.Dispatch<React.SetStateAction<boolean>>
+  right: string
+  isMyAccount?: boolean
+  publicKey?: string
 }) => {
   const [showButtons, setShowButtons] = useState(false)
   const [showReport, setShowReport] = useState(false)
@@ -98,16 +103,8 @@ const Share = ({
     setShowButtons(false)
   }
 
-  const getUrl = () => {
-    const url = typeof window !== 'undefined' ? window.location.href : ''
-    return navigator.clipboard.writeText(url)
-  }
-
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [anchorElReport, setAnchorElReport] = useState(null)
-
-  // const [openShare, setOpenShare] = useState(false)
-  // const [openReport, setOpenReport] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<any>(null)
+  const [anchorElReport, setAnchorElReport] = useState<any>(null)
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
@@ -123,69 +120,43 @@ const Share = ({
     setAnchorElReport(null)
   }
 
-  const open = Boolean(anchorEl)
-  const id = open ? 'simple-popover' : undefined
-
-  const openReport = Boolean(anchorElReport)
-  const idReport = openReport ? 'simple-popover' : undefined
+  const getUrl = () => {
+    const url =
+      typeof window !== 'undefined'
+        ? isMyAccount
+          ? window.location.origin + profilePathFromAddress(publicKey)
+          : window.location.href
+        : ''
+    return navigator.clipboard.writeText(url)
+  }
 
   return (
-    <Grid
-      item
-      direction="column"
-      justify="flex-end"
-      alignItems="flex-end"
-      className={classes.container}
-    >
+    <Grid item direction="column" justify="flex-end" alignItems="flex-end">
       {
-        <Popover
-          open={open}
-          onClose={handleClose}
-          id={id}
+        <PopoverTwitter
+          open={Boolean(anchorEl)}
           anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          anchorPosition={{
-            top: 200,
-            left: 200,
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-        >
-          <TwShareButton linkTwitter={linkTwitter} />
-          <CopyLinkButton onClick={getUrl} />
-        </Popover>
+          getUrl={getUrl}
+          handleClose={handleClose}
+          linkTwitter={linkTwitter}
+        />
       }
       {
-        <Popover
-          open={openReport}
-          onClose={handleCloseReport}
-          id={idReport}
-          anchorEl={anchorElReport}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-        >
-          <ReportButton onClick={setDisplayReportModal} />
-        </Popover>
+        <PopoverReport
+          openReport={Boolean(anchorElReport)}
+          anchorElReport={anchorElReport}
+          handleCloseReport={handleCloseReport}
+          setDisplayModal={setDisplayReportModal}
+        />
       }
       <Grid item direction="row" justify="center">
         {!isMyAccount ? (
           <Button onClick={handleClickReport} className={classes.buttonReport}>
-            <MoreHorizIcon className={classes.icon} />
+            <MoreHoriz className={classes.icon} />
           </Button>
         ) : null}
         <Button onClick={handleClick} className={classes.button}>
-          <ArrowUpwardIcon className={classes.icon} />
+          <ArrowUpward className={classes.icon} />
           <Hidden xsDown>
             <Typography className={classes.text}>Share</Typography>
           </Hidden>

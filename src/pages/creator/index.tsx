@@ -18,11 +18,11 @@ const linkShareTwitter = () => {
 
 const CreatorPage = () => {
   const { address } = useQueryParams()
-  const [displayReportModal, setDisplayReportModal] = useState(false)
+  const [displayReportModal, setDisplayReportModal] = useState<boolean>(false)
   const { data: user, isLoading } = useQuery('creatorQuery', () =>
     getUser({ public_address: address })
   )
-  const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState('')
+  const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState<string>('')
 
   return (
     <Layout

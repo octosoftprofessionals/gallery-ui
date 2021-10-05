@@ -7,9 +7,8 @@ import { Avatar, Grid } from '@material-ui/core'
 import { Users } from '../../types'
 
 import GridCreator from './GridCreator'
-// import CreatorkShare from '../../components/ArtworkShow/ArtworkShare'
 import InfoCreator from './InfoCreator'
-import Share from '../../components/Creator/InfoCreator/Share'
+import Share from './InfoCreator/Share'
 import {
   getOneFolloweeByIdWithAllHisFollowers,
   getOneFollowerByIdWithAllHisFollowees,
@@ -68,7 +67,7 @@ const useStyle = makeStyles(Theme => ({
       padding: Theme.spacing(0),
       marginTop: Theme.spacing(0),
       marginLeft: Theme.spacing(10),
-      dispay: 'flex',
+      display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
@@ -77,7 +76,7 @@ const useStyle = makeStyles(Theme => ({
   },
   info: {
     '@media (max-width: 545px)': {
-      dispay: 'flex',
+      display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
@@ -101,18 +100,14 @@ const Creator = ({
 }: Props) => {
   const classes = useStyle()
 
-  const {
-    data: followeeItem = [],
-    isLoading: isLoadingFollowees,
-  } = useQuery('followeeQuery', () =>
-    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+  const { data: followeeItem = [], isLoading: isLoadingFollowees } = useQuery(
+    'followeeQuery',
+    () => getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
   )
 
-  const {
-    data: followersItem = [],
-    isLoading: isLoadingFollowers,
-  } = useQuery('followersQuery', () =>
-    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+  const { data: followersItem = [], isLoading: isLoadingFollowers } = useQuery(
+    'followersQuery',
+    () => getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
   )
 
   const { followees } = followersItem
@@ -120,9 +115,6 @@ const Creator = ({
 
   useEffect(() => {
     setCoverImgUrl(user.coverImgUrl)
-    // if (isMyAccount) {
-    //   window.history.replaceState({}, '', `@${user.username}`)
-    // }
   })
 
   !isMyAccount ? console.log(linkTwitter) : null
@@ -161,6 +153,7 @@ const Creator = ({
               isMyAccount={isMyAccount}
               linkTwitter={linkTwitter}
               setDisplayReportModal={setDisplayReportModal}
+              publicKey={user.publicAddress}
               right="24px"
             />
           </div>
@@ -179,7 +172,7 @@ const Creator = ({
 type Props = {
   isMyAccount: boolean
   user?: Users
-  setDisplayReportModal: Function
+  setDisplayReportModal: React.Dispatch<React.SetStateAction<boolean>>
   setCoverImgUrl: Function
   linkTwitter?: any
 }
