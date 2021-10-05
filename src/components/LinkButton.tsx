@@ -1,5 +1,7 @@
 import React from 'react'
-import { Grid, Typography, Button, Link, Paper } from '@material-ui/core'
+import { Link } from 'gatsby'
+
+import { Grid, Typography, Button, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { VisibilityOutlined, OpenInNewOutlined } from '@material-ui/icons'
@@ -61,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: theme.palette.primary.main,
   },
+  link: { textDecoration: 'none' },
 }))
 
 const LinkButton = ({ link, text, icon }) => {
@@ -69,27 +72,24 @@ const LinkButton = ({ link, text, icon }) => {
   return (
     <>
       {link ? (
-        <Button
-          href={link}
-          underline="none"
-          className={classes.box}
-          component={Link}
-        >
-          <Paper elevation={1} className={classes.paper}>
-            <Grid item xs={9} container className={classes.grid}>
-              {icon === 'iconEtherscan' ? (
-                <EtherScanIcon className={classes.iconSVG} />
-              ) : icon === 'iconView' ? (
-                <VisibilityOutlined className={classes.iconSVG} />
-              ) : (
-                <BlockIcon className={classes.iconSVG} />
-              )}
-              <Typography className={classes.text} variant="h6">
-                {text}
-              </Typography>
-            </Grid>
-            <OpenInNewOutlined className={classes.icon} />
-          </Paper>
+        <Button className={classes.box}>
+          <Link to={link} className={classes.link}>
+            <Paper elevation={1} className={classes.paper}>
+              <Grid item xs={9} container className={classes.grid}>
+                {icon === 'iconEtherscan' ? (
+                  <EtherScanIcon className={classes.iconSVG} />
+                ) : icon === 'iconView' ? (
+                  <VisibilityOutlined className={classes.iconSVG} />
+                ) : (
+                  <BlockIcon className={classes.iconSVG} />
+                )}
+                <Typography className={classes.text} variant="h6">
+                  {text}
+                </Typography>
+              </Grid>
+              <OpenInNewOutlined className={classes.icon} />
+            </Paper>
+          </Link>
         </Button>
       ) : null}
     </>

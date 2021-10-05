@@ -1,5 +1,7 @@
 import React from 'react'
-import { Grid, Avatar, Typography, Link, Button } from '@material-ui/core'
+import { Link } from 'gatsby'
+
+import { Grid, Avatar, Typography, Button } from '@material-ui/core'
 import { Twitter } from '@material-ui/icons'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import { makeStyles } from '@material-ui/core/styles'
@@ -78,6 +80,7 @@ const useStyles = makeStyles(Theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  link: { textDecoration: 'none' },
 }))
 
 const Top50Item = ({
@@ -103,15 +106,14 @@ const Top50Item = ({
               {name}
             </Typography>
             <Link
-              underline="none"
-              variant="subtitle2"
-              href={`/creator?id=${username}`}
+              className={classes.link}
+              to={`/creator?id=${username}`}
             >{`@${username}`}</Link>
           </div>
         </div>
       </Grid>
       <Grid item className={classes.creatorContainer}>
-        <Link href={'/'} underline="none">
+        <Link to={'/'} className={classes.link}>
           <Button
             variant="text"
             color="secondary"
