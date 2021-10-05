@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { useMutation } from 'react-query'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Paper, Typography } from '@material-ui/core'
+import { Paper, Typography } from '@material-ui/core'
 
 import { GalleryItem } from '../../../types'
 import {
@@ -13,26 +13,19 @@ import {
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import {
   artworkPathFrom,
-  profilePathFromAddress,
   biddingPathFrom,
+  linkOpensea,
 } from '../../../config/routes'
 import { deltaTime, timeFormat } from '../../../Utils'
 import FooterCardItem from '../FooterCardItem'
 
 import CreatorInfo from './CreatorInfo'
+import DisplayArtworkItem from './DisplayArtworkItem'
 
 const useStyle = makeStyles(Theme => ({
   root: {
     position: 'relative',
     transition: 'all 300ms cubic-bezier(0.23,1,0.32,1)',
-  },
-  img: {
-    backgroundImage: ({ imageUrl }: { imageUrl: string }) => `url(${imageUrl})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    paddingBottom: '100%',
-    borderRadius: Theme.spacing(4, 4, 0, 0),
   },
   infoCard: {
     padding: Theme.spacing(3, 9),
@@ -46,24 +39,6 @@ const useStyle = makeStyles(Theme => ({
     },
   },
   link: { textDecoration: 'none' },
-  containerVideo: { position: 'relative', paddingBottom: '100%' },
-  inVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    boxSizing: 'border-box',
-    display: 'flex',
-  },
-  video: {
-    display: 'block',
-    objectFit: 'cover',
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    borderRadius: Theme.spacing(4, 4, 0, 0),
-  },
   line: {
     display: 'box',
     lineClamp: 2,
@@ -92,7 +67,7 @@ const ArtworkItem = ({
     videoUrl,
     assetContractAddress,
     assetTokenId,
-    creatorAddress,
+
     creatorUsername,
     creatorImageUrl,
     status,
@@ -101,7 +76,7 @@ const ArtworkItem = ({
     isFavorite,
   } = galleryItem
 
-  const [timer, setTimer] = useState('')
+  const [timer, setTimer] = useState<string>('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
 
@@ -118,9 +93,9 @@ const ArtworkItem = ({
   }, [])
 
   const linkArtworkShow = artworkPathFrom(assetContractAddress, assetTokenId)
-  const linkProfileCreator = profilePathFromAddress(creatorAddress)
   const linkOffer = artworkPathFrom(assetContractAddress, assetTokenId)
   const linkBuyNow = artworkPathFrom(assetContractAddress, assetTokenId)
+  const linkExhibition = linkOpensea(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
@@ -144,26 +119,7 @@ const ArtworkItem = ({
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
-        <Box>
-          {videoUrl != null && videoUrl.length > 0 ? (
-            <div className={classes.containerVideo}>
-              <div className={classes.inVideo}>
-                <video
-                  poster={imageUrl}
-                  src={videoUrl}
-                  autoPlay={true}
-                  loop={true}
-                  className={classes.video}
-                  muted={true}
-                >
-                  <img src={imageUrl} />
-                </video>
-              </div>
-            </div>
-          ) : (
-            <div className={classes.img} />
-          )}
-        </Box>
+        <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
       </Link>
       <Link to={linkArtworkShow} className={classes.link}>
         <div className={classes.infoCard}>
@@ -184,6 +140,7 @@ const ArtworkItem = ({
         artworkId={id}
         linkOffer={linkOffer}
         linkBuyNow={linkBuyNow}
+        linkExhibition={linkExhibition}
       />
     </Paper>
   )
