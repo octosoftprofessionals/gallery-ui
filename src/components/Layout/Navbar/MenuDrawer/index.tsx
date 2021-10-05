@@ -61,7 +61,10 @@ const useStyles = makeStyles(Theme => ({
   offIcon: { fontSize: Theme.typography.fontSize[11] },
   containerImg: { marginBottom: Theme.spacing(7) },
   menuIcon: { fontSize: Theme.typography.fontSize[10] },
-  drawerFooter: { marginTop: `${Theme.spacing(1)}vh` },
+  drawerFooter: {
+    marginTop: `25vh`,
+    padding: Theme.spacing(0, 3),
+  },
   logoDark: {
     display: Theme.palette.type === 'dark' ? 'block' : 'none',
     width: 150,
@@ -85,12 +88,14 @@ const useStyles = makeStyles(Theme => ({
     justifyContent: 'center',
     position: 'fixed',
     top: 110,
-    left: 20,
+    left: 0,
   },
   contButton: {
-    margin: Theme.spacing(6),
+    margin: Theme.spacing(6, 0),
+    // marginLeft: -40,
+    width: '100%',
   },
-  contButtonWallet: { marginTop: `${Theme.spacing(10)}vh` },
+  contButtonWallet: { marginTop: 40 },
 }))
 
 const MenuDrawer = ({
@@ -170,7 +175,7 @@ const MenuDrawer = ({
                 </Grid>
               ) : null}
             </Grid>
-            <Grid container direction="column">
+            <Grid container direction="column" alignItems="center">
               <Link to={'/exhibition'} className={classes.link}>
                 <Typography variant="h4" color="secondary">
                   Exhibition
