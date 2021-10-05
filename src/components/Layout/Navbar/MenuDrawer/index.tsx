@@ -92,11 +92,7 @@ const useStyles = makeStyles(Theme => ({
   },
   contButton: {
     margin: Theme.spacing(6, 0),
-<<<<<<< HEAD
     // marginLeft: -40,
-=======
-    marginLeft: -40,
->>>>>>> develop
     width: '100%',
   },
   contButtonWallet: { marginTop: 40 },
