@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import ArtworkItem from '../../../components/GalleryItem/ArtworkItem'
 import { GalleryItem } from '../../../types'
 import Spinner from '../../Spinner'
-import { findeArtwork } from '../../../Utils'
+import { findArtwork } from '../../../Utils'
 
 import EmptyAccount from './EmptyAccount'
 
@@ -34,7 +34,7 @@ const Gallery = ({
 
   const handleFavorite = useCallback(
     (assetId, status) => {
-      findeArtwork(ItemsToShow, assetId, status)
+      findArtwork(ItemsToShow, assetId, status)
     },
     [ItemsToShow]
   )

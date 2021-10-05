@@ -6,6 +6,7 @@ import InAuctions from './InAuctions'
 import BuyNow from './BuyNow'
 import ButtonPlaylist from './ButtonPlaylist'
 import Offer from './Offer'
+import Exhibition from './Exhibition'
 
 const FooterCardItem = ({
   statesArt,
@@ -18,6 +19,7 @@ const FooterCardItem = ({
   artworkId,
   linkOffer,
   linkBuyNow,
+  linkExhibition,
 }: {
   statesArt: string
   price?: string
@@ -29,6 +31,7 @@ const FooterCardItem = ({
   artworkId: number
   linkOffer?: string
   linkBuyNow?: string
+  linkExhibition?: string
 }) => {
   return (
     <>
@@ -68,7 +71,9 @@ const FooterCardItem = ({
             />
           ) : null}
         </Offer>
-      ) : null}
+      ) : (
+        <Exhibition link={linkExhibition} />
+      )}
     </>
   )
 }
