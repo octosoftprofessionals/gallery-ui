@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { validateEmail } from '../../../Utils/stringUtils'
 import { getUser } from '../../../services/users'
@@ -52,8 +52,9 @@ const InputValidator = ({
     }
   }
 
-  checkDataFieldServerSituation(type.toLowerCase(), savedSetter)
+  useEffect(() => {}, [value])
 
+  checkDataFieldServerSituation(type.toLowerCase(), savedSetter)
   const classes = styles()
 
   if (type === 'Email') {
@@ -76,6 +77,7 @@ const InputValidator = ({
       />
     )
   }
+
   if (type === 'Username') {
     if (value.length === 0 || checkAvailability(userDataList, value) === false)
       setError(true)

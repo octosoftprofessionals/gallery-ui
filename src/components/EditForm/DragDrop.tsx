@@ -8,6 +8,7 @@ import {
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { DropzoneArea } from 'material-ui-dropzone'
+import IconTest from '../../assets/tiktok.svg'
 
 const useStyles = makeStyles(Theme => ({
   dropzone: {
@@ -17,10 +18,17 @@ const useStyles = makeStyles(Theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 90,
+    color: Theme.palette.primary.main,
   },
   dropzoneParagraph: {
     fontSize: 14,
     fontWeight: 400,
+    color: Theme.palette.primary.main,
+  },
+  '@global': {
+    '.MuiDropzoneArea-icon': {
+      color: Theme.palette.primary.main,
+    },
   },
 }))
 
@@ -42,6 +50,7 @@ const DragDrop = ({ setFiles, typeFile, files }) => {
     <DropzoneArea
       dropzoneClass={classes.dropzone}
       dropzoneParagraphClass={classes.dropzoneParagraph}
+      // Icon={IconTest}
       acceptedFiles={['image/*']}
       dropzoneText={'Drag and drop, or click to select from your computer.'}
       onChange={file => uploadFile(file)}
