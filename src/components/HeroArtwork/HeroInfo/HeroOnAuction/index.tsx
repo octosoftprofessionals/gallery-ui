@@ -6,7 +6,7 @@ import ButtonsArtwork from '../ButtonsArtwork'
 import TopHero from '../TopHero'
 import AuctionArtwork from './AuctionArtwork'
 
-const HeroOfferItem = ({
+const HeroOnAuction = ({
   title,
   priceEth,
   priceUsd,
@@ -31,7 +31,7 @@ const HeroOfferItem = ({
         expiration={expiration}
       />
       <ButtonsArtwork
-        textButton={'Make an offer'}
+        textButton={'Place a bid'}
         linkButtonArtWork={linkButtonArtWork}
         linkButton={linkButton}
       />
@@ -39,4 +39,4 @@ const HeroOfferItem = ({
   )
 }
 
-export default HeroOfferItem
+export default HeroOnAuction
