@@ -119,7 +119,7 @@ const Home = () => {
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={carouselArtworks.length > 0 && carouselArtworks}
+          artworksCarousel={carouselArtworks}
           timeout={1000}
           interval={7000}
         />
