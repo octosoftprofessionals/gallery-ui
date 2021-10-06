@@ -68,7 +68,7 @@ const HeroInfo = ({ galleryItem }: { galleryItem: GalleryItem }) => {
           priceUsd={priceUsd}
           expiration={expiration}
           linkButtonArtWork={artworkPath}
-          linkButton={artworkPath}
+          linkButton={biddingPath}
           userInfo={userInfo}
         />
       ) : status === STATUS_VALUES.buyNow ? (

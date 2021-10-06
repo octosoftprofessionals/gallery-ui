@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import {
   Button,
   Divider,
@@ -44,20 +45,22 @@ const Styles = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[9],
     lineHeight: '1.5',
   },
+  link: { textDecoration: 'none' },
 }))
 
-const ButtonBid = ({ valueBid, setValueBid }) => {
+const ButtonBid = ({ valueBid, setValueBid, link }) => {
   const classes = Styles()
   return (
     <Grid
       item
       xs={12}
       container
-      justify="space-around"
+      // justify="space-around"
+      justify="center"
       alignItems="center"
       className={classes.box}
     >
-      <Grid item xs={5}>
+      {/* <Grid item xs={5}>
         <OutlinedInput
           color="primary"
           type="number"
@@ -81,13 +84,15 @@ const ButtonBid = ({ valueBid, setValueBid }) => {
             </Grid>
           }
         />
-      </Grid>
-      <Grid item xs={4}>
-        <Button variant="text" fullWidth className={classes.button}>
-          <Typography variant="caption" className={classes.textButton}>
-            Place a bid
-          </Typography>
-        </Button>
+      </Grid> */}
+      <Grid item xs={12}>
+        <Link to={link} className={classes.link}>
+          <Button variant="text" fullWidth className={classes.button}>
+            <Typography variant="caption" className={classes.textButton}>
+              Place a bid
+            </Typography>
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   )
