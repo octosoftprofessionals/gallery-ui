@@ -8,7 +8,7 @@ import Layout from '../components/Layout'
 import Spinner from '../components/Spinner'
 import RotatingCarousel from '../components/RotatingCarousel'
 import EmailPopUp from '../components/EmailPopUp'
-import { findArtwork, STATUS_VALUES } from '../Utils'
+import { findArtwork, STATUS_VALUES, getCarouselArtworks } from '../Utils'
 import { allQuerysItems } from '../services/gallery'
 
 const Home = () => {
@@ -46,7 +46,7 @@ const Home = () => {
     fetchNextPage: fetchNextPageLA,
     hasNextPage: hasNextPageLA,
   } = useInfiniteQuery(
-    'liveAcutions',
+    'liveAuctions',
     ({ pageParam = 0, querys = `status=${STATUS_VALUES.onAuction}` }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
@@ -57,7 +57,7 @@ const Home = () => {
     }
   )
 
-  const { data: buyNowItems = [], isLoading: isLoadingbuyNow } =
+  const { data: buyNowItems = [], isLoading: isLoadingBuyNow } =
     useInfiniteQuery(
       'buyNowItemsQuery',
       ({ pageParam = 0, querys = `status=${STATUS_VALUES.buyNow}` }) =>
@@ -69,29 +69,6 @@ const Home = () => {
         },
       }
     )
-
-  const carouselArtworks = []
-
-  const getCarouselArtworks = () => {
-    if (liveAuctionItems?.pages && liveAuctionItems?.pages[0].length > 4) {
-      liveAuctionItems?.pages[0].forEach((artwork: any) => {
-        carouselArtworks.push(artwork)
-      })
-    } else if (
-      liveAuctionItems?.pages &&
-      liveAuctionItems?.pages[0].length < 4 &&
-      buyNowItems.pages &&
-      buyNowItems.pages[0].length > 0
-    ) {
-      liveAuctionItems?.pages[0].forEach((artwork: any) => {
-        carouselArtworks.push(artwork)
-      })
-      let emptyPosition = 4 - carouselArtworks.length
-      buyNowItems.pages[0].slice(0, emptyPosition).forEach((artwork: any) => {
-        carouselArtworks.push(artwork)
-      })
-    }
-  }
 
   const getMoreFeaturedArtworks = () => {
     const newPages = featuredArtworks + 20
@@ -110,16 +87,14 @@ const Home = () => {
     [allFeaturedItems.pages, liveAuctionItems.pages]
   )
 
-  getCarouselArtworks()
-
   return (
     <Layout padding="0">
       <EmailPopUp />
-      {isLoadingLA || isLoadingbuyNow ? (
+      {isLoadingLA || isLoadingBuyNow ? (
         <Spinner height="50vh" />
       ) : (
         <RotatingCarousel
-          artworksCarousel={carouselArtworks.length > 0 && carouselArtworks}
+          artworksCarousel={getCarouselArtworks(liveAuctionItems, buyNowItems)}
           timeout={1000}
           interval={7000}
         />

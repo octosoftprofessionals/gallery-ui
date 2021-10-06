@@ -191,3 +191,28 @@ export const STATUS_VALUES = {
   buyNow: 'buy_now',
   none: 'none',
 }
+
+export const getCarouselArtworks = (liveAuctionItems, buyNowItems) => {
+  const carouselArtworks = []
+  const {
+    pages: [pagesAuctions],
+  } = liveAuctionItems
+  const {
+    pages: [pagesBuyNow],
+  } = buyNowItems
+
+  if (pagesAuctions.length >= 4) {
+    pagesAuctions.forEach((artwork: GalleryItem) => {
+      carouselArtworks.push(artwork)
+    })
+  } else if (pagesAuctions.length < 4 && pagesBuyNow.length > 0) {
+    pagesAuctions.forEach((artwork: GalleryItem) => {
+      carouselArtworks.push(artwork)
+    })
+    let emptyPosition = 4 - carouselArtworks.length
+    pagesBuyNow.slice(0, emptyPosition).forEach((artwork: GalleryItem) => {
+      carouselArtworks.push(artwork)
+    })
+  }
+  return carouselArtworks
+}
