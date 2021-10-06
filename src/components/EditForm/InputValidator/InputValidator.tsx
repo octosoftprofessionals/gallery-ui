@@ -76,6 +76,7 @@ const InputValidator = ({
       />
     )
   }
+
   if (type === 'Username') {
     if (value.length === 0 || checkAvailability(userDataList, value) === false)
       setError(true)
