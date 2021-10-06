@@ -1,11 +1,4 @@
-import React, { useState } from 'react'
-import {
-  AttachFile,
-  AudioTrack,
-  Description,
-  PictureAsPdf,
-  Theaters,
-} from '@material-ui/icons'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { DropzoneArea } from 'material-ui-dropzone'
 
@@ -17,10 +10,17 @@ const useStyles = makeStyles(Theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 90,
+    color: Theme.palette.primary.main,
   },
   dropzoneParagraph: {
     fontSize: 14,
     fontWeight: 400,
+    color: Theme.palette.primary.main,
+  },
+  '@global': {
+    '.MuiDropzoneArea-icon': {
+      color: Theme.palette.primary.main,
+    },
   },
 }))
 
