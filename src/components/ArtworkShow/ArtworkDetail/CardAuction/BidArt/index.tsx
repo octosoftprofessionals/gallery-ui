@@ -8,7 +8,7 @@ import ButtonBid from './ButtonBid'
 import OtherBidsItem from './OtherBidsItem'
 
 const Styles = makeStyles(Theme => ({
-  conateinerTop: {
+  containerTop: {
     backgroundColor: ({ color }: { color: string }) =>
       color || Theme.palette.secondary.light,
     padding: Theme.spacing(2, 0, 2, 11),
@@ -60,21 +60,21 @@ const BidArt = ({
   ownerUsername,
 }) => {
   const [valueBid, setValueBid] = useState('')
-  const [isBidsForOwner, setIsBidsForOwner] = useState<boolean>(true)
-  const classes = Styles({ color: alertBuyNow[1].color })
+  const [isBidsForOwner, setIsBidsForOwner] = useState<boolean>(false)
+  const classes = Styles({ color: alertBuyNow[0].color })
 
   return (
     <BidItem
-      title={title[1]}
+      title={title[0]}
       priceEth={priceEth}
       priceUsd={priceUsd}
       ownerAddress={ownerAddress}
       ownerImageUrl={ownerImageUrl}
       ownerUsername={ownerUsername}
     >
-      <div className={classes.conateinerTop}>
+      <div className={classes.containerTop}>
         <Typography variant="body1" className={classes.text}>
-          {alertBuyNow[1].text}
+          {alertBuyNow[0].text}
         </Typography>
       </div>
       {isBidsForOwner ? (
@@ -82,7 +82,7 @@ const BidArt = ({
           <OtherBidsItem />
         </Grid>
       ) : (
-        <ButtonBid valueBid={valueBid} setValueBid={setValueBid} />
+        <ButtonBid valueBid={valueBid} setValueBid={setValueBid} link={link} />
       )}
     </BidItem>
   )
