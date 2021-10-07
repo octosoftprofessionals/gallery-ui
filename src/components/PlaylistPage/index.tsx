@@ -138,10 +138,18 @@ const index = ({
         title: titlePlaylist,
         description: descriptionPlaylist,
       })
-
       const resUpdateArtworksPriorities = await updateArtworksPriorities({
         playlist_id: playlistId,
         artworks_related: artworksRelated,
+      })
+    } else {
+      const resupdateOnePlaylistById = await updateOnePlaylistById(playlistId, {
+        title: titlePlaylist,
+        description: descriptionPlaylist,
+      })
+      const resUpdateArtworksPriorities = await updateArtworksPriorities({
+        playlist_id: playlistId,
+        artworks_related: [],
       })
     }
     onUpDate()
@@ -158,6 +166,9 @@ const index = ({
             artworks={relatedArtworks}
             xs={4}
             setIndex={setImgIndex}
+            emptyMessageProps={{
+              primaryText: 'Nothing to see here.',
+            }}
           />
           <Grid
             item
@@ -267,7 +278,6 @@ const index = ({
         onPlublish={handleEditPlaylist}
         editRelatedArtworks={editRelatedArtworks}
         artworksSelected={addArtworksPlaylist}
-        isDisabled={addArtworksPlaylist.length === 0}
         isEdit={true}
       />
     </>

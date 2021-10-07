@@ -123,6 +123,15 @@ const Playlist = ({
       } catch (error) {
         console.log('errorCreatePlaylist :>> ', error)
       }
+    } else {
+      try {
+        const resCreatePlaylist = await createPlaylist(profileAddress, {
+          title: titlePlaylist,
+          description: descriptionPlaylist,
+        })
+      } catch (error) {
+        console.log('errorCreatePlaylist :>> ', error)
+      }
     }
     try {
       const result = await queryFunction()
@@ -140,11 +149,10 @@ const Playlist = ({
   const handlerDeletedPlaylist = async (id: number) => {
     setIsDelete(true)
     try {
-      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
-        {
+      const resDeletePlaylist =
+        await deleteOnePlaylistByIdWithAssociatedArtworks({
           playlist_id: id,
-        }
-      )
+        })
     } catch (error) {
       console.log('errorResDeletePlaylist :>> ', error)
     }
@@ -210,7 +218,6 @@ const Playlist = ({
         profileAddress={profileAddress}
         onPlublish={handlePublishPlaylist}
         artworksSelected={addArtworksPlaylist}
-        isDisabled={addArtworksPlaylist.length === 0}
       />
     </>
   )

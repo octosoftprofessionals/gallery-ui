@@ -2,13 +2,14 @@ import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import {
   RadioButtonUnchecked,
   ChevronLeft,
   ChevronRight,
 } from '@material-ui/icons'
 
+import EmptyAccount from '../Creator/GridCreator/EmptyAccount'
 import CardArtwork from './CardArtwork'
 
 const useStyles = makeStyles(Theme => ({
@@ -51,7 +52,7 @@ const useStyles = makeStyles(Theme => ({
       opacity: 0,
     },
   },
-  arrowRigt: {
+  arrowRight: {
     position: 'absolute',
     top: 'auto',
     right: 'auto',
@@ -82,8 +83,17 @@ const useStyles = makeStyles(Theme => ({
   },
 }))
 
-const CarouselPL = ({ artworks, setIndex, ...props }) => {
+const CarouselPL = ({ artworks, setIndex, emptyMessageProps, ...props }) => {
   const classes = useStyles()
+
+  if (artworks.length === 0) {
+    return (
+      <Box style={{ padding: 48, width: '100%' }} className={classes.root}>
+        <EmptyAccount {...emptyMessageProps} />
+      </Box>
+    )
+  }
+
   return (
     <Grid item xs={12} className={classes.root}>
       <Carousel
@@ -99,7 +109,7 @@ const CarouselPL = ({ artworks, setIndex, ...props }) => {
           <RadioButtonUnchecked className={classes.circle} />,
         ]}
         NextIcon={[
-          <ChevronRight className={classes.arrowRigt} />,
+          <ChevronRight className={classes.arrowRight} />,
           <RadioButtonUnchecked className={classes.circle} />,
         ]}
       >
