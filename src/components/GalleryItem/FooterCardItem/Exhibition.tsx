@@ -62,7 +62,7 @@ const Exhibition = ({
   children,
 }: {
   link: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }) => {
   const classes = useStyle()
   return (
