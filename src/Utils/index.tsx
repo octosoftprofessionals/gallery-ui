@@ -216,3 +216,10 @@ export const getCarouselArtworks = (liveAuctionItems, buyNowItems) => {
   }
   return carouselArtworks
 }
+
+export const ethereumIoLinkTx = (transactionHash: string) => {
+  if (transactionHash) {
+    return `https://etherscan.io/tx/${transactionHash}`
+  }
+  return '#'
+}

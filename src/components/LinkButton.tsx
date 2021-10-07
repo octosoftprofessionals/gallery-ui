@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     fontSize: theme.spacing(8),
+    color: theme.palette.common.white,
     '&:hover': {
       color: theme.palette.primary.main,
     },
@@ -63,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: theme.palette.primary.main,
   },
-  link: { textDecoration: 'none' },
+  link: { textDecoration: 'none', width: 'inherit' },
 }))
 
 const LinkButton = ({ link, text, icon }) => {

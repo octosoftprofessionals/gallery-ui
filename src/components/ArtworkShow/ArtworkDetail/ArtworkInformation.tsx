@@ -85,7 +85,7 @@ const ArtworkInformation = ({
       </div>
 
       <Typography variant="subtitle1" color="primary" className={classes.title}>
-        Edition of
+        Edition of:
       </Typography>
       <Typography variant="h4" color="initial">
         {/* {number ? number : '1'} */}
