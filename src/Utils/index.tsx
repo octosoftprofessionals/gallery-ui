@@ -202,7 +202,7 @@ export const getCarouselArtworks = (liveAuctionItems, buyNowItems) => {
   } = buyNowItems
 
   if (pagesAuctions.length >= 4) {
-    pagesAuctions.forEach((artwork: GalleryItem) => {
+    pagesAuctions.slice(0, 4).forEach((artwork: GalleryItem) => {
       carouselArtworks.push(artwork)
     })
   } else if (pagesAuctions.length < 4 && pagesBuyNow.length > 0) {
