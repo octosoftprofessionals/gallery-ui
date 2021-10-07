@@ -124,6 +124,15 @@ const Playlist = ({
       } catch (error) {
         console.log('errorCreatePlaylist :>> ', error)
       }
+    } else {
+      try {
+        const resCreatePlaylist = await createPlaylist(profileAddress, {
+          title: titlePlaylist,
+          description: descriptionPlaylist,
+        })
+      } catch (error) {
+        console.log('errorCreatePlaylist :>> ', error)
+      }
     }
     try {
       const result = await queryFunction()
@@ -210,7 +219,6 @@ const Playlist = ({
         profileAddress={profileAddress}
         onPlublish={handlePublishPlaylist}
         artworksSelected={addArtworksPlaylist}
-        isDisabled={addArtworksPlaylist.length === 0}
       />
     </>
   )
