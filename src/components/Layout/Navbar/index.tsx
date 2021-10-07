@@ -150,7 +150,9 @@ const useStyles = makeStyles(Theme => ({
   },
   gradient: {
     background: ({ pathname }) =>
-      pathname === '/profile' ? backgroundGradient5 : 'none',
+      pathname === '/profile' || pathname === '/creator/'
+        ? backgroundGradient5
+        : 'none',
   },
 }))
 

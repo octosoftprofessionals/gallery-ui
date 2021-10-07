@@ -18,6 +18,7 @@ import {
 } from '../../../services/playlists'
 import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
+import useQueryParams from '../../../hooks/useQueryParams'
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -40,7 +41,6 @@ const useStyles = makeStyles(Theme => ({
 
 const Playlist = ({
   isMyAccount,
-  openModal = false,
   emptyMessageProps,
   profileAddress,
   queryName,
@@ -58,10 +58,11 @@ const Playlist = ({
     queryFunction,
     { refetchOnWindowFocus: true }
   )
+  const { open } = useQueryParams()
   const queryClient = useQueryClient()
   const [isdelete, setIsDelete] = useState<boolean>(false)
   const classes = useStyles({ isdelete })
-  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(openModal)
+  const [openCreatePlaylist, setOpenCreatePlaylist] = useState(Boolean(open))
   const [openAddPlaylist, setOpenAddPlaylist] = useState(false)
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
@@ -123,6 +124,15 @@ const Playlist = ({
       } catch (error) {
         console.log('errorCreatePlaylist :>> ', error)
       }
+    } else {
+      try {
+        const resCreatePlaylist = await createPlaylist(profileAddress, {
+          title: titlePlaylist,
+          description: descriptionPlaylist,
+        })
+      } catch (error) {
+        console.log('errorCreatePlaylist :>> ', error)
+      }
     }
     try {
       const result = await queryFunction()
@@ -140,11 +150,10 @@ const Playlist = ({
   const handlerDeletedPlaylist = async (id: number) => {
     setIsDelete(true)
     try {
-      const resDeletePlaylist = await deleteOnePlaylistByIdWithAssociatedArtworks(
-        {
+      const resDeletePlaylist =
+        await deleteOnePlaylistByIdWithAssociatedArtworks({
           playlist_id: id,
-        }
-      )
+        })
     } catch (error) {
       console.log('errorResDeletePlaylist :>> ', error)
     }
@@ -210,7 +219,6 @@ const Playlist = ({
         profileAddress={profileAddress}
         onPlublish={handlePublishPlaylist}
         artworksSelected={addArtworksPlaylist}
-        isDisabled={addArtworksPlaylist.length === 0}
       />
     </>
   )

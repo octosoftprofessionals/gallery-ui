@@ -71,9 +71,9 @@ const FooterCardItem = ({
             />
           ) : null}
         </Offer>
-      ) : (
+      ) : statesArt !== 'creator' ? (
         <Exhibition link={linkExhibition} />
-      )}
+      ) : null}
     </>
   )
 }

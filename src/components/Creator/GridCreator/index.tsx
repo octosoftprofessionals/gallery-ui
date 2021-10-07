@@ -10,11 +10,9 @@ import {
 
 import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
-import useQueryParams, { useQueryHash } from '../../../hooks/useQueryParams'
+import { useQueryHash } from '../../../hooks/useQueryParams'
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => {
-  const { open } = useQueryParams()
-
   return (
     <TabBar
       justify="center"
@@ -67,7 +65,6 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => {
             showExploreButton: true,
           }}
           queryName="PlaylistQuery"
-          openModal={Boolean(open)}
           queryFunction={async () => await getPlaylists(profileAddress)}
         />,
         <Favorite

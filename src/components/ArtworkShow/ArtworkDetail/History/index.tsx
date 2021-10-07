@@ -9,8 +9,11 @@ const useStyle = makeStyles(Theme => ({
     marginTop: Theme.spacing(14),
   },
   historyContainer: {
-    maxHeight: Theme.spacing(16) * 4.5,
+    maxHeight: '40vh',
+    padding: Theme.spacing(2),
     overflow: 'auto',
+    rowGap: Theme.spacing(5),
+    columnGap: Theme.spacing(5),
   },
 }))
 
@@ -19,9 +22,14 @@ const History = ({ data = [] }) => {
   return (
     <div className={classes.history}>
       <Typography variant="h6" color="primary">
-        History
+        History:
       </Typography>
-      <Grid container className={classes.historyContainer}>
+      <Grid
+        container
+        justify="center"
+        wrap="wrap"
+        className={classes.historyContainer}
+      >
         {data.map(historyItem => (
           <HistoryItem {...historyItem} key={historyItem.id} />
         ))}
