@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   divider: {
-    width: '95%',
+    width: '96%',
     height: 1,
     backgroundColor: theme.palette.primary.main,
   },

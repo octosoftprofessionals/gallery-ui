@@ -18,9 +18,14 @@ const useStyle = makeStyles(Theme => ({
     },
     textAlign: 'center',
   },
-  header: {
-    borderBottom:
-      Theme.palette.type === 'dark' ? '1px solid #FFFF' : '1px solid #000',
+  // header: {
+  //   borderBottom:
+  //     Theme.palette.type === 'dark' ? '1px solid #FFFF' : '1px solid #000',
+  // },
+  divider: {
+    marginTop: '0em',
+    color: 'black',
+    width: '96%',
   },
 }))
 
@@ -65,21 +70,21 @@ const Creators = ({ creatorsQuery = [], status }) => {
         className={classes.header}
       >
         <Grid item xs={9} container justify="center" alignContent="center">
-          <Grid
+          {/* <Grid
             item
             xs={5}
             container
-            justify="space-around"
+            justify="center"
             alignContent="flex-end"
+          > */}
+          <Typography
+            variant="caption"
+            color="primary"
+            className={classes.title}
           >
-            <Typography
-              variant="caption"
-              color="primary"
-              className={classes.title}
-            >
-              Meet our creators
-            </Typography>
-          </Grid>
+            Meet our creators
+          </Typography>
+          {/* </Grid> */}
 
           {/* <SearchCreator
             searchBar={search}
@@ -88,6 +93,7 @@ const Creators = ({ creatorsQuery = [], status }) => {
           /> */}
         </Grid>
       </Grid>
+      <hr className={classes.divider}></hr>
       {isLoading ? (
         <Spinner height="50vh" />
       ) : (

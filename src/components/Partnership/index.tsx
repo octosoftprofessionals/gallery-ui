@@ -14,7 +14,7 @@ const useStyle = makeStyles(Theme => ({
     width: '96%',
   },
   title: {
-    paddingTop: '5.5rem',
+    paddingTop: '5.7rem',
     fontSize: '3.5rem',
     '@media (max-width: 576px)': {
       fontSize: '2rem',
