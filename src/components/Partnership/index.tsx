@@ -13,7 +13,13 @@ const useStyle = makeStyles(Theme => ({
     color: 'black',
     width: '96%',
   },
-  title: { padding: Theme.spacing(10) },
+  title: {
+    paddingTop: '5.5rem',
+    fontSize: '3.5rem',
+    '@media (max-width: 576px)': {
+      fontSize: '2rem',
+    },
+  },
   subtitle: {
     textAlign: 'left',
     marginTop: Theme.spacing(10),

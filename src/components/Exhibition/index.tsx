@@ -14,7 +14,14 @@ import { useExhibitionQuery } from '../../atom'
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  title: { padding: theme.spacing(10) },
+  title: {
+    paddingTop: theme.spacing(15),
+    paddingBottom: theme.spacing(2),
+    fontSize: '3.5rem',
+    '@media (max-width: 576px)': {
+      fontSize: '2rem',
+    },
+  },
   divider: {
     width: '95%',
     height: 1,

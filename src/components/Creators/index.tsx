@@ -11,7 +11,13 @@ import CreatorItem from '../GalleryItem/CreatorItem'
 import Spinner from '../Spinner'
 
 const useStyle = makeStyles(Theme => ({
-  title: { fontSize: 56 },
+  title: {
+    fontSize: '3.5rem',
+    '@media (max-width: 576px)': {
+      fontSize: '2rem',
+    },
+    textAlign: 'center',
+  },
   header: {
     borderBottom:
       Theme.palette.type === 'dark' ? '1px solid #FFFF' : '1px solid #000',
