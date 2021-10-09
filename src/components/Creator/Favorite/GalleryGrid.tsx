@@ -26,6 +26,21 @@ const GalleryGridFavorite = ({
 }) => {
   const classes = useStyle({ hasNextPage })
 
+  const { favoriteArtworks } = pages[0]
+  console.log(`favoriteArtworks :>`, favoriteArtworks)
+
+  const favoriteStack = () => {
+    const favoriteArtworksClone = [...favoriteArtworks]
+    const reversedOrderFavorites = []
+    for (let i = 0; i < favoriteArtworks.length; i++) {
+      reversedOrderFavorites.push(favoriteArtworksClone.pop())
+    }
+    return reversedOrderFavorites
+  }
+
+  const reversedArtworks = favoriteStack()
+  console.log(`reversedArtworks :>`, reversedArtworks)
+
   return (
     <>
       <Grid
@@ -37,19 +52,11 @@ const GalleryGridFavorite = ({
         alignContent="center"
         wrap="wrap"
       >
-        {pages.map(({ favoriteArtworks = [] }) =>
-          favoriteArtworks.map((artwork, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              {...prop}
-              className={classes.containerItem}
-            >
-              {renderItem(artwork, index)}
-            </Grid>
-          ))
-        )}
+        {reversedArtworks.map((artwork, index) => (
+          <Grid item xs={12} sm={6} {...prop} className={classes.containerItem}>
+            {renderItem(artwork, index)}
+          </Grid>
+        ))}
       </Grid>
       {isLoading ? (
         <Spinner height="50vh" />
