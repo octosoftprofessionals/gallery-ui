@@ -401,7 +401,7 @@ const EditForm = ({ userAccount }: Props) => {
                   onChange={handleChangeName}
                   value={name}
                 />
-                <Typography className={classes.label}>Username</Typography>
+                <Typography className={classes.label}>* Username</Typography>
                 <TextField
                   variant="outlined"
                   color="primary"
