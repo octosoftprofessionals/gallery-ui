@@ -138,6 +138,7 @@ const ArtworkItem = ({
         isFavorite={isFavorite}
         account={account}
         artworkId={id}
+        assetId={assetId}
         linkOffer={linkOffer}
         linkBuyNow={linkBuyNow}
         linkExhibition={linkExhibition}

@@ -25,7 +25,8 @@ const GalleryGridFavorite = ({
   ...prop
 }) => {
   const classes = useStyle({ hasNextPage })
-
+  const { favoriteArtworks } = pages[0]
+  console.log(`favoritesArtworks :>`, favoriteArtworks) // pages [0]
   return (
     <>
       <Grid
