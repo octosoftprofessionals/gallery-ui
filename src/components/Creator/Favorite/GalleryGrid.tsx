@@ -25,9 +25,7 @@ const GalleryGridFavorite = ({
   ...prop
 }) => {
   const classes = useStyle({ hasNextPage })
-
   const { favoriteArtworks } = pages[0]
-  console.log(`favoriteArtworks :>`, favoriteArtworks)
 
   const favoriteStack = () => {
     const favoriteArtworksClone = [...favoriteArtworks]
@@ -39,7 +37,6 @@ const GalleryGridFavorite = ({
   }
 
   const reversedArtworks = favoriteStack()
-  console.log(`reversedArtworks :>`, reversedArtworks)
 
   return (
     <>
