@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from '../../Modal'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Tab } from '@material-ui/core'
+import { AppBar, Tab, Typography } from '@material-ui/core'
 import { TabContext, TabPanel, TabList } from '@material-ui/lab'
 import FollowItem from './FollowItem'
 
@@ -20,6 +20,14 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(15),
     borderBottom: '1px solid #6666',
     padding: theme.spacing(4, 2, 0, 2),
+  },
+  text: {
+    color: theme.palette.secondary.contrastText,
+    fontWeight: 'bold',
+    fontSize: theme.typography.fontSize[10],
+    marginRight: theme.spacing(1),
+    textAlign: 'center',
+    marginTop: theme.spacing(10),
   },
   tabs: {
     display: 'flex',
@@ -75,6 +83,13 @@ const FollowersModal = ({
     setValue(newValue)
   }
 
+  console.log(
+    `followers :>`,
+    followers.length,
+    'following :>',
+    following.length
+  )
+
   return (
     <div>
       <Modal
@@ -104,26 +119,34 @@ const FollowersModal = ({
             </TabList>
           </AppBar>
           <TabPanel className={classes.panel} value="1">
-            {following
-              ? following.map(user => (
-                  <FollowItem
-                    user={user}
-                    handleClick={setOpenFollowModal}
-                    publicKey={user.publicAddress}
-                  />
-                ))
-              : null}
+            {following.length > 0 ? (
+              following.map(user => (
+                <FollowItem
+                  user={user}
+                  handleClick={setOpenFollowModal}
+                  publicKey={user.publicAddress}
+                />
+              ))
+            ) : (
+              <Typography variant="h3" className={classes.text}>
+                Current creator is not following other creators at the time.
+              </Typography>
+            )}
           </TabPanel>
           <TabPanel className={classes.panel} value="2">
-            {followers
-              ? followers.map(user => (
-                  <FollowItem
-                    user={user}
-                    handleClick={setOpenFollowModal}
-                    publicKey={user.publicAddress}
-                  />
-                ))
-              : null}
+            {followers.length > 0 ? (
+              followers.map(user => (
+                <FollowItem
+                  user={user}
+                  handleClick={setOpenFollowModal}
+                  publicKey={user.publicAddress}
+                />
+              ))
+            ) : (
+              <Typography variant="h3" className={classes.text}>
+                Current creator has no followers at the time.
+              </Typography>
+            )}
           </TabPanel>
         </TabContext>
       </Modal>
