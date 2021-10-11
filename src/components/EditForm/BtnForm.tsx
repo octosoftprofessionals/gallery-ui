@@ -125,7 +125,7 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
     {
       key: 'website',
       name: 'Website',
-      value: socialNetwork.website.toLowerCase(),
+      value: socialNetwork.website,
       icon: <LanguageIcon className={classes.icon} />,
     },
     {
@@ -223,7 +223,9 @@ const LinkButton = ({ socialNetwork, setSocialNetwork, setDisabled }) => {
                     handleChange(network.key, e.currentTarget.value)
                   }
                   placeholder={
-                    network.value !== undefined && network.value !== null && network.value !== ""
+                    network.value !== undefined &&
+                    network.value !== null &&
+                    network.value !== ''
                       ? network.value
                       : 'Discord user'
                   }
