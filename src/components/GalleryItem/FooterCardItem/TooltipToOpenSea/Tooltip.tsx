@@ -21,7 +21,16 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
     margin: '5px',
     height: '100%',
-    width: '80%',
+    width: '100%',
+    '@media (max-width: 1008px) and (min-width: 948px)': {
+      fontSize: '1rem',
+    },
+    '@media (max-width: 665px) and (min-width: 596px)': {
+      fontSize: '0.7rem',
+    },
+    '@media (max-width: 595px)': {
+      fontSize: '1.2rem',
+    },
   },
   btn: {
     position: 'relative',
@@ -39,7 +48,9 @@ const useStyle = makeStyles(Theme => ({
     '&:hover': {
       color: Theme.palette.text.secondary,
     },
-    // marginTop: Theme.spacing(1),
+    height: '50%',
+    paddingTop: Theme.spacing(2),
+    marginLeft: Theme.spacing(2),
   },
 }))
 
