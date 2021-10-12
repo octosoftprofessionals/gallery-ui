@@ -269,6 +269,7 @@ const index = ({
         title={titlePlaylist}
         setDescription={setDescriptionPlaylist}
         description={descriptionPlaylist}
+        modalTitle="Edit your playlist"
       />
       <ModalEditArtworksSelected
         onClose={handleCloseEditArtworksSelected}
