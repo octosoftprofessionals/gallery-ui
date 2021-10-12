@@ -9,6 +9,7 @@ import { GalleryItem } from '../../../types'
 import {
   createAssociationFavoritesArtworks,
   deleteOneFavoriteArtworkFromOneUser,
+  checkExistingFavoriteAssociation,
 } from '../../../services/favorites'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import {
@@ -79,6 +80,7 @@ const ArtworkItem = ({
   const [timer, setTimer] = useState<string>('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
+  const [checkedFavorite, setCheckedFavorite] = useState(null)
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -116,6 +118,18 @@ const ArtworkItem = ({
     onFavorite(assetId, false)
   }
 
+  const checkFavorites = async () => {
+    const response = await checkExistingFavoriteAssociation(account, assetId)
+    return response.favorite ?? {}
+  }
+
+  useEffect(() => {
+    const findFavorites = async () => {
+      setCheckedFavorite(await checkFavorites())
+    }
+    account && findFavorites()
+  }, [account])
+
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
       <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
@@ -135,7 +149,7 @@ const ArtworkItem = ({
         timer={timer}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
-        isFavorite={isFavorite}
+        isFavorite={checkedFavorite}
         account={account}
         artworkId={id}
         assetId={assetId}
