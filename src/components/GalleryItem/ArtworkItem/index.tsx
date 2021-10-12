@@ -108,6 +108,7 @@ const ArtworkItem = ({
       asset_id: assetId,
     })
     onFavorite(assetId, true)
+    setCheckedFavorite(true)
   }
   const handleSubmitUnFavorite = e => {
     e.preventDefault()
@@ -116,6 +117,7 @@ const ArtworkItem = ({
       asset_id: assetId,
     })
     onFavorite(assetId, false)
+    setCheckedFavorite(false)
   }
 
   const checkFavorites = async () => {
