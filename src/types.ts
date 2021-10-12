@@ -183,7 +183,7 @@ export type GalleryItem = {
   // - highest bid
   // - all bids
   isFavorite: boolean
-
+  isExhibition: boolean
   schemaName: string // 'ERC721' | 'ERC1155'
 }
 

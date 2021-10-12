@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Button } from '@material-ui/core'
+import TooltipToOpenSea from './TooltipToOpenSea/Tooltip'
 
 import { colors } from '../../Styles/Colors'
 
@@ -18,12 +19,12 @@ const useStyle = makeStyles(Theme => ({
   },
   containerTop: { padding: Theme.spacing(2, 6) },
   containerButton: { padding: Theme.spacing(0, 0, 2) },
-  btn: {
-    position: 'relative',
-    height: Theme.spacing(2),
-    margin: Theme.spacing(4, 0, 0),
-    padding: '34px 24px 11px 24px',
-  },
+  // btn: {
+  //   position: 'relative',
+  //   height: Theme.spacing(2),
+  //   margin: Theme.spacing(4, 0, 0),
+  //   padding: '34px 24px 11px 24px',
+  // },
   text: {
     height: '100%',
     position: 'absolute',
@@ -39,21 +40,21 @@ const useStyle = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
     margin: '5px',
   },
-  btnText: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    color: colors.Black,
-    '&:hover': {
-      transform: 'none',
-      color: Theme.palette.text.secondary,
-    },
-    fontSize: Theme.typography.fontSize[10],
-    margin: '5px',
-    height: '100%',
-  },
+  // btnText: {
+  //   position: 'absolute',
+  //   top: 0,
+  //   left: 0,
+  //   right: 0,
+  //   bottom: 0,
+  //   color: colors.Black,
+  //   '&:hover': {
+  //     transform: 'none',
+  //     color: Theme.palette.text.secondary,
+  //   },
+  //   fontSize: Theme.typography.fontSize[10],
+  //   margin: '5px',
+  //   height: '100%',
+  // },
   link: { textDecoration: 'none', display: 'contents' },
 }))
 
@@ -69,7 +70,8 @@ const Exhibition = ({
     <Grid container className={classes.footerCard}>
       <Grid item container justify="center" className={classes.containerTop}>
         <Link to={link} className={classes.link}>
-          <Button
+          <TooltipToOpenSea />
+          {/* <Button
             variant="outlined"
             color="primary"
             fullWidth
@@ -78,7 +80,7 @@ const Exhibition = ({
             <Typography variant="button" className={classes.btnText}>
               Check this art out
             </Typography>
-          </Button>
+          </Button> */}
         </Link>
       </Grid>
       <Grid item xs={12} className={classes.containerButton}>
