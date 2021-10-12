@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { navigate } from 'gatsby'
 import { useQuery } from 'react-query'
 import { AccountComponent } from '../../components/AccountComponent'
 import { getUser } from '../../services/users'
@@ -12,7 +13,8 @@ const ProfilePage = () => {
   )
 
   if (!address) {
-    return <NotFound />
+    navigate('/')
+    return null
   }
   return <AccountComponent isLoading={isLoading} userAccount={userAccount} />
 }
