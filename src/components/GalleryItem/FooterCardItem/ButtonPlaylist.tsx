@@ -8,8 +8,6 @@ import {
   SlideshowTwoTone,
 } from '@material-ui/icons/'
 import MenuListPlaylists from './ListPlaylists'
-import useQueryParams from '../../../hooks/useQueryParams'
-import { checkExistingFavoriteAssociation } from '../../../services/favorites'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(0, 6) },
@@ -27,7 +25,6 @@ const ButtonPlaylist = ({
   inPlaylist,
   account,
   artworkId,
-  assetId,
 }: {
   handleSubmitFavorite: Function
   handleSubmitUnFavorite: Function
@@ -39,40 +36,12 @@ const ButtonPlaylist = ({
   const classes = useStyle()
   const [anchorEl, setAnchorEl] = useState(null)
 
-  // const { address } = useQueryParams()
-  const checkFavorites = async () => {
-    const response = await checkExistingFavoriteAssociation(account, assetId)
-    return response
-  }
-
   const handleClose = () => {
     setAnchorEl(null)
   }
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
   }
-
-  // console.log(
-  //   `account :>`,
-  //   account,
-  //   'artworkId :>',
-  //   artworkId,
-  //   'assetId',
-  //   assetId
-  // )
-  // console.log(`From ButtonPlaylist props :>`, props)
-  // console.log(`address from buttonPlaylist :>`, address)
-
-  const print = async () => {
-    const res = await checkFavorites()
-    const response = res.favorite ?? {}
-    console.log(`checkFavorites() :>`, response)
-    return await response
-  }
-
-  // const check = async () => {
-
-  // }
 
   return (
     <Grid
@@ -88,10 +57,10 @@ const ButtonPlaylist = ({
         <Grid container direction="column" justify="center" alignItems="center">
           <Hidden only="xs">
             <Typography variant="overline" color="textSecondary">
-              {print() ? 'Remove Favorites' : 'Add to Favorites'}
+              {inFavorite ? 'Remove Favorites' : 'Add to Favorites'}
             </Typography>
           </Hidden>
-          {print() ? (
+          {inFavorite ? (
             <GradeSharp className={classes.icon} />
           ) : (
             <StarBorderRounded className={classes.icon} />
