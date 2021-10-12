@@ -26,7 +26,6 @@ const GalleryGridFavorite = ({
 }) => {
   const classes = useStyle({ hasNextPage })
   const { favoriteArtworks } = pages[0]
-
   const favoriteStack = () => {
     const favoriteArtworksClone = [...favoriteArtworks]
     const reversedOrderFavorites = []

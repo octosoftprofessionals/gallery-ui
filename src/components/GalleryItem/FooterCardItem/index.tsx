@@ -17,6 +17,7 @@ const FooterCardItem = ({
   isFavorite,
   account,
   artworkId,
+  assetId,
   linkOffer,
   linkBuyNow,
   linkExhibition,
@@ -29,6 +30,7 @@ const FooterCardItem = ({
   isFavorite?: boolean
   account: any
   artworkId: number
+  assetId: number
   linkOffer?: string
   linkBuyNow?: string
   linkExhibition?: string
@@ -44,6 +46,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}
+              assetId={assetId}
             />
           ) : null}
         </InAuctions>
@@ -56,6 +59,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}
+              assetId={assetId}
             />
           ) : null}
         </BuyNow>
@@ -68,6 +72,7 @@ const FooterCardItem = ({
               inFavorite={isFavorite}
               account={account}
               artworkId={artworkId}
+              assetId={assetId}
             />
           ) : null}
         </Offer>
