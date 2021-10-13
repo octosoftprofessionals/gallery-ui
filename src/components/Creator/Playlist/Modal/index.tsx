@@ -54,7 +54,7 @@ const useStyles = makeStyles(Theme => ({
   },
   conteinerGrid: {
     textAlign: 'center',
-    padding: Theme.spacing(6)
+    padding: Theme.spacing(6),
   },
   conteinerForm: {
     marginLeft: Theme.spacing(6),
@@ -72,8 +72,10 @@ const PlaylistModal = ({
   setDescription,
   title,
   description,
+  modalTitle,
 }) => {
   const classes = useStyles()
+
   const handleClose = () => {
     onClose()
   }
@@ -94,13 +96,19 @@ const PlaylistModal = ({
     >
       <form onSubmit={handleNext}>
         <Grid container justify="space-between" alignItems="center">
-          <Grid className={classes.conteinerGrid} item xs={10} container justify="center">
+          <Grid
+            className={classes.conteinerGrid}
+            item
+            xs={10}
+            container
+            justify="center"
+          >
             <Typography
               variant="h5"
               color="primary"
               className={classes.titleModal}
             >
-              Create a new playlist
+              {modalTitle ? modalTitle : 'Create a new playlist'}
             </Typography>
           </Grid>
           <IconButton onClick={handleClose}>
