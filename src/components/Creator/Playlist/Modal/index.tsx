@@ -76,7 +76,6 @@ const PlaylistModal = ({
 }) => {
   const classes = useStyles()
 
-  console.log(`modalTitle :>`, modalTitle)
   const handleClose = () => {
     onClose()
   }

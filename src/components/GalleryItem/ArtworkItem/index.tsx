@@ -81,7 +81,6 @@ const ArtworkItem = ({
   const [account, _] = useAccountStore()
 
   const endpoint = window.location.pathname
-  console.log('endpoint :>', endpoint !== '/exhibition/')
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
