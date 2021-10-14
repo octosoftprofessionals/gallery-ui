@@ -82,6 +82,8 @@ const ArtworkItem = ({
   const [account, _] = useAccountStore()
   const [checkedFavorite, setCheckedFavorite] = useState(null)
 
+  const endpoint = window.location.pathname
+
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const delta = deltaTime(expiration)
@@ -134,17 +136,38 @@ const ArtworkItem = ({
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
-      <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
-        <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
-      </Link>
-      <Link to={linkArtworkShow} className={classes.link}>
-        <div className={classes.infoCard}>
-          <Typography variant="h6" color="primary" className={classes.line}>
-            {title}
-          </Typography>
-          <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
-        </div>
-      </Link>
+      {endpoint !== '/exhibition/' ? (
+        <>
+          <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
+            <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
+          </Link>
+          <Link to={linkArtworkShow} className={classes.link}>
+            <div className={classes.infoCard}>
+              <Typography variant="h6" color="primary" className={classes.line}>
+                {title}
+              </Typography>
+              <CreatorInfo
+                imageUrl={creatorImageUrl}
+                username={creatorUsername}
+              />
+            </div>
+          </Link>
+        </>
+      ) : (
+        <>
+          <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
+          <div className={classes.infoCard}>
+            <Typography variant="h6" color="primary" className={classes.line}>
+              {title}
+            </Typography>
+            <CreatorInfo
+              imageUrl={creatorImageUrl}
+              username={creatorUsername}
+            />
+          </div>
+        </>
+      )}
+
       <FooterCardItem
         statesArt={status}
         price={priceEth}

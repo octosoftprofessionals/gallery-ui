@@ -29,16 +29,20 @@ const CreatorInfo = ({
   const classes = useStyle()
   return (
     <div className={classes.containerAvatar}>
-      <Grid container direction="row" alignItems="center">
-        <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
-        <Typography
-          variant="body1"
-          color="primary"
-          className={classes.username}
-        >
-          {`@${username}`}
-        </Typography>
-      </Grid>
+      {username ? (
+        <Grid container direction="row" alignItems="center">
+          <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
+          <Typography
+            variant="body1"
+            color="primary"
+            className={classes.username}
+          >
+            {`@${username}`}
+          </Typography>
+        </Grid>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
