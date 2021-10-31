@@ -82,7 +82,7 @@ const ArtworkItem = ({
   const [account, _] = useAccountStore()
   const [checkedFavorite, setCheckedFavorite] = useState(null)
 
-  const endpoint = window.location.pathname
+  const endpoint = typeof window !== 'undefined' ? window.location.pathname : ''
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
