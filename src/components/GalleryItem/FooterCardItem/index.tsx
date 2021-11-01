@@ -19,6 +19,7 @@ const FooterCardItem = ({
   artworkId,
   assetId,
   linkOffer,
+  linkBid,
   linkBuyNow,
   linkExhibition,
 }: {
@@ -38,7 +39,7 @@ const FooterCardItem = ({
   return (
     <>
       {statesArt === STATUS_VALUES.onAuction ? (
-        <InAuctions price={price} timer={timer}>
+        <InAuctions price={price} timer={timer} link={linkBid}>
           {account ? (
             <ButtonPlaylist
               handleSubmitFavorite={handleSubmitFavorite}

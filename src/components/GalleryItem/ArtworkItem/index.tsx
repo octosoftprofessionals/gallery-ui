@@ -74,7 +74,6 @@ const ArtworkItem = ({
     status,
     priceEth,
     expiration,
-    isFavorite,
   } = galleryItem
 
   const [timer, setTimer] = useState<string>('')
@@ -100,6 +99,7 @@ const ArtworkItem = ({
   const linkOffer = artworkPathFrom(assetContractAddress, assetTokenId)
   const linkBuyNow = artworkPathFrom(assetContractAddress, assetTokenId)
   const linkExhibition = linkOpensea(assetContractAddress, assetTokenId)
+  const linkBid = biddingPathFrom(assetContractAddress, assetTokenId)
   const favoritesMutation = useMutation(createAssociationFavoritesArtworks)
   const unFavoritesMutation = useMutation(deleteOneFavoriteArtworkFromOneUser)
 
@@ -179,6 +179,7 @@ const ArtworkItem = ({
         artworkId={id}
         assetId={assetId}
         linkOffer={linkOffer}
+        linkBid={linkBid}
         linkBuyNow={linkBuyNow}
         linkExhibition={linkExhibition}
       />
