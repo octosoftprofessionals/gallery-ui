@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { navigate } from 'gatsby'
 import { useQuery } from 'react-query'
 import { AccountComponent } from '../../components/AccountComponent'
+import NotFound from '../../components/404'
 import { getUser } from '../../services/users'
 import { useMetamaskAccount } from '../../hooks/useAccountStore'
-import NotFound from '../404'
 
 const ProfilePage = () => {
   const address = useMetamaskAccount()

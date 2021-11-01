@@ -127,7 +127,11 @@ export const linkStorage = () => {
   // transfers sessionStorage from one tab to another
   let sessionStorage_transfer = function (event) {
     if (!event) {
-      event = window.event
+      if (typeof window !== 'undefined') {
+        event = window.event
+      } else {
+        return
+      }
     } // ie suq
     if (!event.newValue) return // do nothing if no value to work with
     if (event.key == 'getSessionStorage') {
@@ -144,11 +148,13 @@ export const linkStorage = () => {
     }
   }
 
-  // listen for changes to localStorage
-  if (window.addEventListener) {
-    window.addEventListener('storage', sessionStorage_transfer, false)
-  } else {
-    window.attachEvent('onstorage', sessionStorage_transfer)
+  if (typeof window !== 'undefined') {
+    if (window.addEventListener) {
+      // listen for changes to localStorage
+      window.addEventListener('storage', sessionStorage_transfer, false)
+    } else {
+      window.attachEvent('onstorage', sessionStorage_transfer)
+    }
   }
 
   // Ask other tabs for session storage (this is ONLY to trigger event)

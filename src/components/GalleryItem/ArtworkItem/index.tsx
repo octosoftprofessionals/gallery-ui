@@ -9,6 +9,7 @@ import { GalleryItem } from '../../../types'
 import {
   createAssociationFavoritesArtworks,
   deleteOneFavoriteArtworkFromOneUser,
+  checkExistingFavoriteAssociation,
 } from '../../../services/favorites'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import {
@@ -79,6 +80,9 @@ const ArtworkItem = ({
   const [timer, setTimer] = useState<string>('')
   const classes = useStyle({ imageUrl })
   const [account, _] = useAccountStore()
+  const [checkedFavorite, setCheckedFavorite] = useState(null)
+
+  const endpoint = typeof window !== 'undefined' ? window.location.pathname : ''
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -106,6 +110,7 @@ const ArtworkItem = ({
       asset_id: assetId,
     })
     onFavorite(assetId, true)
+    setCheckedFavorite(true)
   }
   const handleSubmitUnFavorite = e => {
     e.preventDefault()
@@ -114,30 +119,65 @@ const ArtworkItem = ({
       asset_id: assetId,
     })
     onFavorite(assetId, false)
+    setCheckedFavorite(false)
   }
+
+  const checkFavorites = async () => {
+    const response = await checkExistingFavoriteAssociation(account, assetId)
+    return response.favorite ?? {}
+  }
+
+  useEffect(() => {
+    const findFavorites = async () => {
+      setCheckedFavorite(await checkFavorites())
+    }
+    account && findFavorites()
+  }, [account])
 
   return (
     <Paper variant="elevation" elevation={1} className={classes.root}>
-      <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
-        <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
-      </Link>
-      <Link to={linkArtworkShow} className={classes.link}>
-        <div className={classes.infoCard}>
-          <Typography variant="h6" color="primary" className={classes.line}>
-            {title}
-          </Typography>
-          <CreatorInfo imageUrl={creatorImageUrl} username={creatorUsername} />
-        </div>
-      </Link>
+      {endpoint !== '/exhibition/' ? (
+        <>
+          <Link to={linkArtworkShow} className={classes.link} {...rootProps}>
+            <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
+          </Link>
+          <Link to={linkArtworkShow} className={classes.link}>
+            <div className={classes.infoCard}>
+              <Typography variant="h6" color="primary" className={classes.line}>
+                {title}
+              </Typography>
+              <CreatorInfo
+                imageUrl={creatorImageUrl}
+                username={creatorUsername}
+              />
+            </div>
+          </Link>
+        </>
+      ) : (
+        <>
+          <DisplayArtworkItem imageUrl={imageUrl} videoUrl={videoUrl} />
+          <div className={classes.infoCard}>
+            <Typography variant="h6" color="primary" className={classes.line}>
+              {title}
+            </Typography>
+            <CreatorInfo
+              imageUrl={creatorImageUrl}
+              username={creatorUsername}
+            />
+          </div>
+        </>
+      )}
+
       <FooterCardItem
         statesArt={status}
         price={priceEth}
         timer={timer}
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
-        isFavorite={isFavorite}
+        isFavorite={checkedFavorite}
         account={account}
         artworkId={id}
+        assetId={assetId}
         linkOffer={linkOffer}
         linkBuyNow={linkBuyNow}
         linkExhibition={linkExhibition}
