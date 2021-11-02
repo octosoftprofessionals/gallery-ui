@@ -41,7 +41,8 @@ const EmailAlert = ({
         >
           <strong>Invalid {type.toLowerCase()} format.</strong>
         </Alert>
-      ) : savedDataField === value ? null : checkAvailability(
+      ) : savedDataField === value ||
+        savedDataField === '' ? null : checkAvailability(
           userDataList,
           value
         ) === false ? (
