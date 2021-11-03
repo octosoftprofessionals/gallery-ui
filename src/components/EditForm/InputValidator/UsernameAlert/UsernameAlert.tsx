@@ -30,7 +30,8 @@ const UserNameAlert = ({
         >
           <strong>This field can't be empty</strong>
         </Alert>
-      ) : savedDataField === value ? null : checkAvailability(
+      ) : savedDataField === value ||
+        savedDataField === '' ? null : checkAvailability(
           userDataList,
           value
         ) === false ? (
