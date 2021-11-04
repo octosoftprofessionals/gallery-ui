@@ -218,7 +218,7 @@ const EditForm = ({ userAccount }: Props) => {
   const [username, setUserName] = React.useState(userAccount.username ?? '')
   const [email, setEmail] = React.useState(userAccount.email ?? '')
 
-  const [usernameList, setUsernameList] = useState([])
+  const [usernameList, setUsernameList] = useState('')
   const [usernameCheck, setUsernameCheck] = useState(true)
   const [savedUsername, setSavedUsername] = useState('')
 

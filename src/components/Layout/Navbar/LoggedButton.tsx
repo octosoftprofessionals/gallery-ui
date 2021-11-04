@@ -99,7 +99,7 @@ const menu = [
   //   link: address => `/construction`,
   // },
   {
-    name: 'Edit profile',
+    name: 'Edit Profile',
     link: address => `/editProfile`,
   },
 ]
