@@ -12,8 +12,7 @@ const detectProvider = () => {
   if (typeof window !== 'undefined') {
     if (detectMob()) {
       return (
-        new Web3.providers.HttpProvider(MAINNET_INFURA_URL) ||
-        window.web3.currentProvider
+        new Web3.providers.HttpProvider(MAINNET_INFURA_URL) || window.ethereum
       )
     } else {
       return new ethers.providers.Web3Provider(window.ethereum)
@@ -22,8 +21,6 @@ const detectProvider = () => {
 }
 
 const httpProvider = detectProvider()
-console.log(`httpProvider :>`, httpProvider)
 // ? window.web3.currentProvider
 // : new Web3.providers.HttpProvider(MAINNET_INFURA_URL)
-
 export default httpProvider

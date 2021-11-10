@@ -34,7 +34,6 @@ const makeAnOffer = async ({
     startAmount: valueBid,
   })
   console.log('CREATED OFFER', offer)
-
   const tokenAddress = offer.asset.tokenAddress
   const tokenId = offer.asset.tokenId
 
