@@ -39,10 +39,9 @@ export const createBuyOrder = async ({
       },
       accountAddress: accountAddress,
       startAmount: amountEth,
-      /*  paymentTokenAddress: WETH_TOKEN_ADDRESS, */
+      paymentTokenAddress: WETH_TOKEN_ADDRESS,
     })
     console.log('Here buyOrder :>>', buyOrder)
-
     const tokenAddress = buyOrder.asset.tokenAddress
     const tokenId = buyOrder.asset.tokenId
 
@@ -53,20 +52,3 @@ export const createBuyOrder = async ({
     return e
   }
 }
-
-// export const fulfillOrder = async ({
-//   accountAddress,
-//   assetContractAddress,
-//   assetTokenId,
-// }) => {
-//   const order = await (await getSeaport()).api.getOrder({
-//     asset_contract_address: assetContractAddress,
-//     token_id: assetTokenId,
-//     side: OrderSide.Sell,
-//   })
-//   const transactionHash = await (await getSeaport()).fulfillOrder({
-//     order,
-//     accountAddress,
-//   })
-//   return transactionHash
-// }
