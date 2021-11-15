@@ -5,10 +5,13 @@ import BuyNow from './BuyNow'
 import OfferArt from './OfferArt'
 
 const CardAuction = ({
+  assetContractAddress,
+  assetTokenId,
   status,
   ownerAddress,
   ownerImageUrl,
   ownerUsername,
+  creatorAddress,
   priceEth,
   priceUsd,
   expiration,
@@ -16,6 +19,9 @@ const CardAuction = ({
 }) => {
   return status === 'buy_now' ? (
     <BuyNow
+      creatorAddress={creatorAddress}
+      assetContractAddress={assetContractAddress}
+      assetTokenId={assetTokenId}
       priceEth={priceEth}
       priceUsd={priceUsd}
       link={biddingLink}
@@ -25,6 +31,8 @@ const CardAuction = ({
     />
   ) : status === 'on_auction' ? (
     <BidArt
+      assetContractAddress={assetContractAddress}
+      assetTokenId={assetTokenId}
       priceEth={priceEth}
       priceUsd={priceUsd}
       link={biddingLink}
@@ -34,6 +42,8 @@ const CardAuction = ({
     />
   ) : status === 'none' ? (
     <OfferArt
+      assetContractAddress={assetContractAddress}
+      assetTokenId={assetTokenId}
       priceEth={priceEth}
       priceUsd={priceUsd}
       ownerAddress={ownerAddress}

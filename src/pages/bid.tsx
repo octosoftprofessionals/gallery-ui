@@ -10,8 +10,6 @@ import { useAccountStore } from '../hooks/useAccountStore'
 
 const BidPage = () => {
   const { contractAddress, tokenId } = useQueryParams()
-  console.log('contractAddress:', contractAddress)
-  console.log('tokenId:', tokenId)
   const { data: galleryItem } = useQuery('artworkQuery', () =>
     galleryItemQuery(
       contractAddress,

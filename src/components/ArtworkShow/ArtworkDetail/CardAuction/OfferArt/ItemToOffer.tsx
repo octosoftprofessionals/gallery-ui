@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Divider,
@@ -8,75 +8,42 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { colors } from '../../../../Styles/Colors'
-
-const Styles = makeStyles(Theme => ({
-  divider: {
-    backgroundColor: Theme.palette.primary.main,
-  },
-  btnMakeOffer: {
-    height: 58,
-    borderRadius: Theme.shape.borderRadius[2],
-    backgroundColor: Theme.palette.secondary.dark,
-    border:
-      Theme.palette.type === 'light'
-        ? `3px solid ${Theme.palette.secondary.contrastText}`
-        : '2px solid #00FFFF',
-  },
-  btnCounteroffert: {
-    height: 58,
-    borderRadius: Theme.shape.borderRadius[2],
-    backgroundColor:
-      Theme.palette.type === 'light'
-        ? Theme.palette.secondary.contrastText
-        : Theme.palette.secondary.main,
-    border:
-      Theme.palette.type === 'light'
-        ? `3px solid ${Theme.palette.secondary.contrastText}`
-        : `2px solid ${Theme.palette.secondary.light}`,
-  },
-  txtBtnMakeOffer: {
-    fontSize: Theme.typography.fontSize[3],
-    color: Theme.palette.primary.dark,
-  },
-  txtBtnCounteroffert: {
-    fontSize: Theme.typography.fontSize[3],
-    color: Theme.palette.primary.light,
-  },
-  box: {
-    padding: Theme.spacing(11),
-  },
-  '@global': {
-    '.MuiOutlinedInput-input': {
-      color: colors.DimGray,
-    },
-    '.MuiOutlinedInput-notchedOutline': {
-      border:
-        Theme.palette.type === 'light'
-          ? `3px solid ${Theme.palette.secondary.contrastText}`
-          : `2px solid ${Theme.palette.secondary.contrastText}`,
-    },
-  },
-  input: {
-    borderRadius: Theme.shape.borderRadius[2],
-    fontFamily: Theme.typography.fontFamily[1],
-    fontSize: Theme.typography.fontSize[10],
-  },
-  eth: {
-    fontSize: Theme.typography.fontSize[9],
-    lineHeight: '1.5',
-  },
-}))
-
+import makeAnOffer from '../../../../../services/makeAnOffer';
+import { useAccountStore } from '../../../../../hooks/useAccountStore'
+import BigNumber from 'bignumber.js'
 const ItemToOffer = ({
   isOwner,
   valueBid,
   setValueBid,
   isPendingOffer,
   setIsPendingOffer,
+  priceEth,
+  ownerAddress,
+  assetContractAddress,
+  assetTokenId,
 }) => {
   const classes = Styles()
   const [textBtn, setTextBtn] = useState<string>('Make Offer')
-  const handleOffer = () => {
+
+  const { account, balance } = useAccountStore()
+  const [accountBalanceWETH, setAccountBalanceWETH] = useState<BigNumber | null>(null)
+  const [accountAddress, setAccoutnAddres] = useState<string | null>(null)
+
+  useEffect(() => {
+    setAccountBalanceWETH(new BigNumber(balance))
+    setAccoutnAddres(account)
+  }, [balance, account])
+
+  const handleOffer = async () => {
+    const result = await makeAnOffer({
+      priceEth,
+      ownerAddress,
+      accountAddress,
+      assetContractAddress,
+      assetTokenId,
+      valueBid,
+    })
+    console.log("HERE RESULT", result)
     setTextBtn('Counteroffer')
     setIsPendingOffer(!isPendingOffer)
   }
@@ -138,5 +105,61 @@ const ItemToOffer = ({
     </Grid>
   )
 }
-
+const Styles = makeStyles(Theme => ({
+  divider: {
+    backgroundColor: Theme.palette.primary.main,
+  },
+  btnMakeOffer: {
+    height: 58,
+    borderRadius: Theme.shape.borderRadius[2],
+    backgroundColor: Theme.palette.secondary.dark,
+    border:
+      Theme.palette.type === 'light'
+        ? `3px solid ${Theme.palette.secondary.contrastText}`
+        : '2px solid #00FFFF',
+  },
+  btnCounteroffert: {
+    height: 58,
+    borderRadius: Theme.shape.borderRadius[2],
+    backgroundColor:
+      Theme.palette.type === 'light'
+        ? Theme.palette.secondary.contrastText
+        : Theme.palette.secondary.main,
+    border:
+      Theme.palette.type === 'light'
+        ? `3px solid ${Theme.palette.secondary.contrastText}`
+        : `2px solid ${Theme.palette.secondary.light}`,
+  },
+  txtBtnMakeOffer: {
+    fontSize: Theme.typography.fontSize[3],
+    color: Theme.palette.primary.dark,
+  },
+  txtBtnCounteroffert: {
+    fontSize: Theme.typography.fontSize[3],
+    color: Theme.palette.primary.light,
+  },
+  box: {
+    padding: Theme.spacing(11),
+  },
+  '@global': {
+    '.MuiOutlinedInput-input': {
+      color: colors.DimGray,
+    },
+    '.MuiOutlinedInput-notchedOutline': {
+      border:
+        Theme.palette.type === 'light'
+          ? `3px solid ${Theme.palette.secondary.contrastText}`
+          : `2px solid ${Theme.palette.secondary.contrastText}`,
+    },
+  },
+  input: {
+    borderRadius: Theme.shape.borderRadius[2],
+    fontFamily: Theme.typography.fontFamily[1],
+    fontSize: Theme.typography.fontSize[10],
+  },
+  eth: {
+    fontSize: Theme.typography.fontSize[9],
+    lineHeight: '1.5',
+  },
+}))
 export default ItemToOffer

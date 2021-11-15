@@ -5,6 +5,39 @@ import { Grid, Typography, Button } from '@material-ui/core'
 import { formatDecimal } from '../../../Utils'
 import { colors } from '../../Styles/Colors'
 
+
+const BuyNow = ({ price, link, children }) => {
+  const classes = useStyle()
+  return (
+    <Grid container className={classes.footerCard}>
+      <Grid item container justify="center" className={classes.containerTop}>
+        {/* Link to "Buy now" page or Event that handles the purchase in future */}
+        <Link to={link} className={classes.link}>
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
+            className={classes.btn}
+          >
+            <Typography
+              variant="caption"
+              color="secondary"
+              className={classes.text}
+            >
+              {isNaN(price)
+                ? 'Buy Now — ETH'
+                : `Buy Now ${formatDecimal(price)} ETH`}
+            </Typography>
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item xs={12} className={classes.containerButton}>
+        {children}
+      </Grid>
+    </Grid>
+  )
+}
+
 const useStyle = makeStyles(Theme => ({
   footerCard: {
     left: 0,
@@ -39,37 +72,5 @@ const useStyle = makeStyles(Theme => ({
   },
   link: { textDecoration: 'none', display: 'contents' },
 }))
-
-const BuyNow = ({ price, link, children }) => {
-  const classes = useStyle()
-  return (
-    <Grid container className={classes.footerCard}>
-      <Grid item container justify="center" className={classes.containerTop}>
-        {/* Link to "Buy now" page or Event that handles the purchase in future */}
-        <Link to={link} className={classes.link}>
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
-            className={classes.btn}
-          >
-            <Typography
-              variant="caption"
-              color="secondary"
-              className={classes.text}
-            >
-              {isNaN(price)
-                ? 'Buy Now — ETH'
-                : `Buy Now ${formatDecimal(price)} ETH`}
-            </Typography>
-          </Button>
-        </Link>
-      </Grid>
-      <Grid item xs={12} className={classes.containerButton}>
-        {children}
-      </Grid>
-    </Grid>
-  )
-}
 
 export default BuyNow

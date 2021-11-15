@@ -83,12 +83,6 @@ const FollowersModal = ({
     setValue(newValue)
   }
 
-  console.log(
-    `followers :>`,
-    followers.length,
-    'following :>',
-    following.length
-  )
 
   return (
     <div>
