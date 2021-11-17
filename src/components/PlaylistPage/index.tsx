@@ -81,7 +81,7 @@ const index = ({
   description: string
   isLoading: any
   playlistId: number
-  onUpDate: Function<any>
+  onUpDate: any
 }) => {
   const classes = useStyles()
   const { username, profileImgUrl, publicAddress } = userAccount ?? {}

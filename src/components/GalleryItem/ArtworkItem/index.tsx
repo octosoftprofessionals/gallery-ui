@@ -78,7 +78,7 @@ const ArtworkItem = ({
 
   const [timer, setTimer] = useState<string>('')
   const classes = useStyle({ imageUrl })
-  const [account, _] = useAccountStore()
+  const { account } = useAccountStore()
   const [checkedFavorite, setCheckedFavorite] = useState(null)
 
   const endpoint = typeof window !== 'undefined' ? window.location.pathname : ''
