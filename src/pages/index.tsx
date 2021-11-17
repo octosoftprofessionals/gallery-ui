@@ -23,7 +23,7 @@ const Home = () => {
     hasNextPage: hasNextPageFA,
   } = useInfiniteQuery(
     'featuredArtworksItems',
-    ({ pageParam = 0, querys = 'collection_slug=superchief-gallery-nifty&owner_username=SUPERCHIEF' }) =>
+    ({ pageParam = 0, querys = 'collection_slug=superchief-gallery-nifty' }) =>
       allQuerysItems({ query: querys, offset: pageParam }),
     {
       refetchOnWindowFocus: false,

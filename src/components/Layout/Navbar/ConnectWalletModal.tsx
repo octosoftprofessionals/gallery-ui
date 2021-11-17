@@ -12,38 +12,20 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import { backgroundGradient } from '../../Styles/Colors'
 import { login } from '../../../services/auth'
 
-const useStyle = makeStyles(Theme => ({
-  icon: { fontSize: Theme.typography.fontSize[6] },
-  button: {
-    borderRadius: Theme.shape.borderRadius[1],
-    marginTop: Theme.spacing(3),
-    '&:hover': { transform: 'none', translate: 'none', border: 'none' },
-  },
-  title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
-  conteiner: {
-    marginBottom: Theme.spacing(4),
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  text: { fontSize: Theme.spacing(4), textAlign: 'center' },
-  link: { textDecoration: 'none' },
-  textCaption: {
-    cursor: 'pointer',
-    fontSize: Theme.spacing(4),
-    '&:hover': { color: Theme.palette.primary.main },
-  },
-}))
+import { useEthers } from '@usedapp/core'
 
 const ConnectWalletModal = ({
   handleCloseConnectWalletModal,
   setRedirectModal,
 }) => {
+
   const classes = useStyle()
 
-  const [acount, setMetamaskAccount] = useAccountStore()
+  const { account } = useAccountStore()
 
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
 
+  const { activateBrowserWallet } = useEthers()
   useEffect(() => {
     checkMetaMaskConnected()
     async function checkMetaMaskConnected() {
@@ -52,42 +34,13 @@ const ConnectWalletModal = ({
     }
   }, [])
 
-  const handleConnection = async () => {
+  const useDappConnection = async () => {
     if (metaMaskInstalled && typeof window !== 'undefined') {
-      try {
-        if (
-          (await window.ethereum?.on('', () => {})._state.accounts.length) !== 0
-        ) {
-          await window.ethereum?.request({
-            method: 'wallet_requestPermissions',
-            params: [
-              {
-                eth_accounts: {},
-              },
-            ],
-          })
-        }
-
-        const accounts =
-          (await window.ethereum?.request({
-            method: 'eth_requestAccounts',
-            params: [
-              {
-                eth_accounts: {},
-              },
-            ],
-          })) ?? []
-        console.log(`accounts :>`, accounts)
-        const account = await login()
-        // TODO: save account instead of metamaskone
-        console.log('Logged in with account :> ', account)
-
-        setMetamaskAccount(accounts[0])
-        handleCloseConnectWalletModal()
-      } catch (e) {
-        console.log(e)
-      }
-    } else {
+      await activateBrowserWallet()
+      await handleCloseConnectWalletModal()
+      return
+    }
+    else {
       handleCloseConnectWalletModal()
       setRedirectModal(true)
     }
@@ -156,7 +109,7 @@ const ConnectWalletModal = ({
               }}
               className={classes.button}
               endIcon={null}
-              onClick={handleConnection}
+              onClick={useDappConnection}
             >
               <Typography variant="caption" color="primary">
                 Metamask
@@ -181,5 +134,27 @@ const ConnectWalletModal = ({
     </>
   )
 }
+
+const useStyle = makeStyles(Theme => ({
+  icon: { fontSize: Theme.typography.fontSize[6] },
+  button: {
+    borderRadius: Theme.shape.borderRadius[1],
+    marginTop: Theme.spacing(3),
+    '&:hover': { transform: 'none', translate: 'none', border: 'none' },
+  },
+  title: { fontSize: Theme.spacing(9), marginBottom: Theme.spacing(4) },
+  conteiner: {
+    marginBottom: Theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  text: { fontSize: Theme.spacing(4), textAlign: 'center' },
+  link: { textDecoration: 'none' },
+  textCaption: {
+    cursor: 'pointer',
+    fontSize: Theme.spacing(4),
+    '&:hover': { color: Theme.palette.primary.main },
+  },
+}))
 
 export default ConnectWalletModal

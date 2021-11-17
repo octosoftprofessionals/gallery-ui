@@ -26,9 +26,129 @@ import LoggedButton from './LoggedButton'
 import MenuDrawer from './MenuDrawer'
 import Cookies from 'js-cookie'
 import { useAccountStore } from '../../../hooks/useAccountStore'
+import { useEthers } from '@usedapp/core'
 
 const { boxShadow1 } = boxShadow
 const { backgroundGradient5 } = backgroundGradient
+
+const index = ({
+  pathname,
+  profileImageUrl,
+}: {
+  pathname: string
+  profileImageUrl: string
+}) => {
+  const { deactivate } = useEthers()
+
+  const classes = useStyles({ logoSrc, pathname })
+  const [showDrawer, setShowDrawer] = useState(false)
+
+  const { account } = useAccountStore()
+
+  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
+    getUser({ public_address: account })
+  )
+
+  const handleLogOut = async () => {
+    await deactivate()
+    Cookies.remove('jwt')
+    navigate(`/`)
+  }
+
+  return (
+    <>
+      <AppBar
+        position="static"
+        color="transparent"
+        elevation={0}
+        className={classes.gradient}
+      >
+        <Toolbar className={classes.root}>
+          <Grid
+            container
+            justify="space-between"
+            alignItems="center"
+            className={classes.nav}
+          >
+            <Grid item md={4} className={classes.navbarElement}>
+              <Link to="/" className={classes.link}>
+                <LogoDarkSrc className={classes.logoDark} />
+                <LogoSCNFT className={classes.logo} />
+              </Link>
+            </Grid>
+
+            <Grid item md={4} container justify="center">
+              <Navigator pathname={pathname} />
+            </Grid>
+
+            <Hidden smDown>
+              {account ? (
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  sm={6}
+                  xs={12}
+                  className={classes.navbarElement}
+                >
+                  {/*   {userAccount ? ( */}
+                  <LoggedButton
+                    profileImageUrl={userAccount?.profileImgUrl}
+                    name={userAccount?.username ?? ''}
+                    account={account}
+                    onLogOut={handleLogOut}
+                  />
+                  {/*     ) : null} */}
+                </Grid>
+              ) : (
+                <Grid
+                  container
+                  justify="flex-end"
+                  md={4}
+                  className={classes.navbarElement}
+                >
+                  <ButtonConnectWallet pathname={pathname} />
+                </Grid>
+              )}
+            </Hidden>
+            <Hidden mdUp>
+              <Grid
+                item
+                xs={2}
+                container
+                justify="flex-end"
+                alignContent="center"
+                className={classes.boxIconButton}
+              >
+                <IconButton
+                  color="inherit"
+                  className={classes.buttonCreatorMenu}
+                  aria-label="open drawer"
+                  onClick={() => setShowDrawer(true)}
+                  edge="end"
+                >
+                  <MenuIcon className={classes.menuIcon} />
+                </IconButton>
+              </Grid>
+            </Hidden>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+
+      <MenuDrawer
+        account={account}
+        pathname={pathname}
+        showDrawer={showDrawer}
+        setShowDrawer={setShowDrawer}
+        LogoDarkSrc={LogoDarkSrc}
+        handleLogOut={handleLogOut}
+        userAccount={userAccount}
+      />
+    </>
+  )
+}
+
+export default withWidth()(index)
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -155,120 +275,3 @@ const useStyles = makeStyles(Theme => ({
         : 'none',
   },
 }))
-
-const index = ({
-  pathname,
-  profileImageUrl,
-}: {
-  pathname: string
-  profileImageUrl: string
-}) => {
-  const classes = useStyles({ logoSrc, pathname })
-  const [showDrawer, setShowDrawer] = useState(false)
-
-  const [account, setAccount] = useAccountStore()
-
-  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-    getUser({ public_address: account })
-  )
-
-  const handleLogOut = async () => {
-    setAccount(null)
-    Cookies.remove('jwt')
-    navigate(`/`)
-  }
-
-  return (
-    <>
-      <AppBar
-        position="static"
-        color="transparent"
-        elevation={0}
-        className={classes.gradient}
-      >
-        <Toolbar className={classes.root}>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="center"
-            className={classes.nav}
-          >
-            <Grid item md={4} className={classes.navbarElement}>
-              <Link to="/" className={classes.link}>
-                <LogoDarkSrc className={classes.logoDark} />
-                <LogoSCNFT className={classes.logo} />
-              </Link>
-            </Grid>
-
-            <Grid item md={4} container justify="center">
-              <Navigator pathname={pathname} />
-            </Grid>
-
-            <Hidden smDown>
-              {account ? (
-                <Grid
-                  container
-                  justify="flex-end"
-                  md={4}
-                  sm={6}
-                  xs={12}
-                  className={classes.navbarElement}
-                >
-                  {userAccount ? (
-                    <LoggedButton
-                      profileImageUrl={userAccount?.profileImgUrl}
-                      name={userAccount.username ?? ''}
-                      account={account}
-                      onLogOut={handleLogOut}
-                    />
-                  ) : null}
-                </Grid>
-              ) : (
-                <Grid
-                  container
-                  justify="flex-end"
-                  md={4}
-                  className={classes.navbarElement}
-                >
-                  <ButtonConnectWallet pathname={pathname} />
-                </Grid>
-              )}
-            </Hidden>
-            <Hidden mdUp>
-              <Grid
-                item
-                xs={2}
-                container
-                justify="flex-end"
-                alignContent="center"
-                className={classes.boxIconButton}
-              >
-                <IconButton
-                  color="inherit"
-                  className={classes.buttonCreatorMenu}
-                  aria-label="open drawer"
-                  onClick={() => setShowDrawer(true)}
-                  edge="end"
-                >
-                  <MenuIcon className={classes.menuIcon} />
-                </IconButton>
-              </Grid>
-            </Hidden>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-
-      <MenuDrawer
-        account={account}
-        pathname={pathname}
-        showDrawer={showDrawer}
-        setShowDrawer={setShowDrawer}
-        LogoDarkSrc={LogoDarkSrc}
-        handleLogOut={handleLogOut}
-        userAccount={userAccount}
-      />
-    </>
-  )
-}
-
-export default withWidth()(index)

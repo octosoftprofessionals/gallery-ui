@@ -7,6 +7,58 @@ import OfferItem from './OfferItem'
 import OtherOffersItem from './OtherOffersItem'
 import ItemToOffer from './ItemToOffer'
 
+const OffersArt = ({
+  priceEth,
+  priceUsd,
+  ownerAddress,
+  ownerImageUrl,
+  ownerUsername,
+  assetContractAddress,
+  assetTokenId,
+}) => {
+  const [valueBid, setValueBid] = useState('')
+  const [isOwner, setIsOwner] = useState<boolean>(false)
+  const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(false)
+  const [isPendingOffer, setIsPendingOffer] = useState<boolean>(false)
+
+  const classes = Styles({ color: alertOffer[0].color })
+
+  return (
+    <OfferItem
+      title={title[0]}
+      priceEth={priceEth}
+      priceUsd={priceUsd}
+      ownerAddress={ownerAddress}
+      ownerImageUrl={ownerImageUrl}
+      ownerUsername={ownerUsername}
+    >
+      <div className={classes.containerTop}>
+        <Typography variant="body1" className={classes.text}>
+          {alertOffer[0].text}
+        </Typography>
+      </div>
+      {isOwnerOffers ? (
+        <Grid item className={classes.boxOffers}>
+          <OtherOffersItem />
+        </Grid>
+      ) : (
+        <ItemToOffer
+          isOwner={isOwner}
+          valueBid={valueBid}
+          setValueBid={setValueBid}
+          isPendingOffer={isPendingOffer}
+          setIsPendingOffer={setIsPendingOffer}
+          priceEth={priceEth}
+          assetContractAddress={assetContractAddress}
+          assetTokenId={assetTokenId}
+          ownerAddress={ownerAddress}
+
+        />
+      )}
+    </OfferItem>
+  )
+}
+
 const Styles = makeStyles(Theme => ({
   link: { textDecoration: 'none' },
   containerTop: {
@@ -54,50 +106,4 @@ const alertOffer = [
     color: '#C48F25',
   },
 ]
-
-const OffersArt = ({
-  priceEth,
-  priceUsd,
-  ownerAddress,
-  ownerImageUrl,
-  ownerUsername,
-}) => {
-  const [valueBid, setValueBid] = useState('')
-  const [isOwner, setIsOwner] = useState<boolean>(false)
-  const [isOwnerOffers, setIsOwnerOffers] = useState<boolean>(false)
-  const [isPendingOffer, setIsPendingOffer] = useState<boolean>(false)
-
-  const classes = Styles({ color: alertOffer[0].color })
-
-  return (
-    <OfferItem
-      title={title[0]}
-      priceEth={priceEth}
-      priceUsd={priceUsd}
-      ownerAddress={ownerAddress}
-      ownerImageUrl={ownerImageUrl}
-      ownerUsername={ownerUsername}
-    >
-      <div className={classes.containerTop}>
-        <Typography variant="body1" className={classes.text}>
-          {alertOffer[0].text}
-        </Typography>
-      </div>
-      {isOwnerOffers ? (
-        <Grid item className={classes.boxOffers}>
-          <OtherOffersItem />
-        </Grid>
-      ) : (
-        <ItemToOffer
-          isOwner={isOwner}
-          valueBid={valueBid}
-          setValueBid={setValueBid}
-          isPendingOffer={isPendingOffer}
-          setIsPendingOffer={setIsPendingOffer}
-        />
-      )}
-    </OfferItem>
-  )
-}
-
 export default OffersArt

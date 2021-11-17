@@ -12,38 +12,6 @@ import HeadButtons from './HeadButtons'
 import CardAuction from './CardAuction'
 import History from './History'
 
-const useStyle = makeStyles(Theme => ({
-  root: {
-    position: 'relative',
-    backgroundColor: Theme.palette.secondary.dark,
-    padding: Theme.spacing(9),
-  },
-  icon: { fontSize: `${Theme.typography.fontSize[0]}em` },
-  text: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: Theme.spacing(3, 0, 9),
-  },
-
-  desciptionText: {
-    margin: Theme.spacing(0, 0, 5),
-    lineBreak: 'auto',
-    whiteSpace: 'pre-line',
-  },
-  name: { margin: Theme.spacing(0, 0, 5) },
-  title: { margin: 0 },
-  creator: { fontSize: Theme.typography.fontSize[8] },
-  buttonsContainer: {
-    position: 'absolute',
-    top: Theme.spacing(1),
-    height: Theme.spacing(10),
-  },
-  history: {
-    marginTop: Theme.spacing(3),
-  },
-  titleArtwork: { marginTop: Theme.spacing(9) },
-}))
-
 const ArtworkDetail = ({
   galleryItem,
   linkTwitter,
@@ -122,6 +90,9 @@ const ArtworkDetail = ({
         </Grid>
         <Grid item xs={12} md={6} container direction="column">
           <CardAuction
+            creatorAddress={creatorAddress}
+            assetContractAddress={assetContractAddress}
+            assetTokenId={assetTokenId}
             ownerAddress={ownerAddress}
             ownerImageUrl={ownerImageUrl}
             ownerUsername={ownerUsername}
@@ -134,7 +105,6 @@ const ArtworkDetail = ({
           <History data={historyItems} />
         </Grid>
       </Grid>
-
       <Grid item xs={12} md={10}>
         <CreatorSection
           username={creatorUsername}
@@ -146,5 +116,37 @@ const ArtworkDetail = ({
     </Grid>
   )
 }
+
+const useStyle = makeStyles(Theme => ({
+  root: {
+    position: 'relative',
+    backgroundColor: Theme.palette.secondary.dark,
+    padding: Theme.spacing(9),
+  },
+  icon: { fontSize: `${Theme.typography.fontSize[0]}em` },
+  text: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: Theme.spacing(3, 0, 9),
+  },
+
+  desciptionText: {
+    margin: Theme.spacing(0, 0, 5),
+    lineBreak: 'auto',
+    whiteSpace: 'pre-line',
+  },
+  name: { margin: Theme.spacing(0, 0, 5) },
+  title: { margin: 0 },
+  creator: { fontSize: Theme.typography.fontSize[8] },
+  buttonsContainer: {
+    position: 'absolute',
+    top: Theme.spacing(1),
+    height: Theme.spacing(10),
+  },
+  history: {
+    marginTop: Theme.spacing(3),
+  },
+  titleArtwork: { marginTop: Theme.spacing(9) },
+}))
 
 export default ArtworkDetail

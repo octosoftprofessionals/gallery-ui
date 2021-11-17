@@ -17,7 +17,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       new webpack.ProvidePlugin({
         Buffer: [require.resolve('buffer'), 'Buffer'],
       }),
-
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
       // required to fix SSR build on Netlify
       // https://github.com/sindresorhus/got/issues/345
       // https://github.com/webpack/webpack/issues/5294

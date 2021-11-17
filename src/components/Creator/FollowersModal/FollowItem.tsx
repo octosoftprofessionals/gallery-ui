@@ -37,7 +37,7 @@ function FollowItem({ user, handleClick, publicKey }) {
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
   const [isFollow, setIsFollow] = useState('')
-  const [account, _] = useAccountStore()
+  const { account } = useAccountStore()
 
   const { data: FollowQuery = {}, isLoading } = useQuery(
     'FollowQuery',
