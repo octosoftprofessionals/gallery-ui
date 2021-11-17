@@ -12,7 +12,7 @@ import { useAccountStore } from '../../hooks/useAccountStore'
 
 const playListPage = () => {
   const { id } = useQueryParams()
-  const [account, _] = useAccountStore()
+  const { account } = useAccountStore()
   const queryClient = useQueryClient()
   const { data: userAccount, isLoading: isLoadingUser } = useQuery(
     'userQuery',
@@ -22,11 +22,9 @@ const playListPage = () => {
     }
   )
 
-  const {
-    data: PlaylistItem = {},
-    isLoading: isLoadingPlaylist,
-  } = useQuery('PlaylistItem', () =>
-    getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
+  const { data: PlaylistItem = {}, isLoading: isLoadingPlaylist } = useQuery(
+    'PlaylistItem',
+    () => getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
   )
 
   const upDate = async (): Promise<any> => {

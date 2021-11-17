@@ -9,25 +9,9 @@ import { formatUsd, formatDecimal } from '../../../../../Utils'
 import OwnerButton from '../../../../CreatorButton'
 import { profilePathFromAddress } from '../../../../../config/routes'
 
-const Styles = makeStyles(Theme => ({
-  root: {
-    width: '100%',
-    backgroundColor: Theme.palette.secondary.light,
-    padding: Theme.spacing(11, 0),
-  },
-  box: { padding: Theme.spacing(0, 11) },
-  price: { fontSize: Theme.typography.fontSize[6] },
-  titlePrice: { fontSize: Theme.typography.fontSize[3] },
-  divider: {
-    backgroundColor: Theme.palette.primary.main,
-    marginBottom: Theme.spacing(4),
-  },
-  btnOwner: {
-    margin: 0,
-  },
-}))
-
 const BidItem = ({
+  assetContractAddress,
+  assetTokenId,
   title,
   priceEth,
   priceUsd,
@@ -36,6 +20,8 @@ const BidItem = ({
   ownerUsername,
   children,
 }: {
+  assetContractAddress: string
+  assetTokenId: string
   title: any
   priceEth: number
   priceUsd: number
@@ -97,5 +83,24 @@ const BidItem = ({
     </Paper>
   )
 }
+
+const Styles = makeStyles(Theme => ({
+  root: {
+    width: '100%',
+    backgroundColor: Theme.palette.secondary.light,
+    padding: Theme.spacing(11, 0),
+  },
+  box: { padding: Theme.spacing(0, 11) },
+  price: { fontSize: Theme.typography.fontSize[6] },
+  titlePrice: { fontSize: Theme.typography.fontSize[3] },
+  divider: {
+    backgroundColor: Theme.palette.primary.main,
+    marginBottom: Theme.spacing(4),
+  },
+  btnOwner: {
+    margin: 0,
+  },
+}))
+
 
 export default BidItem
