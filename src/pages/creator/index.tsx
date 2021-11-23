@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useQuery } from 'react-query'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
-
-import useQueryParams from '../../hooks/useQueryParams'
 import Spinner from '../../components/Spinner'
+
+import NotFound from '../404'
+import useQueryParams from '../../hooks/useQueryParams'
 import { getUser } from '../../services/users'
 
 const linkShareTwitter = () => {
@@ -18,32 +19,49 @@ const linkShareTwitter = () => {
 
 const CreatorPage = () => {
   const { address } = useQueryParams()
+  const addressToLower = address ? address.toString().toLowerCase() : ''
   const [displayReportModal, setDisplayReportModal] = useState<boolean>(false)
-  const { data: user, isLoading } = useQuery('creatorQuery', () =>
-    getUser({ public_address: address })
-  )
-  const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState<string>('')
-
-  return (
-    <Layout
-      padding="0"
-      marginTop="0"
-      height
-      backgroundImage={coverCreatorImgUrl}
-    >
+    
+    const { data: user, isLoading } = useQuery('creatorQuery', () =>
+    getUser({ public_address: addressToLower })
+    )
+    const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState<string>('')
+    
+    if (user) {
+      return (
+        <Layout
+        padding="0"
+        marginTop="0"
+        height
+        backgroundImage={coverCreatorImgUrl}
+        >
       {isLoading ? (
         <Spinner height="50vh" />
-      ) : (
-        <Creator
+        ) : (
+          <Creator
           isMyAccount={false}
           user={user}
           setDisplayReportModal={setDisplayReportModal}
           setCoverImgUrl={setCoverCreatorImgUrl}
           linkTwitter={linkShareTwitter()}
-        />
-      )}
+          />
+          )}
     </Layout>
   )
-}
-
-export default CreatorPage
+} else {
+  return (
+    <Fragment
+    >
+      {isLoading ? (
+        <Spinner height="50vh" />
+        ) : (
+          <NotFound />
+          )}
+    </Fragment>)
+        }
+      }
+      
+      
+      
+      export default CreatorPage
+      

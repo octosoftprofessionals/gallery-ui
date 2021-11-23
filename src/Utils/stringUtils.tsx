@@ -28,9 +28,9 @@ export function validateEmail(email: string) {
 }
 
 export function truncateMiddleText(text: string, length: number) {
-  if (text.lenght < 20) {
-    return text
-  } else {
-    return `${text.slice(0, length)}...${text.slice(-length)}`
-  }
+    if (text.length < 20) {
+      return text
+    } else {
+      return `${text.slice(0, length)}...${text.slice(-length)}`
+    }
 }
