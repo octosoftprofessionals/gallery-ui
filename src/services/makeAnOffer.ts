@@ -15,15 +15,6 @@ const makeAnOffer = async ({
   valueBid,
 }) => {
   const seaport = await getSeaport()
-  console.log('ABOUT CREATE OFFER ORDER', {
-    asset: {
-      tokenId: assetTokenId,
-      tokenAddress: assetContractAddress,
-      schemaName: WyvernSchemaName.ERC1155,
-    },
-    accountAddress: accountAddress,
-    startAmount: valueBid,
-  })
   const offer = await seaport.createBuyOrder({
     asset: {
       tokenId: assetTokenId,
@@ -33,12 +24,9 @@ const makeAnOffer = async ({
     accountAddress: accountAddress,
     startAmount: valueBid,
   })
-  console.log('CREATED OFFER', offer)
   const tokenAddress = offer.asset.tokenAddress
   const tokenId = offer.asset.tokenId
 
-  console.log('tokenAddress :>> ', tokenAddress)
-  console.log('tokenId :>> ', tokenId)
 
   eventListener(tokenAddress, tokenId)
 }

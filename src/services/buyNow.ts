@@ -21,19 +21,14 @@ const buyNow = async ({
       token_id: assetTokenId,
       side: OrderSide.Sell,
     })
-    console.log('HERE ORDER:>>', Order)
 
     const transaction = await seaport.fulfillOrder({
       order: Order,
       accountAddress: accountAddress,
     })
-    console.log('HERE TRANSACTION:>>', transaction)
 
     const tokenAddress = Order.asset.tokenAddress
     const tokenId = Order.asset.tokenId
-
-    console.log('tokenAddress :>> ', tokenAddress)
-    console.log('tokenId :>> ', tokenId)
 
     eventListener(tokenAddress, tokenId)
     return transaction

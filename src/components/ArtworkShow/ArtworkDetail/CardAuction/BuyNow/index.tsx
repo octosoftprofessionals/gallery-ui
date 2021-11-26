@@ -38,7 +38,6 @@ const BidArt = ({
       assetTokenId,
       ownerAddress,
     })
-    console.log("HERE RESULT", result)
   }
   return (
     <BuyNowItem
