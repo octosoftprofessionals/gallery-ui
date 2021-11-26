@@ -7,28 +7,35 @@ export const getUser = async (queryParams: any = {}): Promise<Users> => {
   const users = res.data ?? {}
   let user = []
   if (users.length > 0 && queryParams.public_address !== null) {
-    user = users.find(user => user.publicAddress === queryParams.public_address)
+    user = await users.find(
+      user =>
+        user.publicAddress.toLowerCase() ===
+        queryParams.public_address.toLowerCase()
+    )
+
     return user
   } else {
-    return {}
+    return null
   }
 }
 
-export const getUsersDataField = async (dataField, queryParams: any = {}): Promise<Users> => {
+export const getUsersDataField = async (
+  dataField,
+  queryParams: any = {}
+): Promise<Users> => {
   const url = `/users`
   const res = await get(url, queryParams)
   const users = res.data ?? {}
   const userDataFieldList: Array<string> = []
-  users.forEach((user) => {
-    for(let prop in user){
-      if(prop == dataField){
+  users.forEach(user => {
+    for (let prop in user) {
+      if (prop == dataField) {
         userDataFieldList.push(user[prop])
       }
     }
   })
   return userDataFieldList
 }
-
 
 export const updateUser = async (public_address, queryParams = {}) => {
   const url = `/users/update/${public_address}`
