@@ -43,7 +43,6 @@ const ItemToOffer = ({
       assetTokenId,
       valueBid,
     })
-    console.log("HERE RESULT", result)
     setTextBtn('Counteroffer')
     setIsPendingOffer(!isPendingOffer)
   }
