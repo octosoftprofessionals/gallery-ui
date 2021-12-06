@@ -182,7 +182,7 @@ const InfoCreator = ({
   const [openFollowModal, setOpenFollowModal] = useState<boolean>(false)
 
   const {account} = useAccountStore()
-  const address = account.toLowerCase()
+  const address = account?.toLowerCase()
 
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)

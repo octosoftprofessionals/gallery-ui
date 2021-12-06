@@ -8,7 +8,7 @@ import { useAccountStore } from '../../hooks/useAccountStore'
 
 const ProfilePage = () => {
   const {account} = useAccountStore()
-  const address = account.toLowerCase()
+  const address = account?.toLowerCase()
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )
