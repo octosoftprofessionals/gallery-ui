@@ -4,10 +4,11 @@ import { useQuery } from 'react-query'
 import { AccountComponent } from '../../components/AccountComponent'
 import NotFound from '../../components/404'
 import { getUser } from '../../services/users'
-import { useMetamaskAccount } from '../../hooks/useAccountStore'
+import { useAccountStore } from '../../hooks/useAccountStore'
 
 const ProfilePage = () => {
-  const address = useMetamaskAccount()
+  const {account} = useAccountStore()
+  const address = account.toLowerCase()
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )

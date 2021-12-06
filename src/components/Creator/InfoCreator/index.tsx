@@ -11,7 +11,7 @@ import {
   checkExistingFollow,
 } from '../../../services/follow'
 import MessageSnackBar from '../../MessageSnackBar'
-import { useMetamaskAccount } from '../../../hooks/useAccountStore'
+import { useAccountStore } from '../../../hooks/useAccountStore'
 import { truncateMiddleText } from '../../../Utils/stringUtils'
 import { useSetModalShow } from '../../../atom'
 import { TransitionProps } from '../../../types'
@@ -181,7 +181,8 @@ const InfoCreator = ({
   const [isFollow, setIsFollow] = useState<boolean>(false)
   const [openFollowModal, setOpenFollowModal] = useState<boolean>(false)
 
-  const address = useMetamaskAccount()
+  const {account} = useAccountStore()
+  const address = account.toLowerCase()
 
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)

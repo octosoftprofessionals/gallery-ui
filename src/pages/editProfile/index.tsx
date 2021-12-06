@@ -3,14 +3,17 @@ import { useQuery } from 'react-query'
 import Layout from '../../components/Layout'
 import EditForm from '../../components/EditForm'
 import { getUser } from '../../services/users'
-import { useMetamaskAccount } from '../../hooks/useAccountStore'
+import { useAccountStore } from '../../hooks/useAccountStore'
 import NotFound from '../404'
 
 const editProfile = () => {
-  const address = useMetamaskAccount()
+  const {account} = useAccountStore()
+  const address = account?.toLowerCase()
+  
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-    getUser({ public_address: address })
+  getUser({ public_address: address })
   )
+
 
   if (!address) {
     return <NotFound />
@@ -18,7 +21,7 @@ const editProfile = () => {
 
   return (
     <Layout>
-      {userAccount ? <EditForm userAccount={userAccount} /> : null}
+      {isLoading ? null : <EditForm userAccount={userAccount} />}
     </Layout>
   )
 }
