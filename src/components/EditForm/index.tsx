@@ -241,7 +241,8 @@ const EditForm = ({ userAccount }: Props) => {
     snapchat: userAccount.snapchat ?? '',
   })
   const [files, setFiles] = useState({ picture: [], cover: [] })
-  const [metamaskAccount, setMetamaskAccount] = useAccountStore()
+  const {account} = useAccountStore()
+  const address = account?.toLowerCase()
   const [openAlert, setOpenAlert] = useState({ open: false, error: false })
   const [disabled, setDisabled] = useState(true)
 
@@ -313,7 +314,7 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('username', username)
       formData.append('profile_img_url', files.picture[0])
       formData.append('cover_img_url', files.cover[0])
-      formData.append('public_address', metamaskAccount as string)
+      formData.append('public_address', address as string)
       formData.append('email', email)
       formData.append('bio', bio)
       formData.append('website', socialNetwork.website)
@@ -327,7 +328,7 @@ const EditForm = ({ userAccount }: Props) => {
       formData.append('snapchat', socialNetwork.snapchat)
       /* Ultimo intento! */
       try {
-        const res = await updateUser(metamaskAccount, formData)
+        const res = await updateUser(address, formData)
         handleClick(false)
         setDisabled(true)
         console.log(res)
@@ -422,7 +423,7 @@ const EditForm = ({ userAccount }: Props) => {
                   savedDataField={savedUsername}
                   savedSetter={setSavedUsername}
                   checkAvailability={checkAvailability}
-                  account={metamaskAccount}
+                  account={address}
                   value={username}
                   userDataList={usernameList}
                   error={error}
@@ -447,7 +448,7 @@ const EditForm = ({ userAccount }: Props) => {
                   savedDataField={savedEmail}
                   savedSetter={setSavedEmail}
                   checkAvailability={checkAvailability}
-                  account={metamaskAccount}
+                  account={address}
                   value={email}
                   userDataList={userEmailList}
                   error={error}

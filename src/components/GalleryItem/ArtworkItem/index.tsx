@@ -106,7 +106,7 @@ const ArtworkItem = ({
   const handleSubmitFavorite = e => {
     e.preventDefault()
     favoritesMutation.mutate({
-      public_address: account as string,
+      public_address: account?.toLowerCase() as string,
       asset_id: assetId,
     })
     onFavorite(assetId, true)
@@ -115,7 +115,7 @@ const ArtworkItem = ({
   const handleSubmitUnFavorite = e => {
     e.preventDefault()
     unFavoritesMutation.mutate({
-      public_address: account as string,
+      public_address: account?.toLowerCase() as string,
       asset_id: assetId,
     })
     onFavorite(assetId, false)
@@ -123,7 +123,7 @@ const ArtworkItem = ({
   }
 
   const checkFavorites = async () => {
-    const response = await checkExistingFavoriteAssociation(account, assetId)
+    const response = await checkExistingFavoriteAssociation(account?.toLowerCase(), assetId)
     return response.favorite ?? {}
   }
 
@@ -131,7 +131,7 @@ const ArtworkItem = ({
     const findFavorites = async () => {
       setCheckedFavorite(await checkFavorites())
     }
-    account && findFavorites()
+    account?.toLowerCase() && findFavorites()
   }, [account])
 
   return (
@@ -175,7 +175,7 @@ const ArtworkItem = ({
         handleSubmitFavorite={handleSubmitFavorite}
         handleSubmitUnFavorite={handleSubmitUnFavorite}
         isFavorite={checkedFavorite}
-        account={account}
+        account={account?.toLowerCase()}
         artworkId={id}
         assetId={assetId}
         linkOffer={linkOffer}
