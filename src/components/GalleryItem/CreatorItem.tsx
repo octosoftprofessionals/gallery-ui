@@ -42,7 +42,10 @@ const useStyle = makeStyles(Theme => ({
     WebkitBoxOrient: 'vertical',
   },
   nameArtis: {
-    fontSize: Theme.typography.fontSize[5],
+    fontSize: '75%',
+  },
+  semiTitle: {
+    fontSize: '90%',
   },
 }))
 
@@ -52,12 +55,8 @@ const CreatorItem = ({
 }: {
   galleryItem: GalleryItem | undefined
 }) => {
-  const {
-    creatorUsername,
-    creatorImageUrl,
-    creatorAddress,
-    description,
-  } = galleryItem
+  const { creatorUsername, creatorImageUrl, creatorAddress, description } =
+    galleryItem
   const classes = useStyle({ imgUrl: creatorImageUrl })
   const linkCreator = profilePathFromAddress(creatorAddress)
 
@@ -76,7 +75,11 @@ const CreatorItem = ({
         </div>
         <Grid container justify="flex-start" className={classes.infoCard}>
           <Grid item xs={12}>
-            <Typography variant="h5" color="primary">
+            <Typography
+              className={classes.semiTitle}
+              variant="h5"
+              color="primary"
+            >
               {creatorUsername}
             </Typography>
           </Grid>
