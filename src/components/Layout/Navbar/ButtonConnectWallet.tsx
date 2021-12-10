@@ -19,7 +19,7 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ButtonConnectWallet = ({ pathname }) => {
+const ButtonConnectWallet = () => {
   const classes = useStyle()
   const setConnectWallet = useSetModalShow()
   const connectWallet = useModalShow()
