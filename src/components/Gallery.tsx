@@ -44,6 +44,7 @@ const Gallery = ({
               md={4}
               lg={3}
               className={classes.containerItem}
+              key={artwork.assetId}
             >
               {renderItem(artwork, index)}
             </Grid>

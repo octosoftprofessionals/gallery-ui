@@ -86,22 +86,22 @@ const index = ({
                 <Grid
                   container
                   justify="flex-end"
+                  item
                   md={4}
                   sm={6}
                   xs={12}
                   className={classes.navbarElement}
                 >
-                  {/*   {userAccount ? ( */}
                   <LoggedButton
                     profileImageUrl={userAccount?.profileImgUrl}
                     name={userAccount?.username ?? ''}
                     account={account}
                     onLogOut={handleLogOut}
                   />
-                  {/*     ) : null} */}
                 </Grid>
               ) : (
                 <Grid
+                  item
                   container
                   justify="flex-end"
                   md={4}

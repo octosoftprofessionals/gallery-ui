@@ -11,7 +11,7 @@ const useStyle = makeStyles(Theme => ({
     justifyContent: 'flex-start',
   },
   text: {
-    fontSize: Theme.typography.fontSize[9.5],
+    fontSize: Theme.typography.fontSize[3],
     color: Theme.palette.primary.main,
     fontFamily: 'Bai Jamjuree',
     marginLeft: Theme.spacing(4),
