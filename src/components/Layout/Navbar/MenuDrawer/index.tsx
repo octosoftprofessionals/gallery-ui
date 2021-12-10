@@ -215,7 +215,6 @@ const MenuDrawer = ({
                     <Grid
                       container
                       justify="flex-start"
-                      xs={12}
                       className={classes.contButtonWallet}
                     >
                       <ButtonConnectWallet pathname={pathname} />

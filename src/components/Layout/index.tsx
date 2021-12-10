@@ -58,7 +58,7 @@ const Layout = ({
   marginTop,
   backgroundImage,
   height,
-  cois,
+  coins,
   publicKey,
   profileImageUrl,
   name,
@@ -104,7 +104,7 @@ type Props = {
   marginBottom?: string
   backgroundImage?: string
   height?: boolean
-  cois?: string
+  coins?: string
   publicKey?: MetamaskAccountType
   profileImageUrl?: string
   name?: string

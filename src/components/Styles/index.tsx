@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import { colors, darkColors, backgroundGradient, boxShadow } from './Colors'
 
 const {
@@ -17,7 +17,7 @@ const {
   DarkGrey,
 } = colors
 
-export const darkTheme = createMuiTheme({
+export const darkTheme = createTheme({
   overrides: {
     MuiPopover: {
       paper: {
@@ -326,7 +326,7 @@ export const darkTheme = createMuiTheme({
   },
 })
 
-export const Theme = createMuiTheme({
+export const Theme = createTheme({
   overrides: {
     MuiPopover: {
       paper: {

@@ -112,10 +112,10 @@ const TabBar = ({
   const selectedIn = (playlist, index) => {
     if (playlist) {
       if (selected === index) {
-        return [classes.button, classes.selectButtonPlaylist]
+        return `${classes.button}, ${classes.selectButtonPlaylist}`
       }
     } else if (selected === index) {
-      return [classes.buttonPrimary, classes.selectButton]
+      return `${classes.buttonPrimary}, ${classes.selectButton}`
     }
     return playlist ? classes.button : classes.buttonPrimary
   }

@@ -56,9 +56,9 @@ const ArtworkGrid = ({
         xs={12}
         container
         direction="row"
-        justify="space-between"
+        justifyContent="space-between"
         alignItems="center"
-        className={[classes.head, classes.container]}
+        className={`${classes.head} ,${classes.container}`}
       >
         <Grid item xs={6} container>
           <FiberManualRecordIcon className={classes.iconDot} />
