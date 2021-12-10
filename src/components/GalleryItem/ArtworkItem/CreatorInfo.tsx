@@ -17,6 +17,9 @@ const useStyle = makeStyles(Theme => ({
       width: Theme.spacing(12),
     },
   },
+  boxAvatar: {
+    minHeight: Theme.spacing(13),
+  },
 }))
 
 const CreatorInfo = ({
@@ -29,20 +32,25 @@ const CreatorInfo = ({
   const classes = useStyle()
   return (
     <div className={classes.containerAvatar}>
-      {username ? (
-        <Grid container direction="row" alignItems="center">
-          <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
-          <Typography
-            variant="body1"
-            color="primary"
-            className={classes.username}
-          >
-            {`@${username}`}
-          </Typography>
-        </Grid>
-      ) : (
-        ''
-      )}
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.boxAvatar}
+      >
+        {username && (
+          <>
+            <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
+            <Typography
+              variant="body1"
+              color="primary"
+              className={classes.username}
+            >
+              {`@${username}`}
+            </Typography>
+          </>
+        )}
+      </Grid>
     </div>
   )
 }
