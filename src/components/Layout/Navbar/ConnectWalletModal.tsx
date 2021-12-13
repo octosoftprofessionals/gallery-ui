@@ -38,6 +38,7 @@ const ConnectWalletModal = ({
     if (metaMaskInstalled && typeof window !== 'undefined') {
       await activateBrowserWallet()
       await handleCloseConnectWalletModal()
+      await login()
       return
     }
     else {

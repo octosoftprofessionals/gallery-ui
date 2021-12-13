@@ -1,4 +1,3 @@
-import Web3 from 'web3'
 import { ethers } from 'ethers'
 
 import { detectMob } from '../Utils/stringUtils'
@@ -11,6 +10,7 @@ const MAINNET_INFURA_URL =
 const detectProvider = () => {
   if (typeof window !== 'undefined') {
     if (detectMob()) {
+      const Web3 = require('web3')
       return (
         new Web3.providers.HttpProvider(MAINNET_INFURA_URL) || window.ethereum
       )
