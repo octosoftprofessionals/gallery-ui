@@ -43,19 +43,23 @@ const Payment = ({ tokenEthPrice, tokenUsdPrice, transactionHash }) => {
         tokenEthPrice != 'NaN' &&
         tokenUsdPrice != 'NaN' ? (
           <>
-            <Typography className={classes.actionText}>{`${formatDecimal(
+            <Typography variant="subtitle1" className={classes.actionText}>{`${formatDecimal(
               tokenEthPrice
             )} ETH`}</Typography>
-            <Typography className={classes.price}>{`${formatUsd(
+            <Typography variant="subtitle1" className={classes.price}>{`${formatUsd(
               tokenUsdPrice
             )} `}</Typography>
           </>
         ) : null}
       </Grid>
       <Grid item xs={2}>
-        <Link to={ethereumIoLinkTx(transactionHash)} className={classes.link}>
-          <OpenInNewOutlinedIcon className={classes.icon} />
-        </Link>
+        {
+          transactionHash ? 
+            <Link to={ethereumIoLinkTx(transactionHash)} className={classes.link}>
+            <OpenInNewOutlinedIcon className={classes.icon} />
+            </Link>
+          : null
+        }
       </Grid>
     </Grid>
   )

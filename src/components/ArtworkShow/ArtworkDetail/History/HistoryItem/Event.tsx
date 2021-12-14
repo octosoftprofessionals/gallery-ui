@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -13,11 +12,7 @@ const useStyle = makeStyles(theme => ({
     fontWeight: 600,
     color: theme.palette.primary.light,
     margin: theme.spacing(0, 0, 0, 2),
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
   },
-
   link: {
     display: 'flex',
     color: theme.palette.primary.light,
@@ -25,7 +20,6 @@ const useStyle = makeStyles(theme => ({
     justifyContent: 'flex-end',
     textDecoration: 'none',
   },
-
   date: {
     fontFamily: theme.typography.fontFamily[2],
     margin: theme.spacing(0),
@@ -54,15 +48,13 @@ const Event = ({
       <Grid item container justify="flex-start">
         <Typography
           className={classes.actionText}
-          variant="body1"
+          variant="subtitle1"
         >{`${eventType} by `}</Typography>
         {transaction != null ? (
-          <Link className={classes.link} to={'#'}>
             <Typography
               className={classes.creator}
-              variant="body1"
+              variant="subtitle1"
             >{`@${transaction}`}</Typography>
-          </Link>
         ) : null}
       </Grid>
       <Grid item>
