@@ -21,7 +21,7 @@ const ConnectWalletModal = ({
 
   const classes = useStyle()
 
-  const { account } = useAccountStore()
+  const { setAccount, account } = useAccountStore()
 
   const [metaMaskInstalled, setMetaMaskInstalled] = useState(false)
 
@@ -39,6 +39,9 @@ const ConnectWalletModal = ({
       await activateBrowserWallet()
       await handleCloseConnectWalletModal()
       await login()
+      setAccount(true)
+      console.log('account LOGIN:>> ', account);
+
       return
     }
     else {

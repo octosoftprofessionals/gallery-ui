@@ -13,21 +13,23 @@ export const useMetamaskAccount = () => useRecoilValue(metamaskAccount)
 
 // save metamask account value on localStorage
 export function useAccountStore() {
-  const { active, account, activateBrowserWallet } = useEthers()
+  const { account } = useEthers()
   const etherBalance = useEtherBalance(account)
   const balanceFormated = etherBalance && formatEther(etherBalance)
   const metamaskAccount = useMetamaskAccount()
   const setMetamaskAccount = useSetMetamaskAccount()
-  const newAccount = account && account.toLowerCase()
-  const setAccount = account => {
-    const valueToStore =
-      account instanceof Function ? account(metamaskAccount) : account
-    setMetamaskAccount(valueToStore)
-    saveStore('account', valueToStore)
+  const setAccount = (account) => {  
+    if (account) {
+      setMetamaskAccount(account)
+      saveStore('account', account)
+    } else {
+      return
+    }
   }
   return {
     account: account,
     balance: balanceFormated,
     setAccount,
+    metamaskAccount: metamaskAccount
   }
 }
