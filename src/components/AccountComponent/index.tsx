@@ -14,7 +14,6 @@ const parseSessionUser = JSON.parse(sessionUser)
   const linkShareTwitter = () => {
     const path = profilePathFromAddress(userAccount.publicAddress)
     const BASE_URL = typeof window !== 'undefined' ? window.location.origin : ''
-    console.log(`${BASE_URL}${path}`)
     const searchParams = new URLSearchParams()
     searchParams.set('url', `${BASE_URL}${path}`)
     searchParams.set('text', 'Art is lit! Check this out!')

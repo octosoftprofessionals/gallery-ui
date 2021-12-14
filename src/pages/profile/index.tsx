@@ -14,7 +14,9 @@ const ProfilePage = () => {
     getUser({ public_address: address })
   )
 
-  if (userAccount) {
+    const logedAccount = sessionStorage.getItem('account')
+
+  if (userAccount && logedAccount) {
     sessionStorage.setItem('user', JSON.stringify([userAccount]))
   }
 
