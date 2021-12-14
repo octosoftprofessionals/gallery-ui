@@ -5,7 +5,7 @@ import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
 import Spinner from '../../components/Spinner'
 
-import NotFound from '../404'
+import UserNotFound from '../creatorNotFound'
 import useQueryParams from '../../hooks/useQueryParams'
 import { getUser } from '../../services/users'
 
@@ -55,7 +55,7 @@ const CreatorPage = () => {
       {isLoading ? (
         <Spinner height="50vh" />
         ) : (
-          <NotFound />
+          <UserNotFound />
           )}
     </Fragment>)
         }
