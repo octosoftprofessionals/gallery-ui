@@ -19,7 +19,8 @@ const useStyle = makeStyles(Theme => ({
   },
 }))
 
-const ButtonConnectWallet = () => {
+
+const ButtonConnectWallet = ({ setAccount }) => {
   const classes = useStyle()
   const setConnectWallet = useSetModalShow()
   const connectWallet = useModalShow()
@@ -27,6 +28,10 @@ const ButtonConnectWallet = () => {
   const handleCloseConnectWalletModal = () => {
     setConnectWallet(null)
   }
+  const handleConnect = () => {
+    setConnectWallet(true)
+  }
+
   const handleCloseRedirectModal = () => {
     setRedirectModal(null)
   }
@@ -36,7 +41,7 @@ const ButtonConnectWallet = () => {
         <Button
           variant="contained"
           className={classes.btnGreen}
-          onClick={() => setConnectWallet(true)}
+          onClick={handleConnect}
         >
           <Typography
             color="secondary"
