@@ -14,16 +14,24 @@ const ProfilePage = () => {
     getUser({ public_address: address })
   )
 
-    const logedAccount = sessionStorage.getItem('account')
+  const logedAccount = sessionStorage.getItem('account')
 
   if (userAccount && logedAccount) {
     sessionStorage.setItem('user', JSON.stringify([userAccount]))
   }
 
-  if (address) {
-    return <AccountComponent isLoading={isLoading} userAccount={address} />
+  if (logedAccount) {
+    return (
+      <>
+        {isLoading ? (
+          <Spinner height="50vh" />
+        ) : (
+          <AccountComponent isLoading={isLoading} userAccount={address} />
+        )}
+      </>
+    )
   } else {
-    return <>{isLoading ? <Spinner height="50vh" /> : <NotFound />}</>
+    return <NotFound />
   }
 }
 

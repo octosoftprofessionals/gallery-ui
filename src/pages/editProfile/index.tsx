@@ -4,26 +4,39 @@ import Layout from '../../components/Layout'
 import EditForm from '../../components/EditForm'
 import { getUser } from '../../services/users'
 import { useAccountStore } from '../../hooks/useAccountStore'
+import Spinner from '../../components/Spinner'
 import NotFound from '../404'
 
 const editProfile = () => {
-  const {account} = useAccountStore()
+  const { account } = useAccountStore()
   const address = account?.toLowerCase()
-  
+
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-  getUser({ public_address: address })
+    getUser({ public_address: address })
   )
 
+  const logedAccount = sessionStorage.getItem('account')
+  const sessionCheck = sessionStorage.getItem('user')
 
-  if (!address) {
-    return <NotFound />
+  if (userAccount && Boolean(logedAccount)) {
+    sessionStorage.setItem('user', JSON.stringify([userAccount]))
   }
 
-  return (
-    <Layout>
-      {isLoading ? null : <EditForm userAccount={userAccount} />}
-    </Layout>
-  )
+  const sessionAccount = JSON.parse(sessionCheck)
+
+  if (Boolean(logedAccount)) {
+    return (
+      <Layout>
+        {isLoading ? (
+          <Spinner height="50vh" />
+        ) : (
+          <EditForm userAccount={sessionAccount} />
+        )}
+      </Layout>
+    )
+  } else {
+    return <NotFound />
+  }
 }
 
 export default editProfile

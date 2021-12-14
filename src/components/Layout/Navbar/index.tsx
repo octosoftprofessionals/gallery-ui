@@ -44,18 +44,20 @@ const index = ({
   const [showDrawer, setShowDrawer] = useState(false)
 
   const { account, setAccount, metamaskAccount } = useAccountStore()
-  const { data: userAccount, isLoading } = useQuery('userQuery', () =>
-    getUser({ public_address: account })
+  const address = account?.toLowerCase()
+  const { data: userAccount, isLoading } = useQuery(
+    'userQuery',
+    () => getUser({ public_address: address }),
+    { refetchOnWindowFocus: false }
   )
-
 
   const handleLogOut = () => {
     deactivate()
     Cookies.remove('jwt')
     navigate(`/`)
 
-     sessionStorage.removeItem('account');
-     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('account')
+    sessionStorage.removeItem('user')
   }
 
   const logedAccount = sessionStorage.getItem('account')
@@ -87,8 +89,7 @@ const index = ({
             </Grid>
 
             <Hidden smDown>
-              {
-              logedAccount ? (
+              {logedAccount ? (
                 <Grid
                   container
                   justify="flex-end"
@@ -101,7 +102,7 @@ const index = ({
                   <LoggedButton
                     profileImageUrl={userAccount?.profileImgUrl}
                     name={userAccount?.username ?? ''}
-                    account={account}
+                    account={address}
                     onLogOut={handleLogOut}
                   />
                 </Grid>
