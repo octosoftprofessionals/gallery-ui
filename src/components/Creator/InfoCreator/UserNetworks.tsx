@@ -25,7 +25,7 @@ const useStyles = makeStyles(Theme => ({
   link: {
     textDecoration: 'none',
     cursor: 'pointer',
-    textTransform: 'lowercase',
+    textTransform: 'none',
   },
   drawer: {
     padding: Theme.spacing(4),
@@ -97,7 +97,7 @@ const useStyles = makeStyles(Theme => ({
         ? 'block'
         : 'none',
   },
-  discordMargin:{
+  discordMargin: {
     marginLeft: Theme.spacing(7),
   },
   youtube: {
@@ -244,7 +244,10 @@ const UserNetworks = ({
             <Typography
               variant="overline"
               color="primary"
-              className={[discord ? classes.link : classes.discord, classes.discordMargin]}
+              className={[
+                discord ? classes.link : classes.discord,
+                classes.discordMargin,
+              ]}
             >
               {` ${discord} #${discordId}`}
             </Typography>
