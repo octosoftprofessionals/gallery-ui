@@ -16,7 +16,7 @@ const playListPage = () => {
   const queryClient = useQueryClient()
   const { data: userAccount, isLoading: isLoadingUser } = useQuery(
     'userQuery',
-    () => getUser({ public_address: account }),
+    () => getUser({ public_address: account.toLowerCase() }),
     {
       refetchOnWindowFocus: false,
     }
