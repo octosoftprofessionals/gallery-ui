@@ -40,8 +40,6 @@ const ConnectWalletModal = ({
       await handleCloseConnectWalletModal()
       await login()
       setAccount(true)
-      console.log('account LOGIN:>> ', account);
-
       return
     }
     else {
