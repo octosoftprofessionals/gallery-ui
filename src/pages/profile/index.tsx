@@ -13,10 +13,14 @@ const ProfilePage = () => {
     getUser({ public_address: address })
   )
 
+  if (userAccount) {
+    sessionStorage.setItem('user', JSON.stringify([userAccount]))
+  }
+
   if (!address) {
     return <NotFound />
   }
-  return <AccountComponent isLoading={isLoading} userAccount={userAccount} />
+  return <AccountComponent isLoading={isLoading} userAccount={address} />
 }
 
 export default ProfilePage
