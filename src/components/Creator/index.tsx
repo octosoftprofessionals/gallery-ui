@@ -115,7 +115,7 @@ const Creator = ({
 
   useEffect(() => {
     setCoverImgUrl(user.coverImgUrl)
-  })
+  }, [user])
 
   !isMyAccount ? console.log(linkTwitter) : null
 
