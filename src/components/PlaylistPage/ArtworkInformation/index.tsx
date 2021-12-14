@@ -82,7 +82,7 @@ const ArtworkInformation = ({
         <Title title={title} index={index} length={arryArtwork.length} />
         <Description
           creatorUsername={creatorUsername}
-          ownerUsername={ownerUsername}
+          ownerUsername={ownerUsername ? ownerUsername : '-'}
           priceEth={priceEth}
         />
         <Grid item xs={12} container justify="center">
