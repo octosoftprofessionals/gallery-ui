@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import Spinner from '../../Spinner'
 import {
   createFollow,
   unFollow,
   checkExistingFollow,
+  getOneFollowerByIdWithAllHisFollowees,
+  getOneFolloweeByIdWithAllHisFollowers,
 } from '../../../services/follow'
 import { useAccountStore } from '../../../hooks/useAccountStore'
 import { makeStyles } from '@material-ui/core/styles'
 import { backgroundGradient } from '../../Styles/Colors'
 import { Link } from 'gatsby'
 import { Avatar, Button, Grid, Typography, Paper } from '@material-ui/core'
+import { getUser } from '../../../services/users'
 
 const useStyles = makeStyles(Theme => ({
   avatar: {
@@ -29,14 +32,23 @@ const useStyles = makeStyles(Theme => ({
     color: '#FFF',
     background: backgroundGradient.backgroundGradient1,
   },
-  link: { textDecoration: 'none' },
+  link: { cursor: 'pointer' },
 }))
 
-function FollowItem({ user, handleClick, publicKey }) {
+function FollowItem({
+  user,
+  publicKey,
+  setOpenModal,
+}: {
+  user: any
+  publicKey: string
+  setOpenModal: any
+}) {
   const classes = useStyles()
   const followMutation = useMutation(createFollow)
   const unFollowMutation = useMutation(unFollow)
   const [isFollow, setIsFollow] = useState('')
+  const queryClient = useQueryClient()
   const { account } = useAccountStore()
 
   const { data: FollowQuery = {}, isLoading } = useQuery(
@@ -73,6 +85,26 @@ function FollowItem({ user, handleClick, publicKey }) {
     setIsFollow(false)
   }
 
+  const handleClicked = () => {
+    getUser({ public_address: user.publicAddress })
+      .then(newUser => {
+        queryClient.setQueryData('creatorQuery', newUser)
+      })
+      .catch(e => console.log('Error in getUser', e))
+
+    getOneFollowerByIdWithAllHisFollowees(user.publicAddress)
+      .then(newDate => queryClient.setQueryData('followersQuery', newDate))
+      .catch(e =>
+        console.log('Error in getOneFollowerByIdWithAllHisFollowees', e)
+      )
+    getOneFolloweeByIdWithAllHisFollowers(user.publicAddress)
+      .then(newDate => queryClient.setQueryData('followeeQuery', newDate))
+      .catch(e =>
+        console.log('Error in getOneFolloweeByIdWithAllHisFollowers', e)
+      )
+    setOpenModal(false)
+  }
+
   return (
     <Paper fullWidth className={classes.btnContainer}>
       <Grid
@@ -94,17 +126,14 @@ function FollowItem({ user, handleClick, publicKey }) {
         >
           <Avatar
             alt={user.username}
-            className={[classes.profileColor, classes.avatar]}
+            className={`${classes.profileColor}, ${classes.avatar}`}
             src={user.profileImgUrl}
           >
             {' '}
           </Avatar>
-          <Link
-            to={`/creator/?address=${user.publicAddress}`}
-            className={classes.link}
-          >
+          <div className={classes.link} onClick={handleClicked}>
             <Typography variant="subtitle2">{`@${user.username}`}</Typography>
-          </Link>
+          </div>
         </Grid>
         <Grid md={3} xs={6} item container justify="flex-end">
           {user.publicAddress !== account ? (

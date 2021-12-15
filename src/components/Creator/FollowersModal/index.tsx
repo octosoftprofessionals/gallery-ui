@@ -83,7 +83,6 @@ const FollowersModal = ({
     setValue(newValue)
   }
 
-
   return (
     <div>
       <Modal
@@ -117,7 +116,7 @@ const FollowersModal = ({
               following.map(user => (
                 <FollowItem
                   user={user}
-                  handleClick={setOpenFollowModal}
+                  setOpenModal={setOpenFollowModal}
                   publicKey={user.publicAddress}
                 />
               ))
@@ -132,7 +131,7 @@ const FollowersModal = ({
               followers.map(user => (
                 <FollowItem
                   user={user}
-                  handleClick={setOpenFollowModal}
+                  setOpenModal={setOpenFollowModal}
                   publicKey={user.publicAddress}
                 />
               ))
