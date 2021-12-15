@@ -47,8 +47,7 @@ const index = ({
   const address = account?.toLowerCase()
   const { data: userAccount, isLoading } = useQuery(
     'userQuery',
-    () => getUser({ public_address: address }),
-    { refetchOnWindowFocus: false }
+    () => getUser({ public_address: address })
   )
 
   const handleLogOut = () => {
@@ -56,8 +55,8 @@ const index = ({
     Cookies.remove('jwt')
     navigate(`/`)
 
-    typeof window !== 'undefined' ?? sessionStorage.removeItem('account')
-    typeof window !== 'undefined' ?? sessionStorage.removeItem('user')
+sessionStorage.removeItem('account')
+sessionStorage.removeItem('user')
   }
 
   const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
