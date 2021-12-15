@@ -15,8 +15,8 @@ const editProfile = () => {
     getUser({ public_address: address })
   )
 
-  const logedAccount = sessionStorage.getItem('account')
-  const sessionCheck = sessionStorage.getItem('user')
+  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
+  const sessionCheck = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   if (userAccount && Boolean(logedAccount)) {
     sessionStorage.setItem('user', JSON.stringify([userAccount]))
