@@ -8,10 +8,12 @@ export const AccountComponent = ({ isLoading, userAccount }) => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const [coverProfileImgUrl, setCoverProfileImgUrl] = useState('')
 
+const sessionUser = sessionStorage.getItem('user')
+const parseSessionUser = JSON.parse(sessionUser)
+
   const linkShareTwitter = () => {
     const path = profilePathFromAddress(userAccount.publicAddress)
     const BASE_URL = typeof window !== 'undefined' ? window.location.origin : ''
-    console.log(`${BASE_URL}${path}`)
     const searchParams = new URLSearchParams()
     searchParams.set('url', `${BASE_URL}${path}`)
     searchParams.set('text', 'Art is lit! Check this out!')
@@ -25,12 +27,12 @@ export const AccountComponent = ({ isLoading, userAccount }) => {
       height
       backgroundImage={coverProfileImgUrl}
     >
-      {isLoading ? (
+      {!parseSessionUser ? (
         <Spinner height="50vh" />
       ) : (
         <Account
           isMyAccount={true}
-          user={userAccount}
+          user={parseSessionUser[0]}
           setDisplayReportModal={setDisplayReportModal}
           setCoverImgUrl={setCoverProfileImgUrl}
           linkTwitter={linkShareTwitter()}

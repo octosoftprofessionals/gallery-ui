@@ -213,6 +213,7 @@ type Props = {
 }
 
 const EditForm = ({ userAccount }: Props) => {
+  userAccount = userAccount[0]
   const classes = useStyle()
   const [name, setName] = React.useState(userAccount.name ?? '')
   const [username, setUserName] = React.useState(userAccount.username ?? '')
