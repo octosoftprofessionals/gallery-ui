@@ -11,7 +11,6 @@ import {
   Button,
 } from '@material-ui/core'
 
-import LoggedButton from '../LoggedButton'
 import ButtonUser from './ButtonUser'
 import LogoSCNFT from '../../../../assets/dark-logo-SC.svg'
 
@@ -217,7 +216,7 @@ const MenuDrawer = ({
                       justify="flex-start"
                       className={classes.contButtonWallet}
                     >
-                      <ButtonConnectWallet pathname={pathname} />
+                      <ButtonConnectWallet />
                     </Grid>
                   )}
                 </Grid>

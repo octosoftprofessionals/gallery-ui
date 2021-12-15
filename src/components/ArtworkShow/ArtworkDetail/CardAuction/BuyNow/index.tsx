@@ -6,6 +6,8 @@ import BuyNowItem from './BuyNowItem'
 import { useAccountStore } from '../../../../../hooks/useAccountStore'
 import BigNumber from 'bignumber.js'
 import buyNow from '../../../../../services/buyNow'
+import { useSetModalShow } from '../../../../../atom'
+import { checkBalance } from '../../../../../Utils'
 
 const BidArt = ({
   assetContractAddress,
@@ -18,27 +20,40 @@ const BidArt = ({
   ownerImageUrl,
   ownerUsername,
 }) => {
-  const classes = Styles()
-
+  const setConnectWallet = useSetModalShow()
   const { account, balance } = useAccountStore()
-  const [accountBalanceWETH, setAccountBalanceWETH] = useState<BigNumber | null>(null)
+  const [textBuy, setTextBuy] = useState('You can buy this artwork.')
+  const [isDisable, setIsDisable] = useState(true)
+  const [accountBalanceWETH, setAccountBalanceWETH] =
+    useState<BigNumber | null>(null)
   const [accountAddress, setAccoutnAddres] = useState<string | null>(null)
 
   useEffect(() => {
     setAccountBalanceWETH(new BigNumber(balance))
     setAccoutnAddres(account)
   }, [balance, account])
+  const title = { Right: 'Current Price', Left: 'Current Owner' }
 
   const handleBuyNow = async () => {
-    const result = await buyNow({
-      priceEth,
-      creatorAddress,
-      accountAddress,
-      assetContractAddress,
-      assetTokenId,
-      ownerAddress,
-    })
+    if (account !== null) {
+      if (checkBalance(balance, priceEth)) {
+        const result = await buyNow({
+          priceEth,
+          creatorAddress,
+          accountAddress,
+          assetContractAddress,
+          assetTokenId,
+          ownerAddress,
+        })
+      } else {
+        setTextBuy('You cannot buy this artwork, you cannot afford it.')
+      }
+    } else {
+      setConnectWallet(true)
+    }
   }
+  const classes = Styles({ isBalance: checkBalance(balance, priceEth) })
+
   return (
     <BuyNowItem
       assetContractAddress={assetContractAddress}
@@ -52,13 +67,17 @@ const BidArt = ({
     >
       <div className={classes.containerTop}>
         <Typography variant="body1" className={classes.text}>
-          {'You can buy this artwork.'}
+          {textBuy}
         </Typography>
       </div>
       <Grid item xs={12} container justify="center" className={classes.box}>
         <Grid item xs={6}>
-          <Button variant="contained" fullWidth className={classes.button}
-            onClick={handleBuyNow}>
+          <Button
+            variant="contained"
+            fullWidth
+            className={classes.button}
+            onClick={handleBuyNow}
+          >
             <Typography variant="button" className={classes.textButton}>
               {'Buy Now'}
             </Typography>
@@ -102,5 +121,5 @@ const Styles = makeStyles(Theme => ({
     fontSize: Theme.typography.fontSize[10],
   },
 }))
-const title = { Right: 'Current Price', Left: 'Current Owner' }
+
 export default BidArt

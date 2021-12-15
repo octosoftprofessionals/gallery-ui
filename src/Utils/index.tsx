@@ -229,3 +229,6 @@ export const ethereumIoLinkTx = (transactionHash: string) => {
   }
   return '#'
 }
+
+export const checkBalance = (balanceWETH, priceEth) =>
+  (parseFloat(balanceWETH) >= parseFloat(priceEth))
