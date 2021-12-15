@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
@@ -43,17 +43,21 @@ const index = ({
   const classes = useStyles({ logoSrc, pathname })
   const [showDrawer, setShowDrawer] = useState(false)
 
-  const { account } = useAccountStore()
-
+  const { account, setAccount, metamaskAccount } = useAccountStore()
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: account })
   )
 
-  const handleLogOut = async () => {
-    await deactivate()
+
+  const handleLogOut = () => {
+    deactivate()
     Cookies.remove('jwt')
     navigate(`/`)
+
+     sessionStorage.removeItem('account');
   }
+
+  const logedAccount = sessionStorage.getItem('account')
 
   return (
     <>
@@ -82,7 +86,8 @@ const index = ({
             </Grid>
 
             <Hidden smDown>
-              {account ? (
+              {
+              logedAccount ? (
                 <Grid
                   container
                   justify="flex-end"
@@ -107,7 +112,7 @@ const index = ({
                   md={4}
                   className={classes.navbarElement}
                 >
-                  <ButtonConnectWallet pathname={pathname} />
+                  <ButtonConnectWallet setAccount={setAccount} />
                 </Grid>
               )}
             </Hidden>
