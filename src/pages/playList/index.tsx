@@ -27,6 +27,8 @@ const playListPage = () => {
     () => getOnePlaylistByIdWithRelatedArtworks({ playlist_id: Number(id) })
   )
 
+  console.log(`PlaylistItem :>`, PlaylistItem)
+
   const upDate = async (): Promise<any> => {
     const result = await getOnePlaylistByIdWithRelatedArtworks({
       playlist_id: Number(id),
@@ -44,6 +46,7 @@ const playListPage = () => {
           title={PlaylistItem.queryPlaylist.title}
           description={PlaylistItem.queryPlaylist.description}
           userAccount={userAccount}
+          playlistCreatorAccount={PlaylistItem.queryPlaylist.userAddress}
           isLoading={{ Playlist: isLoadingPlaylist, User: isLoadingUser }}
           playlistId={Number(id)}
           onUpDate={upDate}
