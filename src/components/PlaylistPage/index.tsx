@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { useQuery } from 'react-query'
+import { getUser } from '../../services/users'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Paper, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
@@ -74,6 +75,7 @@ const index = ({
   isLoading,
   playlistId,
   onUpDate,
+  playlistCreatorAccount,
 }: {
   userAccount: Users
   relatedArtworks: GalleryItem[]
@@ -82,6 +84,7 @@ const index = ({
   isLoading: any
   playlistId: number
   onUpDate: any
+  playlistCreatorAccount: string
 }) => {
   const classes = useStyles()
   const { username, profileImgUrl, publicAddress } = userAccount ?? {}
@@ -97,6 +100,14 @@ const index = ({
   const [titlePlaylist, setTitlePlaylist] = useState<string>(title)
   const [descriptionPlaylist, setDescriptionPlaylist] =
     useState<string>(description)
+
+  const { data: userData, isLoading: loadingUser } = useQuery(
+    'userEmailValidator',
+    () => getUser({ public_address: playlistCreatorAccount }),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
 
   const getArtworksId = () => {
     const artworksRelated = relatedArtworks.map(({ id }) => id)
@@ -189,8 +200,8 @@ const index = ({
                   <Grid className={classes.user}>
                     <CreatorInfo
                       username={
-                        username
-                          ? username
+                        userData
+                          ? userData?.username
                           : truncateMiddleText(publicAddress, 8)
                       }
                       imageUrl={profileImgUrl}
