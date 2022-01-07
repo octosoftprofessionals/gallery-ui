@@ -8,7 +8,7 @@ export const AccountComponent = ({ isLoading, userAccount }) => {
   const [displayReportModal, setDisplayReportModal] = useState(false)
   const [coverProfileImgUrl, setCoverProfileImgUrl] = useState('')
 
-const sessionUser = sessionStorage.getItem('user')
+const sessionUser = localStorage.getItem('user')
 const parseSessionUser = JSON.parse(sessionUser)
 
   const linkShareTwitter = () => {
