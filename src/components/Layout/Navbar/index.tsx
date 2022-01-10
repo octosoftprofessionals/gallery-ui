@@ -55,11 +55,11 @@ const index = ({
     Cookies.remove('jwt')
     navigate(`/`)
 
-sessionStorage.removeItem('account')
-sessionStorage.removeItem('user')
+localStorage.removeItem('account')
+localStorage.removeItem('user')
   }
 
-  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
+  const logedAccount = typeof window !== 'undefined' ? localStorage.getItem('account') : null
 
   return (
     <>
