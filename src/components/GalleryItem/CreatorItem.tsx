@@ -55,9 +55,9 @@ const CreatorItem = ({
 }: {
   galleryItem: GalleryItem | undefined
 }) => {
-  const { creatorUsername, creatorImageUrl, creatorAddress, description } =
+  const { creatorUsername, creatorImageUrl, creatorAddress, description, coverImgUrl } =
     galleryItem
-  const classes = useStyle({ imgUrl: creatorImageUrl })
+  const classes = useStyle({ imgUrl: coverImgUrl ?? 'https://storage.googleapis.com/opensea-static/opensea-profile/9.png' })
   const linkCreator = profilePathFromAddress(creatorAddress)
 
   return (
@@ -68,7 +68,7 @@ const CreatorItem = ({
           <div className={classes.behindAvatar}>
             <Avatar
               alt="avat"
-              src={`${creatorImageUrl}`}
+              src={`${creatorImageUrl ?? 'https://storage.googleapis.com/opensea-static/opensea-profile/9.png'}`}
               className={classes.avatar}
             />
           </div>
