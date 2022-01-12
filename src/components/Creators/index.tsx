@@ -48,14 +48,8 @@ const Creators = ({ creatorsQuery = [], status }) => {
   creador = creador.replace(/\"username\":/g, "\"creatorUsername\":");
   creador = creador.replace(/\"publicAddress\":/g, "\"creatorAddress\":");
   creador = creador.replace(/\"profileImgUrl\":/g, "\"creatorImageUrl\":");
-
   creador = JSON.parse(creador)
 
-console.log('creador :>> ', creador);
-
-
-  // const [filteredCreators, setFilteredCreators] = useState(creatorsQuery)
-  const [search, setSearch] = useState<String>('')
   const contractAddress = '0x495f947276749ce646f68ac8c248420045cb7b5e'
   const tokenId =
     '109357140932249174184232105731133177415490681567806678064024980607176452079646'
@@ -70,19 +64,6 @@ console.log('creador :>> ', creador);
   const creator = []
   creator.push(creador)
 
-  console.log('creatorItem :>> ', creatorItem);
-
-  // useEffect(() => {
-  //   if (search.length > 0) {
-  //     const filtered = creatorsQuery.filter(creator =>
-  //       creator.username.toLowerCase().includes(search.toLowerCase())
-  //     )
-  //     setFilteredCreators(filtered)
-  //   } else {
-  //     setFilteredCreators(creatorsQuery)
-  //   }
-  // }, [search, creatorsQuery])
-
   const classes = useStyle()
 
   return (
@@ -96,13 +77,6 @@ console.log('creador :>> ', creador);
         className={classes.header}
       >
         <Grid item xs={9} container justify="center" alignContent="center">
-          {/* <Grid
-            item
-            xs={5}
-            container
-            justify="center"
-            alignContent="flex-end"
-          > */}
           <Typography
             variant="caption"
             color="primary"
@@ -110,13 +84,6 @@ console.log('creador :>> ', creador);
           >
             Meet our creators
           </Typography>
-          {/* </Grid> */}
-
-          {/* <SearchCreator
-            searchBar={search}
-            setSearchBar={setSearch}
-            status={status}
-          /> */}
         </Grid>
       </Grid>
       <hr className={classes.divider}></hr>
