@@ -143,7 +143,7 @@ export const linkStorage = () => {
       // another tab sent data <- get it
       let data = JSON.parse(event.newValue)
       for (let key in data) {
-        sessionStorage.setItem(key, data[key])
+        localStorage.setItem(key, data[key])
       }
     }
   }
@@ -158,7 +158,7 @@ export const linkStorage = () => {
   }
 
   // Ask other tabs for session storage (this is ONLY to trigger event)
-  if (!sessionStorage.length) {
+  if (!localStorage.length) {
     localStorage.setItem('getSessionStorage', 'foobar')
     localStorage.removeItem('getSessionStorage', 'foobar')
   }

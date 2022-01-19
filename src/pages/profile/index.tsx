@@ -6,6 +6,7 @@ import NotFound from '../../components/404'
 import { getUser } from '../../services/users'
 import Spinner from '../../components/Spinner'
 import { useAccountStore } from '../../hooks/useAccountStore'
+import Layout from '../../components/Layout'
 
 const ProfilePage = () => {
   const { account } = useAccountStore()
@@ -13,8 +14,7 @@ const ProfilePage = () => {
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )
-  
-  const logedAccount = typeof window !== 'undefined' ? localStorage.getItem('account') : null
+  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
 
   if (userAccount && logedAccount && typeof window !== 'undefined') {
     localStorage.setItem('user', JSON.stringify([userAccount]))
@@ -22,13 +22,15 @@ const ProfilePage = () => {
 
   if (logedAccount) {
     return (
-      <>
+        <>
         {isLoading ? (
+      <Layout>
           <Spinner height="50vh" />
+          </Layout>
         ) : (
           <AccountComponent isLoading={isLoading} userAccount={address} />
         )}
-      </>
+          </>
     )
   } else {
     return <NotFound />
