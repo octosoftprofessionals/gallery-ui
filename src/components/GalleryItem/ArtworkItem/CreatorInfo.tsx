@@ -21,6 +21,7 @@ const useStyle = makeStyles(Theme => ({
   boxAvatar: {
     minHeight: Theme.spacing(13),
   },
+  link: { textDecoration: 'none', cursor: 'pointer' },
 }))
 
 const CreatorInfo = ({
@@ -45,7 +46,7 @@ const CreatorInfo = ({
         {username && (
           <>
             <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
-            {publicAddress ? <Link to={`/creator/?address=${publicAddress}`}>
+            {publicAddress ? <Link to={`/creator/?address=${publicAddress}`} className={classes.link}>
               <Typography
                 variant="body1"
                 color="primary"
