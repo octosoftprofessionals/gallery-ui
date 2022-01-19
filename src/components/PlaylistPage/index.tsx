@@ -86,6 +86,8 @@ const index = ({
   const classes = useStyles()
   const { username, profileImgUrl, publicAddress } = userAccount ?? {}
 
+  console.log('hdihd', publicAddress)
+
   const [imgIndex, setImgIndex] = useState<number>(0)
   const [openEditPlaylist, setOpenEditPlaylist] = useState<boolean>(false)
   const [openEditArtworksSelected, setOpenEditArtworksSelected] =
@@ -193,6 +195,7 @@ const index = ({
                           ? username
                           : truncateMiddleText(publicAddress, 8)
                       }
+                      publicAddress={publicAddress}
                       imageUrl={profileImgUrl}
                     />
                   </Grid>
