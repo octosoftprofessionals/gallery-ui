@@ -1,5 +1,6 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { useQuery } from 'react-query'
+import { useUrlUpdate } from '../../hooks/utils'
 
 import Layout from '../../components/Layout'
 import Creator from '../../components/Creator'
@@ -18,50 +19,59 @@ const linkShareTwitter = () => {
 }
 
 const CreatorPage = () => {
+  const urlUpdate = useUrlUpdate()
   const { address } = useQueryParams()
   const addressToLower = address ? address.toString().toLowerCase() : ''
   const [displayReportModal, setDisplayReportModal] = useState<boolean>(false)
-    
-    const { data: user, isLoading } = useQuery('creatorQuery', () =>
+
+  const { data: user, isLoading } = useQuery('creatorQuery', () =>
     getUser({ public_address: addressToLower })
-    )
-    const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState<string>('')
-    
+  )
+  const [coverCreatorImgUrl, setCoverCreatorImgUrl] = useState<string>('')
+
+  useEffect(() => {
     if (user) {
-      return (
-        <Layout
+      let url = `/creator/?address=${user.publicAddress}`
+      useUrlUpdate(url)
+    }
+
+  }, [user])
+
+
+  if (user) {
+    return (
+      <Layout
         padding="0"
         marginTop="0"
         height
         backgroundImage={coverCreatorImgUrl}
-        >
-      {isLoading ? (
-        <Spinner height="50vh" />
+      >
+        {isLoading ? (
+          <Spinner height="50vh" />
         ) : (
           <Creator
-          isMyAccount={false}
-          user={user}
-          setDisplayReportModal={setDisplayReportModal}
-          setCoverImgUrl={setCoverCreatorImgUrl}
-          linkTwitter={linkShareTwitter()}
+            isMyAccount={false}
+            user={user}
+            setDisplayReportModal={setDisplayReportModal}
+            setCoverImgUrl={setCoverCreatorImgUrl}
+            linkTwitter={linkShareTwitter()}
           />
-          )}
-    </Layout>
-  )
-} else {
-  return (
-    <Fragment
-    >
-      {isLoading ? (
-        <Spinner height="50vh" />
+        )}
+      </Layout>
+    )
+  } else {
+    return (
+      <Fragment
+      >
+        {isLoading ? (
+          <Spinner height="50vh" />
         ) : (
           <UserNotFound />
-          )}
-    </Fragment>)
-        }
-      }
-      
-      
-      
-      export default CreatorPage
-      
+        )}
+      </Fragment>)
+  }
+}
+
+
+
+export default CreatorPage

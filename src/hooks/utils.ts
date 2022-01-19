@@ -13,3 +13,10 @@ export const saveStore = (key, value) => {
     window.localStorage.setItem(key, JSON.stringify(value))
   }
 }
+
+export function useUrlUpdate(url) {
+  if (typeof window !== `undefined` && typeof url !== `undefined`) {
+    window.history.pushState({}, '', url);
+  }
+  return
+}
