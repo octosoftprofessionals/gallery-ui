@@ -4,6 +4,7 @@ import { getUser } from '../../services/users'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Paper, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
+import { Link } from 'gatsby'
 
 import Spinner from '../Spinner'
 import CarouselPL from './CarouselPL'
@@ -64,6 +65,9 @@ const useStyles = makeStyles(Theme => ({
   },
   textBtn: {
     color: Theme.palette.primary.contrastText,
+  },
+  link: {
+    textDecoration: 'none',
   },
 }))
 
@@ -200,15 +204,19 @@ const index = ({
                   <Spinner height="15hv" />
                 ) : (
                   <Grid className={classes.user}>
-                    <CreatorInfo
-                      username={
-                        userData
-                          ? userData?.username
-                          : truncateMiddleText(publicAddress, 8)
-                      }
-                      publicAddress={publicAddress}
-                      imageUrl={profileImgUrl}
-                    />
+                    <Link
+                      to={`/creator/?address=${userData?.publicAddress}`}
+                      className={classes.link}
+                    >
+                      <CreatorInfo
+                        username={
+                          userData
+                            ? userData?.username
+                            : truncateMiddleText(publicAddress, 8)
+                        }
+                        imageUrl={userData?.profileImgUrl}
+                      />
+                    </Link>
                   </Grid>
                 )}
               </Grid>
