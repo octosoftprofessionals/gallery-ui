@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const { data: userAccount, isLoading } = useQuery('userQuery', () =>
     getUser({ public_address: address })
   )
-  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
+  const logedAccount = typeof window !== 'undefined' ? localStorage.getItem('account') : null
 
   if (userAccount && logedAccount && typeof window !== 'undefined') {
     localStorage.setItem('user', JSON.stringify([userAccount]))

@@ -15,7 +15,7 @@ const editProfile = () => {
     getUser({ public_address: address })
   )
 
-  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
+  const logedAccount = typeof window !== 'undefined' ? localStorage.getItem('account') : null
   const sessionCheck = typeof window !== 'undefined' ? localStorage.getItem('user') : null
 
   if (userAccount && Boolean(logedAccount)) {

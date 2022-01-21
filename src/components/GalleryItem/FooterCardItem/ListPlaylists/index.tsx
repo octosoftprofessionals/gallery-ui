@@ -1,11 +1,11 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-
+import { useState } from 'react'
 import { Link } from 'gatsby'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Divider, Menu, MenuItem, Typography } from '@material-ui/core'
-
+import PlaylistModal from '../../../Creator/Playlist/Modal'
 import Spinner from '../../../Spinner'
 import { myProfilePathWithViewPlaylistOpen } from '../../../../config/routes'
 
@@ -50,6 +50,11 @@ const MenuPlaylist = ({
     onClose()
   }
 
+  const [showModal, setShowModal] = useState(true)
+  const handleModal = () => {
+    setShowModal(!showModal)
+  }
+
   return (
     <Menu
       id="simple-menu"
@@ -84,13 +89,14 @@ const MenuPlaylist = ({
           </>
         ))
       )}
-      <Link to={myProfilePathWithViewPlaylistOpen(2)} className={classes.link}>
-        <MenuItem onClick={onClose}>
+      <div className={classes.link}>
+        <MenuItem onClick={handleModal}>
           <Typography variant="button" color="primary" className={classes.playlistItem}>
             New Playlist
           </Typography>
         </MenuItem>
-      </Link>
+      </div>
+      {showModal ? <PlaylistModal onClose={handleModal} /> : null}
     </Menu>
   )
 }

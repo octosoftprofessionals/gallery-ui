@@ -10,7 +10,7 @@ export const loadStore = (key, defaultValue) => {
 
 export const saveStore = (key, value) => {
   if (typeof window !== 'undefined') {
-    window.sessionStorage.setItem(key, JSON.stringify(value))
+    window.localStorage.setItem(key, JSON.stringify(value))
   }
 }
 
