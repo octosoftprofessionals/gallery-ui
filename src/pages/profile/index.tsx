@@ -14,10 +14,10 @@ const ProfilePage = () => {
     getUser({ public_address: address })
   )
   
-  const logedAccount = typeof window !== 'undefined' ? sessionStorage.getItem('account') : null
+  const logedAccount = typeof window !== 'undefined' ? localStorage.getItem('account') : null
 
   if (userAccount && logedAccount && typeof window !== 'undefined') {
-    sessionStorage.setItem('user', JSON.stringify([userAccount]))
+    localStorage.setItem('user', JSON.stringify([userAccount]))
   }
 
   if (logedAccount) {

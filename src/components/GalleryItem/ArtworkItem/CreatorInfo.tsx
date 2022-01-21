@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Typography } from '@material-ui/core'
 
@@ -20,16 +21,20 @@ const useStyle = makeStyles(Theme => ({
   boxAvatar: {
     minHeight: Theme.spacing(13),
   },
+  link: { textDecoration: 'none', cursor: 'pointer' },
 }))
 
 const CreatorInfo = ({
   username,
+  publicAddress,
   imageUrl,
 }: {
   username: string
+  publicAddress?: string
   imageUrl?: string
 }) => {
   const classes = useStyle()
+
   return (
     <div className={classes.containerAvatar}>
       <Grid
@@ -41,13 +46,23 @@ const CreatorInfo = ({
         {username && (
           <>
             <Avatar alt="avat" src={imageUrl} className={classes.avatar} />
-            <Typography
+            {publicAddress ? <Link to={`/creator/?address=${publicAddress}`} className={classes.link}>
+              <Typography
+                variant="body1"
+                color="primary"
+                className={classes.username}
+              >
+                {`@${username}`}
+              </Typography>
+            </Link> : <Typography
               variant="body1"
               color="primary"
               className={classes.username}
             >
               {`@${username}`}
-            </Typography>
+            </Typography>}
+
+
           </>
         )}
       </Grid>

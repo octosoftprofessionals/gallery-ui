@@ -13,10 +13,12 @@ import {
   addArtworkToExistingPlaylist,
   getPlaylists,
 } from '../../../../services/playlists'
+import { truncateString } from '../../../../Utils/stringUtils'
 
 const useStyles = makeStyles(Theme => ({
   root: {},
   link: { textDecoration: 'none' },
+  playlistItem: { fontSize: 14, display: 'flex' },
 }))
 
 const MenuPlaylist = ({
@@ -64,7 +66,7 @@ const MenuPlaylist = ({
           maxHeight: '30vh',
           width: '20ch',
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
         },
       }}
     >
@@ -73,9 +75,9 @@ const MenuPlaylist = ({
       ) : (
         PlaylistQuery.map(({ id, title }) => (
           <>
-            <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
-              <Typography variant="button" color="primary">
-                {title}
+            <MenuItem key={id} onClick={() => handleAddArtwork(id)} >
+              <Typography color="primary" className={classes.playlistItem}>
+                {title.length < 30 ? title : truncateString(title, 25)}
               </Typography>
             </MenuItem>
             <Divider />
@@ -84,7 +86,7 @@ const MenuPlaylist = ({
       )}
       <Link to={myProfilePathWithViewPlaylistOpen(2)} className={classes.link}>
         <MenuItem onClick={onClose}>
-          <Typography variant="button" color="primary">
+          <Typography variant="button" color="primary" className={classes.playlistItem}>
             New Playlist
           </Typography>
         </MenuItem>

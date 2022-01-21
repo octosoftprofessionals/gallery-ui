@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { navigate } from "gatsby"
+import { profilePathFromAddress } from '../../../config/routes'
 import Spinner from '../../Spinner'
 import {
   createFollow,
@@ -88,7 +90,11 @@ function FollowItem({
   const handleClicked = () => {
     getUser({ public_address: user.publicAddress })
       .then(newUser => {
+        const creatorProfileLink = profilePathFromAddress(newUser.publicAddress)
         queryClient.setQueryData('creatorQuery', newUser)
+        if (window.location.pathname === '/profile') {
+          navigate(creatorProfileLink)
+        }
       })
       .catch(e => console.log('Error in getUser', e))
 
@@ -136,7 +142,7 @@ function FollowItem({
           </div>
         </Grid>
         <Grid md={3} xs={6} item container justify="flex-end">
-          {user.publicAddress !== account ? (
+          {user.publicAddress !== account && window.location.pathname === '/profile' ? (
             <Button
               onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
               variant="outlined"

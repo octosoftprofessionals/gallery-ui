@@ -9,6 +9,8 @@ import SearchCreator from './SearchCreator'
 import Gallery from '../Gallery'
 import CreatorItem from '../GalleryItem/CreatorItem'
 import Spinner from '../Spinner'
+import config from '../../config'
+import axios from 'axios'
 
 const useStyle = makeStyles(Theme => ({
   title: {
@@ -18,10 +20,6 @@ const useStyle = makeStyles(Theme => ({
     },
     textAlign: 'center',
   },
-  // header: {
-  //   borderBottom:
-  //     Theme.palette.type === 'dark' ? '1px solid #FFFF' : '1px solid #000',
-  // },
   divider: {
     marginTop: '0em',
     color: 'black',
@@ -30,8 +28,28 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const Creators = ({ creatorsQuery = [], status }) => {
-  // const [filteredCreators, setFilteredCreators] = useState(creatorsQuery)
-  const [search, setSearch] = useState<String>('')
+  const [creators, setCreators] = useState([])
+  useEffect(() => {
+    const creatorsFilter = async () => {
+      let auxUser = []
+      await axios.get(`${config.API_URL}/users`).then((response) => {
+        auxUser = response.data
+
+        auxUser = auxUser.filter(item => item.creator === true)
+        setCreators(auxUser)
+      })
+    }
+    creatorsFilter()
+  }, [])
+
+  let creador = JSON.stringify(creators)
+
+  creador = creador.replace(/\"name\":/g, "\"collectionName\":");
+  creador = creador.replace(/\"username\":/g, "\"creatorUsername\":");
+  creador = creador.replace(/\"publicAddress\":/g, "\"creatorAddress\":");
+  creador = creador.replace(/\"profileImgUrl\":/g, "\"creatorImageUrl\":");
+  creador = JSON.parse(creador)
+
   const contractAddress = '0x495f947276749ce646f68ac8c248420045cb7b5e'
   const tokenId =
     '109357140932249174184232105731133177415490681567806678064024980607176452079646'
@@ -44,18 +62,7 @@ const Creators = ({ creatorsQuery = [], status }) => {
     }
   )
   const creator = []
-  creator.push([creatorItem])
-
-  // useEffect(() => {
-  //   if (search.length > 0) {
-  //     const filtered = creatorsQuery.filter(creator =>
-  //       creator.username.toLowerCase().includes(search.toLowerCase())
-  //     )
-  //     setFilteredCreators(filtered)
-  //   } else {
-  //     setFilteredCreators(creatorsQuery)
-  //   }
-  // }, [search, creatorsQuery])
+  creator.push(creador)
 
   const classes = useStyle()
 
@@ -70,13 +77,6 @@ const Creators = ({ creatorsQuery = [], status }) => {
         className={classes.header}
       >
         <Grid item xs={9} container justify="center" alignContent="center">
-          {/* <Grid
-            item
-            xs={5}
-            container
-            justify="center"
-            alignContent="flex-end"
-          > */}
           <Typography
             variant="caption"
             color="primary"
@@ -84,13 +84,6 @@ const Creators = ({ creatorsQuery = [], status }) => {
           >
             Meet our creators
           </Typography>
-          {/* </Grid> */}
-
-          {/* <SearchCreator
-            searchBar={search}
-            setSearchBar={setSearch}
-            status={status}
-          /> */}
         </Grid>
       </Grid>
       <hr className={classes.divider}></hr>

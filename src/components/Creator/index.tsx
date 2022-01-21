@@ -117,8 +117,6 @@ const Creator = ({
     setCoverImgUrl(user.coverImgUrl)
   }, [user])
 
-  !isMyAccount ? console.log(linkTwitter) : null
-
   return (
     <Grid container xs={12} direction="column" justify="center">
       <Grid container xs={12} className={classes.root}>
