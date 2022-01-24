@@ -73,6 +73,8 @@ const PlaylistModal = ({
   title,
   description,
   modalTitle,
+  fatherComponent,
+  onPublish,
 }) => {
   const classes = useStyles()
 
@@ -80,8 +82,13 @@ const PlaylistModal = ({
     onClose()
   }
 
-  const handleNext = e => {
+  const handleSubmit = e => {
     e.preventDefault()
+    if (fatherComponent === 'ButtonPlaylist') {
+      onPublish()
+      onClose()
+      return
+    }
     onClose()
     setOpen(true)
   }
@@ -94,7 +101,7 @@ const PlaylistModal = ({
       open={open}
       aria-labelledby="simple-dialog-title"
     >
-      <form onSubmit={handleNext}>
+      <form onSubmit={handleSubmit}>
         <Grid container justify="space-between" alignItems="center">
           <Grid
             className={classes.conteinerGrid}
@@ -169,11 +176,19 @@ const PlaylistModal = ({
           justify="flex-end"
           className={classes.conteinerBtn}
         >
-          <Button variant="text" className={classes.btn} type="submit">
-            <Typography variant="caption" className={classes.textBtn}>
-              Next
-            </Typography>
-          </Button>
+          {fatherComponent === 'ButtonPlaylist' ? (
+            <Button variant="text" className={classes.btn} type="submit">
+              <Typography variant="caption" className={classes.textBtn}>
+                Publish
+              </Typography>
+            </Button>
+          ) : (
+            <Button variant="text" className={classes.btn} type="submit">
+              <Typography variant="caption" className={classes.textBtn}>
+                Next
+              </Typography>
+            </Button>
+          )}
         </Grid>
       </form>
     </Dialog>
