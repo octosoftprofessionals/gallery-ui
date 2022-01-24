@@ -11,6 +11,7 @@ import { myProfilePathWithViewPlaylistOpen } from '../../../../config/routes'
 
 import {
   addArtworkToExistingPlaylist,
+  addArtworkToNewPlaylist,
   getPlaylists,
 } from '../../../../services/playlists'
 import { truncateString } from '../../../../Utils/stringUtils'
@@ -26,12 +27,16 @@ const MenuPlaylist = ({
   onClose,
   account,
   artworkId,
+  handleOpenCreatePlaylist,
+  openCreatePlaylist,
   ...props
 }: {
   anchorEl: any
   onClose: any
   account: string
   artworkId: number
+  handleOpenCreatePlaylist: any
+  openCreatePlaylist: boolean
 }) => {
   const classes = useStyles()
 
@@ -80,7 +85,7 @@ const MenuPlaylist = ({
       ) : (
         PlaylistQuery.map(({ id, title }) => (
           <>
-            <MenuItem key={id} onClick={() => handleAddArtwork(id)} >
+            <MenuItem key={id} onClick={() => handleAddArtwork(id)}>
               <Typography color="primary" className={classes.playlistItem}>
                 {title.length < 30 ? title : truncateString(title, 25)}
               </Typography>
@@ -91,7 +96,12 @@ const MenuPlaylist = ({
       )}
       <div className={classes.link}>
         <MenuItem onClick={handleModal}>
-          <Typography variant="button" color="primary" className={classes.playlistItem}>
+          <Typography
+            variant="button"
+            color="primary"
+            className={classes.playlistItem}
+            onClick={handleOpenCreatePlaylist}
+          >
             New Playlist
           </Typography>
         </MenuItem>
