@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
+import Swal from 'sweetalert2'
+import './swal.css'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box, Button, Typography } from '@material-ui/core'
@@ -19,6 +21,7 @@ import {
 import { ArrayPlaylist } from '../../../types'
 import { myPlaylistsId } from '../../../config/routes'
 import useQueryParams from '../../../hooks/useQueryParams'
+import { loadStore } from '../../../hooks/utils'
 
 const useStyles = makeStyles(Theme => ({
   root: {
@@ -67,6 +70,8 @@ const Playlist = ({
   const [addArtworksPlaylist, setAddArtworksPlaylist] = useState([])
   const [titlePlaylist, setTitlePlaylist] = useState<string>('')
   const [descriptionPlaylist, setDescriptionPlaylist] = useState<string>('')
+
+  const darkTheme = loadStore('dark-theme', false)
 
   const handleOpenCreatePlaylist = () => {
     setOpenCreatePlaylist(true)
@@ -121,6 +126,22 @@ const Playlist = ({
           playlist_id: id,
           artworks_related: artworksRelated,
         })
+        if (
+          resCreatePlaylist.data.id > 0 &&
+          resAddArtworkToNewPlaylist.status === 'Ok'
+        ) {
+          Swal.fire({
+            title: 'Playlist created succesfully',
+            height: 800,
+            padding: '5em',
+            color: darkTheme ? '#dcdedf' : '#180101', // Ternario con black mode y white mode
+            background: darkTheme ? '#212e36' : '#f2f2f2', // Ternario con black mode y white mode
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: 'swal-custom',
+          })
+        }
       } catch (error) {
         console.log('errorCreatePlaylist :>> ', error)
       }
