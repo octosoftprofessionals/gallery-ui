@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
+import Swal from 'sweetalert2'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, Hidden } from '@material-ui/core'
 import {
@@ -17,6 +18,7 @@ import {
   addArtworkToNewPlaylist,
   deleteOnePlaylistByIdWithAssociatedArtworks,
 } from '../../../services/playlists'
+import { loadStore } from '../../../hooks/utils'
 
 const useStyle = makeStyles(Theme => ({
   root: { padding: Theme.spacing(0, 6) },
@@ -46,6 +48,8 @@ const ButtonPlaylist = ({
   const queryClient = useQueryClient()
   // Styles
   const classes = useStyle()
+  const darkTheme = loadStore('dark-theme', false)
+
   // State
   const [anchorEl, setAnchorEl] = useState(null)
   const [isdelete, setIsDelete] = useState<boolean>(false)
@@ -135,6 +139,23 @@ const ButtonPlaylist = ({
           playlist_id: id,
           artworks_related: artworksRelated,
         })
+
+        if (
+          resCreatePlaylist.data.id > 0 &&
+          resAddArtworkToNewPlaylist.status === 'Ok'
+        ) {
+          Swal.fire({
+            title: 'Playlist created succesfully',
+            height: 800,
+            padding: '5em',
+            color: darkTheme ? '#dcdedf' : '#180101', // Ternario con black mode y white mode
+            background: darkTheme ? '#212e36' : '#f2f2f2', // Ternario con black mode y white mode
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: 'swal-custom',
+          })
+        }
       } catch (error) {
         console.log('errorCreatePlaylist :>> ', error)
       }
