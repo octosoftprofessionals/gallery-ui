@@ -61,6 +61,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "styled-components": "^5.2.3",
+    "sweetalert2": "^11.3.6",
     "url-join": "^4.0.1",
     "web3": "^1.4.0",
     "webpack": "^5.46.0"
