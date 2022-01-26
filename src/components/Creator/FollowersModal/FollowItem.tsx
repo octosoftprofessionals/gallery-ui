@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { navigate } from "gatsby"
+import { navigate } from 'gatsby'
 import { profilePathFromAddress } from '../../../config/routes'
 import Spinner from '../../Spinner'
 import {
@@ -141,7 +141,7 @@ function FollowItem({
             <Typography variant="subtitle2">{`@${user.username}`}</Typography>
           </div>
         </Grid>
-        <Grid md={3} xs={6} item container justify="flex-end">
+        {/* <Grid md={3} xs={6} item container justify="flex-end">
           {user.publicAddress !== account && window.location.pathname === '/profile' ? (
             <Button
               onClick={isFollow ? handleSubmitUnfollow : handleSubmitFollow}
@@ -161,7 +161,7 @@ function FollowItem({
               )}
             </Button>
           ) : null}
-        </Grid>
+        </Grid> */}
       </Grid>
     </Paper>
   )
