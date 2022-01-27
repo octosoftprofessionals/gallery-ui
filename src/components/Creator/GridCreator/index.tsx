@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import TabBar from '../../TabBar'
 import Playlist from './../Playlist'
@@ -7,12 +7,35 @@ import {
   getProfileCreatedItemsByAddress,
   getProfileOwnedItemsByAddress,
 } from '../../../services/gallery'
+import config from '../../../config'
+import axios from 'axios'
 
 import { getPlaylists } from '../../../services/playlists'
 import GalleryCreator from './GalleryCreator'
 import { useQueryHash } from '../../../hooks/useQueryParams'
+import { GalleryItem } from '../../../types'
+
+
 
 const GridCreator = ({ isMyAccount = false, profileAddress }) => {
+
+  const [creators, setCreators] = useState([])
+    useEffect(() => {
+  const getCreatedArtworks = async () =>  {
+    await axios
+      .get(
+        `${config.API_URL}/gallery/gallery-items?creator_address=${profileAddress}`
+      )
+      .then(response => {
+        let auxUser = response.data
+        setCreators(auxUser)
+      })
+
+    }
+    
+    getCreatedArtworks()
+  }, [])
+
   return (
     <TabBar
       justify="center"
@@ -26,6 +49,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => {
       titles={['Created', 'Collected', 'Playlist', 'Favorites']}
       components={[
         <GalleryCreator
+        creators={creators}
           emptyMessageProps={{
             primaryText: isMyAccount
               ? 'No creations. Go get busy! 🧑‍🎨'
@@ -38,6 +62,7 @@ const GridCreator = ({ isMyAccount = false, profileAddress }) => {
           }
         />,
         <GalleryCreator
+          creators={[]}
           emptyMessageProps={{
             primaryText: isMyAccount
               ? 'Your collection is empty.'
