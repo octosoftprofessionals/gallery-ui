@@ -16,19 +16,22 @@ const useStyle = makeStyles(Theme => ({
 }))
 
 const Gallery = ({
+  creators,
   emptyMessageProps,
   queryName,
   queryFunction,
 }: {
+  creators: any[]
   emptyMessageProps: Record<string, any>
   queryName: string
-  queryFunction: () => Promise<GalleryItem[]>
+  queryFunction
 }) => {
   const { data: galleryItems = [], isLoading } = useQuery(
     queryName,
     queryFunction,
     { refetchOnWindowFocus: false }
   )
+
   const classes = useStyle()
   const { data: ItemsToShow = [] } = galleryItems
 
@@ -39,7 +42,7 @@ const Gallery = ({
     [ItemsToShow]
   )
 
-  if (ItemsToShow.length === 0) {
+  if (creators.length === 0) {
     return (
       <Box style={{ padding: 48 }}>
         <EmptyAccount {...emptyMessageProps} />
@@ -51,7 +54,7 @@ const Gallery = ({
     <Spinner height="50vh" />
   ) : (
     <Grid container direction="row" justify="center" wrap="wrap">
-      {ItemsToShow.map(galleryItem => (
+      {creators.map(galleryItem => (
         <Grid item xs={12} sm={6} md={3} className={classes.containerItem}>
           <ArtworkItem
             key={galleryItem.assetId}
