@@ -71,7 +71,7 @@ const GridPartnershipArtworks = () => {
           color="primary"
           className={classes.subtitle}
         >
-          SuperChief x Rarible
+          OCTOSOFT x Rarible
         </Typography>
       </Grid>
       <hr className={classes.divider}></hr>

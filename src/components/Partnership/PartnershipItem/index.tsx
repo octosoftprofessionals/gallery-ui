@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Grid, Paper, Typography, Divider } from '@material-ui/core'
 import { deltaTime, timeFormat, isTypeVideo } from '../../../Utils/index'
 import CardImage from '../CardImage'
-import SuperchiefLogo from '../../../assets/logo-collabs.jpeg'
+import SuperchiefLogo from '../../../assets/logoOcto.png'
 import { darkColors } from '../../../components/Styles/Colors'
 
 const useStyle = makeStyles(Theme => ({

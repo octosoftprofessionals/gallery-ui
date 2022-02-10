@@ -83,7 +83,7 @@ const ContactUs = ({ link }) => {
           <Link to={link} className={classes.link}>
             <Button variant="outlined" className={classes.button}>
               <Typography variant="button" className={classes.buttonText}>
-                Became a creator on Superchief
+                Became a creator on OCTOSOFT
               </Typography>
             </Button>
           </Link>

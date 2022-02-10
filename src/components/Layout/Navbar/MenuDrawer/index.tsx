@@ -115,9 +115,9 @@ const MenuDrawer = ({
   userAccount: Users
 }) => {
   const classes = useStyles()
-  const discord = 'https://discord.com/invite/pxjASBky'
-  const instagram = 'https://www.instagram.com/superchiefgallerynft/'
-  const twitter = 'https://twitter.com/SuperchiefNFT'
+  const discord = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+  const instagram = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+  const twitter = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   const termsOfService = '/termsOfService'
   const privacy = '/privacyPolicy'
 

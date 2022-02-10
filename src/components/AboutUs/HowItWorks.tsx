@@ -60,14 +60,14 @@ const HowItWorks = () => {
               color="primary"
               className={classes.text}
             >
-              Creators are invited to join Superchief Gallery NFT by members of the
+              Creators are invited to join OCTOSOFT Gallery NFT by members of the
               community. Once you’ve received an invite, you’ll need to set up a
               MetaMask wallet with ETH before you can create an artist profile
               and mint an NFT—which means uploading your JPG, PNG, or video file
               to IPFS, a decentralized peer-to-peer storage network. It will
               then be an NFT you can price in ETH and put up for auction on
-              Superchief Gallery NFT. Creators receive 85% of the final sale price. If the
-              piece is resold on Superchief Gallery NFT (or OpenSea and Rarible), a 10%
+              OCTOSOFT Gallery NFT. Creators receive 85% of the final sale price. If the
+              piece is resold on OCTOSOFT Gallery NFT (or OpenSea and Rarible), a 10%
               royalty goes back to the wallet that originally minted the NFT—in
               perpetuity.
             </Typography>
@@ -84,7 +84,7 @@ const HowItWorks = () => {
               color="primary"
               className={classes.text}
             >
-              On Superchief Gallery NFT, anyone can create a profile to start collecting
+              On OCTOSOFT Gallery NFT, anyone can create a profile to start collecting
               NFTs. All you’ll need is a MetaMask wallet and ETH, the
               cryptocurrency used to pay for all transactions on Ethereum.
               Artists list NFTs for auction at a reserve price, and once the
@@ -92,7 +92,7 @@ const HowItWorks = () => {
               is placed within the last 15 minutes, the auction extends for
               another 15 minutes. When you win an auction and claim the NFT, the
               artwork gets transferred to your wallet and appears on your
-              Superchief Gallery NFT collector profile. You can also then display it in your
+              OCTOSOFT Gallery NFT collector profile. You can also then display it in your
               virtual gallery, share it on social media, sell it later on the
               secondary market, or pioneer a new approach to appreciating
               digital art and championing the artists in your collection.
@@ -111,7 +111,7 @@ const HowItWorks = () => {
               color="primary"
               className={classes.text}
             >
-              There are many ways to get involved with Superchief Gallery NFT beyond joining
+              There are many ways to get involved with OCTOSOFT Gallery NFT beyond joining
               as a creator, collector, or developer. We welcome anyone
               interested in collectively building the future of digital culture
               to join us on Discord, Instagram, or Twitter. There are a number

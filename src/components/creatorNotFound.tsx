@@ -15,7 +15,7 @@ const UserNotFound = () => {
   return (
     <Layout>
       <h1 className={classes.text}>
-        This user does not have a SuperChief account yet!
+        This user does not have a octosoft account yet!
       </h1>
     </Layout>
   )

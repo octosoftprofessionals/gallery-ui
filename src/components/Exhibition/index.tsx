@@ -60,7 +60,7 @@ export const Exhibition = props => {
   const [showTitles, setShowTitles] = useState(true)
   const { titleId } = useQueryParams()
   const [exhibitionTitle, setExibitionTitle] = useState<string>(
-    'Superchief Collections, Curated by our staff'
+    'OCTOSOFT Collections, Curated by our staff'
   )
 
   const exhibitions = useExhibitionQuery()
@@ -68,7 +68,7 @@ export const Exhibition = props => {
   useEffect(() => {
     if (titleId === undefined) {
       setShowTitles(true)
-      setExibitionTitle('Superchief Collections, Curated by our staff')
+      setExibitionTitle('OCTOSOFT Collections, Curated by our staff')
     }
   }, [titleId])
 
